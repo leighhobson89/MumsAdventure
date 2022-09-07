@@ -24,6 +24,7 @@ public class Player extends Entity {
     boolean dizzyFlag;
     static int interval;
     Timer timer = new Timer();
+    public int standCounter;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -163,6 +164,13 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+        else {
+            standCounter++;
+            if (standCounter == 30) {
+                standCounter = 0;
+                spriteNum = 1;
+            }
+        }
     }
 
     public void pickUpObject(int i) {
@@ -244,5 +252,9 @@ public class Player extends Entity {
                 break;
         }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+          //DEBUG - UNCOMMENT TO DISPLAY COLLISION RECTANGLE ON PLAYER
+//        g2.setColor(Color.RED);
+//        g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
     }
 }
