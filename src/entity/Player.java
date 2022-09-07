@@ -15,6 +15,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    boolean hasFrontDoorKey = false;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -24,13 +25,15 @@ public class Player extends Entity {
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
         solidArea = new Rectangle(8, 16,32,32);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 10;
+        worldX = gp.tileSize * 16;
         worldY = gp.tileSize * 12;
         speed = 2;
         direction = "up";
@@ -67,6 +70,10 @@ public class Player extends Entity {
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            //CHECK OBJECT COLLISION
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
+
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (collisionOn == false) {
                 switch (direction) {
@@ -92,6 +99,29 @@ public class Player extends Entity {
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
+            }
+        }
+    }
+
+    public void pickUpObject(int i) {
+        if (i != 999) {
+            String objectName = gp.obj[i].name;
+
+            switch(objectName) {
+                case "FrontDoorKey":
+                    hasFrontDoorKey = true;
+                    gp.obj[i] = null;
+                    break;
+                case "FrontDoor":
+                    if (hasFrontDoorKey) {
+                        gp.obj[i] = null;
+                    }
+                    break;
+                case "InsideDoor":
+                case "InsideDoorSideways":
+                case "BackGate":
+                    gp.obj[i] = null;
+                    break;
             }
         }
     }

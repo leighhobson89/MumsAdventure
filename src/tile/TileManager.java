@@ -19,7 +19,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tile = new Tile[22];
+        tile = new Tile[50];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
@@ -103,6 +103,62 @@ public class TileManager {
             tile[21] = new Tile();
             tile[21].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree2.png")));
             tile[21].collision = true;
+
+            tile[22] = new Tile();
+            tile[22].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/sofaTop.png")));
+            tile[22].collision = true;
+
+            tile[23] = new Tile();
+            tile[23].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/sofaBottom.png")));
+            tile[23].collision = true;
+
+            tile[24] = new Tile();
+            tile[24].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tableTL.png")));
+
+            tile[25] = new Tile();
+            tile[25].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tableTR.png")));
+            tile[25].collision = true;
+
+            tile[26] = new Tile();
+            tile[26].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tableBL.png")));
+            tile[26].collision = true;
+
+            tile[27] = new Tile();
+            tile[27].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tableBR.png")));
+            tile[27].collision = true;
+
+            tile[28] = new Tile();
+            tile[28].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tableLivingRoomTop.png")));
+
+            tile[29] = new Tile();
+            tile[29].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tableLivingRoomBottom.png")));
+            tile[29].collision = true;
+
+            tile[30] = new Tile();
+            tile[30].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/cupboard1HorLounge.png")));
+            tile[30].collision = true;
+
+            tile[31] = new Tile();
+            tile[31].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/cupboard1VerLounge.png")));
+            tile[31].collision = true;
+
+            tile[32] = new Tile();
+            tile[32].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/cupboard1HorHall.png")));
+            tile[32].collision = true;
+
+            tile[33] = new Tile();
+            tile[33].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tvLounge.png")));
+            tile[33].collision = true;
+
+            tile[34] = new Tile();
+            tile[34].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/cupboard2HorLounge.png")));
+            tile[34].collision = true;
+
+            tile[35] = new Tile();
+            tile[35].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/roadKerb.png")));
+
+            tile[36] = new Tile();
+            tile[36].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road.png")));
 
         } catch (IOException e) {
             e.printStackTrace();
