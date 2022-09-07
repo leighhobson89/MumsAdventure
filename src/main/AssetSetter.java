@@ -93,5 +93,25 @@ public class AssetSetter {
         gp.obj[20] = new OBJ_FrontGate();
         gp.obj[20].worldX = 7 * gp.tileSize;
         gp.obj[20].worldY = 3 * gp.tileSize;
+
+        gp.obj[21] = new OBJ_Bin_Blue();
+        gp.obj[21].worldX = 24 * gp.tileSize;
+        gp.obj[21].worldY = 2 * gp.tileSize;
+
+        gp.obj[22] = new OBJ_Bin_Green();
+        gp.obj[22].worldX = 23 * gp.tileSize;
+        gp.obj[22].worldY = 2 * gp.tileSize;
+
+        gp.obj[23] = new OBJ_Bin_Grey();
+        gp.obj[23].worldX = 22 * gp.tileSize;
+        gp.obj[23].worldY = 2 * gp.tileSize;
+
+//        gp.obj[24] = new OBJ_Tree1();
+//        gp.obj[24].worldX = 20 * gp.tileSize;
+//        gp.obj[24].worldY = 2 * gp.tileSize;
+//
+//        gp.obj[25] = new OBJ_Tree2();
+//        gp.obj[25].worldX = 21 * gp.tileSize;
+//        gp.obj[25].worldY = 2 * gp.tileSize;
     }
 }

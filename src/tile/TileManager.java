@@ -97,11 +97,11 @@ public class TileManager {
             tile[19].collision = true;
 
             tile[20] = new Tile();
-            tile[20].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree1.png")));
+            tile[20].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/tree1.png")));
             tile[20].collision = true;
 
             tile[21] = new Tile();
-            tile[21].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree2.png")));
+            tile[21].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/tree2.png")));
             tile[21].collision = true;
 
             tile[22] = new Tile();
@@ -159,6 +159,33 @@ public class TileManager {
 
             tile[36] = new Tile();
             tile[36].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/road.png")));
+
+            tile[37] = new Tile();
+            tile[37].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree1Tile.png")));
+            tile[37].collision = true;
+
+            tile[38] = new Tile();
+            tile[38].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/tree2Tile.png")));
+            tile[38].collision = true;
+
+            tile[39] = new Tile();
+            tile[39].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/rockery2.png")));
+            tile[39].collision = true;
+
+            tile[40] = new Tile();
+            tile[40].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/rockery3.png")));
+            tile[40].collision = true;
+
+            tile[41] = new Tile();
+            tile[41].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/fireplaceTop.png")));
+            tile[41].collision = true;
+
+            tile[42] = new Tile();
+            tile[42].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/fireplaceBottom.png")));
+            tile[42].collision = true;
+
+            tile[43] = new Tile();
+            tile[43].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/roadKerb2.png")));
 
         } catch (IOException e) {
             e.printStackTrace();

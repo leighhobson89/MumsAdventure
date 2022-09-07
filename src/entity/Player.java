@@ -8,14 +8,22 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
+    final int PILLS_COUNT_DOWN_VALUE = 20;
+    final int MAX_SPEED_UNDER_INFLUENCE = 4;
+
     public final int screenX;
     public final int screenY;
-    boolean hasFrontDoorKey = false;
+    public boolean hasFrontDoorKey = false;
+    boolean dizzyFlag;
+    static int interval;
+    Timer timer = new Timer();
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -30,6 +38,52 @@ public class Player extends Entity {
 
         setDefaultValues();
         getPlayerImage();
+    }
+
+    public void countDownTimerForItemEffect(int value, String effect) {
+        switch (effect) {
+            case "Pills":
+                speed = 1;
+                break;
+        }
+        int period;
+        final int[] timeLeft = new int[1];
+        period = 1000;
+        interval = value;
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                timeLeft[0] = (setInterval(effect));
+            }
+        }, value, period);
+    }
+
+    private final int setInterval(String effect) {
+        switch (effect) {
+            case "Pills":
+                dizzyFlag = true;
+                speed = (int)(Math.random() * MAX_SPEED_UNDER_INFLUENCE) + 1; //random speed every second while effect lasts
+                if (Objects.equals(direction, "up")) {
+                    direction = "down";
+                } else if (Objects.equals(direction, "down")) {
+                    direction = "up";
+                } else if (Objects.equals(direction, "left")) {
+                    direction = "right";
+                } else if (Objects.equals(direction, "right")) {
+                    direction = "left";
+                }
+                break;
+        }
+        if (interval == 1) {
+            timer.cancel();
+            switch (effect) {
+                case "Pills":
+                    speed = 2;
+                    dizzyFlag = false;
+                    break;
+            }
+        }
+        return --interval;
     }
 
     public void setDefaultValues() {
@@ -56,14 +110,22 @@ public class Player extends Entity {
 
     public void update() {
         if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
-            if (keyH.upPressed) {
+            if (keyH.upPressed && !dizzyFlag) {
                 direction = "up";
-            } else if (keyH.downPressed) {
+            } else if (keyH.downPressed && !dizzyFlag) {
                 direction = "down";
-            } else if (keyH.leftPressed) {
+            } else if (keyH.leftPressed && !dizzyFlag) {
                 direction = "left";
-            } else if (keyH.rightPressed) {
+            } else if (keyH.rightPressed && !dizzyFlag) {
                 direction = "right";
+            } else if (keyH.upPressed) {
+                direction = "down";
+            } else if (keyH.downPressed) {
+                direction = "up";
+            } else if (keyH.leftPressed) {
+                direction = "right";
+            } else  {
+                direction = "left";
             }
 
             //CHECK TILE COLLISION
@@ -109,18 +171,36 @@ public class Player extends Entity {
 
             switch(objectName) {
                 case "FrontDoorKey":
+                    gp.playSFX(1);
                     hasFrontDoorKey = true;
                     gp.obj[i] = null;
+                    gp.ui.showMessage("Front / Back Door Key!");
                     break;
                 case "FrontDoor":
                     if (hasFrontDoorKey) {
+                        gp.playSFX(3);
                         gp.obj[i] = null;
+                        gp.ui.showMessage("Door Unlocked!");
+                    } else {
+                        gp.ui.showMessage("You need the keys!");
                     }
                     break;
                 case "InsideDoor":
                 case "InsideDoorSideways":
                 case "BackGate":
+                    gp.playSFX(4);
                     gp.obj[i] = null;
+                    break;
+                case "Pills":
+                    gp.playSFX(2);
+                    gp.obj[i] = null;
+                    countDownTimerForItemEffect(PILLS_COUNT_DOWN_VALUE, "Pills");
+                    gp.ui.showMessage("Bloody Pills, can't think straight!");
+                    break;
+                case "FrontGate": //WIN GAME
+                    gp.ui.gameFinished = true;
+                    gp.stopMusic();
+                    gp.playSFX(3);
                     break;
             }
         }

@@ -20,19 +20,23 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow; //576 px
 
     //WORLD SETTINGS
-    public final int maxWorldCol = 52;
+    public final int maxWorldCol = 66;
     public final int maxWorldRow = 16;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
 
     //FPS
     int FPS = 60;
 
+    //SYSTEM
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
-    Thread gameThread;
+    Sound music = new Sound();
+    Sound sfx = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
+    Thread gameThread;
+
+    //ENTITY AND OBJECT
     public Player player = new Player(this,keyH);
     public SuperObject obj[] = new SuperObject[30];
 
@@ -47,6 +51,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         aSetter.setObject();
+
+        playMusic(0); //UNCOMMENT TO PLAY WHISTLE MUSIC
     }
 
     public void startGameThread() {
@@ -105,7 +111,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D)g;
 
         //TILE
@@ -121,6 +126,23 @@ public class GamePanel extends JPanel implements Runnable {
         //PLAYER
         player.draw(g2);
 
+        //UI
+        ui.draw(g2);
+
         g2.dispose();
+    }
+    public void playMusic(int i) {
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+
+    public void stopMusic() {
+        music.stop();
+    }
+
+    public void playSFX(int i) {
+        sfx.setFile(i);
+        sfx.play();
     }
 }

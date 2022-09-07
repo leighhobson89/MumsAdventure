@@ -10,6 +10,5 @@ public class OBJ_FrontDoorKey extends SuperObject {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        collision = true;
     }
 }
