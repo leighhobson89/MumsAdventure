@@ -1,15 +1,16 @@
 package main;
 
-import entity.Player;
 import object.OBJ_FrontDoorKey;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 
 public class UI {
     GamePanel gp;
-    Font breathFire, breathFire_80;
+    Font uniFont, breathFire_40, breathFire_80;;
     BufferedImage keyImage;
     public boolean messageOn = false;
     public String message = "";
@@ -19,11 +20,14 @@ public class UI {
     double playTime;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
 
-    public UI(GamePanel gp) {
+    public UI(GamePanel gp) throws IOException, FontFormatException {
         this.gp = gp;
 
-        breathFire = new Font("Breathe Fire", Font.PLAIN, 40);
-        breathFire_80 = new Font("Breathe Fire", Font.PLAIN, 80);
+        InputStream iS = this.getClass().getResourceAsStream("/fonts/breatheFire.otf");
+        uniFont = Font.createFont(Font.TRUETYPE_FONT,iS);
+        breathFire_40 = uniFont.deriveFont(40F);
+        breathFire_80 = uniFont.deriveFont(80F);
+
         OBJ_FrontDoorKey frontDoorKey = new OBJ_FrontDoorKey();
         keyImage = frontDoorKey.image;
     }
@@ -44,15 +48,14 @@ public class UI {
     }
 
     public void draw(Graphics2D g2) {
+        String text;
+        int textLength;
+        int x;
+        int y;
 
         if (gameFinished) {
-
-            g2.setFont(breathFire);
+            g2.setFont(breathFire_40);
             g2.setColor(Color.WHITE);
-            String text;
-            int textLength;
-            int x;
-            int y;
 
             text = "You Escaped through the gate!";
             textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth(); //align text in center
@@ -77,20 +80,22 @@ public class UI {
 
             gp.gameThread = null;
         } else {
-
-            g2.setFont(breathFire);
+            g2.setFont(breathFire_40);
             g2.setColor(Color.WHITE);
             g2.drawImage(keyImage, gp.tileSize/2, gp.tileSize/2, gp.tileSize, gp.tileSize, null);
             g2.drawString("  - " + convertBooleanKeyToString(), 50, 60);
 
             //TIME
             playTime += (double)1/60;
-            g2.drawString("Time:" + dFormat.format(playTime), gp.tileSize*12, 65);
+            g2.drawString("Time:" + dFormat.format(playTime), gp.tileSize*11, 65);
 
             //MESSAGE
             if(messageOn) {
                 g2.setFont(g2.getFont().deriveFont(30F));
-                g2.drawString(message, gp.tileSize * 5, gp.tileSize); //position UI messages by changing multiple of gp.tilesize
+                textLength = (int)g2.getFontMetrics().getStringBounds(message, g2).getWidth(); //align text in center
+                x = gp.screenWidth/2 - textLength/2;
+                y = gp.screenHeight/2 + (gp.tileSize*2);
+                g2.drawString(message, x, y);
 
                 messageCounter++;
 

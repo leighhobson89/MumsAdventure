@@ -6,6 +6,7 @@ import tile.TileManager;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -41,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
     public SuperObject obj[] = new SuperObject[30];
 
 
-    public GamePanel() { //constructor
+    public GamePanel() throws IOException, FontFormatException { //constructor
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
