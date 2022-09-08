@@ -28,7 +28,7 @@ public class UI {
         breathFire_40 = uniFont.deriveFont(40F);
         breathFire_80 = uniFont.deriveFont(80F);
 
-        OBJ_FrontDoorKey frontDoorKey = new OBJ_FrontDoorKey();
+        OBJ_FrontDoorKey frontDoorKey = new OBJ_FrontDoorKey(gp);
         keyImage = frontDoorKey.image;
     }
 
