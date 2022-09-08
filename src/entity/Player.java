@@ -22,6 +22,7 @@ public class Player extends Entity {
     public final int screenY;
     public boolean hasFrontDoorKey = false;
     boolean dizzyFlag;
+    public static boolean speedBoost;
     static int interval;
     Timer timer = new Timer();
     public int standCounter;
@@ -90,7 +91,9 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 16;
         worldY = gp.tileSize * 12;
-        speed = 2;
+        defaultSpeed = 2;
+        boostSpeed = 4;
+        speed = defaultSpeed;
         direction = "up";
     }
 
@@ -128,6 +131,13 @@ public class Player extends Entity {
             } else  {
                 direction = "left";
             }
+
+            if (speedBoost) {
+                speed = boostSpeed;
+            } else {
+                speed = defaultSpeed;
+            }
+            System.out.println(speedBoost + " " + speed);
 
             //CHECK TILE COLLISION
             collisionOn = false;

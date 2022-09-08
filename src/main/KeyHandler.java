@@ -1,10 +1,14 @@
 package main;
 
+import entity.Player;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+    Player player;
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -24,6 +28,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_RIGHT) {
             rightPressed = true;
         }
+        if (code == KeyEvent.VK_SHIFT) {
+            player.speedBoost = true;
+        }
     }
 
     @Override
@@ -41,6 +48,9 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_RIGHT) {
             rightPressed = false;
+        }
+        if (code == KeyEvent.VK_SHIFT) {
+            player.speedBoost = false;
         }
     }
 }
