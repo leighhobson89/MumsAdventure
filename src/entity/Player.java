@@ -21,7 +21,6 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    public boolean hasFrontDoorKey = false;
     boolean dizzyFlag;
     public static boolean speedBoost;
     static int interval;
@@ -198,42 +197,7 @@ public class Player extends Entity {
 
     public void pickUpObject(int i) {
         if (i != 999) {
-            String objectName = gp.obj[i].name;
 
-            switch(objectName) {
-                case "FrontDoorKey":
-                    gp.playSFX(1);
-                    hasFrontDoorKey = true;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("Front / Back Door Key!");
-                    break;
-                case "FrontDoor":
-                    if (hasFrontDoorKey) {
-                        gp.playSFX(3);
-                        gp.obj[i] = null;
-                        gp.ui.showMessage("Door Unlocked!");
-                    } else {
-                        gp.ui.showMessage("You need the keys!");
-                    }
-                    break;
-                case "InsideDoor":
-                case "InsideDoorSideways":
-                case "BackGate":
-                    gp.playSFX(4);
-                    gp.obj[i] = null;
-                    break;
-                case "Pills":
-                    gp.playSFX(2);
-                    gp.obj[i] = null;
-                    countDownTimerForItemEffect(PILLS_COUNT_DOWN_VALUE, "Pills");
-                    gp.ui.showMessage("Bloody Pills, can't think straight!");
-                    break;
-                case "FrontGate": //WIN GAME
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSFX(3);
-                    break;
-            }
         }
     }
 

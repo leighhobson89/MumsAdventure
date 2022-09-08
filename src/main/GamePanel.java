@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound sfx = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -40,6 +40,11 @@ public class GamePanel extends JPanel implements Runnable {
     //ENTITY AND OBJECT
     public Player player = new Player(this,keyH);
     public SuperObject obj[] = new SuperObject[30];
+
+    //GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
 
 
     public GamePanel() throws IOException, FontFormatException { //constructor
@@ -53,7 +58,8 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
 
-        playMusic(0); //UNCOMMENT TO PLAY WHISTLE MUSIC
+        playMusic(0, false, 0); //UNCOMMENT TO PLAY WHISTLE MUSIC
+        gameState = playState;
     }
 
     public void startGameThread() {
@@ -107,8 +113,15 @@ public class GamePanel extends JPanel implements Runnable {
         }
 }
     public void update() {
-        player.update();
+        if (gameState == playState) {
+            player.update();
+        }
+        if (gameState == pauseState) {
+            // nothing
+        }
+
     }
+
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -148,18 +161,22 @@ public class GamePanel extends JPanel implements Runnable {
 
         g2.dispose();
     }
-    public void playMusic(int i) {
+    public void playMusic(long position, boolean pausing, int i) {
         music.setFile(i);
-        music.play();
+        music.play(position, pausing);
         music.loop();
     }
 
     public void stopMusic() {
-        music.stop();
+        music.stop(false);
+    }
+
+    public long pauseMusic() {
+        return music.stop(true);
     }
 
     public void playSFX(int i) {
         sfx.setFile(i);
-        sfx.play();
+        sfx.play(0, false);
     }
 }

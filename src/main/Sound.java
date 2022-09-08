@@ -30,13 +30,23 @@ public class Sound {
 
         }
     }
-    public void play() {
+    public void play(long position, boolean pausing) {
         clip.start();
+        if (pausing) {
+            clip.setMicrosecondPosition(position);
+        }
     }
+
     public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
-    public void stop() {
+
+    public long stop(boolean pausing) {
+        long position = 0;
+        if (pausing) {
+            position = clip.getMicrosecondPosition();
+        }
         clip.stop();
+        return position;
     }
 }
