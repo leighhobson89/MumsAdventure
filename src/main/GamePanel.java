@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; //768 px
     public final int screenHeight = tileSize * maxScreenRow; //576 px
-
+    public final boolean musicSetToPlayFromStart = false; //Change to true to play music from start
     //WORLD SETTINGS
     public final int maxWorldCol = 66;
     public final int maxWorldRow = 16;
@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler(this);
+    public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound sfx = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int gameState;
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int dialogueState = 3;
 
 
     public GamePanel() throws IOException, FontFormatException { //constructor
@@ -60,7 +61,11 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
-        playMusic(0, false, 0); //UNCOMMENT TO PLAY WHISTLE MUSIC
+        playMusic(0, false, 0); //UNCOMMENT TO PLAY WHISTLE MUSIC FROM START
+        if (!musicSetToPlayFromStart) {
+            keyH.musicPlaying = false;
+            stopMusic();
+        }
         gameState = playState;
     }
 
