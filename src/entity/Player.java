@@ -132,12 +132,13 @@ public class Player extends Entity {
                 direction = "left";
             }
 
-            if (speedBoost) {
+            if (speedBoost && !dizzyFlag) {
                 speed = boostSpeed;
+            } else if (dizzyFlag) {
+                System.out.println("Dizzy!" + speed);
             } else {
                 speed = defaultSpeed;
             }
-            System.out.println(speedBoost + " " + speed);
 
             //CHECK TILE COLLISION
             collisionOn = false;
