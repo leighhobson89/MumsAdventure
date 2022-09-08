@@ -51,7 +51,7 @@ public class TileManager {
             setup(19, "fence1", true);
             //setup(20, "tree1", true);
             //setup(21, "tree2", true);
-            setup(22, "sofaTop", true);
+            setup(22, "sofaTop", false);
             setup(23, "sofaBottom", true);
             setup(24, "tableTL", false);
             setup(25, "tableTR", true);
@@ -83,6 +83,7 @@ public class TileManager {
             setup(51, "kitCup6", true);
             setup(52, "kitCup7", true);
             setup(53, "kitCup8", true);
+            setup(54, "mumsChairTile", false);
 
     }
 
