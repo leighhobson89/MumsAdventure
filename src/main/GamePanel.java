@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; //768 px
     public final int screenHeight = tileSize * maxScreenRow; //576 px
-
+    public final boolean musicSetToPlayFromStart = true; //Change to true to play music from start
     //WORLD SETTINGS
     public final int maxWorldCol = 66;
     public final int maxWorldRow = 16;
@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler(this);
+    public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound sfx = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -40,13 +40,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     //ENTITY AND OBJECT
     public Player player = new Player(this,keyH);
-    public SuperObject obj[] = new SuperObject[30];
-    public Entity npc[] = new Entity[10];
+    public SuperObject[] obj = new SuperObject[30];
+    public Entity[] npc = new Entity[10];
 
     //GAME STATE
     public int gameState;
+    public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int dialogueState = 3;
 
 
     public GamePanel() throws IOException, FontFormatException { //constructor
@@ -60,8 +62,12 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
-        playMusic(0, false, 0); //UNCOMMENT TO PLAY WHISTLE MUSIC
-        gameState = playState;
+        playMusic(0, false, 0);
+        if (!musicSetToPlayFromStart) {
+            keyH.musicPlaying = false;
+            stopMusic();
+        }
+        gameState = titleState;
     }
 
     public void startGameThread() {
@@ -119,16 +125,12 @@ public class GamePanel extends JPanel implements Runnable {
             //PLAYER
             player.update();
             //NPC
-            for (int i = 0; i < npc.length; i++) {
-                if (npc[i] != null) {
-                    npc[i].update();
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.update();
                 }
             }
         }
-        if (gameState == pauseState) {
-            // nothing
-        }
-
     }
 
 
@@ -138,39 +140,47 @@ public class GamePanel extends JPanel implements Runnable {
 
         //DEBUG
         long drawStart = 0;
-        if (keyH.checkDrawTime == true) {
+        if (keyH.checkDrawTime) {
             drawStart = System.nanoTime();
         }
 
-
-        //TILE
-        tileM.draw(g2); //bottom layer first
-
-        //OBJECT
-        for (int i = 0; i < obj.length; i++) {
-            if (obj[i] != null) {
-                obj[i].draw(g2, this);
-            }
+        //TITLE SCREEN
+        if (gameState == titleState) {
+            ui.draw(g2);
         }
 
-        //NPC
-        for (int i = 0; i < npc.length; i++) {
-            if (npc[i] != null) {
-                npc[i].draw(g2);
+        //OTHERS
+        else {
+            //TILE
+            tileM.draw(g2); //bottom layer first
+
+            //OBJECT
+            for (SuperObject superObject : obj) {
+                if (superObject != null) {
+                    superObject.draw(g2, this);
+                }
             }
+
+            //NPC
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.draw(g2);
+                }
+            }
+
+            //PLAYER
+            player.draw(g2);
+
+            //UI
+            ui.draw(g2);
         }
-
-        //PLAYER
-        player.draw(g2);
-
-        //UI
-        ui.draw(g2);
 
         //DEBUG
-        if (keyH.checkDrawTime == true) {
+        if (keyH.checkDrawTime) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
             g2.setColor(Color.WHITE);
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 42F));
             g2.drawString("Draw Time: " + passed, 10, 400);
             System.out.println("Draw Time: " + passed);
         }

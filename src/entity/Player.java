@@ -35,14 +35,12 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
-        getPlayerImage();
+        getPlayerImage(gp.ui.colorOutfit);
     }
 
     public void countDownTimerForItemEffect(int value, String effect) {
-        switch (effect) {
-            case "Pills":
-                speed = 1;
-                break;
+        if ("Pills".equals(effect)) {
+            speed = 1;
         }
         int period;
         final int[] timeLeft = new int[1];
@@ -56,29 +54,25 @@ public class Player extends Entity {
         }, value, period);
     }
 
-    private final int setInterval(String effect) {
-        switch (effect) {
-            case "Pills":
-                dizzyFlag = true;
-                speed = (int)(Math.random() * MAX_SPEED_UNDER_INFLUENCE) + 1; //random speed every second while effect lasts
-                if (Objects.equals(direction, "up")) {
-                    direction = "down";
-                } else if (Objects.equals(direction, "down")) {
-                    direction = "up";
-                } else if (Objects.equals(direction, "left")) {
-                    direction = "right";
-                } else if (Objects.equals(direction, "right")) {
-                    direction = "left";
-                }
-                break;
+    private int setInterval(String effect) {
+        if ("Pills".equals(effect)) {
+            dizzyFlag = true;
+            speed = (int) (Math.random() * MAX_SPEED_UNDER_INFLUENCE) + 1; //random speed every second while effect lasts
+            if (Objects.equals(direction, "up")) {
+                direction = "down";
+            } else if (Objects.equals(direction, "down")) {
+                direction = "up";
+            } else if (Objects.equals(direction, "left")) {
+                direction = "right";
+            } else if (Objects.equals(direction, "right")) {
+                direction = "left";
+            }
         }
         if (interval == 1) {
             timer.cancel();
-            switch (effect) {
-                case "Pills":
-                    speed = 2;
-                    dizzyFlag = false;
-                    break;
+            if ("Pills".equals(effect)) {
+                speed = 2;
+                dizzyFlag = false;
             }
         }
         return --interval;
@@ -93,17 +87,43 @@ public class Player extends Entity {
         direction = "up";
     }
 
-    public void getPlayerImage () {
-
-        up1 = setup("/player/mum_up1");
-        up2 = setup("/player/mum_up2");
+    public void getPlayerImage(int colorOutfit) {
+        //MENU
         down1 = setup("/player/mum_down1");
-        down2 = setup("/player/mum_down2");
-        left1 = setup("/player/mum_left1");
-        left2 = setup("/player/mum_left2");
-        right1 = setup("/player/mum_right1");
-        right2 = setup("/player/mum_right2");
+        down1_red = setup("/player/mum_down1_red");
+        down1_purple = setup("/player/mum_down1_purple");
+        gp.ui.colorOutfit = 1;
 
+        if (gp.gameState == gp.playState) {
+            if (colorOutfit == 0) {
+                up1 = setup("/player/mum_up1_red");
+                up2 = setup("/player/mum_up2_red");
+                down1 = setup("/player/mum_down1_red");
+                down2 = setup("/player/mum_down2_red");
+                left1 = setup("/player/mum_left1_red");
+                left2 = setup("/player/mum_left2_red");
+                right1 = setup("/player/mum_right1_red");
+                right2 = setup("/player/mum_right2_red");
+            } else if (colorOutfit == 1) {
+                up1 = setup("/player/mum_up1");
+                up2 = setup("/player/mum_up2");
+                down1 = setup("/player/mum_down1");
+                down2 = setup("/player/mum_down2");
+                left1 = setup("/player/mum_left1");
+                left2 = setup("/player/mum_left2");
+                right1 = setup("/player/mum_right1");
+                right2 = setup("/player/mum_right2");
+            } else if (colorOutfit == 2) {
+                up1 = setup("/player/mum_up1_purple");
+                up2 = setup("/player/mum_up2_purple");
+                down1 = setup("/player/mum_down1_purple");
+                down2 = setup("/player/mum_down2_purple");
+                left1 = setup("/player/mum_left1_purple");
+                left2 = setup("/player/mum_left2_purple");
+                right1 = setup("/player/mum_right1_purple");
+                right2 = setup("/player/mum_right2_purple");
+            }
+        }
     }
 
     public void update() {
@@ -140,27 +160,19 @@ public class Player extends Entity {
 
             //CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
-            pickUpObject(objIndex);
+//            pickUpObject(objIndex);
 
             //CHECK NPC COLLISION
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if (collisionOn == false) {
+            if (!collisionOn) {
                 switch (direction) {
-                    case "up":
-                        worldY -= speed;
-                        break;
-                    case "down":
-                        worldY += speed;
-                        break;
-                    case "left":
-                        worldX -= speed;
-                        break;
-                    case "right":
-                        worldX += speed;
-                        break;
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
                 }
             }
             spriteCounter++;
@@ -182,54 +194,58 @@ public class Player extends Entity {
         }
     }
 
-    public void pickUpObject(int i) {
-        if (i != 999) {
-
-        }
-    }
+//    public void pickUpObject(int i) {
+//        if (i != 999) {
+//
+//        }
+//    }
 
     public void interactNPC(int i) {
         if (i != 999) {
-            System.out.println("NPC COLL");
+            if (gp.keyH.enterPressed) {
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
+            }
         }
+        gp.keyH.enterPressed = false;
     }
 
     public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
-        switch(direction) {
-            case "up":
+        switch (direction) {
+            case "up" -> {
                 if (spriteNum == 1) {
                     image = up1;
                 }
                 if (spriteNum == 2) {
                     image = up2;
                 }
-                break;
-            case "down":
+            }
+            case "down" -> {
                 if (spriteNum == 1) {
                     image = down1;
                 }
                 if (spriteNum == 2) {
                     image = down2;
                 }
-                break;
-            case "left":
+            }
+            case "left" -> {
                 if (spriteNum == 1) {
                     image = left1;
                 }
                 if (spriteNum == 2) {
                     image = left2;
                 }
-                break;
-            case "right":
+            }
+            case "right" -> {
                 if (spriteNum == 1) {
                     image = right1;
                 }
                 if (spriteNum == 2) {
                     image = right2;
                 }
-                break;
+            }
         }
         g2.drawImage(image, screenX, screenY,null);
 
