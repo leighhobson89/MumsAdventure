@@ -73,25 +73,16 @@ public class KeyHandler implements KeyListener {
                     if (gp.ui.commandNum == 0) { //RED
                         gp.ui.colorOutfit = 0;
                         gp.gameState = gp.playState;
-                        gp.stopMusic();
-                        musicPlaying = false;
-                        //gp.playMusic(0, false, //add clip number for main game here);
                         gp.player.getPlayerImage(gp.ui.colorOutfit);
                     }
                     if (gp.ui.commandNum == 1) { //BROWN
                         gp.ui.colorOutfit = 1;
                         gp.gameState = gp.playState;
-                        gp.stopMusic();
-                        musicPlaying = false;
-                        //gp.playMusic(0, false, //add clip number for main game here);
                         gp.player.getPlayerImage(gp.ui.colorOutfit);
                     }
                     if (gp.ui.commandNum == 2) { //PURPLE
                         gp.ui.colorOutfit = 2;
                         gp.gameState = gp.playState;
-                        gp.stopMusic();
-                        musicPlaying = false;
-                        //gp.playMusic(0, false, //add clip number for main game here);
                         gp.player.getPlayerImage(gp.ui.colorOutfit);
                     }
                     if (gp.ui.commandNum == 3) { //BACK

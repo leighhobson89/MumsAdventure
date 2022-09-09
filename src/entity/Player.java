@@ -85,6 +85,9 @@ public class Player extends Entity {
         boostSpeed = 4;
         speed = defaultSpeed;
         direction = "up";
+        //PLAYER STATUS
+        maxLife = 10;
+        life = 0;
     }
 
     public void getPlayerImage(int colorOutfit) {
