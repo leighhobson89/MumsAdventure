@@ -1,14 +1,12 @@
 package main;
 
-import object.OBJ_FrontDoorKey;
+import entity.Entity;
 import object.OBJ_Heart;
-import object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 
 public class UI {
     GamePanel gp;
@@ -32,7 +30,7 @@ public class UI {
         maruMonica_40 = maruMonica.deriveFont(40F);
 
         //CREATE HUD OBJECT
-        SuperObject heart = new OBJ_Heart(gp);
+        Entity heart = new OBJ_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
@@ -71,14 +69,14 @@ public class UI {
 
     public void drawPlayerLife() {
 
-        gp.player.life = 3; //debug to test life gauge 10 full stress, 0 no stress
+        //gp.player.life = 3; //debug to test life gauge 10 full stress, 0 no stress
 
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i = 0;
 
         //DRAW MAX LIFE
-        while (i < gp.player.maxLife/2) {
+        while (i < gp.player.maxStress /2) {
             g2.drawImage(heart_blank, x, y, null);
             i++;
             x += gp.tileSize*0.8;
@@ -89,10 +87,10 @@ public class UI {
         i = 0;
 
         //DRAW CURRENT LIFE
-        while(i < gp.player.life) {
+        while(i < gp.player.stressLevel) {
             g2.drawImage(heart_half, x, y, null);
             i++;
-            if (i < gp.player.life) {
+            if (i < gp.player.stressLevel) {
                 g2.drawImage(heart_full, x, y, null);
             }
             i++;

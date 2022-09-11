@@ -9,17 +9,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Player extends Entity {
+    public boolean dizzyFlag;
     KeyHandler keyH;
 
-    final int PILLS_COUNT_DOWN_VALUE = 20;
+    public final int PILLS_COUNT_DOWN_VALUE = 20;
     final int MAX_SPEED_UNDER_INFLUENCE = 4;
 
     public final int screenX;
     public final int screenY;
-    boolean dizzyFlag;
-    public static boolean speedBoost;
+    public boolean speedBoost;
     static int interval;
-    Timer timer = new Timer();
     public int standCounter;
 
     public Player(GamePanel gp, KeyHandler keyH) {
@@ -39,6 +38,7 @@ public class Player extends Entity {
     }
 
     public void countDownTimerForItemEffect(int value, String effect) {
+        Timer timer = new Timer();
         if ("Pills".equals(effect)) {
             speed = 1;
         }
@@ -49,12 +49,12 @@ public class Player extends Entity {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                timeLeft[0] = (setInterval(effect));
+                timeLeft[0] = (setInterval(effect, timer));
             }
         }, value, period);
     }
 
-    private int setInterval(String effect) {
+    private int setInterval(String effect, Timer timer) {
         if ("Pills".equals(effect)) {
             dizzyFlag = true;
             speed = (int) (Math.random() * MAX_SPEED_UNDER_INFLUENCE) + 1; //random speed every second while effect lasts
@@ -86,8 +86,8 @@ public class Player extends Entity {
         speed = defaultSpeed;
         direction = "up";
         //PLAYER STATUS
-        maxLife = 10;
-        life = 0;
+        maxStress = 10;
+        stressLevel = 0;
     }
 
     public void getPlayerImage(int colorOutfit) {
@@ -169,6 +169,11 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
+            // CHECK EVENT
+            gp.eHandler.checkEvent();
+
+            gp.keyH.enterPressed = false;
+
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (!collisionOn) {
                 switch (direction) {
@@ -210,7 +215,6 @@ public class Player extends Entity {
                 gp.npc[i].speak();
             }
         }
-        gp.keyH.enterPressed = false;
     }
 
     public void draw(Graphics2D g2) {

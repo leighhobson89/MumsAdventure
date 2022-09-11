@@ -15,19 +15,23 @@ public class Entity {
     public int worldX, worldY;
     public int speed, defaultSpeed, boostSpeed;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, down1_red, down1_purple;
-    public String direction;
+    public String direction = "up";
     public int spriteCounter = 0;
     public int spriteNum = 1;
-    public Rectangle solidArea = new Rectangle(8, 16, 32,32);
+    public Rectangle solidArea = new Rectangle(8, 16, 32, 32);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
     String[] dialogues = new String[100];
     int dialogueIndex = 0;
+    public BufferedImage image, image2, image3;
+    public String name;
+    public boolean collision = false;
+    UtilityTool uTool = new UtilityTool();
 
     //CHARACTER STATUS
-    public int maxLife;
-    public int life;
+    public int maxStress;
+    public int stressLevel;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -76,7 +80,7 @@ public class Entity {
         }
     }
 
-    public void draw (Graphics2D g2) {
+    public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
         int screenX = worldX - gp.player.worldX + gp.player.screenX;

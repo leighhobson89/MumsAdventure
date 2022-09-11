@@ -107,7 +107,7 @@ public class KeyHandler implements KeyListener {
                 rightPressed = true;
             }
             if (code == KeyEvent.VK_SHIFT) {
-                Player.speedBoost = true;
+                gp.player.speedBoost = true;
             }
             if (code == KeyEvent.VK_P) {
                 gp.gameState = gp.pauseState;
@@ -173,7 +173,7 @@ public class KeyHandler implements KeyListener {
             rightPressed = false;
         }
         if (code == KeyEvent.VK_SHIFT) {
-            Player.speedBoost = false;
+            gp.player.speedBoost = false;
         }
     }
 }

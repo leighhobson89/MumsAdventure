@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 
+import java.awt.*;
 import java.util.Random;
 
 public class NPC_Dad extends Entity {
@@ -13,6 +14,10 @@ public class NPC_Dad extends Entity {
 
         getImage();
         setDialogue();
+
+        solidArea = new Rectangle(8, 16,32,32);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
     }
 
     public void getImage() {
@@ -89,6 +94,7 @@ public class NPC_Dad extends Entity {
         dialogues[57] = "Are ya bringin' t'washing in? Its rainin' out\nthere!";
         dialogues[58] = "I'm just gonna have a run on to that paki shop\nfor some bits for't van!";
         dialogues[59] = "Where's old Fleabag??";
+        dialogues[60] = "Simpsons is on soon!";
     }
 
     public void setAction() {

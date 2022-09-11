@@ -1,25 +1,25 @@
 package object;
 
+import entity.Entity;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.util.Objects;
-
-public class OBJ_BackGate extends SuperObject {
-
-    GamePanel gp;
+public class OBJ_BackGate extends Entity {
 
     public OBJ_BackGate(GamePanel gp) {
 
-        this.gp = gp;
+        super(gp);
 
         name = "BackGate";
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/backGate.png")));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        direction = "down";
+        down1 = setup("/objects/backGate");
+
         collision = true;
+
+        solidArea.x = 0;
+        solidArea.y = 16;
+        solidArea.width = 48;
+        solidArea.height = 32;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
     }
 }

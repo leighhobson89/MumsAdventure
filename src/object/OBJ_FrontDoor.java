@@ -1,25 +1,18 @@
 package object;
 
+import entity.Entity;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.util.Objects;
-
-public class OBJ_FrontDoor extends SuperObject {
-
-    GamePanel gp;
+public class OBJ_FrontDoor extends Entity {
 
     public OBJ_FrontDoor(GamePanel gp) {
 
-        this.gp = gp;
+        super(gp);
 
         name = "FrontDoor";
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/frontDoor.png")));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        down1 = setup("/objects/frontDoor");
+        direction = "down";
         collision = true;
+
     }
 }

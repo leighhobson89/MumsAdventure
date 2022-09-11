@@ -1,25 +1,18 @@
 package object;
 
+import entity.Entity;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.util.Objects;
-
-public class OBJ_Tree2 extends SuperObject {
-
-    GamePanel gp;
+public class OBJ_Tree2 extends Entity {
 
     public OBJ_Tree2(GamePanel gp) {
 
-        this.gp = gp;
+        super(gp);
 
         name = "Tree2";
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/tree2.png")));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        down1 = setup("/objects/tree2");
+        direction = "down";
+
         collision = true;
     }
 }

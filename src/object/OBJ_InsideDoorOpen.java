@@ -1,24 +1,17 @@
 package object;
 
+import entity.Entity;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.util.Objects;
-
-public class OBJ_InsideDoorOpen extends SuperObject {
-
-    GamePanel gp;
+public class OBJ_InsideDoorOpen extends Entity {
 
     public OBJ_InsideDoorOpen(GamePanel gp) {
 
-        this.gp = gp;
+        super(gp);
 
         name = "InsideDoorOpen";
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/insideDoorOpen.png")));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        down1 = setup("/objects/insideDoorOpen");
+        direction = "down";
+
     }
 }
