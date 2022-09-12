@@ -92,7 +92,7 @@ public class NPC_Dad extends Entity {
         dialogues[55] = "There were some bloody kids looking\nsheepish round't back when I went up...";
         dialogues[56] = "Have yer locked t'back gate?";
         dialogues[57] = "Are ya bringin' t'washing in? Its rainin' out\nthere!";
-        dialogues[58] = "I'm just gonna have a run on to that paki shop\nfor some bits for't van!";
+        dialogues[58] = "I'm just gonna have a run on to that paki\nshop for some bits for't van!";
         dialogues[59] = "Where's old Fleabag??";
         dialogues[60] = "Simpsons is on soon!";
     }
