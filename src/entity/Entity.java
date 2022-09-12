@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 
 public class Entity {
 
@@ -22,11 +23,14 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
+    public boolean invincible;
+    public int invincibleCounter =0;
     String[] dialogues = new String[100];
     int dialogueIndex = 0;
     public BufferedImage image, image2, image3;
     public String name;
     public boolean collision = false;
+    public int type; //0 = player, 1 = npc, 2 = monster
     UtilityTool uTool = new UtilityTool();
 
     //CHARACTER STATUS
@@ -39,11 +43,12 @@ public class Entity {
 
     public void setAction() {}
     public void speak() { //GENERAL CHARACTER SPEAK BEHAVIOUR
-        if (dialogues[dialogueIndex] == null) {
-            dialogueIndex = 0; //reset dialogue if reach end of array
+        Random rand = new Random();
+        int randomValue = rand.nextInt(dialogues.length);
+        while (dialogues[randomValue] == null) {
+            randomValue = rand.nextInt(dialogues.length);
         }
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
+        gp.ui.currentDialogue = dialogues[randomValue];
 
         switch (gp.player.direction) {
             case "up" -> direction = "down";
@@ -58,7 +63,17 @@ public class Entity {
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
-        gp.cChecker.checkPlayer(this);
+        gp.cChecker.checkEntity(this, gp.npc);
+        gp.cChecker.checkEntity(this, gp.monster);
+        boolean contactPlayer = gp.cChecker.checkPlayer(this);
+
+        if(this.type == 2 && contactPlayer) {
+            if (!gp.player.invincible) {
+                //we can give damage
+                gp.player.stressLevel +=1;
+                gp.player.invincible = true;
+            }
+        }
 
         //IF COLLISION IS FALSE, ENTITY CAN MOVE
         if (!collisionOn) {

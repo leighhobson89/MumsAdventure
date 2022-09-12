@@ -48,7 +48,8 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(20, 8, "any")) {spiderCount = spiderEvent(20, 8, gp.dialogueState, spiderCount);}
+            if (hit(20, 8, "any")) {spiderCount = spiderEvent(21, 9, gp.dialogueState, spiderCount);}
+            if (hit(23, 2, "up")) {spiderCount = spiderEvent(24, 3, gp.dialogueState, spiderCount);}
             if (hit(16, 13, "any")) {chairDestressEvent(gp.dialogueState);}
             if (!gp.player.dizzyFlag) {
                 if (hit(16, 10, "any")) {teleportPills(gp.dialogueState);}
@@ -86,20 +87,25 @@ public class EventHandler {
         gp.gameState = gameState;
         if (spiderCount == 1) {
             gp.ui.currentDialogue = "Aaagh a bloody big spider!";
+            gp.aSetter.setMonster(spiderCount, col, row); // trigger a spider when the dialogue is closed
         } else if (spiderCount > 1 && spiderCount <= 10) {
             gp.ui.currentDialogue = "Aaagh another bloody spider!\nThat's " + uTool.parseNumberString(spiderCount) + " in one day, sick of it!";
+            gp.aSetter.setMonster(spiderCount, col, row);
         } else {
-            gp.ui.currentDialogue = "So many bloody spiders, Peter will you\nsort this bloody house out?";
+            gp.ui.currentDialogue = "So many bloody spiders today, Peter will you\nsort this bloody house out?";
         }
-        gp.player.stressLevel += 3;
-        //eventRect[col][row].eventDone = true;
+        if (spiderCount <= 10) {
+            gp.player.stressLevel += 3;
+        }
+        //eventRect[col][row].eventDone = true; //for non recurring events only
         canTouchEvent = false;
         spiderCount++;
         return spiderCount;
     }
 
     public void chairDestressEvent (int gameState) {
-        if (gp.keyH.enterPressed && gp.player.stressLevel > 0) {
+        //if (gp.keyH.enterPressed && gp.player.stressLevel > 0) { // to access event with a keypress only
+        if (gp.player.stressLevel > 0) {
             gp.gameState = gameState;
             gp.ui.currentDialogue = "Nice to have a sit down, I feel less stressed\nstraight away!";
             gp.player.stressLevel -= 1;

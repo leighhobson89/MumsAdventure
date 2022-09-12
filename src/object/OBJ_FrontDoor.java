@@ -12,7 +12,7 @@ public class OBJ_FrontDoor extends Entity {
         name = "FrontDoor";
         down1 = setup("/objects/frontDoor");
         direction = "down";
-        collision = true;
+        //collision = true;
 
     }
 }

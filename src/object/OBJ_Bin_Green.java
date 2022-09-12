@@ -12,7 +12,6 @@ public class OBJ_Bin_Green extends Entity {
         name = "Bin_Green";
         down1 = setup("/objects/bin_Green");
         direction = "down";
-        collision = true;
 
     }
 }

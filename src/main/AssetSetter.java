@@ -1,6 +1,7 @@
 package main;
 
 import entity.NPC_Dad;
+import monster.MON_Spider;
 import object.*;
 
 public class AssetSetter {
@@ -102,11 +103,28 @@ public class AssetSetter {
         gp.obj[23] = new OBJ_Bin_Grey(gp);
         gp.obj[23].worldX = 22 * gp.tileSize;
         gp.obj[23].worldY = 2 * gp.tileSize;
+
+        gp.obj[24] = new OBJ_BackGateOpenSideways(gp);
+        gp.obj[24].worldX = 20 * gp.tileSize;
+        gp.obj[24].worldY = 8 * gp.tileSize;
+
+        gp.obj[25] = new OBJ_BackGateSideways(gp);
+        gp.obj[25].worldX = 20 * gp.tileSize;
+        gp.obj[25].worldY = 8 * gp.tileSize;
     }
 
     public void setNPC() {
         gp.npc[0] = new NPC_Dad(gp);
         gp.npc[0].worldX = gp.tileSize*14;
         gp.npc[0].worldY = gp.tileSize*10;
+    }
+
+    public void setMonster(int index, int x, int y) { // Slots 0-9 are taken up with possible spider trigger events, so add more starting at "10"
+        switch(index) {
+            case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10:
+                gp.monster[index-1] = new MON_Spider(gp);
+                gp.monster[index-1].worldX = gp.tileSize * x;
+                gp.monster[index-1].worldY = gp.tileSize * y;
+        }
     }
 }
