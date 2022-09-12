@@ -8,12 +8,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.Buffer;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class Entity {
 
     GamePanel gp;
+
+    ArrayList<Integer> usedDialogues = new ArrayList<>();
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, down1_red, down1_purple;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public BufferedImage image, image2, image3;
@@ -53,11 +54,27 @@ public class Entity {
     public void setAction() {}
     public void speak() { //GENERAL CHARACTER SPEAK BEHAVIOUR
         Random rand = new Random();
-        int randomValue = rand.nextInt(dialogues.length);
-        while (dialogues[randomValue] == null) {
-            randomValue = rand.nextInt(dialogues.length);
+        int dialogueCount = 0;
+
+        for (int i = 0; i < dialogues.length; i++) {
+            if (!(dialogues[i] == null)) {
+                dialogueCount++;
+            }
         }
+
+        int randomValue = rand.nextInt(dialogues.length); //init only;
+
+        while (dialogues[randomValue] == null || usedDialogues.contains(randomValue)) {
+            randomValue = rand.nextInt(dialogueCount);
+
+            if (usedDialogues.size() >= dialogueCount) {
+                usedDialogues.clear(); // cycle round when used all dialogues
+            }
+        }
+
         gp.ui.currentDialogue = dialogues[randomValue];
+        usedDialogues.add(randomValue);
+
 
         switch (gp.player.direction) {
             case "up" -> direction = "down";
