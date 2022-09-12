@@ -10,7 +10,7 @@ public class OBJ_StairsHall extends Entity {
         super(gp);
 
         name = "StairsHall";
-        down1 = setup("/objects/stairsHall");
+        down1 = setup("/objects/stairsHall", gp.tileSize, gp.tileSize);
         direction = "down";
 
     }

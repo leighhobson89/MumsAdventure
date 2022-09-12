@@ -20,7 +20,8 @@ public class UI {
     public String currentDialogue;
     public int commandNum = 0;
     public int titleScreenState = 0; //0: FIRST TITLE SCREEN 1: SECOND SCREEN
-    public int colorOutfit = 0;
+    public String colorOutfit = "brown";
+    public String outfitChosen = "";
 
     public UI(GamePanel gp) throws IOException, FontFormatException {
         this.gp = gp;
@@ -171,7 +172,7 @@ public class UI {
                 x = gp.screenWidth/2 - (gp.tileSize*2)/2;
                 y = gp.tileSize*5;
                 g2.drawImage(gp.player.down1_red, x, y, gp.tileSize*2, gp.tileSize*2, null);
-                colorOutfit = 0;
+                colorOutfit = "red";
             }
 
             text = "Brown";
@@ -183,7 +184,7 @@ public class UI {
                 x = gp.screenWidth/2 - (gp.tileSize*2)/2;
                 y = gp.tileSize*5;
                 g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
-                colorOutfit = 1;
+                colorOutfit = "brown";
             }
 
             text = "Purple";
@@ -195,7 +196,7 @@ public class UI {
                 x = gp.screenWidth/2 - (gp.tileSize*2)/2;
                 y = gp.tileSize*5;
                 g2.drawImage(gp.player.down1_purple, x, y, gp.tileSize*2, gp.tileSize*2, null);
-                colorOutfit = 2;
+                colorOutfit = "purple";
             }
 
             text = "Back";
@@ -204,19 +205,19 @@ public class UI {
             g2.drawString(text, x, y);
             if (commandNum == 3) {
                 g2.drawString(">", x-gp.tileSize, y);
-                colorOutfit = 1;
+                colorOutfit = "brown";
             }
 
             x = gp.screenWidth/2 - (gp.tileSize*2)/2;
             y = gp.tileSize*5;
             switch (colorOutfit) {
-                case 0:
+                case "red":
                     g2.drawImage(gp.player.down1_red, x, y, gp.tileSize*2, gp.tileSize*2, null);
                     break;
-                case 1:
+                case "brown":
                     g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
                     break;
-                case 2:
+                case "purple":
                     g2.drawImage(gp.player.down1_purple, x, y, gp.tileSize*2, gp.tileSize*2, null);
                     break;
             }

@@ -10,7 +10,7 @@ public class OBJ_FrontGateOpen extends Entity {
         super(gp);
 
         name = "FrontGateOpen";
-        down1 = setup("/objects/frontGateOpen");
+        down1 = setup("/objects/frontGateOpen", gp.tileSize, gp.tileSize);
         direction = "down";
 
     }

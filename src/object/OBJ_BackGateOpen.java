@@ -11,7 +11,7 @@ public class OBJ_BackGateOpen extends Entity {
 
         name = "BackGateOpen";
         direction = "down";
-        down1 = setup("/objects/backGateOpen");
+        down1 = setup("/objects/backGateOpen", gp.tileSize, gp.tileSize);
 
     }
 }

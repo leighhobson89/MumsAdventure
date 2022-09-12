@@ -68,20 +68,22 @@ public class KeyHandler implements KeyListener {
                         gp.ui.commandNum = 0;
                     }
                 }
-
                 if (code == KeyEvent.VK_ENTER) {
                     if (gp.ui.commandNum == 0) { //RED
-                        gp.ui.colorOutfit = 0;
+                        gp.ui.colorOutfit = "red";
+                        gp.ui.outfitChosen = gp.ui.colorOutfit;
                         gp.gameState = gp.playState;
                         gp.player.getPlayerImage(gp.ui.colorOutfit);
                     }
                     if (gp.ui.commandNum == 1) { //BROWN
-                        gp.ui.colorOutfit = 1;
+                        gp.ui.colorOutfit = "brown";
+                        gp.ui.outfitChosen = gp.ui.colorOutfit;
                         gp.gameState = gp.playState;
                         gp.player.getPlayerImage(gp.ui.colorOutfit);
                     }
                     if (gp.ui.commandNum == 2) { //PURPLE
-                        gp.ui.colorOutfit = 2;
+                        gp.ui.colorOutfit = "purple";
+                        gp.ui.outfitChosen = gp.ui.colorOutfit;
                         gp.gameState = gp.playState;
                         gp.player.getPlayerImage(gp.ui.colorOutfit);
                     }
@@ -89,11 +91,12 @@ public class KeyHandler implements KeyListener {
                         gp.ui.titleScreenState = 0;
                         gp.ui.commandNum = 0;
                     }
+                    gp.player.getPlayerAttackImage(gp.ui.outfitChosen);
                 }
             }
         }
 
-        if (gp.gameState == gp.playState) { // PLAY STATE KEYS
+        else if (gp.gameState == gp.playState) { // PLAY STATE KEYS
             if (code == KeyEvent.VK_UP) {
                 upPressed = true;
             }

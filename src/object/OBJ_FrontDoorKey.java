@@ -10,7 +10,7 @@ public class OBJ_FrontDoorKey extends Entity {
         super(gp);
 
         name = "FrontDoorKey";
-        down1 = setup("/objects/frontDoorKey");
+        down1 = setup("/objects/frontDoorKey", gp.tileSize, gp.tileSize);
         direction = "down";
 
     }

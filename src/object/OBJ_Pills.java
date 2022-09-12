@@ -10,7 +10,7 @@ public class OBJ_Pills extends Entity {
         super(gp);
 
         name = "Pills";
-        down1 = setup("/objects/pills");
+        down1 = setup("/objects/pills", gp.tileSize, gp.tileSize);
         direction = "down";
 
     }

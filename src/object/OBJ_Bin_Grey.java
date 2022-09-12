@@ -10,7 +10,7 @@ public class OBJ_Bin_Grey extends Entity {
         super(gp);
 
         name = "Bin_Grey";
-        down1 = setup("/objects/bin_Grey");
+        down1 = setup("/objects/bin_Grey", gp.tileSize, gp.tileSize);
         direction = "down";
         collision = true;
 

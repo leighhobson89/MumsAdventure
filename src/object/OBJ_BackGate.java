@@ -11,7 +11,7 @@ public class OBJ_BackGate extends Entity {
 
         name = "BackGate";
         direction = "down";
-        down1 = setup("/objects/backGate");
+        down1 = setup("/objects/backGate", gp.tileSize, gp.tileSize);
 
         collision = true;
 

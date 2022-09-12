@@ -10,7 +10,7 @@ public class OBJ_Spider extends Entity {
         super(gp);
 
         name = "Spider";
-        down1 = setup("/objects/spider");
+        down1 = setup("/objects/spider", gp.tileSize, gp.tileSize);
         direction = "down";
 
     }

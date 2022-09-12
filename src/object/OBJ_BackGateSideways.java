@@ -10,7 +10,7 @@ public class OBJ_BackGateSideways extends Entity {
         super(gp);
 
         name = "BackGateSideways";
-        down1 = setup("/objects/backGateSideways");
+        down1 = setup("/objects/backGateSideways", gp.tileSize, gp.tileSize);
         direction = "down";
         //collision = true;
 

@@ -10,7 +10,7 @@ public class OBJ_Cupboard2 extends Entity {
         super(gp);
 
         name = "Cupboard2";
-        down1 = setup("/objects/cupboard2");
+        down1 = setup("/objects/cupboard2", gp.tileSize, gp.tileSize);
         direction = "down";
         collision = true;
 

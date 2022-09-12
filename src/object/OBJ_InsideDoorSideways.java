@@ -10,7 +10,7 @@ public class OBJ_InsideDoorSideways extends Entity {
         super(gp);
 
         name = "InsideDoorSideways";
-        down1 = setup("/objects/insideDoorSideways");
+        down1 = setup("/objects/insideDoorSideways", gp.tileSize, gp.tileSize);
         direction = "down";
 
         //collision = true;

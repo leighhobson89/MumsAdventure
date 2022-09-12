@@ -10,7 +10,7 @@ public class OBJ_TelephoneHall extends Entity {
         super(gp);
 
         name = "TelephoneHall";
-        down1 = setup("/objects/telephoneHall");
+        down1 = setup("/objects/telephoneHall", gp.tileSize, gp.tileSize);
         direction = "down";
 
     }

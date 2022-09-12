@@ -10,7 +10,7 @@ public class OBJ_InsideDoorOpen extends Entity {
         super(gp);
 
         name = "InsideDoorOpen";
-        down1 = setup("/objects/insideDoorOpen");
+        down1 = setup("/objects/insideDoorOpen", gp.tileSize, gp.tileSize);
         direction = "down";
 
     }

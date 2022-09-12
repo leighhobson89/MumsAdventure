@@ -10,7 +10,7 @@ public class OBJ_Tree2 extends Entity {
         super(gp);
 
         name = "Tree2";
-        down1 = setup("/objects/tree2");
+        down1 = setup("/objects/tree2", gp.tileSize, gp.tileSize);
         direction = "down";
 
         collision = true;

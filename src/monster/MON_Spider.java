@@ -6,15 +6,18 @@ import main.GamePanel;
 import java.util.Random;
 
 public class MON_Spider extends Entity {
+
+    GamePanel gp;
     public MON_Spider(GamePanel gp) {
         super(gp);
+
+        this.gp = gp;
 
         type = 2;
         name = "Spider";
         speed = 5;
-        maxStress = 2;
-        stressLevel = maxStress;
-
+        monsterMaxStress = 3;
+        stressLevel = 0;
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;
@@ -26,14 +29,14 @@ public class MON_Spider extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/monster/spider_Up1");
-        up2 = setup("/monster/spider_Up2");
-        down1 = setup("/monster/spider_Down1");
-        down2 = setup("/monster/spider_Down2");
-        left1 = setup("/monster/spider_Left1");
-        left2 = setup("/monster/spider_Left2");
-        right1 = setup("/monster/spider_Right1");
-        right2 = setup("/monster/spider_Right2");
+        up1 = setup("/monster/spider_Up1", gp.tileSize, gp.tileSize);
+        up2 = setup("/monster/spider_Up2", gp.tileSize, gp.tileSize);
+        down1 = setup("/monster/spider_Down1", gp.tileSize, gp.tileSize);
+        down2 = setup("/monster/spider_Down2", gp.tileSize, gp.tileSize);
+        left1 = setup("/monster/spider_Left1", gp.tileSize, gp.tileSize);
+        left2 = setup("/monster/spider_Left2", gp.tileSize, gp.tileSize);
+        right1 = setup("/monster/spider_Right1", gp.tileSize, gp.tileSize);
+        right2 = setup("/monster/spider_Right2", gp.tileSize, gp.tileSize);
     }
 
     public void setAction() {

@@ -10,7 +10,7 @@ public class OBJ_FrontDoor extends Entity {
         super(gp);
 
         name = "FrontDoor";
-        down1 = setup("/objects/frontDoor");
+        down1 = setup("/objects/frontDoor", gp.tileSize, gp.tileSize);
         direction = "down";
         //collision = true;
 

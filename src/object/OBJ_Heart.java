@@ -12,9 +12,9 @@ public class OBJ_Heart extends Entity {
 
         name = "Heart";
         direction = "down";
-        image = setup("/lifebar/stress_full");
-        image2 = setup("/lifebar/stress_half");
-        image3 = setup("/lifebar/stress_none");
+        image = setup("/lifebar/stress_full", gp.tileSize, gp.tileSize);
+        image2 = setup("/lifebar/stress_half", gp.tileSize, gp.tileSize);
+        image3 = setup("/lifebar/stress_none", gp.tileSize, gp.tileSize);
         image = uTool.scaleImage(image, (int) (gp.tileSize*0.7), gp.tileSize);
         image2 = uTool.scaleImage(image2, (int) (gp.tileSize*0.7), gp.tileSize);
         image3 = uTool.scaleImage(image3, (int) (gp.tileSize*0.7), gp.tileSize);
