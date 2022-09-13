@@ -15,7 +15,7 @@ public class MON_Spider extends Entity {
 
         type = 2;
         name = "Spider";
-        speed = 5;
+        speed = 4;
         monsterMaxStress = 3;
         stressLevel = 0;
         solidArea.x = 3;
@@ -29,6 +29,7 @@ public class MON_Spider extends Entity {
     }
 
     public void getImage() {
+        dyingImage = setup("/monster/spiderDead", gp.tileSize, gp.tileSize);
         up1 = setup("/monster/spider_Up1", gp.tileSize, gp.tileSize);
         up2 = setup("/monster/spider_Up2", gp.tileSize, gp.tileSize);
         down1 = setup("/monster/spider_Down1", gp.tileSize, gp.tileSize);
@@ -61,5 +62,9 @@ public class MON_Spider extends Entity {
             }
             actionLockCounter = 0;
         }
+    }
+    public void damageReaction() {
+        actionLockCounter = 0;
+        direction = gp.player.direction;
     }
 }

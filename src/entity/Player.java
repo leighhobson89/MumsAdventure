@@ -96,7 +96,6 @@ public class Player extends Entity {
 
     public void getPlayerImage(String colorOutfit) {
         //MENU
-        System.out.println("/player/mum_down1_" + colorOutfit);
         down1 = setup("/player/mum_down1_brown", gp.tileSize, gp.tileSize);
         down1_red = setup("/player/mum_down1_red", gp.tileSize, gp.tileSize);
         down1_purple = setup("/player/mum_down1_purple", gp.tileSize, gp.tileSize);
@@ -274,6 +273,7 @@ public class Player extends Entity {
                 gp.npc[i].speak();
             } else {
                 attacking = true;
+                gp.playSFX(5);
             }
         }
     }
@@ -292,9 +292,12 @@ public class Player extends Entity {
             if (!gp.monster[i].invincible) {
                 gp.monster[i].stressLevel += 1;
                 gp.monster[i].invincible = true;
+                gp.monster[i].damageReaction(); //makes monster run away if player hits it
+                gp.playSFX(6);
 
                 if (gp.monster[i].stressLevel >= gp.monster[i].monsterMaxStress) {
-                    gp.monster[i] = null;
+                    gp.monster[i].dying = true;
+                    gp.playSFX(7);
                 }
             }
         }
