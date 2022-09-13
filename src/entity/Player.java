@@ -2,6 +2,9 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_GrandmasCardigan;
+import object.OBJ_Lavendar_Crocs;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
@@ -20,6 +23,7 @@ public class Player extends Entity {
     public boolean speedBoost;
     static int interval;
     public int standCounter;
+    public boolean attackCanceled;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -90,8 +94,26 @@ public class Player extends Entity {
         direction = "up";
 
         //PLAYER STATUS
+        level = 1;
+        strength = 1; //more strength the more damage he gives
+        dexterity = 1; //more dexterity, less damage receives
+        exp = 0;
+        nextLevelExp = 3;
+        coin = 10;
         maxStress = 10;
         stressLevel = 0;
+        currentWeapon = new OBJ_Lavendar_Crocs(gp);
+        currentShield = new OBJ_GrandmasCardigan(gp);
+        attack = getAttack(); // total attack value decided by strength and weapon
+        defense = getDefense(); // total defense value decided by dexterity and shield
+    }
+
+    public int getAttack() {
+        return attack = strength * currentWeapon.attackValue;
+    }
+
+    public int getDefense() {
+        return defense = dexterity * currentShield.defense;
     }
 
     public void getPlayerImage(String colorOutfit) {
@@ -185,6 +207,14 @@ public class Player extends Entity {
                 }
             }
 
+            if (keyH.enterPressed && !attackCanceled) {
+                gp.playSFX(5);
+                attacking = true;
+                spriteCounter = 0;
+            }
+
+            attackCanceled = false;
+
             gp.keyH.enterPressed = false;
 
             spriteCounter++;
@@ -269,6 +299,7 @@ public class Player extends Entity {
 
         if (gp.keyH.enterPressed) {
             if (i != 999) {
+                attackCanceled = true;
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
             } else {

@@ -85,6 +85,7 @@ public class EventHandler {
 
     public int spiderEvent(int col, int row, int gameState, int spiderCount) {
         gp.gameState = gameState;
+        gp.playSFX(8);
         if (spiderCount == 1) {
             gp.ui.currentDialogue = "Aaagh a bloody big spider!";
             gp.aSetter.setMonster(spiderCount, col, row); // trigger a spider when the dialogue is closed
@@ -105,13 +106,15 @@ public class EventHandler {
 
     public void chairDestressEvent (int gameState) {
         //if (gp.keyH.enterPressed && gp.player.stressLevel > 0) { // to access event with a keypress only
-        if (gp.player.stressLevel > 0) {
-            gp.gameState = gameState;
-            gp.ui.currentDialogue = "Nice to have a sit down, I feel less stressed\nstraight away!";
-            gp.player.stressLevel -= 1;
-            canTouchEvent = false;
+            if (gp.player.stressLevel > 0) {
+                gp.player.attackCanceled = true;
+                gp.gameState = gameState;
+                gp.ui.currentDialogue = "Nice to have a sit down, I feel less stressed\nstraight away!";
+                gp.player.stressLevel -= 1;
+                canTouchEvent = false;
+            }
         }
-    }
+    //}
 
     public void teleportPills (int gameState) {
         gp.gameState = gameState;

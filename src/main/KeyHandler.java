@@ -29,74 +29,84 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode();
 
         if (gp.gameState == gp.titleState) { // TITLE STATE KEYS
+            titleState(code);
+        } else if (gp.gameState == gp.playState) { // PLAY STATE KEYS
+            playState(code);
+        } else if (gp.gameState == gp.pauseState) { //PAUSE STATE KEYS
+            pauseState(code);
+        } else if (gp.gameState == gp.dialogueState) { //DIALOGUE STATE KEYS
+            dialogueState(code);
+        } else if (gp.gameState == gp.characterState) { //CHARACTER STATE KEYS
+            characterState(code);
+        }
+    }
 
-            if (gp.ui.titleScreenState == 0) {
-                if (code == KeyEvent.VK_UP) {
-                    gp.ui.commandNum--;
-                    if (gp.ui.commandNum < 0) {
-                        gp.ui.commandNum = 2;
-                    }
-                }
-                if (code == KeyEvent.VK_DOWN) {
-                    gp.ui.commandNum++;
-                    if (gp.ui.commandNum > 2) {
-                        gp.ui.commandNum = 0;
-                    }
-                }
-                if (code == KeyEvent.VK_ENTER) { //NEW GAME
-                    if (gp.ui.commandNum == 0) {
-                        gp.ui.titleScreenState = 1;
-                    }
-                    if (gp.ui.commandNum == 1) { //LOAD GAME
-
-                    }
-                    if (gp.ui.commandNum == 2) { //QUIT
-                        System.exit(0);
-                    }
+    public void titleState(int code) {
+        if (gp.ui.titleScreenState == 0) {
+            if (code == KeyEvent.VK_UP) {
+                gp.ui.commandNum--;
+                if (gp.ui.commandNum < 0) {
+                    gp.ui.commandNum = 2;
                 }
             }
-            else if (gp.ui.titleScreenState == 1) {
-                if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_UP) {
-                    gp.ui.commandNum--;
-                    if (gp.ui.commandNum < 0) {
-                        gp.ui.commandNum = 3;
-                    }
+            if (code == KeyEvent.VK_DOWN) {
+                gp.ui.commandNum++;
+                if (gp.ui.commandNum > 2) {
+                    gp.ui.commandNum = 0;
                 }
-                if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_DOWN) {
-                    gp.ui.commandNum++;
-                    if (gp.ui.commandNum > 3) {
-                        gp.ui.commandNum = 0;
-                    }
+            }
+            if (code == KeyEvent.VK_ENTER) { //NEW GAME
+                if (gp.ui.commandNum == 0) {
+                    gp.ui.titleScreenState = 1;
                 }
-                if (code == KeyEvent.VK_ENTER) {
-                    if (gp.ui.commandNum == 0) { //RED
-                        gp.ui.colorOutfit = "red";
-                        gp.ui.outfitChosen = gp.ui.colorOutfit;
-                        gp.gameState = gp.playState;
-                        gp.player.getPlayerImage(gp.ui.colorOutfit);
-                    }
-                    if (gp.ui.commandNum == 1) { //BROWN
-                        gp.ui.colorOutfit = "brown";
-                        gp.ui.outfitChosen = gp.ui.colorOutfit;
-                        gp.gameState = gp.playState;
-                        gp.player.getPlayerImage(gp.ui.colorOutfit);
-                    }
-                    if (gp.ui.commandNum == 2) { //PURPLE
-                        gp.ui.colorOutfit = "purple";
-                        gp.ui.outfitChosen = gp.ui.colorOutfit;
-                        gp.gameState = gp.playState;
-                        gp.player.getPlayerImage(gp.ui.colorOutfit);
-                    }
-                    if (gp.ui.commandNum == 3) { //BACK
-                        gp.ui.titleScreenState = 0;
-                        gp.ui.commandNum = 0;
-                    }
-                    gp.player.getPlayerAttackImage(gp.ui.outfitChosen);
+                if (gp.ui.commandNum == 1) { //LOAD GAME
+
                 }
+                if (gp.ui.commandNum == 2) { //QUIT
+                    System.exit(0);
+                }
+            }
+        } else if (gp.ui.titleScreenState == 1) {
+            if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_UP) {
+                gp.ui.commandNum--;
+                if (gp.ui.commandNum < 0) {
+                    gp.ui.commandNum = 3;
+                }
+            }
+            if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_DOWN) {
+                gp.ui.commandNum++;
+                if (gp.ui.commandNum > 3) {
+                    gp.ui.commandNum = 0;
+                }
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if (gp.ui.commandNum == 0) { //RED
+                    gp.ui.colorOutfit = "red";
+                    gp.ui.outfitChosen = gp.ui.colorOutfit;
+                    gp.gameState = gp.playState;
+                    gp.player.getPlayerImage(gp.ui.colorOutfit);
+                }
+                if (gp.ui.commandNum == 1) { //BROWN
+                    gp.ui.colorOutfit = "brown";
+                    gp.ui.outfitChosen = gp.ui.colorOutfit;
+                    gp.gameState = gp.playState;
+                    gp.player.getPlayerImage(gp.ui.colorOutfit);
+                }
+                if (gp.ui.commandNum == 2) { //PURPLE
+                    gp.ui.colorOutfit = "purple";
+                    gp.ui.outfitChosen = gp.ui.colorOutfit;
+                    gp.gameState = gp.playState;
+                    gp.player.getPlayerImage(gp.ui.colorOutfit);
+                }
+                if (gp.ui.commandNum == 3) { //BACK
+                    gp.ui.titleScreenState = 0;
+                    gp.ui.commandNum = 0;
+                }
+                gp.player.getPlayerAttackImage(gp.ui.outfitChosen);
             }
         }
-
-        else if (gp.gameState == gp.playState) { // PLAY STATE KEYS
+    }
+    public void playState(int code) {
             if (code == KeyEvent.VK_UP) {
                 upPressed = true;
             }
@@ -125,15 +135,21 @@ public class KeyHandler implements KeyListener {
                     musicPlaying = true;
                 }
             }
+            if (code == KeyEvent.VK_C) {
+                gp.gameState = gp.characterState;
+            }
             if (code == KeyEvent.VK_ENTER) {
                 enterPressed = true;
             }
             if (code == KeyEvent.VK_Q) {
                 System.exit(0);
             }
-        }
-        else if (gp.gameState == gp.pauseState) { //PAUSE STATE KEYS
-
+            //DEBUG
+            if (code == KeyEvent.VK_D) {
+                checkDrawTime = !checkDrawTime; //toggle draw speed information with 'D' key
+            }
+    }
+    public void pauseState(int code) {
             if (code == KeyEvent.VK_P) {
                 gp.gameState = gp.playState;
                 if (musicPlaying) {
@@ -143,18 +159,16 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_Q) {
                 System.exit(0);
             }
-        }
-
-        else if (gp.gameState == gp.dialogueState) { //DIALOGUE STATE KEYS
+    }
+    public void dialogueState(int code) {
             if (code == KeyEvent.VK_ENTER) {
                 gp.gameState = gp.playState;
             }
-        }
-
-        //DEBUG
-        if (code == KeyEvent.VK_D) {
-            checkDrawTime = !checkDrawTime; //toggle draw speed information with 'D' key
-        }
+    }
+    public void characterState(int code) {
+            if (code == KeyEvent.VK_C) {
+                gp.gameState = gp.playState;
+            }
     }
 
 

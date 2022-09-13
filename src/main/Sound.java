@@ -20,6 +20,7 @@ public class Sound {
         soundURL[5] = getClass().getResource("/sound/whack.wav");
         soundURL[6] = getClass().getResource("/sound/spiderHitSqueak.wav");
         soundURL[7] = getClass().getResource("/sound/spiderDeadSquelch.wav");
+        soundURL[8] = getClass().getResource("/sound/discoverSpiderShriek.wav");
     }
 
     public void setFile(int i) {
