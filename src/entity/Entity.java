@@ -65,6 +65,7 @@ public class Entity {
     //ITEM ATTRIBUTES
     public int attackValue;
     public int defenseValue;
+    public String description = "";
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -156,7 +157,7 @@ public class Entity {
 
         if (invincible) {
             invincibleCounter++;
-            if(invincibleCounter > 40 && !dying) {
+            if(invincibleCounter > 40) {
                 invincible = false;
                 invincibleCounter = 0;
             }
@@ -219,7 +220,6 @@ public class Entity {
                     }
                     if (dying) {
                         image = dyingImage;
-                        speed = 0;
                         dyingAnimation(g2);
                     }
 

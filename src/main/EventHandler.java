@@ -108,6 +108,7 @@ public class EventHandler {
         //if (gp.keyH.enterPressed && gp.player.stressLevel > 0) { // to access event with a keypress only
             if (gp.player.stressLevel > 0) {
                 gp.player.attackCanceled = true;
+                gp.playSFX(12);
                 gp.gameState = gameState;
                 gp.ui.currentDialogue = "Nice to have a sit down, I feel less stressed\nstraight away!";
                 gp.player.stressLevel -= 1;

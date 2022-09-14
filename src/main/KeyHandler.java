@@ -13,7 +13,7 @@ public class KeyHandler implements KeyListener {
     boolean musicPlaying = true;
 
     //DEBUG
-    boolean checkDrawTime;
+    boolean showDebugText;
     Player player;
 
     public KeyHandler(GamePanel gp) {
@@ -146,7 +146,10 @@ public class KeyHandler implements KeyListener {
             }
             //DEBUG
             if (code == KeyEvent.VK_D) {
-                checkDrawTime = !checkDrawTime; //toggle draw speed information with 'D' key
+                showDebugText = !showDebugText; //toggle draw speed information with 'D' key
+            }
+            if (code == KeyEvent.VK_R) {
+                gp.tileM.loadMap("/maps/world01.txt"); //refresh the map after editing the world map file and saving it during gameplay
             }
     }
     public void pauseState(int code) {
@@ -169,6 +172,30 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_C) {
                 gp.gameState = gp.playState;
             }
+        if (code == KeyEvent.VK_UP) {
+            if (gp.ui.slotRow != 0) {
+                gp.playSFX(10);
+                gp.ui.slotRow--;
+            }
+        }
+        if (code == KeyEvent.VK_DOWN) {
+            if (gp.ui.slotRow != 3) {
+                gp.playSFX(10);
+                gp.ui.slotRow++;
+            }
+        }
+        if (code == KeyEvent.VK_LEFT) {
+            if (gp.ui.slotCol != 0) {
+                gp.playSFX(10);
+                gp.ui.slotCol--;
+            }
+        }
+        if (code == KeyEvent.VK_RIGHT) {
+            if (gp.ui.slotCol != 4) {
+                gp.playSFX(10);
+                gp.ui.slotCol++;
+            }
+        }
     }
 
 

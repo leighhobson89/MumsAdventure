@@ -11,6 +11,7 @@ public class OBJ_Lavendar_Crocs extends Entity {
         name = "Lavendar Crocs";
         down1 = setup("/objects/lavendarCrocs", gp.tileSize, gp.tileSize);
         attackValue = 2;
+        description = "[" + name + "]\nYour Favourite Crocs!";
     }
 
 }

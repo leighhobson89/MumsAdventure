@@ -2,7 +2,6 @@ package main;
 
 import entity.Entity;
 import entity.Player;
-import tile.Tile;
 import tile.TileManager;
 
 import javax.swing.JPanel;
@@ -140,7 +139,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
             for (int i = 0; i < monster.length; i++) {
                 if (monster[i] != null) {
-                    if (monster[i].alive && !monster[i].dying); {
+                    if (monster[i].alive && !monster[i].dying) {
                         monster[i].update();
                     }
                     if (!monster[i].alive) {
@@ -158,7 +157,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         //DEBUG
         long drawStart = 0;
-        if (keyH.checkDrawTime) {
+        if (keyH.showDebugText) {
             drawStart = System.nanoTime();
         }
 
@@ -216,13 +215,21 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //DEBUG
-        if (keyH.checkDrawTime) {
+        if (keyH.showDebugText) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
             g2.setColor(Color.WHITE);
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 42F));
-            g2.drawString("Draw Time: " + passed, 10, 400);
-            System.out.println("Draw Time: " + passed);
+            int x = 10;
+            int y = 400;
+            int lineHeight = 35;
+
+            //DRAW WORLD POSITION DATA AND DRAWSPEED
+            g2.drawString("WorldX: " + player.worldX, x, y); y += lineHeight;
+            g2.drawString("WorldY: " + player.worldY, x, y); y += lineHeight;
+            g2.drawString("Col: " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
+            g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
+            g2.drawString("Draw Time: " + passed, x, y);
         }
 
         g2.dispose();

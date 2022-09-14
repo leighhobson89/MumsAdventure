@@ -2,11 +2,14 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_FrontDoorKey;
 import object.OBJ_GrandmasCardigan;
 import object.OBJ_Lavendar_Crocs;
+import object.OBJ_Pills;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,6 +27,8 @@ public class Player extends Entity {
     static int interval;
     public int standCounter;
     public boolean attackCanceled;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -42,6 +47,7 @@ public class Player extends Entity {
 
         setDefaultValues();
         getPlayerImage(gp.ui.colorOutfit);
+        setItems();
     }
 
     public void countDownTimerForItemEffect(int value, String effect) {
@@ -106,6 +112,13 @@ public class Player extends Entity {
         currentShield = new OBJ_GrandmasCardigan(gp);
         attack = getAttack(); // total attack value decided by strength and weapon
         defense = getDefense(); // total defense value decided by dexterity and shield
+    }
+
+    public void setItems() {
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new OBJ_FrontDoorKey(gp));
+        inventory.add(new OBJ_Pills(gp));
     }
 
     public int getAttack() {
@@ -314,12 +327,14 @@ public class Player extends Entity {
             if (!invincible) {
 
                 int damage = gp.monster[i].attack - defense;
-                gp.ui.addMessage("The " + gp.monster[i].name + " got you! Your stress increases by " + damage + "!");
-                if (damage < 0) {
+                if (damage > 0) {
+                    gp.ui.addMessage("The " + gp.monster[i].name + " got you! Your stress increases by " + damage + "!");
+                    stressLevel+=1;
+                }
+                if (damage <= 0) {
+                    gp.ui.addMessage("The " + gp.monster[i].name + " got you but it can't stress you at your exp level!");
                     damage = 0;
                 }
-
-                stressLevel+=1;
                 invincible = true;
             }
         }
@@ -342,6 +357,7 @@ public class Player extends Entity {
                 if (gp.monster[i].stressLevel >= gp.monster[i].monsterMaxStress) {
                     gp.monster[i].dying = true;
                     gp.playSFX(7);
+                    gp.playSFX(13);
                     gp.ui.addMessage("You killed the " + gp.monster[i].name + ", phew!");
                     gp.ui.addMessage("Exp +" + gp.monster[i].exp);
                     exp+= gp.monster[i].exp;
@@ -363,7 +379,7 @@ public class Player extends Entity {
 
             gp.playSFX(9);
             gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You have levelled up!\nNow you are level" + level + "!\n\nYou feel more able to cope with stress!";
+            gp.ui.currentDialogue = "You have levelled up!\nNow you are level " + level + "!\n\nYou feel more able to cope with stress!";
         }
     }
 
