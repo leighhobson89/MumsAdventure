@@ -98,7 +98,7 @@ public class Player extends Entity {
         strength = 1; //more strength the more damage he gives
         dexterity = 1; //more dexterity, less damage receives
         exp = 0;
-        nextLevelExp = 3;
+        nextLevelExp = 6;
         coin = 10;
         maxStress = 10;
         stressLevel = 0;
@@ -113,7 +113,7 @@ public class Player extends Entity {
     }
 
     public int getDefense() {
-        return defense = dexterity * currentShield.defense;
+        return defense = dexterity * currentShield.defenseValue;
     }
 
     public void getPlayerImage(String colorOutfit) {
@@ -312,6 +312,13 @@ public class Player extends Entity {
     public void contactMonster(int i) {
         if (i != 999) {
             if (!invincible) {
+
+                int damage = gp.monster[i].attack - defense;
+                gp.ui.addMessage("The " + gp.monster[i].name + " got you! Your stress increases by " + damage + "!");
+                if (damage < 0) {
+                    damage = 0;
+                }
+
                 stressLevel+=1;
                 invincible = true;
             }
@@ -321,16 +328,42 @@ public class Player extends Entity {
     public void damageMonster(int i) {
         if (i != 999) {
             if (!gp.monster[i].invincible) {
-                gp.monster[i].stressLevel += 1;
+                gp.playSFX(6);
+                int damage = attack - gp.monster[i].defense;
+                if (damage < 0) {
+                    damage = 0;
+                }
+                gp.monster[i].stressLevel += damage;
+                gp.ui.addMessage(gp.monster[i].name + " receives " + damage + " damage!");
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction(); //makes monster run away if player hits it
-                gp.playSFX(6);
+
 
                 if (gp.monster[i].stressLevel >= gp.monster[i].monsterMaxStress) {
                     gp.monster[i].dying = true;
                     gp.playSFX(7);
+                    gp.ui.addMessage("You killed the " + gp.monster[i].name + ", phew!");
+                    gp.ui.addMessage("Exp +" + gp.monster[i].exp);
+                    exp+= gp.monster[i].exp;
+                    checkLevelUp();
                 }
             }
+        }
+    }
+
+    public void checkLevelUp() {
+        if (exp >= nextLevelExp) {
+            level++;
+            nextLevelExp = nextLevelExp*2;
+            maxStress += 2;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defense = getDefense();
+
+            gp.playSFX(9);
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "You have levelled up!\nNow you are level" + level + "!\n\nYou feel more able to cope with stress!";
         }
     }
 

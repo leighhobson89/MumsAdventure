@@ -117,7 +117,12 @@ public class Entity {
         if(this.type == 2 && contactPlayer) {
             if (!gp.player.invincible) {
                 //we can give damage
-                gp.player.stressLevel +=1;
+
+                int damage = attack - gp.player.defense;
+                if (damage < 0) {
+                    damage = 0;
+                }
+                gp.player.stressLevel += damage;
                 gp.player.invincible = true;
             }
         }

@@ -4,8 +4,13 @@ import entity.NPC_Dad;
 import monster.MON_Spider;
 import object.*;
 
+import java.util.Random;
+
 public class AssetSetter {
     GamePanel gp;
+
+    //INDICES FOR INSTANCES OF MONSTERS (can add NPC and OBJ equivalents later if required)
+    public int monsterNumber = 0;
 
     public AssetSetter(GamePanel gp) {
         this.gp = gp;
@@ -119,12 +124,32 @@ public class AssetSetter {
         gp.npc[0].worldY = gp.tileSize*10;
     }
 
-    public void setMonster(int index, int x, int y) { // Slots 0-9 are taken up with possible spider trigger events, so add more starting at "10"
-        switch(index) {
-            case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10:
-                gp.monster[index-1] = new MON_Spider(gp);
-                gp.monster[index-1].worldX = gp.tileSize * x;
-                gp.monster[index-1].worldY = gp.tileSize * y;
+    public int setMonster(String type, int monsterNumber, int x, int y, boolean randomizeLocation) {
+        switch(type) {
+            case "Spider":
+                gp.monster[monsterNumber] = new MON_Spider(gp);
+                break;
         }
+        if (randomizeLocation) { // sets monster in any square up to 2 tiles away from player in any direction but never on the player
+            Random rand = new Random();
+            int randX = 0;
+            int randY = 0;
+            while (randX == 0 && randY == 0) {
+                randX = rand.nextInt(4) - 2;
+                randY = rand.nextInt(4) - 2;
+                gp.monster[monsterNumber].worldX = gp.tileSize * (x + randX);
+                gp.monster[monsterNumber].worldY = gp.tileSize * (y + randY);
+            }
+
+        } else { // will place monster exactly at specified x and y co-ordinates
+            gp.monster[monsterNumber].worldX = gp.tileSize * x;
+            gp.monster[monsterNumber].worldY = gp.tileSize * y;
+        }
+
+
+
+        monsterNumber++; //monster counter increments so that next call of method adds to next slot in monster array
+
+        return monsterNumber;
     }
 }

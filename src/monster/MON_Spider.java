@@ -18,6 +18,9 @@ public class MON_Spider extends Entity {
         speed = 4;
         monsterMaxStress = 3;
         stressLevel = 0;
+        attack = 2;
+        defense = 0;
+        exp = 2;
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;
