@@ -32,6 +32,7 @@ public class Entity {
     int dialogueIndex = 0;
     public boolean collisionOn = false;
     public boolean invincible;
+    public boolean newMonster;
     public boolean attacking;
     public boolean alive = true;
     public boolean dying;
@@ -108,10 +109,17 @@ public class Entity {
         setAction();
 
         collisionOn = false;
-        gp.cChecker.checkTile(this);
+        boolean tileState = gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkEntity(this, gp.monster);
+        if (newMonster && tileState) {
+            collisionOn = false;
+        }
+        if (newMonster && !tileState) {
+            newMonster = false;
+            collisionOn = true;
+        }
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
         if(this.type == 2 && contactPlayer) {
@@ -148,7 +156,7 @@ public class Entity {
 
         if (invincible) {
             invincibleCounter++;
-            if(invincibleCounter > 40) {
+            if(invincibleCounter > 40 && !dying) {
                 invincible = false;
                 invincibleCounter = 0;
             }

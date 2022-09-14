@@ -10,7 +10,8 @@ public class CollisionChecker {
         this.gp = gp;
     }
 
-    public void checkTile(Entity entity) {
+    public boolean checkTile(Entity entity) {
+        boolean tileState = false;
         int entityLeftWorldX = entity.worldX + entity.solidArea.x;
         int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
         int entityTopWorldY = entity.worldY + entity.solidArea.y;
@@ -30,6 +31,7 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
                     entity.collisionOn = true;
+                    tileState = true;
                 }
                 break;
             case "down":
@@ -38,6 +40,7 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
                     entity.collisionOn = true;
+                    tileState = true;
                 }
                 break;
             case "left":
@@ -46,6 +49,7 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
                     entity.collisionOn = true;
+                    tileState = true;
                 }
                 break;
             case "right":
@@ -54,9 +58,11 @@ public class CollisionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
                     entity.collisionOn = true;
+                    tileState = true;
                 }
                 break;
         }
+        return tileState;
     }
     public int checkObject(Entity entity, boolean player) {
 

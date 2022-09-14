@@ -128,6 +128,7 @@ public class AssetSetter {
         switch(type) {
             case "Spider":
                 gp.monster[monsterNumber] = new MON_Spider(gp);
+                gp.monster[monsterNumber].newMonster = true;
                 break;
         }
         if (randomizeLocation) { // sets monster in any square up to 2 tiles away from player in any direction but never on the player
