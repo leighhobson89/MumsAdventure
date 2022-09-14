@@ -128,7 +128,11 @@ public class Entity {
                 //we can give damage
 
                 int damage = attack - gp.player.defense;
-                if (damage < 0) {
+                if (damage > 0) {
+                    gp.ui.addMessage("The " + this.name + " got you! Your stress increases by " + damage + "!");
+                }
+                if (damage <= 0) {
+                    gp.ui.addMessage("The " + this.name + " got you but it can't stress you at your exp level!");
                     damage = 0;
                 }
                 gp.player.stressLevel += damage;

@@ -96,7 +96,7 @@ public class EventHandler {
             gp.ui.currentDialogue = "So many bloody spiders today, Peter will you\nsort this bloody house out?";
         }
         if (spiderCount <= 10) {
-            gp.player.stressLevel += 3;
+            gp.player.stressLevel += 1;
         }
         //eventRect[col][row].eventDone = true; //for non recurring events only
         canTouchEvent = false;
