@@ -12,7 +12,7 @@ public class OBJ_Pills extends Entity {
         name = "Pills";
         down1 = setup("/objects/pills", gp.tileSize, gp.tileSize);
         direction = "down";
-        description = "[" + name + "]\nSome Random Pills";
+        description = "[" + name + "]\nYour Daily Pills";
 
     }
 }

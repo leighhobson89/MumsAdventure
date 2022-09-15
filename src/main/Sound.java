@@ -26,6 +26,10 @@ public class Sound {
         soundURL[11] = getClass().getResource("/sound/select.wav");
         soundURL[12] = getClass().getResource("/sound/sitInChairRelax.wav");
         soundURL[13] = getClass().getResource("/sound/phewKillSpider.wav");
+        soundURL[14] = getClass().getResource("/sound/wheelieBinClosing.wav");
+        soundURL[15] = getClass().getResource("/sound/wheelieBinDragToLoop.wav");
+        soundURL[16] = getClass().getResource("/sound/pickupElectricGuitar.wav");
+        soundURL[17] = getClass().getResource("/sound/pickupAcousticGuitar.wav");
     }
 
     public void setFile(int i) {

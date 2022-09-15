@@ -52,7 +52,7 @@ public class Player extends Entity {
 
     public void countDownTimerForItemEffect(int value, String effect) {
         Timer timer = new Timer();
-        if ("Pills".equals(effect)) {
+        if ("Tube of Pills".equals(effect)) {
             speed = 1;
         }
         int period;
@@ -68,7 +68,7 @@ public class Player extends Entity {
     }
 
     private int setInterval(String effect, Timer timer) {
-        if ("Pills".equals(effect)) {
+        if ("Tube of Pills".equals(effect)) {
             dizzyFlag = true;
             speed = (int) (Math.random() * MAX_SPEED_UNDER_INFLUENCE) + 1; //random speed every second while effect lasts
             if (Objects.equals(direction, "up")) {
@@ -83,7 +83,7 @@ public class Player extends Entity {
         }
         if (interval == 1) {
             timer.cancel();
-            if ("Pills".equals(effect)) {
+            if ("Tube of Pills".equals(effect)) {
                 speed = 2;
                 dizzyFlag = false;
             }
@@ -302,11 +302,45 @@ public class Player extends Entity {
         }
     }
 
-//    public void pickUpObject(int i) {
-//        if (i != 999) {
-//
-//        }
-//    }
+    public void pickUpObject(int i) {
+        if (i != 999) {
+
+            String text;
+
+            if (inventory.size() != maxInventorySize) {
+                inventory.add(gp.obj[i]);
+                int selectSfx = selectSfx(gp.obj[i].name);
+                gp.playSFX(selectSfx);
+                text = "Picked up " + gp.obj[i].name + "!";
+            } else {
+                text = "You cannot carry any more!";
+            }
+            gp.ui.addMessage(text);
+            gp.obj[i] = null;
+        }
+    }
+
+    private int selectSfx(String object) {
+        int sfx = 0;
+        switch(object) {
+            case "FrontDoorKey":
+                sfx = 1;
+                break;
+            case "Tube of Pills":
+                sfx = 2;
+                break;
+            case "Bin_Blue", "Bin_Green":
+                sfx = 14;
+                break;
+            case "Acoustic Guitar":
+                sfx = 17;
+                break;
+            case "Electric Guitar":
+                sfx = 16;
+                break;
+        }
+        return sfx;
+    }
 
     public void interactNPC(int i) {
 

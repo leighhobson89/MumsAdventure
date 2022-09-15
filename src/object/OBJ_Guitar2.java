@@ -9,7 +9,7 @@ public class OBJ_Guitar2 extends Entity {
 
         super(gp);
 
-        name = "Guitar2";
+        name = "Electric Guitar";
         down1 = setup("/objects/guitar2", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nElectric Guitar";
