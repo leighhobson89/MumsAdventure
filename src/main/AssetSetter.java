@@ -18,6 +18,17 @@ public class AssetSetter {
 
     public void setObject() {
         int i = 0;
+
+        gp.obj[i] = new OBJ_Pills(gp);
+        gp.obj[i].worldX = 16 * gp.tileSize;
+        gp.obj[i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[i] = new OBJ_Pills(gp);
+        gp.obj[i].worldX = 14 * gp.tileSize;
+        gp.obj[i].worldY = 6 * gp.tileSize;
+        i++;
+
         gp.obj[i] = new OBJ_Guitar1(gp);
         gp.obj[i].worldX = 17 * gp.tileSize;
         gp.obj[i].worldY = 8 * gp.tileSize;
@@ -93,11 +104,6 @@ public class AssetSetter {
         gp.obj[i].worldY = 12 * gp.tileSize;
         i++;
 
-        gp.obj[i] = new OBJ_MumsChair(gp);
-        gp.obj[i].worldX = 16 * gp.tileSize;
-        gp.obj[i].worldY = 13 * gp.tileSize;
-        i++;
-
         gp.obj[i] = new OBJ_BackGateOpen(gp);
         gp.obj[i].worldX = 28 * gp.tileSize;
         gp.obj[i].worldY = 4 * gp.tileSize;
@@ -106,6 +112,21 @@ public class AssetSetter {
         gp.obj[i] = new OBJ_BackGate(gp);
         gp.obj[i].worldX = 28 * gp.tileSize;
         gp.obj[i].worldY = 4 * gp.tileSize;
+        i++;
+
+        gp.obj[i] = new OBJ_Lavendar_Crocs(gp);
+        gp.obj[i].worldX = 18 * gp.tileSize;
+        gp.obj[i].worldY = 9 * gp.tileSize;
+        i++;
+
+        gp.obj[i] = new OBJ_GrandmasCardigan(gp);
+        gp.obj[i].worldX = 23 * gp.tileSize;
+        gp.obj[i].worldY = 5 * gp.tileSize;
+        i++;
+
+        gp.obj[i] = new OBJ_Spatula(gp);
+        gp.obj[i].worldX = 20 * gp.tileSize;
+        gp.obj[i].worldY = 9 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_FrontGateOpen(gp);

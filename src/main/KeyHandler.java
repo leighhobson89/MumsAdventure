@@ -169,8 +169,17 @@ public class KeyHandler implements KeyListener {
             }
     }
     public void characterState(int code) {
+
+        if (code == KeyEvent.VK_ENTER) {
+            gp.player.selectItem();
+            gp.playSFX(11);
+        }
             if (code == KeyEvent.VK_C) {
                 gp.gameState = gp.playState;
+                gp.player.timer.cancel();
+                gp.player.createTimer();
+                gp.player.dizzyFlag = false;
+                gp.player.speed = 2;
             }
         if (code == KeyEvent.VK_UP) {
             if (gp.ui.slotRow != 0) {

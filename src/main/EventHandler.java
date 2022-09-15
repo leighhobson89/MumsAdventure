@@ -51,9 +51,6 @@ public class EventHandler {
             if (hit(20, 8, "any")) {spiderCount = spiderEvent(20, 8, gp.dialogueState, spiderCount, true);}
             if (hit(23, 2, "up")) {spiderCount = spiderEvent(24, 3, gp.dialogueState, spiderCount, false);}
             if (hit(16, 13, "any")) {chairDestressEvent(gp.dialogueState);}
-            if (!gp.player.dizzyFlag) {
-                if (hit(16, 10, "any")) {teleportPills(gp.dialogueState);}
-            }
         }
     }
 
@@ -85,6 +82,9 @@ public class EventHandler {
 
     public int spiderEvent(int col, int row, int gameState, int spiderCount, boolean randomizeLocation) {
         gp.gameState = gameState;
+        if (!randomizeLocation) { //play bin sound only at bin - will need new flag if more spider locations added without randomizeLocation
+            gp.playSFX(14);
+        }
         gp.playSFX(8);
         if (spiderCount == 1) {
             gp.ui.currentDialogue = "Aaagh a bloody big spider!";
@@ -119,7 +119,7 @@ public class EventHandler {
 
     public void teleportPills (int gameState) {
         gp.gameState = gameState;
-        int[][] optionArray = {{14,6},{15,8},{17,6},{20,9},{21,10},{25,6}};
+        int[][] optionArray = {{14,6},{15,8},{17,6},{20,10},{21,10},{25,6}};
         Random random = new Random();
         int randomLocation = random.nextInt(optionArray.length);
         int randX = optionArray[randomLocation][0];

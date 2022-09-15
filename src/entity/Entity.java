@@ -46,8 +46,11 @@ public class Entity {
     int hpBarCounter = 0;
 
     //CHARACTER ATTRIBUTES
-    public int type; //0 = player, 1 = npc, 2 = monster
     public String name;
+    public boolean isWeapon;
+    public boolean isArmour;
+    public boolean collectable;
+    public boolean isOpenable;
     public int maxStress;
     public int monsterMaxStress;
     public int stressLevel;
@@ -66,6 +69,16 @@ public class Entity {
     public int attackValue;
     public int defenseValue;
     public String description = "";
+
+    //TYPE
+    public int type;
+    public final int type_player = 0;
+    public final int type_npc = 1;
+    public final int type_monster = 2;
+    public final int type_short_weapon = 3;
+    public final int type_long_weapon = 4;
+    public final int type_armour = 5;
+    public final int type_consumable = 6;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -106,6 +119,9 @@ public class Entity {
             case "right" -> direction = "left";
         }
     }
+    public void use(Entity entity) {
+        //overridden in Player class
+    }
     public void update() {
         setAction();
 
@@ -123,8 +139,8 @@ public class Entity {
         }
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-        if(this.type == 2 && contactPlayer) {
-            if (!gp.player.invincible) {
+        if(this.type == type_monster && contactPlayer) {
+            if (!gp.player.invincible && !this.dying) {
                 //we can give damage
 
                 int damage = attack - gp.player.defense;
@@ -199,7 +215,7 @@ public class Entity {
                     }
 
             //Monster HP bar
-            if(type == 2 && hpBarOn) {
+            if(type == type_monster && hpBarOn) {
 
                 double oneScale = (double)gp.tileSize/monsterMaxStress;
                 double hpBarValue = gp.tileSize - (oneScale * stressLevel);

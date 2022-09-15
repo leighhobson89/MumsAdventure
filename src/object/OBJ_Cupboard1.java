@@ -13,6 +13,8 @@ public class OBJ_Cupboard1 extends Entity {
         down1 = setup("/objects/cupboard1", gp.tileSize, gp.tileSize);
         direction = "down";
         collision = true;
+        collectable = false;
+        isOpenable = false;
 
     }
 }

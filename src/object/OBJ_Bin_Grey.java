@@ -12,7 +12,9 @@ public class OBJ_Bin_Grey extends Entity {
         name = "Bin_Grey";
         down1 = setup("/objects/bin_Grey", gp.tileSize, gp.tileSize);
         direction = "down";
+        collectable = false;
         collision = true;
+        isOpenable = false;
 
     }
 }

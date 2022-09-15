@@ -13,5 +13,8 @@ public class OBJ_TelephoneHall extends Entity {
         down1 = setup("/objects/telephoneHall", gp.tileSize, gp.tileSize);
         direction = "down";
 
+        collectable = false;
+        isOpenable = false;
+
     }
 }

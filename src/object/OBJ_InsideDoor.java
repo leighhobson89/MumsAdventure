@@ -13,7 +13,8 @@ public class OBJ_InsideDoor extends Entity {
         down1 = setup("/objects/insideDoor", gp.tileSize, gp.tileSize);
         direction = "down";
 
-       // collision = true;
+        collectable = false;
+        isOpenable = true;
 
     }
 }

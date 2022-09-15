@@ -14,6 +14,8 @@ public class OBJ_BackGate extends Entity {
         down1 = setup("/objects/backGate", gp.tileSize, gp.tileSize);
 
         collision = true;
+        collectable = false;
+        isOpenable = true;
 
         solidArea.x = 0;
         solidArea.y = 16;

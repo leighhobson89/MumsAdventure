@@ -13,7 +13,7 @@ public class MON_Spider extends Entity {
 
         this.gp = gp;
 
-        type = 2;
+        type = type_monster;
         name = "Spider";
         speed = 4;
         monsterMaxStress = 3;

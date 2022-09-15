@@ -18,5 +18,8 @@ public class OBJ_Heart extends Entity {
         image = uTool.scaleImage(image, (int) (gp.tileSize*0.7), gp.tileSize);
         image2 = uTool.scaleImage(image2, (int) (gp.tileSize*0.7), gp.tileSize);
         image3 = uTool.scaleImage(image3, (int) (gp.tileSize*0.7), gp.tileSize);
+
+        collectable = false;
+        isOpenable = false;
     }
 }

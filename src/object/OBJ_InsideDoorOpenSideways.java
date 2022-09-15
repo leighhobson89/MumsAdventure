@@ -13,5 +13,8 @@ public class OBJ_InsideDoorOpenSideways extends Entity {
         down1 = setup("/objects/insideDoorOpenSideways", gp.tileSize, gp.tileSize);
         direction = "down";
 
+        collectable = false;
+        isOpenable = false;
+
     }
 }

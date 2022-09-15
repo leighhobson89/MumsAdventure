@@ -12,7 +12,8 @@ public class OBJ_BackGateOpenSideways extends Entity {
         name = "BackGateOpenSideways";
         down1 = setup("/objects/backGateOpenSideways", gp.tileSize, gp.tileSize);
         direction = "down";
-        //collision = true;
+        collectable = false;
+        isOpenable = false;
 
     }
 }

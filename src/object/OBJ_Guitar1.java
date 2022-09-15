@@ -13,6 +13,8 @@ public class OBJ_Guitar1 extends Entity {
         down1 = setup("/objects/guitar1", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nAcoustic Guitar";
+        collectable = true;
+        isOpenable = false;
 
     }
 }

@@ -12,7 +12,9 @@ public class OBJ_FrontDoor extends Entity {
         name = "FrontDoor";
         down1 = setup("/objects/frontDoor", gp.tileSize, gp.tileSize);
         direction = "down";
-        //collision = true;
+        collision = true;
+        collectable = false;
+        isOpenable = false;
 
     }
 }

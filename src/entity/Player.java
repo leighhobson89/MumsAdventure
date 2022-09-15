@@ -2,10 +2,6 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
-import object.OBJ_FrontDoorKey;
-import object.OBJ_GrandmasCardigan;
-import object.OBJ_Lavendar_Crocs;
-import object.OBJ_Pills;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -24,11 +20,17 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public boolean speedBoost;
-    static int interval;
+    public static int interval;
     public int standCounter;
     public boolean attackCanceled;
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
+    public Timer timer;
+
+    public void createTimer() {
+        timer = new Timer();
+    }
+
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -42,8 +44,7 @@ public class Player extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        attackArea.width = 36;
-        attackArea.height = 36;
+
 
         setDefaultValues();
         getPlayerImage(gp.ui.colorOutfit);
@@ -51,8 +52,8 @@ public class Player extends Entity {
     }
 
     public void countDownTimerForItemEffect(int value, String effect) {
-        Timer timer = new Timer();
-        if ("Tube of Pills".equals(effect)) {
+        createTimer();
+        if ("Pills".equals(effect)) {
             speed = 1;
         }
         int period;
@@ -62,13 +63,13 @@ public class Player extends Entity {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                timeLeft[0] = (setInterval(effect, timer));
+                timeLeft[0] = (setInterval(effect));
             }
         }, value, period);
     }
 
-    private int setInterval(String effect, Timer timer) {
-        if ("Tube of Pills".equals(effect)) {
+    private int setInterval(String effect) {
+        if ("Pills".equals(effect)) {
             dizzyFlag = true;
             speed = (int) (Math.random() * MAX_SPEED_UNDER_INFLUENCE) + 1; //random speed every second while effect lasts
             if (Objects.equals(direction, "up")) {
@@ -108,21 +109,20 @@ public class Player extends Entity {
         coin = 10;
         maxStress = 10;
         stressLevel = 0;
-        currentWeapon = new OBJ_Lavendar_Crocs(gp);
-        currentShield = new OBJ_GrandmasCardigan(gp);
-        attack = getAttack(); // total attack value decided by strength and weapon
-        defense = getDefense(); // total defense value decided by dexterity and shield
+        currentWeapon = null;
+        currentShield = null;
+        attack = 0;
+        defense = 0;
     }
 
     public void setItems() {
-        inventory.add(currentWeapon);
-        inventory.add(currentShield);
-        inventory.add(new OBJ_FrontDoorKey(gp));
-        inventory.add(new OBJ_Pills(gp));
+
     }
 
     public int getAttack() {
+        attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
+
     }
 
     public int getDefense() {
@@ -149,14 +149,28 @@ public class Player extends Entity {
 
     public void getPlayerAttackImage(String colorOutfit) {
 
-        attackUp1 = setup("/player/mum_attack_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
-        attackUp2 = setup("/player/mum_attack_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
-        attackDown1 = setup("/player/mum_attack_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
-        attackDown2 = setup("/player/mum_attack_down2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
-        attackLeft1 = setup("/player/mum_attack_left1_" + colorOutfit, gp.tileSize * 2, gp.tileSize); //32 x 16 images
-        attackLeft2 = setup("/player/mum_attack_left2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
-        attackRight1 = setup("/player/mum_attack_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
-        attackRight2 = setup("/player/mum_attack_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+        if (currentWeapon != null) {
+            if (currentWeapon.type == type_short_weapon) {
+                attackUp1 = setup("/player/mum_attack_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
+                attackUp2 = setup("/player/mum_attack_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown1 = setup("/player/mum_attack_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown2 = setup("/player/mum_attack_down2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackLeft1 = setup("/player/mum_attack_left1_" + colorOutfit, gp.tileSize * 2, gp.tileSize); //32 x 16 images
+                attackLeft2 = setup("/player/mum_attack_left2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight1 = setup("/player/mum_attack_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight2 = setup("/player/mum_attack_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+            }
+            if (currentWeapon.type == type_long_weapon) {
+                attackUp1 = setup("/player/mum_spatula_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
+                attackUp2 = setup("/player/mum_spatula_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown1 = setup("/player/mum_spatula_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown2 = setup("/player/mum_spatula_down2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackLeft1 = setup("/player/mum_spatula_left1_" + colorOutfit, gp.tileSize * 2, gp.tileSize); //32 x 16 images
+                attackLeft2 = setup("/player/mum_spatula_left2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight1 = setup("/player/mum_spatula_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight2 = setup("/player/mum_spatula_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+            }
+        }
     }
 
     public void update() {
@@ -197,7 +211,7 @@ public class Player extends Entity {
 
             //CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
-//            pickUpObject(objIndex);
+            pickUpObject(objIndex);
 
             //CHECK NPC COLLISION
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
@@ -220,8 +234,13 @@ public class Player extends Entity {
                 }
             }
 
-            if (keyH.enterPressed && !attackCanceled) {
-                gp.playSFX(5);
+            if (keyH.enterPressed && !attackCanceled && currentWeapon != null) {
+                if (currentWeapon.type == type_short_weapon) {
+                    gp.playSFX(5);
+                } else if (currentWeapon.type == type_long_weapon) {
+                    gp.playSFX(19);
+                }
+
                 attacking = true;
                 spriteCounter = 0;
             }
@@ -306,30 +325,44 @@ public class Player extends Entity {
         if (i != 999) {
 
             String text;
+            int selectSfx;
 
-            if (inventory.size() != maxInventorySize) {
+            if (inventory.size() != maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
+                if (gp.obj[i].isWeapon) {
+                    currentWeapon = gp.obj[i];
+                    attack = getAttack();
+                    getPlayerAttackImage(gp.ui.outfitChosen);
+                } else if (gp.obj[i].isArmour) {
+                    currentShield = gp.obj[i];
+                    defense = getDefense();
+                }
                 inventory.add(gp.obj[i]);
-                int selectSfx = selectSfx(gp.obj[i].name);
+                selectSfx = selectSfx(gp.obj[i].name);
                 gp.playSFX(selectSfx);
                 text = "Picked up " + gp.obj[i].name + "!";
-            } else {
+                gp.ui.addMessage(text);
+                gp.obj[i] = null;
+            } else if (gp.obj[i].isOpenable) {
+                selectSfx = selectSfx(gp.obj[i].name);
+                gp.playSFX(selectSfx);
+                gp.obj[i] = null;
+            } else if (inventory.size() >= maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
                 text = "You cannot carry any more!";
+                gp.ui.addMessage(text);
             }
-            gp.ui.addMessage(text);
-            gp.obj[i] = null;
         }
     }
 
     private int selectSfx(String object) {
         int sfx = 0;
         switch(object) {
-            case "FrontDoorKey":
+            case "Key":
                 sfx = 1;
                 break;
             case "Tube of Pills":
                 sfx = 2;
                 break;
-            case "Bin_Blue", "Bin_Green":
+            case "Bin_Blue", "Lavender Crocs":
                 sfx = 14;
                 break;
             case "Acoustic Guitar":
@@ -337,6 +370,18 @@ public class Player extends Entity {
                 break;
             case "Electric Guitar":
                 sfx = 16;
+                break;
+            case "InsideDoor", "InsideDoorSideways", "BackGate", "BackGateSideways":
+                sfx = 4;
+                break;
+            case "FrontDoor":
+                sfx = 3;
+                break;
+            case "Old Cardigan":
+                sfx = 18;
+                break;
+            case "Spatula":
+                sfx = 19;
                 break;
         }
         return sfx;
@@ -350,15 +395,21 @@ public class Player extends Entity {
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
             } else {
-                attacking = true;
-                gp.playSFX(5);
+                if (currentWeapon != null) {
+                    attacking = true;
+                    if (currentWeapon.type == type_short_weapon) {
+                        gp.playSFX(5);
+                    } else if (currentWeapon.type == type_long_weapon) {
+                        gp.playSFX(19);
+                    }
+                }
             }
         }
     }
 
     public void contactMonster(int i) {
         if (i != 999) {
-            if (!invincible) {
+            if (!invincible && !gp.monster[i].dying) {
 
                 int damage = gp.monster[i].attack - defense;
                 if (damage > 0) {
@@ -414,6 +465,28 @@ public class Player extends Entity {
             gp.playSFX(9);
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You have levelled up!\nNow you are level " + level + "!\n\nYou feel more able to cope with stress!";
+        }
+    }
+
+    public void selectItem() {
+        int itemIndex = gp.ui.getItemIndexOnSlot();
+
+        if (itemIndex < inventory.size()) {
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if (selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon) {
+                currentWeapon = selectedItem;
+                attack = getAttack();
+                getPlayerAttackImage(gp.ui.outfitChosen);
+            }
+            if (selectedItem.type == type_armour) {
+                currentShield = selectedItem;
+                defense = getDefense();
+            }
+            if (selectedItem.type == type_consumable) {
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
+            }
         }
     }
 
