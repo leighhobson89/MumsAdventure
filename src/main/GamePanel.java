@@ -197,8 +197,7 @@ public class GamePanel extends JPanel implements Runnable {
                 @Override
                 public int compare(Entity e1, Entity e2) {
 
-                    int result = Integer.compare(e1.worldY, e2.worldY);
-                    return result;
+                    return Integer.compare(e1.worldY, e2.worldY);
                 }
             });
 
@@ -224,14 +223,14 @@ public class GamePanel extends JPanel implements Runnable {
             int y = 400;
             int lineHeight = 35;
 
-            //DRAW WORLD POSITION DATA AND DRAWSPEED
+            //DRAW WORLD POSITION DATA AND DRAW SPEED
             g2.drawString("WorldX: " + player.worldX, x, y); y += lineHeight;
             g2.drawString("WorldY: " + player.worldY, x, y); y += lineHeight;
             g2.drawString("Col: " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
             g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
             g2.drawString("Draw Time: " + passed, x, y); y += lineHeight;
             //DRAW TIMER STATUS
-            g2.drawString("Timer Interval : " + player.interval, x, y);
+            g2.drawString("Timer Interval : " + Player.interval, x, y);
         }
 
         g2.dispose();

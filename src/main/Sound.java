@@ -8,7 +8,7 @@ import java.net.URL;
 public class Sound {
 
     Clip clip;
-    URL soundURL[] = new URL[30];
+    URL[] soundURL = new URL[30];
 
     public Sound() {
 
@@ -42,7 +42,7 @@ public class Sound {
             clip.open(ais);
 
         } catch(Exception e) {
-
+            e.printStackTrace();
         }
     }
     public void play(long position, boolean pausing) {

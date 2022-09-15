@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 
 public class UI {
@@ -31,6 +30,7 @@ public class UI {
         this.gp = gp;
 
         InputStream iS = getClass().getResourceAsStream("/fonts/x12y16pxMaruMonica.ttf");
+        assert iS != null;
         maruMonica = Font.createFont(Font.TRUETYPE_FONT,iS);
         maruMonica_40 = maruMonica.deriveFont(40F);
 
@@ -92,7 +92,6 @@ public class UI {
         }
 
         x = gp.tileSize/2;
-        y = gp.tileSize/2;
         i = 0;
 
         //DRAW CURRENT LIFE
@@ -243,15 +242,9 @@ public class UI {
             x = gp.screenWidth/2 - (gp.tileSize*2)/2;
             y = gp.tileSize*5;
             switch (colorOutfit) {
-                case "red":
-                    g2.drawImage(gp.player.down1_red, x, y, gp.tileSize*2, gp.tileSize*2, null);
-                    break;
-                case "brown":
-                    g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
-                    break;
-                case "purple":
-                    g2.drawImage(gp.player.down1_purple, x, y, gp.tileSize*2, gp.tileSize*2, null);
-                    break;
+                case "red" -> g2.drawImage(gp.player.down1_red, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
+                case "brown" -> g2.drawImage(gp.player.down1, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
+                case "purple" -> g2.drawImage(gp.player.down1_purple, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
             }
         }
 
@@ -324,7 +317,6 @@ public class UI {
         g2.drawString("Weapon", textX, textY);
         textY += lineHeight + 15;
         g2.drawString("Armour", textX, textY);
-        textY += lineHeight;
 
         //VALUES
         int tailX = (frameX + frameWidth) - 30;
@@ -453,8 +445,7 @@ public class UI {
     }
 
     public int getItemIndexOnSlot() {
-        int itemIndex = slotCol + (slotRow * 5);
-        return itemIndex;
+        return slotCol + (slotRow * 5);
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
@@ -470,13 +461,11 @@ public class UI {
 
     public int getXforCenteredText(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        int x = gp.screenWidth/2 - length/2;
-        return x;
+        return gp.screenWidth/2 - length/2;
     }
 
     public int getXForAlignToRightText(String text, int tailX) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        int x = tailX - length;
-        return x;
+        return tailX - length;
     }
 }

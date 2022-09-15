@@ -1,7 +1,5 @@
 package main;
 
-import entity.Player;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -14,7 +12,6 @@ public class KeyHandler implements KeyListener {
 
     //DEBUG
     boolean showDebugText;
-    Player player;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -60,7 +57,7 @@ public class KeyHandler implements KeyListener {
                     gp.ui.titleScreenState = 1;
                 }
                 if (gp.ui.commandNum == 1) { //LOAD GAME
-
+                    //TO DO
                 }
                 if (gp.ui.commandNum == 2) { //QUIT
                     System.exit(0);

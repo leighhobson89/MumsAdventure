@@ -17,7 +17,6 @@ public class Entity {
     public BufferedImage dyingImage, up1, up2, down1, down2, left1, left2, right1, right2, down1_red, down1_purple;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public BufferedImage image, image2, image3;
-    UtilityTool uTool = new UtilityTool();
     public Rectangle solidArea = new Rectangle(8, 16, 32, 32);
     public Rectangle attackArea = new Rectangle(0,0,0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
@@ -29,7 +28,6 @@ public class Entity {
     public String direction = "up";
     public int spriteNum = 1;
     public int speed, defaultSpeed, boostSpeed;
-    int dialogueIndex = 0;
     public boolean collisionOn = false;
     public boolean invincible;
     public boolean newMonster;

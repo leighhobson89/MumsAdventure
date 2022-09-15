@@ -353,37 +353,18 @@ public class Player extends Entity {
     }
 
     private int selectSfx(String object) {
-        int sfx = 0;
-        switch(object) {
-            case "Key":
-                sfx = 1;
-                break;
-            case "Tube of Pills":
-                sfx = 2;
-                break;
-            case "Bin_Blue", "Lavender Crocs":
-                sfx = 14;
-                break;
-            case "Acoustic Guitar":
-                sfx = 17;
-                break;
-            case "Electric Guitar":
-                sfx = 16;
-                break;
-            case "InsideDoor", "InsideDoorSideways", "BackGate", "BackGateSideways":
-                sfx = 4;
-                break;
-            case "FrontDoor":
-                sfx = 3;
-                break;
-            case "Old Cardigan":
-                sfx = 18;
-                break;
-            case "Spatula":
-                sfx = 19;
-                break;
-        }
-        return sfx;
+        return switch (object) {
+            case "Key" -> 1;
+            case "Tube of Pills" -> 2;
+            case "Bin_Blue", "Lavender Crocs" -> 14;
+            case "Acoustic Guitar" -> 17;
+            case "Electric Guitar" -> 16;
+            case "InsideDoor", "InsideDoorSideways", "BackGate", "BackGateSideways" -> 4;
+            case "FrontDoor" -> 3;
+            case "Old Cardigan" -> 18;
+            case "Spatula" -> 19;
+            default -> 10;
+        };
     }
 
     public void interactNPC(int i) {
@@ -426,11 +407,7 @@ public class Player extends Entity {
     }
 
     public void checkPillsConsumable(int stressLevel) {
-        if (stressLevel >= STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS) {
-            gp.player.pillsConsumableNow = true;
-        } else {
-            gp.player.pillsConsumableNow = false;
-        }
+        gp.player.pillsConsumableNow = stressLevel >= STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
         System.out.println("Can consume pills:" + pillsConsumableNow);
     }
 

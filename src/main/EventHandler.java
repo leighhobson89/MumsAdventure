@@ -1,12 +1,11 @@
 package main;
 
-import entity.Player;
 import java.util.Random;
 
 public class EventHandler {
 
     GamePanel gp;
-    EventRect eventRect[][];
+    EventRect[][] eventRect;
     UtilityTool uTool = new UtilityTool();
 
     int previousEventX, previousEventY;
@@ -106,7 +105,7 @@ public class EventHandler {
     }
 
     public void chairDestressEvent (int gameState) {
-        //if (gp.keyH.enterPressed && gp.player.stressLevel > 0) { // to access event with a keypress only
+        //if (gp.keyH.enterPressed && gp.player.stressLevel > 0) { // to access event with a key press only
             if (gp.player.stressLevel > 0) {
                 gp.player.attackCanceled = true;
                 gp.playSFX(12);
