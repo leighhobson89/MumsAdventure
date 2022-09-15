@@ -80,8 +80,6 @@ public class UI {
 
     public void drawPlayerLife() {
 
-        //gp.player.life = 3; //debug to test life gauge 10 full stress, 0 no stress
-
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i = 0;
@@ -339,7 +337,7 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        value = String.valueOf(gp.player.stressLevel + "/" + gp.player.maxStress);
+        value = gp.player.stressLevel + "/" + gp.player.maxStress;
         textX = getXForAlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;

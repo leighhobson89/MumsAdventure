@@ -22,8 +22,14 @@ public class OBJ_Pills extends Entity {
         isOpenable = false;
     }
 
-        public void use(Entity entity) {
-            gp.eHandler.teleportPills(gp.dialogueState);
-        }
+        public void use(Entity entity, boolean consumable) {
 
+            gp.gameState = gp.dialogueState;
+            System.out.println("pill consumable" + pillsConsumableNow);
+
+            if (consumable) {
+                gp.eHandler.teleportPills();
+                gp.player.checkPillsConsumable(gp.player.stressLevel);
+            }
+        }
     }

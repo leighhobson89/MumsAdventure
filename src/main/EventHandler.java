@@ -97,6 +97,7 @@ public class EventHandler {
         }
         if (spiderCount <= 10) {
             gp.player.stressLevel += 1;
+            gp.player.checkPillsConsumable(gp.player.stressLevel);
         }
         //eventRect[col][row].eventDone = true; //for non recurring events only
         canTouchEvent = false;
@@ -117,8 +118,8 @@ public class EventHandler {
         }
     //}
 
-    public void teleportPills (int gameState) {
-        gp.gameState = gameState;
+    public void teleportPills () {
+        gp.ui.currentDialogue = "Bloody pills, I can't think straight!\nWhat am I doing up here??\nThe stress has gone at least!";
         int[][] optionArray = {{14,6},{15,8},{17,6},{20,10},{21,10},{25,6}};
         Random random = new Random();
         int randomLocation = random.nextInt(optionArray.length);
@@ -129,10 +130,8 @@ public class EventHandler {
         gp.player.worldY = gp.tileSize*randY;
 
         gp.playSFX(2);
-        gp.ui.currentDialogue = "Bloody pills, I can't think straight!\nWhat am I doing up here??\nThe stress has gone at least!";
         gp.player.countDownTimerForItemEffect(gp.player.PILLS_COUNT_DOWN_VALUE, "Pills");
         gp.player.stressLevel = 0;
 
-        canTouchEvent = false;
     }
 }

@@ -51,6 +51,7 @@ public class Entity {
     public boolean isArmour;
     public boolean collectable;
     public boolean isOpenable;
+    public boolean pillsConsumableNow;
     public int maxStress;
     public int monsterMaxStress;
     public int stressLevel;
@@ -119,7 +120,7 @@ public class Entity {
             case "right" -> direction = "left";
         }
     }
-    public void use(Entity entity) {
+    public void use(Entity entity, boolean consumable) {
         //overridden in Player class
     }
     public void update() {
@@ -152,6 +153,7 @@ public class Entity {
                     damage = 0;
                 }
                 gp.player.stressLevel += damage;
+                gp.player.checkPillsConsumable(gp.player.stressLevel);
                 gp.player.invincible = true;
             }
         }

@@ -15,6 +15,7 @@ public class Player extends Entity {
     KeyHandler keyH;
 
     public final int PILLS_COUNT_DOWN_VALUE = 20;
+    public final int STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS = 4;
     final int MAX_SPEED_UNDER_INFLUENCE = 4;
 
     public final int screenX;
@@ -43,8 +44,6 @@ public class Player extends Entity {
         solidArea = new Rectangle(8, 16,32,32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-
-
 
         setDefaultValues();
         getPlayerImage(gp.ui.colorOutfit);
@@ -84,7 +83,7 @@ public class Player extends Entity {
         }
         if (interval == 1) {
             timer.cancel();
-            if ("Tube of Pills".equals(effect)) {
+            if ("Pills".equals(effect)) {
                 speed = 2;
                 dizzyFlag = false;
             }
@@ -415,6 +414,7 @@ public class Player extends Entity {
                 if (damage > 0) {
                     gp.ui.addMessage("The " + gp.monster[i].name + " got you! Your stress increases by " + damage + "!");
                     stressLevel+=1;
+                    checkPillsConsumable(stressLevel);
                 }
                 if (damage <= 0) {
                     gp.ui.addMessage("The " + gp.monster[i].name + " got you but it can't stress you at your exp level!");
@@ -423,6 +423,15 @@ public class Player extends Entity {
                 invincible = true;
             }
         }
+    }
+
+    public void checkPillsConsumable(int stressLevel) {
+        if (stressLevel >= STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS) {
+            gp.player.pillsConsumableNow = true;
+        } else {
+            gp.player.pillsConsumableNow = false;
+        }
+        System.out.println("Can consume pills:" + pillsConsumableNow);
     }
 
     public void damageMonster(int i) {
@@ -478,14 +487,26 @@ public class Player extends Entity {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getPlayerAttackImage(gp.ui.outfitChosen);
+                gp.playSFX(11);
             }
             if (selectedItem.type == type_armour) {
                 currentShield = selectedItem;
                 defense = getDefense();
+                gp.playSFX(11);
             }
-            if (selectedItem.type == type_consumable) {
-                selectedItem.use(this);
+            if (Objects.equals(selectedItem.name, "Tube of Pills") && pillsConsumableNow) {
+                selectedItem.use(this, true);
                 inventory.remove(itemIndex);
+                gp.playSFX(11);
+            } else {
+                gp.gameState = gp.dialogueState;
+                gp.ui.currentDialogue = "I better save these until I'm stressed\nout, 'cos they have some crazy after\neffects!";
+            }
+
+            if (selectedItem.type == type_consumable && !Objects.equals(selectedItem.name, "Tube of Pills")) {
+                selectedItem.use(this, true);
+                inventory.remove(itemIndex);
+                gp.playSFX(11);
             }
         }
     }
