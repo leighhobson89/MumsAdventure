@@ -90,7 +90,7 @@ public class UI {
 
 //        g2.setColor(Color.black);
 //        g2.fillRoundRect(x - 5, y - 10, gp.tileSize*4, gp.tileSize*2, 10, 10);
-        drawSubWindow(x - 15, y - 17, gp.tileSize*4 + 20, gp.tileSize*2 + 15);
+        drawSubWindow(x - 15, y - 17, gp.tileSize*4 + 20, gp.tileSize + 25); //height when mana displayed should be ((gp.tilesize*2) + 15)
 
         //DRAW MAX LIFE
         while (i < gp.player.maxStress /2) {
@@ -113,25 +113,25 @@ public class UI {
             x += gp.tileSize*0.8;
         }
 
-        //DRAW MAX MANA
-        x = (gp.tileSize/2) - 15;
-        y = gp.tileSize + 20;
-        i = 0;
-        while (i < gp.player.maxMana) {
-            g2.drawImage(squeakyToyEmpty, x, y, null);
-            i++;
-            x += 35;
-        }
-
-        //DRAW CURRENT MANA
-        x = (gp.tileSize/2) - 15;
-        y = gp.tileSize + 20;
-        i = 0;
-        while (i < gp.player.mana) {
-            g2.drawImage(squeakyToyFull, x, y, null);
-            i++;
-            x += 35;
-        }
+//        //DRAW MAX MANA
+//        x = (gp.tileSize/2) - 15;
+//        y = gp.tileSize + 20;
+//        i = 0;
+//        while (i < gp.player.maxMana) {
+//            g2.drawImage(squeakyToyEmpty, x, y, null);
+//            i++;
+//            x += 35;
+//        }
+//
+//        //DRAW CURRENT MANA
+//        x = (gp.tileSize/2) - 15;
+//        y = gp.tileSize + 20;
+//        i = 0;
+//        while (i < gp.player.mana) {
+//            g2.drawImage(squeakyToyFull, x, y, null);
+//            i++;
+//            x += 35;
+//        }
     }
 
     public void drawMessage() {

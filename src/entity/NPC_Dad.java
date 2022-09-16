@@ -12,9 +12,9 @@ public class NPC_Dad extends Entity {
 
         direction = "right";
         speed = 1;
-        //comment for not throw bone
-        projectile = new OBJ_DogsBone_NotMagic(gp);
-        //end bone throwing
+//        //comment for not throw bone
+//        projectile = new OBJ_DogsBone_NotMagic(gp);
+//        //end bone throwing
 
         getImage();
         setDialogue();
@@ -124,14 +124,14 @@ public class NPC_Dad extends Entity {
             actionLockCounter = 0;
 
         }
-        //comment for not throw bone
-        int i = new Random().nextInt(1000) + 1; //odds of throwing a bone
-        if (i > 999 && !projectile.alive && shotAvailableCounter == 30) {
-            projectile.set(worldX, worldY, direction, true, this);
-            gp.projectileList.add(projectile);
-            shotAvailableCounter = 0;
-        // end bone code
-        }
+//        //comment for not throw bone
+//        int i = new Random().nextInt(1000) + 1; //odds of throwing a bone
+//        if (i > 999 && !projectile.alive && shotAvailableCounter == 30) {
+//            projectile.set(worldX, worldY, direction, true, this);
+//            gp.projectileList.add(projectile);
+//            shotAvailableCounter = 0;
+//        // end bone code
+//        }
     }
 
     public void speak() {

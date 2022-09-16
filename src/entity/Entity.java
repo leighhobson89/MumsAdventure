@@ -35,6 +35,8 @@ public class Entity {
     public boolean alive = true;
     public boolean dying;
     boolean hpBarOn = false;
+    public int boneIndex;
+    public int itemCount = -1;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -55,7 +57,7 @@ public class Entity {
     public int stressLevel;
     public int maxMana;
     public int mana;
-    public int ammo;
+    public int bone;
     public int level;
     public int strength;
     public int dexterity;

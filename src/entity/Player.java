@@ -7,10 +7,7 @@ import object.OBJ_PipsToy_Magic;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Player extends Entity {
     public boolean dizzyFlag;
@@ -111,12 +108,12 @@ public class Player extends Entity {
         maxStress = 10;
         maxMana = 5; //max number of things to throw
         mana = maxMana;
-        ammo = 1;
+        bone = 0;
         stressLevel = 0;
         currentWeapon = null;
         currentArmour = null;
-        projectile = new OBJ_PipsToy_Magic(gp);
-//        projectile = new OBJ_DogsBone_NotMagic(gp); //activate this for projectile that doesnt affect toys in ui when wanting to add bone that can be picked up after throwing or something : Change sound too if needed
+//        projectile = new OBJ_PipsToy_Magic(gp);
+        projectile = new OBJ_DogsBone_NotMagic(gp); //activate this for projectile that doesn't affect toys in ui when wanting to add bone that can be picked up after throwing or something : Change sound too if needed
         attack = 0;
         defense = 0;
     }
@@ -282,6 +279,13 @@ public class Player extends Entity {
 
             //SUBTRACT THE COST FROM RESOURCES (TOYS ETC)
             projectile.subtractResource(this);
+            System.out.println(gp.player.inventory);
+            System.out.println(boneIndex);
+            gp.player.inventory.remove(boneIndex);
+            itemCount--;
+            System.out.println(gp.player.inventory);
+            System.out.println(itemCount);
+
 
             //ADD IT TO THE LIST
             gp.projectileList.add(projectile);
@@ -330,7 +334,9 @@ public class Player extends Entity {
 
             // Check monster collision with the updated worldX, worldY and solidArea
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             damageMonster(monsterIndex, attack);
+            hitNPC(npcIndex);
 
             // After checking collision, restore the original data
             worldX = currentWorldX;
@@ -351,6 +357,10 @@ public class Player extends Entity {
 
             String text;
             int selectSfx;
+            if (gp.obj[i].collectable) {
+                itemCount++;
+            }
+            System.out.println(itemCount);
 
             if (inventory.size() != maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
                 if (gp.obj[i].isWeapon) {
@@ -368,6 +378,10 @@ public class Player extends Entity {
                     currentWeapon = null;
                 } else if (gp.obj[i].isArmour && gp.obj[i] == currentArmour) {
                     currentArmour = null;
+                }
+                if (gp.obj[i].name == "Phoebe's Bone") {
+                    bone++;
+                    gp.player.boneIndex = gp.player.itemCount;
                 }
                 inventory.add(gp.obj[i]);
                 selectSfx = selectSfx(gp.obj[i].name);
@@ -410,6 +424,12 @@ public class Player extends Entity {
                 keyH.enterPressed = false;
             }
         }
+        if (gp.keyH.spacePressed) {
+            if (i != 999) {
+                attacking();
+                keyH.spacePressed = false;
+            }
+        }
     }
 
     public void contactMonster(int i) {
@@ -434,6 +454,21 @@ public class Player extends Entity {
     public void checkPillsConsumable(int stressLevel) {
         gp.player.pillsConsumableNow = stressLevel >= STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
         System.out.println("Can consume pills:" + pillsConsumableNow);
+    }
+
+    public void hitNPC(int i) {
+        if (i != 999) {
+            gp.gameState = gp.dialogueState;
+            int rand = new Random().nextInt(5);
+            switch (rand) {
+                case 0 -> gp.ui.currentDialogue = "Stop that right now!";
+                case 1 -> gp.ui.currentDialogue = "Hey what the bloody hell are\nya doin'??";
+                case 2 -> gp.ui.currentDialogue = "I'll let that go...ONCE!!";
+                case 3 -> gp.ui.currentDialogue = "What yer playin' at?!";
+                case 4 -> gp.ui.currentDialogue = "Why you hittin' me wi that?!";
+            }
+            attacking = false;
+        }
     }
 
     public void damageMonster(int i, int attack) {

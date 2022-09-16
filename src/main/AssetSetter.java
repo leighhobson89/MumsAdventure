@@ -16,6 +16,14 @@ public class AssetSetter {
         this.gp = gp;
     }
 
+    public void setBone(int x, int y) {
+        int i = 0;
+
+        gp.obj[i] = new OBJ_DogsBone_NotMagic(gp);
+        gp.obj[i].worldX = x * gp.tileSize;
+        gp.obj[i].worldY = y * gp.tileSize;
+    }
+
     public void setObject() {
         int i = 0;
 
@@ -24,9 +32,9 @@ public class AssetSetter {
         gp.obj[i].worldY = 10 * gp.tileSize;
         i++;
 
-        gp.obj[i] = new OBJ_Pills(gp);
-        gp.obj[i].worldX = 14 * gp.tileSize;
-        gp.obj[i].worldY = 6 * gp.tileSize;
+        gp.obj[i] = new OBJ_DogsBone_NotMagic(gp);
+        gp.obj[i].worldX = 22 * gp.tileSize;
+        gp.obj[i].worldY = 13 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_Guitar1(gp);

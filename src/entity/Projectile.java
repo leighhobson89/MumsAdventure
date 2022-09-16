@@ -21,22 +21,29 @@ public class Projectile extends Entity {
 
     public void update () {
 
+        int projX = ((worldX + solidArea.x)/gp.tileSize);
+        int projY = ((worldY + solidArea.y)/gp.tileSize);
+
         if (user == gp.player) {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             boolean tileState = gp.cChecker.checkTile(this);
+
             if (monsterIndex != 999) {
+                gp.aSetter.setBone(projX, projY);
                 gp.player.damageMonster(monsterIndex, attack);
                 gp.playSFX(20);
                 alive = false;
             }
             if (npcIndex != 999) {
+                gp.aSetter.setBone(projX, projY);
                 gp.gameState = gp.dialogueState;
                 gp.ui.currentDialogue = "Watch where you bloody throw that\nwill yer!";
                 gp.playSFX(20);
                 alive = false;
             }
             if (tileState) {
+                gp.aSetter.setBone(projX, projY);
                 gp.playSFX(20);
                 alive = false;
             }
@@ -73,6 +80,7 @@ public class Projectile extends Entity {
         stressLevel++;
 
         if(stressLevel >= maxStress) {
+            gp.aSetter.setBone(projX, projY);
             alive = false;
             gp.playSFX(20);
         }
