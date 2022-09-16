@@ -79,6 +79,18 @@ public class EventHandler {
         return hit;
     }
 
+    public void openFrontBackDoor(int playerX, int playerY) {
+        String doorToUnlock = "";
+        if (playerX == 26 && playerY == 6) {
+            gp.player.backDoorAlreadyUnlocked = true;
+            gp.obj[13] = null;
+        } else if (playerX == 14 && playerY == 6) {
+            gp.player.frontDoorAlreadyUnlocked = true;
+            gp.obj[11] = null;
+        }
+        gp.playSFX(3);
+    }
+
     public int spiderEvent(int col, int row, int gameState, int spiderCount, boolean randomizeLocation) {
         gp.gameState = gameState;
         if (!randomizeLocation) { //play bin sound only at bin - will need new flag if more spider locations added without randomizeLocation

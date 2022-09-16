@@ -13,7 +13,7 @@ public class Entity {
 
     GamePanel gp;
 
-    ArrayList<Integer> usedDialogues = new ArrayList<>();
+    ArrayList<Integer> usedChummeringDialogues = new ArrayList<>();
     public BufferedImage dyingImage, up1, up2, down1, down2, left1, left2, right1, right2, down1_red, down1_purple;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public BufferedImage image, image2, image3;
@@ -21,7 +21,7 @@ public class Entity {
     public Rectangle attackArea = new Rectangle(0,0,0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
-    String[] dialogues = new String[100];
+    String[] randomChummeringDialogues = new String[100];
 
     //STATE
     public int worldX, worldY;
@@ -42,6 +42,7 @@ public class Entity {
     public int invincibleCounter =0;
     int dyingCounter = 0;
     int hpBarCounter = 0;
+    public int shotAvailableCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -51,8 +52,10 @@ public class Entity {
     public boolean isOpenable;
     public boolean pillsConsumableNow;
     public int maxStress;
-    public int monsterMaxStress;
     public int stressLevel;
+    public int maxMana;
+    public int mana;
+    public int ammo;
     public int level;
     public int strength;
     public int dexterity;
@@ -62,12 +65,21 @@ public class Entity {
     public int nextLevelExp;
     public int coin;
     public Entity currentWeapon;
-    public Entity currentShield;
+    public Entity currentArmour;
+    public Projectile projectile;
 
     //ITEM ATTRIBUTES
     public int attackValue;
     public int defenseValue;
     public String description = "";
+    public int useCost;
+
+    //WORLD ATTRIBUTES
+    public boolean frontDoorAlreadyUnlocked = false;
+    public boolean backDoorAlreadyUnlocked = false;
+
+    //MONSTER ATTRIBUTES
+    public int monsterMaxStress;
 
     //TYPE
     public int type;
@@ -91,24 +103,24 @@ public class Entity {
         Random rand = new Random();
         int dialogueCount = 0;
 
-        for (int i = 0; i < dialogues.length; i++) {
-            if (!(dialogues[i] == null)) {
+        for (int i = 0; i < randomChummeringDialogues.length; i++) {
+            if (!(randomChummeringDialogues[i] == null)) {
                 dialogueCount++;
             }
         }
 
-        int randomValue = rand.nextInt(dialogues.length); //init only;
+        int randomValue = rand.nextInt(randomChummeringDialogues.length); //init only;
 
-        while (dialogues[randomValue] == null || usedDialogues.contains(randomValue)) {
+        while (randomChummeringDialogues[randomValue] == null || usedChummeringDialogues.contains(randomValue)) {
             randomValue = rand.nextInt(dialogueCount);
 
-            if (usedDialogues.size() >= dialogueCount) {
-                usedDialogues.clear(); // cycle round when used all dialogues
+            if (usedChummeringDialogues.size() >= dialogueCount) {
+                usedChummeringDialogues.clear(); // cycle round when used all dialogues
             }
         }
 
-        gp.ui.currentDialogue = dialogues[randomValue];
-        usedDialogues.add(randomValue);
+        gp.ui.currentDialogue = randomChummeringDialogues[randomValue];
+        usedChummeringDialogues.add(randomValue);
 
 
         switch (gp.player.direction) {
@@ -118,7 +130,7 @@ public class Entity {
             case "right" -> direction = "left";
         }
     }
-    public void use(Entity entity, boolean consumable) {
+    public void use(Entity entity, boolean consumable, boolean useable) {
         //overridden in Player class
     }
     public void update() {
@@ -139,21 +151,7 @@ public class Entity {
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
         if(this.type == type_monster && contactPlayer) {
-            if (!gp.player.invincible && !this.dying) {
-                //we can give damage
-
-                int damage = attack - gp.player.defense;
-                if (damage > 0) {
-                    gp.ui.addMessage("The " + this.name + " got you! Your stress increases by " + damage + "!");
-                }
-                if (damage <= 0) {
-                    gp.ui.addMessage("The " + this.name + " got you but it can't stress you at your exp level!");
-                    damage = 0;
-                }
-                gp.player.stressLevel += damage;
-                gp.player.checkPillsConsumable(gp.player.stressLevel);
-                gp.player.invincible = true;
-            }
+            damagePlayer(attack);
         }
 
         //IF COLLISION IS FALSE, ENTITY CAN MOVE
@@ -181,6 +179,28 @@ public class Entity {
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+
+        if(shotAvailableCounter < 30) { //bug fix for close encounter projectile duplication
+            shotAvailableCounter++;
+        }
+    }
+
+    public void damagePlayer(int attack) {
+        if (!gp.player.invincible && !this.dying) {
+            //we can give damage
+
+            int damage = attack - gp.player.defense;
+            if (damage > 0) {
+                gp.ui.addMessage("The " + this.name + " got you! Your stress increases by " + damage + "!");
+            }
+            if (damage <= 0) {
+                gp.ui.addMessage("The " + this.name + " got you but it can't stress you at your exp level!");
+                damage = 0;
+            }
+            gp.player.stressLevel += damage;
+            gp.player.checkPillsConsumable(gp.player.stressLevel);
+            gp.player.invincible = true;
         }
     }
 

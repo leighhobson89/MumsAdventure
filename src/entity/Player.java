@@ -2,6 +2,8 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_DogsBone_NotMagic;
+import object.OBJ_PipsToy_Magic;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -107,9 +109,14 @@ public class Player extends Entity {
         nextLevelExp = 6;
         coin = 10;
         maxStress = 10;
+        maxMana = 5; //max number of things to throw
+        mana = maxMana;
+        ammo = 1;
         stressLevel = 0;
         currentWeapon = null;
-        currentShield = null;
+        currentArmour = null;
+        projectile = new OBJ_PipsToy_Magic(gp);
+//        projectile = new OBJ_DogsBone_NotMagic(gp); //activate this for projectile that doesnt affect toys in ui when wanting to add bone that can be picked up after throwing or something : Change sound too if needed
         attack = 0;
         defense = 0;
     }
@@ -119,13 +126,20 @@ public class Player extends Entity {
     }
 
     public int getAttack() {
-        attackArea = currentWeapon.attackArea;
-        return attack = strength * currentWeapon.attackValue;
-
+        if (currentWeapon != null) {
+            attackArea = currentWeapon.attackArea;
+            return attack = strength * currentWeapon.attackValue;
+        } else {
+            return 0;
+        }
     }
 
     public int getDefense() {
-        return defense = dexterity * currentShield.defenseValue;
+        if (currentArmour != null) {
+            return defense = dexterity * currentArmour.defenseValue;
+        } else {
+            return 0;
+        }
     }
 
     public void getPlayerImage(String colorOutfit) {
@@ -173,11 +187,9 @@ public class Player extends Entity {
     }
 
     public void update() {
-
         if (attacking) {
-            //attacking stuff
             attacking();
-        } else if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.enterPressed) {
+        } else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.spacePressed) {
             if (keyH.upPressed && !dizzyFlag) {
                 direction = "up";
             } else if (keyH.downPressed && !dizzyFlag) {
@@ -192,8 +204,6 @@ public class Player extends Entity {
                 direction = "up";
             } else if (keyH.leftPressed) {
                 direction = "right";
-            } else  {
-                direction = "left";
             }
 
             if (speedBoost && !dizzyFlag) {
@@ -224,7 +234,7 @@ public class Player extends Entity {
             gp.eHandler.checkEvent();
 
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if (!collisionOn && !keyH.enterPressed) {
+            if (!collisionOn && !keyH.spacePressed) {
                 switch (direction) {
                     case "up" -> worldY -= speed;
                     case "down" -> worldY += speed;
@@ -233,7 +243,7 @@ public class Player extends Entity {
                 }
             }
 
-            if (keyH.enterPressed && !attackCanceled && currentWeapon != null) {
+            if (keyH.spacePressed && !attackCanceled && currentWeapon != null) {
                 if (currentWeapon.type == type_short_weapon) {
                     gp.playSFX(5);
                 } else if (currentWeapon.type == type_long_weapon) {
@@ -246,7 +256,7 @@ public class Player extends Entity {
 
             attackCanceled = false;
 
-            gp.keyH.enterPressed = false;
+            gp.keyH.spacePressed = false;
 
             spriteCounter++;
             if (spriteCounter > 12) { //walking speed of animation
@@ -265,6 +275,19 @@ public class Player extends Entity {
                 spriteNum = 1;
             }
         }
+
+        if (gp.keyH.throwKeyPressed && !projectile.alive && shotAvailableCounter == 30 && projectile.haveResource(this)) {
+            //SET DEFAULT COORDINATES, DIRECTION AND USER
+            projectile.set(worldX, worldY, direction, true, this);
+
+            //SUBTRACT THE COST FROM RESOURCES (TOYS ETC)
+            projectile.subtractResource(this);
+
+            //ADD IT TO THE LIST
+            gp.projectileList.add(projectile);
+
+            shotAvailableCounter = 0;
+        }
         //This needs to be outside of key if statement!
         if (invincible) {
             invincibleCounter++;
@@ -272,6 +295,9 @@ public class Player extends Entity {
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if(shotAvailableCounter < 30) { //bug fix for close encounter projectile duplication
+            shotAvailableCounter++;
         }
     }
 
@@ -304,7 +330,7 @@ public class Player extends Entity {
 
             // Check monster collision with the updated worldX, worldY and solidArea
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
 
             // After checking collision, restore the original data
             worldX = currentWorldX;
@@ -328,12 +354,20 @@ public class Player extends Entity {
 
             if (inventory.size() != maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
                 if (gp.obj[i].isWeapon) {
-                    currentWeapon = gp.obj[i];
-                    attack = getAttack();
-                    getPlayerAttackImage(gp.ui.outfitChosen);
+                    if (currentWeapon == null) {
+                        currentWeapon = gp.obj[i];
+                        attack = getAttack();
+                        getPlayerAttackImage(gp.ui.outfitChosen);
+                    }
                 } else if (gp.obj[i].isArmour) {
-                    currentShield = gp.obj[i];
-                    defense = getDefense();
+                    if (currentArmour == null) {
+                        currentArmour = gp.obj[i];
+                        defense = getDefense();
+                    }
+                } else if (gp.obj[i].isWeapon && gp.obj[i] == currentWeapon) {
+                    currentWeapon = null;
+                } else if (gp.obj[i].isArmour && gp.obj[i] == currentArmour) {
+                    currentArmour = null;
                 }
                 inventory.add(gp.obj[i]);
                 selectSfx = selectSfx(gp.obj[i].name);
@@ -371,18 +405,9 @@ public class Player extends Entity {
 
         if (gp.keyH.enterPressed) {
             if (i != 999) {
-                attackCanceled = true;
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
-            } else {
-                if (currentWeapon != null) {
-                    attacking = true;
-                    if (currentWeapon.type == type_short_weapon) {
-                        gp.playSFX(5);
-                    } else if (currentWeapon.type == type_long_weapon) {
-                        gp.playSFX(19);
-                    }
-                }
+                keyH.enterPressed = false;
             }
         }
     }
@@ -411,7 +436,7 @@ public class Player extends Entity {
         System.out.println("Can consume pills:" + pillsConsumableNow);
     }
 
-    public void damageMonster(int i) {
+    public void damageMonster(int i, int attack) {
         if (i != 999) {
             if (!gp.monster[i].invincible) {
                 gp.playSFX(6);
@@ -455,33 +480,56 @@ public class Player extends Entity {
     }
 
     public void selectItem() {
+        int playerX = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+        int playerY = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
         int itemIndex = gp.ui.getItemIndexOnSlot();
 
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
 
-            if (selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon) {
+            if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getPlayerAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
+            } else if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon)) {
+                currentWeapon = null;
+                attack = getAttack();
+                gp.playSFX(11);
             }
-            if (selectedItem.type == type_armour) {
-                currentShield = selectedItem;
+            if (selectedItem.type == type_armour && selectedItem != currentArmour) {
+                currentArmour = selectedItem;
+                defense = getDefense();
+                gp.playSFX(11);
+            } else if (selectedItem.type == type_armour) {
+                currentArmour = null;
                 defense = getDefense();
                 gp.playSFX(11);
             }
             if (Objects.equals(selectedItem.name, "Tube of Pills") && pillsConsumableNow) {
-                selectedItem.use(this, true);
+                selectedItem.use(this, true, false);
                 inventory.remove(itemIndex);
                 gp.playSFX(11);
-            } else {
+            } else if (Objects.equals(selectedItem.name, "Tube of Pills")) {
                 gp.gameState = gp.dialogueState;
                 gp.ui.currentDialogue = "I better save these until I'm stressed\nout, 'cos they have some crazy after\neffects!";
             }
 
+            if (Objects.equals(selectedItem.name, "Key") && ((playerX == 26 && playerY == 6) || (playerX == 14 && playerY == 6))) { //be stood next to door to use key
+                selectedItem.use(this, false, true);
+                gp.ui.currentDialogue = "That door's unlocked now!";
+                System.out.println("back " + backDoorAlreadyUnlocked + ", front " + frontDoorAlreadyUnlocked);
+                if (backDoorAlreadyUnlocked && frontDoorAlreadyUnlocked) {
+
+                    inventory.remove(itemIndex);
+                }
+            } else if (Objects.equals(selectedItem.name, "Key")) {
+                gp.gameState = gp.dialogueState;
+                gp.ui.currentDialogue = "I need to use this on the front or\nback door!";
+            }
+
             if (selectedItem.type == type_consumable && !Objects.equals(selectedItem.name, "Tube of Pills")) {
-                selectedItem.use(this, true);
+                selectedItem.use(this, true, false);
                 inventory.remove(itemIndex);
                 gp.playSFX(11);
             }
@@ -553,4 +601,5 @@ public class Player extends Entity {
 //      g2.drawString("Invincible: " + invincibleCounter, 10, 400); //- UNCOMMENT TO DISPLAY INVINCIBILITY COUNTER
 //      g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height); // - UNCOMMENT TO DISPLAY COLLISION RECTANGLE ON PLAYER
     }
+
 }

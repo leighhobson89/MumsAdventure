@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import object.OBJ_Heart;
+import object.OBJ_SqueakyToy_UI;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,7 +14,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font breathFire, maruMonica, breathFire_40, breathFire_80, maruMonica_40;
-    BufferedImage heart_full, heart_half, heart_blank;
+    BufferedImage heart_full, heart_half, heart_blank, squeakyToyFull, squeakyToyEmpty;
     public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
@@ -39,6 +40,9 @@ public class UI {
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
+        Entity squeakyToy = new OBJ_SqueakyToy_UI(gp);
+        squeakyToyFull = squeakyToy.image;
+        squeakyToyEmpty = squeakyToy.image2;
     }
 
     public void addMessage(String text) {
@@ -84,6 +88,10 @@ public class UI {
         int y = gp.tileSize/2;
         int i = 0;
 
+//        g2.setColor(Color.black);
+//        g2.fillRoundRect(x - 5, y - 10, gp.tileSize*4, gp.tileSize*2, 10, 10);
+        drawSubWindow(x - 15, y - 17, gp.tileSize*4 + 20, gp.tileSize*2 + 15);
+
         //DRAW MAX LIFE
         while (i < gp.player.maxStress /2) {
             g2.drawImage(heart_blank, x, y, null);
@@ -103,13 +111,32 @@ public class UI {
             }
             i++;
             x += gp.tileSize*0.8;
+        }
 
+        //DRAW MAX MANA
+        x = (gp.tileSize/2) - 15;
+        y = gp.tileSize + 20;
+        i = 0;
+        while (i < gp.player.maxMana) {
+            g2.drawImage(squeakyToyEmpty, x, y, null);
+            i++;
+            x += 35;
+        }
+
+        //DRAW CURRENT MANA
+        x = (gp.tileSize/2) - 15;
+        y = gp.tileSize + 20;
+        i = 0;
+        while (i < gp.player.mana) {
+            g2.drawImage(squeakyToyFull, x, y, null);
+            i++;
+            x += 35;
         }
     }
 
     public void drawMessage() {
-        int messageX = gp.tileSize;
-        int messageY = gp.tileSize * 2;
+        int messageX = gp.tileSize/2 - 15;
+        int messageY = gp.tileSize * 3;
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 28F));
 
         for (int i = 0; i < message.size(); i++) {
@@ -262,7 +289,7 @@ public class UI {
     public void drawDialogueScreen() {
         //WINDOW
         int x = gp.tileSize*2;
-        int y = gp.tileSize/2;
+        int y = gp.tileSize*4;
         int width = gp.screenWidth - (gp.tileSize*4);
         int height = gp.tileSize*4;
 
@@ -296,26 +323,17 @@ public class UI {
         final int lineHeight = 35;
 
         //NAMES
-        g2.drawString("Level", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Stress", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Strength", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Dexterity", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Attack", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Defence", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Exp", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Next Level", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Coin", textX, textY);
-        textY += lineHeight + 20;
-        g2.drawString("Weapon", textX, textY);
-        textY += lineHeight + 15;
+        g2.drawString("Level", textX, textY); textY += lineHeight;
+        g2.drawString("Stress", textX, textY); textY += lineHeight;
+        g2.drawString("Toys", textX, textY); textY += lineHeight;
+        g2.drawString("Strength", textX, textY); textY += lineHeight;
+        g2.drawString("Dexterity", textX, textY); textY += lineHeight;
+        g2.drawString("Attack", textX, textY); textY += lineHeight;
+        g2.drawString("Defence", textX, textY); textY += lineHeight;
+        g2.drawString("Exp", textX, textY); textY += lineHeight;
+        g2.drawString("Next Level", textX, textY); textY += lineHeight;
+        g2.drawString("Coin", textX, textY); textY += lineHeight + 10;
+        g2.drawString("Weapon", textX, textY); textY += lineHeight + 15;
         g2.drawString("Armour", textX, textY);
 
         //VALUES
@@ -330,6 +348,11 @@ public class UI {
         textY += lineHeight;
 
         value = gp.player.stressLevel + "/" + gp.player.maxStress;
+        textX = getXForAlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        value = gp.player.mana + "/" + gp.player.maxMana;
         textX = getXForAlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
@@ -369,11 +392,11 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
         if (gp.player.currentWeapon != null) {
-            g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY-14, null);
+            g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY-24, null);
         }
         textY += gp.tileSize;
-        if (gp.player.currentShield != null) {
-            g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY-12, null);
+        if (gp.player.currentArmour != null) {
+            g2.drawImage(gp.player.currentArmour.down1, tailX - gp.tileSize, textY-22, null);
         }
     }
 
@@ -396,7 +419,7 @@ public class UI {
         for (int i = 0; i < gp.player.inventory.size(); i++) {
 
             //EQUIP CURSOR
-            if (gp.player.inventory.get(i) == gp.player.currentWeapon || gp.player.inventory.get(i) == gp.player.currentShield) {
+            if (gp.player.inventory.get(i) == gp.player.currentWeapon || gp.player.inventory.get(i) == gp.player.currentArmour) {
                 g2.setColor(new Color(240, 190, 90));
                 g2. fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
 
@@ -449,7 +472,7 @@ public class UI {
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
-        Color c = new Color(0,0,0, 170); //a - transparency value 0-255
+        Color c = new Color(0,0,0, 120); //a - transparency value 0-255
         g2.setColor(c);
         g2.fillRoundRect(x, y, width, height, 35, 35);
 

@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed, throwKeyPressed;
     long MUSIC_POSITION_PAUSE = 0;
     boolean musicPlaying = true;
 
@@ -138,6 +138,12 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER) {
                 enterPressed = true;
             }
+            if (code == KeyEvent.VK_SPACE) {
+                spacePressed = true;
+            }
+            if (code == KeyEvent.VK_T) {
+                throwKeyPressed = true;
+            }
             if (code == KeyEvent.VK_Q) {
                 System.exit(0);
             }
@@ -220,6 +226,9 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_SHIFT) {
             gp.player.speedBoost = false;
+        }
+        if (code == KeyEvent.VK_T) {
+            throwKeyPressed = false;
         }
     }
 }

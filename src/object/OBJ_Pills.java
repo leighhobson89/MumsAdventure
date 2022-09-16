@@ -22,7 +22,7 @@ public class OBJ_Pills extends Entity {
         isOpenable = false;
     }
 
-        public void use(Entity entity, boolean consumable) {
+        public void use(Entity entity, boolean consumable, boolean useable) {
 
             gp.gameState = gp.dialogueState;
             System.out.println("pill consumable" + pillsConsumableNow);
