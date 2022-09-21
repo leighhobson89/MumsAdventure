@@ -2,7 +2,6 @@ package entity;
 
 import main.GamePanel;
 import main.UtilityTool;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -69,8 +68,10 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentArmour;
     public Projectile projectile;
+    public int weedCount;
 
     //ITEM ATTRIBUTES
+    public int value;
     public int attackValue;
     public int defenseValue;
     public String description = "";
@@ -92,6 +93,8 @@ public class Entity {
     public final int type_long_weapon = 4;
     public final int type_armour = 5;
     public final int type_consumable = 6;
+    public final int type_pickupOnly = 7;
+    public final int type_gardeningShovel = 8;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -124,7 +127,6 @@ public class Entity {
         gp.ui.currentDialogue = randomChummeringDialogues[randomValue];
         usedChummeringDialogues.add(randomValue);
 
-
         switch (gp.player.direction) {
             case "up" -> direction = "down";
             case "down" -> direction = "up";
@@ -135,6 +137,25 @@ public class Entity {
     public void use(Entity entity, boolean consumable, boolean useable) {
         //overridden in Player class
     }
+    public void checkDrop() {
+
+    }
+
+    public void dropItem(Entity droppedItem) {
+        for (int i = 0; i < gp.obj.length; i++) {
+            if (gp.obj[i] == null) {
+                gp.obj[i] = droppedItem;
+                if (Objects.equals(droppedItem.name, "Heart")) {
+                    gp.obj[i].worldX = worldX + 20; //Get the dead monster's worldX
+                    gp.obj[i].worldY = worldY + 20;
+                } else {
+                    gp.obj[i].worldX = worldX;
+                    gp.obj[i].worldY = worldY;
+                }
+                break;
+            }
+        }
+    }
     public void update() {
         setAction();
 
@@ -143,6 +164,7 @@ public class Entity {
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkEntity(this, gp.monster);
+        gp.cChecker.checkEntity(this, gp.iTile);
         if (newMonster && tileState) {
             collisionOn = false;
         }
@@ -265,7 +287,7 @@ public class Entity {
                         dyingAnimation(g2);
                     }
 
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(image, screenX, screenY, null);
 
             changeAlpha(g2, 1F);
         }

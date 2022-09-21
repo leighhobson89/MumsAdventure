@@ -2,6 +2,8 @@ package monster;
 
 import entity.Entity;
 import main.GamePanel;
+import object.OBJ_Coin;
+import object.OBJ_Heart;
 
 import java.util.Random;
 
@@ -69,5 +71,18 @@ public class MON_Spider extends Entity {
     public void damageReaction() {
         actionLockCounter = 0;
         direction = gp.player.direction;
+    }
+
+    public void checkDrop() {
+        //THROW A DICE
+        int rand = new Random().nextInt(100) + 1;
+
+        //SET THE MONSTER DROP
+        if (rand < 50) {
+            dropItem(new OBJ_Coin(gp));
+        }
+        if (rand >= 50 && rand < 80) {
+            dropItem(new OBJ_Heart(gp));
+        }
     }
 }

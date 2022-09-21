@@ -170,7 +170,7 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/mum_attack_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_attack_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
-            if (currentWeapon.type == type_long_weapon) {
+            if (currentWeapon.type == type_long_weapon || currentWeapon.type == type_gardeningShovel) {
                 attackUp1 = setup("/player/mum_spatula_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
                 attackUp2 = setup("/player/mum_spatula_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
                 attackDown1 = setup("/player/mum_spatula_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
@@ -227,6 +227,9 @@ public class Player extends Entity {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
 
+            //CHECK INTERACTIVE TILE COLLISION
+            gp.cChecker.checkEntity(this, gp.iTile);
+
             // CHECK EVENT
             gp.eHandler.checkEvent();
 
@@ -243,7 +246,7 @@ public class Player extends Entity {
             if (keyH.spacePressed && !attackCanceled && currentWeapon != null) {
                 if (currentWeapon.type == type_short_weapon) {
                     gp.playSFX(5);
-                } else if (currentWeapon.type == type_long_weapon) {
+                } else if (currentWeapon.type == type_long_weapon || currentWeapon.type == type_gardeningShovel) {
                     gp.playSFX(19);
                 }
 
@@ -303,6 +306,9 @@ public class Player extends Entity {
         if(shotAvailableCounter < 30) { //bug fix for close encounter projectile duplication
             shotAvailableCounter++;
         }
+        if (stressLevel < 0) {
+            stressLevel = 0;
+        }
     }
 
     public void attacking() {
@@ -338,6 +344,10 @@ public class Player extends Entity {
             damageMonster(monsterIndex, attack);
             hitNPC(npcIndex);
 
+            //INTERACTIVE TILE COLLISION CHECKER
+            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+            damageInteractiveTile(iTileIndex);
+
             // After checking collision, restore the original data
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -355,47 +365,54 @@ public class Player extends Entity {
     public void pickUpObject(int i) {
         if (i != 999) {
 
-            String text;
-            int selectSfx;
-            if (gp.obj[i].collectable) {
-                itemCount++;
-            }
-            System.out.println(itemCount);
+            if (gp.obj[i].type == type_pickupOnly) {
+                //PICKUP ONLY ITEMS
+                gp.obj[i].use(this, false, false);
+                gp.obj[i] = null;
+            } else {
+                //INVENTORY ITEMS
+                String text;
+                int selectSfx;
+                if (gp.obj[i].collectable) {
+                    itemCount++;
+                }
+                System.out.println(itemCount);
 
-            if (inventory.size() != maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
-                if (gp.obj[i].isWeapon) {
-                    if (currentWeapon == null) {
-                        currentWeapon = gp.obj[i];
-                        attack = getAttack();
-                        getPlayerAttackImage(gp.ui.outfitChosen);
+                if (inventory.size() != maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
+                    if (gp.obj[i].isWeapon) {
+                        if (currentWeapon == null) {
+                            currentWeapon = gp.obj[i];
+                            attack = getAttack();
+                            getPlayerAttackImage(gp.ui.outfitChosen);
+                        }
+                    } else if (gp.obj[i].isArmour) {
+                        if (currentArmour == null) {
+                            currentArmour = gp.obj[i];
+                            defense = getDefense();
+                        }
+                    } else if (gp.obj[i].isWeapon && gp.obj[i] == currentWeapon) {
+                        currentWeapon = null;
+                    } else if (gp.obj[i].isArmour && gp.obj[i] == currentArmour) {
+                        currentArmour = null;
                     }
-                } else if (gp.obj[i].isArmour) {
-                    if (currentArmour == null) {
-                        currentArmour = gp.obj[i];
-                        defense = getDefense();
+                    if (gp.obj[i].name == "Phoebe's Bone") {
+                        bone++;
+                        gp.player.boneIndex = gp.player.itemCount;
                     }
-                } else if (gp.obj[i].isWeapon && gp.obj[i] == currentWeapon) {
-                    currentWeapon = null;
-                } else if (gp.obj[i].isArmour && gp.obj[i] == currentArmour) {
-                    currentArmour = null;
+                    inventory.add(gp.obj[i]);
+                    selectSfx = selectSfx(gp.obj[i].name);
+                    gp.playSFX(selectSfx);
+                    text = "Picked up " + gp.obj[i].name + "!";
+                    gp.ui.addMessage(text);
+                    gp.obj[i] = null;
+                } else if (gp.obj[i].isOpenable) {
+                    selectSfx = selectSfx(gp.obj[i].name);
+                    gp.playSFX(selectSfx);
+                    gp.obj[i] = null;
+                } else if (inventory.size() >= maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
+                    text = "You cannot carry any more!";
+                    gp.ui.addMessage(text);
                 }
-                if (gp.obj[i].name == "Phoebe's Bone") {
-                    bone++;
-                    gp.player.boneIndex = gp.player.itemCount;
-                }
-                inventory.add(gp.obj[i]);
-                selectSfx = selectSfx(gp.obj[i].name);
-                gp.playSFX(selectSfx);
-                text = "Picked up " + gp.obj[i].name + "!";
-                gp.ui.addMessage(text);
-                gp.obj[i] = null;
-            } else if (gp.obj[i].isOpenable) {
-                selectSfx = selectSfx(gp.obj[i].name);
-                gp.playSFX(selectSfx);
-                gp.obj[i] = null;
-            } else if (inventory.size() >= maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
-                text = "You cannot carry any more!";
-                gp.ui.addMessage(text);
             }
         }
     }
@@ -498,6 +515,28 @@ public class Player extends Entity {
         }
     }
 
+    public void damageInteractiveTile(int i) {
+        if (i != 999 && gp.iTile[i].destructible && gp.iTile[i].isCorrectItem(this) && !gp.iTile[i].invincible) {
+            if (Objects.equals(gp.iTile[i].name, "Weed Tile")) {
+                if (gp.player.weedCount > 1) {
+                    gp.player.weedCount--;
+                } else if (gp.player.weedCount == 1) {
+                    gp.npc[0].randomChummeringDialogues[44] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
+                    gp.player.weedCount--;
+                } else if (gp.player.weedCount == 0) {
+                    //trigger event for end of weeding mission
+                }
+                gp.iTile[i].playSfx();
+                gp.iTile[i].stressLevel++;
+                gp.iTile[i].invincible = true;
+
+                if (gp.iTile[i].stressLevel >= gp.iTile[i].maxStress) {
+                    gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+                }
+            }
+        }
+    }
+
     public void checkLevelUp() {
         if (exp >= nextLevelExp) {
             level++;
@@ -522,12 +561,12 @@ public class Player extends Entity {
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
 
-            if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon) && selectedItem != currentWeapon) {
+            if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getPlayerAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
-            } else if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon)) {
+            } else if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel)) {
                 currentWeapon = null;
                 attack = getAttack();
                 gp.playSFX(11);
@@ -550,13 +589,17 @@ public class Player extends Entity {
                 gp.ui.currentDialogue = "I better save these until I'm stressed\nout, 'cos they have some crazy after\neffects!";
             }
 
-            if (Objects.equals(selectedItem.name, "Key") && ((playerX == 26 && playerY == 6) || (playerX == 14 && playerY == 6))) { //be stood next to door to use key
-                selectedItem.use(this, false, true);
-                gp.ui.currentDialogue = "That door's unlocked now!";
-                System.out.println("back " + backDoorAlreadyUnlocked + ", front " + frontDoorAlreadyUnlocked);
-                if (backDoorAlreadyUnlocked && frontDoorAlreadyUnlocked) {
-
-                    inventory.remove(itemIndex);
+            if (Objects.equals(selectedItem.name, "Key") && (playerX == 12 || playerX == 13 || playerX == 14 || playerX == 26 || playerX == 27 || playerX == 28) && playerY == 6) { //be stood next to door to use key
+                if ((backDoorAlreadyUnlocked && (playerX == 26 || playerX == 27 || playerX == 28)) || (frontDoorAlreadyUnlocked && (playerX == 12 || playerX == 13 || playerX == 14))) {
+                    gp.gameState = gp.dialogueState;
+                    gp.ui.currentDialogue = "This door is already unlocked!";
+                } else {
+                    selectedItem.use(this, false, true);
+                    gp.ui.currentDialogue = "That door's unlocked now!";
+                    System.out.println("back " + backDoorAlreadyUnlocked + ", front " + frontDoorAlreadyUnlocked);
+                    if (backDoorAlreadyUnlocked && frontDoorAlreadyUnlocked) {
+                        inventory.remove(itemIndex);
+                    }
                 }
             } else if (Objects.equals(selectedItem.name, "Key")) {
                 gp.gameState = gp.dialogueState;

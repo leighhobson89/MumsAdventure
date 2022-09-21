@@ -87,6 +87,8 @@ public class TileManager {
             setup(55, "rockery4", true);
             setup(56, "rockery5", true);
             setup(57, "rockery6", true);
+            setup(58, "rockery2", false);
+            setup(59, "rockery3", false);
 
     }
 

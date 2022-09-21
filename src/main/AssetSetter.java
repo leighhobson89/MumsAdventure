@@ -3,6 +3,7 @@ package main;
 import entity.NPC_Dad;
 import monster.MON_Spider;
 import object.*;
+import tile_interactive.IT_WeedTile;
 
 import java.util.Random;
 
@@ -171,6 +172,11 @@ public class AssetSetter {
         gp.obj[i].worldX = 20 * gp.tileSize;
         gp.obj[i].worldY = 8 * gp.tileSize;
         i++;
+
+        gp.obj[i] = new OBJ_Shovel(gp);
+        gp.obj[i].worldX = 42 * gp.tileSize;
+        gp.obj[i].worldY = 3 * gp.tileSize;
+        i++;
     }
 
     public void setNPC() {
@@ -207,5 +213,59 @@ public class AssetSetter {
         monsterNumber++; //monster counter increments so that next call of method adds to next slot in monster array
 
         return monsterNumber;
+    }
+
+    public int setInteractiveTile() {
+        int i = 0;
+        int weedCount = 0;
+
+        gp.iTile[i] = new IT_WeedTile(gp, 38, 6); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 39, 6); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 38, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 39, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 38, 8); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 39, 8); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 38, 9); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 39, 9); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 38, 10); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 39, 10); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 38, 11); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 39, 11); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 38, 12); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 39, 12); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 38, 13); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 39, 13); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 38, 14); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 39, 14); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 1); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 13, 1); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 15, 1); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 19, 1); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 22, 1); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 25, 1); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 8, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 9, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 17, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 18, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 19, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 21, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 27, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 8, 4); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 9, 4); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 10, 4); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 8, 5); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 8, 9); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 8, 13); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 9, 14); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 13); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 12); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 6); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 5); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 25, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 15, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 13, 2); i++; weedCount++;
+
+        return weedCount; //return number of weeds to dig up
     }
 }

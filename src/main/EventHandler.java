@@ -80,11 +80,10 @@ public class EventHandler {
     }
 
     public void openFrontBackDoor(int playerX, int playerY) {
-        String doorToUnlock = "";
-        if (playerX == 26 && playerY == 6) {
+        if ((playerX == 26 || playerX == 27 || playerX == 28) && playerY == 6) {
             gp.player.backDoorAlreadyUnlocked = true;
             gp.obj[13] = null;
-        } else if (playerX == 14 && playerY == 6) {
+        } else if ((playerX == 14 || playerX == 13 || playerX == 12) && playerY == 6) {
             gp.player.frontDoorAlreadyUnlocked = true;
             gp.obj[11] = null;
         }

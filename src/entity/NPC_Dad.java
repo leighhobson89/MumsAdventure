@@ -82,7 +82,11 @@ public class NPC_Dad extends Entity {
         randomChummeringDialogues[41] = "Shunta chopped that tree down, no bloody\nprivacy now!";
         randomChummeringDialogues[42] = "Couldn't stop a pig in a ginnel that one!";
         randomChummeringDialogues[43] = "You only want to go over there for a holiday\nin the sun!";
-        randomChummeringDialogues[44] = "Is that Christina every gonna shift all\nher junk out u't shed or what?";
+        if (gp.player.weedCount > 0) {
+            randomChummeringDialogues[44] = "Them bloody weeds need diggin' up!";
+        } else {
+            randomChummeringDialogues[44] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
+        }
         randomChummeringDialogues[45] = "We'll have to get some blankets cos I'm not\nhaving them radiators on all bloody winter!";
         randomChummeringDialogues[46] = "That telly's never been reyt since\nthat cowboy buggered't satellite dish up\ncuttin' them trees down!";
         randomChummeringDialogues[47] = "I've seen a reyt bloody good guitar\non eBay...";
