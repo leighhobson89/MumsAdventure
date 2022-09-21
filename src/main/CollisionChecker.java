@@ -2,6 +2,8 @@ package main;
 
 import entity.Entity;
 
+import java.util.Objects;
+
 public class CollisionChecker {
 
     GamePanel gp;
@@ -125,8 +127,13 @@ public class CollisionChecker {
 
                 if (entity.solidArea.intersects(target[i].solidArea)) { //if entity touches object...
                     if(target[i] != entity) {
-                        entity.collisionOn = true;
-                        index = i;
+                        if (!Objects.equals(target[i].name, "Weed Tile") && entity.type != entity.type_monster) { //lets monsters run about on destructable tiles
+                            entity.collisionOn = true;
+                            index = i;
+                        } else if (Objects.equals(target[i].name, "Weed Tile") && entity.type != entity.type_monster) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
                     }
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;

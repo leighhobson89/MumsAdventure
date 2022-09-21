@@ -10,7 +10,6 @@ public class EventHandler {
 
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
-    int spiderCount = 1;
 
     public EventHandler(GamePanel gp) {
         this.gp = gp;
@@ -47,8 +46,8 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(20, 8, "any")) {spiderCount = spiderEvent(20, 8, gp.dialogueState, spiderCount, true);}
-            if (hit(23, 2, "up")) {spiderCount = spiderEvent(24, 3, gp.dialogueState, spiderCount, false);}
+            if (hit(20, 8, "any")) {gp.player.spiderCount = spiderEvent(20, 8, gp.dialogueState, gp.player.spiderCount, true);}
+            if (hit(23, 2, "up")) {gp.player.spiderCount = spiderEvent(24, 3, gp.dialogueState, gp.player.spiderCount, false);}
             if (hit(16, 13, "any")) {chairDestressEvent(gp.dialogueState);}
         }
     }
@@ -92,7 +91,11 @@ public class EventHandler {
 
     public int spiderEvent(int col, int row, int gameState, int spiderCount, boolean randomizeLocation) {
         gp.gameState = gameState;
-        if (!randomizeLocation) { //play bin sound only at bin - will need new flag if more spider locations added without randomizeLocation
+        boolean atBin = false;
+        if (col == 24 && row == 3) {
+            atBin = true;
+        }
+        if (atBin) {
             gp.playSFX(14);
         }
         gp.playSFX(8);

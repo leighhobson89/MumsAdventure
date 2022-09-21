@@ -3,7 +3,6 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import object.OBJ_DogsBone_NotMagic;
-import object.OBJ_PipsToy_Magic;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -464,6 +463,7 @@ public class Player extends Entity {
                     damage = 0;
                 }
                 invincible = true;
+                checkIfPassOutFromStress();
             }
         }
     }
@@ -518,20 +518,28 @@ public class Player extends Entity {
     public void damageInteractiveTile(int i) {
         if (i != 999 && gp.iTile[i].destructible && gp.iTile[i].isCorrectItem(this) && !gp.iTile[i].invincible) {
             if (Objects.equals(gp.iTile[i].name, "Weed Tile")) {
-                if (gp.player.weedCount > 1) {
-                    gp.player.weedCount--;
-                } else if (gp.player.weedCount == 1) {
-                    gp.npc[0].randomChummeringDialogues[44] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
-                    gp.player.weedCount--;
-                } else if (gp.player.weedCount == 0) {
-                    //trigger event for end of weeding mission
+                if (gp.iTile[i].stressLevel >= gp.iTile[i].maxStress) {
+                    if (gp.player.weedCount > 1) {
+                        gp.player.weedCount--;
+                    } else if (gp.player.weedCount == 1) {
+                        gp.npc[0].randomChummeringDialogues[44] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
+                        gp.player.weedCount--;
+                    } else if (gp.player.weedCount == 0) {
+                        //end of weeding mission
+                    }
                 }
                 gp.iTile[i].playSfx();
                 gp.iTile[i].stressLevel++;
                 gp.iTile[i].invincible = true;
 
                 if (gp.iTile[i].stressLevel >= gp.iTile[i].maxStress) {
+                    int rand = new Random().nextInt(100);
                     gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+                    if (rand > 80) {
+                        int playerX = gp.player.worldX/gp.tileSize;
+                        int playerY = gp.player.worldY/ gp.tileSize;
+                        gp.eHandler.spiderEvent(playerX-1, playerY, gp.dialogueState, gp.player.spiderCount, false);
+                    }
                 }
             }
         }
@@ -541,7 +549,7 @@ public class Player extends Entity {
         if (exp >= nextLevelExp) {
             level++;
             nextLevelExp = nextLevelExp*2;
-            maxStress += 2;
+//            maxStress += 2; need to draw subdialogue bigger if use this
             strength++;
             dexterity++;
             attack = getAttack();

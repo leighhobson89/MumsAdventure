@@ -18,7 +18,7 @@ public class OBJ_Shovel extends Entity {
         direction = "down";
         description = "[" + name + "]\nDig up the Rockery!";
 
-        attackValue = 0;
+        attackValue = 1;
         attackArea.width = 36;
         attackArea.height = 36;
 

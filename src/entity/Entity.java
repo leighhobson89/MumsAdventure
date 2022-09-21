@@ -83,6 +83,7 @@ public class Entity {
 
     //MONSTER ATTRIBUTES
     public int monsterMaxStress;
+    public int spiderCount = 1;
 
     //TYPE
     public int type;
@@ -212,7 +213,6 @@ public class Entity {
 
     public void damagePlayer(int attack) {
         if (!gp.player.invincible && !this.dying) {
-            //we can give damage
 
             int damage = attack - gp.player.defense;
             if (damage > 0) {
@@ -225,6 +225,20 @@ public class Entity {
             gp.player.stressLevel += damage;
             gp.player.checkPillsConsumable(gp.player.stressLevel);
             gp.player.invincible = true;
+
+            checkIfPassOutFromStress(); // replace with gameover method
+        }
+    }
+
+    public void checkIfPassOutFromStress() {
+        if (gp.player.stressLevel >= gp.player.maxStress) {
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "You pass out from the stress!";
+            gp.playSFX(8);
+
+            gp.player.worldX = gp.tileSize*16;
+            gp.player.worldY = gp.tileSize*12;
+            gp.player.stressLevel = 0;
         }
     }
 

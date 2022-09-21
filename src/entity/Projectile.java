@@ -79,7 +79,7 @@ public class Projectile extends Entity {
 
         stressLevel++;
 
-        if(stressLevel >= maxStress) {
+        if(stressLevel >= maxStress) { //if throwing item reaches end of throwing range
             gp.aSetter.setBone(projX, projY);
             alive = false;
             gp.playSFX(20);
