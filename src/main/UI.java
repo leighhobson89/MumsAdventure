@@ -1,7 +1,7 @@
 package main;
 
 import entity.Entity;
-import object.OBJ_Heart;
+import object.OBJ_LightningBoltStress;
 import object.OBJ_SqueakyToy_UI;
 
 import java.awt.*;
@@ -14,7 +14,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font breathFire, maruMonica, breathFire_40, breathFire_80, maruMonica_40;
-    BufferedImage heart_full, heart_half, heart_blank, squeakyToyFull, squeakyToyEmpty;
+    BufferedImage bolt_full, bolt_half, bolt_blank, squeakyToyFull, squeakyToyEmpty;
     public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
@@ -36,10 +36,10 @@ public class UI {
         maruMonica_40 = maruMonica.deriveFont(40F);
 
         //CREATE HUD OBJECT
-        Entity heart = new OBJ_Heart(gp);
-        heart_full = heart.image;
-        heart_half = heart.image2;
-        heart_blank = heart.image3;
+        Entity bolt = new OBJ_LightningBoltStress(gp);
+        bolt_full = bolt.image;
+        bolt_half = bolt.image2;
+        bolt_blank = bolt.image3;
         Entity squeakyToy = new OBJ_SqueakyToy_UI(gp);
         squeakyToyFull = squeakyToy.image;
         squeakyToyEmpty = squeakyToy.image2;
@@ -94,7 +94,7 @@ public class UI {
 
         //DRAW MAX LIFE
         while (i < gp.player.maxStress /2) {
-            g2.drawImage(heart_blank, x, y, null);
+            g2.drawImage(bolt_blank, x, y, null);
             i++;
             x += gp.tileSize*0.8;
         }
@@ -104,10 +104,10 @@ public class UI {
 
         //DRAW CURRENT LIFE
         while(i < gp.player.stressLevel) {
-            g2.drawImage(heart_half, x, y, null);
+            g2.drawImage(bolt_half, x, y, null);
             i++;
             if (i < gp.player.stressLevel) {
-                g2.drawImage(heart_full, x, y, null);
+                g2.drawImage(bolt_full, x, y, null);
             }
             i++;
             x += gp.tileSize*0.8;

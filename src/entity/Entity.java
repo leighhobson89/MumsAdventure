@@ -24,7 +24,7 @@ public class Entity {
 
     //STATE
     public int worldX, worldY;
-    public String direction = "up";
+    public String direction = "right";
     public int spriteNum = 1;
     public int speed, defaultSpeed, boostSpeed;
     public boolean collisionOn = false;
@@ -146,7 +146,7 @@ public class Entity {
         for (int i = 0; i < gp.obj.length; i++) {
             if (gp.obj[i] == null) {
                 gp.obj[i] = droppedItem;
-                if (Objects.equals(droppedItem.name, "Heart")) {
+                if (Objects.equals(droppedItem.name, "StressBolt")) {
                     gp.obj[i].worldX = worldX + 20; //Get the dead monster's worldX
                     gp.obj[i].worldY = worldY + 20;
                 } else {
@@ -157,6 +157,41 @@ public class Entity {
             }
         }
     }
+
+    public Color getParticleColor() {
+        Color color = null;
+        return color;
+    }
+    public int getParticleSize() {
+        int size = 0; //6 pixels
+        return size;
+    }
+    public int getParticleSpeed() {
+        int speed = 0;
+        return speed;
+    }
+    public int getParticleMaxLife() {
+        int maxLife = 0;
+        return maxLife;
+    }
+
+    public void generateParticle(Entity generator, Entity target) {
+        Color color = generator.getParticleColor();
+        int size = generator.getParticleSize();
+        int speed = generator.getParticleSpeed();
+        int maxLife = generator.getParticleMaxLife();
+
+        Particle p1 = new Particle(gp, generator, color, size, speed, maxLife, -2, -1);
+        Particle p2 = new Particle(gp, generator, color, size, speed, maxLife, 2, -1);
+        Particle p3 = new Particle(gp, generator, color, size, speed, maxLife, -2, 1);
+        Particle p4 = new Particle(gp, generator, color, size, speed, maxLife, 2, 1);
+
+        gp.particleList.add(p1);
+        gp.particleList.add(p2);
+        gp.particleList.add(p3);
+        gp.particleList.add(p4);
+    }
+
     public void update() {
         setAction();
 

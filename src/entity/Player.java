@@ -532,13 +532,16 @@ public class Player extends Entity {
                 gp.iTile[i].stressLevel++;
                 gp.iTile[i].invincible = true;
 
+                //GENERATE PARTICLE
+                generateParticle(gp.iTile[i], gp.iTile[i]);
+
                 if (gp.iTile[i].stressLevel >= gp.iTile[i].maxStress) {
                     int rand = new Random().nextInt(100);
                     gp.iTile[i] = gp.iTile[i].getDestroyedForm();
                     if (rand > 80) {
                         int playerX = gp.player.worldX/gp.tileSize;
                         int playerY = gp.player.worldY/ gp.tileSize;
-                        gp.player.spiderCount = gp.eHandler.spiderEvent(playerX-1, playerY, gp.dialogueState, gp.player.spiderCount, false);
+                        gp.player.spiderCount = gp.eHandler.spiderEvent(playerX+2, playerY+2, gp.dialogueState, gp.player.spiderCount, false, true);
                     }
                 }
             }

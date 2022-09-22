@@ -3,7 +3,7 @@ package monster;
 import entity.Entity;
 import main.GamePanel;
 import object.OBJ_Coin;
-import object.OBJ_Heart;
+import object.OBJ_LightningBoltStress;
 
 import java.util.Random;
 
@@ -82,7 +82,7 @@ public class MON_Spider extends Entity {
             dropItem(new OBJ_Coin(gp));
         }
         if (rand >= 50 && rand < 80) {
-            dropItem(new OBJ_Heart(gp));
+            dropItem(new OBJ_LightningBoltStress(gp));
         }
     }
 }

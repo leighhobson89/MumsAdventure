@@ -46,8 +46,8 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(20, 8, "any")) {gp.player.spiderCount = spiderEvent(20, 8, gp.dialogueState, gp.player.spiderCount, true);}
-            if (hit(23, 2, "up")) {gp.player.spiderCount = spiderEvent(24, 3, gp.dialogueState, gp.player.spiderCount, false);}
+            if (hit(20, 8, "any")) {gp.player.spiderCount = spiderEvent(20, 8, gp.dialogueState, gp.player.spiderCount, true, false);}
+            if (hit(23, 2, "any")) {gp.player.spiderCount = spiderEvent(24, 3, gp.dialogueState, gp.player.spiderCount, false, false);}
             if (hit(16, 13, "any")) {chairDestressEvent(gp.dialogueState);}
         }
     }
@@ -89,8 +89,7 @@ public class EventHandler {
         gp.playSFX(3);
     }
 
-    public int spiderEvent(int col, int row, int gameState, int spiderCount, boolean randomizeLocation) {
-        gp.gameState = gameState;
+    public int spiderEvent(int col, int row, int gameState, int spiderCount, boolean randomizeLocation, boolean gardening) {
         boolean atBin = false;
         if (col == 24 && row == 3) {
             atBin = true;
@@ -98,23 +97,32 @@ public class EventHandler {
         if (atBin) {
             gp.playSFX(14);
         }
-        gp.playSFX(8);
-        if (spiderCount == 1) {
-            gp.ui.currentDialogue = "Aaagh a bloody big spider!";
-            gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation); // trigger a spider when the dialogue is closed
-        } else if (spiderCount > 1 && spiderCount <= 10) {
-            gp.ui.currentDialogue = "Aaagh another bloody spider!\nThat's " + uTool.parseNumberString(spiderCount) + " in one day, sick of it!";
-            gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
+        if (spiderCount > 10) {
+            if (gardening) {
+                gp.gameState = gameState;
+                gp.playSFX(8);
+                gp.ui.currentDialogue = "So many bloody spiders today, Peter will you\nsort this bloody garden out?";
+                gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
+                gp.player.checkPillsConsumable(gp.player.stressLevel);
+                spiderCount++;
+                System.out.println("Spider: " + spiderCount);
+            }
         } else {
-            gp.ui.currentDialogue = "So many bloody spiders today, Peter will you\nsort this bloody house out?";
-        }
-        if (spiderCount <= 10) {
-            gp.player.stressLevel += 1;
+            gp.gameState = gameState;
+            gp.playSFX(8);
+            if (spiderCount == 1) {
+                gp.ui.currentDialogue = "Aaagh a bloody big spider!";
+                gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation); // trigger a spider when the dialogue is closed
+            } else if (spiderCount > 1) {
+                gp.ui.currentDialogue = "Aaagh another bloody spider!\nThat's " + uTool.parseNumberString(spiderCount) + " in one day, sick of it!";
+                gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
+            }
             gp.player.checkPillsConsumable(gp.player.stressLevel);
+            //eventRect[col][row].eventDone = true; //for non recurring events only
+            canTouchEvent = false;
+            spiderCount++;
+            System.out.println("Spider: " + spiderCount);
         }
-        //eventRect[col][row].eventDone = true; //for non recurring events only
-        canTouchEvent = false;
-        spiderCount++;
         return spiderCount;
     }
 
