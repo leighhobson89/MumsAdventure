@@ -32,6 +32,7 @@ public class Projectile extends Entity {
             if (monsterIndex != 999) {
                 gp.aSetter.setBone(projX, projY);
                 gp.player.damageMonster(monsterIndex, attack);
+                generateParticle(user.projectile, gp.monster[monsterIndex]);
                 gp.playSFX(20);
                 alive = false;
             }
@@ -54,6 +55,7 @@ public class Projectile extends Entity {
             boolean tileState = gp.cChecker.checkTile(this);
             if (!gp.player.invincible && contactPlayer) {
                 damagePlayer(attack);
+//                generateParticle(user.projectile, gp.player); //ONLY IF NPC OR MONSTER THROWS OBJECT
                 gp.gameState = gp.dialogueState;
                 gp.ui.currentDialogue = "Oww ya stupid sod, be careful will yer!";
                 gp.playSFX(8);
