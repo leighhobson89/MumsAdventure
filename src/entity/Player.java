@@ -538,7 +538,7 @@ public class Player extends Entity {
                     if (rand > 80) {
                         int playerX = gp.player.worldX/gp.tileSize;
                         int playerY = gp.player.worldY/ gp.tileSize;
-                        gp.eHandler.spiderEvent(playerX-1, playerY, gp.dialogueState, gp.player.spiderCount, false);
+                        gp.player.spiderCount = gp.eHandler.spiderEvent(playerX-1, playerY, gp.dialogueState, gp.player.spiderCount, false);
                     }
                 }
             }
