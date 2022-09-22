@@ -35,6 +35,8 @@ public class KeyHandler implements KeyListener {
             dialogueState(code);
         } else if (gp.gameState == gp.characterState) { //CHARACTER STATE KEYS
             characterState(code);
+        } else if (gp.gameState == gp.optionsState) { //OPTIONS STATE KEYS
+            optionsState(code);
         }
     }
 
@@ -147,6 +149,9 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_Q) {
                 System.exit(0);
             }
+            if (code == KeyEvent.VK_ESCAPE) {
+                gp.gameState = gp.optionsState;
+            }
             //DEBUG
             if (code == KeyEvent.VK_D) {
                 showDebugText = !showDebugText; //toggle draw speed information with 'D' key
@@ -205,7 +210,61 @@ public class KeyHandler implements KeyListener {
             }
         }
     }
+    public void optionsState(int code) {
+        if (code == KeyEvent.VK_ESCAPE) {
+            gp.gameState = gp.playState;
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }
 
+        int maxCommandNum = 0;
+        switch (gp.ui.subState) {
+            case 0: maxCommandNum = 5; break;
+            case 3: maxCommandNum = 1; break;
+        }
+        if (code == KeyEvent.VK_UP) {
+            gp.ui.commandNum--;
+            gp.playSFX(10);
+            if(gp.ui.commandNum < 0) {
+                gp.ui.commandNum = maxCommandNum;
+            }
+        }
+        if (code == KeyEvent.VK_DOWN) {
+            gp.ui.commandNum++;
+            gp.playSFX(10);
+            if(gp.ui.commandNum > maxCommandNum) {
+                gp.ui.commandNum = 0;
+            }
+        }
+        if (code == KeyEvent.VK_LEFT) {
+            if (gp.ui.subState == 0) {
+                if(gp.ui.commandNum == 1 && gp.music.volumeScale > 0) {
+                    gp.music.volumeScale--;
+                    gp.music.checkVolume();
+                    gp.playSFX(10);
+                }
+                if(gp.ui.commandNum == 2 && gp.sfx.volumeScale > 0) {
+                    gp.sfx.volumeScale--;
+                    gp.playSFX(10);
+                }
+            }
+        }
+        if (code == KeyEvent.VK_RIGHT) {
+            if (gp.ui.subState == 0) {
+                if(gp.ui.commandNum == 1 && gp.music.volumeScale < 5) {
+                    gp.music.volumeScale++;
+                    gp.music.checkVolume();
+                    gp.playSFX(10);
+                }
+                if(gp.ui.commandNum == 2 && gp.sfx.volumeScale < 5) {
+                    gp.sfx.volumeScale++;
+                    gp.playSFX(10);
+                }
+            }
+        }
+
+    }
 
 
     @Override

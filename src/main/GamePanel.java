@@ -7,6 +7,7 @@ import tile_interactive.InteractiveTile;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,14 +20,20 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale; //actual size 48
-    public final int maxScreenCol = 16;
+    public final int maxScreenCol = 20;
     public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol; //768 px
+    public final int screenWidth = tileSize * maxScreenCol; //960 px
     public final int screenHeight = tileSize * maxScreenRow; //576 px
     public final boolean musicSetToPlayFromStart = true; //Change to true to play music from start
     //WORLD SETTINGS
     public final int maxWorldCol = 66;
     public final int maxWorldRow = 16;
+    //FOR FULL SCREEN
+    int screenWidth2 = screenWidth;
+    int screenHeight2 = screenHeight;
+    BufferedImage tempScreen;
+    Graphics2D g2;
+    public boolean fullScreenOn = false;
 
     //FPS
     int FPS = 60;
@@ -40,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    Config config = new Config(this);
     Thread gameThread;
 
     //ENTITY AND OBJECT
@@ -60,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int characterState = 4;
+    public final int optionsState = 5;
 
 
     public GamePanel() throws IOException, FontFormatException { //constructor
@@ -81,6 +90,25 @@ public class GamePanel extends JPanel implements Runnable {
             stopMusic();
         }
         gameState = titleState;
+        //FULL SCREEN STUFF
+        tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB); //blank image as big as screen
+        g2 = (Graphics2D)tempScreen.getGraphics(); //attach g2 draw to this new blank image 'canvas'
+        if (fullScreenOn) {
+            setFullScreen();
+        }
+    }
+
+    public void setFullScreen() {
+        //GET LOCAL SCREEN DEVICE
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+
+        gd.setFullScreenWindow(Main.window);
+
+        //GET FULL SCREEN WIDTH AND HEIGHT
+        screenWidth2 = Main.window.getWidth();
+        screenHeight2 = Main.window.getHeight();
+
     }
 
     public void startGameThread() {
@@ -106,7 +134,9 @@ public class GamePanel extends JPanel implements Runnable {
             //1 UPDATE screen
             update();
             //2 DRAW screen
-            repaint();
+//            repaint(); //this is for old draw implementation prior to full screen functionality
+            drawToTempScreen(); // draw to buffered image canvas
+            drawToScreen(); // draw to JPanel
             drawCount++;
 
             if (timer >= 1000000000) { //output FPS in console
@@ -186,11 +216,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
-
+    public void drawToTempScreen() { //FULL SCREEN STUFF
         //DEBUG
         long drawStart = 0;
         if (keyH.showDebugText) {
@@ -288,9 +314,14 @@ public class GamePanel extends JPanel implements Runnable {
             //DRAW TIMER STATUS
             g2.drawString("Timer Interval : " + Player.interval, x, y);
         }
-
-        g2.dispose();
     }
+
+    public void drawToScreen() {
+        Graphics g = getGraphics();
+        g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2, null);
+        g.dispose();
+    }
+
     public void playMusic(long position, boolean pausing, int i) {
         music.setFile(i);
         music.play(position, pausing);
