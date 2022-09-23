@@ -29,160 +29,160 @@ public class AssetSetter {
         int i = 0;
 
         gp.obj[i] = new OBJ_Pills(gp);
-        gp.obj[i].worldX = 16 * gp.tileSize;
-        gp.obj[i].worldY = 10 * gp.tileSize;
+        gp.obj[i].worldX = 19 * gp.tileSize;
+        gp.obj[i].worldY = 15 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_DogsBone_NotMagic(gp);
-        gp.obj[i].worldX = 22 * gp.tileSize;
-        gp.obj[i].worldY = 13 * gp.tileSize;
+        gp.obj[i].worldX = 25 * gp.tileSize;
+        gp.obj[i].worldY = 18 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_Guitar1(gp);
-        gp.obj[i].worldX = 17 * gp.tileSize;
-        gp.obj[i].worldY = 8 * gp.tileSize;
-        i++;
-
-        gp.obj[i] = new OBJ_Guitar2(gp);
-        gp.obj[i].worldX = 18 * gp.tileSize;
+        gp.obj[i].worldX = 20 * gp.tileSize;
         gp.obj[i].worldY = 13 * gp.tileSize;
         i++;
 
-        gp.obj[i] = new OBJ_InsideDoorOpen(gp);
-        gp.obj[i].worldX = 15 * gp.tileSize;
-        gp.obj[i].worldY = 7 * gp.tileSize;
-        i++;
-
-        gp.obj[i] = new OBJ_InsideDoor(gp);
-        gp.obj[i].worldX = 15 * gp.tileSize;
-        gp.obj[i].worldY = 7 * gp.tileSize;
+        gp.obj[i] = new OBJ_Guitar2(gp);
+        gp.obj[i].worldX = 21 * gp.tileSize;
+        gp.obj[i].worldY = 18 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_InsideDoorOpen(gp);
-        gp.obj[i].worldX = 23 * gp.tileSize;
-        gp.obj[i].worldY = 7 * gp.tileSize;
+        gp.obj[i].worldX = 18 * gp.tileSize;
+        gp.obj[i].worldY = 12 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_InsideDoor(gp);
-        gp.obj[i].worldX = 23 * gp.tileSize;
-        gp.obj[i].worldY = 7 * gp.tileSize;
+        gp.obj[i].worldX = 18 * gp.tileSize;
+        gp.obj[i].worldY = 12 * gp.tileSize;
+        i++;
+
+        gp.obj[i] = new OBJ_InsideDoorOpen(gp);
+        gp.obj[i].worldX = 26 * gp.tileSize;
+        gp.obj[i].worldY = 12 * gp.tileSize;
+        i++;
+
+        gp.obj[i] = new OBJ_InsideDoor(gp);
+        gp.obj[i].worldX = 26 * gp.tileSize;
+        gp.obj[i].worldY = 12 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_InsideDoorOpenSideways(gp);
-        gp.obj[i].worldX = 19 * gp.tileSize;
-        gp.obj[i].worldY = 12 * gp.tileSize;
+        gp.obj[i].worldX = 22 * gp.tileSize;
+        gp.obj[i].worldY = 17 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_InsideDoorSideways(gp);
-        gp.obj[i].worldX = 19 * gp.tileSize;
-        gp.obj[i].worldY = 12 * gp.tileSize;
+        gp.obj[i].worldX = 22 * gp.tileSize;
+        gp.obj[i].worldY = 17 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_FrontDoorOpen(gp);
-        gp.obj[i].worldX = 13 * gp.tileSize;
-        gp.obj[i].worldY = 6 * gp.tileSize;
+        gp.obj[i].worldX = 16 * gp.tileSize;
+        gp.obj[i].worldY = 11 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_FrontDoor(gp);
-        gp.obj[i].worldX = 13 * gp.tileSize;
-        gp.obj[i].worldY = 6 * gp.tileSize;
+        gp.obj[i].worldX = 16 * gp.tileSize;
+        gp.obj[i].worldY = 11 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_FrontDoorOpen(gp);
-        gp.obj[i].worldX = 27 * gp.tileSize;
-        gp.obj[i].worldY = 6 * gp.tileSize;
+        gp.obj[i].worldX = 30 * gp.tileSize;
+        gp.obj[i].worldY = 11 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_FrontDoor(gp);
-        gp.obj[i].worldX = 27 * gp.tileSize;
-        gp.obj[i].worldY = 6 * gp.tileSize;
+        gp.obj[i].worldX = 30 * gp.tileSize;
+        gp.obj[i].worldY = 11 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_TelephoneHall(gp);
-        gp.obj[i].worldX = 14 * gp.tileSize;
-        gp.obj[i].worldY = 5 * gp.tileSize;
+        gp.obj[i].worldX = 17 * gp.tileSize;
+        gp.obj[i].worldY = 10 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_StairsHall(gp);
-        gp.obj[i].worldX = 16 * gp.tileSize;
-        gp.obj[i].worldY = 5 * gp.tileSize;
+        gp.obj[i].worldX = 19 * gp.tileSize;
+        gp.obj[i].worldY = 10 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_FrontDoorKey(gp);
-        gp.obj[i].worldX = 25 * gp.tileSize;
-        gp.obj[i].worldY = 12 * gp.tileSize;
+        gp.obj[i].worldX = 28 * gp.tileSize;
+        gp.obj[i].worldY = 17 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_BackGateOpen(gp);
-        gp.obj[i].worldX = 28 * gp.tileSize;
-        gp.obj[i].worldY = 4 * gp.tileSize;
+        gp.obj[i].worldX = 31 * gp.tileSize;
+        gp.obj[i].worldY = 9 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_BackGate(gp);
-        gp.obj[i].worldX = 28 * gp.tileSize;
-        gp.obj[i].worldY = 4 * gp.tileSize;
+        gp.obj[i].worldX = 31 * gp.tileSize;
+        gp.obj[i].worldY = 9 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_Lavendar_Crocs(gp);
-        gp.obj[i].worldX = 18 * gp.tileSize;
-        gp.obj[i].worldY = 9 * gp.tileSize;
+        gp.obj[i].worldX = 21 * gp.tileSize;
+        gp.obj[i].worldY = 14 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_GrandmasCardigan(gp);
-        gp.obj[i].worldX = 23 * gp.tileSize;
-        gp.obj[i].worldY = 5 * gp.tileSize;
+        gp.obj[i].worldX = 26 * gp.tileSize;
+        gp.obj[i].worldY = 10 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_Spatula(gp);
-        gp.obj[i].worldX = 20 * gp.tileSize;
-        gp.obj[i].worldY = 9 * gp.tileSize;
+        gp.obj[i].worldX = 23 * gp.tileSize;
+        gp.obj[i].worldY = 14 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_FrontGateOpen(gp);
-        gp.obj[i].worldX = 7 * gp.tileSize;
-        gp.obj[i].worldY = 3 * gp.tileSize;
+        gp.obj[i].worldX = 10 * gp.tileSize;
+        gp.obj[i].worldY = 8 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_FrontGate(gp);
-        gp.obj[i].worldX = 7 * gp.tileSize;
-        gp.obj[i].worldY = 3 * gp.tileSize;
+        gp.obj[i].worldX = 10 * gp.tileSize;
+        gp.obj[i].worldY = 8 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_Bin_Blue(gp);
-        gp.obj[i].worldX = 24 * gp.tileSize;
-        gp.obj[i].worldY = 2 * gp.tileSize;
+        gp.obj[i].worldX = 27 * gp.tileSize;
+        gp.obj[i].worldY = 7 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_Bin_Green(gp);
-        gp.obj[i].worldX = 23 * gp.tileSize;
-        gp.obj[i].worldY = 2 * gp.tileSize;
+        gp.obj[i].worldX = 26 * gp.tileSize;
+        gp.obj[i].worldY = 7 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_Bin_Grey(gp);
-        gp.obj[i].worldX = 22 * gp.tileSize;
-        gp.obj[i].worldY = 2 * gp.tileSize;
+        gp.obj[i].worldX = 25 * gp.tileSize;
+        gp.obj[i].worldY = 7 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_BackGateOpenSideways(gp);
-        gp.obj[i].worldX = 20 * gp.tileSize;
-        gp.obj[i].worldY = 8 * gp.tileSize;
+        gp.obj[i].worldX = 23 * gp.tileSize;
+        gp.obj[i].worldY = 13 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_BackGateSideways(gp);
-        gp.obj[i].worldX = 20 * gp.tileSize;
-        gp.obj[i].worldY = 8 * gp.tileSize;
+        gp.obj[i].worldX = 23 * gp.tileSize;
+        gp.obj[i].worldY = 13 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_Shovel(gp);
-        gp.obj[i].worldX = 42 * gp.tileSize;
-        gp.obj[i].worldY = 3 * gp.tileSize;
+        gp.obj[i].worldX = 45 * gp.tileSize;
+        gp.obj[i].worldY = 8 * gp.tileSize;
         i++;
     }
 
     public void setNPC() {
         gp.npc[0] = new NPC_Dad(gp);
-        gp.npc[0].worldX = gp.tileSize*14;
-        gp.npc[0].worldY = gp.tileSize*10;
+        gp.npc[0].worldX = gp.tileSize*17;
+        gp.npc[0].worldY = gp.tileSize*15;
     }
 
     public int setMonster(String type, int monsterNumber, int x, int y, boolean randomizeLocation) {
@@ -219,52 +219,52 @@ public class AssetSetter {
         int i = 0;
         int weedCount = 0;
 
-        gp.iTile[i] = new IT_WeedTile(gp, 38, 6); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 39, 6); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 38, 7); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 39, 7); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 38, 8); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 39, 8); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 38, 9); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 39, 9); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 38, 10); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 39, 10); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 38, 11); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 39, 11); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 38, 12); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 39, 12); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 38, 13); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 39, 13); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 38, 14); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 39, 14); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 11, 1); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 13, 1); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 15, 1); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 19, 1); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 22, 1); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 25, 1); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 8, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 9, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 11, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 17, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 18, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 19, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 21, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 27, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 8, 4); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 9, 4); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 10, 4); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 8, 5); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 8, 9); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 8, 13); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 9, 14); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 11, 13); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 11, 12); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 11, 6); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 11, 5); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 25, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 15, 2); i++; weedCount++;
-        gp.iTile[i] = new IT_WeedTile(gp, 13, 2); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 41, 11); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 42, 11); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 41, 12); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 42, 12); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 41, 13); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 42, 13); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 41, 14); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 42, 14); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 41, 15); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 42, 15); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 41, 16); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 42, 16); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 41, 17); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 42, 17); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 41, 18); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 42, 18); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 41, 19); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 42, 19); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 14, 6); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 16, 6); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 18, 6); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 22, 6); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 25, 6); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 28, 6); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 12, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 14, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 20, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 21, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 22, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 24, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 30, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 9); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 12, 9); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 13, 9); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 10); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 14); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 11, 18); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 12, 19); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 14, 18); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 14, 17); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 14, 11); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 14, 10); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 28, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 18, 7); i++; weedCount++;
+        gp.iTile[i] = new IT_WeedTile(gp, 16, 7); i++; weedCount++;
 
         return weedCount; //return number of weeds to dig up
     }

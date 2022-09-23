@@ -69,6 +69,9 @@ public class Entity {
     public Entity currentArmour;
     public Projectile projectile;
     public int weedCount;
+    public int timesPassedOut = 0;
+    public boolean dizzyFlag;
+    public boolean speedBoost;
 
     //ITEM ATTRIBUTES
     public int value;
@@ -83,7 +86,7 @@ public class Entity {
 
     //MONSTER ATTRIBUTES
     public int monsterMaxStress;
-    public int spiderCount = 1;
+    public int spiderCount;
 
     //TYPE
     public int type;
@@ -261,11 +264,16 @@ public class Entity {
             gp.player.checkPillsConsumable(gp.player.stressLevel);
             gp.player.invincible = true;
 
-            checkIfPassOutFromStress(); // replace with gameover method
+            timesPassedOut = checkIfPassOutFromStress(); //gameover method - can pass out from stress twice, next time game over
+            if (timesPassedOut >= 2) { //change to be able to pass out this many times before passing out
+                gp.gameState = gp.gameOverState;
+                gp.stopMusic();
+                gp.playSFX(5); //change to real one
+            }
         }
     }
 
-    public void checkIfPassOutFromStress() {
+    public int checkIfPassOutFromStress() {
         if (gp.player.stressLevel >= gp.player.maxStress) {
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You pass out from the stress!";
@@ -274,7 +282,9 @@ public class Entity {
             gp.player.worldX = gp.tileSize*16;
             gp.player.worldY = gp.tileSize*12;
             gp.player.stressLevel = 0;
+            timesPassedOut++;
         }
+        return timesPassedOut;
     }
 
     public void draw(Graphics2D g2) {

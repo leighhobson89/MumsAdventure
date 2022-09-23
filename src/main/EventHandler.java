@@ -46,9 +46,9 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(20, 8, "any")) {gp.player.spiderCount = spiderEvent(20, 8, gp.dialogueState, gp.player.spiderCount, true, false);}
-            if (hit(23, 2, "any")) {gp.player.spiderCount = spiderEvent(24, 3, gp.dialogueState, gp.player.spiderCount, false, false);}
-            if (hit(16, 13, "any")) {chairDestressEvent(gp.dialogueState);}
+            if (hit(23, 13, "any")) {gp.player.spiderCount = spiderEvent(23, 13, gp.dialogueState, gp.player.spiderCount, true, false);}
+            if (hit(26, 7, "any")) {gp.player.spiderCount = spiderEvent(27, 8, gp.dialogueState, gp.player.spiderCount, false, false);}
+            if (hit(19, 18, "any")) {chairDestressEvent(gp.dialogueState);}
         }
     }
 
@@ -79,10 +79,10 @@ public class EventHandler {
     }
 
     public void openFrontBackDoor(int playerX, int playerY) {
-        if ((playerX == 26 || playerX == 27 || playerX == 28) && playerY == 6) {
+        if ((playerX == 29 || playerX == 30 || playerX == 31) && playerY == 11) {
             gp.player.backDoorAlreadyUnlocked = true;
             gp.obj[13] = null;
-        } else if ((playerX == 14 || playerX == 13 || playerX == 12) && playerY == 6) {
+        } else if ((playerX == 17 || playerX == 16 || playerX == 15) && playerY == 11) {
             gp.player.frontDoorAlreadyUnlocked = true;
             gp.obj[11] = null;
         }
@@ -91,7 +91,7 @@ public class EventHandler {
 
     public int spiderEvent(int col, int row, int gameState, int spiderCount, boolean randomizeLocation, boolean gardening) {
         boolean atBin = false;
-        if (col == 24 && row == 3) {
+        if (col == 30 && row == 8) {
             atBin = true;
         }
         if (atBin) {
@@ -141,7 +141,7 @@ public class EventHandler {
 
     public void teleportPills () {
         gp.ui.currentDialogue = "Bloody pills, I can't think straight!\nWhat am I doing up here??\nThe stress has gone at least!";
-        int[][] optionArray = {{14,6},{15,8},{17,6},{20,10},{21,10},{25,6}};
+        int[][] optionArray = {{17,11},{18,13},{20,11},{23,15},{24,15},{28,11}};
         Random random = new Random();
         int randomLocation = random.nextInt(optionArray.length);
         int randX = optionArray[randomLocation][0];

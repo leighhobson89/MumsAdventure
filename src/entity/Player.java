@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 
 public class Player extends Entity {
-    public boolean dizzyFlag;
     KeyHandler keyH;
 
     public final int PILLS_COUNT_DOWN_VALUE = 20;
@@ -18,7 +17,6 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    public boolean speedBoost;
     public static int interval;
     public int standCounter;
     public boolean attackCanceled;
@@ -90,12 +88,18 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 16;
-        worldY = gp.tileSize * 12;
+        worldX = gp.tileSize * 19;
+        worldY = gp.tileSize * 17;
         defaultSpeed = 2;
         boostSpeed = 4;
         speed = defaultSpeed;
         direction = "up";
+        spiderCount = 1;
+        weedCount = 0;
+        dizzyFlag = false;
+        speedBoost = false;
+        timesPassedOut = 0;
+        pillsConsumableNow = false;
 
         //PLAYER STATUS
         level = 1;
@@ -117,8 +121,20 @@ public class Player extends Entity {
         defense = 0;
     }
 
-    public void setItems() {
+    public void setDefaultPositions() {
+        worldX = gp.tileSize * 19;
+        worldY = gp.tileSize * 17;
+        direction = "up";
+    }
 
+    public void restoreStressAndMana() {
+        stressLevel = 0;
+        mana = maxMana;
+        invincible = false;
+    }
+
+    public void setItems() {
+        inventory.clear();
     }
 
     public int getAttack() {
@@ -600,8 +616,8 @@ public class Player extends Entity {
                 gp.ui.currentDialogue = "I better save these until I'm stressed\nout, 'cos they have some crazy after\neffects!";
             }
 
-            if (Objects.equals(selectedItem.name, "Key") && (playerX == 12 || playerX == 13 || playerX == 14 || playerX == 26 || playerX == 27 || playerX == 28) && playerY == 6) { //be stood next to door to use key
-                if ((backDoorAlreadyUnlocked && (playerX == 26 || playerX == 27 || playerX == 28)) || (frontDoorAlreadyUnlocked && (playerX == 12 || playerX == 13 || playerX == 14))) {
+            if (Objects.equals(selectedItem.name, "Key") && (playerX == 15 || playerX == 16 || playerX == 17 || playerX == 29 || playerX == 30 || playerX == 31) && playerY == 11) { //be stood next to door to use key
+                if ((backDoorAlreadyUnlocked && (playerX == 29 || playerX == 30 || playerX == 31)) || (frontDoorAlreadyUnlocked && (playerX == 15 || playerX == 16 || playerX == 17))) {
                     gp.gameState = gp.dialogueState;
                     gp.ui.currentDialogue = "This door is already unlocked!";
                 } else {
@@ -690,5 +706,4 @@ public class Player extends Entity {
 //      g2.drawString("Invincible: " + invincibleCounter, 10, 400); //- UNCOMMENT TO DISPLAY INVINCIBILITY COUNTER
 //      g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height); // - UNCOMMENT TO DISPLAY COLLISION RECTANGLE ON PLAYER
     }
-
 }

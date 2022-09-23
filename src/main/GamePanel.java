@@ -26,8 +26,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow; //576 px
     public final boolean musicSetToPlayFromStart = true; //Change to true to play music from start
     //WORLD SETTINGS
-    public final int maxWorldCol = 66;
-    public final int maxWorldRow = 16;
+    public final int maxWorldCol = 71;
+    public final int maxWorldRow = 26;
     //FOR FULL SCREEN
     int screenWidth2 = screenWidth;
     int screenHeight2 = screenHeight;
@@ -69,6 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 3;
     public final int characterState = 4;
     public final int optionsState = 5;
+    public final int gameOverState = 6;
 
 
     public GamePanel() throws IOException, FontFormatException { //constructor
@@ -96,6 +97,28 @@ public class GamePanel extends JPanel implements Runnable {
         if (fullScreenOn) {
             setFullScreen();
         }
+    }
+
+    public void retry() {
+        if (keyH.musicPlaying) {
+            playMusic(0, false, 0);
+        }
+        player.setDefaultPositions();
+        player.restoreStressAndMana();
+        aSetter.setNPC();
+    }
+
+    public void restart() {
+        playMusic(0, false, 0);
+        keyH.musicPlaying = true;
+        player.setDefaultValues();
+        player.setDefaultPositions();
+        player.restoreStressAndMana();
+        player.setItems();
+        aSetter.setNPC();
+        clearMonsters();
+        aSetter.setObject();
+        player.weedCount = aSetter.setInteractiveTile();
     }
 
     public void setFullScreen() {
@@ -339,5 +362,9 @@ public class GamePanel extends JPanel implements Runnable {
     public void playSFX(int i) {
         sfx.setFile(i);
         sfx.play(0, false);
+    }
+
+    public void clearMonsters() {
+        monster = new Entity[20];
     }
 }
