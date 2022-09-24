@@ -17,12 +17,25 @@ public class AssetSetter {
         this.gp = gp;
     }
 
-    public void setBone(int x, int y) {
-        int i = 0;
+    public void setObject(String name, int x, int y) { //finds first available slot in object array if setting object after start of game
+        int count = 0;
+        for (int i = 0; i < gp.obj.length; i++) {
+            if (gp.obj[i] != null) {
+                count++; //at end of loop, count will show the index of the last object in the array
+            } else {
+                break;
+            }
+        }
 
-        gp.obj[i] = new OBJ_DogsBone_NotMagic(gp);
+        int i = count;
+        switch (name) { //chooses object
+            case "Phoebe's Bone":
+                gp.obj[i] = new OBJ_DogsBone_NotMagic(gp);
+        }
+
         gp.obj[i].worldX = x * gp.tileSize;
         gp.obj[i].worldY = y * gp.tileSize;
+
     }
 
     public void setObject() {
@@ -31,11 +44,6 @@ public class AssetSetter {
         gp.obj[i] = new OBJ_Pills(gp);
         gp.obj[i].worldX = 19 * gp.tileSize;
         gp.obj[i].worldY = 15 * gp.tileSize;
-        i++;
-
-        gp.obj[i] = new OBJ_DogsBone_NotMagic(gp);
-        gp.obj[i].worldX = 25 * gp.tileSize;
-        gp.obj[i].worldY = 18 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_Guitar1(gp);
@@ -161,6 +169,11 @@ public class AssetSetter {
         gp.obj[i] = new OBJ_Bin_Grey(gp);
         gp.obj[i].worldX = 25 * gp.tileSize;
         gp.obj[i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[i] = new OBJ_DogsBone_NotMagic(gp);
+        gp.obj[i].worldX = 25 * gp.tileSize;
+        gp.obj[i].worldY = 18 * gp.tileSize;
         i++;
 
         gp.obj[i] = new OBJ_BackGateOpenSideways(gp);

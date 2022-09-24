@@ -111,7 +111,7 @@ public class Player extends Entity {
         maxStress = 10;
         maxMana = 5; //max number of things to throw
         mana = maxMana;
-        bone = 0;
+        boneCount = 0;
         stressLevel = 0;
         currentWeapon = null;
         currentArmour = null;
@@ -297,12 +297,7 @@ public class Player extends Entity {
 
             //SUBTRACT THE COST FROM RESOURCES (TOYS ETC)
             projectile.subtractResource(this);
-            System.out.println(gp.player.inventory);
-            System.out.println(boneIndex);
             gp.player.inventory.remove(boneIndex);
-            itemCount--;
-            System.out.println(gp.player.inventory);
-            System.out.println(itemCount);
 
 
             //ADD IT TO THE LIST
@@ -310,7 +305,7 @@ public class Player extends Entity {
 
             shotAvailableCounter = 0;
         }
-        //This needs to be outside of key if statement!
+        //This needs to be outside of main throw if statement!
         if (invincible) {
             invincibleCounter++;
             if(invincibleCounter > 120) {
@@ -388,10 +383,6 @@ public class Player extends Entity {
                 //INVENTORY ITEMS
                 String text;
                 int selectSfx;
-                if (gp.obj[i].collectable) {
-                    itemCount++;
-                }
-                System.out.println(itemCount);
 
                 if (inventory.size() != maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
                     if (gp.obj[i].isWeapon) {
@@ -409,10 +400,9 @@ public class Player extends Entity {
                         currentWeapon = null;
                     } else if (gp.obj[i].isArmour && gp.obj[i] == currentArmour) {
                         currentArmour = null;
-                    }
-                    if (gp.obj[i].name == "Phoebe's Bone") {
-                        bone++;
-                        gp.player.boneIndex = gp.player.itemCount;
+                    } else if (Objects.equals(gp.obj[i].name, "Phoebe's Bone")) {
+                        boneCount = 1;
+                        gp.player.boneIndex = gp.player.inventory.size();
                     }
                     inventory.add(gp.obj[i]);
                     selectSfx = selectSfx(gp.obj[i].name);
@@ -609,6 +599,9 @@ public class Player extends Entity {
             }
             if (Objects.equals(selectedItem.name, "Tube of Pills") && pillsConsumableNow) {
                 selectedItem.use(this, true, false);
+                if (boneCount == 1 && itemIndex < boneIndex) {
+                    boneIndex--;
+                }
                 inventory.remove(itemIndex);
                 gp.playSFX(11);
             } else if (Objects.equals(selectedItem.name, "Tube of Pills")) {
@@ -625,6 +618,9 @@ public class Player extends Entity {
                     gp.ui.currentDialogue = "That door's unlocked now!";
                     System.out.println("back " + backDoorAlreadyUnlocked + ", front " + frontDoorAlreadyUnlocked);
                     if (backDoorAlreadyUnlocked && frontDoorAlreadyUnlocked) {
+                        if (boneCount == 1 && itemIndex < boneIndex) {
+                            boneIndex--;
+                        }
                         inventory.remove(itemIndex);
                     }
                 }

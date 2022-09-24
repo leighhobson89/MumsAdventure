@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class EventHandler {
@@ -79,12 +80,30 @@ public class EventHandler {
     }
 
     public void openFrontBackDoor(int playerX, int playerY) {
+        int objX;
+        int objY;
         if ((playerX == 29 || playerX == 30 || playerX == 31) && playerY == 11) {
             gp.player.backDoorAlreadyUnlocked = true;
-            gp.obj[13] = null;
+            for (int i = 0; i < gp.obj.length; i++) {
+                if (gp.obj[i] != null) {
+                    objX = gp.obj[i].worldX/gp.tileSize;
+                    objY = gp.obj[i].worldY/gp.tileSize;
+                    if (objX == 30 && objY == 11 && Objects.equals(gp.obj[i].name, "FrontDoor")) {
+                        gp.obj[i] = null;
+                    }
+                }
+            }
         } else if ((playerX == 17 || playerX == 16 || playerX == 15) && playerY == 11) {
             gp.player.frontDoorAlreadyUnlocked = true;
-            gp.obj[11] = null;
+            for (int i = 0; i < gp.obj.length; i++) {
+                if (gp.obj[i] != null) {
+                    objX = gp.obj[i].worldX/gp.tileSize;
+                    objY = gp.obj[i].worldY/gp.tileSize;
+                    if (objX == 16 && objY == 11 && Objects.equals(gp.obj[i].name, "FrontDoor")) {
+                        gp.obj[i] = null;
+                    }
+                }
+            }
         }
         gp.playSFX(3);
     }

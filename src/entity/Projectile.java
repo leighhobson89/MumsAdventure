@@ -30,21 +30,21 @@ public class Projectile extends Entity {
             boolean tileState = gp.cChecker.checkTile(this);
 
             if (monsterIndex != 999) {
-                gp.aSetter.setBone(projX, projY);
+                gp.aSetter.setObject("Phoebe's Bone", projX, projY);
                 gp.player.damageMonster(monsterIndex, attack);
                 generateParticle(user.projectile, gp.monster[monsterIndex]);
                 gp.playSFX(20);
                 alive = false;
             }
             if (npcIndex != 999) {
-                gp.aSetter.setBone(projX, projY);
+                gp.aSetter.setObject("Phoebe's Bone", projX, projY);
                 gp.gameState = gp.dialogueState;
                 gp.ui.currentDialogue = "Watch where you bloody throw that\nwill yer!";
                 gp.playSFX(20);
                 alive = false;
             }
             if (tileState) {
-                gp.aSetter.setBone(projX, projY);
+                gp.aSetter.setObject("Phoebe's Bone", projX, projY);
                 gp.playSFX(20);
                 alive = false;
             }
@@ -82,7 +82,7 @@ public class Projectile extends Entity {
         stressLevel++;
 
         if(stressLevel >= maxStress) { //if throwing item reaches end of throwing range
-            gp.aSetter.setBone(projX, projY);
+            gp.aSetter.setObject("Phoebe's Bone", projX, projY);
             alive = false;
             gp.playSFX(20);
         }
