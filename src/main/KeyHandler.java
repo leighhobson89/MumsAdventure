@@ -26,7 +26,11 @@ public class KeyHandler implements KeyListener {
         int code = e.getKeyCode();
 
         if (gp.gameState == gp.titleState) { // TITLE STATE KEYS
-            titleState(code);
+            try {
+                titleState(code);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (gp.gameState == gp.playState) { // PLAY STATE KEYS
             playState(code);
         } else if (gp.gameState == gp.pauseState) { //PAUSE STATE KEYS
@@ -42,28 +46,34 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    public void titleState(int code) {
+    public void titleState(int code) throws InterruptedException {
         if (gp.ui.titleScreenState == 0) {
             if (code == KeyEvent.VK_UP) {
                 gp.ui.commandNum--;
                 if (gp.ui.commandNum < 0) {
                     gp.ui.commandNum = 2;
                 }
+                gp.playSFX(10);
             }
             if (code == KeyEvent.VK_DOWN) {
                 gp.ui.commandNum++;
                 if (gp.ui.commandNum > 2) {
                     gp.ui.commandNum = 0;
                 }
+                gp.playSFX(10);
             }
             if (code == KeyEvent.VK_ENTER) { //NEW GAME
                 if (gp.ui.commandNum == 0) {
                     gp.ui.titleScreenState = 1;
+                    gp.playSFX(11);
                 }
                 if (gp.ui.commandNum == 1) { //LOAD GAME
+                    gp.playSFX(11);
                     //TO DO
                 }
                 if (gp.ui.commandNum == 2) { //QUIT
+                    gp.playSFX(11);
+                    Thread.sleep(500);
                     System.exit(0);
                 }
             }
@@ -73,12 +83,14 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum < 0) {
                     gp.ui.commandNum = 3;
                 }
+                gp.playSFX(10);
             }
             if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_DOWN) {
                 gp.ui.commandNum++;
                 if (gp.ui.commandNum > 3) {
                     gp.ui.commandNum = 0;
                 }
+                gp.playSFX(10);
             }
             if (code == KeyEvent.VK_ENTER) {
                 if (gp.ui.commandNum == 0) { //RED
@@ -104,6 +116,7 @@ public class KeyHandler implements KeyListener {
                     gp.ui.commandNum = 0;
                 }
                 gp.player.getPlayerAttackImage(gp.ui.outfitChosen);
+                gp.playSFX(11);
             }
         }
     }

@@ -39,7 +39,12 @@ public class Projectile extends Entity {
             if (npcIndex != 999) {
                 gp.aSetter.setObject("Phoebe's Bone", projX, projY);
                 gp.gameState = gp.dialogueState;
-                gp.ui.currentDialogue = "Watch where you bloody throw that\nwill yer!";
+                if (npcIndex == 0) {
+                    gp.ui.currentDialogue = "Watch where you bloody throw that\nwill yer!";
+                } else if (npcIndex == 1 || npcIndex == 2) {
+                    gp.ui.currentDialogue = "Yelp!";
+                }
+
                 gp.playSFX(20);
                 alive = false;
             }

@@ -109,9 +109,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void restart() {
-        System.out.println(keyH.musicPlaying);
-        playMusic(0, false, 0);
-        keyH.musicPlaying = true;
         player.setDefaultValues();
         player.setDefaultPositions();
         player.restoreStressAndMana();

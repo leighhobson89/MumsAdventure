@@ -134,6 +134,10 @@ public class CollisionChecker {
                             entity.collisionOn = true;
                             index = i;
                         }
+                        if ((Objects.equals(target[i].name, "Phoebe") || Objects.equals(target[i].name, "Pip"))  && entity.type == entity.type_player) {
+                            entity.collisionOn = false;
+                            index = i;
+                        }
                     }
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;

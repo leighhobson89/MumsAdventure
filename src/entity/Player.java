@@ -483,13 +483,18 @@ public class Player extends Entity {
         if (i != 999) {
             gp.gameState = gp.dialogueState;
             int rand = new Random().nextInt(5);
-            switch (rand) {
-                case 0 -> gp.ui.currentDialogue = "Stop that right now!";
-                case 1 -> gp.ui.currentDialogue = "Hey what the bloody hell are\nya doin'??";
-                case 2 -> gp.ui.currentDialogue = "I'll let that go...ONCE!!";
-                case 3 -> gp.ui.currentDialogue = "What yer playin' at?!";
-                case 4 -> gp.ui.currentDialogue = "Why you hittin' me wi that?!";
+            if (gp.npc[i].name == "Dad") {
+                switch (rand) {
+                    case 0 -> gp.ui.currentDialogue = "Stop that right now!";
+                    case 1 -> gp.ui.currentDialogue = "Hey what the bloody hell are\nya doin'??";
+                    case 2 -> gp.ui.currentDialogue = "I'll let that go...ONCE!!";
+                    case 3 -> gp.ui.currentDialogue = "What yer playin' at?!";
+                    case 4 -> gp.ui.currentDialogue = "Why you hittin' me wi that?!";
+                }
+            } else if (Objects.equals(gp.npc[i].name, "Phoebe") || Objects.equals(gp.npc[i].name, "Pip")) {
+                gp.ui.currentDialogue = "Yelp!";
             }
+
             attacking = false;
         }
     }

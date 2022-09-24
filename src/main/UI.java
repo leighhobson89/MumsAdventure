@@ -553,9 +553,10 @@ public class UI {
         if(commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
             if(gp.keyH.enterPressed) {
+                gp.playSFX(11);
                 if(!gp.fullScreenOn) {
                     gp.fullScreenOn = true;
-                } else if (gp.fullScreenOn) {
+                } else {
                     gp.fullScreenOn = false;
                 }
                 subState = 1;
@@ -582,6 +583,7 @@ public class UI {
         if(commandNum == 3) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
+                gp.playSFX(11);
                 subState = 2;
                 commandNum = 0;
             }
@@ -593,6 +595,7 @@ public class UI {
         if(commandNum == 4) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
+                gp.playSFX(11);
                 subState = 3;
                 commandNum = 0;
             }
@@ -604,6 +607,7 @@ public class UI {
         if(commandNum == 5) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
+                gp.playSFX(11);
                 gp.gameState = gp.playState;
                 commandNum = 0;
             }
@@ -650,6 +654,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
+                gp.playSFX(11);
                 subState = 0;
             }
         }
@@ -692,6 +697,7 @@ public class UI {
         if (commandNum == 0){
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
+                gp.playSFX(11);
                 subState = 0;
                 commandNum = 3;
             }
@@ -717,6 +723,7 @@ public class UI {
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
+                gp.playSFX(11);
                 subState = 0;
                 gp.ui.titleScreenState = 0;
                 gp.ui.commandNum = 0;
@@ -732,6 +739,7 @@ public class UI {
         if (commandNum == 1) {
             g2.drawString(">", textX - 25, textY);
             if (gp.keyH.enterPressed) {
+                gp.playSFX(11);
                 subState = 0;
                 commandNum = 4;
             }

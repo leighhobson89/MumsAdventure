@@ -1,6 +1,8 @@
 package main;
 
 import entity.NPC_Dad;
+import entity.NPC_Phoebe;
+import entity.NPC_Pip;
 import monster.MON_Spider;
 import object.*;
 import tile_interactive.IT_WeedTile;
@@ -196,6 +198,14 @@ public class AssetSetter {
         gp.npc[0] = new NPC_Dad(gp);
         gp.npc[0].worldX = gp.tileSize*17;
         gp.npc[0].worldY = gp.tileSize*15;
+
+        gp.npc[1] = new NPC_Phoebe(gp);
+        gp.npc[1].worldX = gp.tileSize*23;
+        gp.npc[1].worldY = gp.tileSize*17;
+
+        gp.npc[2] = new NPC_Pip(gp);
+        gp.npc[2].worldX = gp.tileSize*20;
+        gp.npc[2].worldY = gp.tileSize*11;
     }
 
     public int setMonster(String type, int monsterNumber, int x, int y, boolean randomizeLocation) {

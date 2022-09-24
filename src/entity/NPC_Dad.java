@@ -10,6 +10,7 @@ public class NPC_Dad extends Entity {
     public NPC_Dad(GamePanel gp) {
         super(gp);
 
+        name = "Dad";
         direction = "right";
         speed = 1;
 //        //comment for not throw bone
