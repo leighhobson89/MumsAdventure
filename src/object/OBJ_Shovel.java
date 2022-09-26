@@ -27,15 +27,4 @@ public class OBJ_Shovel extends Entity {
 
         isWeapon = true;
     }
-
-        public void use(Entity entity, boolean consumable, boolean useable) {
-
-            gp.gameState = gp.dialogueState;
-            System.out.println("pill consumable" + pillsConsumableNow);
-
-            if (consumable) {
-                gp.eHandler.teleportPills();
-                gp.player.checkPillsConsumable(gp.player.stressLevel);
-            }
-        }
-    }
+}

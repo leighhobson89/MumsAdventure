@@ -64,16 +64,19 @@ public class UI {
         //PLAY STATE
         if (gp.gameState == gp.playState) {
             drawPlayerLife();
+            drawMapAreaName(gp.currentMap);
             drawMessage();
         }
         //PAUSE STATE
         if (gp.gameState == gp.pauseState) {
             drawPlayerLife();
+            drawMapAreaName(gp.currentMap);
             drawPauseScreen();
         }
         //DIALOGUE STATE
         if (gp.gameState == gp.dialogueState) {
             drawPlayerLife();
+            drawMapAreaName(gp.currentMap);
             drawDialogueScreen();
         }
         //CHARACTER STATE
@@ -129,6 +132,27 @@ public class UI {
         if (commandNum == 1) {
             g2.drawString(">", x-40, y);
         }
+    }
+
+    public void drawMapAreaName(int currentMap) {
+
+        String text = "";
+        int x = gp.tileSize*15;
+        int y = gp.tileSize/2;
+
+        drawSubWindow(x + 15, y - 17, gp.tileSize*4 + 20, gp.tileSize + 25);
+
+        switch (currentMap) {
+            case 0:
+                text = "Downstairs";
+                g2.drawString(text, x + 40, y + 33);
+                break;
+            case 1:
+                text = "Upstairs";
+                g2.drawString(text, x + 65, y + 33);
+                break;
+        }
+
     }
 
     public void drawPlayerLife() {

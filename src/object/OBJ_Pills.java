@@ -28,7 +28,7 @@ public class OBJ_Pills extends Entity {
             System.out.println("pill consumable" + pillsConsumableNow);
 
             if (consumable) {
-                gp.eHandler.teleportPills();
+                gp.eHandler.teleportPills(gp.currentMap);
                 gp.player.checkPillsConsumable(gp.player.stressLevel);
             }
         }

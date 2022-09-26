@@ -122,9 +122,9 @@ public class Player extends Entity {
     }
 
     public void setDefaultPositions() {
-        worldX = gp.tileSize * 19;
-        worldY = gp.tileSize * 17;
-        direction = "up";
+          worldX = gp.tileSize * 19;
+          worldY = gp.tileSize * 17;
+          direction = "up";
     }
 
     public void restoreStressAndMana() {
@@ -375,46 +375,46 @@ public class Player extends Entity {
     public void pickUpObject(int i) {
         if (i != 999) {
 
-            if (gp.obj[i].type == type_pickupOnly) {
+            if (gp.obj[gp.currentMap][i].type == type_pickupOnly) {
                 //PICKUP ONLY ITEMS
-                gp.obj[i].use(this, false, false);
-                gp.obj[i] = null;
+                gp.obj[gp.currentMap][i].use(this, false, false);
+                gp.obj[gp.currentMap][i] = null;
             } else {
                 //INVENTORY ITEMS
                 String text;
                 int selectSfx;
 
-                if (inventory.size() != maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
-                    if (gp.obj[i].isWeapon) {
+                if (inventory.size() != maxInventorySize && gp.obj[gp.currentMap][i].collectable && !gp.obj[gp.currentMap][i].isOpenable) {
+                    if (gp.obj[gp.currentMap][i].isWeapon) {
                         if (currentWeapon == null) {
-                            currentWeapon = gp.obj[i];
+                            currentWeapon = gp.obj[gp.currentMap][i];
                             attack = getAttack();
                             getPlayerAttackImage(gp.ui.outfitChosen);
                         }
-                    } else if (gp.obj[i].isArmour) {
+                    } else if (gp.obj[gp.currentMap][i].isArmour) {
                         if (currentArmour == null) {
-                            currentArmour = gp.obj[i];
+                            currentArmour = gp.obj[gp.currentMap][i];
                             defense = getDefense();
                         }
-                    } else if (gp.obj[i].isWeapon && gp.obj[i] == currentWeapon) {
+                    } else if (gp.obj[gp.currentMap][i].isWeapon && gp.obj[gp.currentMap][i] == currentWeapon) {
                         currentWeapon = null;
-                    } else if (gp.obj[i].isArmour && gp.obj[i] == currentArmour) {
+                    } else if (gp.obj[gp.currentMap][i].isArmour && gp.obj[gp.currentMap][i] == currentArmour) {
                         currentArmour = null;
-                    } else if (Objects.equals(gp.obj[i].name, "Phoebe's Bone")) {
+                    } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "Phoebe's Bone")) {
                         boneCount = 1;
                         gp.player.boneIndex = gp.player.inventory.size();
                     }
-                    inventory.add(gp.obj[i]);
-                    selectSfx = selectSfx(gp.obj[i].name);
+                    inventory.add(gp.obj[gp.currentMap][i]);
+                    selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
                     gp.playSFX(selectSfx);
-                    text = "Picked up " + gp.obj[i].name + "!";
+                    text = "Picked up " + gp.obj[gp.currentMap][i].name + "!";
                     gp.ui.addMessage(text);
-                    gp.obj[i] = null;
-                } else if (gp.obj[i].isOpenable) {
-                    selectSfx = selectSfx(gp.obj[i].name);
+                    gp.obj[gp.currentMap][i] = null;
+                } else if (gp.obj[gp.currentMap][i].isOpenable) {
+                    selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
                     gp.playSFX(selectSfx);
-                    gp.obj[i] = null;
-                } else if (inventory.size() >= maxInventorySize && gp.obj[i].collectable && !gp.obj[i].isOpenable) {
+                    gp.obj[gp.currentMap][i] = null;
+                } else if (inventory.size() >= maxInventorySize && gp.obj[gp.currentMap][i].collectable && !gp.obj[gp.currentMap][i].isOpenable) {
                     text = "You cannot carry any more!";
                     gp.ui.addMessage(text);
                 }
@@ -442,7 +442,7 @@ public class Player extends Entity {
         if (gp.keyH.enterPressed) {
             if (i != 999) {
                 gp.gameState = gp.dialogueState;
-                gp.npc[i].speak();
+                gp.npc[gp.currentMap][i].speak();
                 keyH.enterPressed = false;
             }
         }
@@ -456,16 +456,16 @@ public class Player extends Entity {
 
     public void contactMonster(int i) {
         if (i != 999) {
-            if (!invincible && !gp.monster[i].dying) {
+            if (!invincible && !gp.monster[gp.currentMap][i].dying) {
 
-                int damage = gp.monster[i].attack - defense;
+                int damage = gp.monster[gp.currentMap][i].attack - defense;
                 if (damage > 0) {
-                    gp.ui.addMessage("The " + gp.monster[i].name + " got you! Your stress increases by " + damage + "!");
+                    gp.ui.addMessage("The " + gp.monster[gp.currentMap][i].name + " got you! Your stress increases by " + damage + "!");
                     stressLevel+=1;
                     checkPillsConsumable(stressLevel);
                 }
                 if (damage <= 0) {
-                    gp.ui.addMessage("The " + gp.monster[i].name + " got you but it can't stress you at your exp level!");
+                    gp.ui.addMessage("The " + gp.monster[gp.currentMap][i].name + " got you but it can't stress you at your exp level!");
                     damage = 0;
                 }
                 invincible = true;
@@ -483,7 +483,7 @@ public class Player extends Entity {
         if (i != 999) {
             gp.gameState = gp.dialogueState;
             int rand = new Random().nextInt(5);
-            if (gp.npc[i].name == "Dad") {
+            if (gp.npc[gp.currentMap][i].name == "Dad") {
                 switch (rand) {
                     case 0 -> gp.ui.currentDialogue = "Stop that right now!";
                     case 1 -> gp.ui.currentDialogue = "Hey what the bloody hell are\nya doin'??";
@@ -491,7 +491,7 @@ public class Player extends Entity {
                     case 3 -> gp.ui.currentDialogue = "What yer playin' at?!";
                     case 4 -> gp.ui.currentDialogue = "Why you hittin' me wi that?!";
                 }
-            } else if (Objects.equals(gp.npc[i].name, "Phoebe") || Objects.equals(gp.npc[i].name, "Pip")) {
+            } else if (Objects.equals(gp.npc[gp.currentMap][i].name, "Phoebe") || Objects.equals(gp.npc[gp.currentMap][i].name, "Pip")) {
                 gp.ui.currentDialogue = "Yelp!";
             }
 
@@ -501,25 +501,25 @@ public class Player extends Entity {
 
     public void damageMonster(int i, int attack) {
         if (i != 999) {
-            if (!gp.monster[i].invincible) {
+            if (!gp.monster[gp.currentMap][i].invincible) {
                 gp.playSFX(6);
-                int damage = attack - gp.monster[i].defense;
+                int damage = attack - gp.monster[gp.currentMap][i].defense;
                 if (damage < 0) {
                     damage = 0;
                 }
-                gp.monster[i].stressLevel += damage;
-                gp.ui.addMessage(gp.monster[i].name + " receives " + damage + " damage!");
-                gp.monster[i].invincible = true;
-                gp.monster[i].damageReaction(); //makes monster run away if player hits it
+                gp.monster[gp.currentMap][i].stressLevel += damage;
+                gp.ui.addMessage(gp.monster[gp.currentMap][i].name + " receives " + damage + " damage!");
+                gp.monster[gp.currentMap][i].invincible = true;
+                gp.monster[gp.currentMap][i].damageReaction(); //makes monster run away if player hits it
 
 
-                if (gp.monster[i].stressLevel >= gp.monster[i].monsterMaxStress) {
-                    gp.monster[i].dying = true;
+                if (gp.monster[gp.currentMap][i].stressLevel >= gp.monster[gp.currentMap][i].monsterMaxStress) {
+                    gp.monster[gp.currentMap][i].dying = true;
                     gp.playSFX(7);
                     gp.playSFX(13);
-                    gp.ui.addMessage("You killed the " + gp.monster[i].name + ", phew!");
-                    gp.ui.addMessage("Exp +" + gp.monster[i].exp);
-                    exp+= gp.monster[i].exp;
+                    gp.ui.addMessage("You killed the " + gp.monster[gp.currentMap][i].name + ", phew!");
+                    gp.ui.addMessage("Exp +" + gp.monster[gp.currentMap][i].exp);
+                    exp+= gp.monster[gp.currentMap][i].exp;
                     checkLevelUp();
                 }
             }
@@ -527,28 +527,30 @@ public class Player extends Entity {
     }
 
     public void damageInteractiveTile(int i) {
-        if (i != 999 && gp.iTile[i].destructible && gp.iTile[i].isCorrectItem(this) && !gp.iTile[i].invincible) {
-            if (Objects.equals(gp.iTile[i].name, "Weed Tile")) {
-                if (gp.iTile[i].stressLevel >= gp.iTile[i].maxStress) {
+
+        if (i != 999 && gp.iTile[gp.currentMap][i].destructible && gp.iTile[gp.currentMap][i].isCorrectItem(this) && !gp.iTile[gp.currentMap][i].invincible) {
+            gp.iTile[gp.currentMap][i].stressLevel++;
+            if (Objects.equals(gp.iTile[gp.currentMap][i].name, "Weed Tile")) {
+                if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
                     if (gp.player.weedCount > 1) {
                         gp.player.weedCount--;
+                        gp.iTile[1][i+gp.aSetter.mapNumTotal] = gp.iTile[1][i+gp.aSetter.mapNumTotal].getDestroyedForm(); //remove weed from upstairs view - **only works if interacive tiles in same location on all maps**
                     } else if (gp.player.weedCount == 1) {
-                        gp.npc[0].randomChummeringDialogues[44] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
+                        gp.npc[gp.currentMap][0].randomChummeringDialogues[44] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
                         gp.player.weedCount--;
                     } else if (gp.player.weedCount == 0) {
                         //end of weeding mission
                     }
                 }
-                gp.iTile[i].playSfx();
-                gp.iTile[i].stressLevel++;
-                gp.iTile[i].invincible = true;
+                gp.iTile[gp.currentMap][i].playSfx();
+                gp.iTile[gp.currentMap][i].invincible = true;
 
                 //GENERATE PARTICLE
-                generateParticle(gp.iTile[i], gp.iTile[i]);
+                generateParticle(gp.iTile[gp.currentMap][i], gp.iTile[gp.currentMap][i]);
 
-                if (gp.iTile[i].stressLevel >= gp.iTile[i].maxStress) {
+                if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
                     int rand = new Random().nextInt(100);
-                    gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+                    gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm();
                     if (rand > 80) {
                         int playerX = gp.player.worldX/gp.tileSize;
                         int playerY = gp.player.worldY/ gp.tileSize;

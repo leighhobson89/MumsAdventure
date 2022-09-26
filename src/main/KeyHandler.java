@@ -172,7 +172,10 @@ public class KeyHandler implements KeyListener {
                 showDebugText = !showDebugText; //toggle draw speed information with 'D' key
             }
             if (code == KeyEvent.VK_R) {
-                gp.tileM.loadMap("/maps/world01.txt"); //refresh the map after editing the world map file and saving it during gameplay
+                switch(gp.currentMap) {
+                    case 0: gp.tileM.loadMap("/maps/world01.txt", 0); //refresh the map after editing the world map file and saving it during gameplay
+                    case 1: gp.tileM.loadMap("/maps/upstairs.txt", 1);
+                }
             }
     }
     public void pauseState(int code) {

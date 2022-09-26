@@ -145,15 +145,15 @@ public class Entity {
     }
 
     public void dropItem(Entity droppedItem) {
-        for (int i = 0; i < gp.obj.length; i++) {
-            if (gp.obj[i] == null) {
-                gp.obj[i] = droppedItem;
+        for (int i = 0; i < gp.obj[1].length; i++) {
+            if (gp.obj[gp.currentMap][i] == null) {
+                gp.obj[gp.currentMap][i] = droppedItem;
                 if (Objects.equals(droppedItem.name, "StressBolt")) {
-                    gp.obj[i].worldX = worldX + 20; //Get the dead monster's worldX
-                    gp.obj[i].worldY = worldY + 20;
+                    gp.obj[gp.currentMap][i].worldX = worldX + 20; //Get the dead monster's worldX
+                    gp.obj[gp.currentMap][i].worldY = worldY + 20;
                 } else {
-                    gp.obj[i].worldX = worldX;
-                    gp.obj[i].worldY = worldY;
+                    gp.obj[gp.currentMap][i].worldX = worldX;
+                    gp.obj[gp.currentMap][i].worldY = worldY;
                 }
                 break;
             }
