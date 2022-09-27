@@ -60,7 +60,8 @@ public class GamePanel extends JPanel implements Runnable {
     public InteractiveTile iTile[][] = new InteractiveTile[maxMap][100];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> particleList = new ArrayList<>();
-    ArrayList<Entity> entityList = new ArrayList<>();
+    public ArrayList<Entity> entityList = new ArrayList<>();
+    public ArrayList<Entity> tempEntityList = new ArrayList<>();
 
 
     //GAME STATE
@@ -72,6 +73,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int characterState = 4;
     public final int optionsState = 5;
     public final int gameOverState = 6;
+    public final int transitionState = 7;
+    public final int tradeState = 8;
 
 
     public GamePanel() throws IOException, FontFormatException { //constructor
@@ -268,6 +271,9 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < npc[1].length; i++) {
                 if (npc[currentMap][i] != null) {
                     entityList.add(npc[currentMap][i]);
+                    if (!tempEntityList.contains(npc[currentMap][i])) {
+                        tempEntityList.add(entityList.get(i));
+                    }
                 }
             }
             //OBJECT
@@ -296,6 +302,9 @@ public class GamePanel extends JPanel implements Runnable {
             }
             //PLAYER
             entityList.add(player);
+            if (!tempEntityList.contains(player)) {
+                tempEntityList.add(player);
+            }
 
             //SORT
             Collections.sort(entityList, new Comparator<Entity>() {
@@ -320,6 +329,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         //DEBUG
         if (keyH.showDebugText) {
+            for (int i = 0; i < tempEntityList.size(); i++) {
+                drawCollisionBoxOnEntity(g2, tempEntityList.get(i));
+            }
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
             g2.setColor(Color.WHITE);
@@ -365,5 +377,16 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void clearMonsters() {
         monster = new Entity[currentMap][20];
+    }
+
+    //DEBUG
+    public void drawCollisionBoxOnEntity(Graphics2D g2, Entity entity) {
+        int screenX = player.screenX;
+        int screenY = player.screenY;
+        if (entity.type == entity.type_player) {
+            g2.drawRect(screenX + player.solidArea.x, screenY + player.solidArea.y, player.solidArea.width, player.solidArea.height); // - UNCOMMENT TO DISPLAY COLLISION RECTANGLE ON PLAYER
+        } else if (entity.type == entity.type_npc) {
+            g2.drawRect(entity.worldX + entity.solidArea.x, entity.worldY + entity.solidArea.y, entity.solidArea.width, entity.solidArea.height); // - UNCOMMENT TO DISPLAY COLLISION RECTANGLE ON PLAYER
+        }
     }
 }

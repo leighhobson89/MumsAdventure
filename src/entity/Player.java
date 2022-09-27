@@ -20,8 +20,6 @@ public class Player extends Entity {
     public static int interval;
     public int standCounter;
     public boolean attackCanceled;
-    public ArrayList<Entity> inventory = new ArrayList<>();
-    public final int maxInventorySize = 20;
     public Timer timer;
 
     public void createTimer() {
@@ -580,7 +578,7 @@ public class Player extends Entity {
     public void selectItem() {
         int playerX = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
         int playerY = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
-        int itemIndex = gp.ui.getItemIndexOnSlot();
+        int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotCol, gp.ui.playerSlotRow);
 
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
@@ -707,6 +705,6 @@ public class Player extends Entity {
 //      g2.setFont(new Font("Arial", Font.BOLD, 26));
 //      g2.setColor(Color.BLACK);
 //      g2.drawString("Invincible: " + invincibleCounter, 10, 400); //- UNCOMMENT TO DISPLAY INVINCIBILITY COUNTER
-//      g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height); // - UNCOMMENT TO DISPLAY COLLISION RECTANGLE ON PLAYER
+
     }
 }

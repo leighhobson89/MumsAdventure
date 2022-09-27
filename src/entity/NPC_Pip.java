@@ -12,6 +12,7 @@ public class NPC_Pip extends Entity {
         name = "Pip";
         direction = "right";
         speed = 3;
+        type = type_npc;
 //        //comment for not throw bone
 //        projectile = new OBJ_DogsBone_NotMagic(gp);
 //        //end bone throwing

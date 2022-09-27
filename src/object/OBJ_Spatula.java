@@ -16,6 +16,7 @@ public class OBJ_Spatula extends Entity {
         attackArea.width = 48;
         attackArea.height = 36;
         description = "[" + name + "]\nSpatula for cooking. Also\nhandy for splatting bugs!";
+        price = 10;
 
         collectable = true;
         isOpenable = false;

@@ -13,6 +13,8 @@ public class NPC_Dad extends Entity {
         name = "Dad";
         direction = "right";
         speed = 1;
+        type = type_npc;
+
 //        //comment for not throw bone
 //        projectile = new OBJ_DogsBone_NotMagic(gp);
 //        //end bone throwing

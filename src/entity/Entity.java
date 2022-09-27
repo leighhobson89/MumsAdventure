@@ -73,11 +73,14 @@ public class Entity {
     public boolean speedBoost;
 
     //ITEM ATTRIBUTES
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
     public int value;
     public int attackValue;
     public int defenseValue;
     public String description = "";
     public int useCost;
+    public int price;
 
     //WORLD ATTRIBUTES
     public boolean frontDoorAlreadyUnlocked = false;
@@ -226,7 +229,7 @@ public class Entity {
             }
         }
         spriteCounter++;
-        if (spriteCounter > 12) { //walking speed of animation
+        if (spriteCounter > 24) { //walking speed of animation
             if (spriteNum == 1) {
                 spriteNum = 2;
             } else if (spriteNum == 2) {

@@ -12,6 +12,7 @@ public class NPC_Phoebe extends Entity {
         name = "Phoebe";
         direction = "up";
         speed = 2;
+        type = type_npc;
 //        //comment for not throw bone
 //        projectile = new OBJ_DogsBone_NotMagic(gp);
 //        //end bone throwing

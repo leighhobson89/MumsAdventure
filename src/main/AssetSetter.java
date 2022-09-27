@@ -1,6 +1,7 @@
 package main;
 
 import entity.NPC_Dad;
+import entity.NPC_Merchant;
 import entity.NPC_Phoebe;
 import entity.NPC_Pip;
 import monster.MON_Spider;
@@ -222,8 +223,13 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize*11;
         i++;
 
+        gp.npc[mapNum][i] = new NPC_Merchant(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize*62;
+        gp.npc[mapNum][i].worldY = gp.tileSize*9;
+        i++;
+
         //        mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
-//
+//        i = 0;
 //        gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
 //        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
 //        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
