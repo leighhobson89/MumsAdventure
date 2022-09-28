@@ -72,6 +72,7 @@ public class Entity {
     public int timesPassedOut;
     public boolean dizzyFlag;
     public boolean speedBoost;
+    public boolean firstTimePickUpBone;
 
     //ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();

@@ -98,6 +98,7 @@ public class Player extends Entity {
         speedBoost = false;
         timesPassedOut = 0;
         pillsConsumableNow = false;
+        firstTimePickUpBone = true;
 
         //PLAYER STATUS
         level = 1;
@@ -398,6 +399,11 @@ public class Player extends Entity {
                     } else if (gp.obj[gp.currentMap][i].isArmour && gp.obj[gp.currentMap][i] == currentArmour) {
                         currentArmour = null;
                     } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "Pip's Bone")) {
+                        if (firstTimePickUpBone) {
+                            gp.gameState = gp.dialogueState;
+                            gp.ui.currentDialogue = "I can throw the bone for Pip.\nI need to find an open area and press 'T'!";
+                            firstTimePickUpBone= false;
+                        }
                         boneCount = 1;
                         gp.player.boneIndex = gp.player.inventory.size();
                     }
