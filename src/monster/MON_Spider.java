@@ -47,30 +47,47 @@ public class MON_Spider extends Entity {
 
     public void setAction() {
 
-        actionLockCounter ++;
+        if(onPath) {
+            int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
 
-        if (actionLockCounter == 30) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1; //pick up a number from 1 to 100
+            searchPath(goalCol, goalRow);
 
-            if (i <= 25) {
-                direction = "up";
+        } else {
+            actionLockCounter++;
+
+            if (actionLockCounter == 60) {
+                Random random = new Random();
+                int i = random.nextInt(100) + 1; //pick up a number from 1 to 100
+
+                if (i <= 25) {
+                    direction = "up";
+                }
+                if (i > 25 && i <= 50) {
+                    direction = "down";
+                }
+                if (i > 50 && i <= 75) {
+                    direction = "left";
+                }
+                if (i > 75) {
+                    direction = "right";
+                }
+                actionLockCounter = 0;
+
             }
-            if (i > 25 && i <= 50) {
-                direction = "down";
-            }
-            if (i > 50 && i <= 75) {
-                direction = "left";
-            }
-            if (i > 75) {
-                direction = "right";
-            }
-            actionLockCounter = 0;
         }
     }
     public void damageReaction() {
+        //THROW A DICE
+        int rand = new Random().nextInt(100) + 1;
         actionLockCounter = 0;
-        direction = gp.player.direction;
+
+        if (rand < 80) { //random chance of counterattacking player if hit it, or maybe it run away
+            onPath = false;
+            direction = gp.player.direction;
+        } else {
+            onPath = true; //attacks player then continues randomly
+        }
     }
 
     public void checkDrop() {

@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 
 import java.awt.*;
+import java.util.Objects;
 import java.util.Random;
 
 public class NPC_Pip extends Entity {
@@ -11,11 +12,8 @@ public class NPC_Pip extends Entity {
 
         name = "Pip";
         direction = "right";
-        speed = 3;
+        speed = 2;
         type = type_npc;
-//        //comment for not throw bone
-//        projectile = new OBJ_DogsBone_NotMagic(gp);
-//        //end bone throwing
 
         getImage();
         setDialogue();
@@ -45,39 +43,92 @@ public class NPC_Pip extends Entity {
         randomChummeringDialogues[3] = "Woof! Phoebe stinks!";
         randomChummeringDialogues[4] = "Growl...I'm not having a bath!";
         randomChummeringDialogues[5] = "Growl...I'm the toughest dog on the street...Ruff!";
+        randomChummeringDialogues[6] = "Grr...Throw my bone...Grr!";
+    }
+
+    public void update() {
+        super.update();
+
+        int xDistance = Math.abs(worldX - gp.player.worldX);
+        int yDistance = Math.abs(worldY - gp.player.worldY);
+        int tileDistance = (xDistance + yDistance)/gp.tileSize;
+
+        if (gp.player.boneCount == 1 && tileDistance <= 15) {
+            //follow player
+            onPath = true;
+            speed = 4;
+            System.out.println("Pip On Path!");
+        } else if (gp.player.boneCount == 1){
+            speed = 2;
+            onPath = false;
+        } else if (gp.player.boneCount == 0) {
+            //follow bone
+            xDistance = Math.abs(worldX - gp.aSetter.boneX);
+            yDistance = Math.abs(worldY - gp.aSetter.boneY);
+            tileDistance = (xDistance + yDistance)/gp.tileSize;
+            if (tileDistance <= 15 && tileDistance >= 1) {
+                onPath = true;
+                speed = 5;
+            } else if (tileDistance < 1) {
+                speed = 0;
+            }
+            else {
+                speed = 2;
+                onPath = false;
+            }
+        }
     }
 
     public void setAction() {
 
-        actionLockCounter ++;
+        if(onPath && gp.player.boneCount == 1) {
+            int goalCol = 0;
+            int goalRow = 0;
+            if (Objects.equals(gp.player.direction, "up")) { //dog chase player but stay one square behind
+                goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+                goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 1;
+            } else if (Objects.equals(gp.player.direction, "down")) {
+                goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+                goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) - 1;
+            } else if (Objects.equals(gp.player.direction, "right")) {
+                goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) - 1;
+                goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+            } else if (Objects.equals(gp.player.direction, "left")) {
+                goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 1;
+                goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+            }
 
-        if (actionLockCounter == 60) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1; //pick up a number from 1 to 100
 
-            if (i <= 25) {
-                direction = "up";
-            }
-            if (i > 25 && i <= 50) {
-                direction = "down";
-            }
-            if (i > 50 && i <= 75) {
-                direction = "left";
-            }
-            if (i > 75) {
-                direction = "right";
-            }
-            actionLockCounter = 0;
+            searchPath(goalCol, goalRow);
 
+        } else if (onPath && gp.player.boneCount == 0) {
+            int goalCol = (gp.aSetter.boneX)/gp.tileSize;
+            int goalRow = (gp.aSetter.boneY)/gp.tileSize;
+
+            searchPath(goalCol, goalRow);
+        } else {
+            actionLockCounter ++;
+
+            if (actionLockCounter == 60) {
+                Random random = new Random();
+                int i = random.nextInt(100) + 1; //pick up a number from 1 to 100
+
+                if (i <= 25) {
+                    direction = "up";
+                }
+                if (i > 25 && i <= 50) {
+                    direction = "down";
+                }
+                if (i > 50 && i <= 75) {
+                    direction = "left";
+                }
+                if (i > 75) {
+                    direction = "right";
+                }
+                actionLockCounter = 0;
+
+            }
         }
-//        //comment for not throw bone
-//        int i = new Random().nextInt(1000) + 1; //odds of throwing a bone
-//        if (i > 999 && !projectile.alive && shotAvailableCounter == 30) {
-//            projectile.set(worldX, worldY, direction, true, this);
-//            gp.projectileList.add(projectile);
-//            shotAvailableCounter = 0;
-//        // end bone code
-//        }
     }
 
     public void speak() {

@@ -16,6 +16,8 @@ public class AssetSetter {
     //INDICES FOR INSTANCES OF MONSTERS (can add NPC and OBJ equivalents later if required)
     public int monsterNumber = 0;
     public int mapNumTotal;
+    public int boneX;
+    public int boneY;
 
     public AssetSetter(GamePanel gp) {
         this.gp = gp;
@@ -33,12 +35,14 @@ public class AssetSetter {
 
         int i = count;
         switch (name) { //chooses object
-            case "Phoebe's Bone":
+            case "Pip's Bone":
                 gp.obj[mapNum][i] = new OBJ_DogsBone_NotMagic(gp);
         }
 
         gp.obj[mapNum][i].worldX = x * gp.tileSize;
         gp.obj[mapNum][i].worldY = y * gp.tileSize;
+        boneX = x * gp.tileSize;
+        boneY = y * gp.tileSize;
 
     }
 
@@ -177,8 +181,8 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new OBJ_DogsBone_NotMagic(gp);
-        gp.obj[mapNum][i].worldX = 25 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        gp.obj[mapNum][i].worldX = 25 * gp.tileSize; boneX = 25;
+        gp.obj[mapNum][i].worldY = 18 * gp.tileSize; boneY = 18;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_BackGateOpenSideways(gp);

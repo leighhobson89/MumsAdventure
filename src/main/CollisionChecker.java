@@ -167,7 +167,6 @@ public class CollisionChecker {
         }
 
         if (entity.solidArea.intersects(gp.player.solidArea)) { //if entity touches object...
-            entity.collisionOn = true;
             contactPlayer = true;
         }
         entity.solidArea.x = entity.solidAreaDefaultX;

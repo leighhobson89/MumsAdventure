@@ -1,5 +1,6 @@
 package main;
 
+import ai.PathFinder;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -41,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     //SYSTEM
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound sfx = new Sound();
@@ -50,6 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
     Config config = new Config(this);
+    public PathFinder pFinder = new PathFinder(this);
     Thread gameThread;
 
     //ENTITY AND OBJECT
@@ -329,6 +331,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         //DEBUG
         if (keyH.showDebugText) {
+            tileM.drawPathFinderTrack = true; // switches on path finder track
             for (int i = 0; i < tempEntityList.size(); i++) {
                 drawCollisionBoxOnEntity(g2, tempEntityList.get(i));
             }
@@ -347,6 +350,8 @@ public class GamePanel extends JPanel implements Runnable {
             g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
             g2.drawString("Draw Time: " + passed, x, y); y += lineHeight;
             g2.drawString("Current Map: " + currentMap, x, y);
+        } else {
+            tileM.drawPathFinderTrack = false;
         }
     }
 

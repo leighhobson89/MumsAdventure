@@ -2,6 +2,8 @@ package entity;
 
 import main.GamePanel;
 
+import java.util.Objects;
+
 public class Projectile extends Entity {
 
     Entity user;
@@ -23,6 +25,10 @@ public class Projectile extends Entity {
 
         int projX = ((worldX + solidArea.x)/gp.tileSize);
         int projY = ((worldY + solidArea.y)/gp.tileSize);
+        if(Objects.equals(this.name, "Pip's Bone")) {
+            gp.aSetter.boneX = (worldX + solidArea.x)/gp.tileSize;
+            gp.aSetter.boneY = (worldY + solidArea.y)/gp.tileSize;
+        }
 
         if (user == gp.player) {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
@@ -30,26 +36,27 @@ public class Projectile extends Entity {
             boolean tileState = gp.cChecker.checkTile(this);
 
             if (monsterIndex != 999) {
-                gp.aSetter.setObjectAfterStart("Phoebe's Bone", gp.currentMap, projX, projY);
+                gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
                 gp.player.damageMonster(monsterIndex, attack);
                 generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
                 gp.playSFX(20);
                 alive = false;
             }
             if (npcIndex != 999) {
-                gp.aSetter.setObjectAfterStart("Phoebe's Bone", gp.currentMap, projX, projY);
+                gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
                 gp.gameState = gp.dialogueState;
-                if (npcIndex == 0) {
+                if (Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Dad")) {
                     gp.ui.currentDialogue = "Watch where you bloody throw that\nwill yer!";
-                } else if (npcIndex == 1 || npcIndex == 2) {
+                } else if (Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Phoebe") || Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Pip")) {
                     gp.ui.currentDialogue = "Yelp!";
+                } else if (Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Merchant")) {
+                    gp.ui.currentDialogue = "Don't throw dat at me innit!";
                 }
-
                 gp.playSFX(20);
                 alive = false;
             }
             if (tileState) {
-                gp.aSetter.setObjectAfterStart("Phoebe's Bone", gp.currentMap, projX, projY);
+                gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
                 gp.playSFX(20);
                 alive = false;
             }
@@ -87,7 +94,7 @@ public class Projectile extends Entity {
         stressLevel++;
 
         if(stressLevel >= maxStress) { //if throwing item reaches end of throwing range
-            gp.aSetter.setObjectAfterStart("Phoebe's Bone", gp.currentMap, projX, projY);
+            gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
             alive = false;
             gp.playSFX(20);
         }

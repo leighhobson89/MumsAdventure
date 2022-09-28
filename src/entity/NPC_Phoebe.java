@@ -41,7 +41,7 @@ public class NPC_Phoebe extends Entity {
     public void setDialogue() {
         randomChummeringDialogues[0] = "Woof!";
         randomChummeringDialogues[1] = "Grr!";
-        randomChummeringDialogues[2] = "Grr...Throw my bone...Grr!";
+        randomChummeringDialogues[2] = "I'm doing the dinner dance!";
         randomChummeringDialogues[3] = "Woof! Pip was doing something funny to his bed!";
         randomChummeringDialogues[4] = "Growl...Chicken time!";
     }

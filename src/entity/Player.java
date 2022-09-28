@@ -297,7 +297,6 @@ public class Player extends Entity {
             projectile.subtractResource(this);
             gp.player.inventory.remove(boneIndex);
 
-
             //ADD IT TO THE LIST
             gp.projectileList.add(projectile);
 
@@ -398,7 +397,7 @@ public class Player extends Entity {
                         currentWeapon = null;
                     } else if (gp.obj[gp.currentMap][i].isArmour && gp.obj[gp.currentMap][i] == currentArmour) {
                         currentArmour = null;
-                    } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "Phoebe's Bone")) {
+                    } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "Pip's Bone")) {
                         boneCount = 1;
                         gp.player.boneIndex = gp.player.inventory.size();
                     }

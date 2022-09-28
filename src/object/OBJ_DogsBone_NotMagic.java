@@ -15,10 +15,10 @@ public class OBJ_DogsBone_NotMagic extends Projectile {
         super(gp);
         this.gp = gp;
 
-        name = "Phoebe's Bone";
-        description = "[" + name + "]\nThrow it for her!";
-        speed = 4;
-        maxStress = 50;
+        name = "Pip's Bone";
+        description = "[" + name + "]\nThrow it for him!";
+        speed = 6;
+        maxStress = 80;
         attack = 1;
         useCost = 1; //spend mana to use spell
         alive = false;
