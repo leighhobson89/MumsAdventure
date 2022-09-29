@@ -420,7 +420,7 @@ public class Player extends Entity {
                             firstTimePickUpBone= false;
                         }
                         boneCount = 1;
-                        gp.player.boneIndex = gp.player.inventory.size();
+                        gp.player.boneIndex = gp.player.inventory.size()-1;
                     }
                     selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
                     gp.playSFX(selectSfx);
