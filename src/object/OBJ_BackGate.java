@@ -45,11 +45,10 @@ public class OBJ_BackGate extends Entity {
             collision = false;
             opened = true;
 
-//            if (gp.player.inventory.size() == gp.player.maxInventorySize) { //for loot
+//            if (gp.player.canObtainItem(loot) == false) { //for loot
 //                sb.append("\n...But you cannot carry any more!");
 //            } else {
 //                sb.append("\n I got a " + loot.name + "!");
-//                gp.player.inventory.add(loot);
 //                down1 = image2;
 //                opened = true;
 //            }

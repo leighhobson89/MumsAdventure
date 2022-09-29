@@ -87,6 +87,8 @@ public class Entity {
     public int useCost;
     public int price;
     public int knockBackPower = 0;
+    public boolean stackable;
+    public int amount = 1;
 
     //WORLD ATTRIBUTES
 

@@ -46,7 +46,6 @@ public class NPC_Merchant extends Entity {
         inventory.add(new OBJ_Pills(gp));
         inventory.add(new OBJ_Spatula(gp));
         inventory.add(new OBJ_Guitar2(gp));
-        //inventory.add(new OBJ_Coin(gp)); //experimental way to sell camper or if not then through dialogue
     }
 
     public void speak() {
