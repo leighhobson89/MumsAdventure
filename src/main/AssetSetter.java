@@ -52,16 +52,6 @@ public class AssetSetter {
 
         gp.obj[mapNum][i] = new OBJ_Pills(gp);
         gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Pills(gp);
-        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Pills(gp);
-        gp.obj[mapNum][i].worldX = 20 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
         i++;
 
