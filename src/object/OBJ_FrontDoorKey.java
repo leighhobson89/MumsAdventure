@@ -16,17 +16,29 @@ public class OBJ_FrontDoorKey extends Entity {
         down1 = setup("/objects/frontDoorKey", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nKey For Front And\nBack Door";
-        collectable = true;
-        isOpenable = false;
+        type = type_consumable;
 
     }
 
-    public void use(Entity entity, boolean consumable, boolean useable) {
+    public boolean use(Entity entity) {
 
         gp.gameState = gp.dialogueState;
-        int playerX = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize);
-        int playerY = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize);
+        int objIndex = getDetected(entity, gp.obj, "FrontDoor");
 
-        gp.eHandler.openFrontBackDoor(playerX, playerY);
+        if (objIndex != 999) {
+            gp.ui.currentDialogue = "This door is unlocked now!";
+            doorUnlockedCount++;
+            System.out.println("DoorUnlockedCount " + doorUnlockedCount);
+            gp.playSFX(3);
+            gp.obj[gp.currentMap][objIndex] = null;
+        } else {
+            gp.ui.currentDialogue = "I need to use this on the front or back door.";
+            return false;
+        }
+        if (doorUnlockedCount >= 2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

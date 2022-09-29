@@ -5,17 +5,25 @@ import main.GamePanel;
 
 public class OBJ_BackGate extends Entity {
 
-    public OBJ_BackGate(GamePanel gp) {
+    GamePanel gp;
+    //    Entity loot;
+    boolean opened = false;
+
+    public OBJ_BackGate(GamePanel gp) { // , Entity loot
 
         super(gp);
+        this.gp = gp;
+//        this.loot = loot;
+
+        type = type_obstacle;
 
         name = "BackGate";
         direction = "down";
-        down1 = setup("/objects/backGate", gp.tileSize, gp.tileSize);
+        image = setup("/objects/backGate", gp.tileSize, gp.tileSize);
+        image2 = setup("/objects/backGateOpen", gp.tileSize, gp.tileSize);
+        down1 = image;
 
         collision = true;
-        collectable = false;
-        isOpenable = true;
 
         solidArea.x = 0;
         solidArea.y = 16;
@@ -23,5 +31,33 @@ public class OBJ_BackGate extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+    }
+    public void interact() {
+        gp.gameState = gp.dialogueState;
+        if (!opened) {
+            gp.playSFX(4);
+
+//            StringBuilder sb = new StringBuilder(); //for loot
+//            sb.append("You opened the door");
+
+            gp.ui.currentDialogue = "Back gate opened.";
+            down1 = image2;
+            collision = false;
+            opened = true;
+
+//            if (gp.player.inventory.size() == gp.player.maxInventorySize) { //for loot
+//                sb.append("\n...But you cannot carry any more!");
+//            } else {
+//                sb.append("\n I got a " + loot.name + "!");
+//                gp.player.inventory.add(loot);
+//                down1 = image2;
+//                opened = true;
+//            }
+//            gp.ui.currentDialogue = sb.toString();
+        }
+        else {
+            gp.ui.currentDialogue = "The back gate's already open!";
+        }
+        gp.keyH.enterPressed = false;
     }
 }

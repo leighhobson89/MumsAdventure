@@ -14,7 +14,5 @@ public class OBJ_Tree2 extends Entity {
         direction = "down";
 
         collision = true;
-        collectable = false;
-        isOpenable = false;
     }
 }

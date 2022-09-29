@@ -60,7 +60,8 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] monster = new Entity[maxMap][20];
     public InteractiveTile iTile[][] = new InteractiveTile[maxMap][100];
-    public ArrayList<Entity> projectileList = new ArrayList<>();
+//    public ArrayList<Entity> projectileList = new ArrayList<>(); //
+    public Entity projectile[][] = new Entity[maxMap][20];
     public ArrayList<Entity> particleList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
     public ArrayList<Entity> tempEntityList = new ArrayList<>();
@@ -88,9 +89,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+        aSetter.setNPC();
         aSetter.setObject();
         player.weedCount = aSetter.setInteractiveTile();
-        aSetter.setNPC();
 
         playMusic(0, false, 0);
         if (!musicSetToPlayFromStart) {
@@ -214,13 +215,13 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
             //PROJECTILE
-            for (int i = 0; i < projectileList.size(); i++) {
-                if (projectileList.get(i) != null) {
-                    if (projectileList.get(i).alive) {
-                        projectileList.get(i).update();
+            for (int i = 0; i < projectile[1].length; i++) {
+                if (projectile[currentMap][i] != null) {
+                    if (projectile[currentMap][i].alive) {
+                        projectile[currentMap][i].update();
                     }
-                    if (!projectileList.get(i).alive) {
-                        projectileList.remove(i);
+                    if (!projectile[currentMap][i].alive) {
+                        projectile[currentMap][i] = null;
                     }
                 }
             }
@@ -269,6 +270,17 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             //ADD ENTITIES TO THE LIST
+            //PLAYER
+            entityList.add(player);
+            if (!tempEntityList.contains(player)) {
+                tempEntityList.add(player);
+            }
+            //MONSTER
+            for (int i = 0; i < monster[1].length; i++) {
+                if (monster[currentMap][i] != null) {
+                    entityList.add(monster[currentMap][i]);
+                }
+            }
             //NPC
             for (int i = 0; i < npc[1].length; i++) {
                 if (npc[currentMap][i] != null) {
@@ -278,22 +290,11 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
             }
-            //OBJECT
-            for (int i = 0; i < obj[1].length; i++) {
-                if (obj[currentMap][i] != null) {
-                    entityList.add(obj[currentMap][i]);
-                }
-            }
-            //MONSTER
-            for (int i = 0; i < monster[1].length; i++) {
-                if (monster[currentMap][i] != null) {
-                    entityList.add(monster[currentMap][i]);
-                }
-            }
+
             //PROJECTILE
-            for (int i = 0; i < projectileList.size(); i++) {
-                if (projectileList.get(i) != null) {
-                    entityList.add(projectileList.get(i));
+            for (int i = 0; i < projectile[1].length; i++) {
+                if (projectile[currentMap][i] != null) {
+                    entityList.add(projectile[currentMap][i]);
                 }
             }
             //PARTICLE
@@ -302,10 +303,11 @@ public class GamePanel extends JPanel implements Runnable {
                     entityList.add(particleList.get(i));
                 }
             }
-            //PLAYER
-            entityList.add(player);
-            if (!tempEntityList.contains(player)) {
-                tempEntityList.add(player);
+            //OBJECT
+            for (int i = 0; i < obj[1].length; i++) {
+                if (obj[currentMap][i] != null) {
+                    entityList.add(obj[currentMap][i]);
+                }
             }
 
             //SORT

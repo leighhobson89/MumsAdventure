@@ -26,8 +26,6 @@ public class OBJ_PipsToy_Magic extends Projectile {
         solidArea = new Rectangle(13, 12,23,24);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-
-        collectable = true;
     }
 
     public void getImage() {

@@ -26,7 +26,6 @@ public class Entity {
     public int worldX, worldY;
     public String direction = "right";
     public int spriteNum = 1;
-    public int speed, defaultSpeed, boostSpeed;
     public boolean collisionOn = false;
     public boolean invincible;
     public boolean newMonster;
@@ -36,21 +35,24 @@ public class Entity {
     boolean hpBarOn = false;
     public int boneIndex;
     public boolean onPath = false;
+    public boolean knockBack = false;
 
     //COUNTER
     public int spriteCounter = 0;
     public int actionLockCounter = 0;
-    public int invincibleCounter =0;
+    public int invincibleCounter = 0;
     int dyingCounter = 0;
     int hpBarCounter = 0;
     public int shotAvailableCounter = 0;
+    int knockBackCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
+    public int speed;
+    public int defaultSpeed;
+    public int pillsSpeed;
     public boolean isWeapon;
     public boolean isArmour;
-    public boolean collectable;
-    public boolean isOpenable;
     public boolean pillsConsumableNow;
     public int maxStress;
     public int stressLevel;
@@ -73,6 +75,7 @@ public class Entity {
     public boolean dizzyFlag;
     public boolean speedBoost;
     public boolean firstTimePickUpBone;
+    public int doorUnlockedCount;
 
     //ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();
@@ -83,10 +86,9 @@ public class Entity {
     public String description = "";
     public int useCost;
     public int price;
+    public int knockBackPower = 0;
 
     //WORLD ATTRIBUTES
-    public boolean frontDoorAlreadyUnlocked = false;
-    public boolean backDoorAlreadyUnlocked = false;
 
     //MONSTER ATTRIBUTES
     public int monsterMaxStress;
@@ -103,9 +105,28 @@ public class Entity {
     public final int type_consumable = 6;
     public final int type_pickupOnly = 7;
     public final int type_gardeningShovel = 8;
+    public final int type_obstacle = 9;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
+    }
+    public int getLeftX() {
+        return worldX + solidArea.x;
+    }
+    public int getRightX() {
+        return worldX + solidArea.x + solidArea.width;
+    }
+    public int getTopY() {
+        return worldY + solidArea.y;
+    }
+    public int getBottomY() {
+        return worldY + solidArea.y + solidArea.height;
+    }
+    public int getCol() {
+        return (worldX + solidArea.x)/gp.tileSize;
+    }
+    public int getRow() {
+        return (worldY + solidArea.y)/gp.tileSize;
     }
 
     public void setAction() {}
@@ -143,8 +164,12 @@ public class Entity {
         }
     }
 
-    public void use(Entity entity, boolean consumable, boolean useable) {
-        //overridden in Player class
+    public void interact() {
+
+    }
+
+    public boolean use(Entity entity) {
+        return false;
     }
     public void checkDrop() {
 
@@ -203,9 +228,9 @@ public class Entity {
     public void checkCollision() {
         collisionOn = false;
         boolean tileState = gp.cChecker.checkTile(this);
-        gp.cChecker.checkObject(this, false);
         gp.cChecker.checkEntity(this, gp.npc);
         gp.cChecker.checkEntity(this, gp.monster);
+        gp.cChecker.checkObject(this, false);
         gp.cChecker.checkEntity(this, gp.iTile);
         if (newMonster && tileState) {
             collisionOn = false;
@@ -222,18 +247,44 @@ public class Entity {
     }
 
     public void update() {
-        setAction();
-        checkCollision();
 
-        //IF COLLISION IS FALSE, ENTITY CAN MOVE
-        if (!collisionOn) {
-            switch (direction) {
-                case "up" -> worldY -= speed;
-                case "down" -> worldY += speed;
-                case "left" -> worldX -= speed;
-                case "right" -> worldX += speed;
+        if (knockBack) {
+            checkCollision();
+
+            if(collisionOn) {
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            } else {
+                switch (gp.player.direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+
+            knockBackCounter++;
+            if (knockBackCounter == 10) {
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+        } else {
+            setAction();
+            checkCollision();
+
+            //IF COLLISION IS FALSE, ENTITY CAN MOVE
+            if (!collisionOn) {
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
             }
         }
+
         spriteCounter++;
         if (spriteCounter > 24) { //walking speed of animation
             if (spriteNum == 1) {
@@ -271,7 +322,7 @@ public class Entity {
                 damage = 0;
             }
             gp.player.stressLevel += damage;
-            gp.player.checkPillsConsumable(gp.player.stressLevel);
+            gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
             gp.player.invincible = true;
 
             checkIfPassOutFromStress(); //gameover method - can pass out from stress twice, next time game over
@@ -469,5 +520,35 @@ public class Entity {
                 onPath = false;
             }
         }
+    }
+
+    public int getDetected(Entity user, Entity target[][], String targetName) { //detect object next to user ie opening doors
+        int index = 999;
+
+        //Check the surrounding object
+        int nextWorldX = user.getLeftX();
+        int nextWorldY = user.getTopY();
+
+        switch (user.direction) {
+            case "up": nextWorldY = user.getTopY() - user.speed; break;
+            case "down": nextWorldY = user.getBottomY() + user.speed; break;
+            case "left": nextWorldX = user.getLeftX() - user.speed; break;
+            case "right": nextWorldX = user.getRightX() + user.speed; break;
+        }
+
+        int col = nextWorldX/gp.tileSize;
+        int row = nextWorldY/gp.tileSize;
+
+        for (int i = 0; i < target[1].length; i++) {
+            if (target[gp.currentMap][i] != null) {
+                if (target[gp.currentMap][i].getCol() == col &&
+                target[gp.currentMap][i].getRow() == row &&
+                target[gp.currentMap][i].name.equals(targetName)) {
+                index = i;
+                break;
+                }
+            }
+        }
+        return index;
     }
 }

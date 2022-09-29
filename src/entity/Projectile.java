@@ -37,7 +37,7 @@ public class Projectile extends Entity {
 
             if (monsterIndex != 999) {
                 gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
-                gp.player.damageMonster(monsterIndex, attack);
+                gp.player.damageMonster(monsterIndex, attack, knockBackPower);
                 generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
                 gp.playSFX(20);
                 alive = false;
@@ -74,7 +74,7 @@ public class Projectile extends Entity {
                 alive = false;
             }
             if (monsterIndex != 999) {
-                gp.player.damageMonster(monsterIndex, attack);
+                gp.player.damageMonster(monsterIndex, attack, knockBackPower);
                 gp.playSFX(21);
                 alive = false;
             }

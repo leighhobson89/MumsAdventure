@@ -18,18 +18,18 @@ public class OBJ_Pills extends Entity {
         direction = "down";
         description = "[" + name + "]\nYour Daily Pills";
         price = 5;
-        collectable = true;
-        isOpenable = false;
     }
 
-        public void use(Entity entity, boolean consumable, boolean useable) {
+        public boolean use(Entity entity) {
 
             gp.gameState = gp.dialogueState;
-            System.out.println("pill consumable" + pillsConsumableNow);
+            gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
 
-            if (consumable) {
+            if (gp.player.pillsConsumableNow) {
                 gp.eHandler.teleportPills(gp.currentMap);
-                gp.player.checkPillsConsumable(gp.player.stressLevel);
+                return true;
             }
+            gp.ui.currentDialogue = "I better save these until I'm stressed\nout, 'cos they have some crazy after\neffects!";
+            return false;
         }
     }

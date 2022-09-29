@@ -12,9 +12,6 @@ public class OBJ_Tree1 extends Entity {
         name = "Tree1";
         down1 = setup("/objects/tree1", gp.tileSize, gp.tileSize);
         direction = "down";
-
         collision = true;
-        collectable = false;
-        isOpenable = false;
     }
 }

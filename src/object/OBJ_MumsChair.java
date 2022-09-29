@@ -12,9 +12,5 @@ public class OBJ_MumsChair extends Entity {
         name = "MumsChair";
         down1 = setup("/objects/mumsChair", gp.tileSize, gp.tileSize);
         direction = "down";
-
-        collectable = false;
-        isOpenable = false;
-
     }
 }

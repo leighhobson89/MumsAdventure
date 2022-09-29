@@ -65,29 +65,14 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_InsideDoorOpen(gp);
-        gp.obj[mapNum][i].worldX = 18 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
-        i++;
-
         gp.obj[mapNum][i] = new OBJ_InsideDoor(gp);
         gp.obj[mapNum][i].worldX = 18 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_InsideDoorOpen(gp);
-        gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_InsideDoor(gp);
         gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_InsideDoorOpenSideways(gp);
-        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
@@ -128,11 +113,6 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_FrontDoorKey(gp);
         gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_BackGateOpen(gp);
-        gp.obj[mapNum][i].worldX = 31 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_BackGate(gp);
@@ -183,11 +163,6 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_DogsBone_NotMagic(gp);
         gp.obj[mapNum][i].worldX = 25 * gp.tileSize; boneX = 25;
         gp.obj[mapNum][i].worldY = 18 * gp.tileSize; boneY = 18;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_BackGateOpenSideways(gp);
-        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);

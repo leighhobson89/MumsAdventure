@@ -12,8 +12,5 @@ public class OBJ_FrontDoorOpen extends Entity {
         name = "FrontDoorOpen";
         down1 = setup("/objects/frontDoorOpen", gp.tileSize, gp.tileSize);
         direction = "down";
-        collectable = false;
-        isOpenable = false;
-
     }
 }

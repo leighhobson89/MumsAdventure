@@ -89,7 +89,7 @@ public class Player extends Entity {
         worldX = gp.tileSize * 19;
         worldY = gp.tileSize * 17;
         defaultSpeed = 2;
-        boostSpeed = 4;
+        pillsSpeed = 4;
         speed = defaultSpeed;
         direction = "up";
         spiderCount = 1;
@@ -218,7 +218,7 @@ public class Player extends Entity {
             }
 
             if (speedBoost && !dizzyFlag) {
-                speed = boostSpeed;
+                speed = pillsSpeed;
             } else if (dizzyFlag) {
                 System.out.println("Dizzy!" + speed);
             } else {
@@ -298,8 +298,13 @@ public class Player extends Entity {
             projectile.subtractResource(this);
             gp.player.inventory.remove(boneIndex);
 
-            //ADD IT TO THE LIST
-            gp.projectileList.add(projectile);
+            //CHECK VACANCY
+            for (int i= 0; i < gp.projectile[1].length; i++) {
+                if (gp.projectile[gp.currentMap][i] == null) {
+                    gp.projectile[gp.currentMap][i] = projectile;
+                    break;
+                }
+            }
 
             shotAvailableCounter = 0;
         }
@@ -349,12 +354,15 @@ public class Player extends Entity {
             // Check monster collision with the updated worldX, worldY and solidArea
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
-            damageMonster(monsterIndex, attack);
+            damageMonster(monsterIndex, attack, currentWeapon.knockBackPower);
             hitNPC(npcIndex);
 
             //INTERACTIVE TILE COLLISION CHECKER
             int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
             damageInteractiveTile(iTileIndex);
+
+            int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
+            damageProjectile(projectileIndex);
 
             // After checking collision, restore the original data
             worldX = currentWorldX;
@@ -375,14 +383,21 @@ public class Player extends Entity {
 
             if (gp.obj[gp.currentMap][i].type == type_pickupOnly) {
                 //PICKUP ONLY ITEMS
-                gp.obj[gp.currentMap][i].use(this, false, false);
+                gp.obj[gp.currentMap][i].use(this);
                 gp.obj[gp.currentMap][i] = null;
+
+            }  //OBSTACLE
+            else if (gp.obj[gp.currentMap][i].type == type_obstacle) { //for doors and other obstacles that need to use objects to pass them
+                if (keyH.enterPressed) {
+                    attackCanceled = true;
+                    gp.obj[gp.currentMap][i].interact();
+                }
             } else {
                 //INVENTORY ITEMS
                 String text;
                 int selectSfx;
 
-                if (inventory.size() != maxInventorySize && gp.obj[gp.currentMap][i].collectable && !gp.obj[gp.currentMap][i].isOpenable) {
+                if (inventory.size() != maxInventorySize && !Objects.equals(gp.obj[gp.currentMap][i].name, "FrontDoorOpen")) {
                     if (gp.obj[gp.currentMap][i].isWeapon) {
                         if (currentWeapon == null) {
                             currentWeapon = gp.obj[gp.currentMap][i];
@@ -413,11 +428,7 @@ public class Player extends Entity {
                     text = "Picked up " + gp.obj[gp.currentMap][i].name + "!";
                     gp.ui.addMessage(text);
                     gp.obj[gp.currentMap][i] = null;
-                } else if (gp.obj[gp.currentMap][i].isOpenable) {
-                    selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
-                    gp.playSFX(selectSfx);
-                    gp.obj[gp.currentMap][i] = null;
-                } else if (inventory.size() >= maxInventorySize && gp.obj[gp.currentMap][i].collectable && !gp.obj[gp.currentMap][i].isOpenable) {
+                } else if (inventory.size() >= maxInventorySize) {
                     text = "You cannot carry any more!";
                     gp.ui.addMessage(text);
                 }
@@ -465,7 +476,7 @@ public class Player extends Entity {
                 if (damage > 0) {
                     gp.ui.addMessage("The " + gp.monster[gp.currentMap][i].name + " got you! Your stress increases by " + damage + "!");
                     stressLevel+=1;
-                    checkPillsConsumable(stressLevel);
+                    gp.player.pillsConsumableNow = gp.player.stressLevel >= STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
                 }
                 if (damage <= 0) {
                     gp.ui.addMessage("The " + gp.monster[gp.currentMap][i].name + " got you but it can't stress you at your exp level!");
@@ -475,11 +486,6 @@ public class Player extends Entity {
                 checkIfPassOutFromStress();
             }
         }
-    }
-
-    public void checkPillsConsumable(int stressLevel) {
-        gp.player.pillsConsumableNow = stressLevel >= STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
-        System.out.println("Can consume pills:" + pillsConsumableNow);
     }
 
     public void hitNPC(int i) {
@@ -502,10 +508,15 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int i, int attack) {
+    public void damageMonster(int i, int attack, int knockBackPower) {
         if (i != 999) {
             if (!gp.monster[gp.currentMap][i].invincible) {
                 gp.playSFX(6);
+
+                if(knockBackPower > 0) {
+                    knockBack(gp.monster[gp.currentMap][i], knockBackPower);
+                }
+
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
                 if (damage < 0) {
                     damage = 0;
@@ -527,6 +538,12 @@ public class Player extends Entity {
                 }
             }
         }
+    }
+
+    public void knockBack(Entity entity, int knockbackPower) {
+        entity.direction = direction;
+        entity.speed += knockbackPower;
+        entity.knockBack = true;
     }
 
     public void damageInteractiveTile(int i) {
@@ -564,6 +581,14 @@ public class Player extends Entity {
         }
     }
 
+    public void damageProjectile(int i) {
+        if (i != 999) {
+            Entity projectile = gp.projectile[gp.currentMap][i];
+            projectile.alive = false;
+            generateParticle(projectile, projectile);
+        }
+    }
+
     public void checkLevelUp() {
         if (exp >= nextLevelExp) {
             level++;
@@ -581,8 +606,6 @@ public class Player extends Entity {
     }
 
     public void selectItem() {
-        int playerX = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-        int playerY = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
         int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotCol, gp.ui.playerSlotRow);
 
         if (itemIndex < inventory.size()) {
@@ -607,42 +630,13 @@ public class Player extends Entity {
                 defense = getDefense();
                 gp.playSFX(11);
             }
-            if (Objects.equals(selectedItem.name, "Tube of Pills") && pillsConsumableNow) {
-                selectedItem.use(this, true, false);
-                if (boneCount == 1 && itemIndex < boneIndex) {
-                    boneIndex--;
-                }
-                inventory.remove(itemIndex);
-                gp.playSFX(11);
-            } else if (Objects.equals(selectedItem.name, "Tube of Pills")) {
-                gp.gameState = gp.dialogueState;
-                gp.ui.currentDialogue = "I better save these until I'm stressed\nout, 'cos they have some crazy after\neffects!";
-            }
-
-            if (Objects.equals(selectedItem.name, "Key") && (playerX == 15 || playerX == 16 || playerX == 17 || playerX == 29 || playerX == 30 || playerX == 31) && playerY == 11) { //be stood next to door to use key
-                if ((backDoorAlreadyUnlocked && (playerX == 29 || playerX == 30 || playerX == 31)) || (frontDoorAlreadyUnlocked && (playerX == 15 || playerX == 16 || playerX == 17))) {
-                    gp.gameState = gp.dialogueState;
-                    gp.ui.currentDialogue = "This door is already unlocked!";
-                } else {
-                    selectedItem.use(this, false, true);
-                    gp.ui.currentDialogue = "That door's unlocked now!";
-                    System.out.println("back " + backDoorAlreadyUnlocked + ", front " + frontDoorAlreadyUnlocked);
-                    if (backDoorAlreadyUnlocked && frontDoorAlreadyUnlocked) {
-                        if (boneCount == 1 && itemIndex < boneIndex) {
-                            boneIndex--;
-                        }
-                        inventory.remove(itemIndex);
+            if (selectedItem.type == type_consumable) {
+                if(selectedItem.use(this)) {
+                    if (boneCount == 1 && itemIndex < boneIndex) {
+                        boneIndex--;
                     }
+                    inventory.remove(itemIndex);
                 }
-            } else if (Objects.equals(selectedItem.name, "Key")) {
-                gp.gameState = gp.dialogueState;
-                gp.ui.currentDialogue = "I need to use this on the front or\nback door!";
-            }
-
-            if (selectedItem.type == type_consumable && !Objects.equals(selectedItem.name, "Tube of Pills")) {
-                selectedItem.use(this, true, false);
-                inventory.remove(itemIndex);
-                gp.playSFX(11);
             }
         }
     }

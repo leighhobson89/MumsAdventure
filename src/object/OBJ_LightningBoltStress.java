@@ -12,8 +12,6 @@ public class OBJ_LightningBoltStress extends Entity {
         super(gp);
         this.gp = gp;
 
-        UtilityTool uTool = new UtilityTool();
-
         name = "StressBolt";
         type = type_pickupOnly;
         value = 2;
@@ -22,12 +20,9 @@ public class OBJ_LightningBoltStress extends Entity {
         image = setup("/lifeBar/stress_full", (int) (gp.tileSize*0.7), gp.tileSize);
         image2 = setup("/lifeBar/stress_half", (int) (gp.tileSize*0.7), gp.tileSize);
         image3 = setup("/lifeBar/stress_none", (int) (gp.tileSize*0.7), gp.tileSize);
-
-        collectable = true;
-        isOpenable = false;
     }
 
-    public void use(Entity entity, boolean consumable, boolean useable) {
+    public boolean use(Entity entity) {
         gp.playSFX(12);
         gp.player.stressLevel-= value;
         if (gp.player.stressLevel >= 0) {
@@ -35,5 +30,6 @@ public class OBJ_LightningBoltStress extends Entity {
         } else {
             gp.ui.addMessage("Stress -" + value + " -> " + "0");
         }
+        return true;
     }
 }

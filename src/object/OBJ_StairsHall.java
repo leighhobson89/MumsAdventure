@@ -13,8 +13,5 @@ public class OBJ_StairsHall extends Entity {
         down1 = setup("/objects/stairsHall", gp.tileSize, gp.tileSize);
         direction = "down";
 
-        collectable = false;
-        isOpenable = false;
-
     }
 }

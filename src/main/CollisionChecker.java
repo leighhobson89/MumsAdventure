@@ -166,7 +166,7 @@ public class CollisionChecker {
             case "right": entity.solidArea.x += entity.speed; break;
         }
 
-        if (entity.solidArea.intersects(gp.player.solidArea)) { //if entity touches object...
+        if (entity.solidArea.intersects(gp.player.solidArea)) { //if player touches object...
             contactPlayer = true;
         }
         entity.solidArea.x = entity.solidAreaDefaultX;

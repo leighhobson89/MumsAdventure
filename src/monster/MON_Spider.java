@@ -17,8 +17,9 @@ public class MON_Spider extends Entity {
 
         type = type_monster;
         name = "Spider";
-        speed = 4;
-        monsterMaxStress = 3;
+        defaultSpeed = 3;
+        speed = defaultSpeed;
+        monsterMaxStress = 10;
         stressLevel = 0;
         attack = 2;
         defense = 0;
@@ -53,6 +54,20 @@ public class MON_Spider extends Entity {
 
             searchPath(goalCol, goalRow);
 
+            //CODE TO MAKE MONSTER FIRE PROJECTILE WHEN ONPATH (COUNTERATTACK)
+//            int i = new Random().nextInt(200) + 1;
+//            if (i >197 && !projectile.alive && shotAvailableCounter == 30) {
+//                projectile.set(worldX, worldY, direction, true, this);
+//
+//                //CHECK VACANCY
+//                for (int j = 0; j < gp.projectile[1].length; j++) {
+//                    if (gp.projectile[gp.currentMap][j] == null) {
+//                        gp.projectile[gp.currentMap][j] = projectile;
+//                        break;
+//                    }
+//                }
+//            }
+
         } else {
             actionLockCounter++;
 
@@ -82,7 +97,7 @@ public class MON_Spider extends Entity {
         int rand = new Random().nextInt(100) + 1;
         actionLockCounter = 0;
 
-        if (rand < 80) { //random chance of counterattacking player if hit it, or maybe it run away
+        if (rand < 50) { //random chance of counterattacking player if hit it, or maybe it run away
             onPath = false;
             direction = gp.player.direction;
         } else {

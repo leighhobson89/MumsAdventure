@@ -12,8 +12,6 @@ public class OBJ_FrontGateOpen extends Entity {
         name = "FrontGateOpen";
         down1 = setup("/objects/frontGateOpen", gp.tileSize, gp.tileSize);
         direction = "down";
-        collectable = false;
-        isOpenable = false;
 
     }
 }

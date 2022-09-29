@@ -13,8 +13,5 @@ public class OBJ_InsideDoorOpen extends Entity {
         down1 = setup("/objects/insideDoorOpen", gp.tileSize, gp.tileSize);
         direction = "down";
 
-        collectable = false;
-        isOpenable = false;
-
     }
 }

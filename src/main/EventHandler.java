@@ -1,6 +1,5 @@
 package main;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class EventHandler {
@@ -54,9 +53,7 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(0, 23, 13, "any")) {gp.player.spiderCount = spiderEvent(23, 13, gp.dialogueState, gp.player.spiderCount, true, false);}
-            else if (hit(0, 26, 7, "any")) {gp.player.spiderCount = spiderEvent(27, 8, gp.dialogueState, gp.player.spiderCount, false, false);}
-            else if (hit(0, 19, 18, "any")) {chairDestressEvent(gp.dialogueState);}
+            if (hit(0, 19, 18, "any")) {chairDestressEvent(gp.dialogueState);}
             else if (hit(0, 19, 10, "right")) {transitionUpDownStairs(1, 24, 10);}
             else if (hit(1, 24, 10, "left")) {transitionUpDownStairs(0, 19, 10);}
         }
@@ -90,35 +87,6 @@ public class EventHandler {
         return hit;
     }
 
-    public void openFrontBackDoor(int playerX, int playerY) {
-        int objX;
-        int objY;
-        if ((playerX == 29 || playerX == 30 || playerX == 31) && playerY == 11) {
-            gp.player.backDoorAlreadyUnlocked = true;
-            for (int i = 0; i < gp.obj[1].length; i++) {
-                if (gp.obj[gp.currentMap][i] != null) {
-                    objX = gp.obj[gp.currentMap][i].worldX/gp.tileSize;
-                    objY = gp.obj[gp.currentMap][i].worldY/gp.tileSize;
-                    if (objX == 30 && objY == 11 && Objects.equals(gp.obj[gp.currentMap][i].name, "FrontDoor")) {
-                        gp.obj[gp.currentMap][i] = null;
-                    }
-                }
-            }
-        } else if ((playerX == 17 || playerX == 16 || playerX == 15) && playerY == 11) {
-            gp.player.frontDoorAlreadyUnlocked = true;
-            for (int i = 0; i < gp.obj[1].length; i++) {
-                if (gp.obj[gp.currentMap][i] != null) {
-                    objX = gp.obj[gp.currentMap][i].worldX/gp.tileSize;
-                    objY = gp.obj[gp.currentMap][i].worldY/gp.tileSize;
-                    if (objX == 16 && objY == 11 && Objects.equals(gp.obj[gp.currentMap][i].name, "FrontDoor")) {
-                        gp.obj[gp.currentMap][i] = null;
-                    }
-                }
-            }
-        }
-        gp.playSFX(3);
-    }
-
     public int spiderEvent(int col, int row, int gameState, int spiderCount, boolean randomizeLocation, boolean gardening) {
         boolean atBin = false;
         if (col == 30 && row == 8) {
@@ -133,7 +101,7 @@ public class EventHandler {
                 gp.playSFX(8);
                 gp.ui.currentDialogue = "So many bloody spiders today, Peter will you\nsort this bloody garden out?";
                 gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
-                gp.player.checkPillsConsumable(gp.player.stressLevel);
+                gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
                 spiderCount++;
                 System.out.println("Spider: " + spiderCount);
             }
@@ -147,7 +115,7 @@ public class EventHandler {
                 gp.ui.currentDialogue = "Aaagh another bloody spider!\nThat's " + uTool.parseNumberString(spiderCount) + " in one day, sick of it!";
                 gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
             }
-            gp.player.checkPillsConsumable(gp.player.stressLevel);
+            gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
             //eventRect[col][row].eventDone = true; //for non recurring events only
             canTouchEvent = false;
             spiderCount++;

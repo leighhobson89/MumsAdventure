@@ -14,8 +14,6 @@ public class OBJ_GrandmasCardigan extends Entity {
         direction = "down";
         defenseValue = 1;
         description = "[" + name + "]\nAn Old Cardigan";
-        collectable = true;
-        isOpenable = false;
 
         isArmour = true;
     }

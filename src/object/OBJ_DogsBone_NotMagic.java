@@ -20,6 +20,7 @@ public class OBJ_DogsBone_NotMagic extends Projectile {
         speed = 6;
         maxStress = 80;
         attack = 1;
+        knockBackPower = 4;
         useCost = 1; //spend mana to use spell
         alive = false;
         getImage();
@@ -27,8 +28,6 @@ public class OBJ_DogsBone_NotMagic extends Projectile {
         solidArea = new Rectangle(9, 10,25,29);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-
-        collectable = true;
     }
 
     public void getImage() {

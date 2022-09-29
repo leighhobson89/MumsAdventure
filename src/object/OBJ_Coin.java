@@ -18,14 +18,12 @@ public class OBJ_Coin extends Entity {
         down1 = setup("/objects/goldCoin", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nA Quid!";
-
-        collectable = true;
-        isOpenable = false;
     }
 
-    public void use(Entity entity, boolean consumable, boolean useable) {
+    public boolean use(Entity entity) {
         gp.playSFX(22);
         gp.player.coin += value;
         gp.ui.addMessage("Coin +" + value + " -> " + gp.player.coin);
+        return true;
     }
 }
