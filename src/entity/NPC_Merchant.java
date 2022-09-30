@@ -1,10 +1,7 @@
 package entity;
 
 import main.GamePanel;
-import object.OBJ_Coin;
-import object.OBJ_Guitar2;
-import object.OBJ_Pills;
-import object.OBJ_Spatula;
+import object.*;
 
 import java.awt.*;
 import java.util.Random;
@@ -46,6 +43,7 @@ public class NPC_Merchant extends Entity {
         inventory.add(new OBJ_Pills(gp));
         inventory.add(new OBJ_Spatula(gp));
         inventory.add(new OBJ_Guitar2(gp));
+        inventory.add(new OBJ_LightPills(gp));
     }
 
     public void speak() {

@@ -634,8 +634,10 @@ public class Player extends Entity {
             if (selectedItem.type == type_light) {
                 if (currentLight == selectedItem) {
                     currentLight = null;
+                    gp.playSFX(11);
                 } else {
                     currentLight = selectedItem;
+                    gp.playSFX(11);
                 }
                 lightUpdated = true;
             }
