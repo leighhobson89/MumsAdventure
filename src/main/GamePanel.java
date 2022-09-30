@@ -62,7 +62,6 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] monster = new Entity[maxMap][20];
     public InteractiveTile iTile[][] = new InteractiveTile[maxMap][100];
-//    public ArrayList<Entity> projectileList = new ArrayList<>(); //
     public Entity projectile[][] = new Entity[maxMap][20];
     public ArrayList<Entity> particleList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
@@ -246,6 +245,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
+        eManager.update();
     }
 
     public void drawToTempScreen() { //FULL SCREEN STUFF

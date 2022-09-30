@@ -57,7 +57,7 @@ public class TileManager {
             setup(23, "sofaBottom", true);
             setup(24, "tableTL", false);
             setup(25, "tableTR", true);
-            setup(26, "tableBL", true);
+            setup(26, "tableBL", false);
             setup(27, "tableBR", true);
             setup(28, "tableLivingRoomTop", false);
             setup(29, "tableLivingRoomBottom", true);

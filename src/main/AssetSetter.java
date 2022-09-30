@@ -50,6 +50,11 @@ public class AssetSetter {
         int mapNum = 0;
         int i = 0;
 
+        gp.obj[mapNum][i] = new OBJ_LightPills(gp);
+        gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_Pills(gp);
         gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 15 * gp.tileSize;

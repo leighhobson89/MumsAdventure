@@ -13,6 +13,7 @@ public class Player extends Entity {
 
     public final int PILLS_COUNT_DOWN_VALUE = 20;
     public final int STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS = 4;
+    public final int LIGHT_LEVEL_NEEDED_TO_CONSUME_PILLS = 10; //work it out later
     final int MAX_SPEED_UNDER_INFLUENCE = 4;
 
     public final int screenX;
@@ -20,6 +21,7 @@ public class Player extends Entity {
     public static int interval;
     public int standCounter;
     public boolean attackCanceled;
+    public boolean lightUpdated;
     public Timer timer;
 
     public void createTimer() {
@@ -628,6 +630,14 @@ public class Player extends Entity {
                 currentArmour = null;
                 defense = getDefense();
                 gp.playSFX(11);
+            }
+            if (selectedItem.type == type_light) {
+                if (currentLight == selectedItem) {
+                    currentLight = null;
+                } else {
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
             }
             if (selectedItem.type == type_consumable) {
                 if(selectedItem.use(this)) {
