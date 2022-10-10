@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class UI {
     GamePanel gp;
     Graphics2D g2;
-    Font breathFire, maruMonica, breathFire_40, breathFire_80, maruMonica_40;
+    public Font breathFire, maruMonica, breathFire_40, breathFire_80, maruMonica_40;
     BufferedImage bolt_full, bolt_half, bolt_blank, squeakyToyFull, squeakyToyEmpty, coin;
     public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
@@ -91,27 +91,22 @@ public class UI {
             drawCharacterScreen();
             drawInventory(gp.player, true);
         }
-
         //OPTIONS STATE
         if (gp.gameState == gp.optionsState) {
             drawOptionsScreen();
         }
-
         //GAME OVER STATE
         if (gp.gameState == gp.gameOverState) {
             drawGameOverScreen();
         }
-
         //TRANSITION STATE
         if (gp.gameState == gp.transitionState) {
             drawTransition();
         }
-
         //TRADE STATE
         if (gp.gameState == gp.tradeState) {
             drawTradeScreen();
         }
-
         //SLEEP STATE
         if (gp.gameState == gp.sleepState) {
             drawSleepScreen();
@@ -789,7 +784,7 @@ public class UI {
         g2.drawString("T", textX, textY); textY += gp.tileSize;
         g2.drawString("C", textX, textY); textY += gp.tileSize;
         g2.drawString("P", textX, textY); textY += gp.tileSize;
-        g2.drawString("M", textX, textY); textY += gp.tileSize;
+        g2.drawString("S", textX, textY); textY += gp.tileSize;
         g2.drawString("ESC", textX, textY); textY += gp.tileSize;
 
         // BACK

@@ -43,8 +43,10 @@ public class KeyHandler implements KeyListener {
             optionsState(code);
         } else if (gp.gameState == gp.gameOverState) { //GAME OVER STATE KEYS
             gameOverState(code);
-        }  else if (gp.gameState == gp.tradeState) { //GAME OVER STATE KEYS
+        }  else if (gp.gameState == gp.tradeState) { //TRADE STATE KEYS
             tradeState(code);
+        }  else if (gp.gameState == gp.mapState) { //MAP STATE KEYS
+            mapState(code);
         }
     }
 
@@ -142,7 +144,7 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.pauseState;
                 MUSIC_POSITION_PAUSE = gp.pauseMusic();
             }
-            if (code == KeyEvent.VK_M) { //music toggle with 'M' key
+            if (code == KeyEvent.VK_S) { //music toggle with 'S' key
                 if (musicPlaying) {
                     gp.stopMusic();
                     musicPlaying = false;
@@ -168,6 +170,16 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ESCAPE) {
                 gp.gameState = gp.optionsState;
+            }
+            if (code == KeyEvent.VK_M) {
+                gp.gameState = gp.mapState;
+            }
+            if (code == KeyEvent.VK_X) {
+                if (!gp.map.miniMapOn) {
+                    gp.map.miniMapOn = true;
+                } else {
+                    gp.map.miniMapOn = false;
+                }
             }
             //DEBUG
             if (code == KeyEvent.VK_D) {
@@ -319,6 +331,11 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent. VK_ESCAPE) {
                 gp.ui.subState = 0;
             }
+        }
+    }
+    public void mapState(int code) {
+        if (code == KeyEvent.VK_M) {
+            gp.gameState = gp.playState;
         }
     }
 
