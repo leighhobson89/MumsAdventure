@@ -21,7 +21,7 @@ public class Lighting {
         Graphics2D g2 = (Graphics2D)brightFilter.getGraphics();
 
         if(gp.player.currentLight == null) {
-            g2.setColor(new Color(255, 255, 255, 200));
+            g2.setColor(new Color(255, 255, 255, 125));
         } else {
             //Get the center x and y of the visible circle
             int centerX = gp.player.screenX + (gp.tileSize)/2;

@@ -389,7 +389,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void clearMonsters() {
-        monster = new Entity[currentMap][20];
+        monster = new Entity[maxMap][20];
     }
 
     //DEBUG
