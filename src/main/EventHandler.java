@@ -53,7 +53,7 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(0, 19, 18, "any")) {chairDestressEvent(gp.dialogueState);}
+            if (hit(0, 19, 18, "any")) {chairDestressEvent();}
             else if (hit(0, 19, 10, "right")) {transitionUpDownStairs(1, 24, 10);}
             else if (hit(1, 24, 10, "left")) {transitionUpDownStairs(0, 19, 10);}
         }
@@ -124,14 +124,13 @@ public class EventHandler {
         return spiderCount;
     }
 
-    public void chairDestressEvent (int gameState) {
+    public void chairDestressEvent () {
         //if (gp.keyH.enterPressed && gp.player.stressLevel > 0) { // to access event with a key press only
-            if (gp.player.stressLevel > 0) {
+            if (gp.player.stressLevel > 0) { //add condition for if brightness level too high as another option with ||
                 gp.player.attackCanceled = true;
                 gp.playSFX(12);
-                gp.gameState = gameState;
-                gp.ui.currentDialogue = "Nice to have a sit down, I feel less stressed\nstraight away!";
-                gp.player.stressLevel -= 1;
+                gp.gameState = gp.sleepState;
+                gp.player.stressLevel = 0;
                 canTouchEvent = false;
             }
         }

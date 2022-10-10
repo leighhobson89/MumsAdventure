@@ -111,6 +111,11 @@ public class UI {
         if (gp.gameState == gp.tradeState) {
             drawTradeScreen();
         }
+
+        //SLEEP STATE
+        if (gp.gameState == gp.sleepState) {
+            drawSleepScreen();
+        }
     }
 
     public void drawGameOverScreen() {
@@ -1029,6 +1034,28 @@ public class UI {
                     gp.player.coin += price;
                     gp.playSFX(11);
                 }
+            }
+        }
+    }
+
+    public void drawSleepScreen() {
+        counter++;
+
+        if (counter < 120) {
+            gp.eManager.lighting.filterAlpha += 0.01f;
+            if (gp.eManager.lighting.filterAlpha > 1f) {
+                gp.eManager.lighting.filterAlpha = 1f;
+            }
+        }
+        if (counter >= 120) {
+            gp.eManager.lighting.filterAlpha -= 0.01f;
+            if (gp.eManager.lighting.filterAlpha <= 0f) {
+                gp.eManager.lighting.filterAlpha = 0f;
+                counter = 0;
+                gp.eManager.lighting.dayState = gp.eManager.lighting.day;
+                gp.eManager.lighting.dayCounter = 0;
+                gp.gameState = gp.dialogueState;
+                gp.ui.currentDialogue = "Nice to have a sit down, I feel less stressed\nstraight away!";
             }
         }
     }

@@ -9,6 +9,15 @@ public class Lighting {
 
     GamePanel gp;
     BufferedImage brightFilter;
+    public int dayCounter;
+    public float filterAlpha = 0f;
+
+    //Day State
+    public final int day = 0;
+    public final int dusk = 1;
+    public final int night = 2;
+    public final int dawn = 3;
+    public int dayState = day;
 
     public Lighting(GamePanel gp) {
         this.gp = gp;
@@ -66,9 +75,59 @@ public class Lighting {
             setLightSource();
             gp.player.lightUpdated = false;
         }
+
+        //Check the state of the day
+        if (dayState == day) {
+            dayCounter++;
+
+            if(dayCounter > 600) {
+                dayState = dusk;
+                dayCounter = 0;
+            }
+        }
+        if (dayState == dusk) {
+            filterAlpha += 0.001f;
+
+            if (filterAlpha > 1f) {
+                filterAlpha = 1f;
+                dayState = night;
+            }
+        }
+        if (dayState == night) {
+            dayCounter++;
+
+            if (dayCounter > 600) {
+                dayState = dawn;
+                dayCounter = 0;
+            }
+        }
+        if (dayState == dawn) {
+            filterAlpha -= 0.001f;
+
+            if (filterAlpha < 0f) {
+                filterAlpha = 0;
+                dayState = day;
+            }
+        }
     }
     public void draw(Graphics2D g2) {
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
         g2.drawImage(brightFilter, 0, 0, null);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+        //DEBUG
+        String dayNightSituation = "";
+
+        switch (dayState) {
+            case day: dayNightSituation = "Day"; break;
+            case dusk: dayNightSituation = "Dusk"; break;
+            case night: dayNightSituation = "Night"; break;
+            case dawn: dayNightSituation = "Dawn"; break;
+        }
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(50f));
+        g2.drawString(dayNightSituation, 800, 500);
+
     }
 
 
