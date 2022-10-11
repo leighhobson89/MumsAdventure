@@ -9,6 +9,7 @@ public class OBJ_StairsHall extends Entity {
 
         super(gp);
 
+        type = type_obstacle;
         name = "StairsHall";
         down1 = setup("/objects/stairsHall", gp.tileSize, gp.tileSize);
         direction = "down";

@@ -9,6 +9,8 @@ public class OBJ_TelephoneHall extends Entity {
 
         super(gp);
 
+        type = type_obstacle;
+        collision = true;
         name = "TelephoneHall";
         down1 = setup("/objects/telephoneHall", gp.tileSize, gp.tileSize);
         direction = "down";

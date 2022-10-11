@@ -30,7 +30,7 @@ public class Lighting {
         Graphics2D g2 = (Graphics2D)brightFilter.getGraphics();
 
         if(gp.player.currentLight == null) {
-            g2.setColor(new Color(255, 255, 255, 125));
+            g2.setColor(new Color(255, 255, 255, 150));
         } else {
             //Get the center x and y of the visible circle
             int centerX = gp.player.screenX + (gp.tileSize)/2;
@@ -80,7 +80,7 @@ public class Lighting {
         if (dayState == day) {
             dayCounter++;
 
-            if(dayCounter > 600) {
+            if(dayCounter > 3600) {
                 dayState = dusk;
                 dayCounter = 0;
             }
@@ -93,40 +93,40 @@ public class Lighting {
                 dayState = night;
             }
         }
-        if (dayState == night) {
-            dayCounter++;
-
-            if (dayCounter > 600) {
-                dayState = dawn;
-                dayCounter = 0;
-            }
-        }
-        if (dayState == dawn) {
-            filterAlpha -= 0.001f;
-
-            if (filterAlpha < 0f) {
-                filterAlpha = 0;
-                dayState = day;
-            }
-        }
+//        if (dayState == night) {
+//            dayCounter++;
+//
+//            if (dayCounter > 600) {
+//                dayState = dawn;
+//                dayCounter = 0;
+//            }
+//        }
+//        if (dayState == dawn) {
+//            filterAlpha -= 0.001f;
+//
+//            if (filterAlpha < 0f) {
+//                filterAlpha = 0;
+//                dayState = day;
+//            }
+//        }
     }
     public void draw(Graphics2D g2) {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
         g2.drawImage(brightFilter, 0, 0, null);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
-        //DEBUG
-        String dayNightSituation = "";
-
-        switch (dayState) {
-            case day: dayNightSituation = "Day"; break;
-            case dusk: dayNightSituation = "Dusk"; break;
-            case night: dayNightSituation = "Night"; break;
-            case dawn: dayNightSituation = "Dawn"; break;
-        }
-        g2.setColor(Color.WHITE);
-        g2.setFont(g2.getFont().deriveFont(50f));
-        g2.drawString(dayNightSituation, 800, 500);
+//        //DEBUG
+//        String dayNightSituation = "";
+//
+//        switch (dayState) {
+//            case day: dayNightSituation = "Day"; break;
+//            case dusk: dayNightSituation = "Dusk"; break;
+//            case night: dayNightSituation = "Night"; break;
+//            case dawn: dayNightSituation = "Dawn"; break;
+//        }
+//        g2.setColor(Color.WHITE);
+//        g2.setFont(g2.getFont().deriveFont(50f));
+//        g2.drawString(dayNightSituation, 800, 500);
 
     }
 

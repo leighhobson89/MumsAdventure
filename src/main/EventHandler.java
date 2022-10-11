@@ -126,7 +126,7 @@ public class EventHandler {
 
     public void chairDestressEvent () {
         //if (gp.keyH.enterPressed && gp.player.stressLevel > 0) { // to access event with a key press only
-            if (gp.player.stressLevel > 0) { //add condition for if brightness level too high as another option with ||
+            if (gp.player.stressLevel > 0 || gp.eManager.lighting.dayState != gp.eManager.lighting.day) {
                 gp.player.attackCanceled = true;
                 gp.playSFX(12);
                 gp.gameState = gp.sleepState;
