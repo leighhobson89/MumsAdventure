@@ -21,5 +21,7 @@ public class OBJ_Shovel extends Entity {
         attackArea.width = 36;
         attackArea.height = 36;
         isWeapon = true;
+        motion1_duration = 30;
+        motion2_duration = 75;
     }
 }

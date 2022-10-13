@@ -5,6 +5,7 @@ import entity.NPC_Merchant;
 import entity.NPC_Phoebe;
 import entity.NPC_Pip;
 import monster.MON_Spider;
+import monster.MON_WaspSwarm;
 import object.*;
 import tile_interactive.IT_WeedTile;
 
@@ -228,6 +229,9 @@ public class AssetSetter {
                 gp.monster[mapNum][monsterNumber] = new MON_Spider(gp);
                 gp.monster[mapNum][monsterNumber].newMonster = true;
                 break;
+            case "WaspSwarm":
+                gp.monster[mapNum][monsterNumber] = new MON_WaspSwarm(gp);
+                gp.monster[mapNum][monsterNumber].newMonster = true;
         }
         if (randomizeLocation) { // sets monster in any square up to 2 tiles away from player in any direction but never on the player
             Random rand = new Random();
@@ -246,6 +250,7 @@ public class AssetSetter {
         }
 
         monsterNumber++; //monster counter increments so that next call of method adds to next slot in monster array
+        System.out.println("MonsterNumber: " + monsterNumber);
 
         return monsterNumber;
     }

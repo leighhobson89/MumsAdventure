@@ -19,6 +19,8 @@ public class OBJ_Lavendar_Crocs extends Entity {
         price = 7;
         knockBackPower = 3;
         isWeapon = true;
+        motion1_duration = 5;
+        motion2_duration = 25;
     }
 
 }

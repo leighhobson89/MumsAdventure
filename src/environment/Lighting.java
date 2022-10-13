@@ -24,7 +24,7 @@ public class Lighting {
         setLightSource();
     }
 
-    public void setLightSource() { // implement this
+    public void setLightSource() {
         // Create a buffered image
         brightFilter = new BufferedImage(gp.screenWidth, gp.screenHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = (Graphics2D)brightFilter.getGraphics();
@@ -80,7 +80,7 @@ public class Lighting {
         if (dayState == day) {
             dayCounter++;
 
-            if(dayCounter > 1200) {
+            if(dayCounter > 3600) { //length of day
                 dayState = dusk;
                 dayCounter = 0;
             }
@@ -96,7 +96,7 @@ public class Lighting {
 //        if (dayState == night) {
 //            dayCounter++;
 //
-//            if (dayCounter > 600) {
+//            if (dayCounter > 600) { //length of night
 //                dayState = dawn;
 //                dayCounter = 0;
 //            }

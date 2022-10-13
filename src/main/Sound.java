@@ -42,6 +42,7 @@ public class Sound {
         soundURL[23] = getClass().getResource("/sound/shovelDig.wav");
         soundURL[24] = getClass().getResource("/sound/gameOverMum.wav");
         soundURL[25] = getClass().getResource("/sound/passOutMum.wav");
+        soundURL[26] = getClass().getResource("/sound/waspBuzz.wav");
     }
 
     public void setFile(int i) {

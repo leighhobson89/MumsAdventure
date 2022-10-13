@@ -141,6 +141,8 @@ public class Player extends Entity {
     public int getAttack() {
         if (currentWeapon != null) {
             attackArea = currentWeapon.attackArea;
+            motion1_duration = currentWeapon.motion1_duration;
+            motion2_duration = currentWeapon.motion2_duration;
             return attack = strength * currentWeapon.attackValue;
         } else {
             return 0;
@@ -326,60 +328,6 @@ public class Player extends Entity {
         }
     }
 
-    public void attacking() {
-        spriteCounter++; //spriteCounter is a timer for how long to show each sprite within the current frame of animation
-
-        if (spriteCounter <= 5) {
-            spriteNum = 1;
-        }
-        if (spriteCounter > 5 && spriteCounter <= 25) {
-            spriteNum = 2;
-
-            //Save the current worldX, worldY, solidArea
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int solidAreaWidth = solidArea.width;
-            int solidAreaHeight = solidArea.height;
-
-            //Adjust the player's worldX/Y for the attackArea
-            switch(direction) {
-                case "up": worldY -= attackArea.height; break;
-                case "down": worldY += attackArea.height; break;
-                case "left": worldX -= attackArea.width; break;
-                case "right": worldX += attackArea.width; break;
-            }
-
-            // attackArea becomes solidArea
-            solidArea.width = attackArea.width;
-            solidArea.height = attackArea.height;
-
-            // Check monster collision with the updated worldX, worldY and solidArea
-            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
-            damageMonster(monsterIndex, attack, currentWeapon.knockBackPower);
-            hitNPC(npcIndex);
-
-            //INTERACTIVE TILE COLLISION CHECKER
-            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
-            damageInteractiveTile(iTileIndex);
-
-            int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
-            damageProjectile(projectileIndex);
-
-            // After checking collision, restore the original data
-            worldX = currentWorldX;
-            worldY = currentWorldY;
-            solidArea.width = solidAreaWidth;
-            solidArea.height = solidAreaHeight;
-
-        }
-        if (spriteCounter > 25) {
-            spriteNum = 1;
-            spriteCounter = 0;
-            attacking = false;
-        }
-    }
-
     public void pickUpObject(int i) {
         if (i != 999) {
 
@@ -509,13 +457,17 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int i, int attack, int knockBackPower) {
+    public void damageMonster(int i, Entity attacker, int attack, int knockBackPower) {
         if (i != 999) {
             if (!gp.monster[gp.currentMap][i].invincible) {
-                gp.playSFX(6);
+                if (Objects.equals(gp.monster[gp.currentMap][i].name, "Spider")) {
+                    gp.playSFX(6);
+                } else if (Objects.equals(gp.monster[gp.currentMap][i].name, "WaspSwarm")) {
+                    gp.playSFX(26);
+                }
 
                 if(knockBackPower > 0) {
-                    knockBack(gp.monster[gp.currentMap][i], knockBackPower);
+                    setKnockBack(gp.monster[gp.currentMap][i], attacker, knockBackPower);
                 }
 
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
@@ -524,6 +476,7 @@ public class Player extends Entity {
                 }
                 gp.monster[gp.currentMap][i].stressLevel += damage;
                 gp.ui.addMessage(gp.monster[gp.currentMap][i].name + " receives " + damage + " damage!");
+                damageJustReceived = true;
                 gp.monster[gp.currentMap][i].invincible = true;
                 gp.monster[gp.currentMap][i].damageReaction(); //makes monster run away if player hits it
 
@@ -539,12 +492,6 @@ public class Player extends Entity {
                 }
             }
         }
-    }
-
-    public void knockBack(Entity entity, int knockbackPower) {
-        entity.direction = direction;
-        entity.speed += knockbackPower;
-        entity.knockBack = true;
     }
 
     public void damageInteractiveTile(int i) {

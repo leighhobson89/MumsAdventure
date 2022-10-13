@@ -9,9 +9,11 @@ public class OBJ_FrontGate extends Entity {
 
         super(gp);
 
+        type = type_obstacle;
         name = "FrontGate";
         down1 = setup("/objects/frontGate", gp.tileSize, gp.tileSize);
         direction = "down";
         collision = true;
+
     }
 }

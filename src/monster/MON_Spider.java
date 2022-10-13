@@ -18,6 +18,7 @@ public class MON_Spider extends Entity {
         type = type_monster;
         name = "Spider";
         defaultSpeed = 3;
+        chaseSpeed = 5;
         speed = defaultSpeed;
         monsterMaxStress = 10;
         stressLevel = 0;
@@ -49,47 +50,20 @@ public class MON_Spider extends Entity {
     public void setAction() {
 
         if(onPath) {
-            int goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-            int goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
-
-            searchPath(goalCol, goalRow);
+            //Check if it stops chasing
+            checkStopsChasingOrNot(gp.player, 15, 100);
+            //Search the direction to go
+            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
             //CODE TO MAKE MONSTER FIRE PROJECTILE WHEN ONPATH (COUNTERATTACK)
-//            int i = new Random().nextInt(200) + 1;
-//            if (i >197 && !projectile.alive && shotAvailableCounter == 30) {
-//                projectile.set(worldX, worldY, direction, true, this);
-//
-//                //CHECK VACANCY
-//                for (int j = 0; j < gp.projectile[1].length; j++) {
-//                    if (gp.projectile[gp.currentMap][j] == null) {
-//                        gp.projectile[gp.currentMap][j] = projectile;
-//                        break;
-//                    }
-//                }
-//            }
+            //Check if it shoots a projectile
+            checkShootOrNot(200, 30);
 
         } else {
-            actionLockCounter++;
-
-            if (actionLockCounter == 60) {
-                Random random = new Random();
-                int i = random.nextInt(100) + 1; //pick up a number from 1 to 100
-
-                if (i <= 25) {
-                    direction = "up";
-                }
-                if (i > 25 && i <= 50) {
-                    direction = "down";
-                }
-                if (i > 50 && i <= 75) {
-                    direction = "left";
-                }
-                if (i > 75) {
-                    direction = "right";
-                }
-                actionLockCounter = 0;
-
-            }
+            //Check if it starts chasing
+            checkStartsChasingOrNot(gp.player, 5, 100, damageJustReceived);
+            //Get a random direction
+            getRandomDirection();
         }
     }
     public void damageReaction() {
@@ -100,8 +74,10 @@ public class MON_Spider extends Entity {
         if (rand < 50) { //random chance of counterattacking player if hit it, or maybe it run away
             onPath = false;
             direction = gp.player.direction;
+            speed = defaultSpeed;
         } else {
             onPath = true; //attacks player then continues randomly
+            speed = chaseSpeed;
         }
     }
 

@@ -19,6 +19,8 @@ public class OBJ_Spatula extends Entity {
         price = 10;
         knockBackPower = 6;
         isWeapon = true;
+        motion1_duration = 4;
+        motion2_duration = 20;
     }
 
 }

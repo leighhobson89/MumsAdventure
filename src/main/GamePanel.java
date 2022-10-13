@@ -96,6 +96,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setNPC();
         aSetter.setObject();
+        aSetter.monsterNumber = aSetter.setMonster("WaspSwarm", aSetter.monsterNumber, 13, 18, false);
         player.weedCount = aSetter.setInteractiveTile();
         eManager.setup();
 
