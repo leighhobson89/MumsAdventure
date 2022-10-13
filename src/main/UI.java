@@ -1015,7 +1015,7 @@ public class UI {
             //SELL AN ITEM
             if (gp.keyH.enterPressed) {
                 if (gp.player.inventory.get(itemIndex) == gp.player.currentWeapon ||
-                        gp.player.inventory.get(itemIndex) == gp.player.currentArmour) {
+                        gp.player.inventory.get(itemIndex) == gp.player.currentArmour || gp.player.inventory.get(itemIndex) == gp.player.currentLight) {
                     commandNum = 0;
                     subState = 0;
                     gp.gameState = gp.dialogueState;

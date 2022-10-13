@@ -108,7 +108,7 @@ public class Player extends Entity {
         dexterity = 1; //more dexterity, less damage receives
         exp = 0;
         nextLevelExp = 6;
-        coin = 10;
+        coin = 100;
         maxStress = 10;
         maxMana = 5; //max number of things to throw
         mana = maxMana;
