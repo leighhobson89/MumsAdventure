@@ -83,6 +83,11 @@ public class AssetSetter {
 
         gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
         gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
+        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
         i++;
 
@@ -111,11 +116,6 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_StairsHall(gp);
-        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
-        i++;
-
         gp.obj[mapNum][i] = new OBJ_FrontDoorKey(gp);
         gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
@@ -139,16 +139,6 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_Spatula(gp);
         gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_FrontGateOpen(gp);
-        gp.obj[mapNum][i].worldX = 10 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_FrontGate(gp);
-        gp.obj[mapNum][i].worldX = 10 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Bin_Blue(gp);
@@ -181,12 +171,22 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
         i++;
 
-//        mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
-//
-//        gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
-//        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
-//        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-//        i++;
+        mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
+
+        gp.obj[mapNum][i] = new OBJ_Bin_Blue(gp);
+        gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bin_Green(gp);
+        gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bin_Grey(gp);
+        gp.obj[mapNum][i].worldX = 25 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
     }
 
     public void setNPC() {
