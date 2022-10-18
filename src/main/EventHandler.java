@@ -165,4 +165,14 @@ public class EventHandler {
         canTouchEvent = false;
         //add sound effect stairs
     }
+
+    public void cupboardHall() {
+        gp.aSetter.setObjectAfterStart("Old Cardigan", gp.currentMap, 24, 11);
+
+    }
+
+    public void kitchenCupBoard() {
+        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 23, 13);
+
+    }
 }

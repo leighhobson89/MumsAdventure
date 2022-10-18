@@ -38,12 +38,19 @@ public class AssetSetter {
         switch (name) { //chooses object
             case "Pip's Bone":
                 gp.obj[mapNum][i] = new OBJ_DogsBone_NotMagic(gp);
+                boneX = x * gp.tileSize;
+                boneY = y * gp.tileSize;
+                break;
+            case "Old Cardigan":
+                gp.obj[mapNum][i] = new OBJ_GrandmasCardigan(gp);
+                break;
+            case "Spatula":
+                gp.obj[mapNum][i] = new OBJ_Spatula(gp);
+                break;
         }
 
         gp.obj[mapNum][i].worldX = x * gp.tileSize;
         gp.obj[mapNum][i].worldY = y * gp.tileSize;
-        boneX = x * gp.tileSize;
-        boneY = y * gp.tileSize;
 
     }
 
@@ -54,6 +61,11 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_LightPills(gp);
         gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Cupboard2(gp);
+        gp.obj[mapNum][i].worldX = 24 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Pills(gp);
@@ -127,18 +139,8 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Lavendar_Crocs(gp);
-        gp.obj[mapNum][i].worldX = 21 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_GrandmasCardigan(gp);
         gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Spatula(gp);
-        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Bin_Blue(gp);
