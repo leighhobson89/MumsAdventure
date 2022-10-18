@@ -117,6 +117,11 @@ public class TileManager {
         setup(83, "lawnLeaves2", false);
         setup(84, "lawnLeaves3", false);
         setup(85, "lawnLeaves4", false);
+        setup(86, "rockeryShrub", true);
+        setup(87, "pathLawnTop", false);
+        setup(88, "lawnMiddleLeaves1", false);
+        setup(89, "lawnMiddleLeaves2", false);
+        setup(90, "pathLawnBottom", false);
 
     }
 
