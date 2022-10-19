@@ -18,6 +18,13 @@ public class OBJ_FrontDoor extends Entity {
         direction = "down";
         collision = true;
 
+        solidArea.x = 0;
+        solidArea.y = 0;
+        solidArea.width = 15;
+        solidArea.height = 48;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
     }
 
     public void interact() {

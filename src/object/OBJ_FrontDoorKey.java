@@ -23,14 +23,23 @@ public class OBJ_FrontDoorKey extends Entity {
     public boolean use(Entity entity) {
 
         gp.gameState = gp.dialogueState;
-        int objIndex = getDetected(entity, gp.obj, "FrontDoor");
+        int objIndexFront = getDetected(entity, gp.obj, "FrontDoor");
+        int objIndexBack = getDetected(entity, gp.obj, "BackDoor");
 
-        if (objIndex != 999) {
+        if (objIndexFront != 999) {
             gp.ui.currentDialogue = "This door is unlocked now!";
             doorUnlockedCount++;
             System.out.println("DoorUnlockedCount " + doorUnlockedCount);
             gp.playSFX(3);
-            gp.obj[gp.currentMap][objIndex] = null;
+            gp.obj[gp.currentMap][objIndexFront] = null;
+            gp.aSetter.setObjectAfterStart("FrontDoorOpen", gp.currentMap, 16, 11);
+        } else if (objIndexBack != 999) {
+            gp.ui.currentDialogue = "This door is unlocked now!";
+            doorUnlockedCount++;
+            System.out.println("DoorUnlockedCount " + doorUnlockedCount);
+            gp.playSFX(3);
+            gp.obj[gp.currentMap][objIndexBack] = null;
+            gp.aSetter.setObjectAfterStart("FrontDoorOpen", gp.currentMap, 30, 11);
         } else {
             gp.ui.currentDialogue = "I need to use this on the front or back door.";
             return false;

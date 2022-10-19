@@ -47,6 +47,9 @@ public class AssetSetter {
             case "Spatula":
                 gp.obj[mapNum][i] = new OBJ_Spatula(gp);
                 break;
+            case "FrontDoorOpen":
+                gp.obj[mapNum][i] = new OBJ_FrontDoorOpen(gp);
+                break;
         }
 
         gp.obj[mapNum][i].worldX = x * gp.tileSize;
@@ -103,22 +106,22 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_FrontDoorOpen(gp);
-        gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
-        i++;
+//        gp.obj[mapNum][i] = new OBJ_FrontDoorOpen(gp);
+//        gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
+//        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
+//        i++;
 
         gp.obj[mapNum][i] = new OBJ_FrontDoor(gp);
         gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_FrontDoorOpen(gp);
-        gp.obj[mapNum][i].worldX = 30 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
-        i++;
+//        gp.obj[mapNum][i] = new OBJ_FrontDoorOpen(gp);
+//        gp.obj[mapNum][i].worldX = 30 * gp.tileSize;
+//        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
+//        i++;
 
-        gp.obj[mapNum][i] = new OBJ_FrontDoor(gp);
+        gp.obj[mapNum][i] = new OBJ_BackDoor(gp);
         gp.obj[mapNum][i].worldX = 30 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
         i++;
