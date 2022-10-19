@@ -123,6 +123,8 @@ public class TileManager {
         setup(89, "lawnMiddleLeaves2", false);
         setup(90, "pathLawnBottom", false);
         setup(91, "pathLawnRight", false);
+        setup(92, "fence2", true);
+        setup(93, "fenceVertical", true);
 
     }
 

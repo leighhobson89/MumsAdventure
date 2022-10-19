@@ -539,6 +539,7 @@ public class Entity {
                 gp.player.worldX = gp.tileSize*19;
                 gp.player.worldY = gp.tileSize*17;
                 gp.player.stressLevel = 0;
+                gp.gameState = gp.sleepState;
             } else if (timesPassedOut > 2) { //change to be able to pass out this many times before passing out
                 gp.gameState = gp.gameOverState;
                 gp.stopMusic();
