@@ -150,6 +150,10 @@ public class CollisionChecker {
                             entity.collisionOn = false;
                             index = i;
                         }
+                        if ((Objects.equals(target[gp.currentMap][i].name, "Dad"))  && entity.type == entity.type_player) {
+                            entity.collisionOn = false;
+                            index = i;
+                        }
                     }
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
