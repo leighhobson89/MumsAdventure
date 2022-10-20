@@ -503,11 +503,12 @@ public class Player extends Entity {
                     if (gp.player.weedCount > 1) {
                         gp.player.weedCount--;
                         gp.iTile[1][i+gp.aSetter.mapNumTotal] = gp.iTile[1][i+gp.aSetter.mapNumTotal].getDestroyedForm(); //remove weed from upstairs view - **only works if interacive tiles in same location on all maps**
-                    } else if (gp.player.weedCount == 1) {
+                    } else if (gp.player.weedCount == 1) { //end of weeding mission
                         gp.npc[gp.currentMap][0].randomChummeringDialogues[44] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
                         gp.player.weedCount--;
-                    } else if (gp.player.weedCount == 0) {
-                        //end of weeding mission
+                        gp.gameState = gp.dialogueState;
+                        gp.ui.currentDialogue = "Wow I found hundred quid!\nNice reward for doing the weeding!";
+                        gp.aSetter.setObjectAfterStart("HundredQuid", gp.currentMap, gp.iTile[gp.currentMap][i].worldX/gp.tileSize, gp.iTile[gp.currentMap][i].worldY/gp.tileSize); //place supercoin where last weed dug up as reward
                     }
                 }
                 gp.iTile[gp.currentMap][i].playSfx();
