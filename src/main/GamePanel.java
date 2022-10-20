@@ -282,6 +282,12 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             //ADD ENTITIES TO THE LIST
+            //OBJECT
+            for (int i = 0; i < obj[1].length; i++) {
+                if (obj[currentMap][i] != null) {
+                    entityList.add(obj[currentMap][i]);
+                }
+            }
             //PLAYER
             entityList.add(player);
             if (!tempEntityList.contains(player)) {
@@ -315,21 +321,16 @@ public class GamePanel extends JPanel implements Runnable {
                     entityList.add(particleList.get(i));
                 }
             }
-            //OBJECT
-            for (int i = 0; i < obj[1].length; i++) {
-                if (obj[currentMap][i] != null) {
-                    entityList.add(obj[currentMap][i]);
-                }
-            }
 
-            //SORT
-            Collections.sort(entityList, new Comparator<Entity>() {
-                @Override
-                public int compare(Entity e1, Entity e2) {
 
-                    return Integer.compare(e1.worldY, e2.worldY);
-                }
-            });
+//            //SORT
+//            Collections.sort(entityList, new Comparator<Entity>() {
+//                @Override
+//                public int compare(Entity e1, Entity e2) {
+//
+//                    return Integer.compare(e1.worldY, e2.worldY);
+//                }
+//            });
 
             //DRAW ENTITIES
             for (int i= 0; i < entityList.size(); i++) {

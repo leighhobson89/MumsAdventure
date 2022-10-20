@@ -53,8 +53,7 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(0, 19, 18, "any")) {chairDestressEvent();}
-            else if (hit(0, 19, 10, "right")) {transitionUpDownStairs(1, 24, 10);}
+            if (hit(0, 19, 10, "right")) {transitionUpDownStairs(1, 24, 10);}
             else if (hit(1, 24, 10, "left")) {transitionUpDownStairs(0, 19, 10);}
         }
     }
@@ -124,7 +123,7 @@ public class EventHandler {
         return spiderCount;
     }
 
-    public void chairDestressEvent () {
+    public void DestressEvent() {
         //if (gp.keyH.enterPressed && gp.player.stressLevel > 0) { // to access event with a key press only
             if (gp.player.stressLevel > 0 || gp.eManager.lighting.dayState != gp.eManager.lighting.day) {
                 gp.player.attackCanceled = true;
@@ -132,6 +131,8 @@ public class EventHandler {
                 gp.gameState = gp.sleepState;
                 gp.player.stressLevel = 0;
                 canTouchEvent = false;
+            } else {
+                gp.ui.currentDialogue = "I'm fine, I don't need to\nrelax at the moment!";
             }
         }
     //}

@@ -101,25 +101,25 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_Cupboard3(gp);
+        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_MumsChair(gp);
+        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
         gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
         i++;
 
-//        gp.obj[mapNum][i] = new OBJ_FrontDoorOpen(gp);
-//        gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
-//        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
-//        i++;
-
         gp.obj[mapNum][i] = new OBJ_FrontDoor(gp);
         gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
         i++;
-
-//        gp.obj[mapNum][i] = new OBJ_FrontDoorOpen(gp);
-//        gp.obj[mapNum][i].worldX = 30 * gp.tileSize;
-//        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
-//        i++;
 
         gp.obj[mapNum][i] = new OBJ_BackDoor(gp);
         gp.obj[mapNum][i].worldX = 30 * gp.tileSize;
@@ -177,6 +177,26 @@ public class AssetSetter {
         i++;
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
+
+        gp.obj[mapNum][i] = new OBJ_BedMumDadBL(gp);
+        gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_BedMumDadBR(gp);
+        gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_BedMumDadTL(gp);
+        gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_BedMumDadTR(gp);
+        gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
+        i++;
 
         gp.obj[mapNum][i] = new OBJ_Bin_Blue(gp);
         gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
