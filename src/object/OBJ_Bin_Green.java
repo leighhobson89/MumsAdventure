@@ -15,7 +15,7 @@ public class OBJ_Bin_Green extends Entity {
 
         type = type_obstacle;
         name = "Bin_Green";
-        image = setup("/objects/bin_green", gp.tileSize, gp.tileSize);
+        image = setup("/objects/bin_Green", gp.tileSize, gp.tileSize);
         down1 = image;
         direction = "down";
 

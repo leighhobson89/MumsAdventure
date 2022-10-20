@@ -77,7 +77,7 @@ public class Lighting {
         }
 
         //Check the state of the day
-        if (dayState == day) {
+        if (dayState == day && gp.gameState == gp.playState) {
             dayCounter++;
 
             if(dayCounter > 3600) { //length of day
@@ -85,7 +85,7 @@ public class Lighting {
                 dayCounter = 0;
             }
         }
-        if (dayState == dusk) {
+        if (dayState == dusk && gp.gameState == gp.playState) {
             filterAlpha += 0.001f;
 
             if (filterAlpha > 1f) {
