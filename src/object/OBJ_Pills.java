@@ -27,6 +27,7 @@ public class OBJ_Pills extends Entity {
             gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
 
             if (gp.player.pillsConsumableNow) {
+                gp.gameState = gp.sleepState;
                 gp.eHandler.teleportPills(gp.currentMap);
                 return true;
             }

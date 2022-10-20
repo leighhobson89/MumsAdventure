@@ -33,9 +33,8 @@ public class OBJ_Cupboard2 extends Entity {
         gp.ui.currentDialogue = "This cardigan is nice and warm\nI should put this on!";
         if (!opened) {
             gp.playSFX(4);
-
-            gp.eHandler.cupboardHall();
             opened = true;
+            gp.eHandler.cupboardHall();
         } else {
             gp.gameState = gp.playState;
         }

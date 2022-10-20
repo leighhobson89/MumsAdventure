@@ -38,8 +38,8 @@ public class OBJ_BackGateSideways extends Entity {
             down1 = image2;
             collision = false;
             opened = true;
-            gp.eHandler.kitchenCupBoard();
             gp.player.spiderCount = gp.eHandler.spiderEvent(23, 13, gp.dialogueState, gp.player.spiderCount, true, false);
+            gp.eHandler.kitchenCupBoard();
         }
         else {
             gp.ui.currentDialogue = "The cupboard's already open!";

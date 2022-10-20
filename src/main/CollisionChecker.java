@@ -146,7 +146,7 @@ public class CollisionChecker {
                             entity.collisionOn = true;
                             index = i;
                         }
-                        if ((Objects.equals(target[gp.currentMap][i].name, "Phoebe") || Objects.equals(target[gp.currentMap][i].name, "Pip"))  && entity.type == entity.type_player) {
+                        if ((Objects.equals(target[gp.currentMap][i].name, "Phoebe") || Objects.equals(target[gp.currentMap][i].name, "Pip"))  && (entity.type == entity.type_npc || entity.type == entity.type_player)) {
                             entity.collisionOn = false;
                             index = i;
                         }
