@@ -274,6 +274,12 @@ public class GamePanel extends JPanel implements Runnable {
             //TILE
             tileM.draw(g2); //bottom layer first
 
+            for (int i = 0; i < obj[1].length; i++) {
+                if (obj[currentMap][i] != null) {
+                    obj[currentMap][i].draw(g2);
+                }
+            }
+
             //INTERACTIVE TILE
             for (int i = 0; i < iTile[1].length; i++) {
                 if (iTile[currentMap][i] != null) {
@@ -281,13 +287,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            //ADD ENTITIES TO THE LIST
-            //OBJECT
-            for (int i = 0; i < obj[1].length; i++) {
-                if (obj[currentMap][i] != null) {
-                    entityList.add(obj[currentMap][i]);
-                }
-            }
+//            //ADD ENTITIES TO THE LIST
             //PLAYER
             entityList.add(player);
             if (!tempEntityList.contains(player)) {
@@ -323,14 +323,14 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
 
-//            //SORT
-//            Collections.sort(entityList, new Comparator<Entity>() {
-//                @Override
-//                public int compare(Entity e1, Entity e2) {
-//
-//                    return Integer.compare(e1.worldY, e2.worldY);
-//                }
-//            });
+            //SORT
+            Collections.sort(entityList, new Comparator<Entity>() {
+                @Override
+                public int compare(Entity e1, Entity e2) {
+
+                    return Integer.compare(e1.worldY, e2.worldY);
+                }
+            });
 
             //DRAW ENTITIES
             for (int i= 0; i < entityList.size(); i++) {

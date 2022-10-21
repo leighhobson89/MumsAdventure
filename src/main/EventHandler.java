@@ -177,4 +177,12 @@ public class EventHandler {
         gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 23, 13);
 
     }
+
+    public void lightPillsEvent() {
+
+        gp.gameState = gp.dialogueState;
+        gp.ui.currentDialogue = "These light pills will help my dodgy eye\nfor a bit, phew!";
+
+        gp.player.countDownTimerForItemEffect(gp.player.LIGHT_PILLS_COUNT_DOWN_VALUE, "LightPills");
+    }
 }

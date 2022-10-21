@@ -12,10 +12,11 @@ public class Player extends Entity {
     KeyHandler keyH;
 
     public final int PILLS_COUNT_DOWN_VALUE = 20;
+    public final int LIGHT_PILLS_COUNT_DOWN_VALUE = 60;
     public final int STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS = 4;
-    public final int LIGHT_LEVEL_NEEDED_TO_CONSUME_PILLS = 10; //work it out later
     final int MAX_SPEED_UNDER_INFLUENCE = 4;
 
+    public boolean usedItemOrNot = false;
     public final int screenX;
     public final int screenY;
     public static int interval;
@@ -50,6 +51,7 @@ public class Player extends Entity {
         createTimer();
         if ("Pills".equals(effect)) {
             speed = 1;
+        } else if ("LightPills".equals(effect)) {
         }
         int period;
         final int[] timeLeft = new int[1];
@@ -76,12 +78,18 @@ public class Player extends Entity {
             } else if (Objects.equals(direction, "right")) {
                 direction = "left";
             }
+        } else if ("LightPills".equals(effect)) {
+            gp.player.lightUpdated = true;
+            gp.eManager.lighting.setLightSource();
         }
         if (interval == 1) {
             timer.cancel();
             if ("Pills".equals(effect)) {
                 speed = 2;
                 dizzyFlag = false;
+            }
+            if ("LightPills".equals(effect)) {
+                gp.player.lightUpdated = false;
             }
         }
         return --interval;
@@ -388,7 +396,7 @@ public class Player extends Entity {
     private int selectSfx(String object) {
         return switch (object) {
             case "Key" -> 1;
-            case "Tube of Pills" -> 2;
+            case "Tube of Pills", "Anti Brightness Pills" -> 2;
             case "Bin_Blue", "Lavender Crocs" -> 14;
             case "Acoustic Guitar" -> 17;
             case "Electric Guitar" -> 16;
@@ -579,7 +587,7 @@ public class Player extends Entity {
                 defense = getDefense();
                 gp.playSFX(11);
             }
-            if (selectedItem.type == type_light) {
+            if (selectedItem.type == type_light && !Objects.equals(selectedItem.name, "Anti Brightness Pills")) {
                 if (currentLight == selectedItem) {
                     currentLight = null;
                     gp.playSFX(11);
@@ -588,6 +596,17 @@ public class Player extends Entity {
                     gp.playSFX(11);
                 }
                 lightUpdated = true;
+            } else if (selectedItem.type == type_light && Objects.equals(selectedItem.name, "Anti Brightness Pills")) {
+                gp.playSFX(2);
+                selectedItem.use(this);
+                if (usedItemOrNot) {
+                    if(selectedItem.amount > 1) {
+                        selectedItem.amount--;
+                    } else {
+                        inventory.remove(itemIndex);
+                    }
+                    usedItemOrNot = false;
+                }
             }
             if (selectedItem.type == type_consumable) {
                 if(selectedItem.use(this)) {
