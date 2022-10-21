@@ -174,7 +174,7 @@ public class EventHandler {
     }
 
     public void kitchenCupBoard() {
-        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 24, 13);
+        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 23, 13);
 
     }
 }
