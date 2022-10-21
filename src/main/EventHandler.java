@@ -138,6 +138,7 @@ public class EventHandler {
     //}
 
     public void teleportPills (int currentMap) {
+        gp.gameState = gp.dialogueState;
         gp.ui.currentDialogue = "Bloody pills, I can't think straight!\nWhat am I doing up here??\nThe stress has gone at least!";
         int[][] optionArray = {{0,17,11},{0,18,13},{0,20,11},{0,23,15},{0,24,15},{0,28,11}}; //add some upstairs locations too
         Random random = new Random();
@@ -173,7 +174,7 @@ public class EventHandler {
     }
 
     public void kitchenCupBoard() {
-        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 23, 13);
+        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 24, 13);
 
     }
 }

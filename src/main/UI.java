@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UI {
     GamePanel gp;
@@ -855,7 +856,7 @@ public class UI {
             gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
             gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
             gp.eHandler.previousEventX = gp.player.worldX;
-            gp.eHandler.previousEventX = gp.player.worldY;
+            gp.eHandler.previousEventY = gp.player.worldY;
         }
     }
 
@@ -885,7 +886,7 @@ public class UI {
         g2.drawString("Buy", x, y);
         if (commandNum == 0) {
             g2.drawString(">", x - 24, y);
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 gp.playSFX(11);
                 subState = 1;
             }
@@ -894,7 +895,7 @@ public class UI {
         g2.drawString("Sell", x, y);
         if (commandNum == 1) {
             g2.drawString(">", x - 24, y);
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 gp.playSFX(11);
                 subState = 2;
             }
@@ -903,7 +904,7 @@ public class UI {
         g2.drawString("Leave", x, y);
         if (commandNum == 2) {
             g2.drawString(">", x - 24, y);
-            if (gp.keyH.enterPressed == true) {
+            if (gp.keyH.enterPressed) {
                 gp.playSFX(11);
                 commandNum = 0;
                 gp.gameState = gp.dialogueState;

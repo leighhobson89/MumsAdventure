@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
     public EventHandler eHandler = new EventHandler(this);
     Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
-    EnvironmentManager eManager = new EnvironmentManager(this);
+    public EnvironmentManager eManager = new EnvironmentManager(this);
     Map map = new Map(this);
     Thread gameThread;
 

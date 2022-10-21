@@ -27,8 +27,10 @@ public class OBJ_Pills extends Entity {
             gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
 
             if (gp.player.pillsConsumableNow) {
-                gp.gameState = gp.sleepState;
                 gp.eHandler.teleportPills(gp.currentMap);
+                gp.eManager.lighting.dayState = gp.eManager.lighting.day;
+                gp.eManager.lighting.filterAlpha = 0;
+                gp.eManager.lighting.dayCounter = 0;
                 return true;
             }
             gp.ui.currentDialogue = "I better save these until I'm stressed\nout, 'cos they have some crazy after\neffects!";
