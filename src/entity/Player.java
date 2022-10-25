@@ -52,6 +52,8 @@ public class Player extends Entity {
         if ("Pills".equals(effect)) {
             speed = 1;
         } else if ("LightPills".equals(effect)) {
+            gp.player.lightUpdated = true;
+            gp.eManager.lighting.update();
         }
         int period;
         final int[] timeLeft = new int[1];
@@ -79,8 +81,6 @@ public class Player extends Entity {
                 direction = "left";
             }
         } else if ("LightPills".equals(effect)) {
-            gp.player.lightUpdated = true;
-            gp.eManager.lighting.setLightSource();
         }
         if (interval == 1) {
             timer.cancel();
@@ -89,7 +89,9 @@ public class Player extends Entity {
                 dizzyFlag = false;
             }
             if ("LightPills".equals(effect)) {
-                gp.player.lightUpdated = false;
+                gp.player.lightUpdated = true;
+                gp.player.currentLight = null;
+                gp.eManager.lighting.update();
             }
         }
         return --interval;
@@ -598,6 +600,7 @@ public class Player extends Entity {
                 lightUpdated = true;
             } else if (selectedItem.type == type_light && Objects.equals(selectedItem.name, "Anti Brightness Pills")) {
                 gp.playSFX(2);
+                currentLight = selectedItem;
                 selectedItem.use(this);
                 if (usedItemOrNot) {
                     if(selectedItem.amount > 1) {
