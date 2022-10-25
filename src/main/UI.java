@@ -962,6 +962,7 @@ public class UI {
                 } else {
                     if (gp.player.canObtainItem(merchant.inventory.get(itemIndex))) {
                         gp.player.coin -= merchant.inventory.get(itemIndex).price;
+                        gp.playSFX(11);
                     } else {
                         subState = 0;
                         gp.gameState = gp.dialogueState;
@@ -1022,13 +1023,20 @@ public class UI {
                     gp.gameState = gp.dialogueState;
                     currentDialogue = "You need to unequip your item before you can sell it!";
                 } else {
-                    if (gp.player.inventory.get(itemIndex).amount > 1) {
-                        gp.player.inventory.get(itemIndex).amount--;
+                    if (gp.player.inventory.get(itemIndex).isSaleable) {
+                        if (gp.player.inventory.get(itemIndex).amount > 1) {
+                            gp.player.inventory.get(itemIndex).amount--;
+                        } else {
+                            gp.player.inventory.remove(itemIndex);
+                        }
+                        gp.player.coin += price;
+                        gp.playSFX(22);
                     } else {
-                        gp.player.inventory.remove(itemIndex);
+                        commandNum = 0;
+                        subState = 0;
+                        gp.gameState = gp.dialogueState;
+                        currentDialogue = "You cannot sell this item";
                     }
-                    gp.player.coin += price;
-                    gp.playSFX(11);
                 }
             }
         }

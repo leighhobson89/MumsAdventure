@@ -18,6 +18,7 @@ public class OBJ_LightPills extends Entity {
         down1 = setup("/objects/lightPills", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nYour Anti Brightness Pills";
+        isSaleable = true;
         price = 8;
         stackable = true;
         lightRadius = 576;

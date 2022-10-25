@@ -93,6 +93,7 @@ public class Entity {
     public int price;
     public int knockBackPower = 0;
     public boolean stackable;
+    public boolean isSaleable;
     public int amount = 1;
     public int lightRadius; //for different objects affecting lighting
 

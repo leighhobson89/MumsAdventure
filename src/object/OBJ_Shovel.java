@@ -23,5 +23,6 @@ public class OBJ_Shovel extends Entity {
         isWeapon = true;
         motion1_duration = 15; //30
         motion2_duration = 40; //75
+        isSaleable = false;
     }
 }

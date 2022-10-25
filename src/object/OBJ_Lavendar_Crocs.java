@@ -16,6 +16,7 @@ public class OBJ_Lavendar_Crocs extends Entity {
         attackArea.width = 36;
         attackArea.height = 36;
         description = "[" + name + "]\nYour Favourite Lavender\nCrocs!";
+        isSaleable = true;
         price = 7;
         knockBackPower = 3;
         isWeapon = true;

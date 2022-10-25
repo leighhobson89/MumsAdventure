@@ -8,11 +8,13 @@ public class OBJ_Guitar1 extends Entity {
     public OBJ_Guitar1(GamePanel gp) {
 
         super(gp);
-        stackable = true;
+
         name = "Acoustic Guitar";
         down1 = setup("/objects/guitar1", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nAcoustic Guitar";
+        price = 80;
+        isSaleable = true;
 
     }
 }

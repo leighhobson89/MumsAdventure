@@ -21,6 +21,7 @@ public class OBJ_Spatula extends Entity {
         isWeapon = true;
         motion1_duration = 4;
         motion2_duration = 20;
+        isSaleable = true;
     }
 
 }

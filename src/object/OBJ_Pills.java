@@ -19,6 +19,7 @@ public class OBJ_Pills extends Entity {
         description = "[" + name + "]\nYour Daily Pills";
         price = 5;
         stackable = true;
+        isSaleable = true;
     }
 
         public boolean use(Entity entity) {
