@@ -43,7 +43,9 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
-        getPlayerImage(gp.ui.colorOutfit);
+        getImage(gp.ui.colorOutfit);
+        //GUARD
+        //getGuardImage();
         setItems();
     }
 
@@ -142,6 +144,7 @@ public class Player extends Entity {
         stressLevel = 0;
         mana = maxMana;
         invincible = false;
+        transparent= false;
     }
 
     public void setItems() {
@@ -167,7 +170,7 @@ public class Player extends Entity {
         }
     }
 
-    public void getPlayerImage(String colorOutfit) {
+    public void getImage(String colorOutfit) {
         //MENU
         down1 = setup("/player/mum_down1_brown", gp.tileSize, gp.tileSize);
         down1_red = setup("/player/mum_down1_red", gp.tileSize, gp.tileSize);
@@ -185,7 +188,7 @@ public class Player extends Entity {
         }
     }
 
-    public void getPlayerAttackImage(String colorOutfit) {
+    public void getAttackImage(String colorOutfit) {
 
         if (currentWeapon != null) {
             if (currentWeapon.type == type_short_weapon) {
@@ -211,10 +214,50 @@ public class Player extends Entity {
         }
     }
 
+    public void getGuardImage() {
+        guardUp = setup("/player/mum_guard_up", gp.tileSize, gp.tileSize);
+        guardDown = setup("/player/mum_guard_down", gp.tileSize, gp.tileSize);
+        guardLeft = setup("/player/mum_guard_left", gp.tileSize, gp.tileSize);
+        guardRight = setup("/player/mum_guard_right", gp.tileSize, gp.tileSize);
+    }
+
     public void update() {
-        if (attacking) {
+
+        if (knockBack) {
+
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+            gp.cChecker.checkObject(this, true);
+            gp.cChecker.checkEntity(this, gp.npc);
+            gp.cChecker.checkEntity(this, gp.monster);
+            gp.cChecker.checkEntity(this, gp.iTile);
+
+            if(collisionOn) {
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            } else {
+                switch (knockBackDirection) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+
+            knockBackCounter++;
+            if (knockBackCounter == 10) {
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+        } else if (attacking) {
             attacking();
-        } else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.spacePressed) {
+        } else if (keyH.guardAltPressed) {
+            guarding = true;
+            guardCounter++;
+        }
+        else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.spacePressed) {
             if (keyH.upPressed && !dizzyFlag) {
                 direction = "up";
             } else if (keyH.downPressed && !dizzyFlag) {
@@ -283,8 +326,9 @@ public class Player extends Entity {
             }
 
             attackCanceled = false;
-
             gp.keyH.spacePressed = false;
+            guarding = false;
+            guardCounter = 0;
 
             spriteCounter++;
             if (spriteCounter > 12) { //walking speed of animation
@@ -302,6 +346,8 @@ public class Player extends Entity {
                 standCounter = 0;
                 spriteNum = 1;
             }
+            guarding = false;
+            guardCounter = 0;
         }
 
         if (gp.keyH.throwKeyPressed && !projectile.alive && shotAvailableCounter == 30 && projectile.haveResource(this)) {
@@ -327,6 +373,7 @@ public class Player extends Entity {
             invincibleCounter++;
             if(invincibleCounter > 120) {
                 invincible = false;
+                transparent = false;
                 invincibleCounter = 0;
             }
         }
@@ -362,7 +409,7 @@ public class Player extends Entity {
                         if (currentWeapon == null) {
                             currentWeapon = gp.obj[gp.currentMap][i];
                             attack = getAttack();
-                            getPlayerAttackImage(gp.ui.outfitChosen);
+                            getAttackImage(gp.ui.outfitChosen);
                         }
                     } else if (gp.obj[gp.currentMap][i].isArmour) {
                         if (currentArmour == null) {
@@ -438,10 +485,12 @@ public class Player extends Entity {
                     gp.player.pillsConsumableNow = gp.player.stressLevel >= STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
                 }
                 if (damage <= 0) {
-                    gp.ui.addMessage("The " + gp.monster[gp.currentMap][i].name + " got you but it can't stress you at your exp level!");
-                    damage = 0;
+                    gp.ui.addMessage("The " + this.name + " got you but it can barely stress you at this level");
+                    damage = 1;
+                    gp.ui.addMessage("Stress increased by " + damage + "!");
                 }
                 invincible = true;
+                transparent = true;
                 checkIfPassOutFromStress();
             }
         }
@@ -478,6 +527,10 @@ public class Player extends Entity {
 
                 if(knockBackPower > 0) {
                     setKnockBack(gp.monster[gp.currentMap][i], attacker, knockBackPower);
+                }
+
+                if (gp.monster[gp.currentMap][i].offBalance) {
+
                 }
 
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
@@ -573,7 +626,7 @@ public class Player extends Entity {
             if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
-                getPlayerAttackImage(gp.ui.outfitChosen);
+                getAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
             } else if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel)) {
                 currentWeapon = null;
@@ -682,6 +735,9 @@ public class Player extends Entity {
                     if (spriteNum == 1) { image = attackUp1;}
                     if (spriteNum == 2) { image = attackUp2;}
                 }
+                if (guarding) {
+                    image = guardUp;
+                }
                 break;
             case "down":
                 if (!attacking) {
@@ -691,6 +747,9 @@ public class Player extends Entity {
                 if (attacking) {
                     if (spriteNum == 1) { image = attackDown1;}
                     if (spriteNum == 2) { image = attackDown2;}
+                }
+                if (guarding) {
+                    image = guardDown;
                 }
                 break;
             case "left":
@@ -703,6 +762,9 @@ public class Player extends Entity {
                     if (spriteNum == 1) { image = attackLeft1;}
                     if (spriteNum == 2) { image = attackLeft2;}
                 }
+                if (guarding) {
+                    image = guardLeft;
+                }
                 break;
             case "right":
                 if (!attacking) {
@@ -713,10 +775,13 @@ public class Player extends Entity {
                     if (spriteNum == 1) { image = attackRight1;}
                     if (spriteNum == 2) { image = attackRight2;}
                 }
+                if (guarding) {
+                    image = guardRight;
+                }
                 break;
         }
 
-        if (invincible) {
+        if (transparent) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
         g2.drawImage(image, tempScreenX, tempScreenY, null);

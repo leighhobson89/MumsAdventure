@@ -25,6 +25,7 @@ public class MON_Spider extends Entity {
         attack = 2;
         defense = 0;
         exp = 2;
+        knockBackPower = 5;
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;

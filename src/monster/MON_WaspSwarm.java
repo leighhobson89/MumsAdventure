@@ -25,6 +25,7 @@ public class MON_WaspSwarm extends Entity {
         attack = 3;
         defense = 2;
         exp = 4;
+        knockBackPower = 6;
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;

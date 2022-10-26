@@ -14,7 +14,7 @@ public class Entity {
 
     ArrayList<Integer> usedChummeringDialogues = new ArrayList<>();
     public BufferedImage dyingImage, up1, up2, down1, down2, left1, left2, right1, right2, down1_red, down1_purple;
-    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2, guardUp, guardDown, guardLeft, guardRight;
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(8, 16, 32, 32);
     public Rectangle attackArea = new Rectangle(0,0,0,0);
@@ -38,6 +38,9 @@ public class Entity {
     public boolean onPath = false;
     public boolean knockBack = false;
     public String knockBackDirection;
+    public boolean guarding = false;
+    public boolean transparent = false;
+    public boolean offBalance = false;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -47,6 +50,8 @@ public class Entity {
     int hpBarCounter = 0;
     public int shotAvailableCounter = 0;
     int knockBackCounter = 0;
+    public int guardCounter = 0;
+    public int offBalanceCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -339,6 +344,14 @@ public class Entity {
         if(shotAvailableCounter < 30) { //bug fix for close encounter projectile duplication
             shotAvailableCounter++;
         }
+
+        if (offBalance) {
+            offBalanceCounter++;
+            if (offBalanceCounter > 60) {
+                offBalance = false;
+                offBalanceCounter = 0;
+            }
+        }
     }
 
     public void checkAttackOrNot(int rate, int straight, int horizontal) { //for monsters that attack with weapon
@@ -435,6 +448,26 @@ public class Entity {
         }
     }
 
+    public String getOppositeDirection(String direction) {
+        String oppositeDirection = "";
+
+        switch (direction) {
+            case "up":
+                oppositeDirection = "down";
+                break;
+            case "down":
+                oppositeDirection = "up";
+                break;
+            case "left":
+                oppositeDirection = "right";
+                break;
+            case "right":
+                oppositeDirection = "left";
+                break;
+        }
+        return oppositeDirection;
+    }
+
     public void attacking() {
         spriteCounter++; //spriteCounter is a timer for how long to show each sprite within the current frame of animation
 
@@ -501,19 +534,43 @@ public class Entity {
         } else if (!gp.player.invincible && !this.dying) {
 
             int damage = attack - gp.player.defense;
-            if (damage > 0) {
-                gp.ui.addMessage("The " + this.name + " got you! Your stress increases by " + damage + "!");
+
+            //Setup guard direction
+            String canGuardDirection = getOppositeDirection(direction);
+
+            if (gp.player.guarding && gp.player.direction.equals(canGuardDirection)) { //if successful guard block
+                //PARRY
+                if (gp.player.guardCounter < 10) { //this number can be up to 60 - easier to parry the higher the number
+                    damage = 0;
+//                    gp.playSFX(PARRY SFX); //add sound fx for parry
+                    setKnockBack(this, gp.player, knockBackPower);
+                    offBalance = true;
+                    spriteCounter -= 60;
+                } else {
+                    //NORMAL GUARD
+                    damage /= 3; //damage reduced to a third
+//                  gp.playSFX(GUARDING/BLOCKING SFX); //add sound fx for guard/block
+                }
+            } else { //not guarding
+                if (damage > 0) {
+                    gp.ui.addMessage("The " + this.name + " got you! Your stress increases by " + damage + "!");
+                }
+                if (damage <= 0) {
+                    gp.ui.addMessage("The " + this.name + " got you but it can barely stress you at this level");
+                    damage = 1;
+                    gp.ui.addMessage("Stress increased by " + damage + "!");
+                }
+                if (Objects.equals(this.name, "Spider")) {
+                    gp.playSFX(6);
+                } else if (Objects.equals(this.name, "WaspSwarm")) {
+                    gp.playSFX(26);
+                }
             }
-            if (damage <= 0) {
-                gp.ui.addMessage("The " + this.name + " got you but it can't stress you at your exp level!");
-                damage = 0;
+            if (damage != 0) {
+                gp.player.transparent = true;
+                setKnockBack(gp.player, this, knockBackPower);
             }
-            System.out.println("this.name = " + this.name);
-            if (Objects.equals(this.name, "Spider")) {
-                gp.playSFX(6);
-            } else if (Objects.equals(this.name, "WaspSwarm")) {
-                gp.playSFX(26);
-            }
+
             gp.player.stressLevel += damage;
             gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
             gp.player.invincible = true;

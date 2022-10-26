@@ -67,7 +67,7 @@ public class Projectile extends Entity {
             boolean tileState = gp.cChecker.checkTile(this);
             if (!gp.player.invincible && contactPlayer) {
                 damagePlayer(attack);
-//                generateParticle(user.projectile, gp.player); //ONLY IF NPC OR MONSTER THROWS OBJECT
+//                generateParticle(user.projectile, user.projectile); //ONLY IF NPC OR MONSTER THROWS OBJECT
                 gp.gameState = gp.dialogueState;
                 gp.ui.currentDialogue = "Oww ya stupid sod, be careful will yer!";
                 gp.playSFX(8);

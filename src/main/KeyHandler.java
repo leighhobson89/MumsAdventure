@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed, throwKeyPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed, throwKeyPressed, guardAltPressed;
     long MUSIC_POSITION_PAUSE = 0;
     boolean musicPlaying = true;
 
@@ -101,25 +101,25 @@ public class KeyHandler implements KeyListener {
                     gp.ui.colorOutfit = "red";
                     gp.ui.outfitChosen = gp.ui.colorOutfit;
                     gp.gameState = gp.playState;
-                    gp.player.getPlayerImage(gp.ui.colorOutfit);
+                    gp.player.getImage(gp.ui.colorOutfit);
                 }
                 if (gp.ui.commandNum == 1) { //BROWN
                     gp.ui.colorOutfit = "brown";
                     gp.ui.outfitChosen = gp.ui.colorOutfit;
                     gp.gameState = gp.playState;
-                    gp.player.getPlayerImage(gp.ui.colorOutfit);
+                    gp.player.getImage(gp.ui.colorOutfit);
                 }
                 if (gp.ui.commandNum == 2) { //PURPLE
                     gp.ui.colorOutfit = "purple";
                     gp.ui.outfitChosen = gp.ui.colorOutfit;
                     gp.gameState = gp.playState;
-                    gp.player.getPlayerImage(gp.ui.colorOutfit);
+                    gp.player.getImage(gp.ui.colorOutfit);
                 }
                 if (gp.ui.commandNum == 3) { //BACK
                     gp.ui.titleScreenState = 0;
                     gp.ui.commandNum = 0;
                 }
-                gp.player.getPlayerAttackImage(gp.ui.outfitChosen);
+                gp.player.getAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
             }
         }
@@ -181,6 +181,10 @@ public class KeyHandler implements KeyListener {
                     gp.map.miniMapOn = false;
                 }
             }
+            //GUARD
+//            if (code == KeyEvent.VK_ALT) {
+//                guardAltPressed = true;
+//            }
             //DEBUG
             if (code == KeyEvent.VK_D) {
                 showDebugText = !showDebugText; //toggle draw speed information with 'D' key
@@ -416,5 +420,12 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_T) {
             throwKeyPressed = false;
         }
+        if (code == KeyEvent.VK_ENTER) {
+            enterPressed = false;
+        }
+        //GUARD
+//        if (code == KeyEvent.VK_ALT) {
+//            guardAltPressed = false;
+//        }
     }
 }
