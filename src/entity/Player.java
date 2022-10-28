@@ -168,6 +168,26 @@ public class Player extends Entity {
         }
     }
 
+    public int getCurrentWeaponSlot() {
+        int currentWeaponSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentWeapon) {
+                currentWeaponSlot = i;
+            }
+        }
+        return currentWeaponSlot;
+    }
+
+    public int getCurrentArmourSlot() {
+        int currentArmourSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentArmour) {
+                currentArmourSlot = i;
+            }
+        }
+        return currentArmourSlot;
+    }
+
     public int getDefense() {
         if (currentArmour != null) {
             return defense = dexterity * currentArmour.defenseValue;
@@ -450,7 +470,7 @@ public class Player extends Entity {
 
     private int selectSfx(String object) {
         return switch (object) {
-            case "Key" -> 1;
+            case "FrontBackDoorKey" -> 1;
             case "Tube of Pills", "Anti Brightness Pills" -> 2;
             case "Bin_Blue", "Lavender Crocs" -> 14;
             case "Acoustic Guitar" -> 17;
@@ -701,7 +721,7 @@ public class Player extends Entity {
         boolean canObtain = false;
 
         // CHECK IF ITEM IS STACKABLE
-        if(!Objects.equals(item.name, "FrontDoorOpen")) {
+        if(!Objects.equals(item.name, "FrontBackDoorOpen")) {
             if (item.stackable) {
                 int index = searchItemInInventory(item.name);
 

@@ -44,12 +44,12 @@ public class OBJ_DogsBone_NotMagic extends Projectile {
     }
 
     public boolean haveResource(Entity user) {
-        boolean haveResource = false;
+        gp.player.haveResource = false;
 
         if (user.boneCount >= useCost) {
-            haveResource = true;
+            gp.player.haveResource = true;
         }
-        return haveResource;
+        return gp.player.haveResource;
     }
 
     public void subtractResource(Entity user) {

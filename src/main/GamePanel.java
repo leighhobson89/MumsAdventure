@@ -117,7 +117,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void resetGame(boolean restart) {
-        if (keyH.musicPlaying) {
+        if (!keyH.musicPlaying) {
             playMusic(0, false, 0);
         }
         player.setDefaultPositions();
@@ -130,6 +130,7 @@ public class GamePanel extends JPanel implements Runnable {
             aSetter.setObject();
             player.weedCount = aSetter.setInteractiveTile();
             eManager.lighting.resetDay();
+            keyH.musicPlaying = true;
         }
     }
 

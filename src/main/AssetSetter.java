@@ -47,8 +47,8 @@ public class AssetSetter {
             case "Spatula":
                 gp.obj[mapNum][i] = new OBJ_Spatula(gp);
                 break;
-            case "FrontDoorOpen":
-                gp.obj[mapNum][i] = new OBJ_FrontDoorOpen(gp);
+            case "FrontBackDoorOpen":
+                gp.obj[mapNum][i] = new OBJ_FrontBackDoorOpen(gp);
                 break;
             case "HundredQuid":
                 gp.obj[mapNum][i] = new OBJ_SuperCoin(gp);
@@ -134,7 +134,7 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_FrontDoorKey(gp);
+        gp.obj[mapNum][i] = new OBJ_FrontBackDoorKey(gp);
         gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
         i++;

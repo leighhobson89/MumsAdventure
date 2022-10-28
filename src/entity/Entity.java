@@ -88,6 +88,9 @@ public class Entity {
     public boolean speedBoost;
     public boolean firstTimePickUpBone;
     public int doorUnlockedCount;
+    public boolean savedWithAWeaponEquipped;
+    public boolean savedWithAnArmourEquipped;
+    public boolean haveResource;
 
     //ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();

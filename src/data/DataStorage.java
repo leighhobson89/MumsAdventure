@@ -23,8 +23,22 @@ public class DataStorage implements Serializable {
     int timesPassedOut;
     boolean pillsConsumableNow;
     int boneIndex;
+    boolean musicPlaying;
+    boolean savedWithAWeaponEquipped;
+    boolean savedWithAnArmourEquipped;
+    boolean savedWithBoneEquipped;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();
     ArrayList<Integer> itemAmounts = new ArrayList<>();
+    int currentWeaponSlot;
+    int currentArmourSlot;
+
+    //OBJECT ON MAP
+    String[][] mapObjectNames;
+    int[][] mapObjectWorldX;
+    int[][] mapObjectWorldY;
+    String[][] mapObjectLootNames; //Only needed if loot functionality implemented
+    boolean[][] mapObjectOpened;
+
 }

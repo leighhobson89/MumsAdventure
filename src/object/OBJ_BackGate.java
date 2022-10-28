@@ -34,7 +34,7 @@ public class OBJ_BackGate extends Entity {
         if (!opened) {
             gp.playSFX(4);
 
-//            StringBuilder sb = new StringBuilder(); //for loot
+//            StringBuilder sb = new StringBuilder(); //for loot objects only like chests
 //            sb.append("You opened the door");
 
             gp.ui.currentDialogue = "Back gate opened.";

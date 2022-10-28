@@ -8,7 +8,7 @@ public class KeyHandler implements KeyListener {
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed, throwKeyPressed, guardAltPressed;
     long MUSIC_POSITION_PAUSE = 0;
-    boolean musicPlaying = true;
+    public boolean musicPlaying = true;
 
     //DEBUG
     boolean showDebugText;
