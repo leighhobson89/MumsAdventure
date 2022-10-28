@@ -2,6 +2,8 @@ package data;
 
 import entity.Entity;
 import main.GamePanel;
+import monster.MON_Spider;
+import monster.MON_WaspSwarm;
 import object.*;
 
 import java.io.*;
@@ -52,6 +54,16 @@ public class SaveLoad {
             case "TelephoneHall": obj = new OBJ_TelephoneHall(gp); break;
         }
         return obj;
+    }
+
+    public Entity getMonster(String itemName) {
+        Entity monster = null;
+
+        switch(itemName) {
+            case "Spider": monster = new MON_Spider(gp); break;
+            case "WaspSwarm": monster = new MON_WaspSwarm(gp); break;
+        }
+        return monster;
     }
 
     public void save() {
@@ -124,6 +136,43 @@ public class SaveLoad {
                             ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.name;
                         }
                         ds.mapObjectOpened[mapNum][i] = gp.obj[mapNum][i].opened;
+                    }
+                }
+            }
+
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+                for (int i = 0; i < gp.obj[1].length; i++) {
+                    if (gp.obj[mapNum][i] == null) {
+                        ds.mapObjectNames[mapNum][i] = "NA";
+                    } else {
+                        ds.mapObjectNames[mapNum][i] = gp.obj[mapNum][i].name;
+                        ds.mapObjectWorldX[mapNum][i] = gp.obj[mapNum][i].worldX;
+                        ds.mapObjectWorldY[mapNum][i] = gp.obj[mapNum][i].worldY;
+                        if (gp.obj[mapNum][i].loot != null) {
+                            ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.name;
+                        }
+                        ds.mapObjectOpened[mapNum][i] = gp.obj[mapNum][i].opened;
+                    }
+                }
+            }
+
+            //MONSTERS ON MAP
+            ds.mapMonsterNames = new String[gp.maxMap][gp.monster[1].length];
+            ds.mapMonsterWorldX = new int[gp.maxMap][gp.monster[1].length];
+            ds.mapMonsterWorldY = new int[gp.maxMap][gp.monster[1].length];
+            ds.mapMonsterHealth = new int[gp.maxMap][gp.monster[1].length];
+            ds.mapMonsterDirection = new String[gp.maxMap][gp.monster[1].length];
+
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+                for (int i = 0; i < gp.monster[1].length; i++) {
+                    if (gp.monster[mapNum][i] == null) {
+                        ds.mapMonsterNames[mapNum][i] = "NA";
+                    } else {
+                        ds.mapMonsterNames[mapNum][i] = gp.monster[mapNum][i].name;
+                        ds.mapMonsterWorldX[mapNum][i] = gp.monster[mapNum][i].worldX;
+                        ds.mapMonsterWorldY[mapNum][i] = gp.monster[mapNum][i].worldY;
+                        ds.mapMonsterHealth[mapNum][i] = gp.monster[mapNum][i].stressLevel;
+                        ds.mapMonsterDirection[mapNum][i] = gp.monster[mapNum][i].direction;
                     }
                 }
             }
@@ -216,6 +265,22 @@ public class SaveLoad {
                     }
                 }
             }
+
+            //MONSTERS ON MAP
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+                for (int i = 0; i < gp.monster[1].length; i++) {
+                    if (ds.mapObjectNames[mapNum][i].equals("NA")) {
+                        gp.monster[mapNum][i] = null;
+                    } else {
+                        gp.monster[mapNum][i] = getMonster(ds.mapMonsterNames[mapNum][i]);
+                        gp.monster[mapNum][i].worldX = ds.mapMonsterWorldX[mapNum][i];
+                        gp.monster[mapNum][i].worldY = ds.mapMonsterWorldY[mapNum][i];
+                        gp.monster[mapNum][i].stressLevel = ds.mapMonsterHealth[mapNum][i];
+                        gp.monster[mapNum][i].direction = ds.mapMonsterDirection[mapNum][i];
+                    }
+                }
+            }
+
 
         } catch (Exception e) {
             System.out.println("Load Exception!");

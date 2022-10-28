@@ -41,4 +41,11 @@ public class DataStorage implements Serializable {
     String[][] mapObjectLootNames; //Only needed if loot functionality implemented
     boolean[][] mapObjectOpened;
 
+    //MONSTERS ON MAP
+    String[][] mapMonsterNames;
+    int[][] mapMonsterWorldX;
+    int[][] mapMonsterWorldY;
+    int[][] mapMonsterHealth;
+    String[][] mapMonsterDirection;
+
 }
