@@ -6,14 +6,11 @@ import main.GamePanel;
 public class OBJ_BackGate extends Entity {
 
     GamePanel gp;
-    //    Entity loot;
-    boolean opened = false;
 
-    public OBJ_BackGate(GamePanel gp) { // , Entity loot
+    public OBJ_BackGate(GamePanel gp) {
 
         super(gp);
         this.gp = gp;
-//        this.loot = loot;
 
         type = type_obstacle;
 

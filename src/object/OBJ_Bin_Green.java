@@ -6,7 +6,6 @@ import main.GamePanel;
 public class OBJ_Bin_Green extends Entity {
 
     GamePanel gp;
-    boolean opened = false;
 
     public OBJ_Bin_Green(GamePanel gp) {
 

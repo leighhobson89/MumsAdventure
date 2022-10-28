@@ -6,7 +6,6 @@ import main.GamePanel;
 public class OBJ_InsideDoor extends Entity {
 
     GamePanel gp;
-    boolean opened = false;
 
     public OBJ_InsideDoor(GamePanel gp) {
 

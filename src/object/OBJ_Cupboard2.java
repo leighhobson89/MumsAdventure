@@ -6,7 +6,6 @@ import main.GamePanel;
 public class OBJ_Cupboard2 extends Entity {
 
     GamePanel gp;
-    boolean opened = false;
 
     public OBJ_Cupboard2(GamePanel gp) {
 
