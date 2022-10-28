@@ -72,8 +72,9 @@ public class KeyHandler implements KeyListener {
                     gp.playSFX(11);
                 }
                 if (gp.ui.commandNum == 1) { //LOAD GAME
+                    gp.saveLoad.load();
+                    gp.gameState = gp.playState;
                     gp.playSFX(11);
-                    //TO DO
                 }
                 if (gp.ui.commandNum == 2) { //QUIT
                     gp.playSFX(11);
@@ -101,19 +102,19 @@ public class KeyHandler implements KeyListener {
                     gp.ui.colorOutfit = "red";
                     gp.ui.outfitChosen = gp.ui.colorOutfit;
                     gp.gameState = gp.playState;
-                    gp.player.getImage(gp.ui.colorOutfit);
+                    gp.player.getImage(gp.ui.colorOutfit, false);
                 }
                 if (gp.ui.commandNum == 1) { //BROWN
                     gp.ui.colorOutfit = "brown";
                     gp.ui.outfitChosen = gp.ui.colorOutfit;
                     gp.gameState = gp.playState;
-                    gp.player.getImage(gp.ui.colorOutfit);
+                    gp.player.getImage(gp.ui.colorOutfit, false);
                 }
                 if (gp.ui.commandNum == 2) { //PURPLE
                     gp.ui.colorOutfit = "purple";
                     gp.ui.outfitChosen = gp.ui.colorOutfit;
                     gp.gameState = gp.playState;
-                    gp.player.getImage(gp.ui.colorOutfit);
+                    gp.player.getImage(gp.ui.colorOutfit, false);
                 }
                 if (gp.ui.commandNum == 3) { //BACK
                     gp.ui.titleScreenState = 0;
@@ -294,13 +295,13 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
-                gp.retry();
+                gp.resetGame(false);
                 gp.gameState = gp.playState;
             } else if (gp.ui.commandNum == 1) {
                 gp.ui.titleScreenState = 0;
                 gp.ui.commandNum = 0;
                 gp.gameState = gp.titleState;
-                gp.restart();
+                gp.resetGame(true);
             }
         }
     }

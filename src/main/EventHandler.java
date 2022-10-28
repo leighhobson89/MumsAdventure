@@ -132,8 +132,9 @@ public class EventHandler {
                 gp.player.stressLevel = 0;
                 canTouchEvent = false;
             } else {
-                gp.ui.currentDialogue = "I'm fine, I don't need to\nrelax at the moment!";
+                gp.ui.currentDialogue = "I'm fine, I don't need to\nrelax at the moment!\n(Game Saved!)";
             }
+            gp.saveLoad.save();
         }
     //}
 

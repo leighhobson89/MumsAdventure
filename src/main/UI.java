@@ -826,7 +826,7 @@ public class UI {
                 gp.ui.titleScreenState = 0;
                 gp.ui.commandNum = 0;
                 gp.gameState = gp.titleState;
-                gp.restart();
+                gp.resetGame(true);
             }
         }
         //NO
@@ -1059,7 +1059,7 @@ public class UI {
                 gp.eManager.lighting.dayState = gp.eManager.lighting.day;
                 gp.eManager.lighting.dayCounter = 0;
                 gp.gameState = gp.dialogueState;
-                gp.ui.currentDialogue = "Nice to have a rest, I feel less stressed\nstraight away!";
+                gp.ui.currentDialogue = "Nice to have a rest, I feel less stressed\nstraight away!\n(Game Saved!)";
             }
         }
     }

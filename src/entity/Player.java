@@ -43,10 +43,6 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
-        getImage(gp.ui.colorOutfit);
-        //GUARD
-        //getGuardImage();
-        setItems();
     }
 
     public void countDownTimerForItemEffect(int value, String effect) {
@@ -128,10 +124,16 @@ public class Player extends Entity {
         stressLevel = 0;
         currentWeapon = null;
         currentArmour = null;
+        currentLight = null;
 //        projectile = new OBJ_PipsToy_Magic(gp);
         projectile = new OBJ_DogsBone_NotMagic(gp); //activate this for projectile that doesn't affect toys in ui when wanting to add bone that can be picked up after throwing or something : Change sound too if needed
         attack = 0;
         defense = 0;
+
+        getImage(gp.ui.colorOutfit, false);
+        //GUARD
+        //getGuardImage();
+        setItems();
     }
 
     public void setDefaultPositions() {
@@ -140,11 +142,15 @@ public class Player extends Entity {
           direction = "up";
     }
 
-    public void restoreStressAndMana() {
+    public void restoreStatus() {
         stressLevel = 0;
         mana = maxMana;
         invincible = false;
         transparent= false;
+        attacking = false;
+        guarding = false;
+        knockBack = false;
+        lightUpdated = true;
     }
 
     public void setItems() {
@@ -170,13 +176,13 @@ public class Player extends Entity {
         }
     }
 
-    public void getImage(String colorOutfit) {
+    public void getImage(String colorOutfit, boolean loadGame) {
         //MENU
         down1 = setup("/player/mum_down1_brown", gp.tileSize, gp.tileSize);
         down1_red = setup("/player/mum_down1_red", gp.tileSize, gp.tileSize);
         down1_purple = setup("/player/mum_down1_purple", gp.tileSize, gp.tileSize);
 
-        if (gp.gameState == gp.playState) {
+        if (gp.gameState == gp.playState || loadGame) {
             up1 = setup("/player/mum_up1_" + colorOutfit, gp.tileSize, gp.tileSize); //16 x 16 images
             up2 = setup("/player/mum_up2_" + colorOutfit, gp.tileSize, gp.tileSize);
             down1 = setup("/player/mum_down1_" + colorOutfit, gp.tileSize, gp.tileSize);
