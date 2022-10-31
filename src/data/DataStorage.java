@@ -48,4 +48,8 @@ public class DataStorage implements Serializable {
     int[][] mapMonsterHealth;
     String[][] mapMonsterDirection;
 
+    //INTERACTIVE TILES STATUS ON MAP
+    String [][] mapITileNames;
+    int[][] mapITileWorldX;
+    int[][] mapITileWorldY;
 }

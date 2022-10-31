@@ -5,6 +5,9 @@ import main.GamePanel;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
 import object.*;
+import tile_interactive.IT_BareRockery;
+import tile_interactive.IT_WeedTile;
+import tile_interactive.InteractiveTile;
 
 import java.io.*;
 
@@ -64,6 +67,16 @@ public class SaveLoad {
             case "WaspSwarm": monster = new MON_WaspSwarm(gp); break;
         }
         return monster;
+    }
+
+    public Entity getITile(String itemName, int col, int row) {
+        Entity iTile = null;
+
+        switch(itemName) {
+            case "Weed Tile": iTile = new IT_WeedTile(gp, col, row); break;
+            case "Bare Rockery": iTile = new IT_BareRockery(gp, col, row); break;
+        }
+        return iTile;
     }
 
     public void save() {
@@ -140,22 +153,6 @@ public class SaveLoad {
                 }
             }
 
-            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
-                for (int i = 0; i < gp.obj[1].length; i++) {
-                    if (gp.obj[mapNum][i] == null) {
-                        ds.mapObjectNames[mapNum][i] = "NA";
-                    } else {
-                        ds.mapObjectNames[mapNum][i] = gp.obj[mapNum][i].name;
-                        ds.mapObjectWorldX[mapNum][i] = gp.obj[mapNum][i].worldX;
-                        ds.mapObjectWorldY[mapNum][i] = gp.obj[mapNum][i].worldY;
-                        if (gp.obj[mapNum][i].loot != null) {
-                            ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.name;
-                        }
-                        ds.mapObjectOpened[mapNum][i] = gp.obj[mapNum][i].opened;
-                    }
-                }
-            }
-
             //MONSTERS ON MAP
             ds.mapMonsterNames = new String[gp.maxMap][gp.monster[1].length];
             ds.mapMonsterWorldX = new int[gp.maxMap][gp.monster[1].length];
@@ -173,6 +170,23 @@ public class SaveLoad {
                         ds.mapMonsterWorldY[mapNum][i] = gp.monster[mapNum][i].worldY;
                         ds.mapMonsterHealth[mapNum][i] = gp.monster[mapNum][i].stressLevel;
                         ds.mapMonsterDirection[mapNum][i] = gp.monster[mapNum][i].direction;
+                    }
+                }
+            }
+
+            //INTERACTIVE TILES ON MAP
+            ds.mapITileNames = new String[gp.maxMap][gp.iTile[1].length];
+            ds.mapITileWorldX = new int[gp.maxMap][gp.iTile[1].length];
+            ds.mapITileWorldY = new int[gp.maxMap][gp.iTile[1].length];
+
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+                for (int i = 0; i < gp.iTile[1].length; i++) {
+                    if (gp.iTile[mapNum][i] == null) {
+                        ds.mapITileNames[mapNum][i] = "NA";
+                    } else {
+                        ds.mapITileNames[mapNum][i] = gp.iTile[mapNum][i].name;
+                        ds.mapITileWorldX[mapNum][i] = gp.iTile[mapNum][i].worldX;
+                        ds.mapITileWorldY[mapNum][i] = gp.iTile[mapNum][i].worldY;
                     }
                 }
             }
@@ -210,13 +224,14 @@ public class SaveLoad {
             gp.player.nextLevelExp = ds.nextLevelExp;
             gp.player.coin = ds.coin;
             gp.player.doorUnlockedCount = ds.doorUnlockedCount;
-            gp.player.weedCount = ds.weedCount;
             gp.player.timesPassedOut = ds.timesPassedOut;
             gp.player.pillsConsumableNow = ds.pillsConsumableNow;
             gp.player.boneIndex = ds.boneIndex;
             gp.player.savedWithAWeaponEquipped = ds.savedWithAWeaponEquipped;
             gp.player.savedWithAnArmourEquipped = ds.savedWithAnArmourEquipped;
             loadWithBoneEquipped = ds.savedWithBoneEquipped;
+            gp.player.weedCount = ds.weedCount;
+
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
                 gp.player.firstTimePickUpBone = false;
@@ -269,7 +284,7 @@ public class SaveLoad {
             //MONSTERS ON MAP
             for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
                 for (int i = 0; i < gp.monster[1].length; i++) {
-                    if (ds.mapObjectNames[mapNum][i].equals("NA")) {
+                    if (ds.mapMonsterNames[mapNum][i].equals("NA")) {
                         gp.monster[mapNum][i] = null;
                     } else {
                         gp.monster[mapNum][i] = getMonster(ds.mapMonsterNames[mapNum][i]);
@@ -277,6 +292,19 @@ public class SaveLoad {
                         gp.monster[mapNum][i].worldY = ds.mapMonsterWorldY[mapNum][i];
                         gp.monster[mapNum][i].stressLevel = ds.mapMonsterHealth[mapNum][i];
                         gp.monster[mapNum][i].direction = ds.mapMonsterDirection[mapNum][i];
+                    }
+                }
+            }
+
+            //INTERACTIVE TILES ON MAP
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+                for (int i = 0; i < gp.iTile[1].length; i++) {
+                    if (ds.mapITileNames[mapNum][i].equals("NA")) {
+                        gp.iTile[mapNum][i] = null;
+                    } else {
+                        gp.iTile[mapNum][i] = (InteractiveTile) getITile(ds.mapITileNames[mapNum][i], ds.mapITileWorldX[mapNum][i], ds.mapITileWorldY[mapNum][i]);
+                        gp.iTile[mapNum][i].worldX = ds.mapITileWorldX[mapNum][i];
+                        gp.iTile[mapNum][i].worldY = ds.mapITileWorldY[mapNum][i];
                     }
                 }
             }

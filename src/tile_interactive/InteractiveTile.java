@@ -16,8 +16,7 @@ public class InteractiveTile extends Entity {
     }
 
     public boolean isCorrectItem(Entity entity) {
-        boolean isCorrectItem = false;
-        return isCorrectItem;
+        return false;
     }
 
 
@@ -26,8 +25,7 @@ public class InteractiveTile extends Entity {
     }
 
     public InteractiveTile getDestroyedForm() {
-        InteractiveTile tile = null;
-        return tile;
+        return null;
     }
     public void update() {
         if (invincible) {
