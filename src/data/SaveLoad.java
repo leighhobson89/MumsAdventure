@@ -109,6 +109,7 @@ public class SaveLoad {
             } else {
                 ds.savedWithBoneEquipped = false;
             }
+            ds.spiderCount = gp.player.spiderCount;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -231,6 +232,7 @@ public class SaveLoad {
             gp.player.savedWithAnArmourEquipped = ds.savedWithAnArmourEquipped;
             loadWithBoneEquipped = ds.savedWithBoneEquipped;
             gp.player.weedCount = ds.weedCount;
+            gp.player.spiderCount = ds.spiderCount;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
