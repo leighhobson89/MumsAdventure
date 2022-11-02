@@ -35,7 +35,7 @@ public class OBJ_Bin_Green extends Entity {
             gp.player.spiderCount = gp.eHandler.spiderEvent(27, 8, gp.dialogueState, gp.player.spiderCount, true, false);
             opened = true;
         } else {
-            gp.gameState = gp.playState;
+            gp.ui.currentDialogue = "No way I'm opening that bin again!";
         }
         gp.keyH.enterPressed = false;
     }

@@ -14,7 +14,8 @@ public class OBJ_Cupboard2 extends Entity {
 
         type = type_obstacle;
         name = "Cupboard2";
-        down1 = setup("/objects/cupboard2", gp.tileSize, gp.tileSize);
+        image = setup("/objects/cupboard2", gp.tileSize, gp.tileSize);
+        down1 = image;
         direction = "down";
         collision = true;
 
@@ -29,13 +30,13 @@ public class OBJ_Cupboard2 extends Entity {
 
     public void interact() {
         gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "This cardigan is nice and warm\nI should put this on!";
         if (!opened) {
             gp.playSFX(4);
+            gp.ui.currentDialogue = "This cardigan is nice and warm\nI should put this on!";
             opened = true;
             gp.eHandler.cupboardHall();
         } else {
-            gp.gameState = gp.playState;
+            gp.ui.currentDialogue = "The cupboard is empty!";
         }
         gp.keyH.enterPressed = false;
     }

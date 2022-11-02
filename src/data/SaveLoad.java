@@ -276,8 +276,11 @@ public class SaveLoad {
                         }
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
                         if (gp.obj[mapNum][i].opened) {
-                            gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
-                            gp.obj[mapNum][i].collision = false;
+                            switch(gp.obj[mapNum][i].name) { //add cases here for objects that could be loaded in an open state but dont have 2 images
+                                case "Cupboard2": gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image; gp.obj[mapNum][i].collision = true; break;
+                                case "Bin_Green": gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image; gp.obj[mapNum][i].collision = true; break;
+                                default:  gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2; gp.obj[mapNum][i].collision = false; break;
+                            }
                         }
                     }
                 }

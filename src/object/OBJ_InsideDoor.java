@@ -33,7 +33,6 @@ public class OBJ_InsideDoor extends Entity {
         gp.gameState = gp.dialogueState;
         if (!opened) {
             gp.playSFX(4);
-
             down1 = image2;
             collision = false;
             opened = true;
