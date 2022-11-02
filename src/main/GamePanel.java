@@ -274,12 +274,6 @@ public class GamePanel extends JPanel implements Runnable {
             //TILE
             tileM.draw(g2); //bottom layer first
 
-            for (int i = 0; i < obj[1].length; i++) {
-                if (obj[currentMap][i] != null) {
-                    obj[currentMap][i].draw(g2);
-                }
-            }
-
             //INTERACTIVE TILE
             for (int i = 0; i < iTile[1].length; i++) {
                 if (iTile[currentMap][i] != null) {
@@ -287,7 +281,14 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-//            //ADD ENTITIES TO THE LIST
+            //OBJECTS
+            for (int i = 0; i < obj[1].length; i++) {
+                if (obj[currentMap][i] != null) {
+                    obj[currentMap][i].draw(g2);
+                }
+            }
+
+            //ADD ENTITIES TO THE LIST
             //PLAYER
             entityList.add(player);
             if (!tempEntityList.contains(player)) {
