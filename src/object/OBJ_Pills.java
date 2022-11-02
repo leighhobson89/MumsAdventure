@@ -20,11 +20,12 @@ public class OBJ_Pills extends Entity {
         price = 5;
         stackable = true;
         isSaleable = true;
+
+        setDialogue();
     }
 
         public boolean use(Entity entity) {
 
-            gp.gameState = gp.dialogueState;
             gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
 
             if (gp.player.pillsConsumableNow) {
@@ -34,7 +35,11 @@ public class OBJ_Pills extends Entity {
                 gp.eManager.lighting.dayCounter = 0;
                 return true;
             }
-            gp.ui.currentDialogue = "I better save these until I'm stressed\nout, 'cos they have some crazy after\neffects!";
+            startDialogue(this, 0);
             return false;
+        }
+
+        public void setDialogue() {
+            dialogueText[0][0] = "I better save these until I'm stressed\nout, 'cos they have some crazy after\neffects!";
         }
     }

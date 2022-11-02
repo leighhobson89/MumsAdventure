@@ -28,19 +28,25 @@ public class OBJ_InsideDoorSideways extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogueText[0][0] = "Door opened.";
+        dialogueText[1][0] = "The door's already open!";
     }
     public void interact() {
-        gp.gameState = gp.dialogueState;
         if (!opened) {
             gp.playSFX(4);
 
             down1 = image2;
             collision = false;
             opened = true;
-            gp.ui.currentDialogue = "Door opened.";
+            startDialogue(this, 0);
         }
         else {
-            gp.ui.currentDialogue = "The door's already open!";
+            startDialogue(this, 1);
         }
         gp.keyH.enterPressed = false;
     }

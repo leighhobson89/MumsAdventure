@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class UI {
     GamePanel gp;
@@ -32,7 +31,7 @@ public class UI {
     public int npcSlotRow = 0;
     public int subState = 0;
     int counter = 0;
-    public Entity merchant;
+    public Entity npc;
 
     public UI(GamePanel gp) throws IOException, FontFormatException {
         this.gp = gp;
@@ -404,6 +403,26 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         x += gp.tileSize;
         y += gp.tileSize;
+
+        if (npc != null) {
+            if (npc.dialogueText[npc.dialogueSet][npc.dialogueIndex] != null) {
+                currentDialogue = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex];
+
+                if (gp.keyH.enterPressed) {
+                    if (gp.gameState == gp.dialogueState) {
+                        npc.dialogueIndex++;
+                        gp.keyH.enterPressed = false;
+                    }
+                }
+            } else {
+                npc.dialogueIndex = 0;
+
+                if (gp.gameState == gp.dialogueState) {
+                    gp.gameState = gp.playState;
+                }
+            }
+            gp.keyH.enterPressed = false;
+        }
 
         for (String line : currentDialogue.split("\n")) {
             g2.drawString(line, x, y);
@@ -919,7 +938,7 @@ public class UI {
         //DRAW PLAYER INVENTORY
         drawInventory(gp.player, false);
         // DRAW NPC INVENTORY
-        drawInventory(merchant, true);
+        drawInventory(npc, true);
 
         //DRAW HINT WINDOW
         int x = gp.tileSize*2;
@@ -939,7 +958,7 @@ public class UI {
 
         //DRAW PRICE WINDOW
         int itemIndex = getItemIndexOnSlot(npcSlotCol, npcSlotRow);
-        if (itemIndex < merchant.inventory.size()) {
+        if (itemIndex < npc.inventory.size()) {
 
             x = (int) (gp.tileSize*5.5);
             y = (int) (gp.tileSize*5.5);
@@ -948,20 +967,20 @@ public class UI {
             drawSubWindow(x, y, width, height);
             g2.drawImage(coin, x + 10, y + 8, 32, 32, null);
 
-            int price = merchant.inventory.get(itemIndex).price;
+            int price = npc.inventory.get(itemIndex).price;
             String text = "" + price;
             x = getXForAlignToRightText(text, gp.tileSize*8 - 20);
             g2.drawString(text, x, y + 34);
 
             //BUY AN ITEM
             if (gp.keyH.enterPressed) {
-                if (merchant.inventory.get(itemIndex).price > gp.player.coin) {
+                if (npc.inventory.get(itemIndex).price > gp.player.coin) {
                     subState = 0;
                     gp.gameState = gp.dialogueState;
                     currentDialogue = "Dat's not enough coin, you have to pay " + price + " innit!";
                 } else {
-                    if (gp.player.canObtainItem(merchant.inventory.get(itemIndex))) {
-                        gp.player.coin -= merchant.inventory.get(itemIndex).price;
+                    if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
+                        gp.player.coin -= npc.inventory.get(itemIndex).price;
                         gp.playSFX(11);
                     } else {
                         subState = 0;
@@ -1059,7 +1078,7 @@ public class UI {
                 gp.eManager.lighting.dayState = gp.eManager.lighting.day;
                 gp.eManager.lighting.dayCounter = 0;
                 gp.gameState = gp.dialogueState;
-                gp.ui.currentDialogue = "Nice to have a rest, I feel less stressed\nstraight away!\n(Game Saved!)";
+                gp.player.startDialogue(gp.player, 10);
             }
         }
     }

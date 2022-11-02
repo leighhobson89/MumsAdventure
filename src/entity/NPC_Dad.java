@@ -1,7 +1,6 @@
 package entity;
 
 import main.GamePanel;
-import object.OBJ_DogsBone_NotMagic;
 
 import java.awt.*;
 import java.util.Random;
@@ -41,71 +40,79 @@ public class NPC_Dad extends Entity {
     }
 
     public void setDialogue() {
-        randomChummeringDialogues[0] = "I'm just tekin' t'dogs out!";
-        randomChummeringDialogues[1] = "Keep that sliding door shut, I'm frozzen\nbowlegged!";
-        randomChummeringDialogues[2] = "Shall we go over to Morecambe??";
-        randomChummeringDialogues[3] = "What d'ya wanna do then?";
-        randomChummeringDialogues[4] = "Did ya put that towel down for't shower?";
-        randomChummeringDialogues[5] = "Are you comin' up Colne shopping?";
-        randomChummeringDialogues[6] = "I'll just wash up again!";
-        randomChummeringDialogues[7] = "Have you emptied 't recycling?";
-        randomChummeringDialogues[8] = "I'll be taping that thermostat up this\nyear, can't be having that on wi'\nthese prices!";
-        randomChummeringDialogues[9] = "Don't be using \"Constant\" on't heater in\ncase you forget to turn it off!";
-        randomChummeringDialogues[10] = "Is Pip making love to his basket again?";
-        randomChummeringDialogues[11] = "I'm off dahn't Station later...";
-        randomChummeringDialogues[12] = "grumble...vaccines...grumble...";
-        randomChummeringDialogues[13] = "You're bloody crackers since ya come off\nthem tablets!";
-        randomChummeringDialogues[14] = "Bloody governments useless!";
-        randomChummeringDialogues[15] = "That Truss won't be any good, we need\nLabour in!!";
-        randomChummeringDialogues[16] = "grumble...energy costs...grumble...";
-        randomChummeringDialogues[17] = "I'm not going up there doing that all day...";
-        randomChummeringDialogues[18] = "Baldilocks has gone on another cruise\nI see...";
-        randomChummeringDialogues[19] = "I'm just gonna sit in't garden!";
-        randomChummeringDialogues[20] = "Sharon, I were looking at these on\neBay, what you think??";
-        randomChummeringDialogues[21] = "Meggy's getting rid of a cement\nmixer, only wants eighty quid for it...";
-        randomChummeringDialogues[22] = "You should cover that camera up with\nthis gaffer tape...";
-        randomChummeringDialogues[23] = "Bloody Chinese listening in, have\nyou seen this advert...";
-        randomChummeringDialogues[24] = "Tell you what, you won't be havin'\nall them holidays after this electric goes up!";
-        randomChummeringDialogues[25] = "What did you say to Pete Squeeze\nlast neyt? He seemed a bit off like...";
-        randomChummeringDialogues[26] = "That bloody tosser next door needs\nto fix that fence!";
-        randomChummeringDialogues[27] = "Need some new strings for this guitar...";
-        randomChummeringDialogues[28] = "When's our Leigh over...Not staying\nall month or owt is he?!";
-        randomChummeringDialogues[29] = "I can't park my bloody car outside my\nown house f'that t&@t next door!";
-        randomChummeringDialogues[30] = "I were looking at Golf's yesterday, but\nthey're running diesels off t'bloody road\naren't they?!";
-        randomChummeringDialogues[31] = "Them electric cars are ticking time bombs...";
-        randomChummeringDialogues[32] = "Its all about bloody control...";
-        randomChummeringDialogues[33] = "I'll tell you what...";
-        randomChummeringDialogues[34] = "Were not going to Spain for winter,\nwe can't bloody afford it!";
-        randomChummeringDialogues[35] = "Its that bloody Fauchi and Bill Gates!";
-        randomChummeringDialogues[36] = "That bloody investment's gone down again!";
-        randomChummeringDialogues[37] = "Lardy's int garden...";
-        randomChummeringDialogues[38] = "Oh ya not having her round again are\nya, she never shuts up!";
-        randomChummeringDialogues[39] = "There's some reyt cheap houses on\nShetland, need a bit o work like...";
-        randomChummeringDialogues[40] = "Is't back door shut?";
-        randomChummeringDialogues[41] = "Shunta chopped that tree down, no bloody\nprivacy now!";
-        randomChummeringDialogues[42] = "Couldn't stop a pig in a ginnel that one!";
-        randomChummeringDialogues[43] = "You only want to go over there for a holiday\nin the sun!";
-        if (gp.player.weedCount > 0) {
-            randomChummeringDialogues[44] = "Them bloody weeds need diggin' up!";
-        } else {
-            randomChummeringDialogues[44] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
-        }
-        randomChummeringDialogues[45] = "We'll have to get some blankets cos I'm not\nhaving them radiators on all bloody winter!";
-        randomChummeringDialogues[46] = "That telly's never been reyt since\nthat cowboy buggered't satellite dish up\ncuttin' them trees down!";
-        randomChummeringDialogues[47] = "I've seen a reyt bloody good guitar\non eBay...";
-        randomChummeringDialogues[48] = "There's a draught coming in under\nthat door...";
-        randomChummeringDialogues[49] = "Just you watch, petrol and th'electric'll stay\nhigh even after their war excuses finish!";
-        randomChummeringDialogues[50] = "Smart TV? I wun't ha' one ginn!";
-        randomChummeringDialogues[51] = "She's a face like a bulldog chewin' a wasp!";
-        randomChummeringDialogues[52] = "All this Putin...Bet ya owt ya want its\nbloody government and't AmUrricans\ncashin' in!";
-        randomChummeringDialogues[53] = "One o't lads at shop says they're gerrin'\nrid of another scaffolding platform...";
-        randomChummeringDialogues[54] = "I'll have to put t'bins out...";
-        randomChummeringDialogues[55] = "There were some bloody kids looking\nsheepish round't back when I went up...";
-        randomChummeringDialogues[56] = "Have yer locked t'back gate?";
-        randomChummeringDialogues[57] = "Are ya bringin' t'washing in? Its rainin' out\nthere!";
-        randomChummeringDialogues[58] = "I'm just gonna have a run on to that\nshop at Nelson for some bits for't van!";
-        randomChummeringDialogues[59] = "Where's old Fleabag??";
-        randomChummeringDialogues[60] = "Simpsons is on soon!";
+        //RANDOM CHUMMERING DIALOGUE SETS
+        dialogueText[0][0] = "I'm just tekin' t'dogs out!";
+        dialogueText[1][0] = "Keep that sliding door shut, I'm frozzen\nbowlegged!";
+        dialogueText[2][0] = "Shall we go over to Morecambe??";
+        dialogueText[3][0] = "What d'ya wanna do then?";
+        dialogueText[4][0] = "Did ya put that towel down for't shower?";
+        dialogueText[5][0] = "Are you comin' up Colne shopping?";
+        dialogueText[6][0] = "I'll just wash up again!";
+        dialogueText[7][0] = "Have you emptied 't recycling?";
+        dialogueText[8][0] = "I'll be taping that thermostat up this\nyear, can't be having that on wi'\nthese prices!";
+        dialogueText[9][0] = "Don't be using \"Constant\" on't heater in\ncase you forget to turn it off!";
+        dialogueText[10][0] = "Is Pip making love to his basket again?";
+        dialogueText[11][0] = "I'm off dahn't Station later...";
+        dialogueText[12][0] = "grumble...vaccines...grumble...";
+        dialogueText[13][0] = "You're bloody crackers since ya come off\nthem tablets!";
+        dialogueText[14][0] = "Bloody governments useless!";
+        dialogueText[15][0] = "That Truss won't be any good, we need\nLabour in!!";
+        dialogueText[16][0] = "grumble...energy costs...grumble...";
+        dialogueText[17][0] = "I'm not going up there doing that all day...";
+        dialogueText[18][0] = "Baldilocks has gone on another cruise\nI see...";
+        dialogueText[19][0] = "I'm just gonna sit in't garden!";
+        dialogueText[20][0] = "Sharon, I were looking at these on\neBay, what you think??";
+        dialogueText[21][0] = "Meggy's getting rid of a cement\nmixer, only wants eighty quid for it...";
+        dialogueText[22][0] = "You should cover that camera up with\nthis gaffer tape...";
+        dialogueText[23][0] = "Bloody Chinese listening in, have\nyou seen this advert...";
+        dialogueText[24][0] = "Tell you what, you won't be havin'\nall them holidays after this electric goes up!";
+        dialogueText[25][0] = "What did you say to Pete Squeeze\nlast neyt? He seemed a bit off like...";
+        dialogueText[26][0] = "That bloody tosser next door needs\nto fix that fence!";
+        dialogueText[27][0] = "Need some new strings for this guitar...";
+        dialogueText[28][0] = "When's our Leigh over...Not staying\nall month or owt is he?!";
+        dialogueText[29][0] = "I can't park my bloody car outside my\nown house f'that t&@t next door!";
+        dialogueText[30][0] = "I were looking at Golf's yesterday, but\nthey're running diesels off t'bloody road\naren't they?!";
+        dialogueText[31][0] = "Them electric cars are ticking time bombs...";
+        dialogueText[32][0] = "Its all about bloody control...";
+        dialogueText[33][0] = "I'll tell you what...";
+        dialogueText[34][0] = "Were not going to Spain for winter,\nwe can't bloody afford it!";
+        dialogueText[35][0] = "Its that bloody Fauchi and Bill Gates!";
+        dialogueText[36][0] = "That bloody investment's gone down again!";
+        dialogueText[37][0] = "Lardy's int garden...";
+        dialogueText[38][0] = "Oh ya not having her round again are\nya, she never shuts up!";
+        dialogueText[39][0] = "There's some reyt cheap houses on\nShetland, need a bit o work like...";
+        dialogueText[40][0] = "Is't back door shut?";
+        dialogueText[41][0] = "Shunta chopped that tree down, no bloody\nprivacy now!";
+        dialogueText[42][0] = "Couldn't stop a pig in a ginnel that one!";
+        dialogueText[43][0] = "You only want to go over there for a holiday\nin the sun!";
+        dialogueText[44][0] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
+        dialogueText[45][0] = "We'll have to get some blankets cos I'm not\nhaving them radiators on all bloody winter!";
+        dialogueText[46][0] = "That telly's never been reyt since\nthat cowboy buggered't satellite dish up\ncuttin' them trees down!";
+        dialogueText[47][0] = "I've seen a reyt bloody good guitar\non eBay...";
+        dialogueText[48][0] = "There's a draught coming in under\nthat door...";
+        dialogueText[49][0] = "Just you watch, petrol and th'electric'll stay\nhigh even after their war excuses finish!";
+        dialogueText[50][0] = "Smart TV? I wun't ha' one ginn!";
+        dialogueText[51][0] = "She's a face like a bulldog chewin' a wasp!";
+        dialogueText[52][0] = "All this Putin...Bet ya owt ya want its\nbloody government and't AmUrricans\ncashin' in!";
+        dialogueText[53][0] = "One o't lads at shop says they're gerrin'\nrid of another scaffolding platform...";
+        dialogueText[54][0] = "I'll have to put t'bins out...";
+        dialogueText[55][0] = "There were some bloody kids looking\nsheepish round't back when I went up...";
+        dialogueText[56][0] = "Have yer locked t'back gate?";
+        dialogueText[57][0] = "Are ya bringin' t'washing in? Its rainin' out\nthere!";
+        dialogueText[58][0] = "I'm just gonna have a run on to that\nshop at Nelson for some bits for't van!";
+        dialogueText[59][0] = "Where's old Fleabag??";
+        dialogueText[60][0] = "Simpsons is on soon!";
+
+        //MISSION DIALOGUE SETS
+        dialogueText[61][0] = "Have you seen those weeds out there?";
+        dialogueText[61][1] = "I could really do with getting them dug up but I\nhave to order that horse hair for my violin bow.";
+        dialogueText[61][2] = "That's gonna tek all day with this bloody laptop!";
+        dialogueText[61][3] = "Can you do it?\nThere's a shovel up int' garage you can use.\nBut don't bend it, or lose it!";
+
+        //BONE THROWN DIALOG
+        dialogueText[62][0] ="Watch where you bloody throw that\nwill yer!";
+
+
     }
 
     public void setAction() {
@@ -142,8 +149,12 @@ public class NPC_Dad extends Entity {
     }
 
     public void speak() {
-
+        switch(gp.player.missionState) {
+            case 0: dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); break; //not in a mission
+            case 1: dialogueSet = 61; //weeding mission
+        }
         //character specific stuff here
-        super.speak();
+        facePlayer();
+        startDialogue(this, dialogueSet);
     }
 }

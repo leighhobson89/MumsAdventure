@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 import object.OBJ_DogsBone_NotMagic;
 
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.util.*;
 
 public class Player extends Entity {
     KeyHandler keyH;
+    UtilityTool uTool = new UtilityTool();
 
     public final int PILLS_COUNT_DOWN_VALUE = 20;
     public final int LIGHT_PILLS_COUNT_DOWN_VALUE = 60;
@@ -24,6 +26,7 @@ public class Player extends Entity {
     public boolean attackCanceled;
     public boolean lightUpdated;
     public Timer timer;
+    int randSet;
 
     public void createTimer() {
         timer = new Timer();
@@ -134,6 +137,7 @@ public class Player extends Entity {
         //GUARD
         //getGuardImage();
         setItems();
+        startDialogue();
     }
 
     public void setDefaultPositions() {
@@ -143,6 +147,7 @@ public class Player extends Entity {
     }
 
     public void restoreStatus() {
+        speed = defaultSpeed;
         stressLevel = 0;
         mana = maxMana;
         invincible = false;
@@ -449,7 +454,7 @@ public class Player extends Entity {
                     } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "Pip's Bone")) {
                         if (firstTimePickUpBone) {
                             gp.gameState = gp.dialogueState;
-                            gp.ui.currentDialogue = "I can throw the bone for Pip.\nI need to find an open area and press 'T'!";
+                            this.startDialogue(this, 0);
                             firstTimePickUpBone= false;
                         }
                         boneCount = 1;
@@ -464,6 +469,46 @@ public class Player extends Entity {
                     text = "You cannot carry any more!";
                     gp.ui.addMessage(text);
                 }
+            }
+        }
+    }
+
+    public void startDialogue() {
+        dialogueText[0][0] = "I can throw the bone for Pip.\nI need to find an open area and press 'T'!";
+        dialogueText[1][0] = "You have levelled up!\nNow you are level " + level + "!\n\nYou feel more able to cope with stress!";
+        dialogueText[2][0] = "Wow I found hundred quid!\nNice reward for doing the weeding!";
+        dialogueText[3][0] = "Yelp!";
+        dialogueText[4][0] = "Stop that right now!";
+        dialogueText[5][0] = "Hey what the bloody hell are\nya doin'??";
+        dialogueText[6][0] = "I'll let that go...ONCE!!";
+        dialogueText[7][0] = "What yer playin' at?!";
+        dialogueText[8][0] = "Why you hittin' me wi that?!";
+        dialogueText[9][0] = "You pass out from the stress!";
+        dialogueText[10][0] = "Nice to have a rest, I feel less stressed\nstraight away!\n(Game Saved!)";
+        dialogueText[11][0] = "Oww ya stupid sod, be careful will yer!";
+        dialogueText[12][0] = "Aaagh a bloody big spider!";
+        dialogueText[13][0] = "Aaagh another bloody spider!\nThat's " + uTool.parseNumberString(spiderCount)  + " in one day, sick of it!";
+        dialogueText[14][0] = "So many bloody spiders today, Peter will you\nsort this bloody garden out?";
+        dialogueText[15][0] = "I'm fine, I don't need to\nrelax at the moment!\n(Game Saved!)";
+        dialogueText[16][0] = "These light pills will help my dodgy eye\nfor a bit, phew!";
+        dialogueText[17][0] = "Bloody pills, I can't think straight!\nWhat am I doing up here??\nThe stress has gone at least!";
+    }
+
+    public void checkIfPassOutFromStress() {
+        if (gp.player.stressLevel >= gp.player.maxStress) {
+            timesPassedOut++;
+            gp.gameState = gp.dialogueState;
+            startDialogue(this, 9);
+            if (timesPassedOut <= 2) {
+                gp.playSFX(25);
+                gp.player.worldX = gp.tileSize*19;
+                gp.player.worldY = gp.tileSize*17;
+                gp.player.stressLevel = 0;
+                gp.gameState = gp.sleepState;
+            } else if (timesPassedOut > 2) { //change to be able to pass out this many times before passing out
+                gp.gameState = gp.gameOverState;
+                gp.stopMusic();
+                gp.playSFX(24);
             }
         }
     }
@@ -487,7 +532,6 @@ public class Player extends Entity {
 
         if (gp.keyH.enterPressed) {
             if (i != 999) {
-                gp.gameState = gp.dialogueState;
                 gp.npc[gp.currentMap][i].speak();
                 keyH.enterPressed = false;
             }
@@ -525,17 +569,11 @@ public class Player extends Entity {
     public void hitNPC(int i) {
         if (i != 999) {
             gp.gameState = gp.dialogueState;
-            int rand = new Random().nextInt(5);
-            if (gp.npc[gp.currentMap][i].name == "Dad") {
-                switch (rand) {
-                    case 0 -> gp.ui.currentDialogue = "Stop that right now!";
-                    case 1 -> gp.ui.currentDialogue = "Hey what the bloody hell are\nya doin'??";
-                    case 2 -> gp.ui.currentDialogue = "I'll let that go...ONCE!!";
-                    case 3 -> gp.ui.currentDialogue = "What yer playin' at?!";
-                    case 4 -> gp.ui.currentDialogue = "Why you hittin' me wi that?!";
-                }
+            if (Objects.equals(gp.npc[gp.currentMap][i].name, "Dad")) {
+                randSet = gp.player.chooseRandomDialogueFromSet(gp.npc[gp.currentMap][i].name, "HitWithWeaponOrProjectile");
+                startDialogue(this, randSet);
             } else if (Objects.equals(gp.npc[gp.currentMap][i].name, "Phoebe") || Objects.equals(gp.npc[gp.currentMap][i].name, "Pip")) {
-                gp.ui.currentDialogue = "Yelp!";
+                startDialogue(this, 3);
             }
 
             attacking = false;
@@ -593,11 +631,11 @@ public class Player extends Entity {
                         gp.player.weedCount--;
                         gp.iTile[1][i+gp.aSetter.mapNumTotal] = gp.iTile[1][i+gp.aSetter.mapNumTotal].getDestroyedForm(); //remove weed from upstairs view - **only works if interacive tiles in same location on all maps**
                     } else if (gp.player.weedCount == 1) { //end of weeding mission
-                        gp.npc[gp.currentMap][0].randomChummeringDialogues[44] = "Is that Christina ever gonna shift\nall her junk out u't shed or what?";
                         gp.player.weedCount--;
                         gp.gameState = gp.dialogueState;
-                        gp.ui.currentDialogue = "Wow I found hundred quid!\nNice reward for doing the weeding!";
+                        startDialogue(this, 2);
                         gp.aSetter.setObjectAfterStart("HundredQuid", gp.currentMap, gp.iTile[gp.currentMap][i].worldX/gp.tileSize, gp.iTile[gp.currentMap][i].worldY/gp.tileSize); //place supercoin where last weed dug up as reward
+                        gp.player.missionState = 0;
                     }
                 }
                 gp.iTile[gp.currentMap][i].playSfx();
@@ -639,7 +677,7 @@ public class Player extends Entity {
 
             gp.playSFX(9);
             gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You have levelled up!\nNow you are level " + level + "!\n\nYou feel more able to cope with stress!";
+            startDialogue(this, 1);
         }
     }
 

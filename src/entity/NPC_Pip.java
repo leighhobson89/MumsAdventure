@@ -37,13 +37,14 @@ public class NPC_Pip extends Entity {
     }
 
     public void setDialogue() {
-        randomChummeringDialogues[0] = "Woof!";
-        randomChummeringDialogues[1] = "Grr!";
-        randomChummeringDialogues[2] = "Grr...I'm off to my basket, don't look...Grr!";
-        randomChummeringDialogues[3] = "Woof! Phoebe stinks!";
-        randomChummeringDialogues[4] = "Growl...I'm not having a bath!";
-        randomChummeringDialogues[5] = "Growl...I'm the toughest dog on the street...Ruff!";
-        randomChummeringDialogues[6] = "Grr...Throw my bone...Grr!";
+        dialogueText[0][0] = "Woof!";
+        dialogueText[1][0] = "Grr!";
+        dialogueText[2][0] = "Grr...I'm off to my basket, don't look...Grr!";
+        dialogueText[3][0] = "Woof! Phoebe stinks!";
+        dialogueText[4][0] = "Growl...I'm not having a bath!";
+        dialogueText[5][0] = "Growl...I'm the toughest dog on the street...Ruff!";
+        dialogueText[6][0] = "Grr...Throw my bone...Grr!";
+        dialogueText[7][0] = "Yelp!";
     }
 
     public void update() {
@@ -134,6 +135,8 @@ public class NPC_Pip extends Entity {
     public void speak() {
 
         //character specific stuff here
-        super.speak();
+        facePlayer();
+        startDialogue(this, dialogueSet);
+        gp.keyH.enterPressed = false;
     }
 }

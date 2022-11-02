@@ -4,7 +4,6 @@ import main.GamePanel;
 import object.*;
 
 import java.awt.*;
-import java.util.Random;
 
 public class NPC_Merchant extends Entity {
     public NPC_Merchant(GamePanel gp) {
@@ -36,7 +35,10 @@ public class NPC_Merchant extends Entity {
     }
 
     public void setDialogue() {
-        randomChummeringDialogues[0] = "'Ere, d'ya wanna sell that camper van 'n dat?\nI have loads of good stuff here innit!";
+        dialogueText[0][0] = "'Ere, d'ya wanna sell that camper van 'n dat?\nI have loads of good stuff here innit!";
+
+        //BONE THROWN AT MERCHANT
+        dialogueText[1][0] = "Don't throw dat at me innit!";;
     }
 
     public void setItems() {
@@ -49,9 +51,13 @@ public class NPC_Merchant extends Entity {
     public void speak() {
 
         //character specific stuff here
-        super.speak();
+
+        facePlayer();
+        startDialogue(this, dialogueSet);
+
         gp.gameState = gp.tradeState;
-        gp.ui.merchant = this;
+        gp.ui.npc = this;
+        gp.keyH.enterPressed = false;
     }
 
 }

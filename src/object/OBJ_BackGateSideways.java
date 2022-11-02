@@ -28,9 +28,14 @@ public class OBJ_BackGateSideways extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogueText[0][0] = "The cupboard's already open!";
     }
     public void interact() {
-        gp.gameState = gp.dialogueState;
         if (!opened) {
             gp.playSFX(4);
 
@@ -41,7 +46,7 @@ public class OBJ_BackGateSideways extends Entity {
             gp.eHandler.kitchenCupBoard();
         }
         else {
-            gp.ui.currentDialogue = "The cupboard's already open!";
+            startDialogue(this, 0);
         }
         gp.keyH.enterPressed = false;
     }

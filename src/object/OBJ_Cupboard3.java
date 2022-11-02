@@ -25,10 +25,15 @@ public class OBJ_Cupboard3 extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogueText[0][0] = "Hey, don't touch my bloody music center!";
     }
 
     public void interact() {
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "Hey, don't touch my bloody music center!";
-        }
+        startDialogue(this, 0);
+        gp.keyH.enterPressed = false;
+    }
 }

@@ -22,11 +22,16 @@ public class OBJ_LightPills extends Entity {
         price = 8;
         stackable = true;
         lightRadius = 576;
+
+        setDialogue();
     }
+
+        public void setDialogue() {
+         dialogueText[0][0] = "I better save these until the light\nis affecting me, 'cos they have some\ncrazy after effects!";
+        }
 
         public boolean use(Entity entity) {
 
-            gp.gameState = gp.dialogueState;
             if (gp.eManager.lighting.dayState != gp.eManager.lighting.day) { //only possible to consume after light level changes from standard
                 consumableNow = true;
             }
@@ -36,7 +41,7 @@ public class OBJ_LightPills extends Entity {
                 gp.player.usedItemOrNot = true;
                 return true;
             } else {
-                gp.ui.currentDialogue = "I better save these until the light\nis affecting me, 'cos they have some\ncrazy after effects!";
+                startDialogue(this, 0);
                 return false;
             }
         }

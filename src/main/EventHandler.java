@@ -6,7 +6,6 @@ public class EventHandler {
 
     GamePanel gp;
     EventRect[][][] eventRect;
-    UtilityTool uTool = new UtilityTool();
 
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
@@ -98,7 +97,7 @@ public class EventHandler {
             if (gardening) {
                 gp.gameState = gameState;
                 gp.playSFX(8);
-                gp.ui.currentDialogue = "So many bloody spiders today, Peter will you\nsort this bloody garden out?";
+                gp.player.startDialogue(gp.player, 14);
                 gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
                 gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
                 spiderCount++;
@@ -108,10 +107,10 @@ public class EventHandler {
             gp.gameState = gameState;
             gp.playSFX(8);
             if (spiderCount == 1) {
-                gp.ui.currentDialogue = "Aaagh a bloody big spider!";
+                gp.player.startDialogue(gp.player, 12);
                 gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation); // trigger a spider when the dialogue is closed
             } else if (spiderCount > 1) {
-                gp.ui.currentDialogue = "Aaagh another bloody spider!\nThat's " + uTool.parseNumberString(spiderCount) + " in one day, sick of it!";
+                gp.player.startDialogue(gp.player, 13);
                 gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
             }
             gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
@@ -132,7 +131,7 @@ public class EventHandler {
                 gp.player.stressLevel = 0;
                 canTouchEvent = false;
             } else {
-                gp.ui.currentDialogue = "I'm fine, I don't need to\nrelax at the moment!\n(Game Saved!)";
+                gp.player.startDialogue(gp.player, 15);
             }
             gp.saveLoad.save();
         }
@@ -140,7 +139,7 @@ public class EventHandler {
 
     public void teleportPills (int currentMap) {
         gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "Bloody pills, I can't think straight!\nWhat am I doing up here??\nThe stress has gone at least!";
+        gp.player.startDialogue(gp.player, 17);
         int[][] optionArray = {{0,17,11},{0,18,13},{0,20,11},{0,23,15},{0,24,15},{0,28,11}}; //add some upstairs locations too
         Random random = new Random();
         int randomLocation = random.nextInt(optionArray.length);
@@ -182,7 +181,7 @@ public class EventHandler {
     public void lightPillsEvent() {
 
         gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = "These light pills will help my dodgy eye\nfor a bit, phew!";
+        gp.player.startDialogue(gp.player, 16);
 
         gp.player.countDownTimerForItemEffect(gp.player.LIGHT_PILLS_COUNT_DOWN_VALUE, "LightPills");
     }

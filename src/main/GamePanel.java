@@ -120,6 +120,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (!keyH.musicPlaying) {
             playMusic(0, false, 0);
         }
+        player.resetCounter();
         player.setDefaultPositions();
         player.restoreStatus();
         aSetter.setNPC();

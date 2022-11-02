@@ -12,7 +12,6 @@ public class Entity {
 
     GamePanel gp;
 
-    ArrayList<Integer> usedChummeringDialogues = new ArrayList<>();
     public BufferedImage dyingImage, up1, up2, down1, down2, left1, left2, right1, right2, down1_red, down1_purple;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2, guardUp, guardDown, guardLeft, guardRight;
     public BufferedImage image, image2, image3;
@@ -20,13 +19,15 @@ public class Entity {
     public Rectangle attackArea = new Rectangle(0,0,0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
-    String[] randomChummeringDialogues = new String[100];
+    public String[][] dialogueText = new String[100][20];
     public Entity attacker;
 
     //STATE
     public int worldX, worldY;
     public String direction = "right";
     public int spriteNum = 1;
+    public int dialogueSet = 61;
+    public int dialogueIndex = 0;
     public boolean collisionOn = false;
     public boolean invincible;
     public boolean newMonster;
@@ -43,6 +44,7 @@ public class Entity {
     public boolean offBalance = false;
     public Entity loot;
     public boolean opened = false;
+    public int missionState = 1;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -171,40 +173,59 @@ public class Entity {
         int goalRow = (target.worldY + target.solidArea.y)/gp.tileSize;
         return goalRow;
     }
+    public void resetCounter() {
+        spriteCounter = 0;
+        actionLockCounter = 0;
+        invincibleCounter = 0;
+        dyingCounter = 0;
+        hpBarCounter = 0;
+        shotAvailableCounter = 0;
+        knockBackCounter = 0;
+        guardCounter = 0;
+        offBalanceCounter = 0;
+    }
     public void setLoot(Entity loot) {}
     public void setAction() {}
     public void damageReaction() {
         //overridden in specific monster class
     }
-    public void speak() { //GENERAL CHARACTER SPEAK BEHAVIOUR
-        Random rand = new Random();
-        int dialogueCount = 0;
+    public void speak() {}
 
-        for (int i = 0; i < randomChummeringDialogues.length; i++) {
-            if (!(randomChummeringDialogues[i] == null)) {
-                dialogueCount++;
-            }
-        }
-
-        int randomValue = rand.nextInt(randomChummeringDialogues.length); //init only;
-
-        while (randomChummeringDialogues[randomValue] == null || usedChummeringDialogues.contains(randomValue)) {
-            randomValue = rand.nextInt(dialogueCount);
-
-            if (usedChummeringDialogues.size() >= dialogueCount) {
-                usedChummeringDialogues.clear(); // cycle round when used all dialogues
-            }
-        }
-
-        gp.ui.currentDialogue = randomChummeringDialogues[randomValue];
-        usedChummeringDialogues.add(randomValue);
-
+    public void facePlayer() {
         switch (gp.player.direction) {
             case "up" -> direction = "down";
             case "down" -> direction = "up";
             case "left" -> direction = "right";
             case "right" -> direction = "left";
         }
+    }
+    public void startDialogue(Entity entity, int setNum) {
+        gp.gameState = gp.dialogueState;
+        gp.ui.npc = entity;
+        dialogueSet = setNum;
+    }
+
+    public int chooseRandomDialogueFromSet(String entityAffected, String action) {
+        Random random = new Random();
+        int bound;
+        int randSet = 0;
+
+        if (Objects.equals(action, "HitWithWeaponOrProjectile")) {
+            switch (entityAffected) {
+                case "Dad":
+                    bound = 4;
+                    randSet = random.nextInt(bound) + 4;
+                    break;
+            }
+        } else if (Objects.equals(action, "NormalChat")) {
+            switch (entityAffected) {
+                case "Dad":
+                    bound = 60; //increase if more random dialogues added
+                    randSet = random.nextInt(bound);
+                    break;
+            }
+        }
+        return randSet;
     }
 
     public void interact() {
@@ -581,7 +602,7 @@ public class Entity {
             gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
             gp.player.invincible = true;
 
-            checkIfPassOutFromStress(); //gameover method - can pass out from stress twice, next time game over
+            gp.player.checkIfPassOutFromStress(); //gameover method - can pass out from stress twice, next time game over
         }
     }
 
@@ -590,26 +611,6 @@ public class Entity {
         target.knockBackDirection = attacker.direction;
         target.speed += knockbackPower;
         target.knockBack = true;
-    }
-
-    public void checkIfPassOutFromStress() {
-        if (gp.player.stressLevel >= gp.player.maxStress) {
-            timesPassedOut++;
-            gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You pass out from the stress!";
-            System.out.println("Times Passed Out:" + timesPassedOut);
-            if (timesPassedOut <= 2) {
-                gp.playSFX(25);
-                gp.player.worldX = gp.tileSize*19;
-                gp.player.worldY = gp.tileSize*17;
-                gp.player.stressLevel = 0;
-                gp.gameState = gp.sleepState;
-            } else if (timesPassedOut > 2) { //change to be able to pass out this many times before passing out
-                gp.gameState = gp.gameOverState;
-                gp.stopMusic();
-                gp.playSFX(24);
-            }
-        }
     }
 
     public void draw(Graphics2D g2) {

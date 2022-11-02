@@ -26,17 +26,22 @@ public class OBJ_Cupboard2 extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogueText[0][0] = "This cardigan is nice and warm\nI should put this on!";
+        dialogueText[1][0] = "The cupboard is empty!";
     }
 
     public void interact() {
-        gp.gameState = gp.dialogueState;
         if (!opened) {
             gp.playSFX(4);
-            gp.ui.currentDialogue = "This cardigan is nice and warm\nI should put this on!";
+            startDialogue(this, 0);
             opened = true;
             gp.eHandler.cupboardHall();
         } else {
-            gp.ui.currentDialogue = "The cupboard is empty!";
+            startDialogue(this, 1);
         }
         gp.keyH.enterPressed = false;
     }

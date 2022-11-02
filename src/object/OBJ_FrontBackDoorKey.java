@@ -19,30 +19,33 @@ public class OBJ_FrontBackDoorKey extends Entity {
         direction = "down";
         type = type_consumable;
 
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogueText[0][0] = "This door is unlocked now!";
+        dialogueText[1][0] = "I need to use this on the front or back door.";
     }
 
     public boolean use(Entity entity) {
 
-        gp.gameState = gp.dialogueState;
         int objIndexFront = getDetected(entity, gp.obj, "FrontDoor");
         int objIndexBack = getDetected(entity, gp.obj, "BackDoor");
 
         if (objIndexFront != 999) {
-            gp.ui.currentDialogue = "This door is unlocked now!";
+            startDialogue(this, 0);
             doorUnlockedCount++;
-            System.out.println("DoorUnlockedCount " + doorUnlockedCount);
             gp.playSFX(3);
             gp.obj[gp.currentMap][objIndexFront] = null;
             gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 16, 11);
         } else if (objIndexBack != 999) {
-            gp.ui.currentDialogue = "This door is unlocked now!";
+            startDialogue(this, 0);
             doorUnlockedCount++;
-            System.out.println("DoorUnlockedCount " + doorUnlockedCount);
             gp.playSFX(3);
             gp.obj[gp.currentMap][objIndexBack] = null;
             gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 30, 11);
         } else {
-            gp.ui.currentDialogue = "I need to use this on the front or back door.";
+            startDialogue(this, 1);
             return false;
         }
         if (doorUnlockedCount >= 2) {

@@ -46,11 +46,11 @@ public class Projectile extends Entity {
                 gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
                 gp.gameState = gp.dialogueState;
                 if (Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Dad")) {
-                    gp.ui.currentDialogue = "Watch where you bloody throw that\nwill yer!";
+                    gp.npc[gp.currentMap][npcIndex].startDialogue(gp.npc[gp.currentMap][npcIndex], 62);
                 } else if (Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Phoebe") || Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Pip")) {
-                    gp.ui.currentDialogue = "Yelp!";
+                    gp.npc[gp.currentMap][npcIndex].startDialogue(gp.npc[gp.currentMap][npcIndex], 7);
                 } else if (Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Merchant")) {
-                    gp.ui.currentDialogue = "Don't throw dat at me innit!";
+                    gp.npc[gp.currentMap][npcIndex].startDialogue(gp.npc[gp.currentMap][npcIndex], 1);
                 }
                 gp.playSFX(20);
                 alive = false;
@@ -69,7 +69,7 @@ public class Projectile extends Entity {
                 damagePlayer(attack);
 //                generateParticle(user.projectile, user.projectile); //ONLY IF NPC OR MONSTER THROWS OBJECT
                 gp.gameState = gp.dialogueState;
-                gp.ui.currentDialogue = "Oww ya stupid sod, be careful will yer!";
+                startDialogue(gp.player, 11);
                 gp.playSFX(8);
                 alive = false;
             }

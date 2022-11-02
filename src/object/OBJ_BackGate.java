@@ -28,16 +28,22 @@ public class OBJ_BackGate extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogueText[0][0] = "Back gate opened.";
+        dialogueText[1][0] = "The back gate's already open!";
     }
     public void interact() {
-        gp.gameState = gp.dialogueState;
         if (!opened) {
             gp.playSFX(4);
 
 //            StringBuilder sb = new StringBuilder(); //for loot objects only like chests
 //            sb.append("You opened the door");
 
-            gp.ui.currentDialogue = "Back gate opened.";
+            startDialogue(this, 0);
             down1 = image2;
             collision = false;
             opened = true;
@@ -52,7 +58,7 @@ public class OBJ_BackGate extends Entity {
 //            gp.ui.currentDialogue = sb.toString();
         }
         else {
-            gp.ui.currentDialogue = "The back gate's already open!";
+            startDialogue(this, 1);
         }
         gp.keyH.enterPressed = false;
     }

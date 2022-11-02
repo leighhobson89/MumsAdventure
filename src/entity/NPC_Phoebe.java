@@ -39,11 +39,14 @@ public class NPC_Phoebe extends Entity {
     }
 
     public void setDialogue() {
-        randomChummeringDialogues[0] = "Woof!";
-        randomChummeringDialogues[1] = "Grr!";
-        randomChummeringDialogues[2] = "I'm doing the dinner dance!";
-        randomChummeringDialogues[3] = "Woof! Pip was doing something funny to his bed!";
-        randomChummeringDialogues[4] = "Growl...Chicken time!";
+        dialogueText[0][0] = "Woof!";
+        dialogueText[1][0] = "Grr!";
+        dialogueText[2][0] = "I'm doing the dinner dance!";
+        dialogueText[3][0] = "Woof! Pip was doing something funny to his bed!";
+        dialogueText[4][0] = "Growl...Chicken time!";
+        dialogueText[5][0] = "Growl...Pip thinks he's the toughest dog on\nthe street...HaHa...Ruff!";
+        dialogueText[6][0] = "Shall we play cheeky monkey?";
+        dialogueText[7][0] = "Yelp!";
     }
 
     public void setAction() {
@@ -82,6 +85,8 @@ public class NPC_Phoebe extends Entity {
     public void speak() {
 
         //character specific stuff here
-        super.speak();
+        facePlayer();
+        startDialogue(this, dialogueSet);
+        gp.keyH.enterPressed = false;
     }
 }
