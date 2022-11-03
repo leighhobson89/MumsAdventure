@@ -101,7 +101,6 @@ public class EventHandler {
                 gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
                 gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
                 spiderCount++;
-                System.out.println("Spider: " + spiderCount);
             }
         } else {
             gp.gameState = gameState;
@@ -110,6 +109,7 @@ public class EventHandler {
                 gp.player.startDialogue(gp.player, 12);
                 gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation); // trigger a spider when the dialogue is closed
             } else if (spiderCount > 1) {
+                gp.player.setDialogue();
                 gp.player.startDialogue(gp.player, 13);
                 gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
             }
@@ -117,7 +117,6 @@ public class EventHandler {
             //eventRect[col][row].eventDone = true; //for non recurring events only
             canTouchEvent = false;
             spiderCount++;
-            System.out.println("Spider: " + spiderCount);
         }
         return spiderCount;
     }

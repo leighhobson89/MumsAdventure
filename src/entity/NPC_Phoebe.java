@@ -86,7 +86,10 @@ public class NPC_Phoebe extends Entity {
 
         //character specific stuff here
         facePlayer();
+        dialogueSet++;
+        if (dialogueSet > 6) {
+            dialogueSet = 0;
+        }
         startDialogue(this, dialogueSet);
-        gp.keyH.enterPressed = false;
     }
 }

@@ -137,7 +137,7 @@ public class Player extends Entity {
         //GUARD
         //getGuardImage();
         setItems();
-        startDialogue();
+        setDialogue();
     }
 
     public void setDefaultPositions() {
@@ -473,7 +473,7 @@ public class Player extends Entity {
         }
     }
 
-    public void startDialogue() {
+    public void setDialogue() {
         dialogueText[0][0] = "I can throw the bone for Pip.\nI need to find an open area and press 'T'!";
         dialogueText[1][0] = "You have levelled up!\nNow you are level " + level + "!\n\nYou feel more able to cope with stress!";
         dialogueText[2][0] = "Wow I found hundred quid!\nNice reward for doing the weeding!";
@@ -487,7 +487,7 @@ public class Player extends Entity {
         dialogueText[10][0] = "Nice to have a rest, I feel less stressed\nstraight away!\n(Game Saved!)";
         dialogueText[11][0] = "Oww ya stupid sod, be careful will yer!";
         dialogueText[12][0] = "Aaagh a bloody big spider!";
-        dialogueText[13][0] = "Aaagh another bloody spider!\nThat's " + uTool.parseNumberString(spiderCount)  + " in one day, sick of it!";
+        dialogueText[13][0] = "Aaagh another bloody spider!\nThat's " + uTool.parseNumberString(this.spiderCount)  + " in one day, sick of it!";
         dialogueText[14][0] = "So many bloody spiders today, Peter will you\nsort this bloody garden out?";
         dialogueText[15][0] = "I'm fine, I don't need to\nrelax at the moment!\n(Game Saved!)";
         dialogueText[16][0] = "These light pills will help my dodgy eye\nfor a bit, phew!";
@@ -651,6 +651,7 @@ public class Player extends Entity {
                         int playerX = gp.player.worldX/gp.tileSize;
                         int playerY = gp.player.worldY/ gp.tileSize;
                         gp.player.spiderCount = gp.eHandler.spiderEvent(playerX+2, playerY+2, gp.dialogueState, gp.player.spiderCount, false, true);
+                        System.out.println("SpiderCount after event set it: " + gp.player.spiderCount);
                     }
                 }
             }

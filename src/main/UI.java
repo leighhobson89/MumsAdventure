@@ -889,6 +889,7 @@ public class UI {
     }
 
     public void trade_select() { //dialogue options
+        npc.dialogueSet = 0;
         drawDialogueScreen(1);
 
         //DRAW WINDOW
@@ -926,8 +927,7 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 gp.playSFX(11);
                 commandNum = 0;
-                gp.gameState = gp.dialogueState;
-                currentDialogue = "Ok den, I'll wait 'ere while\nyou tink about it innit!";
+                npc.startDialogue(npc, 2);
             }
         }
         y += gp.tileSize;
@@ -976,16 +976,14 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 if (npc.inventory.get(itemIndex).price > gp.player.coin) {
                     subState = 0;
-                    gp.gameState = gp.dialogueState;
-                    currentDialogue = "Dat's not enough coin, you have to pay " + price + " innit!";
+                    npc.startDialogue(npc, 3);
                 } else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
                         gp.player.coin -= npc.inventory.get(itemIndex).price;
                         gp.playSFX(11);
                     } else {
                         subState = 0;
-                        gp.gameState = gp.dialogueState;
-                        currentDialogue = "My pockets are all full, I can't carry more!";
+                        npc.startDialogue(npc, 4);
                     }
                 }
             }
@@ -1039,8 +1037,7 @@ public class UI {
                         gp.player.inventory.get(itemIndex) == gp.player.currentArmour || gp.player.inventory.get(itemIndex) == gp.player.currentLight) {
                     commandNum = 0;
                     subState = 0;
-                    gp.gameState = gp.dialogueState;
-                    currentDialogue = "You need to unequip your item before you can sell it!";
+                    npc.startDialogue(npc, 5);
                 } else {
                     if (gp.player.inventory.get(itemIndex).isSaleable) {
                         if (gp.player.inventory.get(itemIndex).amount > 1) {
@@ -1053,8 +1050,7 @@ public class UI {
                     } else {
                         commandNum = 0;
                         subState = 0;
-                        gp.gameState = gp.dialogueState;
-                        currentDialogue = "You cannot sell this item";
+                        npc.startDialogue(npc, 6);
                     }
                 }
             }

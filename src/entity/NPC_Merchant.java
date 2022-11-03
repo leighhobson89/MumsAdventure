@@ -38,7 +38,12 @@ public class NPC_Merchant extends Entity {
         dialogueText[0][0] = "'Ere, d'ya wanna sell that camper van 'n dat?\nI have loads of good stuff here innit!";
 
         //BONE THROWN AT MERCHANT
-        dialogueText[1][0] = "Don't throw dat at me innit!";;
+        dialogueText[1][0] = "Don't throw dat at me innit!";
+        dialogueText[2][0] = "Ok den, I'll wait 'ere while\nyou tink about it innit!";
+        dialogueText[3][0] = "Dat's not enough coin, you have to pay more innit!";
+        dialogueText[4][0] = "My pockets are all full, I can't carry more!";
+        dialogueText[5][0] = "You need to unequip your item before you can sell it!";
+        dialogueText[6][0] = "You cannot sell this item";
     }
 
     public void setItems() {
@@ -51,13 +56,11 @@ public class NPC_Merchant extends Entity {
     public void speak() {
 
         //character specific stuff here
-
         facePlayer();
         startDialogue(this, dialogueSet);
 
         gp.gameState = gp.tradeState;
         gp.ui.npc = this;
-        gp.keyH.enterPressed = false;
     }
 
 }
