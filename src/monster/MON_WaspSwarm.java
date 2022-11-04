@@ -62,8 +62,12 @@ public class MON_WaspSwarm extends Entity {
         } else {
             //Check if it starts chasing
             damageJustReceived = checkStartsChasingOrNot(gp.player, 5, 100, damageJustReceived);
-            //Get a random direction
-            getRandomDirection();
+            //Set direction
+            if (checkEdgeOfMap(this)) {
+                turnEntityAround(this);
+            } else {
+                getRandomDirection();
+            }
         }
 
 //        //Check if it attacks (applies to monsters with weapon to swing at player)

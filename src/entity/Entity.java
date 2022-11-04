@@ -110,6 +110,10 @@ public class Entity {
     public int lightRadius; //for different objects affecting lighting
 
     //WORLD ATTRIBUTES
+    public static final int MAX_WORLD_X_COORDINATE = 69;
+    public static final int MAX_WORLD_Y_COORDINATE = 24;
+    public static final int MIN_WORLD_X_COORDINATE = 0;
+    public static final int MIN_WORLD_Y_COORDINATE = 0;
 
     //MONSTER ATTRIBUTES
     public int monsterMaxStress;
@@ -471,7 +475,6 @@ public class Entity {
             if (i > 50 && i <= 75) {direction = "left";}
             if (i > 75) {direction = "right";}
             actionLockCounter = 0;
-
         }
     }
 
@@ -844,5 +847,23 @@ public class Entity {
             }
         }
         return index;
+    }
+
+    public void turnEntityAround(Entity entity) {
+        //IF ENTITY REACHES EDGE OF WORLD, TURN THEM AROUND BEFORE ARRAY OUT OF BOUNDS ERROR
+        entity.direction = entity.getOppositeDirection(entity.direction);
+    }
+
+    public boolean checkEdgeOfMap(Entity entity) {
+        int worldX = entity.worldX/gp.tileSize;
+        int worldY = entity.worldY/gp.tileSize;
+
+        if ((worldX == MAX_WORLD_X_COORDINATE && entity.direction.equals("right"))
+                || (worldY == MAX_WORLD_Y_COORDINATE && entity.direction.equals("down"))
+                || (worldX == MIN_WORLD_X_COORDINATE && entity.direction.equals("left"))
+                || (worldY == MIN_WORLD_Y_COORDINATE && entity.direction.equals("up"))) {
+            return true;
+        }
+        return false;
     }
 }

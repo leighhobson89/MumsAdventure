@@ -63,8 +63,12 @@ public class MON_Spider extends Entity {
         } else {
             //Check if it starts chasing
             checkStartsChasingOrNot(gp.player, 5, 100, damageJustReceived);
-            //Get a random direction
-            getRandomDirection();
+            //Set direction
+            if (checkEdgeOfMap(this)) {
+                turnEntityAround(this);
+            } else {
+                getRandomDirection();
+            }
         }
     }
     public void damageReaction() {

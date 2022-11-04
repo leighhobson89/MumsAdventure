@@ -108,26 +108,10 @@ public class NPC_Pip extends Entity {
 
             searchPath(goalCol, goalRow);
         } else {
-            actionLockCounter ++;
-
-            if (actionLockCounter == 60) {
-                Random random = new Random();
-                int i = random.nextInt(100) + 1; //pick up a number from 1 to 100
-
-                if (i <= 25) {
-                    direction = "up";
-                }
-                if (i > 25 && i <= 50) {
-                    direction = "down";
-                }
-                if (i > 50 && i <= 75) {
-                    direction = "left";
-                }
-                if (i > 75) {
-                    direction = "right";
-                }
-                actionLockCounter = 0;
-
+            if (checkEdgeOfMap(this)) {
+                turnEntityAround(this);
+            } else {
+                getRandomDirection();
             }
         }
     }
