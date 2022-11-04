@@ -32,6 +32,9 @@ public class UI {
     public int subState = 0;
     int counter = 0;
     public Entity npc;
+    int charIndex = 0;
+    String combinedText = "";
+    boolean soundFXShouldPlay;
 
     public UI(GamePanel gp) throws IOException, FontFormatException {
         this.gp = gp;
@@ -406,9 +409,25 @@ public class UI {
 
         if (npc != null) {
             if (npc.dialogueText[npc.dialogueSet][npc.dialogueIndex] != null) {
-                currentDialogue = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex];
+                //currentDialogue = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex];
+
+                char[] characters = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex].toCharArray();
+
+                if (charIndex < characters.length) {
+
+                    gp.playSFX(27);
+                    String s = String.valueOf(characters[charIndex]);
+                    combinedText = combinedText + s;
+                    currentDialogue = combinedText;
+
+                    charIndex++;
+                }
 
                 if (gp.keyH.enterPressed) {
+
+                    charIndex = 0;
+                    combinedText = "";
+
                     if (gp.gameState == gp.dialogueState) {
                         npc.dialogueIndex++;
                         gp.keyH.enterPressed = false;
@@ -421,7 +440,6 @@ public class UI {
                     gp.gameState = gp.playState;
                 }
             }
-            //gp.keyH.enterPressed = false; - seems like is not needed but wait and see
         }
 
         for (String line : currentDialogue.split("\n")) {

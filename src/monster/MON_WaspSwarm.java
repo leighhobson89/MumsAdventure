@@ -49,10 +49,6 @@ public class MON_WaspSwarm extends Entity {
     }
 
     public void setAction() {
-//        System.out.println("Wasps on Path: " + onPath);
-//        System.out.println("Wasps speed: " + speed);
-//        System.out.println("Wasp received damage just now: " + damageJustReceived);
-
         if(onPath) {
             //Check if it stops chasing
             checkStopsChasingOrNot(gp.player, 15, 100);

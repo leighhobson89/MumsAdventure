@@ -43,7 +43,6 @@ public class OBJ_BackGateSideways extends Entity {
             collision = false;
             opened = true;
             gp.player.spiderCount = gp.eHandler.spiderEvent(23, 13, gp.dialogueState, gp.player.spiderCount, true, false);
-            System.out.println("SpiderCount after event set it: " + gp.player.spiderCount);
             gp.eHandler.kitchenCupBoard();
         }
         else {

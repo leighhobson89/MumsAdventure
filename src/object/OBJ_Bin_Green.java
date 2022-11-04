@@ -38,7 +38,6 @@ public class OBJ_Bin_Green extends Entity {
             gp.playSFX(14);
 
             gp.player.spiderCount = gp.eHandler.spiderEvent(27, 8, gp.dialogueState, gp.player.spiderCount, true, false);
-            System.out.println("SpiderCount after event set it: " + gp.player.spiderCount);
             opened = true;
         } else {
             startDialogue(this, 0);

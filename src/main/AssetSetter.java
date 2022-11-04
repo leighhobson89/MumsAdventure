@@ -278,7 +278,6 @@ public class AssetSetter {
         }
 
         monsterNumber++; //monster counter increments so that next call of method adds to next slot in monster array
-        System.out.println("MonsterNumber: " + monsterNumber);
 
         return monsterNumber;
     }

@@ -58,7 +58,6 @@ public class NPC_Pip extends Entity {
             //follow player
             onPath = true;
             speed = 4;
-            System.out.println("Pip On Path!");
         } else if (gp.player.boneCount == 1){
             speed = 2;
             onPath = false;

@@ -403,6 +403,10 @@ public class GamePanel extends JPanel implements Runnable {
         sfx.play(0, false);
     }
 
+    public void stopSFX(int i) {
+        sfx.stop(false);
+    }
+
     public void clearMonsters() {
         monster = new Entity[maxMap][20];
     }

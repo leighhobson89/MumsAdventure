@@ -43,6 +43,7 @@ public class Sound {
         soundURL[24] = getClass().getResource("/sound/gameOverMum.wav");
         soundURL[25] = getClass().getResource("/sound/passOutMum.wav");
         soundURL[26] = getClass().getResource("/sound/waspBuzz.wav");
+        soundURL[27] = getClass().getResource("/sound/talkTextSound.wav");
     }
 
     public void setFile(int i) {

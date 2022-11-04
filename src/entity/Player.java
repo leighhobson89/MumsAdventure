@@ -308,7 +308,6 @@ public class Player extends Entity {
             if (speedBoost && !dizzyFlag) {
                 speed = pillsSpeed;
             } else if (dizzyFlag) {
-                System.out.println("Dizzy!" + speed);
             } else {
                 speed = defaultSpeed;
             }
@@ -651,7 +650,6 @@ public class Player extends Entity {
                         int playerX = gp.player.worldX/gp.tileSize;
                         int playerY = gp.player.worldY/ gp.tileSize;
                         gp.player.spiderCount = gp.eHandler.spiderEvent(playerX+2, playerY+2, gp.dialogueState, gp.player.spiderCount, false, true);
-                        System.out.println("SpiderCount after event set it: " + gp.player.spiderCount);
                     }
                 }
             }
@@ -678,6 +676,7 @@ public class Player extends Entity {
 
             gp.playSFX(9);
             gp.gameState = gp.dialogueState;
+            setDialogue();
             startDialogue(this, 1);
         }
     }
