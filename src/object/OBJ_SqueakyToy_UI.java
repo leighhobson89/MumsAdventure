@@ -12,6 +12,8 @@ public class OBJ_SqueakyToy_UI extends Entity {
         this.gp = gp;
 
         name = "Squeaky Toy UI";
+        displayName = "Squeaky Toy UI";
+
         image = setup("/projectiles/pips_toy_down1", gp.tileSize,gp.tileSize);
         image2 = setup("/projectiles/pips_toy_down1_blank", gp.tileSize,gp.tileSize);
     }

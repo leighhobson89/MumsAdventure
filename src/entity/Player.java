@@ -431,7 +431,7 @@ public class Player extends Entity {
                 }
             } else {
                 //INVENTORY ITEMS
-                String text;
+                String text = "";
                 int selectSfx;
 
                 if (canObtainItem(gp.obj[gp.currentMap][i])) {
@@ -461,13 +461,12 @@ public class Player extends Entity {
                     }
                     selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
                     gp.playSFX(selectSfx);
-                    text = "Picked up " + gp.obj[gp.currentMap][i].name + "!";
-                    gp.ui.addMessage(text);
+                    text = "Picked up " + gp.obj[gp.currentMap][i].displayName + "!";
                     gp.obj[gp.currentMap][i] = null;
                 } else if (inventory.size() >= maxInventorySize) {
                     text = "You cannot carry any more!";
-                    gp.ui.addMessage(text);
                 }
+                gp.ui.addMessage(text);
             }
         }
     }
@@ -557,6 +556,11 @@ public class Player extends Entity {
                     gp.ui.addMessage("The " + this.name + " got you but it can barely stress you at this level");
                     damage = 1;
                     gp.ui.addMessage("Stress increased by " + damage + "!");
+                }
+                if (Objects.equals(this.name, "Spider")) {
+                    gp.playSFX(6);
+                } else if (Objects.equals(this.name, "WaspSwarm")) {
+                    gp.playSFX(26);
                 }
                 invincible = true;
                 transparent = true;

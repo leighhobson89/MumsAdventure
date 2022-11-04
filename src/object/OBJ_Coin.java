@@ -15,6 +15,7 @@ public class OBJ_Coin extends Entity {
         type = type_pickupOnly;
         value = 1;
         name = "A Pound Coin";
+        displayName = "A Pound Coin";
         down1 = setup("/objects/goldCoin", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nA Quid!";

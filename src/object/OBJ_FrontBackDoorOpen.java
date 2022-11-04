@@ -10,6 +10,7 @@ public class OBJ_FrontBackDoorOpen extends Entity {
         super(gp);
 
         name = "FrontBackDoorOpen";
+        displayName = "FrontBackDoorOpen";
         down1 = setup("/objects/frontBackDoorOpen", gp.tileSize, gp.tileSize);
         direction = "down";
     }

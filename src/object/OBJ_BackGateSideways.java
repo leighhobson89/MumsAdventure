@@ -15,6 +15,7 @@ public class OBJ_BackGateSideways extends Entity {
         type = type_obstacle;
 
         name = "BackGateSideways";
+        displayName = "BackGateSideways";
         direction = "down";
         image = setup("/objects/backGateSideways", gp.tileSize, gp.tileSize);
         image2 = setup("/objects/backGateOpenSideways", gp.tileSize, gp.tileSize);

@@ -10,6 +10,7 @@ public class OBJ_GrandmasCardigan extends Entity {
 
         type = type_armour;
         name = "Old Cardigan";
+        displayName = "Old Cardigan";
         down1 = setup("/objects/grandmasCardigan", gp.tileSize, gp.tileSize);
         direction = "down";
         defenseValue = 1;

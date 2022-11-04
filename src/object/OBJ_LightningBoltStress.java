@@ -13,6 +13,7 @@ public class OBJ_LightningBoltStress extends Entity {
         this.gp = gp;
 
         name = "StressBolt";
+        displayName = "some stress relief!";
         type = type_pickupOnly;
         value = 2;
         direction = "down";

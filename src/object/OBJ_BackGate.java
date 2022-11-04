@@ -15,6 +15,7 @@ public class OBJ_BackGate extends Entity {
         type = type_obstacle;
 
         name = "BackGate";
+        displayName = "BackGate";
         direction = "down";
         image = setup("/objects/backGate", gp.tileSize, gp.tileSize);
         image2 = setup("/objects/backGateOpen", gp.tileSize, gp.tileSize);

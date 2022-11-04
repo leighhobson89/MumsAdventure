@@ -15,6 +15,7 @@ public class OBJ_SuperCoin extends Entity {
         type = type_pickupOnly;
         value = 100;
         name = "HundredQuid";
+        displayName = "a hundred quid!";
         down1 = setup("/objects/goldCoin", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nWow, Hundred Quid!";

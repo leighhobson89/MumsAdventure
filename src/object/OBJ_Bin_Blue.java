@@ -11,6 +11,7 @@ public class OBJ_Bin_Blue extends Entity {
 
         type = type_obstacle;
         name = "Bin_Blue";
+        displayName = "Bin_Blue";
         down1 = setup("/objects/bin_Blue", gp.tileSize, gp.tileSize);
         direction = "down";
 

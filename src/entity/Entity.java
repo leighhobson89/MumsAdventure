@@ -59,6 +59,7 @@ public class Entity {
 
     //CHARACTER ATTRIBUTES
     public String name;
+    public String displayName;
     public int speed;
     public int defaultSpeed;
     public int pillsSpeed;

@@ -15,6 +15,7 @@ public class OBJ_LightPills extends Entity {
         this.gp = gp;
         type = type_light;
         name = "Anti Brightness Pills";
+        displayName = "Anti Brightness Pills";
         down1 = setup("/objects/lightPills", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nYour Anti Brightness Pills";

@@ -14,6 +14,7 @@ public class OBJ_Pills extends Entity {
         this.gp = gp;
         type = type_consumable;
         name = "Tube of Pills";
+        displayName = "Tube of Pills";
         down1 = setup("/objects/pills", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nYour Daily Pills";

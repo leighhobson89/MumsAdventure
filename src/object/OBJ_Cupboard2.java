@@ -14,6 +14,7 @@ public class OBJ_Cupboard2 extends Entity {
 
         type = type_obstacle;
         name = "Cupboard2";
+        displayName = "Cupboard2";
         image = setup("/objects/cupboard2", gp.tileSize, gp.tileSize);
         down1 = image;
         direction = "down";

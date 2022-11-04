@@ -14,6 +14,7 @@ public class OBJ_Shovel extends Entity {
         this.gp = gp;
         type = type_gardeningShovel;
         name = "Garden Shovel";
+        displayName = "Garden Shovel";
         down1 = setup("/objects/shovel", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nDig up the Rockery!";

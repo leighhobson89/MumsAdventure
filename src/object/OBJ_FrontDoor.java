@@ -14,6 +14,7 @@ public class OBJ_FrontDoor extends Entity {
 
         type = type_obstacle;
         name = "FrontDoor";
+        displayName = "FrontDoor";
         down1 = setup("/objects/frontDoor", gp.tileSize, gp.tileSize);
         direction = "down";
         collision = true;

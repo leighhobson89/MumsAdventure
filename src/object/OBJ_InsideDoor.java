@@ -15,6 +15,7 @@ public class OBJ_InsideDoor extends Entity {
         type = type_obstacle;
 
         name = "InsideDoor";
+        displayName = "InsideDoor";
         direction = "down";
         image = setup("/objects/insideDoor", gp.tileSize, gp.tileSize);
         image2 = setup("/objects/insideDoorOpen", gp.tileSize, gp.tileSize);

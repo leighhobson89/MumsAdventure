@@ -11,6 +11,7 @@ public class OBJ_FrontGate extends Entity {
 
         type = type_obstacle;
         name = "FrontGate";
+        displayName = "FrontGate";
         down1 = setup("/objects/frontGate", gp.tileSize, gp.tileSize);
         direction = "down";
         collision = true;

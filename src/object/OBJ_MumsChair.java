@@ -14,6 +14,7 @@ public class OBJ_MumsChair extends Entity {
 
         type = type_obstacle;
         name = "MumsChair";
+        displayName = "MumsChair";
         down1 = setup("/objects/mumsChair", gp.tileSize, gp.tileSize);
         direction = "down";
 

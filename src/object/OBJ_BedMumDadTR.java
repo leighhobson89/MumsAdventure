@@ -14,6 +14,7 @@ public class OBJ_BedMumDadTR extends Entity {
 
         type = type_obstacle;
         name = "BedMumDadTR";
+        displayName = "BedMumDadTR";
         image = setup("/objects/TRbedMumDadBedroom", gp.tileSize, gp.tileSize);
         down1 = image;
         direction = "down";

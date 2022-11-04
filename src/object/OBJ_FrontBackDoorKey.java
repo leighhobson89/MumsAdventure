@@ -13,6 +13,7 @@ public class OBJ_FrontBackDoorKey extends Entity {
         this.gp = gp;
 
         name = "FrontBackDoorKey";
+        displayName = "Key";
         description = "[" + name + "]\nKey For Front And\nBack Door";
         isSaleable = false;
         down1 = setup("/objects/frontBackDoorKey", gp.tileSize, gp.tileSize);

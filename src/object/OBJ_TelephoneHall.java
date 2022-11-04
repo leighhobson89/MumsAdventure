@@ -12,6 +12,7 @@ public class OBJ_TelephoneHall extends Entity {
         type = type_obstacle;
         collision = true;
         name = "TelephoneHall";
+        displayName = "TelephoneHall";
         down1 = setup("/objects/telephoneHall", gp.tileSize, gp.tileSize);
         direction = "down";
 

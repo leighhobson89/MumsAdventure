@@ -10,6 +10,7 @@ public class OBJ_Spatula extends Entity {
 
         type = type_long_weapon;
         name = "Spatula";
+        displayName = "a fish slice";
         down1 = setup("/objects/spatulaWeapon", gp.tileSize, gp.tileSize);
         direction = "down";
         attackValue = 3;

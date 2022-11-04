@@ -16,6 +16,7 @@ public class OBJ_PipsToy_Magic extends Projectile {
         this.gp = gp;
 
         name = "Pip's Toy";
+        displayName = "Pip's Toy";
         speed = 5;
         maxStress = 50;
         attack = 1;

@@ -10,6 +10,7 @@ public class OBJ_Lavendar_Crocs extends Entity {
 
         type = type_short_weapon;
         name = "Lavender Crocs";
+        displayName = "Lavender Crocs";
         down1 = setup("/objects/lavendarCrocs", gp.tileSize, gp.tileSize);
         direction = "down";
         attackValue = 2;
