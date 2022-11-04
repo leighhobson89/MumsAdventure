@@ -494,6 +494,7 @@ public class Player extends Entity {
 
     public void checkIfPassOutFromStress() {
         if (gp.player.stressLevel >= gp.player.maxStress) {
+            knockBack = false;
             timesPassedOut++;
             gp.gameState = gp.dialogueState;
             startDialogue(this, 9);
@@ -562,6 +563,12 @@ public class Player extends Entity {
                 } else if (Objects.equals(this.name, "WaspSwarm")) {
                     gp.playSFX(26);
                 }
+                if (damage != 0) {
+                    gp.player.transparent = true;
+                    setKnockBack(gp.player, this, knockBackPower);
+                }
+                gp.player.stressLevel += damage;
+                gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
                 invincible = true;
                 transparent = true;
                 checkIfPassOutFromStress();
