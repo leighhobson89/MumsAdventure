@@ -9,13 +9,14 @@ import java.awt.*;
 public class OBJ_DogsBone_NotMagic extends Projectile {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "Pip's Bone";
 
     public OBJ_DogsBone_NotMagic(GamePanel gp) {
 
         super(gp);
         this.gp = gp;
 
-        name = "Pip's Bone";
+        name = OBJ_NAME;
         displayName = "Pip's Bone";
         description = "[" + name + "]\nThrow it for him!";
         isSaleable = false;

@@ -9,13 +9,14 @@ import java.awt.*;
 public class OBJ_PipsToy_Magic extends Projectile {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "Pip's Toy";
 
     public OBJ_PipsToy_Magic(GamePanel gp) {
 
         super(gp);
         this.gp = gp;
 
-        name = "Pip's Toy";
+        name = OBJ_NAME;
         displayName = "Pip's Toy";
         speed = 5;
         maxStress = 50;

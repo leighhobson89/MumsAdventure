@@ -7,13 +7,15 @@ public class OBJ_BackDoor extends Entity {
 
     GamePanel gp;
 
+    public static final String OBJ_NAME = "BackDoor";
+
     public OBJ_BackDoor(GamePanel gp) {
 
         super(gp);
         this.gp = gp;
 
         type = type_obstacle;
-        name = "BackDoor";
+        name = OBJ_NAME;
         displayName = "BackDoor";
         down1 = setup("/objects/backDoor", gp.tileSize, gp.tileSize);
         direction = "down";

@@ -5,11 +5,13 @@ import main.GamePanel;
 
 public class OBJ_GrandmasCardigan extends Entity {
 
+    public static final String OBJ_NAME = "Old Cardigan";
+
     public OBJ_GrandmasCardigan(GamePanel gp) {
         super(gp);
 
         type = type_armour;
-        name = "Old Cardigan";
+        name = OBJ_NAME;
         displayName = "Old Cardigan";
         down1 = setup("/objects/grandmasCardigan", gp.tileSize, gp.tileSize);
         direction = "down";

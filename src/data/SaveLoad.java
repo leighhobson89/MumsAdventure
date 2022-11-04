@@ -19,46 +19,6 @@ public class SaveLoad {
     }
     boolean loadWithBoneEquipped;
 
-    public Entity getObject(String itemName) {
-        Entity obj = null;
-
-        switch(itemName) {
-            case "Pip's Bone": obj = new OBJ_DogsBone_NotMagic(gp); break;
-            case "FrontBackDoorKey": obj = new OBJ_FrontBackDoorKey(gp); break;
-            case "Old Cardigan": obj = new OBJ_GrandmasCardigan(gp); break;
-            case "Acoustic Guitar": obj = new OBJ_Guitar1(gp); break;
-            case "Electric Guitar": obj = new OBJ_Guitar2(gp); break;
-            case "Lavender Crocs": obj = new OBJ_Lavendar_Crocs(gp); break;
-            case "Anti Brightness Pills": obj = new OBJ_LightPills(gp); break;
-            case "Tube of Pills": obj = new OBJ_Pills(gp); break;
-            case "Garden Shovel": obj = new OBJ_Shovel(gp); break;
-            case "Spatula": obj = new OBJ_Spatula(gp); break;
-            case "InsideDoor": obj = new OBJ_InsideDoor(gp); break;
-            case "InsideDoorSideways": obj = new OBJ_InsideDoorSideways(gp); break;
-            case "Cupboard1": obj = new OBJ_Cupboard1(gp); break;
-            case "Cupboard2": obj = new OBJ_Cupboard2(gp); break;
-            case "Cupboard3": obj = new OBJ_Cupboard3(gp); break;
-            case "Bin_Blue": obj = new OBJ_Bin_Blue(gp); break;
-            case "Bin_Green": obj = new OBJ_Bin_Green(gp); break;
-            case "Bin_Grey": obj = new OBJ_Bin_Grey(gp); break;
-            case "BackGateSideways": obj = new OBJ_BackGateSideways(gp); break;
-            case "BackGate": obj = new OBJ_BackGate(gp); break;
-            case "MumsChair": obj = new OBJ_MumsChair(gp); break;
-            case "FrontDoor": obj = new OBJ_FrontDoor(gp); break;
-            case "BackDoor": obj = new OBJ_BackDoor(gp); break;
-            case "BedMumDadBL": obj = new OBJ_BedMumDadBL(gp); break;
-            case "BedMumDadBR": obj = new OBJ_BedMumDadBR(gp); break;
-            case "BedMumDadTL": obj = new OBJ_BedMumDadTL(gp); break;
-            case "BedMumDadTR": obj = new OBJ_BedMumDadTR(gp); break;
-            case "FrontBackDoorOpen": obj = new OBJ_FrontBackDoorOpen(gp); break;
-            case "A Pound Coin": obj = new OBJ_Coin(gp); break;
-            case "StressBolt": obj = new OBJ_LightningBoltStress(gp); break;
-            case "HundredQuid": obj = new OBJ_SuperCoin(gp); break;
-            case "TelephoneHall": obj = new OBJ_TelephoneHall(gp); break;
-        }
-        return obj;
-    }
-
     public Entity getMonster(String itemName) {
         Entity monster = null;
 
@@ -247,7 +207,7 @@ public class SaveLoad {
 
             //PLAYER INVENTORY
             for (int i = 0; i < ds.itemNames.size(); i++) {
-                gp.player.inventory.add(getObject(ds.itemNames.get(i)));
+                gp.player.inventory.add(gp.eGenerator.getObject(ds.itemNames.get(i)));
                 gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
             }
 
@@ -268,11 +228,11 @@ public class SaveLoad {
                     if (ds.mapObjectNames[mapNum][i].equals("NA")) {
                         gp.obj[mapNum][i] = null;
                     } else {
-                        gp.obj[mapNum][i] = getObject(ds.mapObjectNames[mapNum][i]);
+                        gp.obj[mapNum][i] = gp.eGenerator.getObject(ds.mapObjectNames[mapNum][i]);
                         gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
                         gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
                         if (ds.mapObjectLootNames[mapNum][i] != null) {
-                            gp.obj[mapNum][i].loot = getObject(ds.mapObjectLootNames[mapNum][i]);
+                            gp.obj[mapNum][i].loot = gp.eGenerator.getObject(ds.mapObjectLootNames[mapNum][i]);
                         }
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
                         if (gp.obj[mapNum][i].opened) {

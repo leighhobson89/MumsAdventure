@@ -5,12 +5,14 @@ import main.GamePanel;
 
 public class OBJ_FrontGate extends Entity {
 
+    public static final String OBJ_NAME = "FrontGate";
+
     public OBJ_FrontGate(GamePanel gp) {
 
         super(gp);
 
         type = type_obstacle;
-        name = "FrontGate";
+        name = OBJ_NAME;
         displayName = "FrontGate";
         down1 = setup("/objects/frontGate", gp.tileSize, gp.tileSize);
         direction = "down";

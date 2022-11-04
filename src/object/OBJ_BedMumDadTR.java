@@ -6,6 +6,7 @@ import main.GamePanel;
 public class OBJ_BedMumDadTR extends Entity {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "BedMumDadTR";
 
     public OBJ_BedMumDadTR(GamePanel gp) {
 
@@ -13,7 +14,7 @@ public class OBJ_BedMumDadTR extends Entity {
         this.gp = gp;
 
         type = type_obstacle;
-        name = "BedMumDadTR";
+        name = OBJ_NAME;
         displayName = "BedMumDadTR";
         image = setup("/objects/TRbedMumDadBedroom", gp.tileSize, gp.tileSize);
         down1 = image;

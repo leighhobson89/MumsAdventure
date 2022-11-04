@@ -6,6 +6,7 @@ import main.GamePanel;
 public class OBJ_Cupboard2 extends Entity {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "Cupboard2";
 
     public OBJ_Cupboard2(GamePanel gp) {
 
@@ -13,7 +14,7 @@ public class OBJ_Cupboard2 extends Entity {
         this.gp = gp;
 
         type = type_obstacle;
-        name = "Cupboard2";
+        name = OBJ_NAME;
         displayName = "Cupboard2";
         image = setup("/objects/cupboard2", gp.tileSize, gp.tileSize);
         down1 = image;

@@ -5,11 +5,13 @@ import main.GamePanel;
 
 public class OBJ_Spatula extends Entity {
 
+    public static final String OBJ_NAME = "Spatula";
+
     public OBJ_Spatula(GamePanel gp) {
         super(gp);
 
         type = type_long_weapon;
-        name = "Spatula";
+        name = OBJ_NAME;
         displayName = "a fish slice";
         down1 = setup("/objects/spatulaWeapon", gp.tileSize, gp.tileSize);
         direction = "down";

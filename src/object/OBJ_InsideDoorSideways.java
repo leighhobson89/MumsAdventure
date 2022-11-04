@@ -6,6 +6,7 @@ import main.GamePanel;
 public class OBJ_InsideDoorSideways extends Entity {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "InsideDoorSideways";
 
     public OBJ_InsideDoorSideways(GamePanel gp) {
 
@@ -14,7 +15,7 @@ public class OBJ_InsideDoorSideways extends Entity {
 
         type = type_obstacle;
 
-        name = "InsideDoorSideways";
+        name = OBJ_NAME;
         displayName = "InsideDoorSideways";
         direction = "down";
         image = setup("/objects/insideDoorSideways", gp.tileSize, gp.tileSize);

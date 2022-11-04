@@ -6,6 +6,7 @@ import main.GamePanel;
 public class OBJ_Pills extends Entity {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "Tube of Pills";
 
     public OBJ_Pills(GamePanel gp) {
 
@@ -13,7 +14,7 @@ public class OBJ_Pills extends Entity {
 
         this.gp = gp;
         type = type_consumable;
-        name = "Tube of Pills";
+        name = OBJ_NAME;
         displayName = "Tube of Pills";
         down1 = setup("/objects/pills", gp.tileSize, gp.tileSize);
         direction = "down";

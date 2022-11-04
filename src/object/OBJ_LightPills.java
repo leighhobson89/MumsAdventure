@@ -6,6 +6,8 @@ import main.GamePanel;
 public class OBJ_LightPills extends Entity {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "Anti Brightness Pills";
+
     boolean consumableNow = false;
 
     public OBJ_LightPills(GamePanel gp) {
@@ -14,7 +16,7 @@ public class OBJ_LightPills extends Entity {
 
         this.gp = gp;
         type = type_light;
-        name = "Anti Brightness Pills";
+        name = OBJ_NAME;
         displayName = "Anti Brightness Pills";
         down1 = setup("/objects/lightPills", gp.tileSize, gp.tileSize);
         direction = "down";

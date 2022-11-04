@@ -6,6 +6,7 @@ import main.GamePanel;
 public class OBJ_FrontDoor extends Entity {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "FrontDoor";
 
     public OBJ_FrontDoor(GamePanel gp) {
 
@@ -13,7 +14,7 @@ public class OBJ_FrontDoor extends Entity {
         this.gp = gp;
 
         type = type_obstacle;
-        name = "FrontDoor";
+        name = OBJ_NAME;
         displayName = "FrontDoor";
         down1 = setup("/objects/frontDoor", gp.tileSize, gp.tileSize);
         direction = "down";

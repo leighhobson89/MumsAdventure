@@ -7,12 +7,13 @@ import main.UtilityTool;
 public class OBJ_LightningBoltStress extends Entity {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "StressBolt";
 
     public OBJ_LightningBoltStress(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
-        name = "StressBolt";
+        name = OBJ_NAME;
         displayName = "some stress relief!";
         type = type_pickupOnly;
         value = 2;

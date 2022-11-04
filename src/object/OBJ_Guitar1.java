@@ -5,11 +5,13 @@ import main.GamePanel;
 
 public class OBJ_Guitar1 extends Entity {
 
+    public static final String OBJ_NAME = "Acoustic Guitar";
+
     public OBJ_Guitar1(GamePanel gp) {
 
         super(gp);
 
-        name = "Acoustic Guitar";
+        name = OBJ_NAME;
         displayName = "Acoustic Guitar";
         down1 = setup("/objects/guitar1", gp.tileSize, gp.tileSize);
         direction = "down";

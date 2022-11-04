@@ -6,6 +6,7 @@ import main.GamePanel;
 public class OBJ_BackGate extends Entity {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "BackGate";
 
     public OBJ_BackGate(GamePanel gp) {
 
@@ -14,7 +15,7 @@ public class OBJ_BackGate extends Entity {
 
         type = type_obstacle;
 
-        name = "BackGate";
+        name = OBJ_NAME;
         displayName = "BackGate";
         direction = "down";
         image = setup("/objects/backGate", gp.tileSize, gp.tileSize);

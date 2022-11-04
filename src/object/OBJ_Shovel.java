@@ -6,6 +6,7 @@ import main.GamePanel;
 public class OBJ_Shovel extends Entity {
 
     GamePanel gp;
+    public static final String OBJ_NAME = "Garden Shovel";
 
     public OBJ_Shovel(GamePanel gp) {
 
@@ -13,7 +14,7 @@ public class OBJ_Shovel extends Entity {
 
         this.gp = gp;
         type = type_gardeningShovel;
-        name = "Garden Shovel";
+        name = OBJ_NAME;
         displayName = "Garden Shovel";
         down1 = setup("/objects/shovel", gp.tileSize, gp.tileSize);
         direction = "down";
