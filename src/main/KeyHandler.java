@@ -307,6 +307,7 @@ public class KeyHandler implements KeyListener {
     }
     public void tradeState(int code) {
         if (code == KeyEvent.VK_ENTER) {
+            System.out.println("Enter Pressed before setting enterpressed variable: " + enterPressed);
             enterPressed = true;
         }
         if (gp.ui.subState == 0) {
@@ -326,6 +327,7 @@ public class KeyHandler implements KeyListener {
             }
         }
         if (gp.ui.subState == 1) {
+            System.out.println("Enter Pressed before loading inventory: " + enterPressed);
             npcInventory(code);
             if (code == KeyEvent. VK_ESCAPE) {
                 gp.ui.subState = 0;

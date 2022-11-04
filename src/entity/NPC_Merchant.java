@@ -39,6 +39,9 @@ public class NPC_Merchant extends Entity {
 
         //BONE THROWN AT MERCHANT
         dialogueText[1][0] = "Don't throw dat at me innit!";
+
+        //MERCHANT NORMAL TEXTS
+
         dialogueText[2][0] = "Ok den, I'll wait 'ere while\nyou tink about it innit!";
         dialogueText[3][0] = "Dat's not enough coin, you have to pay more innit!";
         dialogueText[4][0] = "My pockets are all full, I can't carry more!";

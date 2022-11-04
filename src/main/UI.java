@@ -421,7 +421,7 @@ public class UI {
                     gp.gameState = gp.playState;
                 }
             }
-            gp.keyH.enterPressed = false;
+            //gp.keyH.enterPressed = false; - seems like is not needed but wait and see
         }
 
         for (String line : currentDialogue.split("\n")) {
