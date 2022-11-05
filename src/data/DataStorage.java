@@ -28,6 +28,10 @@ public class DataStorage implements Serializable {
     boolean savedWithAnArmourEquipped;
     boolean savedWithBoneEquipped;
     int spiderCount;
+    int missionState;
+    int playerWorldX;
+    int playerWorldY;
+    int currentMap;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();

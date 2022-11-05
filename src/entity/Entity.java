@@ -190,11 +190,15 @@ public class Entity {
         offBalanceCounter = 0;
     }
     public void setLoot(Entity loot) {}
-    public void setAction() {}
+    public void setAction() {
+        //overridden in specific entity class
+    }
     public void damageReaction() {
         //overridden in specific monster class
     }
-    public void speak() {}
+    public void speak() {
+        //overridden in specific entity class
+    }
 
     public void facePlayer() {
         switch (gp.player.direction) {

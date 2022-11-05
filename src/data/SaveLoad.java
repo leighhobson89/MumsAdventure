@@ -48,6 +48,13 @@ public class SaveLoad {
             //MUSIC CONFIG
             ds.musicPlaying = gp.keyH.musicPlaying;
 
+            //PLAYER POSITION
+            ds.playerWorldX = gp.player.worldX;
+            ds.playerWorldY = gp.player.worldY;
+
+            //MAP SELECTION
+            ds.currentMap = gp.currentMap;
+
             // PLAYER STATS
             ds.level = gp.player.level;
             ds.maxStress = gp.player.maxStress;
@@ -70,6 +77,7 @@ public class SaveLoad {
                 ds.savedWithBoneEquipped = false;
             }
             ds.spiderCount = gp.player.spiderCount;
+            ds.missionState = gp.player.missionState;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -173,6 +181,13 @@ public class SaveLoad {
                 gp.stopMusic();
             }
 
+            //MAP SELECTION
+            gp.currentMap = ds.currentMap;
+
+            //PLAYER POSITION
+            gp.player.worldX = ds.playerWorldX;
+            gp.player.worldY = ds.playerWorldY;
+
             //PLAYER STATS
             gp.player.level = ds.level;
             gp.player.maxStress = ds.maxStress;
@@ -193,6 +208,7 @@ public class SaveLoad {
             loadWithBoneEquipped = ds.savedWithBoneEquipped;
             gp.player.weedCount = ds.weedCount;
             gp.player.spiderCount = ds.spiderCount;
+            gp.player.missionState = ds.missionState;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
