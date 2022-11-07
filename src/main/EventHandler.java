@@ -202,7 +202,7 @@ public class EventHandler {
                 case 2 -> gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
                 case 3 -> gp.player.missionState = MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT;
             }
-            gp.player.readyForNextPhoneMission = false;
+            gp.player.readyForNextPhoneMission = false; //hu
         }
     }
 }
