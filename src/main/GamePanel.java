@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     //SYSTEM
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
+    public MissionStates misStat = new MissionStates(this);
     Sound music = new Sound();
     Sound sfx = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -97,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+        player.missionList.add(MissionStates.BETWEEN_MISSIONS); //add non mission state to missionList at beginning of game
         aSetter.setNPC();
         aSetter.setObject();
         aSetter.monsterNumber = aSetter.setMonster("WaspSwarm", aSetter.monsterNumber, 13, 18, false);
@@ -128,6 +130,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (restart) {
             player.setDefaultValues();
+            player.cleanMissionList();
             clearMonsters();
             aSetter.setObject();
             player.weedCount = aSetter.setInteractiveTile();
@@ -179,6 +182,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (timer >= 1000000000) { //output FPS in console
                 System.out.println("FPS: " + drawCount);
+                System.out.println("MissionList: " + player.missionList);
                 drawCount = 0;
                 timer = 0;
             }
@@ -203,6 +207,9 @@ public class GamePanel extends JPanel implements Runnable {
 }
     public void update() {
         if (gameState == playState) {
+            //MISSION
+            eHandler.incrementMissionCounterIfNotInAMission(player.missionState); //increment time after a mission ends, to set the new one if required
+            eHandler.setNewMissionState(player.readyForNextPhoneMission, player.missionState, player.missionToSet);
             //PLAYER
             player.update();
             //NPC

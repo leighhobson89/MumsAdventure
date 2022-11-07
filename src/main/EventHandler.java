@@ -184,4 +184,28 @@ public class EventHandler {
 
         gp.player.countDownTimerForItemEffect(gp.player.LIGHT_PILLS_COUNT_DOWN_VALUE, "LightPills");
     }
+
+    public void incrementMissionCounterIfNotInAMission(int missionState) {
+        if (missionState == MissionStates.BETWEEN_MISSIONS) {
+            gp.player.missionEndingCounter++;
+            if (gp.player.missionEndingCounter > 1200) {
+                gp.player.missionEndingCounter = 0;
+                gp.player.readyForNextPhoneMission = true;
+            }
+        }
+    }
+
+    public void setNewMissionState(boolean readyForNextPhoneMission, int missionState, int missionToSet) {
+        if (readyForNextPhoneMission && missionState == MissionStates.BETWEEN_MISSIONS) {
+            switch(missionToSet) {
+                case 2:
+                    gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
+                    break;
+                case 3:
+                    gp.player.missionState = MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT;
+                    break;
+            }
+            gp.player.readyForNextPhoneMission = false;
+        }
+    }
 }

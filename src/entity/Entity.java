@@ -1,12 +1,14 @@
 package entity;
 
 import main.GamePanel;
+import main.MissionStates;
 import main.UtilityTool;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 public class Entity {
 
@@ -44,7 +46,10 @@ public class Entity {
     public boolean offBalance = false;
     public Entity loot;
     public boolean opened = false;
-    public int missionState = 1;
+    public int missionState = MissionStates.WEEDING_MISSION;
+    public List<Integer> missionList = new ArrayList<>();
+    public boolean readyForNextPhoneMission = false;
+    public int missionToSet;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -56,6 +61,7 @@ public class Entity {
     int knockBackCounter = 0;
     public int guardCounter = 0;
     public int offBalanceCounter = 0;
+    public int missionEndingCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -188,6 +194,7 @@ public class Entity {
         knockBackCounter = 0;
         guardCounter = 0;
         offBalanceCounter = 0;
+        missionEndingCounter = 0;
     }
     public void setLoot(Entity loot) {}
     public void setAction() {

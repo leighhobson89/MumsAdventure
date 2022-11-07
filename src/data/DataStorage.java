@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataStorage implements Serializable {
 
@@ -29,6 +30,9 @@ public class DataStorage implements Serializable {
     boolean savedWithBoneEquipped;
     int spiderCount;
     int missionState;
+    public List<Integer> missionList = new ArrayList<>();
+    boolean readyForNextPhoneMission;
+    int missionToSet;
     int playerWorldX;
     int playerWorldY;
     int currentMap;

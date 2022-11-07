@@ -78,6 +78,9 @@ public class SaveLoad {
             }
             ds.spiderCount = gp.player.spiderCount;
             ds.missionState = gp.player.missionState;
+            ds.missionList = gp.player.missionList;
+            ds.readyForNextPhoneMission = gp.player.readyForNextPhoneMission;
+            ds.missionToSet = gp.player.missionToSet;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -209,6 +212,9 @@ public class SaveLoad {
             gp.player.weedCount = ds.weedCount;
             gp.player.spiderCount = ds.spiderCount;
             gp.player.missionState = ds.missionState;
+            gp.player.missionList = ds.missionList;
+            gp.player.readyForNextPhoneMission = ds.readyForNextPhoneMission;
+            gp.player.missionToSet = ds.missionToSet;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

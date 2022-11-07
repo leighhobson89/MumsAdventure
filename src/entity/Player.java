@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.MissionStates;
 import main.UtilityTool;
 import object.OBJ_DogsBone_NotMagic;
 
@@ -11,6 +12,7 @@ import java.util.*;
 
 public class Player extends Entity {
     KeyHandler keyH;
+    MissionStates missionStates;
     UtilityTool uTool = new UtilityTool();
 
     public final int PILLS_COUNT_DOWN_VALUE = 20;
@@ -96,6 +98,12 @@ public class Player extends Entity {
             }
         }
         return --interval;
+    }
+
+    public void cleanMissionList() {
+        missionList = new ArrayList<>(); //clear missionList
+        missionList.add(MissionStates.BETWEEN_MISSIONS);
+        missionState = MissionStates.WEEDING_MISSION;
     }
 
     public void setDefaultValues() {
@@ -645,7 +653,9 @@ public class Player extends Entity {
                         gp.gameState = gp.dialogueState;
                         startDialogue(this, 2);
                         gp.aSetter.setObjectAfterStart("HundredQuid", gp.currentMap, gp.iTile[gp.currentMap][i].worldX/gp.tileSize, gp.iTile[gp.currentMap][i].worldY/gp.tileSize); //place supercoin where last weed dug up as reward
-                        gp.player.missionState = 0;
+                        gp.player.missionState = MissionStates.BETWEEN_MISSIONS;
+                        gp.player.missionList.add(MissionStates.WEEDING_MISSION); //add completed weeding mission to missionList
+                        gp.player.missionToSet = MissionStates.HELP_ANDREA_OUT;
                     }
                 }
                 gp.iTile[gp.currentMap][i].playSfx();
