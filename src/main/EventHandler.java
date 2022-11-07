@@ -198,6 +198,7 @@ public class EventHandler {
     public void setNewMissionState(boolean readyForNextPhoneMission, int missionState, int missionToSet) {
         if (readyForNextPhoneMission && missionState == MissionStates.BETWEEN_MISSIONS) {
             switch (missionToSet) {
+                case 1 -> gp.player.missionState = MissionStates.WEEDING_MISSION;
                 case 2 -> gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
                 case 3 -> gp.player.missionState = MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT;
             }

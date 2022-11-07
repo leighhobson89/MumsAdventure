@@ -46,10 +46,10 @@ public class Entity {
     public boolean offBalance = false;
     public Entity loot;
     public boolean opened = false;
-    public int missionState = MissionStates.WEEDING_MISSION;
+    public int missionState = MissionStates.BETWEEN_MISSIONS;
     public List<Integer> missionList = new ArrayList<>();
-    public boolean readyForNextPhoneMission = false;
-    public int missionToSet;
+    public boolean readyForNextPhoneMission = true;
+    public int missionToSet = 1;
 
     //COUNTER
     public int spriteCounter = 0;
