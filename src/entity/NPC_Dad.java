@@ -134,9 +134,13 @@ public class NPC_Dad extends Entity {
     }
 
     public void speak() {
+        if (gp.player.weedCount > 0) {
+            gp.player.missionState = 1;
+            gp.player.setShovelFlag = true;
+        }
         switch(gp.player.missionState) {
-            case 0: dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); break; //not in a mission
-            case 1: dialogueSet = 61; //weeding mission
+            case 1: dialogueSet = 61; break; //weeding mission
+            default: dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission
         }
         //character specific stuff here
         facePlayer();

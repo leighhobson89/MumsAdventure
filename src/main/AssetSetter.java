@@ -53,6 +53,9 @@ public class AssetSetter {
             case "HundredQuid":
                 gp.obj[mapNum][i] = new OBJ_SuperCoin(gp);
                 break;
+            case "Garden Shovel":
+                gp.obj[mapNum][i] = new OBJ_Shovel(gp);
+                break;
         }
 
         gp.obj[mapNum][i].worldX = x * gp.tileSize;
@@ -172,11 +175,6 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
         gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Shovel(gp);
-        gp.obj[mapNum][i].worldX = 45 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
         i++;
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS

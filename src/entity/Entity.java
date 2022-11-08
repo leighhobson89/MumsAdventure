@@ -26,6 +26,7 @@ public class Entity {
 
     //STATE
     public int worldX, worldY;
+    public int phoneNormalWorldX = 816;
     public String direction = "right";
     public int spriteNum = 1;
     public int dialogueSet = 61;
@@ -48,8 +49,10 @@ public class Entity {
     public boolean opened = false;
     public int missionState = MissionStates.BETWEEN_MISSIONS;
     public List<Integer> missionList = new ArrayList<>();
-    public boolean readyForNextPhoneMission = true;
+    public boolean readyForNextPhoneMission;
     public int missionToSet = 1;
+    public Random rand = new Random();
+    public boolean repeatSfx;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -62,6 +65,8 @@ public class Entity {
     public int guardCounter = 0;
     public int offBalanceCounter = 0;
     public int missionEndingCounter = 0;
+    public int randomCounter; //used for random time in between missions before phone rings
+    public int buzzCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -92,6 +97,7 @@ public class Entity {
     public Entity currentLight;
     public Projectile projectile;
     public int weedCount;
+    public boolean setShovelFlag;
     public int timesPassedOut;
     public boolean dizzyFlag;
     public boolean speedBoost;
@@ -195,6 +201,7 @@ public class Entity {
         guardCounter = 0;
         offBalanceCounter = 0;
         missionEndingCounter = 0;
+        randomCounter = rand.nextInt(5000) + 1200;
     }
     public void setLoot(Entity loot) {}
     public void setAction() {
@@ -877,5 +884,16 @@ public class Entity {
             return true;
         }
         return false;
+    }
+
+    public void setNewMissionState(boolean readyForNextPhoneMission, int missionState, int missionToSet) {
+        if (readyForNextPhoneMission && missionState == MissionStates.BETWEEN_MISSIONS) {
+            switch (missionToSet) {
+                case 1 -> gp.player.missionState = MissionStates.WEEDING_MISSION;
+                case 2 -> gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
+                case 3 -> gp.player.missionState = MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT;
+            }
+            gp.player.readyForNextPhoneMission = false;
+        }
     }
 }

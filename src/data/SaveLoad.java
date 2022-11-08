@@ -81,6 +81,8 @@ public class SaveLoad {
             ds.missionList = gp.player.missionList;
             ds.readyForNextPhoneMission = gp.player.readyForNextPhoneMission;
             ds.missionToSet = gp.player.missionToSet;
+            ds.setShovelFlag = gp.player.setShovelFlag;
+            ds.repeatSfx = gp.player.repeatSfx;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -215,6 +217,9 @@ public class SaveLoad {
             gp.player.missionList = ds.missionList;
             gp.player.readyForNextPhoneMission = ds.readyForNextPhoneMission;
             gp.player.missionToSet = ds.missionToSet;
+            gp.player.randomCounter = gp.player.rand.nextInt(5000) + 1200;
+            gp.player.setShovelFlag = ds.setShovelFlag;
+            gp.player.repeatSfx = ds.repeatSfx;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

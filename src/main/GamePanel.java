@@ -13,9 +13,7 @@ import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -98,6 +96,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+        player.randomCounter = player.rand.nextInt(5000) + 1200;
         player.missionList.add(MissionStates.BETWEEN_MISSIONS); //add non mission state to missionList at beginning of game
         aSetter.setNPC();
         aSetter.setObject();
@@ -182,7 +181,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (timer >= 1000000000) { //output FPS in console
                 System.out.println("FPS: " + drawCount);
-                System.out.println("MissionList: " + player.missionList);
+                System.out.println("RandomCounter: " + player.randomCounter);
+                System.out.println("Mission To Set: " + player.missionToSet + " Mission State: " + player.missionState);
                 drawCount = 0;
                 timer = 0;
             }
@@ -208,8 +208,11 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (gameState == playState) {
             //MISSION
-            eHandler.incrementMissionCounterIfNotInAMission(player.missionState); //increment time after a mission ends, to set the new one if required
-            eHandler.setNewMissionState(player.readyForNextPhoneMission, player.missionState, player.missionToSet);
+            eHandler.setUpNextPhoneCallWhenNotInAMission(player.missionState); //increment time after a mission ends, to set the new one if required
+            if (player.setShovelFlag) {
+                player.setShovelFlag = false;
+                aSetter.setObjectAfterStart("Garden Shovel", currentMap, 45, 8);
+            }
             //PLAYER
             player.update();
             //NPC
@@ -293,6 +296,23 @@ public class GamePanel extends JPanel implements Runnable {
             //OBJECTS
             for (int i = 0; i < obj[1].length; i++) {
                 if (obj[currentMap][i] != null) {
+                    if (Objects.equals(obj[currentMap][i].name, "TelephoneHall") && player.readyForNextPhoneMission && player.weedCount < 1) { //make phone vibrate if required
+                        player.buzzCounter++;
+                        Random rand = new Random();
+                        int randNum = rand.nextInt(100) + 1;
+                        if (randNum < 50 && player.buzzCounter < 120) {
+                            obj[currentMap][i].worldX = obj[currentMap][i].phoneNormalWorldX - 1;
+                        } else if (randNum >= 50 && player.buzzCounter < 120) {
+                            obj[currentMap][i].worldX = obj[currentMap][i].phoneNormalWorldX + 1;
+                        } else {
+                            obj[currentMap][i].worldX = obj[currentMap][i].phoneNormalWorldX;
+                        }
+                    } else if ((Objects.equals(obj[currentMap][i].name, "TelephoneHall") && !player.readyForNextPhoneMission) || (Objects.equals(obj[currentMap][i].name, "TelephoneHall") && player.buzzCounter >= 350)) {
+                        obj[currentMap][i].worldX = obj[currentMap][i].phoneNormalWorldX;
+                    }
+                    if (player.buzzCounter > 240) {
+                        player.buzzCounter = 0;
+                    }
                     obj[currentMap][i].draw(g2);
                 }
             }

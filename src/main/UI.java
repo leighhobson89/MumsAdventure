@@ -32,6 +32,7 @@ public class UI {
     public int subState = 0;
     int counter = 0;
     public Entity npc;
+    public Entity obj;
     int charIndex = 0;
     String combinedText = "";
     boolean soundFXShouldPlay;
@@ -414,8 +415,12 @@ public class UI {
                 char[] characters = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 
                 if (charIndex < characters.length) {
-
-                    gp.playSFX(27);
+                    if (npc.name == "TelephoneHall" && gp.player.repeatSfx) {
+                        gp.playSFX(29);
+                        gp.player.repeatSfx = false;
+                    } else if (gp.player.repeatSfx) {
+                        gp.playSFX(27);
+                    }
                     String s = String.valueOf(characters[charIndex]);
                     combinedText = combinedText + s;
                     currentDialogue = combinedText;
@@ -425,6 +430,7 @@ public class UI {
 
                 if (gp.keyH.enterPressed) {
 
+                    gp.player.repeatSfx = true;
                     charIndex = 0;
                     combinedText = "";
 
