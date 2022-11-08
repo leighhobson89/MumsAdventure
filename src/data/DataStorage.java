@@ -38,6 +38,7 @@ public class DataStorage implements Serializable {
     int currentMap;
     boolean setShovelFlag;
     boolean repeatSfx;
+    int dialogueSet;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();

@@ -66,6 +66,7 @@ public class SaveLoad {
             ds.exp = gp.player.exp;
             ds.nextLevelExp = gp.player.nextLevelExp;
             ds.coin = gp.player.coin;
+            ds.dialogueSet = gp.player.dialogueSet;
             ds.doorUnlockedCount = gp.player.doorUnlockedCount;
             ds.weedCount = gp.player.weedCount;
             ds.timesPassedOut = gp.player.timesPassedOut;
@@ -210,6 +211,7 @@ public class SaveLoad {
             gp.player.boneIndex = ds.boneIndex;
             gp.player.savedWithAWeaponEquipped = ds.savedWithAWeaponEquipped;
             gp.player.savedWithAnArmourEquipped = ds.savedWithAnArmourEquipped;
+            gp.player.dialogueSet = ds.dialogueSet;
             loadWithBoneEquipped = ds.savedWithBoneEquipped;
             gp.player.weedCount = ds.weedCount;
             gp.player.spiderCount = ds.spiderCount;

@@ -183,6 +183,7 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println("FPS: " + drawCount);
                 System.out.println("RandomCounter: " + player.randomCounter);
                 System.out.println("Mission To Set: " + player.missionToSet + " Mission State: " + player.missionState);
+                System.out.println("ReadyForNExtPhoneMission: " + player.readyForNextPhoneMission);
                 drawCount = 0;
                 timer = 0;
             }

@@ -47,12 +47,16 @@ public class NPC_Merchant extends Entity {
         dialogueText[4][0] = "My pockets are all full, I can't carry more!";
         dialogueText[5][0] = "You need to unequip your item before you can sell it!";
         dialogueText[6][0] = "You cannot sell this item";
+
+        //MISSION TEXTS
+        //SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT
+        dialogueText[7][0] = "So are yer gonna find me an electric guitar den?";
+        dialogueText[8][0] = "Oh wow man, dats excellent init, here take this!";
     }
 
     public void setItems() {
         inventory.add(new OBJ_Pills(gp));
         inventory.add(new OBJ_Spatula(gp));
-        inventory.add(new OBJ_Guitar2(gp));
         inventory.add(new OBJ_LightPills(gp));
     }
 
@@ -60,6 +64,11 @@ public class NPC_Merchant extends Entity {
 
         //character specific stuff here
         facePlayer();
+        if (gp.player.missionState == 2) {
+            dialogueSet = 7;
+        } else {
+            dialogueSet = 0;
+        }
         startDialogue(this, dialogueSet);
 
         gp.gameState = gp.tradeState;

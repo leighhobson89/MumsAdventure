@@ -415,7 +415,7 @@ public class UI {
                 char[] characters = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 
                 if (charIndex < characters.length) {
-                    if (npc.name == "TelephoneHall" && gp.player.repeatSfx) {
+                    if (npc.name == "TelephoneHall" && gp.player.repeatSfx && gp.player.missionState > 1) {
                         gp.playSFX(29);
                         gp.player.repeatSfx = false;
                     } else if (gp.player.repeatSfx) {
@@ -913,7 +913,6 @@ public class UI {
     }
 
     public void trade_select() { //dialogue options
-        npc.dialogueSet = 0;
         drawDialogueScreen(1);
 
         //DRAW WINDOW

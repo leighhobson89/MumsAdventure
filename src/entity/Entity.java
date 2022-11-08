@@ -52,7 +52,7 @@ public class Entity {
     public boolean readyForNextPhoneMission;
     public int missionToSet = 1;
     public Random rand = new Random();
-    public boolean repeatSfx;
+    public boolean repeatSfx = true;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -222,7 +222,8 @@ public class Entity {
             case "right" -> direction = "left";
         }
     }
-    public void startDialogue(Entity entity, int setNum) {
+    public void
+    startDialogue(Entity entity, int setNum) {
         gp.gameState = gp.dialogueState;
         gp.ui.npc = entity;
         dialogueSet = setNum;
@@ -890,8 +891,8 @@ public class Entity {
         if (readyForNextPhoneMission && missionState == MissionStates.BETWEEN_MISSIONS) {
             switch (missionToSet) {
                 case 1 -> gp.player.missionState = MissionStates.WEEDING_MISSION;
-                case 2 -> gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
-                case 3 -> gp.player.missionState = MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT;
+                case 2 -> gp.player.missionState = MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT;
+                case 3 -> gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
             }
             gp.player.readyForNextPhoneMission = false;
         }

@@ -657,7 +657,7 @@ public class Player extends Entity {
                         gp.aSetter.setObjectAfterStart("HundredQuid", gp.currentMap, gp.iTile[gp.currentMap][i].worldX/gp.tileSize, gp.iTile[gp.currentMap][i].worldY/gp.tileSize); //place supercoin where last weed dug up as reward
                         gp.player.missionState = MissionStates.BETWEEN_MISSIONS;
                         gp.player.missionList.add(MissionStates.WEEDING_MISSION); //add completed weeding mission to missionList
-                        gp.player.missionToSet = MissionStates.HELP_ANDREA_OUT;
+                        gp.player.missionToSet = MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT;
                     }
                 }
                 gp.iTile[gp.currentMap][i].playSfx();
