@@ -17,7 +17,7 @@ public class OBJ_Guitar1 extends Entity {
         direction = "down";
         description = "[" + name + "]\nAcoustic Guitar";
         price = 80;
-        isSaleable = true;
+        isSaleable = false;
 
     }
 }

@@ -166,6 +166,9 @@ public class SaveLoad {
                 }
             }
 
+            //NPCS ON MAP
+            ds.andreaOnMap = gp.player.andreaOnMap;
+
             //Write the DataStorage Object
             oos.writeObject(ds);
 
@@ -302,6 +305,9 @@ public class SaveLoad {
                     }
                 }
             }
+
+            //NPCS ON MAP
+             gp.player.andreaOnMap = ds.andreaOnMap;
 
 
         } catch (Exception e) {

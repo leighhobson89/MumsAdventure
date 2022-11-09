@@ -104,6 +104,14 @@ public class GamePanel extends JPanel implements Runnable {
         player.weedCount = aSetter.setInteractiveTile();
         eManager.setup();
 
+        //DEBUG TO SKIP AHEAD IN MISSIONS - COMMENT FOR NORMAL GAME FROM START
+        //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSIONLIST IF STARTING FURTHER ON
+        player.weedCount = 0;
+        player.missionList.add(1);
+        player.missionState = 2;
+        player.missionToSet = 2;
+        //END OF DEBUG
+
         playMusic(0, false, 0);
         if (!musicSetToPlayFromStart) {
             keyH.musicPlaying = false;
@@ -183,7 +191,6 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println("FPS: " + drawCount);
                 System.out.println("RandomCounter: " + player.randomCounter);
                 System.out.println("Mission To Set: " + player.missionToSet + " Mission State: " + player.missionState);
-                System.out.println("ReadyForNExtPhoneMission: " + player.readyForNextPhoneMission);
                 drawCount = 0;
                 timer = 0;
             }
@@ -213,6 +220,10 @@ public class GamePanel extends JPanel implements Runnable {
             if (player.setShovelFlag) {
                 player.setShovelFlag = false;
                 aSetter.setObjectAfterStart("Garden Shovel", currentMap, 45, 8);
+            }
+            if (player.missionState == MissionStates.HELP_ANDREA_OUT && player.andreaOnMap) {
+                aSetter.setNPCAfterStart("Andrea", 0, 9, 1);
+                player.andreaOnMap = false;
             }
             //PLAYER
             player.update();

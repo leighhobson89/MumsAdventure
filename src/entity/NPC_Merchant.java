@@ -1,6 +1,7 @@
 package entity;
 
 import main.GamePanel;
+import main.MissionStates;
 import object.*;
 
 import java.awt.*;
@@ -35,13 +36,13 @@ public class NPC_Merchant extends Entity {
     }
 
     public void setDialogue() {
+        //DEFAULT INTRO
         dialogueText[0][0] = "'Ere, d'ya wanna sell that camper van 'n dat?\nI have loads of good stuff here innit!";
 
         //BONE THROWN AT MERCHANT
         dialogueText[1][0] = "Don't throw dat at me innit!";
 
         //MERCHANT NORMAL TEXTS
-
         dialogueText[2][0] = "Ok den, I'll wait 'ere while\nyou tink about it innit!";
         dialogueText[3][0] = "Dat's not enough coin, you have to pay more innit!";
         dialogueText[4][0] = "My pockets are all full, I can't carry more!";
@@ -52,6 +53,7 @@ public class NPC_Merchant extends Entity {
         //SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT
         dialogueText[7][0] = "So are yer gonna find me an electric guitar den?";
         dialogueText[8][0] = "Oh wow man, dats excellent init, here take this!";
+        dialogueText[9][0] = "This is not electric init, he won't want dat one!";
     }
 
     public void setItems() {
@@ -62,9 +64,8 @@ public class NPC_Merchant extends Entity {
 
     public void speak() {
 
-        //character specific stuff here
         facePlayer();
-        if (gp.player.missionState == 2) {
+        if (gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT) {
             dialogueSet = 7;
         } else {
             dialogueSet = 0;

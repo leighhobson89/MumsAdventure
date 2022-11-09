@@ -1,6 +1,7 @@
 package entity;
 
 import main.GamePanel;
+import main.MissionStates;
 
 import java.awt.*;
 import java.util.Random;
@@ -135,7 +136,7 @@ public class NPC_Dad extends Entity {
 
     public void speak() {
         if (gp.player.weedCount > 0) {
-            gp.player.missionState = 1;
+            gp.player.missionState = MissionStates.WEEDING_MISSION;
             gp.player.setShovelFlag = true;
         }
         switch(gp.player.missionState) {

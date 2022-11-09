@@ -32,7 +32,6 @@ public class UI {
     public int subState = 0;
     int counter = 0;
     public Entity npc;
-    public Entity obj;
     int charIndex = 0;
     String combinedText = "";
     boolean soundFXShouldPlay;
@@ -442,8 +441,11 @@ public class UI {
             } else {
                 npc.dialogueIndex = 0;
 
-                if (gp.gameState == gp.dialogueState) {
+                if (gp.gameState == gp.dialogueState && npc.name != "Andrea") { // add more names for multi dialog before trade screen
                     gp.gameState = gp.playState;
+                } else {
+                    npc.dialogueSet = 2;
+                    gp.gameState = gp.tradeState;
                 }
             }
         }
@@ -926,7 +928,11 @@ public class UI {
         //DRAW TEXTS
         x += gp.tileSize;
         y += gp.tileSize;
-        g2.drawString("Buy", x, y);
+        if (npc.name == "Andrea") {
+            g2.drawString("Take", x, y);
+        } else {
+            g2.drawString("Buy", x, y);
+        }
         if (commandNum == 0) {
             g2.drawString(">", x - 24, y);
             if (gp.keyH.enterPressed) {
@@ -935,7 +941,11 @@ public class UI {
             }
         }
         y += gp.tileSize;
-        g2.drawString("Sell", x, y);
+        if (npc.name == "Andrea") {
+            g2.drawString("Give", x, y);
+        } else {
+            g2.drawString("Sell", x, y);
+        }
         if (commandNum == 1) {
             g2.drawString(">", x - 24, y);
             if (gp.keyH.enterPressed) {
@@ -950,7 +960,11 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 gp.playSFX(11);
                 commandNum = 0;
-                npc.startDialogue(npc, 2);
+                if (npc.name == "Andrea") {
+                    npc.startDialogue(npc, 3);
+                } else {
+                    npc.startDialogue(npc, 2);
+                }
             }
         }
         y += gp.tileSize;
@@ -1062,14 +1076,25 @@ public class UI {
                     subState = 0;
                     npc.startDialogue(npc, 5);
                 } else {
-                    if (gp.player.inventory.get(itemIndex).isSaleable) {
+                    if (gp.player.inventory.get(itemIndex).isSaleable || (gp.player.inventory.get(itemIndex).name == "Electric Guitar" && gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT)) {
                         if (gp.player.inventory.get(itemIndex).amount > 1) {
                             gp.player.inventory.get(itemIndex).amount--;
                         } else {
+                            if (gp.player.inventory.get(itemIndex).name == "Electric Guitar") {
+                                gp.gameState = gp.dialogueState;
+                                npc.startDialogue(npc, 8);
+                                gp.misStat.endMissionTasks(MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT);
+                                commandNum = 0;
+                                subState = 0;
+                            }
                             gp.player.inventory.remove(itemIndex);
                         }
                         gp.player.coin += price;
                         gp.playSFX(22);
+                    } else if (gp.player.inventory.get(itemIndex).name == "Acoustic Guitar" && gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT) {
+                        commandNum = 0;
+                        subState = 0;
+                        npc.startDialogue(npc, 9);
                     } else {
                         commandNum = 0;
                         subState = 0;

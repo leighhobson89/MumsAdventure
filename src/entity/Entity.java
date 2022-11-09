@@ -53,6 +53,7 @@ public class Entity {
     public int missionToSet = 1;
     public Random rand = new Random();
     public boolean repeatSfx = true;
+    public boolean andreaOnMap;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -892,7 +893,10 @@ public class Entity {
             switch (missionToSet) {
                 case 1 -> gp.player.missionState = MissionStates.WEEDING_MISSION;
                 case 2 -> gp.player.missionState = MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT;
-                case 3 -> gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
+                case 3 -> {
+                    gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
+                    gp.player.andreaOnMap = true;
+                }
             }
             gp.player.readyForNextPhoneMission = false;
         }

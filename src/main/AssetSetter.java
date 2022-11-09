@@ -1,9 +1,6 @@
 package main;
 
-import entity.NPC_Dad;
-import entity.NPC_Merchant;
-import entity.NPC_Phoebe;
-import entity.NPC_Pip;
+import entity.*;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
 import object.*;
@@ -61,6 +58,31 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldX = x * gp.tileSize;
         gp.obj[mapNum][i].worldY = y * gp.tileSize;
 
+    }
+
+    public void setNPCAfterStart(String name, int mapNum, int x, int y) {
+
+        int count = 0;
+        for (int i = 0; i < gp.npc[1].length; i++) {
+            if (gp.npc[gp.currentMap][i] != null) {
+                count++; //at end of loop, count will show the index of the last object in the array
+            } else {
+                break;
+            }
+        }
+
+        int i = count;
+        switch (name) { //chooses npc
+            case "Andrea":
+                gp.npc[mapNum][i] = new NPC_Andrea(gp);
+                break;
+            case "placeholder": //there to allow switch to work with only one case, so replace with extra npcs when needed
+                gp.npc[mapNum][i] = new NPC_Dad(gp);
+                break;
+        }
+
+        gp.npc[mapNum][i].worldX = x * gp.tileSize;
+        gp.npc[mapNum][i].worldY = y * gp.tileSize;
     }
 
     public void setObject() {
