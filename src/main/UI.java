@@ -439,14 +439,8 @@ public class UI {
                     }
                 }
             } else {
+                gp.gameState = gp.playState;
                 npc.dialogueIndex = 0;
-
-                if (gp.gameState == gp.dialogueState && npc.name != "Andrea") { // add more names for multi dialog before trade screen
-                    gp.gameState = gp.playState;
-                } else {
-                    npc.dialogueSet = 2;
-                    gp.gameState = gp.tradeState;
-                }
             }
         }
 
@@ -1015,9 +1009,15 @@ public class UI {
                     subState = 0;
                     npc.startDialogue(npc, 3);
                 } else {
-                    if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
+                    if (gp.player.canObtainItem(npc.inventory.get(itemIndex)) && npc.name != "Andrea") {
                         gp.player.coin -= npc.inventory.get(itemIndex).price;
                         gp.playSFX(11);
+                    } else if (npc.inventory.get(itemIndex).name == "Coat off Amanda" && npc.name == "Andrea") {
+                        gp.player.inventory.add(gp.eGenerator.getObject(npc.inventory.get(itemIndex).name));
+                        npc.inventory.remove(npc.inventory.get(itemIndex));
+                        gp.playSFX(11);
+                    } else if (npc.name == "Andrea" && npc.inventory.get(itemIndex).name != "Coat off Amanda") {
+                        npc.startDialogue(npc, 4);
                     } else {
                         subState = 0;
                         npc.startDialogue(npc, 4);
@@ -1095,6 +1095,10 @@ public class UI {
                         commandNum = 0;
                         subState = 0;
                         npc.startDialogue(npc, 9);
+                    } else if (npc.name == "Andrea" && (npc.inventory.get(itemIndex).name != "Red Boots" || npc.inventory.get(itemIndex).name != "Forty Quid For Andrea")) {
+                        commandNum = 0;
+                        subState = 0;
+                        npc.startDialogue(npc, 5);
                     } else {
                         commandNum = 0;
                         subState = 0;

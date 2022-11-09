@@ -2,6 +2,9 @@ package entity;
 
 import main.GamePanel;
 import main.MissionStates;
+import object.OBJ_LightPills;
+import object.OBJ_Pills;
+import object.OBJ_Spatula;
 
 import java.awt.*;
 import java.util.Objects;
@@ -19,6 +22,7 @@ public class NPC_Andrea extends Entity {
 
         getImage();
         setDialogue();
+        setItems();
 
         solidArea = new Rectangle(8, 16,32,32);
         solidAreaDefaultX = solidArea.x;
@@ -52,12 +56,17 @@ public class NPC_Andrea extends Entity {
         //TRADESCREEN
         dialogueText[2][0] = "Trade the items with Andrea.  You only get one\nchance because she's off to the petrol station\nfor fags and petrol now!";
         dialogueText[3][0] = "Reyt, ta, I'll see ya la....ER!";
+        dialogueText[4][0] = "You're not having that off me Sharon!";
+        dialogueText[5][0] = "I don't need that but cheers!";
+    }
+
+    public void setItems() {
+        inventory.add(new OBJ_Pills(gp));
     }
 
     public void update() {
         super.update();
 
-        System.out.println("Andrea Speed: " + speed);
         int xDistance = Math.abs(worldX - gp.tileSize*9);
         int yDistance = Math.abs(worldY - gp.tileSize*9);
         int tileDistance = (xDistance + yDistance)/gp.tileSize;
@@ -81,9 +90,17 @@ public class NPC_Andrea extends Entity {
     }
 
     public void speak() {
-        dialogueSet = 0;
+        if (firstTimeChattingToAndrea) {
+            dialogueSet = 0;
+        } else {
+            dialogueSet = 2;
+        }
         facePlayer();
         startDialogue(this, dialogueSet);
         gp.ui.npc = this;
+        if (!firstTimeChattingToAndrea) {
+            gp.gameState = gp.tradeState;
+        }
+        firstTimeChattingToAndrea = false;
     }
 }

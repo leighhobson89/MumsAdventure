@@ -120,7 +120,7 @@ public class Player extends Entity {
         timesPassedOut = 0;
         pillsConsumableNow = false;
         firstTimePickUpBone = true;
-        randomCounter = rand.nextInt(5000) + 1200;
+        randomCounter = setRandomCounter();
         buzzCounter = 0;
 
         //PLAYER STATUS

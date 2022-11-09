@@ -40,6 +40,7 @@ public class DataStorage implements Serializable {
     boolean repeatSfx;
     int dialogueSet;
     boolean andreaOnMap;
+    boolean firstTimeChattingToAndrea;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();

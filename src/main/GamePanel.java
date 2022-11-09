@@ -96,7 +96,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        player.randomCounter = player.rand.nextInt(5000) + 1200;
+        player.randomCounter = player.setRandomCounter();
         player.missionList.add(MissionStates.BETWEEN_MISSIONS); //add non mission state to missionList at beginning of game
         aSetter.setNPC();
         aSetter.setObject();

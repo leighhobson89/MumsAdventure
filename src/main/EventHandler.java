@@ -186,13 +186,12 @@ public class EventHandler {
     }
 
     public void setUpNextPhoneCallWhenNotInAMission(int missionState) {
-        System.out.println("MissionState: " + gp.player.missionState + " | WeedCount: " + gp.player.weedCount);
         if (missionState == MissionStates.BETWEEN_MISSIONS && gp.player.weedCount < 1) {
             gp.player.missionEndingCounter++;
             if (gp.player.missionEndingCounter > gp.player.randomCounter) {
                 gp.player.missionEndingCounter = 0;
                 gp.player.readyForNextPhoneMission = true;
-                gp.player.randomCounter = gp.player.rand.nextInt(5000) + 1200;
+                gp.player.randomCounter = gp.player.setRandomCounter();
                 gp.playSFX(28); //make phone ring
             }
         }

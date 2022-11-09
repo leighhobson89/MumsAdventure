@@ -54,6 +54,7 @@ public class Entity {
     public Random rand = new Random();
     public boolean repeatSfx = true;
     public boolean andreaOnMap;
+    public boolean firstTimeChattingToAndrea = true;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -202,7 +203,7 @@ public class Entity {
         guardCounter = 0;
         offBalanceCounter = 0;
         missionEndingCounter = 0;
-        randomCounter = rand.nextInt(5000) + 1200;
+        randomCounter = setRandomCounter();
     }
     public void setLoot(Entity loot) {}
     public void setAction() {
@@ -223,11 +224,17 @@ public class Entity {
             case "right" -> direction = "left";
         }
     }
-    public void
-    startDialogue(Entity entity, int setNum) {
+    public void startDialogue(Entity entity, int setNum) {
         gp.gameState = gp.dialogueState;
         gp.ui.npc = entity;
         dialogueSet = setNum;
+    }
+
+    public int setRandomCounter() {
+        if (this.gp.player != null) {
+            return gp.player.rand.nextInt(400) + 500; //3800 + 1200 for normal game
+        }
+        return 0;
     }
 
     public int chooseRandomDialogueFromSet(String entityAffected, String action) {

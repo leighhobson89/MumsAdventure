@@ -168,6 +168,7 @@ public class SaveLoad {
 
             //NPCS ON MAP
             ds.andreaOnMap = gp.player.andreaOnMap;
+            ds.firstTimeChattingToAndrea = gp.player.firstTimeChattingToAndrea;
 
             //Write the DataStorage Object
             oos.writeObject(ds);
@@ -222,7 +223,7 @@ public class SaveLoad {
             gp.player.missionList = ds.missionList;
             gp.player.readyForNextPhoneMission = ds.readyForNextPhoneMission;
             gp.player.missionToSet = ds.missionToSet;
-            gp.player.randomCounter = gp.player.rand.nextInt(5000) + 1200;
+            gp.player.randomCounter = gp.player.setRandomCounter();
             gp.player.setShovelFlag = ds.setShovelFlag;
             gp.player.repeatSfx = ds.repeatSfx;
 
@@ -307,7 +308,8 @@ public class SaveLoad {
             }
 
             //NPCS ON MAP
-             gp.player.andreaOnMap = ds.andreaOnMap;
+            gp.player.andreaOnMap = ds.andreaOnMap;
+            gp.player.firstTimeChattingToAndrea = ds.firstTimeChattingToAndrea;
 
 
         } catch (Exception e) {
