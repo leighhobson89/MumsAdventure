@@ -3,12 +3,9 @@ package entity;
 import main.GamePanel;
 import main.MissionStates;
 import object.OBJ_AmandaCoat;
-import object.OBJ_LightPills;
 import object.OBJ_Pills;
-import object.OBJ_Spatula;
 
 import java.awt.*;
-import java.util.Objects;
 
 public class NPC_Andrea extends Entity {
 
@@ -77,15 +74,20 @@ public class NPC_Andrea extends Entity {
     public void update() {
         super.update();
 
-        int xDistance = Math.abs(worldX - gp.tileSize*9);
-        int yDistance = Math.abs(worldY - gp.tileSize*9);
+        int xDistance = Math.abs(worldX - gp.tileSize* gp.player.andreaTempGoalCol);
+        int yDistance = Math.abs(worldY - gp.tileSize* gp.player.andreaTempGoalRow);
         int tileDistance = (xDistance + yDistance)/gp.tileSize;
 
         if (tileDistance == 0) {
-            speed = defaultSpeed;
-            direction = "right";
-            onPath = false;
-            solidArea = new Rectangle(0, -64,100,128); //contact area reaches over gate so player can interact
+            if (gp.player.andreaTempGoalRow*gp.tileSize < 2 && gp.player.andreaTempGoalCol*gp.tileSize < 2) {
+                speed = defaultSpeed;
+                onPath = false;
+            } else {
+                speed = defaultSpeed;
+                direction = "right";
+                onPath = false;
+                solidArea = new Rectangle(0, -64,100,128); //contact area reaches over gate so player can interact
+            }
         }
     }
 

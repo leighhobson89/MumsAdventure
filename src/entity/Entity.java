@@ -57,6 +57,8 @@ public class Entity {
     public boolean repeatSfx = true;
     public boolean andreaOnMap;
     public boolean firstTimeChattingToAndrea = true;
+    public int andreaTempGoalCol;
+    public int andreaTempGoalRow;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -373,7 +375,7 @@ public class Entity {
         } else if (attacking) {
             attacking();
         } else {
-            setAction(0,0);
+            setAction(andreaTempGoalCol, andreaTempGoalRow);
             checkCollision();
 
             //IF COLLISION IS FALSE, ENTITY CAN MOVE
@@ -915,8 +917,11 @@ public class Entity {
     }
 
     public void AndreaLeaveSetup(Entity npc) {
+        npc.speed = 1;
         npc.solidArea = new Rectangle(8, 16,32,32);
-        npc.onPath = true;
-        setAction(9, 1);
+        if (npc.name == "Andrea") {
+            npc.onPath = true;
+        }
+        npc.setAction(gp.player.andreaTempGoalCol, gp.player.andreaTempGoalRow);
     }
 }

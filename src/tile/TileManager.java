@@ -108,7 +108,7 @@ public class TileManager {
         setup(74, "lawnRockeryTopRight", false);
         setup(75, "lawnRockeryTopLeft", false);
         setup(76, "pathRockeryBottomBorder", false);
-        setup(77, "frontGateOnPath", true);
+        setup(77, "frontGateOnPath", false);
         setup(78, "frontGateOnHedge", true);
         setup(79, "hedgeHorizontal", true);
         setup(80, "hedgeCorner", true);

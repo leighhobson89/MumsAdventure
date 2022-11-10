@@ -1,7 +1,6 @@
 package main;
 
 import entity.Entity;
-import object.OBJ_AmandaCoat;
 import object.OBJ_Coin;
 import object.OBJ_LightningBoltStress;
 import object.OBJ_SqueakyToy_UI;
@@ -11,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class UI {
     GamePanel gp;
@@ -1020,6 +1018,8 @@ public class UI {
                         gp.player.coin -= npc.inventory.get(itemIndex).price;
                         gp.playSFX(11);
                     } else if (npc.inventory.get(itemIndex).name == "Coat off Amanda" && npc.name == "Andrea") {
+                        subState = 0;
+                        commandNum = 0;
                         npc.inventory.get(itemIndex).price = 50; //set up coat price for selling after freebie from Andrea
                         gp.player.inventory.add(npc.inventory.get(itemIndex));
                         npc.inventory.remove(npc.inventory.get(itemIndex));
@@ -1032,9 +1032,11 @@ public class UI {
                             }
                         }
                         if (missionCanPass) {
+                            gp.player.andreaTempGoalCol = 0;
+                            gp.player.andreaTempGoalRow = 0;
                             npc.startDialogue(npc, 6);
-                            gp.player.AndreaLeaveSetup(npc);
                             gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT);
+                            gp.player.AndreaLeaveSetup(npc);
                             commandNum = 0;
                             subState = 0;
                         } else {
@@ -1111,6 +1113,7 @@ public class UI {
                                 alreadyRemoved = true;
                                 gp.player.inventory.remove(itemIndex);
                                 npc.startDialogue(npc, 8);
+                                gp.playSFX(22);
                                 gp.misStat.endMissionTasks(MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT);
                                 commandNum = 0;
                                 subState = 0;
@@ -1118,6 +1121,7 @@ public class UI {
                                 alreadyRemoved = true;
                                 commandNum = 0;
                                 subState = 0;
+                                gp.playSFX(22);
                                 gp.player.inventory.remove(itemIndex);
                             }
                             if (npc.name == "Andrea" && gp.player.inventory.get(itemIndex).name == "Red Boots") {
@@ -1145,9 +1149,11 @@ public class UI {
                                     }
                                 }
                                 if (missionCanPass) {
+                                    gp.player.andreaTempGoalCol = 0;
+                                    gp.player.andreaTempGoalRow = 0;
                                     npc.startDialogue(npc, 6);
-                                    gp.player.AndreaLeaveSetup(npc);
                                     gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT);
+                                    gp.player.AndreaLeaveSetup(npc);
                                 } else {
                                     npc.startDialogue(npc, 8);
                                 }
@@ -1158,7 +1164,6 @@ public class UI {
                             }
                         }
                         gp.player.coin += price;
-                        gp.playSFX(22);
                     } else if (npc.name == "Merchant" && gp.player.inventory.get(itemIndex).name == "Acoustic Guitar" && gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT) {
                         commandNum = 0;
                         subState = 0;
