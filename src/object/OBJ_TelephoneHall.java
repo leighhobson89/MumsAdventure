@@ -49,8 +49,8 @@ public class OBJ_TelephoneHall extends Entity {
             setNewMissionState(gp.player.readyForNextPhoneMission, gp.player.missionState, gp.player.missionToSet);
             startDialogue(this, gp.player.missionState);
             gp.keyH.enterPressed = false;
-            gp.player.readyForNextPhoneMission = false;
             gp.stopSFX(28);
+            gp.player.readyForNextPhoneMission = false;
         } else {
             startDialogue(this, 0);
             gp.keyH.enterPressed = false;

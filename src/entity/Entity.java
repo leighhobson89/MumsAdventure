@@ -236,9 +236,10 @@ public class Entity {
         dialogueSet = setNum;
     }
 
+    //DEBUG - CAN CHANGE THIS TO SPEED UP TELEPHONE RINGING
     public int setRandomCounter() {
         if (this.gp.player != null) {
-            return gp.player.rand.nextInt(400) + 500; //3800 + 1200 for normal game
+            return gp.player.rand.nextInt(3800) + 1200; //3800 + 1200 for normal game
         }
         return 0;
     }
