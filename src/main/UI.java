@@ -1024,14 +1024,15 @@ public class UI {
                         gp.player.inventory.add(npc.inventory.get(itemIndex));
                         npc.inventory.remove(npc.inventory.get(itemIndex));
                         gp.playSFX(11);
+                        missionCanPass = true;
                         for (int i = 0; i < gp.player.inventory.size(); i++) {
                             inventoryItem = gp.player.inventory.get(i);
-                            if (inventoryItem.name == "Coat off Amanda") {
-                                missionCanPass = true;
+                            if (inventoryItem.name == "Forty Quid For Andrea") {
+                                missionCanPass = false;
                             }
-                            i++;
                         }
                         if (missionCanPass) {
+                            npc.startDialogue(npc, 6);
                             gp.player.AndreaLeaveSetup(npc);
                             gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT);
                         } else {
@@ -1039,6 +1040,7 @@ public class UI {
                         }
 
                     } else if (npc.name == "Andrea" && npc.inventory.get(itemIndex).name != "Coat off Amanda") {
+                        subState = 0;
                         npc.startDialogue(npc, 4);
                     } else {
                         subState = 0;
@@ -1114,17 +1116,17 @@ public class UI {
                                 subState = 0;
                             }
                             if (npc.name == "Andrea" && gp.player.inventory.get(itemIndex).name == "Forty Quid For Andrea") {
-                                npc.startDialogue(npc, 6);
                                 commandNum = 0;
                                 subState = 0;
+                                missionCanPass = true;
                                 for (int i = 0; i < npc.inventory.size(); i++) {
                                     inventoryItem = npc.inventory.get(i);
                                     if (inventoryItem.name == "Coat off Amanda") {
-                                        missionCanPass = true;
+                                        missionCanPass = false;
                                     }
-                                    i++;
                                 }
                                 if (missionCanPass) {
+                                    npc.startDialogue(npc, 6);
                                     gp.player.AndreaLeaveSetup(npc);
                                     gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT);
                                 } else {
