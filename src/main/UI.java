@@ -1035,6 +1035,8 @@ public class UI {
                             npc.startDialogue(npc, 6);
                             gp.player.AndreaLeaveSetup(npc);
                             gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT);
+                            commandNum = 0;
+                            subState = 0;
                         } else {
                             npc.startDialogue(npc, 9);
                         }
@@ -1052,6 +1054,7 @@ public class UI {
     }
 
     public void trade_sell() {
+        boolean alreadyRemoved = false;
         //DRAW PLAYERS INVENTORY
         drawInventory(gp.player, true);
 
@@ -1105,17 +1108,33 @@ public class UI {
                             gp.player.inventory.get(itemIndex).amount--;
                         } else {
                             if (npc.name == "Merchant" && gp.player.inventory.get(itemIndex).name == "Electric Guitar") {
+                                alreadyRemoved = true;
+                                gp.player.inventory.remove(itemIndex);
                                 npc.startDialogue(npc, 8);
                                 gp.misStat.endMissionTasks(MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT);
                                 commandNum = 0;
                                 subState = 0;
+                            } else if (npc.name == "Merchant") {
+                                alreadyRemoved = true;
+                                commandNum = 0;
+                                subState = 0;
+                                gp.player.inventory.remove(itemIndex);
                             }
                             if (npc.name == "Andrea" && gp.player.inventory.get(itemIndex).name == "Red Boots") {
+                                alreadyRemoved = true;
+                                gp.ui.addMessage("You \"lend\" Andrea your best Red Boots!");
+                                gp.player.coin = (int) (gp.player.coin - (gp.player.inventory.get(itemIndex).price * 0.7));
+                                gp.playSFX(11);
+                                gp.player.inventory.remove(itemIndex);
                                 npc.startDialogue(npc, 5);
                                 commandNum = 0;
                                 subState = 0;
                             }
                             if (npc.name == "Andrea" && gp.player.inventory.get(itemIndex).name == "Forty Quid For Andrea") {
+                                alreadyRemoved = true;
+                                gp.ui.addMessage("You \"lend\" Andrea " + gp.player.inventory.get(itemIndex).value + "quid! -> Coin: " + (gp.player.coin - gp.player.inventory.get(itemIndex).value));
+                                gp.playSFX(22);
+                                gp.player.inventory.remove(itemIndex);
                                 commandNum = 0;
                                 subState = 0;
                                 missionCanPass = true;
@@ -1132,9 +1151,11 @@ public class UI {
                                 } else {
                                     npc.startDialogue(npc, 8);
                                 }
+                            } else if (!alreadyRemoved && gp.player.inventory.get(itemIndex).isSaleable && npc.name == "Andrea" && gp.player.inventory.get(itemIndex).name != "Red Boots") {
+                                commandNum = 0;
+                                subState = 0;
+                                npc.startDialogue(npc, 7);
                             }
-
-                            gp.player.inventory.remove(itemIndex);
                         }
                         gp.player.coin += price;
                         gp.playSFX(22);
@@ -1151,6 +1172,12 @@ public class UI {
                         subState = 0;
                         npc.startDialogue(npc, 6);
                     }
+                }
+            }
+            for (int i = 0; i < gp.player.inventory.size(); i++) {
+                inventoryItem = gp.player.inventory.get(i);
+                if (inventoryItem.name == "Pip's Bone") {
+                    gp.player.boneIndex = i;
                 }
             }
         }

@@ -788,7 +788,9 @@ public class Player extends Entity {
                 int index = searchItemInInventory(newItem.name);
 
                 if (index != 999) {
-                    inventory.get(index).amount++;
+                    if (!Objects.equals(npc.name, "Andrea")) {
+                        inventory.get(index).amount++;
+                    }
                     canObtain = true;
                 } else { // New item so need to check vacancy in inventory
                     if (inventory.size() != maxInventorySize) {

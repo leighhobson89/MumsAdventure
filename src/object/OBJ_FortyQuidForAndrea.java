@@ -13,13 +13,13 @@ public class OBJ_FortyQuidForAndrea extends Entity {
         super(gp);
 
         this.gp = gp;
-        value = -40;
+        value = 40;
         name = OBJ_NAME;
         displayName = "Forty Quid For Andrea";
         down1 = setup("/objects/fortyQuidForAndrea", gp.tileSize, gp.tileSize);
         direction = "down";
-        description = "[" + name + "]\nLend it Andrea!";
         isSaleable = true;
+        description = "[" + name + "]\nLend it Andrea!";
         price = -58;
     }
 

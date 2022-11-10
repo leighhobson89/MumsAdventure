@@ -111,6 +111,7 @@ public class NPC_Andrea extends Entity {
         startDialogue(this, dialogueSet);
         gp.ui.npc = this;
         if (!firstTimeChattingToAndrea) {
+            gp.ui.commandNum = 0;
             gp.gameState = gp.tradeState;
         }
         firstTimeChattingToAndrea = false;
