@@ -18,6 +18,7 @@ public class OBJ_GrandmasCardigan extends Entity {
         defenseValue = 1;
         description = "[" + name + "]\nAn Old Cardigan";
         isSaleable = true;
+        price = 20;
 
         isArmour = true;
     }

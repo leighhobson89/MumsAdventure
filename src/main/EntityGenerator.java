@@ -47,6 +47,9 @@ public class EntityGenerator {
             case OBJ_LightningBoltStress.OBJ_NAME: obj = new OBJ_LightningBoltStress(gp); break;
             case OBJ_SuperCoin.OBJ_NAME: obj = new OBJ_SuperCoin(gp); break;
             case OBJ_TelephoneHall.OBJ_NAME: obj = new OBJ_TelephoneHall(gp); break;
+            case OBJ_AmandaCoat.OBJ_NAME: obj = new OBJ_AmandaCoat(gp); break;
+            case OBJ_FortyQuidForAndrea.OBJ_NAME: obj = new OBJ_FortyQuidForAndrea(gp); break;
+            case OBJ_RedBoots.OBJ_NAME: obj = new OBJ_RedBoots(gp); break;
         }
         return obj;
     }

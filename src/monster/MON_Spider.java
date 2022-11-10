@@ -48,7 +48,7 @@ public class MON_Spider extends Entity {
         right2 = setup("/monster/spider_Right2", gp.tileSize, gp.tileSize);
     }
 
-    public void setAction() {
+    public void setAction(int goalCol, int goalRow) {
 
         if(onPath) {
             //Check if it stops chasing

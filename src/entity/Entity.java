@@ -3,6 +3,8 @@ package entity;
 import main.GamePanel;
 import main.MissionStates;
 import main.UtilityTool;
+import object.OBJ_FortyQuidForAndrea;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -149,6 +151,8 @@ public class Entity {
     public final int type_gardeningShovel = 8;
     public final int type_obstacle = 9;
     public final int type_light = 10;
+    public int goalRow;
+    public int goalCol;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -206,7 +210,7 @@ public class Entity {
         randomCounter = setRandomCounter();
     }
     public void setLoot(Entity loot) {}
-    public void setAction() {
+    public void setAction(int goalCol, int goalRow) {
         //overridden in specific entity class
     }
     public void damageReaction() {
@@ -369,7 +373,7 @@ public class Entity {
         } else if (attacking) {
             attacking();
         } else {
-            setAction();
+            setAction(0,0);
             checkCollision();
 
             //IF COLLISION IS FALSE, ENTITY CAN MOVE
@@ -902,10 +906,17 @@ public class Entity {
                 case 2 -> gp.player.missionState = MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT;
                 case 3 -> {
                     gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
+                    gp.player.inventory.add(new OBJ_FortyQuidForAndrea(gp)); //add mission object
                     gp.player.andreaOnMap = true;
                 }
             }
             gp.player.readyForNextPhoneMission = false;
         }
+    }
+
+    public void AndreaLeaveSetup(Entity npc) {
+        npc.solidArea = new Rectangle(8, 16,32,32);
+        npc.onPath = true;
+        setAction(9, 1);
     }
 }

@@ -48,7 +48,7 @@ public class MON_WaspSwarm extends Entity {
         right2 = setup("/monster/waspSwarm2", gp.tileSize, gp.tileSize);
     }
 
-    public void setAction() {
+    public void setAction(int goalCol, int goalRow) {
         if(onPath) {
             //Check if it stops chasing
             checkStopsChasingOrNot(gp.player, 15, 100);

@@ -79,11 +79,11 @@ public class NPC_Pip extends Entity {
         }
     }
 
-    public void setAction() {
+    public void setAction(int goalCol, int goalRow) {
 
         if(onPath && gp.player.boneCount == 1) {
-            int goalCol = 0;
-            int goalRow = 0;
+            goalCol = 0;
+            goalRow = 0;
             if (Objects.equals(gp.player.direction, "up")) { //dog chase player but stay one square behind
                 goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
                 goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 1;
@@ -102,8 +102,8 @@ public class NPC_Pip extends Entity {
             searchPath(goalCol, goalRow);
 
         } else if (onPath && gp.player.boneCount == 0) {
-            int goalCol = (gp.aSetter.boneX)/gp.tileSize;
-            int goalRow = (gp.aSetter.boneY)/gp.tileSize;
+            goalCol = (gp.aSetter.boneX)/gp.tileSize;
+            goalRow = (gp.aSetter.boneY)/gp.tileSize;
 
             searchPath(goalCol, goalRow);
         } else {

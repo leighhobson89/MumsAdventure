@@ -117,7 +117,7 @@ public class NPC_Dad extends Entity {
 
     }
 
-    public void setAction() {
+    public void setAction(int goalCol, int goalRow) {
 
         if (checkEdgeOfMap(this)) {
             turnEntityAround(this);

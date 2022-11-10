@@ -49,7 +49,7 @@ public class NPC_Phoebe extends Entity {
         dialogueText[7][0] = "Yelp!";
     }
 
-    public void setAction() {
+    public void setAction(int goalCol, int goalRow) {
         if (checkEdgeOfMap(this)) {
             turnEntityAround(this);
         } else {

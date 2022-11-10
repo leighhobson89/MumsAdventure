@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.MissionStates;
+import object.OBJ_AmandaCoat;
 import object.OBJ_LightPills;
 import object.OBJ_Pills;
 import object.OBJ_Spatula;
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.util.Objects;
 
 public class NPC_Andrea extends Entity {
+
     public NPC_Andrea(GamePanel gp) {
         super(gp);
 
@@ -57,10 +59,18 @@ public class NPC_Andrea extends Entity {
         dialogueText[2][0] = "Trade the items with Andrea.  You only get one\nchance because she's off to the petrol station\nfor fags and petrol now!";
         dialogueText[3][0] = "Reyt, ta, I'll see ya la....ER!";
         dialogueText[4][0] = "You're not having that off me Sharon!";
-        dialogueText[5][0] = "I don't need that but cheers!";
+        dialogueText[5][0] = "I love these boots!";
+        dialogueText[5][1] = "I'll bring 'em back after the party!";
+        dialogueText[6][0] = "Cheers, I can get my fags now!\nAlways bloody going up aren't they!";
+        dialogueText[6][1] = "Oh, and petrol aswell yeah...";
+        dialogueText[6][2] = "Reyt I'll see ya laaaa...ER!";
+        dialogueText[7][0] = "I don't need that but cheers.";
+        dialogueText[8][0] = "Cheers, don't forget this coat!";
+        dialogueText[9][0] = "Ok, can you lend me that money then?";
     }
 
     public void setItems() {
+        inventory.add(new OBJ_AmandaCoat(gp));
         inventory.add(new OBJ_Pills(gp));
     }
 
@@ -79,11 +89,13 @@ public class NPC_Andrea extends Entity {
         }
     }
 
-    public void setAction() {
+    public void setAction(int goalCol, int goalRow) {
 
         if(onPath) {
-            int goalCol = 9;
-            int goalRow = 9;
+            if (gp.player.missionState == MissionStates.HELP_ANDREA_OUT) {
+                goalCol = 9;
+                goalRow = 9;
+            }
 
             searchPath(goalCol, goalRow);
         }

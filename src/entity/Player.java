@@ -444,7 +444,7 @@ public class Player extends Entity {
                 String text = "";
                 int selectSfx;
 
-                if (canObtainItem(gp.obj[gp.currentMap][i])) {
+                if (canObtainItem(gp.obj[gp.currentMap][i], this)) { //npc not required here so passing !Andrea (object being picked up)
                     if (gp.obj[gp.currentMap][i].isWeapon) {
                         if (currentWeapon == null) {
                             currentWeapon = gp.obj[gp.currentMap][i];
@@ -776,7 +776,7 @@ public class Player extends Entity {
         return itemIndex;
     }
 
-    public boolean canObtainItem(Entity item) {
+    public boolean canObtainItem(Entity item, Entity npc) {
 
         boolean canObtain = false;
 
@@ -792,13 +792,17 @@ public class Player extends Entity {
                     canObtain = true;
                 } else { // New item so need to check vacancy in inventory
                     if (inventory.size() != maxInventorySize) {
-                        inventory.add(newItem);
+                        if (!Objects.equals(npc.name, "Andrea")) {
+                            inventory.add(newItem);
+                        }
                         canObtain = true;
                     }
                 }
             } else { //Not stackable so check vacancy in inventory
                 if (inventory.size() != maxInventorySize) {
-                    inventory.add(newItem);
+                    if (!Objects.equals(npc.name, "Andrea")) {
+                        inventory.add(newItem);
+                    }
                     canObtain = true;
                 }
             }
