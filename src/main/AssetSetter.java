@@ -44,6 +44,9 @@ public class AssetSetter {
             case "Spatula":
                 gp.obj[mapNum][i] = new OBJ_Spatula(gp);
                 break;
+            case "Hatchet":
+                gp.obj[mapNum][i] = new OBJ_Hatchet(gp);
+                break;
             case "FrontBackDoorOpen":
                 gp.obj[mapNum][i] = new OBJ_FrontBackDoorOpen(gp);
                 break;
@@ -53,11 +56,29 @@ public class AssetSetter {
             case "Garden Shovel":
                 gp.obj[mapNum][i] = new OBJ_Shovel(gp);
                 break;
+            case "Lavender Crocs":
+                gp.obj[mapNum][i] = new OBJ_Lavendar_Crocs(gp);
+                break;
+            case "Chicken":
+                gp.obj[mapNum][i] = new OBJ_Chicken(gp);
+                break;
+            case "BlockOfWoodChicken":
+                gp.obj[mapNum][i] = new OBJ_BlockOfWoodChicken(gp);
+                break;
+            case "BlockOfWoodBlood":
+                gp.obj[mapNum][i] = new OBJ_BlockOfWoodBlood(gp);
+                break;
         }
 
         gp.obj[mapNum][i].worldX = x * gp.tileSize;
         gp.obj[mapNum][i].worldY = y * gp.tileSize;
 
+    }
+
+    public void setChickenOnBlockInstanceAndRemoveThisInstanceOfBlock(Entity oldBlock, int x, int y) {
+        oldBlock = null;
+        System.gc();
+        setObjectAfterStart("BlockOfWoodChicken", gp.currentMap, x, y);
     }
 
     public void setNPCAfterStart(String name, int mapNum, int x, int y) {
@@ -97,6 +118,11 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_Cupboard2(gp);
         gp.obj[mapNum][i].worldX = 24 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Cupboard1(gp);
+        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Pills(gp);
@@ -169,11 +195,6 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Lavendar_Crocs(gp);
-        gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
-        i++;
-
         gp.obj[mapNum][i] = new OBJ_Bin_Blue(gp);
         gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
@@ -197,6 +218,16 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
         gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_BlockOfWood(gp);
+        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Fridge(gp);
+        gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS

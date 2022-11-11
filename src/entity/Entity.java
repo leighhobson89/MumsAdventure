@@ -53,6 +53,7 @@ public class Entity {
     public List<Integer> missionList = new ArrayList<>();
     public boolean readyForNextPhoneMission;
     public int missionToSet = 1;
+    public int missionSubstate = 0;
     public Random rand = new Random();
     public boolean repeatSfx = true;
     public boolean andreaOnMap;
@@ -153,8 +154,7 @@ public class Entity {
     public final int type_gardeningShovel = 8;
     public final int type_obstacle = 9;
     public final int type_light = 10;
-    public int goalRow;
-    public int goalCol;
+    public final int type_axe = 11;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -239,7 +239,7 @@ public class Entity {
     //DEBUG - CAN CHANGE THIS TO SPEED UP TELEPHONE RINGING
     public int setRandomCounter() {
         if (this.gp.player != null) {
-            return gp.player.rand.nextInt(3800) + 1200; //3800 + 1200 for normal game
+            return gp.player.rand.nextInt(300) + 400; //3800 + 1200 for normal game
         }
         return 0;
     }
@@ -912,6 +912,7 @@ public class Entity {
                     gp.player.inventory.add(new OBJ_FortyQuidForAndrea(gp)); //add mission object
                     gp.player.andreaOnMap = true;
                 }
+                case 4 -> gp.player.missionState = MissionStates.CHOP_CHICKEN_FOR_DOGS;
             }
             gp.player.readyForNextPhoneMission = false;
         }

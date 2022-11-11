@@ -1,5 +1,9 @@
 package main;
 
+import entity.Entity;
+
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class EventHandler {
@@ -169,12 +173,19 @@ public class EventHandler {
 
     public void cupboardHall() {
         gp.aSetter.setObjectAfterStart("Old Cardigan", gp.currentMap, 24, 11);
+    }
 
+    public void cupboardLounge() {
+        gp.aSetter.setObjectAfterStart("Lavender Crocs", gp.currentMap, 18, 13);
     }
 
     public void kitchenCupBoard() {
         gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 24, 13);
 
+    }
+
+    public void fridgeOpen() {
+        gp.aSetter.setObjectAfterStart("Chicken", gp.currentMap, 26, 11);
     }
 
     public void lightPillsEvent() {
@@ -193,6 +204,15 @@ public class EventHandler {
                 gp.player.readyForNextPhoneMission = true;
                 gp.player.randomCounter = gp.player.setRandomCounter();
                 gp.playSFX(28); //make phone ring
+            }
+        }
+    }
+
+    public void removeChickenFromPlayerInventory(ArrayList<Entity> inventory) {
+        for (int i = 0; i < inventory.size(); i++) {
+            if (Objects.equals(inventory.get(i).name, "Chicken")) {
+                inventory.remove(i);
+                break;
             }
         }
     }

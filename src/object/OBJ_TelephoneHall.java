@@ -42,6 +42,15 @@ public class OBJ_TelephoneHall extends Entity {
         dialogueText[3][2] = "I need some fags and petrol and Andy has spent\nup on our fourth holiday to Turkey this year.";
         dialogueText[3][3] = "Oh and I've got that coat you wanted off Amanda";
         dialogueText[3][4] = "Come to the front gate, I'm here";
+        //CHOP CHICKEN FOR DOGS
+        dialogueText[4][0] = "Hee Hee, I thought I'd make you run to the phone!";
+        dialogueText[4][1] = "Can you do me a favour?";
+        dialogueText[4][2] = "These dogs are pestering me for their chicken.";
+        dialogueText[4][3] = "I got some yesterday up Colne and\n it's in the fridge.";
+        dialogueText[4][4] = "Can you get it out, and go and chop it up\non the chopping block outside?";
+        dialogueText[4][5] = "Then throw it in the garden for them\nthey'll love it!";
+
+
     }
 
     public void interact() {
@@ -49,8 +58,8 @@ public class OBJ_TelephoneHall extends Entity {
             setNewMissionState(gp.player.readyForNextPhoneMission, gp.player.missionState, gp.player.missionToSet);
             startDialogue(this, gp.player.missionState);
             gp.keyH.enterPressed = false;
-            gp.stopSFX(28);
             gp.player.readyForNextPhoneMission = false;
+            gp.stopSFX(28);
         } else {
             startDialogue(this, 0);
             gp.keyH.enterPressed = false;

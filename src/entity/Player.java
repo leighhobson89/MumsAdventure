@@ -242,7 +242,7 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/mum_attack_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_attack_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
-            if (currentWeapon.type == type_long_weapon || currentWeapon.type == type_gardeningShovel) {
+            if (currentWeapon.type == type_axe ||currentWeapon.type == type_long_weapon || currentWeapon.type == type_gardeningShovel) {
                 attackUp1 = setup("/player/mum_spatula_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
                 attackUp2 = setup("/player/mum_spatula_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
                 attackDown1 = setup("/player/mum_spatula_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
@@ -359,6 +359,8 @@ public class Player extends Entity {
                     gp.playSFX(5);
                 } else if (currentWeapon.type == type_long_weapon || currentWeapon.type == type_gardeningShovel) {
                     gp.playSFX(19);
+                } else if (currentWeapon.type == type_axe) {
+                    gp.playSFX(30);
                 }
 
                 attacking = true;
@@ -533,6 +535,7 @@ public class Player extends Entity {
             case "FrontDoor" -> 3;
             case "Old Cardigan" -> 18;
             case "Spatula" -> 19;
+            case "Hatchet" -> 30;
             default -> 10;
         };
     }
@@ -708,12 +711,12 @@ public class Player extends Entity {
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
 
-            if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel) && selectedItem != currentWeapon) {
+            if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
-            } else if ((selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel)) {
+            } else if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel)) {
                 currentWeapon = null;
                 attack = getAttack();
                 gp.playSFX(11);

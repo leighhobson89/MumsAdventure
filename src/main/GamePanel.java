@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //ENTITY AND OBJECT
     public Player player = new Player(this,keyH);
-    public Entity[][] obj = new Entity[maxMap][30];
+    public Entity[][] obj = new Entity[maxMap][50];
     public Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] monster = new Entity[maxMap][30];
     public InteractiveTile iTile[][] = new InteractiveTile[maxMap][100];
@@ -108,10 +108,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         //DEBUG TO SKIP AHEAD IN MISSIONS - COMMENT FOR NORMAL GAME FROM START
         //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSIONLIST IF STARTING FURTHER ON
-//        player.weedCount = 0;
-//        player.missionList.add(1);
-//        player.missionState = 2;
-//        player.missionToSet = 2;
+        player.weedCount = 0;
+        player.missionList.add(1);
+        player.missionState = 2;
+        player.missionToSet = 2;
         //END OF DEBUG
 
         playMusic(0, false, 0);
@@ -446,6 +446,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void stopSFX(int i) {
+        sfx.setFile(i);
         sfx.stop(false);
     }
 

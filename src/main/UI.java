@@ -10,11 +10,12 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UI {
     GamePanel gp;
     Graphics2D g2;
-    public Font breathFire, maruMonica, breathFire_40, breathFire_80, maruMonica_40;
+    public Font maruMonica, maruMonica_40;
     BufferedImage bolt_full, bolt_half, bolt_blank, squeakyToyFull, squeakyToyEmpty, coin;
     public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
@@ -34,11 +35,9 @@ public class UI {
     public Entity npc;
     int charIndex = 0;
     String combinedText = "";
-    boolean soundFXShouldPlay;
 
     //MISSION STUFF
     Entity inventoryItem;
-    boolean missionCanPass = false;
 
     public UI(GamePanel gp) throws IOException, FontFormatException {
         this.gp = gp;
@@ -161,21 +160,21 @@ public class UI {
 
     public void drawMapAreaName(int currentMap) {
 
-        String text = "";
+        String text;
         int x = gp.tileSize*15;
         int y = gp.tileSize/2;
 
         drawSubWindow(x + 15, y - 17, gp.tileSize*4 + 20, gp.tileSize + 25);
 
         switch (currentMap) {
-            case 0:
+            case 0 -> {
                 text = "Downstairs";
                 g2.drawString(text, x + 40, y + 33);
-                break;
-            case 1:
+            }
+            case 1 -> {
                 text = "Upstairs";
                 g2.drawString(text, x + 65, y + 33);
-                break;
+            }
         }
 
     }
@@ -188,7 +187,7 @@ public class UI {
 
 //        g2.setColor(Color.black);
 //        g2.fillRoundRect(x - 5, y - 10, gp.tileSize*4, gp.tileSize*2, 10, 10);
-        drawSubWindow(x - 15, y - 17, gp.tileSize*4 + 20, gp.tileSize + 25); //height when mana displayed should be ((gp.tilesize*2) + 15)
+        drawSubWindow(x - 15, y - 17, gp.tileSize*4 + 20, gp.tileSize + 25); //height when mana displayed should be ((gp.tileSize*2) + 15)
 
         //DRAW MAX LIFE
         while (i < gp.player.maxStress /2) {
@@ -391,19 +390,19 @@ public class UI {
         int height = 0;
 
         switch (layout) {
-            case 0:
+            case 0 -> {
                 //WINDOW
-                x = gp.tileSize*2;
-                y = gp.tileSize*4;
-                width = gp.screenWidth - (gp.tileSize*4);
-                height = gp.tileSize*4;
-                break;
-            case 1:
-                x = gp.tileSize*3;
-                y = gp.tileSize/2;
-                width = gp.screenWidth - (gp.tileSize*6);
-                height = gp.tileSize*4;
-                break;
+                x = gp.tileSize * 2;
+                y = gp.tileSize * 4;
+                width = gp.screenWidth - (gp.tileSize * 4);
+                height = gp.tileSize * 4;
+            }
+            case 1 -> {
+                x = gp.tileSize * 3;
+                y = gp.tileSize / 2;
+                width = gp.screenWidth - (gp.tileSize * 6);
+                height = gp.tileSize * 4;
+            }
         }
 
         drawSubWindow(x, y, width, height);
@@ -419,7 +418,7 @@ public class UI {
                 char[] characters = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 
                 if (charIndex < characters.length) {
-                    if (npc.name == "TelephoneHall" && gp.player.repeatSfx && gp.player.missionState > 1) {
+                    if (Objects.equals(npc.name, "TelephoneHall") && gp.player.repeatSfx && gp.player.missionState > 1) {
                         gp.playSFX(29);
                         gp.player.repeatSfx = false;
                     } else if (gp.player.repeatSfx) {
@@ -552,12 +551,12 @@ public class UI {
     }
 
     public void drawInventory(Entity entity, boolean cursor) {
-        int frameX = 0;
-        int frameY = 0;
-        int frameWidth = 0;
-        int frameHeight = 0;
-        int slotCol = 0;
-        int slotRow = 0;
+        int frameX;
+        int frameY;
+        int frameWidth;
+        int frameHeight;
+        int slotCol;
+        int slotRow;
 
         //FRAME
         if (entity == gp.player) {
@@ -589,7 +588,7 @@ public class UI {
         for (int i = 0; i < entity.inventory.size(); i++) {
 
             //EQUIP CURSOR
-            if (entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentArmour || (entity.inventory.get(i) == entity.currentLight && entity.inventory.get(i).name != "Anti Brightness Pills")) {
+            if (entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentArmour || (entity.inventory.get(i) == entity.currentLight && !Objects.equals(entity.inventory.get(i).name, "Anti Brightness Pills"))) {
                 g2.setColor(new Color(240, 190, 90));
                 g2. fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
 
@@ -669,11 +668,11 @@ public class UI {
         int frameHeight = gp.tileSize*10;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
-        switch(subState) {
-            case 0: options_top(frameX, frameY); break;
-            case 1: options_fullScreenNotification(frameX, frameY);break;
-            case 2: options_control(frameX, frameY); break;
-            case 3: options_endGameConfirmation(frameX, frameY); break;
+        switch (subState) {
+            case 0 -> options_top(frameX, frameY);
+            case 1 -> options_fullScreenNotification(frameX, frameY);
+            case 2 -> options_control(frameX, frameY);
+            case 3 -> options_endGameConfirmation(frameX, frameY);
         }
 
         gp.keyH.enterPressed = false;
@@ -696,11 +695,7 @@ public class UI {
             g2.drawString(">", textX - 25, textY);
             if(gp.keyH.enterPressed) {
                 gp.playSFX(11);
-                if(!gp.fullScreenOn) {
-                    gp.fullScreenOn = true;
-                } else {
-                    gp.fullScreenOn = false;
-                }
+                gp.fullScreenOn = !gp.fullScreenOn;
                 subState = 1;
             }
         }
@@ -776,7 +771,7 @@ public class UI {
         volumeWidth = 24 * gp.sfx.volumeScale;
         g2.fillRect(textX, textY, volumeWidth, 24);
 
-        gp.config.saveConfig(); //saves options for loading back next time game starts
+        gp.config.saveConfig(); //saves option for loading back next time game starts
     }
 
     public void options_fullScreenNotification(int frameX, int frameY) {
@@ -906,9 +901,9 @@ public class UI {
 
     public void drawTradeScreen() {
         switch (subState) {
-            case 0: trade_select(); break;
-            case 1: trade_buy(); break;
-            case 2: trade_sell(); break;
+            case 0 -> trade_select();
+            case 1 -> trade_buy();
+            case 2 -> trade_sell();
         }
         gp.keyH.enterPressed = false;
     }
@@ -927,7 +922,7 @@ public class UI {
         //DRAW TEXTS
         x += gp.tileSize;
         y += gp.tileSize;
-        if (npc.name == "Andrea") {
+        if (Objects.equals(npc.name, "Andrea")) {
             g2.drawString("Take", x, y);
         } else {
             g2.drawString("Buy", x, y);
@@ -940,7 +935,7 @@ public class UI {
             }
         }
         y += gp.tileSize;
-        if (npc.name == "Andrea") {
+        if (Objects.equals(npc.name, "Andrea")) {
             g2.drawString("Give", x, y);
         } else {
             g2.drawString("Sell", x, y);
@@ -959,7 +954,7 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 gp.playSFX(11);
                 commandNum = 0;
-                if (npc.name == "Andrea") {
+                if (Objects.equals(npc.name, "Andrea")) {
                     npc.startDialogue(npc, 3);
                 } else {
                     npc.startDialogue(npc, 2);
@@ -986,9 +981,6 @@ public class UI {
 
         //DRAW PLAYER COIN WINDOW
         x = gp.tileSize*12;
-        y = gp.tileSize*9;
-        width = gp.tileSize*6;
-        height = gp.tileSize*2;
         drawSubWindow(x, y, width, height);
         g2.drawString("Your Coin: " + gp.player.coin, x + 24, y + 60);
 
@@ -1014,24 +1006,19 @@ public class UI {
                     subState = 0;
                     npc.startDialogue(npc, 3);
                 } else {
-                    if (gp.player.canObtainItem(npc.inventory.get(itemIndex), npc) && npc.name != "Andrea") {
+                    if (gp.player.canObtainItem(npc.inventory.get(itemIndex), npc) && !Objects.equals(npc.name, "Andrea")) {
                         gp.player.coin -= npc.inventory.get(itemIndex).price;
                         gp.playSFX(11);
-                    } else if (npc.inventory.get(itemIndex).name == "Coat off Amanda" && npc.name == "Andrea") {
+                    } else if (Objects.equals(npc.inventory.get(itemIndex).name, "Coat off Amanda") && Objects.equals(npc.name, "Andrea")) {
                         subState = 0;
                         commandNum = 0;
                         npc.inventory.get(itemIndex).price = 50; //set up coat price for selling after freebie from Andrea
                         gp.player.inventory.add(npc.inventory.get(itemIndex));
                         npc.inventory.remove(npc.inventory.get(itemIndex));
                         gp.playSFX(11);
-                        missionCanPass = true;
-                        for (int i = 0; i < gp.player.inventory.size(); i++) {
-                            inventoryItem = gp.player.inventory.get(i);
-                            if (inventoryItem.name == "Forty Quid For Andrea") {
-                                missionCanPass = false;
-                            }
-                        }
-                        if (missionCanPass) {
+                        gp.player.missionSubstate++;
+                        if (gp.player.missionSubstate == 2) {
+                            gp.player.missionSubstate = 0;
                             gp.player.andreaTempGoalCol = 0;
                             gp.player.andreaTempGoalRow = 0;
                             npc.startDialogue(npc, 6);
@@ -1043,7 +1030,7 @@ public class UI {
                             npc.startDialogue(npc, 9);
                         }
 
-                    } else if (npc.name == "Andrea" && npc.inventory.get(itemIndex).name != "Coat off Amanda") {
+                    } else if (Objects.equals(npc.name, "Andrea") && !Objects.equals(npc.inventory.get(itemIndex).name, "Coat off Amanda")) {
                         subState = 0;
                         npc.startDialogue(npc, 4);
                     } else {
@@ -1075,9 +1062,6 @@ public class UI {
 
         //DRAW PLAYER COIN WINDOW
         x = gp.tileSize*12;
-        y = gp.tileSize*9;
-        width = gp.tileSize*6;
-        height = gp.tileSize*2;
         drawSubWindow(x, y, width, height);
         g2.drawString("Your Coin: " + gp.player.coin, x + 24, y + 60);
 
@@ -1099,32 +1083,33 @@ public class UI {
 
             //SELL AN ITEM
             if (gp.keyH.enterPressed) {
-                if (npc.name == "Merchant" && (gp.player.inventory.get(itemIndex) == gp.player.currentWeapon ||
+                if (Objects.equals(npc.name, "Merchant") && (gp.player.inventory.get(itemIndex) == gp.player.currentWeapon ||
                         gp.player.inventory.get(itemIndex) == gp.player.currentArmour || gp.player.inventory.get(itemIndex) == gp.player.currentLight)) {
                     commandNum = 0;
                     subState = 0;
                     npc.startDialogue(npc, 5);
                 } else {
-                    if (gp.player.inventory.get(itemIndex).isSaleable || (npc.name == "Merchant" && gp.player.inventory.get(itemIndex).name == "Electric Guitar" && gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT)) {
-                        if (npc.name == "Merchant" && gp.player.inventory.get(itemIndex).amount > 1) {
+                    if (gp.player.inventory.get(itemIndex).isSaleable || (Objects.equals(npc.name, "Merchant") && Objects.equals(gp.player.inventory.get(itemIndex).name, "Electric Guitar") && gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT)) {
+                        if (Objects.equals(npc.name, "Merchant") && gp.player.inventory.get(itemIndex).amount > 1) {
                             gp.player.inventory.get(itemIndex).amount--;
                         } else {
-                            if (npc.name == "Merchant" && gp.player.inventory.get(itemIndex).name == "Electric Guitar") {
+                            if (Objects.equals(npc.name, "Merchant") && Objects.equals(gp.player.inventory.get(itemIndex).name, "Electric Guitar")) {
                                 alreadyRemoved = true;
+                                gp.ui.addMessage("You sell the Electric Guitar to the Merchant! -> Coin: " + (int)(gp.player.coin + ((gp.player.inventory.get(itemIndex).price)*0.7)));
                                 gp.player.inventory.remove(itemIndex);
                                 npc.startDialogue(npc, 8);
                                 gp.playSFX(22);
                                 gp.misStat.endMissionTasks(MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT);
                                 commandNum = 0;
                                 subState = 0;
-                            } else if (npc.name == "Merchant") {
+                            } else if (Objects.equals(npc.name, "Merchant")) {
                                 alreadyRemoved = true;
                                 commandNum = 0;
                                 subState = 0;
                                 gp.playSFX(22);
                                 gp.player.inventory.remove(itemIndex);
                             }
-                            if (npc.name == "Andrea" && gp.player.inventory.get(itemIndex).name == "Red Boots") {
+                            if (Objects.equals(npc.name, "Andrea") && Objects.equals(gp.player.inventory.get(itemIndex).name, "Red Boots")) {
                                 alreadyRemoved = true;
                                 gp.ui.addMessage("You \"lend\" Andrea your best Red Boots!");
                                 gp.player.coin = (int) (gp.player.coin - (gp.player.inventory.get(itemIndex).price * 0.7));
@@ -1134,21 +1119,15 @@ public class UI {
                                 commandNum = 0;
                                 subState = 0;
                             }
-                            if (npc.name == "Andrea" && gp.player.inventory.get(itemIndex).name == "Forty Quid For Andrea") {
-                                alreadyRemoved = true;
+                            if (Objects.equals(npc.name, "Andrea") && Objects.equals(gp.player.inventory.get(itemIndex).name, "Forty Quid For Andrea")) {
                                 gp.ui.addMessage("You \"lend\" Andrea " + gp.player.inventory.get(itemIndex).value + "quid! -> Coin: " + (gp.player.coin - gp.player.inventory.get(itemIndex).value));
                                 gp.playSFX(22);
                                 gp.player.inventory.remove(itemIndex);
                                 commandNum = 0;
                                 subState = 0;
-                                missionCanPass = true;
-                                for (int i = 0; i < npc.inventory.size(); i++) {
-                                    inventoryItem = npc.inventory.get(i);
-                                    if (inventoryItem.name == "Coat off Amanda") {
-                                        missionCanPass = false;
-                                    }
-                                }
-                                if (missionCanPass) {
+                                gp.player.missionSubstate++;
+                                if (gp.player.missionSubstate == 2) {
+                                    gp.player.missionSubstate = 0;
                                     gp.player.andreaTempGoalCol = 0;
                                     gp.player.andreaTempGoalRow = 0;
                                     npc.startDialogue(npc, 6);
@@ -1157,22 +1136,22 @@ public class UI {
                                 } else {
                                     npc.startDialogue(npc, 8);
                                 }
-                            } else if (!alreadyRemoved && gp.player.inventory.get(itemIndex).isSaleable && npc.name == "Andrea" && gp.player.inventory.get(itemIndex).name != "Red Boots") {
+                            } else if (!alreadyRemoved && gp.player.inventory.get(itemIndex).isSaleable && Objects.equals(npc.name, "Andrea") && !Objects.equals(gp.player.inventory.get(itemIndex).name, "Red Boots")) {
                                 commandNum = 0;
                                 subState = 0;
                                 npc.startDialogue(npc, 7);
                             }
                         }
                         gp.player.coin += price;
-                    } else if (npc.name == "Merchant" && gp.player.inventory.get(itemIndex).name == "Acoustic Guitar" && gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT) {
+                    } else if (Objects.equals(npc.name, "Merchant") && Objects.equals(gp.player.inventory.get(itemIndex).name, "Acoustic Guitar") && gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT) {
                         commandNum = 0;
                         subState = 0;
                         npc.startDialogue(npc, 9);
-                    } else if (npc.name == "Andrea" && (gp.player.inventory.get(itemIndex).name != "Red Boots" && gp.player.inventory.get(itemIndex).name != "Forty Quid For Andrea")) {
+                    } else if (Objects.equals(npc.name, "Andrea") && (!Objects.equals(gp.player.inventory.get(itemIndex).name, "Red Boots") && !Objects.equals(gp.player.inventory.get(itemIndex).name, "Forty Quid For Andrea"))) {
                         commandNum = 0;
                         subState = 0;
                         npc.startDialogue(npc, 7);
-                    } else if (npc.name == "Merchant") {
+                    } else if (Objects.equals(npc.name, "Merchant")) {
                         commandNum = 0;
                         subState = 0;
                         npc.startDialogue(npc, 6);
@@ -1181,7 +1160,7 @@ public class UI {
             }
             for (int i = 0; i < gp.player.inventory.size(); i++) {
                 inventoryItem = gp.player.inventory.get(i);
-                if (inventoryItem.name == "Pip's Bone") {
+                if (Objects.equals(inventoryItem.name, "Pip's Bone")) {
                     gp.player.boneIndex = i;
                 }
             }

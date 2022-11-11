@@ -51,8 +51,6 @@ public class TileManager {
         setup(17, "rockery", true);
         setup(18, "hedge", true);
         setup(19, "fence1", true);
-        //setup(20, "tree1", true);
-        //setup(21, "tree2", true);
         setup(22, "sofaTop", false);
         setup(23, "sofaBottom", true);
         setup(24, "tableTL", false);
@@ -108,7 +106,7 @@ public class TileManager {
         setup(74, "lawnRockeryTopRight", false);
         setup(75, "lawnRockeryTopLeft", false);
         setup(76, "pathRockeryBottomBorder", false);
-        setup(77, "frontGateOnPath", false);
+        setup(77, "frontGateOnPath", true);
         setup(78, "frontGateOnHedge", true);
         setup(79, "hedgeHorizontal", true);
         setup(80, "hedgeCorner", true);

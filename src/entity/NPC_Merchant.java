@@ -58,7 +58,7 @@ public class NPC_Merchant extends Entity {
 
     public void setItems() {
         inventory.add(new OBJ_Pills(gp));
-        inventory.add(new OBJ_Spatula(gp));
+        inventory.add(new OBJ_Hatchet(gp));
         inventory.add(new OBJ_LightPills(gp));
     }
 
