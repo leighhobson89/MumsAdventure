@@ -42,20 +42,20 @@ public class Projectile extends Entity {
             int objIndex = gp.cChecker.checkEntity(this, gp.obj);
 
             if (objIndex != 999) {
-                gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
+                gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
                 gp.playSFX(20);
                 alive = false;
             }
 
             if (monsterIndex != 999) {
-                gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
+                gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
                 gp.player.damageMonster(monsterIndex, this, attack, knockBackPower);
                 generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
                 gp.playSFX(20);
                 alive = false;
             }
             if (npcIndex != 999) {
-                gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
+                gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
                 gp.gameState = gp.dialogueState;
                 if (Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Dad")) {
                     gp.npc[gp.currentMap][npcIndex].startDialogue(gp.npc[gp.currentMap][npcIndex], 62);
@@ -68,7 +68,7 @@ public class Projectile extends Entity {
                 alive = false;
             }
             if (tileState) {
-                gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
+                gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
                 gp.playSFX(20);
                 alive = false;
             }
@@ -106,7 +106,7 @@ public class Projectile extends Entity {
         stressLevel++;
 
         if(stressLevel >= maxStress) { //if throwing item reaches end of throwing range
-            gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
+            gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
             alive = false;
             gp.playSFX(20);
         }

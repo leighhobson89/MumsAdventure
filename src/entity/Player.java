@@ -416,12 +416,14 @@ public class Player extends Entity {
                 projectile.subtractResource(this);
                 if (Objects.equals(projectile.name, "Pip's Bone")) {
                     gp.player.inventory.remove(boneIndex);
+                    itemToThrow = "Pip's Bone";
                 } else if (Objects.equals(projectile.name, "Chopped Chicken")) {
                     if (gp.player.inventory.get(chickenIndex).amount < 2) {
                         gp.player.inventory.remove(chickenIndex);
                     } else {
                         gp.player.inventory.get(chickenIndex).amount--;
                     }
+                    itemToThrow = "Chopped Chicken";
                 }
                 gp.player.currentProjectile = null;
 
