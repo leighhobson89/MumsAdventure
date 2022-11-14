@@ -41,6 +41,8 @@ public class Entity {
     public boolean dying;
     boolean hpBarOn = false;
     public int boneIndex;
+    public int chickenIndex;
+    public int thrownChickenCount = 0;
     public boolean onPath = false;
     public boolean knockBack = false;
     public String knockBackDirection;
@@ -91,6 +93,7 @@ public class Entity {
     public int maxMana;
     public int mana;
     public int boneCount;
+    public int choppedChickenCount;
     public int level;
     public int strength;
     public int dexterity;
@@ -114,7 +117,8 @@ public class Entity {
     public int doorUnlockedCount;
     public boolean savedWithAWeaponEquipped;
     public boolean savedWithAnArmourEquipped;
-    public boolean haveResource;
+    public boolean haveBoneResource;
+    public boolean haveChoppedChickenResource;
 
     //ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();

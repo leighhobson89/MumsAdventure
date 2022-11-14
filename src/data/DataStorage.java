@@ -24,10 +24,12 @@ public class DataStorage implements Serializable {
     int timesPassedOut;
     boolean pillsConsumableNow;
     int boneIndex;
+    int chickenIndex;
     boolean musicPlaying;
     boolean savedWithAWeaponEquipped;
     boolean savedWithAnArmourEquipped;
     boolean savedWithBoneEquipped;
+    boolean savedWithChoppedChickenEquipped;
     int spiderCount;
     int missionState;
     public List<Integer> missionList = new ArrayList<>();
@@ -41,6 +43,8 @@ public class DataStorage implements Serializable {
     int dialogueSet;
     boolean andreaOnMap;
     boolean firstTimeChattingToAndrea;
+    int choppedChickenCount;
+    int thrownChickenCount = 0;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();

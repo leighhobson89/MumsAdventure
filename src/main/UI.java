@@ -1162,6 +1162,8 @@ public class UI {
                 inventoryItem = gp.player.inventory.get(i);
                 if (Objects.equals(inventoryItem.name, "Pip's Bone")) {
                     gp.player.boneIndex = i;
+                } else if (Objects.equals(inventoryItem.name, "Chopped Chicken")) {
+                    gp.player.chickenIndex = i;
                 }
             }
         }

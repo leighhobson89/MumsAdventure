@@ -6,6 +6,7 @@ import monster.MON_WaspSwarm;
 import object.*;
 import tile_interactive.IT_WeedTile;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class AssetSetter {
@@ -16,6 +17,12 @@ public class AssetSetter {
     public int mapNumTotal;
     public int boneX;
     public int boneY;
+    public int choppedChickenX;
+    public int choppedChickenY;
+    public int choppedChickenPhoebeX;
+    public int choppedChickenPhoebeY;
+    public int choppedChickenPipX;
+    public int choppedChickenPipY;
 
     public AssetSetter(GamePanel gp) {
         this.gp = gp;
@@ -34,9 +41,19 @@ public class AssetSetter {
         int i = count;
         switch (name) { //chooses object
             case "Pip's Bone":
-                gp.obj[mapNum][i] = new OBJ_DogsBone_NotMagic(gp);
+                gp.obj[mapNum][i] = new OBJ_PipsBone(gp);
                 boneX = x * gp.tileSize;
                 boneY = y * gp.tileSize;
+                break;
+            case "Chopped Chicken Phoebe":
+                gp.obj[mapNum][i] = new OBJ_ChoppedChickenPhoebe(gp);
+                choppedChickenPhoebeX = x * gp.tileSize;
+                choppedChickenPhoebeY = y * gp.tileSize;
+                break;
+            case "Chopped Chicken Pip":
+                gp.obj[mapNum][i] = new OBJ_ChoppedChickenPip(gp);
+                choppedChickenPipX = x * gp.tileSize;
+                choppedChickenPipY = y * gp.tileSize;
                 break;
             case "Old Cardigan":
                 gp.obj[mapNum][i] = new OBJ_GrandmasCardigan(gp);
@@ -201,7 +218,7 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_DogsBone_NotMagic(gp);
+        gp.obj[mapNum][i] = new OBJ_PipsBone(gp);
         gp.obj[mapNum][i].worldX = 25 * gp.tileSize; boneX = 25;
         gp.obj[mapNum][i].worldY = 18 * gp.tileSize; boneY = 18;
         i++;

@@ -18,6 +18,7 @@ public class SaveLoad {
         this.gp = gp;
     }
     boolean loadWithBoneEquipped;
+    boolean loadWithChoppedChickenEquipped;
 
     public Entity getMonster(String itemName) {
         Entity monster = null;
@@ -72,11 +73,19 @@ public class SaveLoad {
             ds.timesPassedOut = gp.player.timesPassedOut;
             ds.pillsConsumableNow = gp.player.pillsConsumableNow;
             ds.boneIndex = gp.player.boneIndex;
-            if (gp.player.boneCount == 1) {
+            ds.chickenIndex = gp.player.chickenIndex;
+            ds.choppedChickenCount = gp.player.choppedChickenCount;
+            if (gp.player.boneCount > 0) {
                 ds.savedWithBoneEquipped = true;
             } else {
                 ds.savedWithBoneEquipped = false;
             }
+            if (gp.player.choppedChickenCount > 0) {
+                ds.savedWithChoppedChickenEquipped = true;
+            } else {
+                ds.savedWithChoppedChickenEquipped = false;
+            }
+            ds.thrownChickenCount = gp.player.thrownChickenCount;
             ds.spiderCount = gp.player.spiderCount;
             ds.missionState = gp.player.missionState;
             ds.missionList = gp.player.missionList;
@@ -213,10 +222,12 @@ public class SaveLoad {
             gp.player.timesPassedOut = ds.timesPassedOut;
             gp.player.pillsConsumableNow = ds.pillsConsumableNow;
             gp.player.boneIndex = ds.boneIndex;
+            gp.player.chickenIndex = ds.chickenIndex;
             gp.player.savedWithAWeaponEquipped = ds.savedWithAWeaponEquipped;
             gp.player.savedWithAnArmourEquipped = ds.savedWithAnArmourEquipped;
             gp.player.dialogueSet = ds.dialogueSet;
             loadWithBoneEquipped = ds.savedWithBoneEquipped;
+            loadWithChoppedChickenEquipped = ds.savedWithChoppedChickenEquipped;
             gp.player.weedCount = ds.weedCount;
             gp.player.spiderCount = ds.spiderCount;
             gp.player.missionState = ds.missionState;
@@ -226,11 +237,18 @@ public class SaveLoad {
             gp.player.randomCounter = gp.player.setRandomCounter();
             gp.player.setShovelFlag = ds.setShovelFlag;
             gp.player.repeatSfx = ds.repeatSfx;
+            gp.player.choppedChickenCount = ds.choppedChickenCount;
+            gp.player.thrownChickenCount = ds.thrownChickenCount;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
                 gp.player.firstTimePickUpBone = false;
-                gp.player.haveResource = true;
+                gp.player.haveBoneResource = true;
+            }
+
+            if (loadWithChoppedChickenEquipped) {
+                gp.player.choppedChickenCount = ds.choppedChickenCount;
+                gp.player.haveChoppedChickenResource = true;
             }
 
             //PLAYER OUTFIT

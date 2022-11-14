@@ -15,7 +15,7 @@ public class NPC_Phoebe extends Entity {
         type = type_npc;
         goesTransparentWhenHit = true;
 //        //comment for not throw bone
-//        projectile = new OBJ_DogsBone_NotMagic(gp);
+//        projectile = new OBJ_PipsBone(gp);
 //        //end bone throwing
 
         getImage();

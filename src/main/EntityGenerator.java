@@ -15,7 +15,7 @@ public class EntityGenerator {
         Entity obj = null;
 
         switch(itemName) {
-            case OBJ_DogsBone_NotMagic.OBJ_NAME: obj = new OBJ_DogsBone_NotMagic(gp); break;
+            case OBJ_PipsBone.OBJ_NAME: obj = new OBJ_PipsBone(gp); break;
             case OBJ_FrontBackDoorKey.OBJ_NAME: obj = new OBJ_FrontBackDoorKey(gp); break;
             case OBJ_GrandmasCardigan.OBJ_NAME: obj = new OBJ_GrandmasCardigan(gp); break;
             case OBJ_Guitar1.OBJ_NAME: obj = new OBJ_Guitar1(gp); break;
@@ -55,6 +55,8 @@ public class EntityGenerator {
             case OBJ_Chicken.OBJ_NAME: obj = new OBJ_Chicken(gp); break;
             case OBJ_ChoppedChicken.OBJ_NAME: obj = new OBJ_ChoppedChicken(gp); break;
             case OBJ_Fridge.OBJ_NAME: obj = new OBJ_Fridge(gp); break;
+            case OBJ_ChoppedChickenPhoebe.OBJ_NAME: obj = new OBJ_ChoppedChickenPhoebe(gp); break;
+            case OBJ_ChoppedChickenPip.OBJ_NAME: obj = new OBJ_ChoppedChickenPip(gp); break;
         }
         return obj;
     }

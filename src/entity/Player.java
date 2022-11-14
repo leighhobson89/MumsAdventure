@@ -4,7 +4,9 @@ import main.GamePanel;
 import main.KeyHandler;
 import main.MissionStates;
 import main.UtilityTool;
-import object.OBJ_DogsBone_NotMagic;
+import object.OBJ_ChoppedChickenPhoebe;
+import object.OBJ_ChoppedChickenPip;
+import object.OBJ_PipsBone;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -135,12 +137,13 @@ public class Player extends Entity {
         maxMana = 5; //max number of things to throw
         mana = maxMana;
         boneCount = 0;
+        choppedChickenCount = 0;
         stressLevel = 0;
         currentWeapon = null;
         currentArmour = null;
         currentLight = null;
 //        projectile = new OBJ_PipsToy_Magic(gp);
-        projectile = new OBJ_DogsBone_NotMagic(gp); //activate this for projectile that doesn't affect toys in ui when wanting to add bone that can be picked up after throwing or something : Change sound too if needed
+        projectile = new OBJ_PipsBone(gp); //activate this for projectile that doesn't affect toys in ui when wanting to add bone that can be picked up after throwing or something : Change sound too if needed
         attack = 0;
         defense = 0;
 
@@ -399,7 +402,16 @@ public class Player extends Entity {
 
             //SUBTRACT THE COST FROM RESOURCES (TOYS ETC)
             projectile.subtractResource(this);
-            gp.player.inventory.remove(boneIndex);
+            if (Objects.equals(projectile.name, "Pip's Bone")) {
+                gp.player.inventory.remove(boneIndex);
+            } else if (Objects.equals(projectile.name, "Chopped Chicken")) {
+                if (gp.player.inventory.get(chickenIndex).amount < 2) {
+                    gp.player.inventory.remove(chickenIndex);
+                } else {
+                    gp.player.inventory.get(chickenIndex).amount--;
+                }
+            }
+
 
             //CHECK VACANCY
             for (int i= 0; i < gp.projectile[1].length; i++) {
@@ -471,6 +483,9 @@ public class Player extends Entity {
                         }
                         boneCount = 1;
                         gp.player.boneIndex = gp.player.inventory.size()-1;
+                    } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "Chopped Chicken")) {
+                        choppedChickenCount++;
+                        gp.player.chickenIndex = gp.player.inventory.size()-1;
                     }
                     selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
                     gp.playSFX(selectSfx);
@@ -784,8 +799,11 @@ public class Player extends Entity {
             }
             if (selectedItem.type == type_consumable) {
                 if(selectedItem.use(this)) {
-                    if (boneCount == 1 && itemIndex < boneIndex) {
+                    if (boneCount > 0 && itemIndex < boneIndex) {
                         boneIndex--;
+                    }
+                    if (choppedChickenCount > 0 && itemIndex < chickenIndex) {
+                        chickenIndex--;
                     }
                     if(selectedItem.amount > 1) {
                         selectedItem.amount--;

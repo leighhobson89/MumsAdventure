@@ -1,6 +1,8 @@
 package entity;
 
 import main.GamePanel;
+import object.OBJ_ChoppedChickenPhoebe;
+import object.OBJ_ChoppedChickenPip;
 
 import java.util.Objects;
 
@@ -28,6 +30,9 @@ public class Projectile extends Entity {
         if(Objects.equals(this.name, "Pip's Bone")) {
             gp.aSetter.boneX = (worldX + solidArea.x)/gp.tileSize;
             gp.aSetter.boneY = (worldY + solidArea.y)/gp.tileSize;
+        } else if (Objects.equals(this.name, "Chopped Chicken")) {
+            gp.aSetter.choppedChickenX = (worldX + solidArea.x)/gp.tileSize;
+            gp.aSetter.choppedChickenY = (worldY + solidArea.y)/gp.tileSize;
         }
 
         if (user == gp.player) {

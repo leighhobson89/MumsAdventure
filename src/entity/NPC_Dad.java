@@ -17,7 +17,7 @@ public class NPC_Dad extends Entity {
         goesTransparentWhenHit = true;
 
 //        //comment for not throw bone
-//        projectile = new OBJ_DogsBone_NotMagic(gp);
+//        projectile = new OBJ_PipsBone(gp);
 //        //end bone throwing
 
         getImage();
