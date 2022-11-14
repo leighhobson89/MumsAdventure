@@ -51,8 +51,6 @@ public class EntityGenerator {
             case OBJ_FortyQuidForAndrea.OBJ_NAME: obj = new OBJ_FortyQuidForAndrea(gp); break;
             case OBJ_RedBoots.OBJ_NAME: obj = new OBJ_RedBoots(gp); break;
             case OBJ_BlockOfWood.OBJ_NAME: obj = new OBJ_BlockOfWood(gp); break;
-            case OBJ_BlockOfWoodBlood.OBJ_NAME: obj = new OBJ_BlockOfWoodBlood(gp); break;
-            case OBJ_BlockOfWoodChicken.OBJ_NAME: obj = new OBJ_BlockOfWoodChicken(gp); break;
             case OBJ_Hatchet.OBJ_NAME: obj = new OBJ_Hatchet(gp); break;
             case OBJ_Chicken.OBJ_NAME: obj = new OBJ_Chicken(gp); break;
             case OBJ_Fridge.OBJ_NAME: obj = new OBJ_Fridge(gp); break;

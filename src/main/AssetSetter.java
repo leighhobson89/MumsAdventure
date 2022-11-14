@@ -75,12 +75,6 @@ public class AssetSetter {
 
     }
 
-    public void setChickenOnBlockInstanceAndRemoveThisInstanceOfBlock(Entity oldBlock, int x, int y) {
-        oldBlock = null;
-        System.gc();
-        setObjectAfterStart("BlockOfWoodChicken", gp.currentMap, x, y);
-    }
-
     public void setNPCAfterStart(String name, int mapNum, int x, int y) {
 
         int count = 0;

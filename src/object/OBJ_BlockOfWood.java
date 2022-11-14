@@ -19,7 +19,10 @@ public class OBJ_BlockOfWood extends Entity {
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "Chopping Block";
-        down1 = setup("/objects/blockOfWood", gp.tileSize, gp.tileSize);
+        image = setup("/objects/blockOfWood", gp.tileSize, gp.tileSize);
+        image2 = setup("/objects/blockOfWoodChicken", gp.tileSize, gp.tileSize);
+        image3 = setup("/objects/blockOfWoodBlood", gp.tileSize, gp.tileSize);
+        down1 = image;
         direction = "down";
         collision = true;
 
@@ -53,11 +56,11 @@ public class OBJ_BlockOfWood extends Entity {
         if (!opened && gp.player.missionState == 4 && checkIfPlayerHasChicken(gp.player.inventory)) {
             gp.playSFX(4); //change to chicken slapping sound
             gp.eHandler.removeChickenFromPlayerInventory(gp.player.inventory);
-            gp.aSetter.setChickenOnBlockInstanceAndRemoveThisInstanceOfBlock(this, this.worldX/gp.tileSize, this.worldY/gp.tileSize);
             startDialogue(this, 0);
+            down1 = image2; //set chicken on wood image
             opened = true;
             gp.keyH.enterPressed = false;
-        } else if (!opened && !checkIfPlayerHasChicken(gp.player.inventory) && missionState == 4) {
+        } else if (!opened && !checkIfPlayerHasChicken(gp.player.inventory) && gp.player.missionState == 4) {
             startDialogue(this, 2);
             gp.keyH.enterPressed = false;
         } else if (!opened && gp.player.missionState < 4) {
