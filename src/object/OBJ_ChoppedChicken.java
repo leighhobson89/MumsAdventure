@@ -1,11 +1,12 @@
 package object;
 
 import entity.Entity;
+import entity.Projectile;
 import main.GamePanel;
 
 import java.awt.*;
 
-public class OBJ_ChoppedChicken extends Entity {
+public class OBJ_ChoppedChicken extends Projectile {
 
     GamePanel gp;
     public static final String OBJ_NAME = "Chopped Chicken";
