@@ -14,6 +14,7 @@ public class OBJ_BackDoor extends Entity {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "BackDoor";

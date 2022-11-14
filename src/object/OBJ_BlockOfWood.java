@@ -16,6 +16,7 @@ public class OBJ_BlockOfWood extends Entity {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = true;
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "Chopping Block";
@@ -25,6 +26,10 @@ public class OBJ_BlockOfWood extends Entity {
         down1 = image;
         direction = "down";
         collision = true;
+        goesTransparentWhenHit = false;
+
+        stressLevel = 0;
+        monsterMaxStress = 5;
 
         solidArea.x = 0;
         solidArea.y = 16;

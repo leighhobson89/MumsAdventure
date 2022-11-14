@@ -14,6 +14,7 @@ public class OBJ_TelephoneHall extends Entity {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         type = type_obstacle;
         collision = true;
         name = OBJ_NAME;

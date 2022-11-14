@@ -11,6 +11,7 @@ public class OBJ_FrontGate extends Entity {
 
         super(gp);
 
+        isUpdateable = false;
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "FrontGate";

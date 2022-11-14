@@ -13,8 +13,8 @@ public class OBJ_BackGateSideways extends Entity {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         type = type_obstacle;
-
         name = OBJ_NAME;
         displayName = "BackGateSideways";
         direction = "down";

@@ -275,6 +275,13 @@ public class GamePanel extends JPanel implements Runnable {
                     iTile[currentMap][i].update();
                 }
             }
+
+            //OBJECT
+            for (int i = 0; i < obj[1].length; i++) {
+                if (obj[currentMap][i] != null && obj[currentMap][i].isUpdateable) {
+                    obj[currentMap][i].update();
+                }
+            }
         }
         eManager.update();
     }

@@ -13,6 +13,7 @@ public class OBJ_Bin_Green extends Entity {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "Bin_Green";

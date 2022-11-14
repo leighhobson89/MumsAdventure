@@ -10,6 +10,7 @@ public class OBJ_Lavendar_Crocs extends Entity {
     public OBJ_Lavendar_Crocs(GamePanel gp) {
         super(gp);
 
+        isUpdateable = false;
         type = type_short_weapon;
         name = OBJ_NAME;
         displayName = "Lavender Crocs";

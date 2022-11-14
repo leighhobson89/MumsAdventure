@@ -10,6 +10,7 @@ public class OBJ_AmandaCoat extends Entity {
     public OBJ_AmandaCoat(GamePanel gp) {
         super(gp);
 
+        isUpdateable = false;
         type = type_armour;
         name = OBJ_NAME;
         displayName = "Blue Coat";

@@ -13,6 +13,7 @@ public class OBJ_LightningBoltStress extends Entity {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         name = OBJ_NAME;
         displayName = "some stress relief!";
         type = type_pickupOnly;

@@ -12,6 +12,7 @@ public class OBJ_FortyQuidForAndrea extends Entity {
 
         super(gp);
 
+        isUpdateable = false;
         this.gp = gp;
         value = 40;
         name = OBJ_NAME;

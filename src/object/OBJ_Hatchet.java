@@ -10,6 +10,7 @@ public class OBJ_Hatchet extends Entity {
     public OBJ_Hatchet(GamePanel gp) {
         super(gp);
 
+        isUpdateable = false;
         type = type_axe;
         name = OBJ_NAME;
         displayName = "an Axe";

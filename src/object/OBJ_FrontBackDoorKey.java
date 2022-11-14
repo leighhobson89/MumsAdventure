@@ -13,6 +13,7 @@ public class OBJ_FrontBackDoorKey extends Entity {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         name = OBJ_NAME;
         displayName = "Key";
         description = "[" + name + "]\nKey For Front And\nBack Door";

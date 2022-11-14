@@ -10,6 +10,7 @@ public class OBJ_RedBoots extends Entity {
     public OBJ_RedBoots(GamePanel gp) {
         super(gp);
 
+        isUpdateable = false;
         name = OBJ_NAME;
         displayName = "Red Boots";
         down1 = setup("/objects/redBoots", gp.tileSize, gp.tileSize);

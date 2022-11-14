@@ -13,6 +13,8 @@ public class OBJ_Coin extends Entity {
         super(gp);
 
         this.gp = gp;
+
+        isUpdateable = false;
         type = type_pickupOnly;
         value = 1;
         name = OBJ_NAME;

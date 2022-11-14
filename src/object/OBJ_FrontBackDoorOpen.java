@@ -11,6 +11,7 @@ public class OBJ_FrontBackDoorOpen extends Entity {
 
         super(gp);
 
+        isUpdateable = false;
         name = OBJ_NAME;
         displayName = "FrontBackDoorOpen";
         down1 = setup("/objects/frontBackDoorOpen", gp.tileSize, gp.tileSize);

@@ -10,6 +10,7 @@ public class OBJ_GrandmasCardigan extends Entity {
     public OBJ_GrandmasCardigan(GamePanel gp) {
         super(gp);
 
+        isUpdateable = false;
         type = type_armour;
         name = OBJ_NAME;
         displayName = "Old Cardigan";

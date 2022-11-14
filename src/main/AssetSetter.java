@@ -62,11 +62,8 @@ public class AssetSetter {
             case "Chicken":
                 gp.obj[mapNum][i] = new OBJ_Chicken(gp);
                 break;
-            case "BlockOfWoodChicken":
-                gp.obj[mapNum][i] = new OBJ_BlockOfWoodChicken(gp);
-                break;
-            case "BlockOfWoodBlood":
-                gp.obj[mapNum][i] = new OBJ_BlockOfWoodBlood(gp);
+            case "Chopped Chicken":
+                gp.obj[mapNum][i] = new OBJ_ChoppedChicken(gp);
                 break;
         }
 

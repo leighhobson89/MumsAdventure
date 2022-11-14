@@ -11,8 +11,9 @@ public class OBJ_Pills extends Entity {
     public OBJ_Pills(GamePanel gp) {
 
         super(gp);
-
         this.gp = gp;
+
+        isUpdateable = false;
         type = type_consumable;
         name = OBJ_NAME;
         displayName = "Tube of Pills";

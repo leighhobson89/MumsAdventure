@@ -13,8 +13,8 @@ public class OBJ_InsideDoor extends Entity {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         type = type_obstacle;
-
         name = OBJ_NAME;
         displayName = "InsideDoor";
         direction = "down";

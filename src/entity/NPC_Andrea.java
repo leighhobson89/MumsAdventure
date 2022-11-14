@@ -18,6 +18,7 @@ public class NPC_Andrea extends Entity {
         speed = 1;
         type = type_npc;
         onPath = true;
+        goesTransparentWhenHit = true;
 
         getImage();
         setDialogue();

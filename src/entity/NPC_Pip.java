@@ -14,6 +14,7 @@ public class NPC_Pip extends Entity {
         direction = "right";
         speed = 2;
         type = type_npc;
+        goesTransparentWhenHit = true;
 
         getImage();
         setDialogue();

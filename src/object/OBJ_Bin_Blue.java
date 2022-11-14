@@ -11,6 +11,7 @@ public class OBJ_Bin_Blue extends Entity {
 
         super(gp);
 
+        isUpdateable = false;
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "Bin_Blue";

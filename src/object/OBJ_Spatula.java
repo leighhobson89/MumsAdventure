@@ -10,6 +10,7 @@ public class OBJ_Spatula extends Entity {
     public OBJ_Spatula(GamePanel gp) {
         super(gp);
 
+        isUpdateable = false;
         type = type_long_weapon;
         name = OBJ_NAME;
         displayName = "a fish slice";

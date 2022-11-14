@@ -12,6 +12,7 @@ public class OBJ_SqueakyToy_UI extends Entity {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         name = OBJ_NAME;
         displayName = "Squeaky Toy UI";
 

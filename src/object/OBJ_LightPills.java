@@ -15,6 +15,8 @@ public class OBJ_LightPills extends Entity {
         super(gp);
 
         this.gp = gp;
+
+        isUpdateable = false;
         type = type_light;
         name = OBJ_NAME;
         displayName = "Anti Brightness Pills";

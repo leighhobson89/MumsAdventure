@@ -16,6 +16,7 @@ public class OBJ_PipsToy_Magic extends Projectile {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         name = OBJ_NAME;
         displayName = "Pip's Toy";
         speed = 5;

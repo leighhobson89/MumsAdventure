@@ -34,6 +34,13 @@ public class Projectile extends Entity {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             boolean tileState = gp.cChecker.checkTile(this);
+            int objIndex = gp.cChecker.checkEntity(this, gp.obj);
+
+            if (objIndex != 999) {
+                gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);
+                gp.playSFX(20);
+                alive = false;
+            }
 
             if (monsterIndex != 999) {
                 gp.aSetter.setObjectAfterStart("Pip's Bone", gp.currentMap, projX, projY);

@@ -15,6 +15,7 @@ public class MON_WaspSwarm extends Entity {
 
         this.gp = gp;
 
+        goesTransparentWhenHit = true;
         type = type_monster;
         name = "WaspSwarm";
         defaultSpeed = 2;

@@ -11,6 +11,7 @@ public class OBJ_Chicken extends Entity {
 
         super(gp);
 
+        isUpdateable = false;
         name = OBJ_NAME;
         displayName = "some Raw Chicken";
         down1 = setup("/objects/chicken", gp.tileSize, gp.tileSize);

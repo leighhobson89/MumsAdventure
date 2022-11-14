@@ -11,8 +11,9 @@ public class OBJ_SuperCoin extends Entity {
     public OBJ_SuperCoin(GamePanel gp) {
 
         super(gp);
-
         this.gp = gp;
+
+        isUpdateable = false;
         type = type_pickupOnly;
         value = 100;
         name = OBJ_NAME;

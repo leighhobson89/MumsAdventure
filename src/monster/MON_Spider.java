@@ -15,6 +15,7 @@ public class MON_Spider extends Entity {
 
         this.gp = gp;
 
+        goesTransparentWhenHit = true;
         type = type_monster;
         name = "Spider";
         defaultSpeed = 3;

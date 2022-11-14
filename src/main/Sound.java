@@ -47,6 +47,7 @@ public class Sound {
         soundURL[28] = getClass().getResource("/sound/phoneRinging.wav");
         soundURL[29] = getClass().getResource("/sound/fastPhoneChatter.wav");
         soundURL[30] = getClass().getResource("/sound/hatchet.wav");
+        soundURL[31] = getClass().getResource("/sound/squelch.wav");
     }
 
     public void setFile(int i) {

@@ -11,8 +11,9 @@ public class OBJ_Shovel extends Entity {
     public OBJ_Shovel(GamePanel gp) {
 
         super(gp);
-
         this.gp = gp;
+
+        isUpdateable = false;
         type = type_gardeningShovel;
         name = OBJ_NAME;
         displayName = "Garden Shovel";

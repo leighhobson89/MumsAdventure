@@ -11,6 +11,7 @@ public class OBJ_Guitar1 extends Entity {
 
         super(gp);
 
+        isUpdateable = false;
         name = OBJ_NAME;
         displayName = "Acoustic Guitar";
         down1 = setup("/objects/guitar1", gp.tileSize, gp.tileSize);

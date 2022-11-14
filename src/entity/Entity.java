@@ -60,6 +60,8 @@ public class Entity {
     public boolean firstTimeChattingToAndrea = true;
     public int andreaTempGoalCol;
     public int andreaTempGoalRow;
+    public boolean goesTransparentWhenHit;
+    public boolean isUpdateable;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -351,114 +353,115 @@ public class Entity {
 
     public void update() {
 
-        if (knockBack) {
-            checkCollision();
+        if (!isUpdateable) {
+            if (knockBack) {
+                checkCollision();
 
-            if(collisionOn) {
-                knockBackCounter = 0;
-                knockBack = false;
-                speed = defaultSpeed;
+                if (collisionOn) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                } else {
+                    switch (knockBackDirection) {
+                        case "up" -> worldY -= speed;
+                        case "down" -> worldY += speed;
+                        case "left" -> worldX -= speed;
+                        case "right" -> worldX += speed;
+                    }
+                }
+
+                knockBackCounter++;
+                if (knockBackCounter == 10) {
+                    knockBackCounter = 0;
+                    knockBack = false;
+                    speed = defaultSpeed;
+                }
+            } else if (attacking) {
+                attacking();
             } else {
-                switch (knockBackDirection) {
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
+                setAction(andreaTempGoalCol, andreaTempGoalRow);
+                checkCollision();
+
+                //IF COLLISION IS FALSE, ENTITY CAN MOVE
+                if (!collisionOn) {
+                    switch (direction) {
+                        case "up" -> worldY -= speed;
+                        case "down" -> worldY += speed;
+                        case "left" -> worldX -= speed;
+                        case "right" -> worldX += speed;
+                    }
+                }
+                spriteCounter++;
+                if (spriteCounter > 24) { //walking speed of animation
+                    if (spriteNum == 1) {
+                        spriteNum = 2;
+                    } else if (spriteNum == 2) {
+                        spriteNum = 1;
+                    }
+                    spriteCounter = 0;
                 }
             }
 
-            knockBackCounter++;
-            if (knockBackCounter == 10) {
-                knockBackCounter = 0;
-                knockBack = false;
-                speed = defaultSpeed;
+            if (shotAvailableCounter < 30) { //bug fix for close encounter projectile duplication
+                shotAvailableCounter++;
             }
-        } else if (attacking) {
-            attacking();
-        } else {
-            setAction(andreaTempGoalCol, andreaTempGoalRow);
-            checkCollision();
 
-            //IF COLLISION IS FALSE, ENTITY CAN MOVE
-            if (!collisionOn) {
-                switch (direction) {
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
+            if (offBalance) {
+                offBalanceCounter++;
+                if (offBalanceCounter > 60) {
+                    offBalance = false;
+                    offBalanceCounter = 0;
                 }
-            }
-            spriteCounter++;
-            if (spriteCounter > 24) { //walking speed of animation
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
             }
         }
-
         if (invincible) {
             invincibleCounter++;
-            if(invincibleCounter > 40) {
+            if (invincibleCounter > 40) {
                 invincible = false;
                 invincibleCounter = 0;
             }
         }
-
-        if(shotAvailableCounter < 30) { //bug fix for close encounter projectile duplication
-            shotAvailableCounter++;
-        }
-
-        if (offBalance) {
-            offBalanceCounter++;
-            if (offBalanceCounter > 60) {
-                offBalance = false;
-                offBalanceCounter = 0;
-            }
-        }
     }
 
-    public void checkAttackOrNot(int rate, int straight, int horizontal) { //for monsters that attack with weapon
-        boolean targetInRange = false;
-        int xDis = getXdistance(gp.player);
-        int yDis = getYdistance(gp.player);
+        public void checkAttackOrNot(int rate, int straight, int horizontal) { //for monsters that attack with weapon
+            boolean targetInRange = false;
+            int xDis = getXdistance(gp.player);
+            int yDis = getYdistance(gp.player);
 
-        switch (direction) {
-            case "up":
-                if (gp.player.worldY < worldY && yDis < straight && xDis < horizontal) {
-                    targetInRange = true;
-                }
-                break;
-            case "down":
-                if (gp.player.worldY > worldY && yDis < straight && xDis < horizontal) {
-                    targetInRange = true;
-                }
-                break;
-            case "left":
-                if (gp.player.worldX < worldX && xDis < straight && yDis < horizontal) {
-                    targetInRange = true;
-                }
-                break;
-            case "right":
-                if (gp.player.worldX > worldX && xDis < straight && yDis < horizontal) {
-                    targetInRange = true;
-                }
-                break;
-        }
+            switch (direction) {
+                case "up":
+                    if (gp.player.worldY < worldY && yDis < straight && xDis < horizontal) {
+                        targetInRange = true;
+                    }
+                    break;
+                case "down":
+                    if (gp.player.worldY > worldY && yDis < straight && xDis < horizontal) {
+                        targetInRange = true;
+                    }
+                    break;
+                case "left":
+                    if (gp.player.worldX < worldX && xDis < straight && yDis < horizontal) {
+                        targetInRange = true;
+                    }
+                    break;
+                case "right":
+                    if (gp.player.worldX > worldX && xDis < straight && yDis < horizontal) {
+                        targetInRange = true;
+                    }
+                    break;
+            }
 
-        if (targetInRange) {
-            // Check if it initiates an attack
-            int i = new Random().nextInt(rate);
-            if (i == 0) {
-                attacking = true;
-                spriteNum = 1;
-                spriteCounter = 0;
-                shotAvailableCounter = 0;
+            if (targetInRange) {
+                // Check if it initiates an attack
+                int i = new Random().nextInt(rate);
+                if (i == 0) {
+                    attacking = true;
+                    spriteNum = 1;
+                    spriteCounter = 0;
+                    shotAvailableCounter = 0;
+                }
             }
         }
-    }
 
     public void checkShootOrNot(int rate, int shotInterval) {
                     int i = new Random().nextInt(rate) + 1;
@@ -568,8 +571,10 @@ public class Entity {
                 // Check monster collision with the updated worldX, worldY and solidArea
                 int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
                 int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+                int objIndex = gp.cChecker.checkEntity(this, gp.obj);
                 gp.player.damageMonster(monsterIndex, this, attack, currentWeapon.knockBackPower);
                 gp.player.hitNPC(npcIndex);
+                gp.player.damageObject(objIndex);
 
                 //INTERACTIVE TILE COLLISION CHECKER
                 int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
@@ -732,7 +737,9 @@ public class Entity {
                     if (invincible) {
                         hpBarOn = true;
                         hpBarCounter = 0;
-                        changeAlpha(g2, 0.4F);
+                        if (this.goesTransparentWhenHit) {
+                            changeAlpha(g2, 0.4F);
+                        }
                     }
                     if (dying) {
                         image = dyingImage;

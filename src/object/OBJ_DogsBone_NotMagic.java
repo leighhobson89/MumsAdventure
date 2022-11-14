@@ -16,6 +16,7 @@ public class OBJ_DogsBone_NotMagic extends Projectile {
         super(gp);
         this.gp = gp;
 
+        isUpdateable = false;
         name = OBJ_NAME;
         displayName = "Pip's Bone";
         description = "[" + name + "]\nThrow it for him!";
