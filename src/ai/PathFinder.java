@@ -80,7 +80,7 @@ public class PathFinder {
             //SET SOLID NODE
             //CHECK TILES
             int tileNum = gp.tileM.mapTileNum[gp.currentMap][col][row];
-            if (gp.tileM.tile[tileNum].collision == true) {
+            if (gp.tileM.tile[tileNum].collision) {
                 node[col][row].solid = true;
             }
             //CHECK INTERACTIVE TILES
@@ -118,7 +118,7 @@ public class PathFinder {
 
     public boolean search() {
 
-        while(goalReached == false && step < 500) {
+        while(!goalReached && step < 500) {
             int col = currentNode.col;
             int row = currentNode.row;
 

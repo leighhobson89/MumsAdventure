@@ -936,9 +936,21 @@ public class Entity {
     public void AndreaLeaveSetup(Entity npc) {
         npc.speed = 1;
         npc.solidArea = new Rectangle(8, 16,32,32);
-        if (npc.name == "Andrea") {
+        if (Objects.equals(npc.name, "Andrea")) {
             npc.onPath = true;
         }
         npc.setAction(gp.player.andreaTempGoalCol, gp.player.andreaTempGoalRow);
+    }
+
+    public int checkIfObjectOnMap(String object) {
+        int count = 0;
+        for (int i = 0; i < gp.obj.length; i++) {
+            if (gp.obj[gp.currentMap][i] != null) {
+                if (Objects.equals(gp.obj[gp.currentMap][i].name, object)) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }

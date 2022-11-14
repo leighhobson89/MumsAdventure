@@ -1,5 +1,7 @@
 package data;
 
+import entity.Entity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ public class DataStorage implements Serializable {
     boolean firstTimeChattingToAndrea;
     int choppedChickenCount;
     int thrownChickenCount = 0;
+    Entity currentProjectile;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();

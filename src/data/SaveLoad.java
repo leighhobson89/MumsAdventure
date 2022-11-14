@@ -94,6 +94,7 @@ public class SaveLoad {
             ds.missionToSet = gp.player.missionToSet;
             ds.setShovelFlag = gp.player.setShovelFlag;
             ds.repeatSfx = gp.player.repeatSfx;
+            ds.currentProjectile = gp.player.currentProjectile;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -249,6 +250,7 @@ public class SaveLoad {
             gp.player.repeatSfx = ds.repeatSfx;
             gp.player.choppedChickenCount = ds.choppedChickenCount;
             gp.player.thrownChickenCount = ds.thrownChickenCount;
+            gp.player.currentProjectile = ds.currentProjectile;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
