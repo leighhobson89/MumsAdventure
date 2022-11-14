@@ -10,6 +10,7 @@ import tile_interactive.IT_WeedTile;
 import tile_interactive.InteractiveTile;
 
 import java.io.*;
+import java.util.Objects;
 
 public class SaveLoad {
     GamePanel gp;
@@ -113,6 +114,15 @@ public class SaveLoad {
                 ds.currentArmourSlot = gp.player.getCurrentArmourSlot();
                 ds.savedWithAnArmourEquipped = true;
             }
+            if (gp.player.currentProjectile != null) {
+                ds.currentProjectileSlot = gp.player.getCurrentProjectileSlot();
+                if (Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken")) {
+                    ds.savedWithChoppedChickenEquipped = true;
+                } else if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone")) {
+                    ds.savedWithBoneEquipped = true;
+                }
+            }
+
 
             //OBJECTS ON MAP
             ds.mapObjectNames = new String[gp.maxMap][gp.obj[1].length];
@@ -268,6 +278,9 @@ public class SaveLoad {
             }
             if (gp.player.savedWithAnArmourEquipped) {
                 gp.player.currentArmour = gp.player.inventory.get(ds.currentArmourSlot);
+            }
+            if (gp.player.savedWithAProjectileEquipped) {
+                gp.player.currentProjectile = gp.player.inventory.get(ds.currentProjectileSlot);
             }
             gp.player.getAttack();
             gp.player.getDefense();

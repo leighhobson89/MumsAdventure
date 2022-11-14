@@ -25,6 +25,7 @@ public class OBJ_ChoppedChicken extends Projectile {
         price = 0;
         stackable = true;
         isSaleable = false;
+        isProjectile = true;
 
         speed = 6;
         maxStress = 80;

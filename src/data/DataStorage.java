@@ -51,6 +51,7 @@ public class DataStorage implements Serializable {
     ArrayList<Integer> itemAmounts = new ArrayList<>();
     int currentWeaponSlot;
     int currentArmourSlot;
+    int currentProjectileSlot;
 
     //OBJECT ON MAP
     String[][] mapObjectNames;

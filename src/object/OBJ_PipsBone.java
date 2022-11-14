@@ -27,6 +27,7 @@ public class OBJ_PipsBone extends Projectile {
         knockBackPower = 4;
         useCost = 1; //spend mana to use spell
         alive = false;
+        isProjectile = true;
         getImage();
 
         solidArea = new Rectangle(9, 10,25,29);

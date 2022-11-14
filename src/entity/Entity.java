@@ -43,6 +43,7 @@ public class Entity {
     public int boneIndex;
     public int chickenIndex;
     public int thrownChickenCount = 0;
+    public String itemToThrow = "";
     public boolean onPath = false;
     public boolean knockBack = false;
     public String knockBackDirection;
@@ -87,6 +88,7 @@ public class Entity {
     public int pillsSpeed;
     public boolean isWeapon;
     public boolean isArmour;
+    public boolean isProjectile;
     public boolean pillsConsumableNow;
     public int maxStress;
     public int stressLevel;
@@ -107,6 +109,7 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentArmour;
     public Entity currentLight;
+    public Entity currentProjectile;
     public Projectile projectile;
     public int weedCount;
     public boolean setShovelFlag;
@@ -117,6 +120,7 @@ public class Entity {
     public int doorUnlockedCount;
     public boolean savedWithAWeaponEquipped;
     public boolean savedWithAnArmourEquipped;
+    public boolean savedWithAProjectileEquipped;
     public boolean haveBoneResource;
     public boolean haveChoppedChickenResource;
 

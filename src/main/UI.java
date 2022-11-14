@@ -485,6 +485,7 @@ public class UI {
         g2.drawString("Coin", textX, textY); textY += lineHeight + 10;
         g2.drawString("Weapon", textX, textY); textY += lineHeight + 15;
         g2.drawString("Armour", textX, textY);
+        g2.drawString("Projectile", textX, textY);
 
         //VALUES
         int tailX = (frameX + frameWidth) - 30;
@@ -548,6 +549,9 @@ public class UI {
         if (gp.player.currentArmour != null) {
             g2.drawImage(gp.player.currentArmour.down1, tailX - gp.tileSize, textY-22, null);
         }
+        if (gp.player.currentProjectile != null) {
+            g2.drawImage(gp.player.currentProjectile.down1, tailX - gp.tileSize, textY-22, null);
+        }
     }
 
     public void drawInventory(Entity entity, boolean cursor) {
@@ -588,7 +592,7 @@ public class UI {
         for (int i = 0; i < entity.inventory.size(); i++) {
 
             //EQUIP CURSOR
-            if (entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentArmour || (entity.inventory.get(i) == entity.currentLight && !Objects.equals(entity.inventory.get(i).name, "Anti Brightness Pills"))) {
+            if (entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentArmour || entity.inventory.get(i) == entity.currentProjectile || (entity.inventory.get(i) == entity.currentLight && !Objects.equals(entity.inventory.get(i).name, "Anti Brightness Pills"))) {
                 g2.setColor(new Color(240, 190, 90));
                 g2. fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
 
@@ -1084,7 +1088,7 @@ public class UI {
             //SELL AN ITEM
             if (gp.keyH.enterPressed) {
                 if (Objects.equals(npc.name, "Merchant") && (gp.player.inventory.get(itemIndex) == gp.player.currentWeapon ||
-                        gp.player.inventory.get(itemIndex) == gp.player.currentArmour || gp.player.inventory.get(itemIndex) == gp.player.currentLight)) {
+                        gp.player.inventory.get(itemIndex) == gp.player.currentArmour || gp.player.inventory.get(itemIndex) == gp.player.currentProjectile || gp.player.inventory.get(itemIndex) == gp.player.currentLight)) {
                     commandNum = 0;
                     subState = 0;
                     npc.startDialogue(npc, 5);

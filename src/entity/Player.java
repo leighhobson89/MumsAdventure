@@ -4,6 +4,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import main.MissionStates;
 import main.UtilityTool;
+import object.OBJ_ChoppedChicken;
 import object.OBJ_ChoppedChickenPhoebe;
 import object.OBJ_ChoppedChickenPip;
 import object.OBJ_PipsBone;
@@ -143,7 +144,7 @@ public class Player extends Entity {
         currentArmour = null;
         currentLight = null;
 //        projectile = new OBJ_PipsToy_Magic(gp);
-        projectile = new OBJ_PipsBone(gp); //activate this for projectile that doesn't affect toys in ui when wanting to add bone that can be picked up after throwing or something : Change sound too if needed
+         // projectile = new OBJ_PipsBone(gp); activate this for projectile that doesn't affect toys in ui when wanting to add bone that can be picked up after throwing or something : Change sound too if needed
         attack = 0;
         defense = 0;
 
@@ -205,6 +206,16 @@ public class Player extends Entity {
             }
         }
         return currentArmourSlot;
+    }
+
+    public int getCurrentProjectileSlot() {
+        int currentProjectileSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentProjectile) {
+                currentProjectileSlot = i;
+            }
+        }
+        return currentProjectileSlot;
     }
 
     public int getDefense() {
@@ -396,33 +407,38 @@ public class Player extends Entity {
             guardCounter = 0;
         }
 
-        if (gp.keyH.throwKeyPressed && !projectile.alive && shotAvailableCounter == 30 && projectile.haveResource(this)) {
-            //SET DEFAULT COORDINATES, DIRECTION AND USER
-            projectile.set(worldX, worldY, direction, true, this);
+        if (projectile != null) {
+            if (gp.keyH.throwKeyPressed && !projectile.alive && shotAvailableCounter == 30) { // && projectile.haveResource(this)
+                //SET DEFAULT COORDINATES, DIRECTION AND USER
+                projectile.set(worldX, worldY, direction, true, this);
 
-            //SUBTRACT THE COST FROM RESOURCES (TOYS ETC)
-            projectile.subtractResource(this);
-            if (Objects.equals(projectile.name, "Pip's Bone")) {
-                gp.player.inventory.remove(boneIndex);
-            } else if (Objects.equals(projectile.name, "Chopped Chicken")) {
-                if (gp.player.inventory.get(chickenIndex).amount < 2) {
-                    gp.player.inventory.remove(chickenIndex);
-                } else {
-                    gp.player.inventory.get(chickenIndex).amount--;
+                //SUBTRACT THE COST FROM RESOURCES (TOYS ETC)
+                projectile.subtractResource(this);
+                if (Objects.equals(projectile.name, "Pip's Bone")) {
+                    gp.player.inventory.remove(boneIndex);
+                } else if (Objects.equals(projectile.name, "Chopped Chicken")) {
+                    if (gp.player.inventory.get(chickenIndex).amount < 2) {
+                        gp.player.inventory.remove(chickenIndex);
+                    } else {
+                        gp.player.inventory.get(chickenIndex).amount--;
+                    }
                 }
-            }
+                gp.player.currentProjectile = null;
 
 
-            //CHECK VACANCY
-            for (int i= 0; i < gp.projectile[1].length; i++) {
-                if (gp.projectile[gp.currentMap][i] == null) {
-                    gp.projectile[gp.currentMap][i] = projectile;
-                    break;
+                //CHECK VACANCY
+                for (int i= 0; i < gp.projectile[1].length; i++) {
+                    if (gp.projectile[gp.currentMap][i] == null) {
+                        gp.projectile[gp.currentMap][i] = projectile;
+                        break;
+                    }
                 }
-            }
+                projectile = null;
 
-            shotAvailableCounter = 0;
+                shotAvailableCounter = 0;
+            }
         }
+
         //This needs to be outside of main throw if statement!
         if (invincible) {
             invincibleCounter++;
@@ -475,7 +491,10 @@ public class Player extends Entity {
                         currentWeapon = null;
                     } else if (gp.obj[gp.currentMap][i].isArmour && gp.obj[gp.currentMap][i] == currentArmour) {
                         currentArmour = null;
-                    } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "Pip's Bone")) {
+                    } else if (gp.obj[gp.currentMap][i].isProjectile && gp.obj[gp.currentMap][i] == currentProjectile) {
+                        currentProjectile = null;
+                    }
+                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "Pip's Bone")) {
                         if (firstTimePickUpBone) {
                             gp.gameState = gp.dialogueState;
                             this.startDialogue(this, 0);
@@ -483,7 +502,7 @@ public class Player extends Entity {
                         }
                         boneCount = 1;
                         gp.player.boneIndex = gp.player.inventory.size()-1;
-                    } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "Chopped Chicken")) {
+                    } if (Objects.equals(gp.obj[gp.currentMap][i].name, "Chopped Chicken")) {
                         choppedChickenCount++;
                         gp.player.chickenIndex = gp.player.inventory.size()-1;
                     }
@@ -764,6 +783,18 @@ public class Player extends Entity {
             } else if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel)) {
                 currentWeapon = null;
                 attack = getAttack();
+                gp.playSFX(11);
+            } else if (selectedItem.isProjectile && selectedItem != currentProjectile) {
+                currentProjectile = selectedItem;
+                if (Objects.equals(selectedItem.name, "Pip's Bone")) {
+                    projectile = new OBJ_PipsBone(gp);
+                } else if (Objects.equals(selectedItem.name, "Chopped Chicken")) {
+                    projectile = new OBJ_ChoppedChicken(gp);
+                }
+                gp.playSFX(11);
+            } else if (selectedItem.isProjectile) {
+                currentProjectile = null;
+                projectile = null;
                 gp.playSFX(11);
             }
             if (selectedItem.type == type_armour && selectedItem != currentArmour) {
