@@ -944,7 +944,7 @@ public class Entity {
 
     public int checkIfObjectOnMap(String object) {
         int count = 0;
-        for (int i = 0; i < gp.obj.length; i++) {
+        for (int i = 0; i < gp.obj[1].length; i++) {
             if (gp.obj[gp.currentMap][i] != null) {
                 if (Objects.equals(gp.obj[gp.currentMap][i].name, object)) {
                     count++;

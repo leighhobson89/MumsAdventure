@@ -414,12 +414,20 @@ public class Player extends Entity {
 
                 //SUBTRACT THE COST FROM RESOURCES (TOYS ETC)
                 projectile.subtractResource(this);
-                if (Objects.equals(projectile.name, "Pip's Bone")) {
+                if (Objects.equals(projectile.name, "Pip's Bone") && gp.player.chickenIndex > gp.player.boneIndex) {
+                    gp.player.inventory.remove(boneIndex);
+                    chickenIndex--;
+                    itemToThrow = "Pip's Bone";
+                } else if (Objects.equals(projectile.name, "Pip's Bone")) {
                     gp.player.inventory.remove(boneIndex);
                     itemToThrow = "Pip's Bone";
-                } else if (Objects.equals(projectile.name, "Chopped Chicken")) {
+                }
+                else if (Objects.equals(projectile.name, "Chopped Chicken")) {
                     thrownChickenCount++;
-                    if (gp.player.inventory.get(chickenIndex).amount < 2) {
+                    if (gp.player.inventory.get(chickenIndex).amount < 2 && gp.player.boneIndex > gp.player.chickenIndex) {
+                        boneIndex--;
+                        gp.player.inventory.remove(chickenIndex);
+                    } else if (gp.player.inventory.get(chickenIndex).amount < 2) {
                         gp.player.inventory.remove(chickenIndex);
                     } else {
                         gp.player.inventory.get(chickenIndex).amount--;

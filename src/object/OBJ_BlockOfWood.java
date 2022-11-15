@@ -25,7 +25,7 @@ public class OBJ_BlockOfWood extends Entity {
         image3 = setup("/objects/blockOfWoodBlood", gp.tileSize, gp.tileSize);
         down1 = image;
         direction = "down";
-        collision = true;
+        collision = false;
         goesTransparentWhenHit = false;
 
         stressLevel = 0;

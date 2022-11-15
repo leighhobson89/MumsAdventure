@@ -7,7 +7,8 @@ import java.util.Objects;
 
 public class NPC_Pip extends Entity {
 
-    public final int TILE_DISTANCE_TO_BE_ON_PATH = 20;
+    public final int TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE = 20;
+    public final int TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN = 40;
     public NPC_Pip(GamePanel gp) {
         super(gp);
 
@@ -57,41 +58,64 @@ public class NPC_Pip extends Entity {
         int tileDistance = (xDistance + yDistance)/gp.tileSize;
 
         if (gp.player.currentProjectile != null) {
-            if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0) {
+            if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0) {
                 //follow player
                 onPath = true;
                 speed = 4;
-            } else if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0) {
+            } else if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && tileDistance > TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE) {
                 speed = 2;
                 onPath = false;
-            } else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
-                //follow bone
-                xDistance = Math.abs(worldX - gp.aSetter.boneX);
-                yDistance = Math.abs(worldY - gp.aSetter.boneY);
-                tileDistance = (xDistance + yDistance)/gp.tileSize;
-                if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH && tileDistance >= 1) {
-                    onPath = true;
-                    speed = 5;
-                } else if (tileDistance < 1) {
-                    speed = 0;
-                }
-                else {
-                    speed = 2;
-                    onPath = false;
-                }
-            } else if ((Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") || gp.player.boneCount > 0 || gp.player.checkIfObjectOnMap("Pip's Bone") > 0) && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") > 0) {
+            } else if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN) && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
+                onPath = true;
+                speed = 5;
+            } else if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN)) {
                 onPath = true;
                 speed = 5;
             }
         }
+        else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0 && gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
+            onPath = true;
+            speed = 5;
+        }
+        else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
+            //follow bone
+            xDistance = Math.abs(worldX - gp.aSetter.boneX);
+            yDistance = Math.abs(worldY - gp.aSetter.boneY);
+            tileDistance = (xDistance + yDistance)/gp.tileSize;
+            if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE && tileDistance >= 1) {
+                onPath = true;
+                speed = 5;
+            } else if (tileDistance < 1) {
+                speed = 0;
+            }
+            else {
+                speed = 2;
+                onPath = false;
+            }
+        } else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") > 0) {
+            //follow chicken
+            xDistance = Math.abs(worldX - gp.aSetter.choppedChickenPipX);
+            yDistance = Math.abs(worldY - gp.aSetter.choppedChickenPipY);
+            tileDistance = (xDistance + yDistance)/gp.tileSize;
+            if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN && tileDistance >= 1) {
+                onPath = true;
+                speed = 5;
+            } else if (tileDistance < 1) {
+                speed = 0;
+            }
+            else {
+                speed = 2;
+                onPath = false;
+            }
+        }
     }
 
-    public void setAction(int goalCol, int goalRow) {
+    public void setAction(int goalCol, int goalRow) { //correct
 
         if (gp.player.currentProjectile != null) {
             goalCol = 0;
             goalRow = 0;
-            if(onPath && Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0) {
+            if(onPath && (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") || Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken")) && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0) { //correct
                 if (Objects.equals(gp.player.direction, "up")) { //dog chase player but stay one square behind
                     goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
                     goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 1;
@@ -106,11 +130,11 @@ public class NPC_Pip extends Entity {
                     goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
                 }
                 searchPath(goalCol, goalRow);
-            } else if (onPath && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") > 0) {
-                goalCol = gp.aSetter.choppedChickenPipX/gp.tileSize;
-                goalRow = gp.aSetter.choppedChickenPipY/gp.tileSize;
-                searchPath(goalCol, goalRow);
             }
+        } else if (onPath && (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") > 0) || (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") > 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0)) {
+            goalCol = gp.aSetter.choppedChickenPipX/gp.tileSize;
+            goalRow = gp.aSetter.choppedChickenPipY/gp.tileSize;
+            searchPath(goalCol, goalRow);
         } else if (onPath && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
             goalCol = (gp.aSetter.boneX)/gp.tileSize;
             goalRow = (gp.aSetter.boneY)/gp.tileSize;

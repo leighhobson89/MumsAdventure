@@ -3,9 +3,13 @@ package entity;
 import main.GamePanel;
 
 import java.awt.*;
+import java.util.Objects;
 import java.util.Random;
 
 public class NPC_Phoebe extends Entity {
+
+    public final int TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN = 40;
+
     public NPC_Phoebe(GamePanel gp) {
         super(gp);
 
@@ -14,9 +18,6 @@ public class NPC_Phoebe extends Entity {
         speed = 2;
         type = type_npc;
         goesTransparentWhenHit = true;
-//        //comment for not throw bone
-//        projectile = new OBJ_PipsBone(gp);
-//        //end bone throwing
 
         getImage();
         setDialogue();
@@ -50,21 +51,73 @@ public class NPC_Phoebe extends Entity {
         dialogueText[7][0] = "Yelp!";
     }
 
-    public void setAction(int goalCol, int goalRow) {
-        if (checkEdgeOfMap(this)) {
-            turnEntityAround(this);
-        } else {
-            getRandomDirection();
-        }
+    public void update() {
+        super.update();
 
-//        //comment for not throw bone
-//        int i = new Random().nextInt(1000) + 1; //odds of throwing a bone
-//        if (i > 999 && !projectile.alive && shotAvailableCounter == 30) {
-//            projectile.set(worldX, worldY, direction, true, this);
-//            gp.projectileList.add(projectile);
-//            shotAvailableCounter = 0;
-//        // end bone code
-//        }
+        int xDistance = Math.abs(worldX - gp.player.worldX);
+        int yDistance = Math.abs(worldY - gp.player.worldY);
+        int tileDistance = (xDistance + yDistance)/gp.tileSize;
+
+        if (gp.player.currentProjectile != null) {
+            if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN)) {
+                onPath = true;
+                speed = 3;
+            }
+        }
+        else if (gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
+            //follow chicken
+            xDistance = Math.abs(worldX - gp.aSetter.choppedChickenPhoebeX);
+            yDistance = Math.abs(worldY - gp.aSetter.choppedChickenPhoebeY);
+            tileDistance = (xDistance + yDistance)/gp.tileSize;
+            if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN && tileDistance >= 1) {
+                onPath = true;
+                speed = 3;
+            } else if (tileDistance < 1) {
+                speed = 0;
+            }
+            else {
+                speed = 2;
+                onPath = false;
+            }
+        }
+    }
+
+    public void setAction(int goalCol, int goalRow) { //correct
+
+        if (gp.player.currentProjectile != null) {
+            goalCol = 0;
+            goalRow = 0;
+            if(onPath && Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") == 0) { //correct
+                if (Objects.equals(gp.player.direction, "up")) { //dog chase player but stay one square behind
+                    goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+                    goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 1;
+                } else if (Objects.equals(gp.player.direction, "down")) {
+                    goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+                    goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) - 1;
+                } else if (Objects.equals(gp.player.direction, "right")) {
+                    goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) - 1;
+                    goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+                } else if (Objects.equals(gp.player.direction, "left")) {
+                    goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 1;
+                    goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+                }
+                searchPath(goalCol, goalRow);
+            } else if (onPath && Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
+                goalCol = gp.aSetter.choppedChickenPhoebeX/gp.tileSize;
+                goalRow = gp.aSetter.choppedChickenPhoebeY/gp.tileSize;
+                searchPath(goalCol, goalRow);
+            }
+        } else if (onPath && (gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0)) {
+            goalCol = gp.aSetter.choppedChickenPhoebeX/gp.tileSize;
+            goalRow = gp.aSetter.choppedChickenPhoebeY/gp.tileSize;
+            searchPath(goalCol, goalRow);
+        } else {
+            if (checkEdgeOfMap(this)) {
+                turnEntityAround(this);
+            } else {
+                getRandomDirection();
+            }
+        }
     }
 
     public void speak() {
