@@ -2,6 +2,7 @@ package object;
 
 import entity.Entity;
 import main.GamePanel;
+import main.MissionStates;
 
 public class OBJ_Fridge extends Entity {
 
@@ -39,12 +40,12 @@ public class OBJ_Fridge extends Entity {
     }
 
     public void interact() {
-        if (!opened && gp.player.missionState == 4) {
+        if (!opened && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
             gp.playSFX(4); //change to fridge sound
             startDialogue(this, 0);
             opened = true;
             gp.eHandler.fridgeOpen();
-        } else if (!opened && gp.player.missionState < 4) {
+        } else if (!opened && gp.player.missionState < MissionStates.CHOP_CHICKEN_FOR_DOGS) {
             startDialogue(this, 2);
         } else {
             startDialogue(this, 1);

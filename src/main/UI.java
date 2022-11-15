@@ -418,7 +418,7 @@ public class UI {
                 char[] characters = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 
                 if (charIndex < characters.length) {
-                    if (Objects.equals(npc.name, "TelephoneHall") && gp.player.repeatSfx && gp.player.missionState > 1) {
+                    if (Objects.equals(npc.name, "TelephoneHall") && gp.player.repeatSfx && gp.player.missionState > MissionStates.WEEDING_MISSION) {
                         gp.playSFX(29);
                         gp.player.repeatSfx = false;
                     } else if (gp.player.repeatSfx) {

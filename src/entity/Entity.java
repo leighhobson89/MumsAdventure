@@ -370,7 +370,7 @@ public class Entity {
 
     public void update() {
 
-        if (gp.player.missionState == 4 && gp.player.missionSubstate >= 2) {
+        if (gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.player.missionSubstate >= MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT) {
             gp.misStat.endMissionTasks(MissionStates.CHOP_CHICKEN_FOR_DOGS);
             gp.ui.addMessage("That's the dogs fed, nice one!");
             gp.player.phoebeEatingChickenCounter = 0;

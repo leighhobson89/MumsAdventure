@@ -92,7 +92,14 @@ public class CollisionChecker {
                     case "right": entity.solidArea.x += entity.speed; break;
                 }
 
-                if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) { //if entity touches object...
+                if (gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && !Objects.equals(gp.obj[gp.currentMap][i].name, "BackGateSideways") && !Objects.equals(gp.obj[gp.currentMap][i].name, "BackGate") && !Objects.equals(gp.obj[gp.currentMap][i].name, "Fridge")) { //if entity touches object...
+                    if (gp.obj[gp.currentMap][i].collision) {
+                        entity.collisionOn = true;
+                    }
+                    if (player) {
+                        index = i;
+                    }
+                } else if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && gp.player.missionState != MissionStates.CHOP_CHICKEN_FOR_DOGS) {
                     if (gp.obj[gp.currentMap][i].collision) {
                         entity.collisionOn = true;
                     }

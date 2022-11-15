@@ -2,6 +2,7 @@ package object;
 
 import entity.Entity;
 import main.GamePanel;
+import main.MissionStates;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -58,18 +59,21 @@ public class OBJ_BlockOfWood extends Entity {
     }
 
     public void interact() {
-        if (!opened && gp.player.missionState == 4 && checkIfPlayerHasChicken(gp.player.inventory)) {
+        if (!opened && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && checkIfPlayerHasChicken(gp.player.inventory)) {
             gp.playSFX(4); //change to chicken slapping sound
             gp.eHandler.removeChickenFromPlayerInventory(gp.player.inventory);
             startDialogue(this, 0);
             down1 = image2; //set chicken on wood image
             opened = true;
             gp.keyH.enterPressed = false;
-        } else if (!opened && !checkIfPlayerHasChicken(gp.player.inventory) && gp.player.missionState == 4) {
+        } else if (!opened && !checkIfPlayerHasChicken(gp.player.inventory) && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
             startDialogue(this, 2);
             gp.keyH.enterPressed = false;
-        } else if (!opened && gp.player.missionState < 4) {
+        } else if (!opened && gp.player.missionState < MissionStates.CHOP_CHICKEN_FOR_DOGS) {
             startDialogue(this, 1);
+            gp.keyH.enterPressed = false;
+        } else if (opened && gp.player.missionState > MissionStates.CHOP_CHICKEN_FOR_DOGS || opened && gp.player.missionState == MissionStates.BETWEEN_MISSIONS) {
+            startDialogue(this, 0);
             gp.keyH.enterPressed = false;
         }
     }

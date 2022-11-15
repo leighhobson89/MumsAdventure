@@ -742,14 +742,14 @@ public class Player extends Entity {
         int damage;
         if (i != 999) {
 
-            if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && Objects.equals(gp.player.currentWeapon.name, "Hatchet") && gp.player.missionState == 4 && gp.obj[gp.currentMap][i].down1 == gp.obj[gp.currentMap][i].image2) { //chop chicken mission
+            if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && Objects.equals(gp.player.currentWeapon.name, "Hatchet") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.obj[gp.currentMap][i].down1 == gp.obj[gp.currentMap][i].image2) { //chop chicken mission
                 damage = 1;
             } else { //add further conditions when required
                 damage = 0;
             }
 
             if (!gp.obj[gp.currentMap][i].invincible) {
-                if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && gp.player.missionState == 4 && gp.obj[gp.currentMap][i].down1 == gp.obj[gp.currentMap][i].image2) {
+                if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.obj[gp.currentMap][i].down1 == gp.obj[gp.currentMap][i].image2) {
                     gp.playSFX(31); //play chicken squelch sound
                 }
                 gp.obj[gp.currentMap][i].stressLevel += damage;
@@ -757,7 +757,7 @@ public class Player extends Entity {
 
                 if (gp.obj[gp.currentMap][i].stressLevel >= gp.obj[gp.currentMap][i].monsterMaxStress) {
                     gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image3; //possibly change this image3 variable name if more objects added
-                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && gp.player.missionState == 4) {
+                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
                         gp.ui.addMessage("You chopped the chicken!");
                         gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 11);
                         gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 10);

@@ -31,8 +31,8 @@ public class NPC_Andrea extends Entity {
 
     public void getImage() {
 
-        up1 = setup("/NPC/dad_up1", gp.tileSize, gp.tileSize);
-        up2 = setup("/NPC/dad_up2", gp.tileSize, gp.tileSize);
+        up1 = setup("/NPC/andrea_up1", gp.tileSize, gp.tileSize);
+        up2 = setup("/NPC/andrea_up2", gp.tileSize, gp.tileSize);
         down1 = setup("/NPC/dad_down1", gp.tileSize, gp.tileSize);
         down2 = setup("/NPC/dad_down2", gp.tileSize, gp.tileSize);
         left1 = setup("/NPC/dad_left1", gp.tileSize, gp.tileSize);
