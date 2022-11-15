@@ -95,6 +95,14 @@ public class SaveLoad {
             ds.setShovelFlag = gp.player.setShovelFlag;
             ds.repeatSfx = gp.player.repeatSfx;
             ds.currentProjectile = gp.player.currentProjectile;
+            ds.itemToThrow = gp.player.itemToThrow;
+            ds.startCounterPhoebeEatingChicken = gp.player.startCounterPhoebeEatingChicken;
+            ds.startCounterPipEatingChicken = gp.player.startCounterPipEatingChicken;
+            ds.phoebeEatingChickenCounter = gp.player.phoebeEatingChickenCounter;
+            ds.pipEatingChickenCounter = gp.player.pipEatingChickenCounter;
+            ds.phoebeChickenEaten = gp.player.phoebeChickenEaten;
+            ds.pipChickenEaten = gp.player.pipChickenEaten;
+            ds.phoneRinging = gp.player.phoneRinging;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -251,6 +259,14 @@ public class SaveLoad {
             gp.player.choppedChickenCount = ds.choppedChickenCount;
             gp.player.thrownChickenCount = ds.thrownChickenCount;
             gp.player.currentProjectile = ds.currentProjectile;
+            gp.player.itemToThrow = ds.itemToThrow;
+            gp.player.startCounterPhoebeEatingChicken = ds.startCounterPhoebeEatingChicken;
+            gp.player.startCounterPipEatingChicken = ds.startCounterPipEatingChicken;
+            gp.player.phoebeEatingChickenCounter = ds.phoebeEatingChickenCounter;
+            gp.player.pipEatingChickenCounter = ds.pipEatingChickenCounter;
+            gp.player.phoebeChickenEaten = ds.phoebeChickenEaten;
+            gp.player.pipChickenEaten = ds.pipChickenEaten;
+            gp.player.phoneRinging = ds.phoneRinging;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

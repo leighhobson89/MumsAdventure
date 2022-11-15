@@ -15,7 +15,6 @@ import java.util.*;
 
 public class Player extends Entity {
     KeyHandler keyH;
-    MissionStates missionStates;
     UtilityTool uTool = new UtilityTool();
 
     public final int PILLS_COUNT_DOWN_VALUE = 20;

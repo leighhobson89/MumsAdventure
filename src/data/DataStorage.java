@@ -48,6 +48,14 @@ public class DataStorage implements Serializable {
     int choppedChickenCount;
     int thrownChickenCount = 0;
     Entity currentProjectile;
+    String itemToThrow;
+    boolean startCounterPipEatingChicken;
+    boolean startCounterPhoebeEatingChicken;
+    int pipEatingChickenCounter;
+    int phoebeEatingChickenCounter;
+    boolean pipChickenEaten;
+    boolean phoebeChickenEaten;
+    boolean phoneRinging;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();

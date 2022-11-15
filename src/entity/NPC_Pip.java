@@ -102,6 +102,9 @@ public class NPC_Pip extends Entity {
                 speed = 5;
             } else if (tileDistance < 1) {
                 speed = 0;
+                if (!gp.player.pipChickenEaten) {
+                    gp.player.startCounterPipEatingChicken = true;
+                }
             }
             else {
                 speed = 2;

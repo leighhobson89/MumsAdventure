@@ -203,7 +203,10 @@ public class EventHandler {
                 gp.player.missionEndingCounter = 0;
                 gp.player.readyForNextPhoneMission = true;
                 gp.player.randomCounter = gp.player.setRandomCounter();
-                gp.playSFX(28); //make phone ring
+                if (!gp.player.phoneRinging) {
+                    gp.playSFX(28); //make phone ring
+                    gp.player.phoneRinging = true;
+                }
             }
         }
     }

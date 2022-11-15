@@ -65,6 +65,11 @@ public class Entity {
     public int andreaTempGoalRow;
     public boolean goesTransparentWhenHit;
     public boolean isUpdateable;
+    public boolean pipChickenEaten;
+    public boolean phoebeChickenEaten;
+    public boolean startCounterPhoebeEatingChicken;
+    public boolean startCounterPipEatingChicken;
+    public boolean phoneRinging;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -79,6 +84,8 @@ public class Entity {
     public int missionEndingCounter = 0;
     public int randomCounter; //used for random time in between missions before phone rings
     public int buzzCounter = 0;
+    public int phoebeEatingChickenCounter;
+    public int pipEatingChickenCounter;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -220,6 +227,8 @@ public class Entity {
         offBalanceCounter = 0;
         missionEndingCounter = 0;
         randomCounter = setRandomCounter();
+        pipEatingChickenCounter = 0;
+        phoebeEatingChickenCounter = 0;
     }
     public void setLoot(Entity loot) {}
     public void setAction(int goalCol, int goalRow) {
@@ -360,6 +369,44 @@ public class Entity {
     }
 
     public void update() {
+
+        if (gp.player.missionState == 4 && gp.player.missionSubstate >= 2) {
+            gp.misStat.endMissionTasks(MissionStates.CHOP_CHICKEN_FOR_DOGS);
+            gp.ui.addMessage("That's the dogs fed, nice one!");
+            gp.player.phoebeEatingChickenCounter = 0;
+            gp.player.startCounterPhoebeEatingChicken = false;
+            gp.player.pipEatingChickenCounter = 0;
+            gp.player.startCounterPipEatingChicken = false;
+        }
+
+        if (gp.player.startCounterPhoebeEatingChicken) {
+            gp.player.phoebeEatingChickenCounter++;
+            if (gp.player.phoebeEatingChickenCounter >= 2000) {
+                for (int i = 0; i < gp.obj[1].length; i++) {
+                    if (gp.obj[gp.currentMap][i] != null) {
+                        if (Objects.equals(gp.obj[gp.currentMap][i].name, "Chopped Chicken Phoebe")) {
+                            gp.obj[gp.currentMap][i] = null;
+                            gp.player.phoebeChickenEaten = true;
+                            gp.player.missionSubstate++;
+                        }
+                    }
+                }
+            }
+        }
+        if (gp.player.startCounterPipEatingChicken) {
+            gp.player.pipEatingChickenCounter++;
+            if (gp.player.pipEatingChickenCounter >= 2000) {
+                for (int i = 0; i < gp.obj[1].length; i++) {
+                    if (gp.obj[gp.currentMap][i] != null) {
+                        if (Objects.equals(gp.obj[gp.currentMap][i].name, "Chopped Chicken Pip")) {
+                            gp.obj[gp.currentMap][i] = null;
+                            gp.player.pipChickenEaten = true;
+                            gp.player.missionSubstate++;
+                        }
+                    }
+                }
+            }
+        }
 
         if (!isUpdateable) {
             if (knockBack) {

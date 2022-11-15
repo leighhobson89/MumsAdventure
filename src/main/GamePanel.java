@@ -192,7 +192,6 @@ public class GamePanel extends JPanel implements Runnable {
             if (timer >= 1000000000) { //output FPS in console
                 System.out.println("FPS: " + drawCount);
                 System.out.println("RandomCounter: " + player.randomCounter);
-                System.out.println("Mission To Set: " + player.missionToSet + " Mission State: " + player.missionState);
                 drawCount = 0;
                 timer = 0;
             }
@@ -452,8 +451,7 @@ public class GamePanel extends JPanel implements Runnable {
         sfx.play(0, false);
     }
 
-    public void stopSFX(int i) {
-        sfx.setFile(i);
+    public void stopSFX() {
         sfx.stop(false);
     }
 

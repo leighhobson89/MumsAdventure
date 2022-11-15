@@ -43,7 +43,10 @@ public class Projectile extends Entity {
 
             if (objIndex != 999) {
                 gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
-                gp.playSFX(20);
+                switch (this.name) {
+                    case "Chopped Chicken" -> gp.playSFX(31);
+                    case "Pip's Bone" -> gp.playSFX(20);
+                }
                 alive = false;
             }
 
@@ -51,7 +54,10 @@ public class Projectile extends Entity {
                 gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
                 gp.player.damageMonster(monsterIndex, this, attack, knockBackPower);
                 generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
-                gp.playSFX(20);
+                switch (this.name) {
+                    case "Chopped Chicken" -> gp.playSFX(31);
+                    case "Pip's Bone" -> gp.playSFX(20);
+                }
                 alive = false;
             }
             if (npcIndex != 999) {
@@ -64,12 +70,18 @@ public class Projectile extends Entity {
                 } else if (Objects.equals(gp.npc[gp.currentMap][npcIndex].name, "Merchant")) {
                     gp.npc[gp.currentMap][npcIndex].startDialogue(gp.npc[gp.currentMap][npcIndex], 1);
                 }
-                gp.playSFX(20);
+                switch (this.name) {
+                    case "Chopped Chicken" -> gp.playSFX(31);
+                    case "Pip's Bone" -> gp.playSFX(20);
+                }
                 alive = false;
             }
             if (tileState) {
                 gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
-                gp.playSFX(20);
+                switch (this.name) {
+                    case "Chopped Chicken" -> gp.playSFX(31);
+                    case "Pip's Bone" -> gp.playSFX(20);
+                }
                 alive = false;
             }
         }
@@ -108,7 +120,10 @@ public class Projectile extends Entity {
         if(stressLevel >= maxStress) { //if throwing item reaches end of throwing range
             gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
             alive = false;
-            gp.playSFX(20);
+            switch (this.name) {
+                case "Chopped Chicken" -> gp.playSFX(31);
+                case "Pip's Bone" -> gp.playSFX(20);
+            }
         }
 
         spriteCounter++;

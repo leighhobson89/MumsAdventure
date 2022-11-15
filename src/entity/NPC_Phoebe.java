@@ -1,6 +1,7 @@
 package entity;
 
 import main.GamePanel;
+import main.MissionStates;
 
 import java.awt.*;
 import java.util.Objects;
@@ -74,6 +75,9 @@ public class NPC_Phoebe extends Entity {
                 speed = 3;
             } else if (tileDistance < 1) {
                 speed = 0;
+                if (!gp.player.phoebeChickenEaten) {
+                    gp.player.startCounterPhoebeEatingChicken = true;
+                }
             }
             else {
                 speed = 2;
