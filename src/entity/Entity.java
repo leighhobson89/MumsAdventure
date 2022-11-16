@@ -287,7 +287,6 @@ public class Entity {
     }
 
     public void interact() {
-
     }
 
     public boolean use(Entity entity) {

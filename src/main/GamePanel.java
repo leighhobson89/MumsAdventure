@@ -451,6 +451,11 @@ public class GamePanel extends JPanel implements Runnable {
         sfx.play(0, false);
     }
 
+    public void loopSFX(int i) {
+        sfx.setFile(i);
+        sfx.loop();
+    }
+
     public void stopSFX() {
         sfx.stop(false);
     }

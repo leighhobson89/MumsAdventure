@@ -204,7 +204,7 @@ public class EventHandler {
                 gp.player.readyForNextPhoneMission = true;
                 gp.player.randomCounter = gp.player.setRandomCounter();
                 if (!gp.player.phoneRinging) {
-                    gp.playSFX(28); //make phone ring
+                    gp.loopSFX(28); //make phone ring
                     gp.player.phoneRinging = true;
                 }
             }
