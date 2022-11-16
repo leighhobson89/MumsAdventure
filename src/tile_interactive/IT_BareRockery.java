@@ -13,7 +13,7 @@ public class IT_BareRockery extends InteractiveTile {
 
         this.worldX = gp.tileSize * col;
         this.worldY = gp.tileSize * row;
-        name = "Bare Rockery";
+        name = "IT_RockeryBare";
         down1 = setup("/tiles_interactive/bareRockery", gp.tileSize, gp.tileSize);
         direction = "down";
 

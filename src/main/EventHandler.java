@@ -180,8 +180,11 @@ public class EventHandler {
     }
 
     public void kitchenCupBoard() {
-        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 24, 13);
+        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 27, 15);
+    }
 
+    public void kitchenPantry() {
+        gp.aSetter.setObjectAfterStart("Mop", gp.currentMap, 24, 15);
     }
 
     public void fridgeOpen() {
@@ -196,16 +199,18 @@ public class EventHandler {
         gp.player.countDownTimerForItemEffect(gp.player.LIGHT_PILLS_COUNT_DOWN_VALUE, "LightPills");
     }
 
-    public void setUpNextPhoneCallWhenNotInAMission(int missionState) {
+    public void setUpNextPhoneCallWhenNotInAMissionAndNextMissionIsAPhoneMission(int missionState) {
         if (missionState == MissionStates.BETWEEN_MISSIONS && gp.player.weedCount < 1) {
             gp.player.missionEndingCounter++;
             if (gp.player.missionEndingCounter > gp.player.randomCounter) {
                 gp.player.missionEndingCounter = 0;
-                gp.player.readyForNextPhoneMission = true;
-                gp.player.randomCounter = gp.player.setRandomCounter();
-                if (!gp.player.phoneRinging) {
-                    gp.loopSFX(28); //make phone ring
-                    gp.player.phoneRinging = true;
+                if (gp.player.nextMissionIsPhoneMission) {
+                    gp.player.readyForNextPhoneMission = true;
+                    gp.player.randomCounter = gp.player.setRandomCounter();
+                    if (!gp.player.phoneRinging) {
+                        gp.loopSFX(28); //make phone ring
+                        gp.player.phoneRinging = true;
+                    }
                 }
             }
         }

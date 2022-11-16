@@ -1027,7 +1027,7 @@ public class UI {
                             gp.player.andreaTempGoalCol = 0;
                             gp.player.andreaTempGoalRow = 0;
                             npc.startDialogue(npc, 6);
-                            gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT);
+                            gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT, true);
                             gp.player.AndreaLeaveSetup(npc);
                             commandNum = 0;
                             subState = 0;
@@ -1104,7 +1104,7 @@ public class UI {
                                 gp.player.inventory.remove(itemIndex);
                                 npc.startDialogue(npc, 8);
                                 gp.playSFX(22);
-                                gp.misStat.endMissionTasks(MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT);
+                                gp.misStat.endMissionTasks(MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT, true);
                                 commandNum = 0;
                                 subState = 0;
                             } else if (Objects.equals(npc.name, "Merchant")) {
@@ -1136,7 +1136,7 @@ public class UI {
                                     gp.player.andreaTempGoalCol = 0;
                                     gp.player.andreaTempGoalRow = 0;
                                     npc.startDialogue(npc, 6);
-                                    gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT);
+                                    gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT, true);
                                     gp.player.AndreaLeaveSetup(npc);
                                 } else {
                                     npc.startDialogue(npc, 8);

@@ -123,6 +123,8 @@ public class TileManager {
         setup(91, "pathLawnRight", false);
         setup(92, "fence2", true);
         setup(93, "fenceVertical", true);
+        setup(94, "bathroomFloor", false);
+
 
     }
 

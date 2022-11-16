@@ -106,7 +106,7 @@ public class NPC_Dad extends Entity {
         dialogueText[60][0] = "Simpsons is on soon!";
 
         //MISSION DIALOGUE SETS
-        //WEEDING MISSION
+        //WEEDING
         dialogueText[61][0] = "Have you seen those weeds out there?";
         dialogueText[61][1] = "I could really do with getting them dug up but I\nhave to order that horse hair for my violin bow.";
         dialogueText[61][2] = "That's gonna tek all day with this bloody laptop!";
@@ -115,7 +115,12 @@ public class NPC_Dad extends Entity {
         //BONE THROWN DIALOG
         dialogueText[62][0] ="Watch where you bloody throw that\nwill yer!";
 
-
+        //MOP UP SHOWER WATER
+        dialogueText[63][0] = "Cheers for feeding the dogs!";
+        dialogueText[63][1] = "Bloody hell you stink, like a mix of chicken\nand sweat!";
+        dialogueText[63][2] = "Must be from digging them weeds up.";
+        dialogueText[63][3] = "Go and get a shower, water's been on all\nmorning.";
+        dialogueText[63][4] = "Don't use it all though, we can't afford\nto keep putting the bloody heating on!";
     }
 
     public void setAction(int goalCol, int goalRow) {
@@ -136,13 +141,17 @@ public class NPC_Dad extends Entity {
     }
 
     public void speak() {
+        switch (gp.player.missionToSet) {
+            case 5: gp.player.missionState = 5;
+        }
         if (gp.player.weedCount > 0) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;
             gp.player.setShovelFlag = true;
         }
-        switch(gp.player.missionState) {
-            case 1: dialogueSet = 61; break; //weeding mission
-            default: dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission
+        switch (gp.player.missionState) {
+            case 1 -> dialogueSet = 61; //weeding mission
+            case 5 -> dialogueSet = 63; //mop shower water mission
+            default -> dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission
         }
         //character specific stuff here
         facePlayer();

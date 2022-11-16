@@ -92,7 +92,7 @@ public class CollisionChecker {
                     case "right": entity.solidArea.x += entity.speed; break;
                 }
 
-                if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && (Objects.equals(entity.name, "Pip") || Objects.equals(entity.name, "Phoebe")) && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && (Objects.equals(gp.obj[gp.currentMap][i].name, "Fridge") || Objects.equals(gp.obj[gp.currentMap][i].name, "BackGate") || Objects.equals(gp.obj[gp.currentMap][i].name, "BackGateSideways"))) {
+                if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && (Objects.equals(entity.name, "Pip") || Objects.equals(entity.name, "Phoebe")) && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && (Objects.equals(gp.obj[gp.currentMap][i].name, "Fridge") || Objects.equals(gp.obj[gp.currentMap][i].name, "BackGate") || Objects.equals(gp.obj[gp.currentMap][i].name, "KitchenCupboard1") || Objects.equals(gp.obj[gp.currentMap][i].name, "BackGateSideways"))) {
                     entity.collisionOn = false;
                 } else if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
                     if (gp.obj[gp.currentMap][i].collision) {
@@ -141,10 +141,10 @@ public class CollisionChecker {
 
                 if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) { //if entity touches object...
                     if(target[gp.currentMap][i] != entity) {
-                        if (!Objects.equals(target[gp.currentMap][i].name, "Weed Tile") && entity.type != entity.type_monster) { //lets monsters run about on destructable tiles
+                        if (!Objects.equals(target[gp.currentMap][i].name, "IT_Weed") && entity.type != entity.type_monster) { //lets monsters run about on destructable tiles
                             entity.collisionOn = true;
                             index = i;
-                        } else if (Objects.equals(target[gp.currentMap][i].name, "Weed Tile") && entity.type != entity.type_monster) {
+                        } else if (Objects.equals(target[gp.currentMap][i].name, "IT_Weed") && entity.type != entity.type_monster) {
                             entity.collisionOn = true;
                             index = i;
                         }

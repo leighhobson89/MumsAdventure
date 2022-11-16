@@ -58,8 +58,10 @@ public class OBJ_TelephoneHall extends Entity {
         gp.stopSFX();
         gp.player.phoneRinging = false;
         if (gp.player.readyForNextPhoneMission || gp.player.missionState == MissionStates.WEEDING_MISSION) {
-            setNewMissionState(gp.player.readyForNextPhoneMission, gp.player.missionState, gp.player.missionToSet);
-            startDialogue(this, gp.player.missionState);
+            if (gp.player.nextMissionIsPhoneMission) {
+                setNewMissionState(gp.player.readyForNextPhoneMission, gp.player.missionState, gp.player.missionToSet);
+                startDialogue(this, gp.player.missionState);
+            }
             gp.keyH.enterPressed = false;
             gp.player.readyForNextPhoneMission = false;
         } else {

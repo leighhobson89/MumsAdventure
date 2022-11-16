@@ -217,7 +217,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (gameState == playState) {
             //MISSION
-            eHandler.setUpNextPhoneCallWhenNotInAMission(player.missionState); //increment time after a mission ends, to set the new one if required
+            eHandler.setUpNextPhoneCallWhenNotInAMissionAndNextMissionIsAPhoneMission(player.missionState); //increment time after a mission ends, to set the new one if required
             if (player.setShovelFlag) {
                 player.setShovelFlag = false;
                 aSetter.setObjectAfterStart("Garden Shovel", currentMap, 45, 8);

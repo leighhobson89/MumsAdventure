@@ -56,6 +56,7 @@ public class DataStorage implements Serializable {
     boolean pipChickenEaten;
     boolean phoebeChickenEaten;
     boolean phoneRinging;
+    boolean nextMissionIsPhoneMission;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();

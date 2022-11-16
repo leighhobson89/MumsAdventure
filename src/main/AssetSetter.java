@@ -82,6 +82,8 @@ public class AssetSetter {
             case "Chopped Chicken":
                 gp.obj[mapNum][i] = new OBJ_ChoppedChicken(gp);
                 break;
+            case "Mop":
+                gp.obj[mapNum][i] = new OBJ_Mop(gp);
         }
 
         gp.obj[mapNum][i].worldX = x * gp.tileSize;
@@ -166,6 +168,11 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_Cupboard3(gp);
         gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_KitchenCupboard1(gp);
+        gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_MumsChair(gp);

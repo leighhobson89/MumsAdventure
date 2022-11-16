@@ -35,8 +35,8 @@ public class SaveLoad {
         Entity iTile = null;
 
         switch(itemName) {
-            case "Weed Tile": iTile = new IT_WeedTile(gp, col, row); break;
-            case "Bare Rockery": iTile = new IT_BareRockery(gp, col, row); break;
+            case "IT_Weed": iTile = new IT_WeedTile(gp, col, row); break;
+            case "IT_RockeryBare": iTile = new IT_BareRockery(gp, col, row); break;
         }
         return iTile;
     }
@@ -103,6 +103,7 @@ public class SaveLoad {
             ds.phoebeChickenEaten = gp.player.phoebeChickenEaten;
             ds.pipChickenEaten = gp.player.pipChickenEaten;
             ds.phoneRinging = gp.player.phoneRinging;
+            ds.nextMissionIsPhoneMission = gp.player.nextMissionIsPhoneMission;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -267,6 +268,7 @@ public class SaveLoad {
             gp.player.phoebeChickenEaten = ds.phoebeChickenEaten;
             gp.player.pipChickenEaten = ds.pipChickenEaten;
             gp.player.phoneRinging = ds.phoneRinging;
+            gp.player.nextMissionIsPhoneMission = ds.nextMissionIsPhoneMission;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

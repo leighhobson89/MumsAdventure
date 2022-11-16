@@ -55,6 +55,7 @@ public class Entity {
     public int missionState = MissionStates.BETWEEN_MISSIONS;
     public List<Integer> missionList = new ArrayList<>();
     public boolean readyForNextPhoneMission;
+    public boolean nextMissionIsPhoneMission;
     public int missionToSet = 1;
     public int missionSubstate = 0;
     public Random rand = new Random();
@@ -172,6 +173,7 @@ public class Entity {
     public final int type_obstacle = 9;
     public final int type_light = 10;
     public final int type_axe = 11;
+    public final int type_mop = 12;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -370,7 +372,7 @@ public class Entity {
     public void update() {
 
         if (gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.player.missionSubstate >= MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT) {
-            gp.misStat.endMissionTasks(MissionStates.CHOP_CHICKEN_FOR_DOGS);
+            gp.misStat.endMissionTasks(MissionStates.CHOP_CHICKEN_FOR_DOGS, false);
             gp.ui.addMessage("That's the dogs fed, nice one!");
             gp.player.phoebeEatingChickenCounter = 0;
             gp.player.startCounterPhoebeEatingChicken = false;

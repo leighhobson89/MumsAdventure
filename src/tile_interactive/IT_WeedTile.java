@@ -15,7 +15,7 @@ public class IT_WeedTile extends InteractiveTile {
 
         this.worldX = gp.tileSize * col;
         this.worldY = gp.tileSize * row;
-        name = "Weed Tile";
+        name = "IT_Weed";
         down1 = setup("/tiles_interactive/rockeryWorked1", gp.tileSize, gp.tileSize);
         direction = "down";
 

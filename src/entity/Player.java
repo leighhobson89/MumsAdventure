@@ -256,7 +256,7 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/mum_attack_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_attack_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
-            if (currentWeapon.type == type_axe ||currentWeapon.type == type_long_weapon || currentWeapon.type == type_gardeningShovel) {
+            if (currentWeapon.type == type_axe ||currentWeapon.type == type_long_weapon || currentWeapon.type == type_gardeningShovel || currentWeapon.type == type_mop) {
                 attackUp1 = setup("/player/mum_spatula_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
                 attackUp2 = setup("/player/mum_spatula_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
                 attackDown1 = setup("/player/mum_spatula_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
@@ -375,6 +375,8 @@ public class Player extends Entity {
                     gp.playSFX(19);
                 } else if (currentWeapon.type == type_axe) {
                     gp.playSFX(30);
+                } else if (currentWeapon.type == type_mop) {
+                    gp.playSFX(31);
                 }
 
                 attacking = true;
@@ -698,7 +700,7 @@ public class Player extends Entity {
 
         if (i != 999 && gp.iTile[gp.currentMap][i].destructible && gp.iTile[gp.currentMap][i].isCorrectItem(this) && !gp.iTile[gp.currentMap][i].invincible) {
             gp.iTile[gp.currentMap][i].stressLevel++;
-            if (Objects.equals(gp.iTile[gp.currentMap][i].name, "Weed Tile")) {
+            if (Objects.equals(gp.iTile[gp.currentMap][i].name, "IT_Weed")) {
                 if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
                     if (gp.player.weedCount > 1) {
                         gp.player.weedCount--;
@@ -708,7 +710,7 @@ public class Player extends Entity {
                         gp.gameState = gp.dialogueState;
                         startDialogue(this, 2);
                         gp.aSetter.setObjectAfterStart("HundredQuid", gp.currentMap, gp.iTile[gp.currentMap][i].worldX/gp.tileSize, gp.iTile[gp.currentMap][i].worldY/gp.tileSize); //place supercoin where last weed dug up as reward
-                        gp.misStat.endMissionTasks(MissionStates.WEEDING_MISSION);
+                        gp.misStat.endMissionTasks(MissionStates.WEEDING_MISSION, true);
                     }
                 }
                 gp.iTile[gp.currentMap][i].playSfx();
@@ -790,12 +792,12 @@ public class Player extends Entity {
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
 
-            if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel) && selectedItem != currentWeapon) {
+            if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
-            } else if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel)) {
+            } else if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop)) {
                 currentWeapon = null;
                 attack = getAttack();
                 gp.playSFX(11);
