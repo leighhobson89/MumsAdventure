@@ -21,6 +21,7 @@ public class Player extends Entity {
     public final int LIGHT_PILLS_COUNT_DOWN_VALUE = 60;
     public final int STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS = 4;
     final int MAX_SPEED_UNDER_INFLUENCE = 4;
+    final int LENGTH_OF_SHOWER = 510;
 
     public boolean usedItemOrNot = false;
     public final int screenX;
@@ -277,6 +278,15 @@ public class Player extends Entity {
     }
 
     public void update() {
+        if (missionState == MissionStates.MOP_UP_THE_SHOWER_WATER && showerCounterStart) {
+            System.out.println("ShowerCounter: " + showerCounter + " ShowerRan? " + showerAlreadyRan);
+            showerCounter++;
+            if (showerCounter >= LENGTH_OF_SHOWER) {
+                showerCounterStart = false;
+                showerCounter = 0;
+                gp.eHandler.stopShower();
+            }
+        }
 
         if (knockBack) {
 
@@ -554,6 +564,8 @@ public class Player extends Entity {
         dialogueText[15][0] = "I'm fine, I don't need to\nrelax at the moment!\n(Game Saved!)";
         dialogueText[16][0] = "These light pills will help my dodgy eye\nfor a bit, phew!";
         dialogueText[17][0] = "Bloody pills, I can't think straight!\nWhat am I doing up here??\nThe stress has gone at least!";
+        dialogueText[18][0] = "Phew! He gets absolutely furious if water\ngets left on the floor!";
+        dialogueText[18][1] = "If he would just finish the house, we wouldn't\nhave these problems!";
     }
 
     public void checkIfPassOutFromStress() {
@@ -727,6 +739,27 @@ public class Player extends Entity {
                         int playerY = gp.player.worldY/ gp.tileSize;
                         gp.player.spiderCount = gp.eHandler.spiderEvent(playerX+2, playerY+2, gp.dialogueState, gp.player.spiderCount, false, true);
                     }
+                }
+            } else if (Objects.equals(gp.iTile[gp.currentMap][i].name, "IT_Water")) {
+                if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
+                    if (gp.player.waterTileCount > 1) {
+                        gp.player.waterTileCount--;
+                        gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm();
+                    } else if (gp.player.waterTileCount == 1) { //end of mop shower mission
+                        gp.player.waterTileCount--;
+                        gp.gameState = gp.dialogueState;
+                        startDialogue(this, 18);
+                        gp.misStat.endMissionTasks(MissionStates.MOP_UP_THE_SHOWER_WATER, true);
+                    }
+                }
+                gp.iTile[gp.currentMap][i].playSfx();
+                gp.iTile[gp.currentMap][i].invincible = true;
+
+                //GENERATE PARTICLE
+                generateParticle(gp.iTile[gp.currentMap][i], gp.iTile[gp.currentMap][i]);
+
+                if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
+                    gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm();
                 }
             }
         }

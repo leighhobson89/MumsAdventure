@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import object.OBJ_BathLeft;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -184,7 +185,7 @@ public class EventHandler {
     }
 
     public void kitchenPantry() {
-        gp.aSetter.setObjectAfterStart("Mop", gp.currentMap, 24, 15);
+        gp.aSetter.setObjectAfterStart("Mop", gp.currentMap, 24, 14);
     }
 
     public void fridgeOpen() {
@@ -223,5 +224,28 @@ public class EventHandler {
                 break;
             }
         }
+    }
+
+    public void startShower() {
+        for (int i = 0; i < gp.obj[1].length; i++) {
+            if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "BathLeft")) {
+                gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
+            }
+            gp.player.showerCounterStart = true;
+        }
+    }
+
+    public void stopShower() {
+        for (int i = 0; i < gp.obj[1].length; i++) {
+            if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "BathLeft")) {
+                gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image;
+                gp.obj[gp.currentMap][i].startDialogue(gp.obj[gp.currentMap][i], 1);
+            }
+        }
+        gp.player.showerAlreadyRan = true;
+        gp.player.waterTileCount = gp.aSetter.setInteractiveTilesAfterStart(MissionStates.MOP_UP_THE_SHOWER_WATER);
+        System.out.println("WaterTileCount: " + gp.player.waterTileCount);
+        gp.playSFX(33);
+        gp.player.missionSubstate++;
     }
 }

@@ -57,6 +57,10 @@ public class DataStorage implements Serializable {
     boolean phoebeChickenEaten;
     boolean phoneRinging;
     boolean nextMissionIsPhoneMission;
+    boolean showerAlreadyRan;
+    boolean showerCounterStart;
+    int showerCounter;
+    int waterTileCount;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();

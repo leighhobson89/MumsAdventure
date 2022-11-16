@@ -71,6 +71,9 @@ public class Entity {
     public boolean startCounterPhoebeEatingChicken;
     public boolean startCounterPipEatingChicken;
     public boolean phoneRinging;
+    public boolean showerAlreadyRan;
+    public boolean showerCounterStart;
+    public int waterTileCount;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -87,6 +90,7 @@ public class Entity {
     public int buzzCounter = 0;
     public int phoebeEatingChickenCounter;
     public int pipEatingChickenCounter;
+    public int showerCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -231,6 +235,7 @@ public class Entity {
         randomCounter = setRandomCounter();
         pipEatingChickenCounter = 0;
         phoebeEatingChickenCounter = 0;
+        showerCounter = 0;
     }
     public void setLoot(Entity loot) {}
     public void setAction(int goalCol, int goalRow) {

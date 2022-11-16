@@ -444,6 +444,9 @@ public class UI {
                     }
                 }
             } else {
+                if ((Objects.equals(npc.name, "BathLeft") || Objects.equals(npc.name, "BathRight")) && !gp.player.showerAlreadyRan) {
+                    gp.playSFX(32);
+                }
                 gp.gameState = gp.playState;
                 npc.dialogueIndex = 0;
             }

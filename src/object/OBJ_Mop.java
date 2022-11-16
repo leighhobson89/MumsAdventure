@@ -20,7 +20,7 @@ public class OBJ_Mop extends Entity {
         down1 = setup("/objects/mop", gp.tileSize, gp.tileSize);
         direction = "down";
         description = "[" + name + "]\nAn old Mop";
-        attackValue = 0;
+        attackValue = 1;
         attackArea.width = 36;
         attackArea.height = 36;
         isWeapon = true;

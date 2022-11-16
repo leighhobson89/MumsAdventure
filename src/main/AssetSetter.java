@@ -4,6 +4,7 @@ import entity.*;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
 import object.*;
+import tile_interactive.IT_WaterTile;
 import tile_interactive.IT_WeedTile;
 
 import java.util.Objects;
@@ -286,6 +287,16 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldX = 29 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
         i++;
+
+        gp.obj[mapNum][i] = new OBJ_BathLeft(gp);
+        gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_BathRight(gp);
+        gp.obj[mapNum][i].worldX = 29 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
     }
 
     public void setNPC() {
@@ -351,6 +362,36 @@ public class AssetSetter {
         monsterNumber++; //monster counter increments so that next call of method adds to next slot in monster array
 
         return monsterNumber;
+    }
+
+    public int setInteractiveTilesAfterStart(int missionTrigger) {
+        int count = 0;
+        int colToAdd = 0;
+        int rowToAdd = 0;
+        int mapNum = 0;
+        int waterTileCount = 0;
+
+        if (missionTrigger == MissionStates.MOP_UP_THE_SHOWER_WATER) { //need a better way to do this
+            mapNum = 1;
+            colToAdd = 27;
+            rowToAdd = 12;
+            for (int i = 0; i < gp.iTile[mapNum].length; i++) {
+                if (gp.iTile[mapNum][i] == null) {
+                    gp.iTile[mapNum][i] = new IT_WaterTile(gp, colToAdd, rowToAdd); i++; waterTileCount++;
+                    colToAdd++;
+                    if (colToAdd > 29) {
+                        colToAdd = 28;
+                        rowToAdd--;
+                        if (rowToAdd < 11) {
+                            break;
+                        }
+                    }
+                }
+            }
+            count = waterTileCount;
+        }
+
+        return count;
     }
 
     public int setInteractiveTile() {
@@ -453,7 +494,7 @@ public class AssetSetter {
         gp.iTile[mapNum][i] = new IT_WeedTile(gp, 14, 10); i++;
         gp.iTile[mapNum][i] = new IT_WeedTile(gp, 28, 7); i++;
         gp.iTile[mapNum][i] = new IT_WeedTile(gp, 18, 7); i++;
-        gp.iTile[mapNum][i] = new IT_WeedTile(gp, 16, 7); i++;
+        gp.iTile[mapNum][i] = new IT_WeedTile(gp, 16, 7);
 
 
         return weedCount; //return number of weeds to dig up

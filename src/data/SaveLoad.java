@@ -104,6 +104,10 @@ public class SaveLoad {
             ds.pipChickenEaten = gp.player.pipChickenEaten;
             ds.phoneRinging = gp.player.phoneRinging;
             ds.nextMissionIsPhoneMission = gp.player.nextMissionIsPhoneMission;
+            ds.showerAlreadyRan = gp.player.showerAlreadyRan;
+            ds.showerCounterStart = gp.player.showerCounterStart;
+            ds.showerCounter = gp.player.showerCounter;
+            ds.waterTileCount = gp.player.waterTileCount;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -269,6 +273,10 @@ public class SaveLoad {
             gp.player.pipChickenEaten = ds.pipChickenEaten;
             gp.player.phoneRinging = ds.phoneRinging;
             gp.player.nextMissionIsPhoneMission = ds.nextMissionIsPhoneMission;
+            gp.player.showerAlreadyRan = ds.showerAlreadyRan;
+            gp.player.showerCounterStart = ds.showerCounterStart;
+            gp.player.showerCounter = ds.showerCounter;
+            gp.player.waterTileCount = ds.waterTileCount;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
