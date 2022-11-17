@@ -276,7 +276,7 @@ public class UI {
 
             //MUM IMAGE
             x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-            y += gp.tileSize*2;
+            y += gp.tileSize;
             g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
 
             //MENU
@@ -298,11 +298,19 @@ public class UI {
                 g2.drawString(">", x - gp.tileSize, y);
             }
 
-            text = "QUIT";
+            text = "INSTRUCTIONS";
             x = getXforCenteredText(text);
             y += gp.tileSize;
             g2.drawString(text, x, y);
             if (commandNum == 2) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+
+            text = "QUIT";
+            x = getXforCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if (commandNum == 3) {
                 g2.drawString(">", x - gp.tileSize, y);
             }
         }
@@ -369,6 +377,62 @@ public class UI {
                 case "red" -> g2.drawImage(gp.player.down1_red, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
                 case "brown" -> g2.drawImage(gp.player.down1, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
                 case "purple" -> g2.drawImage(gp.player.down1_purple, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
+            }
+        } else if (titleScreenState == 2) {
+            g2.setColor(new Color (218, 217, 132));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+            g2.setColor(Color.BLACK);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 72F));
+
+            String text = "INSTRUCTIONS";
+            int x = getXforCenteredText(text);
+            int y = gp.tileSize*2;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 42F));
+
+            text = "Back";
+            x = getXforCenteredText(text) - gp.tileSize*3;
+            y = gp.tileSize*11;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "Next";
+            x = getXforCenteredText(text) + gp.tileSize*3;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+        } else if (titleScreenState == 3) {
+            g2.setColor(new Color (218, 217, 132));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+            g2.setColor(Color.BLACK);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 72F));
+
+            String text = "INSTRUCTIONS 2";
+            int x = getXforCenteredText(text);
+            int y = gp.tileSize*2;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 42F));
+
+            text = "Back";
+            x = getXforCenteredText(text) - gp.tileSize*3;
+            y = gp.tileSize*11;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "Finish";
+            x = getXforCenteredText(text) + gp.tileSize*3;
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x - gp.tileSize, y);
             }
         }
 

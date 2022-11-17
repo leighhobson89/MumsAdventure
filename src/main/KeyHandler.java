@@ -55,13 +55,13 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_UP) {
                 gp.ui.commandNum--;
                 if (gp.ui.commandNum < 0) {
-                    gp.ui.commandNum = 2;
+                    gp.ui.commandNum = 3;
                 }
                 gp.playSFX(10);
             }
             if (code == KeyEvent.VK_DOWN) {
                 gp.ui.commandNum++;
-                if (gp.ui.commandNum > 2) {
+                if (gp.ui.commandNum > 3) {
                     gp.ui.commandNum = 0;
                 }
                 gp.playSFX(10);
@@ -76,7 +76,13 @@ public class KeyHandler implements KeyListener {
                     gp.gameState = gp.playState;
                     gp.playSFX(11);
                 }
-                if (gp.ui.commandNum == 2) { //QUIT
+                if (gp.ui.commandNum == 2) { //INSTRUCTIONS
+                    gp.ui.titleScreenState = 2;
+                    gp.ui.commandNum = 1;
+                    //INSTRUCTIONS SCREEN
+                    gp.playSFX(11);
+                }
+                if (gp.ui.commandNum == 3) { //QUIT
                     gp.playSFX(11);
                     Thread.sleep(500);
                     System.exit(0);
@@ -121,6 +127,56 @@ public class KeyHandler implements KeyListener {
                     gp.ui.commandNum = 0;
                 }
                 gp.player.getAttackImage(gp.ui.outfitChosen);
+                gp.playSFX(11);
+            }
+        } else if (gp.ui.titleScreenState == 2) { //INSTRUCTIONS SCREEN 1
+            if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_UP) {
+                gp.ui.commandNum--;
+                if (gp.ui.commandNum < 0) {
+                    gp.ui.commandNum = 1;
+                }
+                gp.playSFX(10);
+            }
+            if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_DOWN) {
+                gp.ui.commandNum++;
+                if (gp.ui.commandNum > 1) {
+                    gp.ui.commandNum = 0;
+                }
+                gp.playSFX(10);
+            }
+
+            if (code == KeyEvent.VK_ENTER) {
+                if (gp.ui.commandNum == 0) { //BACK
+                    gp.ui.titleScreenState = 0;
+                } else if (gp.ui.commandNum == 1) { //NEXT
+                    gp.ui.titleScreenState = 3;
+                }
+                gp.playSFX(11);
+            }
+
+        } else if (gp.ui.titleScreenState == 3) { //INSTRUCTIONS SCREEN 2
+            if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_UP) {
+                gp.ui.commandNum--;
+                if (gp.ui.commandNum < 0) {
+                    gp.ui.commandNum = 1;
+                }
+                gp.playSFX(10);
+            }
+            if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_DOWN) {
+                gp.ui.commandNum++;
+                if (gp.ui.commandNum > 1) {
+                    gp.ui.commandNum = 0;
+                }
+                gp.playSFX(10);
+            }
+
+            if (code == KeyEvent.VK_ENTER) {
+                if (gp.ui.commandNum == 0) { //BACK
+                    gp.ui.titleScreenState = 2;
+                } else if (gp.ui.commandNum == 1) { //FINISH
+                    gp.ui.titleScreenState = 0;
+                    gp.ui.commandNum = 0;
+                }
                 gp.playSFX(11);
             }
         }
