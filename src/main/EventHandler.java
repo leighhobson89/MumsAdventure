@@ -261,7 +261,6 @@ public class EventHandler {
         }
         gp.player.showerAlreadyRan = true;
         gp.player.waterTileCount = gp.aSetter.setInteractiveTilesAfterStart(MissionStates.MOP_UP_THE_SHOWER_WATER);
-        System.out.println("WaterTileCount: " + gp.player.waterTileCount);
         gp.playSFX(33);
         gp.player.missionSubstate++;
     }

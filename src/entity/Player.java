@@ -284,7 +284,6 @@ public class Player extends Entity {
 
     public void update() {
         if (missionState == MissionStates.MOP_UP_THE_SHOWER_WATER && showerCounterStart) {
-            System.out.println("ShowerCounter: " + showerCounter + " ShowerRan? " + showerAlreadyRan);
             showerCounter++;
             if (showerCounter >= LENGTH_OF_SHOWER) {
                 showerCounterStart = false;
