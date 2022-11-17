@@ -275,16 +275,29 @@ public class UI {
             g2.drawString(text, x, y);
 
             //MUM IMAGE
-            x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+            x = gp.screenWidth/2 - gp.tileSize*2;
             y += gp.tileSize;
             g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+
+            //DAD IMAGE
+            x = gp.screenWidth/2;
+            g2.drawImage(gp.player.dadDown1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+
+            //PHOEBE LEFT IMAGE // CHANGE FOR PIP
+            x = gp.screenWidth/2 - gp.tileSize*3 - 20;
+            y = (gp.tileSize*9)/2 + 20;
+            g2.drawImage(gp.player.phoebeRight2, x, y, gp.tileSize*2, gp.tileSize*2, null);
+
+            //PHOEBE RIGHT IMAGE
+            x = gp.screenWidth - 420;
+            g2.drawImage(gp.player.phoebeLeft1, x, y, gp.tileSize*2, gp.tileSize*2, null);
 
             //MENU
             g2.setFont((g2.getFont().deriveFont(Font.BOLD, 48F)));
 
             text = "NEW GAME";
             x = getXforCenteredText(text);
-            y += gp.tileSize*3.5;
+            y += (gp.tileSize*3.5) - 20;
             g2.drawString(text, x, y);
             if (commandNum == 0) {
                 g2.drawString(">", x - gp.tileSize, y);
@@ -388,7 +401,41 @@ public class UI {
             String text = "INSTRUCTIONS";
             int x = getXforCenteredText(text);
             int y = gp.tileSize*2;
+            g2.setColor(new Color (168, 168, 103)); //SHADOW
+            g2.drawString(text, x+4, y+4);
+            g2.setColor(Color.BLACK); //TEXT
             g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 42F));
+
+            text = "You are Mum, a lonely character in an enclosed";
+            x = getXforCenteredText(text);
+            y = gp.tileSize*4;
+            g2.drawString(text, x, y);
+
+            text = "world.  You have to go through your daily";
+            x = getXforCenteredText(text);
+            y = gp.tileSize*5;
+            g2.drawString(text, x, y);
+
+            text = "life, tolerating stress, anguish, and routine.";
+            x = getXforCenteredText(text);
+            y = gp.tileSize*6;
+            g2.drawString(text, x, y);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 58F));
+
+            text = "Will you survive another day?";
+            x = gp.screenWidth/2 - 240;
+            y = gp.tileSize*8 + 40;
+            g2.setColor(new Color (168, 168, 103)); //SHADOW
+            g2.drawString(text, x+4, y+4);
+            g2.setColor(Color.BLACK); //TEXT
+            g2.drawString(text, x, y);
+
+            x = gp.tileSize - 20;
+            y = gp.tileSize*6 + 35;
+            g2.drawImage(gp.player.right2, x, y, gp.tileSize*4, gp.tileSize*4, null);
 
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 42F));
 
@@ -413,12 +460,44 @@ public class UI {
             g2.setColor(Color.BLACK);
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 72F));
 
-            String text = "INSTRUCTIONS 2";
+            String text = "CONTROLS";
             int x = getXforCenteredText(text);
             int y = gp.tileSize*2;
+            g2.setColor(new Color (168, 168, 103)); //SHADOW
+            g2.drawString(text, x+4, y+4);
+            g2.setColor(Color.BLACK); //TEXT
             g2.drawString(text, x, y);
 
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 42F));
+
+            x = gp.screenWidth - gp.tileSize*5;
+            y = gp.tileSize*2;
+            g2.drawImage(gp.player.left1, x, y, gp.tileSize*4, gp.tileSize*4, null);
+
+            text = "- Use the arrow keys to move around.";
+            x = 15;
+            y = gp.tileSize*4;
+            g2.drawString(text, x, y);
+
+            text = "- Use ENTER to interact with the world.";
+            y = gp.tileSize*5;
+            g2.drawString(text, x, y);
+
+            text = "- Use SPACE to attack or perform actions.";
+            y = gp.tileSize*6;
+            g2.drawString(text, x, y);
+
+            text = "- Look for things to do by talking to people.";
+            y = gp.tileSize*7;
+            g2.drawString(text, x, y);
+
+            text = "- Check options screen with ESC for full list of controls.";
+            y = gp.tileSize*8;
+            g2.drawString(text, x, y);
+
+            text = "Try and survive another day of misery!";
+            y = gp.tileSize*9;
+            g2.drawString(text, x, y);
 
             text = "Back";
             x = getXforCenteredText(text) - gp.tileSize*3;

@@ -231,6 +231,11 @@ public class Player extends Entity {
         down1 = setup("/player/mum_down1_brown", gp.tileSize, gp.tileSize);
         down1_red = setup("/player/mum_down1_red", gp.tileSize, gp.tileSize);
         down1_purple = setup("/player/mum_down1_purple", gp.tileSize, gp.tileSize);
+        left1 = setup("/player/mum_left1_red", gp.tileSize, gp.tileSize);
+        right2 = setup("/player/mum_right2_purple", gp.tileSize, gp.tileSize);
+        dadDown1 = setup("/NPC/dad_down1", gp.tileSize, gp.tileSize);
+        phoebeLeft1 = setup("/NPC/phoebe_left1", gp.tileSize, gp.tileSize);
+        phoebeRight2 = setup("/NPC/phoebe_right2", gp.tileSize, gp.tileSize);
 
         if (gp.gameState == gp.playState || loadGame) {
             up1 = setup("/player/mum_up1_" + colorOutfit, gp.tileSize, gp.tileSize); //16 x 16 images
@@ -574,13 +579,13 @@ public class Player extends Entity {
             timesPassedOut++;
             gp.gameState = gp.dialogueState;
             startDialogue(this, 9);
-            if (timesPassedOut <= 2) {
+            if (timesPassedOut <= 2) { //change to be able to pass out this many times before passing out
                 gp.playSFX(25);
                 gp.player.worldX = gp.tileSize*19;
                 gp.player.worldY = gp.tileSize*17;
                 gp.player.stressLevel = 0;
                 gp.gameState = gp.sleepState;
-            } else if (timesPassedOut > 2) { //change to be able to pass out this many times before passing out
+            } else {
                 gp.gameState = gp.gameOverState;
                 gp.stopMusic();
                 gp.playSFX(24);
@@ -640,10 +645,9 @@ public class Player extends Entity {
                 } else if (Objects.equals(this.name, "WaspSwarm")) {
                     gp.playSFX(26);
                 }
-                if (damage != 0) {
-                    gp.player.transparent = true;
-                    setKnockBack(gp.player, this, knockBackPower);
-                }
+                gp.player.transparent = true; //this and next line were in an if condition
+                setKnockBack(gp.player, this, knockBackPower);
+
                 gp.player.stressLevel += damage;
                 gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
                 invincible = true;
@@ -681,7 +685,7 @@ public class Player extends Entity {
                 }
 
                 if (gp.monster[gp.currentMap][i].offBalance) {
-
+                    //todo if introduce monsters with weapons and parry ability
                 }
 
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
