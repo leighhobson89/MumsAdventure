@@ -166,8 +166,25 @@ public class EventHandler {
     public void transitionUpDownStairs(int map, int col, int row) {
         gp.gameState = gp.transitionState;
         tempMap = map;
+
         tempCol = col;
         tempRow = row;
+        for (int i = 0; i < gp.obj[1].length; i++) { //set correct image state for outdoor objects that appear on both maps, add more as required
+            if (gp.obj[tempMap][i] != null) {
+                if (Objects.equals(gp.obj[tempMap][i].name, "BackGate")) {
+                    switch (gp.player.backGateState) {
+                        case 1 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image;
+                        case 2 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image2;
+                    }
+                } else if (Objects.equals(gp.obj[tempMap][i].name, "BlockOfWood")) {
+                    switch (gp.player.blockWoodState) {
+                        case 1 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image;
+                        case 2 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image2;
+                        case 3 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image3;
+                    }
+                }
+            }
+        }
         canTouchEvent = false;
         //add sound effect stairs
     }

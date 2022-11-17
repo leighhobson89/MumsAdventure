@@ -21,6 +21,7 @@ public class OBJ_BackGate extends Entity {
         image = setup("/objects/backGate", gp.tileSize, gp.tileSize);
         image2 = setup("/objects/backGateOpen", gp.tileSize, gp.tileSize);
         down1 = image;
+        gp.player.backGateState = 1; //for upstairs correct image
 
         collision = true;
 
@@ -47,6 +48,7 @@ public class OBJ_BackGate extends Entity {
 
             startDialogue(this, 0);
             down1 = image2;
+            gp.player.backGateState = 2; //for upstairs correct image
             collision = false;
             opened = true;
 

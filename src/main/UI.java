@@ -444,7 +444,7 @@ public class UI {
                     }
                 }
             } else {
-                if ((Objects.equals(npc.name, "BathLeft") || Objects.equals(npc.name, "BathRight")) && !gp.player.showerAlreadyRan) {
+                if ((Objects.equals(npc.name, "BathLeft") || Objects.equals(npc.name, "BathRight")) && !gp.player.showerAlreadyRan && gp.player.missionState == MissionStates.MOP_UP_THE_SHOWER_WATER) {
                     gp.playSFX(32);
                 }
                 gp.gameState = gp.playState;

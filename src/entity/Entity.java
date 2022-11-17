@@ -74,6 +74,8 @@ public class Entity {
     public boolean showerAlreadyRan;
     public boolean showerCounterStart;
     public int waterTileCount;
+    public int blockWoodState; //for upstairs correct image
+    public int backGateState;
 
     //COUNTER
     public int spriteCounter = 0;

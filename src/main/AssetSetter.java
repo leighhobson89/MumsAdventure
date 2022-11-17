@@ -248,6 +248,16 @@ public class AssetSetter {
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
 
+        gp.obj[mapNum][i] = new OBJ_BackGate(gp);
+        gp.obj[mapNum][i].worldX = 31 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_BlockOfWood(gp);
+        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_BedMumDadBL(gp);
         gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 15 * gp.tileSize;

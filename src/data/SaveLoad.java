@@ -108,6 +108,8 @@ public class SaveLoad {
             ds.showerCounterStart = gp.player.showerCounterStart;
             ds.showerCounter = gp.player.showerCounter;
             ds.waterTileCount = gp.player.waterTileCount;
+            ds.blockWoodState = gp.player.blockWoodState;
+            ds.backGateState = gp.player.backGateState;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -277,6 +279,8 @@ public class SaveLoad {
             gp.player.showerCounterStart = ds.showerCounterStart;
             gp.player.showerCounter = ds.showerCounter;
             gp.player.waterTileCount = ds.waterTileCount;
+            gp.player.blockWoodState = ds.blockWoodState;
+            gp.player.backGateState = ds.backGateState;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

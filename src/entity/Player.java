@@ -749,7 +749,7 @@ public class Player extends Entity {
                         gp.player.waterTileCount--;
                         gp.gameState = gp.dialogueState;
                         startDialogue(this, 18);
-                        gp.misStat.endMissionTasks(MissionStates.MOP_UP_THE_SHOWER_WATER, true);
+                        gp.misStat.endMissionTasks(MissionStates.MOP_UP_THE_SHOWER_WATER, false);
                     }
                 }
                 gp.iTile[gp.currentMap][i].playSfx();
@@ -792,6 +792,7 @@ public class Player extends Entity {
 
                 if (gp.obj[gp.currentMap][i].stressLevel >= gp.obj[gp.currentMap][i].monsterMaxStress) {
                     gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image3; //possibly change this image3 variable name if more objects added
+                    gp.player.blockWoodState = 3; //for upstairs correct image
                     if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
                         gp.ui.addMessage("You chopped the chicken!");
                         gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 11);

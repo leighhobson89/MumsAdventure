@@ -25,6 +25,7 @@ public class OBJ_BlockOfWood extends Entity {
         image2 = setup("/objects/blockOfWoodChicken", gp.tileSize, gp.tileSize);
         image3 = setup("/objects/blockOfWoodBlood", gp.tileSize, gp.tileSize);
         down1 = image;
+        gp.player.blockWoodState = 1; //for upstairs correct image
         direction = "down";
         collision = false;
         goesTransparentWhenHit = false;
@@ -64,6 +65,7 @@ public class OBJ_BlockOfWood extends Entity {
             gp.eHandler.removeChickenFromPlayerInventory(gp.player.inventory);
             startDialogue(this, 0);
             down1 = image2; //set chicken on wood image
+            gp.player.blockWoodState = 2; //for upstairs correct image
             opened = true;
             gp.keyH.enterPressed = false;
         } else if (!opened && !checkIfPlayerHasChicken(gp.player.inventory) && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {

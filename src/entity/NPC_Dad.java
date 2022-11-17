@@ -119,7 +119,7 @@ public class NPC_Dad extends Entity {
         dialogueText[63][0] = "Cheers for feeding the dogs!";
         dialogueText[63][1] = "Bloody hell you stink, like a mix of chicken\nand sweat!";
         dialogueText[63][2] = "Must be from digging them weeds up.";
-        dialogueText[63][3] = "Go and get a shower, water's been on all\nmorning.";
+        dialogueText[63][3] = "Go and get a shower, I've just fettled it so\nit works now and t'water's been on all morning.";
         dialogueText[63][4] = "Don't use it all though, we can't afford\nto keep putting the bloody heating on!";
     }
 
