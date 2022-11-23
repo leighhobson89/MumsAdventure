@@ -283,12 +283,12 @@ public class UI {
             x = gp.screenWidth/2;
             g2.drawImage(gp.player.dadDown1, x, y, gp.tileSize*2, gp.tileSize*2, null);
 
-            //PHOEBE LEFT IMAGE // CHANGE FOR PIP
+            //DOG LEFT IMAGE // CHANGE FOR PIP
             x = gp.screenWidth/2 - gp.tileSize*3 - 20;
             y = (gp.tileSize*9)/2 + 20;
             g2.drawImage(gp.player.phoebeRight2, x, y, gp.tileSize*2, gp.tileSize*2, null);
 
-            //PHOEBE RIGHT IMAGE
+            //DOG RIGHT IMAGE
             x = gp.screenWidth - 420;
             g2.drawImage(gp.player.phoebeLeft1, x, y, gp.tileSize*2, gp.tileSize*2, null);
 
