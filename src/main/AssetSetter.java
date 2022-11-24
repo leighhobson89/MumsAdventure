@@ -246,6 +246,69 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
 
+        //58 57 56 9
+
+        gp.obj[mapNum][i] = new OBJ_Camper1(gp);
+        gp.obj[mapNum][i].worldX = 54 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper2(gp);
+        gp.obj[mapNum][i].worldX = 55 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper3(gp);
+        gp.obj[mapNum][i].worldX = 56 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper4(gp);
+        gp.obj[mapNum][i].worldX = 57 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper5(gp);
+        gp.obj[mapNum][i].worldX = 58 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper6(gp);
+        gp.obj[mapNum][i].worldX = 59 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper7(gp);
+        gp.obj[mapNum][i].worldX = 54 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper8(gp);
+        gp.obj[mapNum][i].worldX = 55 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper9(gp);
+        gp.obj[mapNum][i].worldX = 56 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper10(gp);
+        gp.obj[mapNum][i].worldX = 57 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper11(gp);
+        gp.obj[mapNum][i].worldX = 58 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Camper12(gp);
+        gp.obj[mapNum][i].worldX = 59 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
 
         gp.obj[mapNum][i] = new OBJ_BackGate(gp);

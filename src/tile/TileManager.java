@@ -124,6 +124,7 @@ public class TileManager {
         setup(92, "fence2", true);
         setup(93, "fenceVertical", true);
         setup(94, "bathroomFloor", false);
+        setup(95, "fenceVertical2", true);
 
 
     }
