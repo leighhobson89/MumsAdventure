@@ -4,9 +4,6 @@ import entity.Entity;
 import main.GamePanel;
 import main.MissionStates;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
 public class OBJ_BlockOfWood extends Entity {
 
     GamePanel gp;
@@ -49,26 +46,16 @@ public class OBJ_BlockOfWood extends Entity {
         dialogueText[2][0] = "I need some chicken to chop!";
     }
 
-    public boolean checkIfPlayerHasChicken(ArrayList<Entity> inventory) {
-        boolean playerHasChicken= false;
-        for (int i = 0; i < inventory.size(); i++) {
-            if (Objects.equals(inventory.get(i).name, "Chicken")) {
-                playerHasChicken = true;
-            }
-        }
-        return playerHasChicken;
-    }
-
     public void interact() {
-        if (!opened && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && checkIfPlayerHasChicken(gp.player.inventory)) {
+        if (!opened && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && checkIfPlayerHasMissionItem(gp.player.inventory, MissionStates.CHOP_CHICKEN_FOR_DOGS, gp.player.missionSubstate)) {
             gp.playSFX(4); //change to chicken slapping sound
-            gp.eHandler.removeChickenFromPlayerInventory(gp.player.inventory);
+            gp.eHandler.removeMissionItemFromPlayerInventory(gp.player.inventory, MissionStates.CHOP_CHICKEN_FOR_DOGS, gp.player.missionSubstate);
             startDialogue(this, 0);
             down1 = image2; //set chicken on wood image
             gp.player.blockWoodState = 2; //for upstairs correct image
             opened = true;
             gp.keyH.enterPressed = false;
-        } else if (!opened && !checkIfPlayerHasChicken(gp.player.inventory) && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
+        } else if (!opened && !checkIfPlayerHasMissionItem(gp.player.inventory, MissionStates.CHOP_CHICKEN_FOR_DOGS, gp.player.missionSubstate) && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
             startDialogue(this, 2);
             gp.keyH.enterPressed = false;
         } else if (!opened && gp.player.missionState < MissionStates.CHOP_CHICKEN_FOR_DOGS) {

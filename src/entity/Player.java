@@ -5,8 +5,6 @@ import main.KeyHandler;
 import main.MissionStates;
 import main.UtilityTool;
 import object.OBJ_ChoppedChicken;
-import object.OBJ_ChoppedChickenPhoebe;
-import object.OBJ_ChoppedChickenPip;
 import object.OBJ_PipsBone;
 
 import java.awt.*;
@@ -710,6 +708,13 @@ public class Player extends Entity {
             }
         }
     }
+    public void switchInteractiveTile(int i) {
+        if (i != 999) { //might need to add condition if player has walked off square to stop constant switching
+            if (gp.iTile[gp.currentMap][i].type == gp.player.type_switchable_interactive_tile && gp.iTile[gp.currentMap][i].worldX == worldX && gp.iTile[gp.currentMap][i].worldY == worldY && gp.player.bookHutState == 1) {
+                gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].switchForm();
+            }
+        }
+    }
 
     public void damageInteractiveTile(int i) {
 
@@ -719,7 +724,7 @@ public class Player extends Entity {
                 if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
                     if (gp.player.weedCount > 1) {
                         gp.player.weedCount--;
-                        gp.iTile[1][i+gp.aSetter.mapNumTotal] = gp.iTile[1][i+gp.aSetter.mapNumTotal].getDestroyedForm(); //remove weed from upstairs view - **only works if interacive tiles in same location on all maps**
+                        gp.iTile[1][i+gp.aSetter.mapNumTotal] = gp.iTile[1][i+gp.aSetter.mapNumTotal].switchForm(); //remove weed from upstairs view - **only works if interacive tiles in same location on all maps**
                     } else if (gp.player.weedCount == 1) { //end of weeding mission
                         gp.player.weedCount--;
                         gp.gameState = gp.dialogueState;
@@ -734,9 +739,9 @@ public class Player extends Entity {
                 //GENERATE PARTICLE
                 generateParticle(gp.iTile[gp.currentMap][i], gp.iTile[gp.currentMap][i]);
 
-                if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
+                if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress && gp.iTile[gp.currentMap][i].type !=gp.player.type_switchable_interactive_tile) {
                     int rand = new Random().nextInt(100);
-                    gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm();
+                    gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].switchForm();
                     if (rand > 80) {
                         int playerX = gp.player.worldX/gp.tileSize;
                         int playerY = gp.player.worldY/ gp.tileSize;
@@ -747,7 +752,7 @@ public class Player extends Entity {
                 if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
                     if (gp.player.waterTileCount > 1) {
                         gp.player.waterTileCount--;
-                        gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm();
+                        gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].switchForm();
                     } else if (gp.player.waterTileCount == 1) { //end of mop shower mission
                         gp.player.waterTileCount--;
                         gp.gameState = gp.dialogueState;
@@ -762,7 +767,7 @@ public class Player extends Entity {
                 generateParticle(gp.iTile[gp.currentMap][i], gp.iTile[gp.currentMap][i]);
 
                 if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
-                    gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm();
+                    gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].switchForm();
                 }
             }
         }

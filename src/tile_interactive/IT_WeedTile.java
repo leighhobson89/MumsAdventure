@@ -37,7 +37,7 @@ public class IT_WeedTile extends InteractiveTile {
         gp.playSFX(23);
     }
 
-    public InteractiveTile getDestroyedForm() {
+    public InteractiveTile switchForm() {
         InteractiveTile tile = new IT_BareRockery(gp, worldX/gp.tileSize, worldY/gp.tileSize);
         return tile;
     }

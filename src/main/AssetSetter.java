@@ -308,6 +308,51 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_Bookhut1_Left(gp);
+        gp.obj[mapNum][i].worldX = 36 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bookhut1_Center(gp);
+        gp.obj[mapNum][i].worldX = 37 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bookhut1_Right(gp);
+        gp.obj[mapNum][i].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bookhut2_Left(gp);
+        gp.obj[mapNum][i].worldX = 36 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bookhut2_Center(gp);
+        gp.obj[mapNum][i].worldX = 37 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bookhut2_Right(gp);
+        gp.obj[mapNum][i].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bookhut3_Left(gp);
+        gp.obj[mapNum][i].worldX = 36 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bookhut3_Center(gp);
+        gp.obj[mapNum][i].worldX = 37 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Bookhut3_Right(gp);
+        gp.obj[mapNum][i].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
 

@@ -63,6 +63,7 @@ public class DataStorage implements Serializable {
     int waterTileCount;
     int backGateState;
     int blockWoodState;
+    int bookHutState;
 
     //PLAYER INVENTORY
     ArrayList<String> itemNames = new ArrayList<>();

@@ -121,6 +121,11 @@ public class NPC_Dad extends Entity {
         dialogueText[63][2] = "Must be from digging them weeds up.";
         dialogueText[63][3] = "Go and get a shower, I've just fettled it so\nit works now and t'water's been on all morning.";
         dialogueText[63][4] = "Don't use it all though, we can't afford\nto keep putting the bloody heating on!";
+
+        //MAGIC BOOK QUIZ
+        dialogueText[64][0] = "I wonder of we still have that old blue book\nyou know which I mean?";
+        dialogueText[64][1] = "It's that personal quiz book where it knows\nyour personality type by your name and age an\nhabits etc.  Do you remember it?";
+        dialogueText[64][2] = "Go and see if you can find it int' book hut\nfor me and we'll have a do at it!";
     }
 
     public void setAction(int goalCol, int goalRow) {
@@ -142,15 +147,17 @@ public class NPC_Dad extends Entity {
 
     public void speak() {
         switch (gp.player.missionToSet) {
-            case 5: gp.player.missionState = 5;
+            case MissionStates.MOP_UP_THE_SHOWER_WATER -> gp.player.missionState = MissionStates.MOP_UP_THE_SHOWER_WATER;
+            case MissionStates.MAGIC_BOOK_QUIZ -> gp.player.missionState = MissionStates.MAGIC_BOOK_QUIZ;
         }
         if (gp.player.weedCount > 0) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;
             gp.player.setShovelFlag = true;
         }
         switch (gp.player.missionState) {
-            case 1 -> dialogueSet = 61; //weeding mission
-            case 5 -> dialogueSet = 63; //mop shower water mission
+            case MissionStates.WEEDING_MISSION -> dialogueSet = 61; //weeding mission
+            case MissionStates.MOP_UP_THE_SHOWER_WATER -> dialogueSet = 63; //mop shower water mission
+            case MissionStates.MAGIC_BOOK_QUIZ -> dialogueSet = 64; //magic book quiz
             default -> dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission
         }
         //character specific stuff here

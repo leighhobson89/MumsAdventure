@@ -65,6 +65,8 @@ public class Entity {
     public int andreaTempGoalCol;
     public int andreaTempGoalRow;
     public boolean goesTransparentWhenHit;
+    public boolean goesTransparentWhenStoodOn;
+    public boolean insideShed;
     public boolean isUpdateable;
     public boolean pipChickenEaten;
     public boolean phoebeChickenEaten;
@@ -76,6 +78,7 @@ public class Entity {
     public int waterTileCount;
     public int blockWoodState; //for upstairs correct image
     public int backGateState;
+    public int bookHutState = 0;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -180,6 +183,7 @@ public class Entity {
     public final int type_light = 10;
     public final int type_axe = 11;
     public final int type_mop = 12;
+    public final int type_switchable_interactive_tile = 13;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -247,6 +251,9 @@ public class Entity {
         //overridden in specific monster class
     }
     public void speak() {
+        //overridden in specific entity class
+    }
+    public void makeObjectTransparentAndTempRemoveCollision(Entity entity) {
         //overridden in specific entity class
     }
 
@@ -377,6 +384,12 @@ public class Entity {
     }
 
     public void update() {
+
+        int iTileIndex;
+        if (gp.player.bookHutState == 1) {
+            iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+            gp.player.switchInteractiveTile(iTileIndex);
+        }
 
         if (gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.player.missionSubstate >= MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT) {
             gp.misStat.endMissionTasks(MissionStates.CHOP_CHICKEN_FOR_DOGS, false);
@@ -1007,5 +1020,25 @@ public class Entity {
             }
         }
         return count;
+    }
+
+    public boolean checkIfPlayerHasMissionItem(ArrayList<Entity> inventory, int missionState, int missionSubState) {
+        boolean playerHasRequiredItem = false;
+        for (int i = 0; i < inventory.size(); i++) {
+            switch(missionState) {
+                case MissionStates.CHOP_CHICKEN_FOR_DOGS:
+                    if (Objects.equals(inventory.get(i).name, "Chicken")) {
+                        playerHasRequiredItem = true;
+                    }
+                    break;
+                case MissionStates.MAGIC_BOOK_QUIZ:
+                    if (Objects.equals(inventory.get(i).name, "BookHutKey") && missionSubState == 0) {
+                        playerHasRequiredItem = true;
+                    }
+                    break;
+            }
+
+        }
+        return playerHasRequiredItem;
     }
 }

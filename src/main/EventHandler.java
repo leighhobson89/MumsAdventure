@@ -57,12 +57,14 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(0, 19, 10, "right")) {transitionUpDownStairs(1, 24, 10);}
-            else if (hit(1, 24, 10, "left")) {transitionUpDownStairs(0, 19, 10);}
+            if (hit(0, 19, 10, "right", "")) {transitionUpDownStairs(1, 24, 10);}
+            else if (hit(1, 24, 10, "left", "")) {transitionUpDownStairs(0, 19, 10);}
+            else if (hit(0, 37, 8, "any", "up")) {flagInsideShed(false);}
+            else if (hit(0, 37, 8, "any", "down")) {flagInsideShed(true);}
         }
     }
 
-    public boolean hit(int map, int col, int row, String reqDirection) {
+    public boolean hit(int map, int col, int row, String reqDirection, String exclude) {
 
         boolean hit = false;
 
@@ -73,7 +75,7 @@ public class EventHandler {
             eventRect[map][col][row].y = row*gp.tileSize + eventRect[map][col][row].y;
 
             if (gp.player.solidArea.intersects(eventRect[map][col][row]) && !eventRect[map][col][row].eventDone) {
-                if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
+                if ((gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) && !reqDirection.contentEquals(exclude)) {
                     hit = true;
 
                     previousEventX = gp.player.worldX;
@@ -234,12 +236,21 @@ public class EventHandler {
         }
     }
 
-    public void removeChickenFromPlayerInventory(ArrayList<Entity> inventory) {
+    public void removeMissionItemFromPlayerInventory(ArrayList<Entity> inventory, int missionState, int missionSubState) {
         for (int i = 0; i < inventory.size(); i++) {
-            if (Objects.equals(inventory.get(i).name, "Chicken")) {
-                inventory.remove(i);
-                break;
+            switch(missionState) {
+                case MissionStates.CHOP_CHICKEN_FOR_DOGS:
+                    if (Objects.equals(inventory.get(i).name, "Chicken")) {
+                        inventory.remove(i);
+                    }
+                    break;
+                case MissionStates.MAGIC_BOOK_QUIZ:
+                    if (Objects.equals(inventory.get(i).name, "BookHutKey") && missionSubState == 0) {
+                        inventory.remove(i);
+                    }
+                    break;
             }
+            break;
         }
     }
 
@@ -263,5 +274,13 @@ public class EventHandler {
         gp.player.waterTileCount = gp.aSetter.setInteractiveTilesAfterStart(MissionStates.MOP_UP_THE_SHOWER_WATER);
         gp.playSFX(33);
         gp.player.missionSubstate++;
+    }
+
+    public void flagInsideShed(boolean isInside) {
+        if (isInside) {
+            gp.player.insideShed = true;
+        } else {
+            gp.player.insideShed = false;
+        }
     }
 }

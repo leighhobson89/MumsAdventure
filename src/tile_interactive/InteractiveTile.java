@@ -27,7 +27,7 @@ public class InteractiveTile extends Entity {
 
     }
 
-    public InteractiveTile getDestroyedForm() {
+    public InteractiveTile switchForm() {
         return null;
     }
     public void update() {

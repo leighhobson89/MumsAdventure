@@ -73,6 +73,15 @@ public class EntityGenerator {
             case OBJ_Camper10.OBJ_NAME: obj = new OBJ_Camper10(gp); break;
             case OBJ_Camper11.OBJ_NAME: obj = new OBJ_Camper11(gp); break;
             case OBJ_Camper12.OBJ_NAME: obj = new OBJ_Camper12(gp); break;
+            case OBJ_Bookhut1_Left.OBJ_NAME: obj = new OBJ_Bookhut1_Left(gp); break;
+            case OBJ_Bookhut1_Center.OBJ_NAME: obj = new OBJ_Bookhut1_Center(gp); break;
+            case OBJ_Bookhut1_Right.OBJ_NAME: obj = new OBJ_Bookhut1_Right(gp); break;
+            case OBJ_Bookhut2_Left.OBJ_NAME: obj = new OBJ_Bookhut2_Left(gp); break;
+            case OBJ_Bookhut2_Center.OBJ_NAME: obj = new OBJ_Bookhut2_Center(gp); break;
+            case OBJ_Bookhut2_Right.OBJ_NAME: obj = new OBJ_Bookhut2_Right(gp); break;
+            case OBJ_Bookhut3_Left.OBJ_NAME: obj = new OBJ_Bookhut3_Left(gp); break;
+            case OBJ_Bookhut3_Center.OBJ_NAME: obj = new OBJ_Bookhut3_Center(gp); break;
+            case OBJ_Bookhut3_Right.OBJ_NAME: obj = new OBJ_Bookhut3_Right(gp); break;
         }
         return obj;
     }

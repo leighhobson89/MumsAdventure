@@ -37,7 +37,7 @@ public class IT_WaterTile extends InteractiveTile {
         gp.playSFX(31);
     }
 
-    public InteractiveTile getDestroyedForm() {
+    public InteractiveTile switchForm() {
         InteractiveTile tile = new IT_Bathroom(gp, worldX/gp.tileSize, worldY/gp.tileSize);
         return tile;
     }

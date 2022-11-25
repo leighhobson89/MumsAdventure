@@ -125,6 +125,9 @@ public class TileManager {
         setup(93, "fenceVertical", true);
         setup(94, "bathroomFloor", false);
         setup(95, "fenceVertical2", true);
+        setup(96, "bookHutBackLeft", true);
+        setup(97, "bookHutBackCentre", false);
+        setup(98, "bookHutBackRight", true);
 
 
     }
