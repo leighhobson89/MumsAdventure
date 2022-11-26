@@ -48,9 +48,11 @@ public class OBJ_Bookhut1_Center extends Entity {
             gp.playSFX(3);
             gp.eHandler.removeMissionItemFromPlayerInventory(gp.player.inventory, MissionStates.MAGIC_BOOK_QUIZ, gp.player.missionSubstate);
             startDialogue(this, 0);
+            changeOtherObjectImage("Bookhut2_Center", 37, 7, 2);
             down1 = image2; //set open book hut Image
             gp.player.bookHutState = 1;
             gp.player.missionSubstate = 1;
+            collision = false;
             opened = true;
             gp.keyH.enterPressed = false;
         } else if (!opened && !checkIfPlayerHasMissionItem(gp.player.inventory, MissionStates.MAGIC_BOOK_QUIZ, gp.player.missionSubstate) && gp.player.missionState == MissionStates.MAGIC_BOOK_QUIZ) {
@@ -60,7 +62,7 @@ public class OBJ_Bookhut1_Center extends Entity {
             startDialogue(this, 1);
             gp.keyH.enterPressed = false;
         } else if (opened) {
-            startDialogue(this, 0);
+            startDialogue(this, 3);
             gp.keyH.enterPressed = false;
         }
     }

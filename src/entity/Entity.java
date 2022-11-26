@@ -254,7 +254,15 @@ public class Entity {
         //overridden in specific entity class
     }
     public void makeObjectTransparentAndTempRemoveCollision(Entity entity) {
-        //overridden in specific entity class
+        if (gp.player.bookHutState == 1 && gp.player.insideShed && entity.goesTransparentWhenStoodOn) {
+            if (Math.abs(entity.worldX - gp.player.worldX) <= 1 || Math.abs(entity.worldY - gp.player.worldY) <= 1) {
+                entity.collision = false;
+                entity.transparent = true;
+            }
+        } else if (!Objects.equals(entity.name, "Bookhut1_Center")) {
+            entity.transparent = false;
+            entity.collision = true;
+        }
     }
 
     public void facePlayer() {
@@ -384,6 +392,14 @@ public class Entity {
     }
 
     public void update() {
+
+        for (int i = 0; i < gp.obj[1].length; i++) {
+            if (gp.obj[gp.currentMap][i] != null) {
+                if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOn) {
+                    makeObjectTransparentAndTempRemoveCollision(this);
+                }
+            }
+        }
 
         int iTileIndex;
         if (gp.player.bookHutState == 1) {
@@ -1040,5 +1056,17 @@ public class Entity {
 
         }
         return playerHasRequiredItem;
+    }
+
+    public void changeOtherObjectImage(String name, int worldX, int worldY, int image) {
+        for (int i = 0; i < gp.obj.length; i++) {
+            if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, name) && gp.obj[gp.currentMap][i].worldX == worldX && gp.obj[gp.currentMap][i].worldY == worldY) {
+                switch (image) {
+                    case 1 -> gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image;
+                    case 2 -> gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
+                    case 3 -> gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image3;
+                }
+            }
+        }
     }
 }

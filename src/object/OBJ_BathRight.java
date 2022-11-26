@@ -18,7 +18,8 @@ public class OBJ_BathRight extends Entity {
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "BathRight";
-        down1 = setup("/objects/bathRight", gp.tileSize, gp.tileSize);
+        image = setup("/objects/bathRight", gp.tileSize, gp.tileSize);
+        down1 = image;
         direction = "down";
         collision = true;
 

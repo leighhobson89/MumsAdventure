@@ -82,6 +82,7 @@ public class EntityGenerator {
             case OBJ_Bookhut3_Left.OBJ_NAME: obj = new OBJ_Bookhut3_Left(gp); break;
             case OBJ_Bookhut3_Center.OBJ_NAME: obj = new OBJ_Bookhut3_Center(gp); break;
             case OBJ_Bookhut3_Right.OBJ_NAME: obj = new OBJ_Bookhut3_Right(gp); break;
+            case OBJ_BookHutKey.OBJ_NAME: obj = new OBJ_BookHutKey(gp); break;
         }
         return obj;
     }

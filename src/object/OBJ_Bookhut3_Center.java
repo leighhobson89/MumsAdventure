@@ -32,21 +32,4 @@ public class OBJ_Bookhut3_Center extends Entity {
         solidAreaDefaultY = solidArea.y;
 
     }
-
-    public void update() {
-        makeObjectTransparentAndTempRemoveCollision(this);
-    }
-
-    public void makeObjectTransparentAndTempRemoveCollision(Entity entity) {
-        if (gp.player.bookHutState == 1 && gp.player.insideShed) {
-            collision = false;
-            if (gp.player.worldX == this.worldX && gp.player.worldY == this.worldY) {
-                transparent = true;
-            }
-        }
-         else {
-            transparent = false;
-            collision = true;
-        }
-    }
 }

@@ -59,8 +59,12 @@ public class EventHandler {
         if (canTouchEvent) {
             if (hit(0, 19, 10, "right", "")) {transitionUpDownStairs(1, 24, 10);}
             else if (hit(1, 24, 10, "left", "")) {transitionUpDownStairs(0, 19, 10);}
-            else if (hit(0, 37, 8, "any", "up")) {flagInsideShed(false);}
-            else if (hit(0, 37, 8, "any", "down")) {flagInsideShed(true);}
+            else if (hit(0, 37, 8, "down", "up")) {
+                flagInsideShed(false);
+            }
+            else if (hit(0, 37, 8, "up", "down")) {
+                flagInsideShed(true);
+            }
         }
     }
 
@@ -75,7 +79,7 @@ public class EventHandler {
             eventRect[map][col][row].y = row*gp.tileSize + eventRect[map][col][row].y;
 
             if (gp.player.solidArea.intersects(eventRect[map][col][row]) && !eventRect[map][col][row].eventDone) {
-                if ((gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) && !reqDirection.contentEquals(exclude)) {
+                if (gp.player.direction.contentEquals(reqDirection) || (reqDirection.contentEquals("any") && !reqDirection.contentEquals(exclude))) {
                     hit = true;
 
                     previousEventX = gp.player.worldX;
@@ -250,7 +254,6 @@ public class EventHandler {
                     }
                     break;
             }
-            break;
         }
     }
 

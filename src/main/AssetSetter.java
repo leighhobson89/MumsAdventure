@@ -353,6 +353,11 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_BookHutKey(gp);
+        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
 

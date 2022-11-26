@@ -5,9 +5,7 @@ import main.GamePanel;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
 import object.*;
-import tile_interactive.IT_BareRockery;
-import tile_interactive.IT_WeedTile;
-import tile_interactive.InteractiveTile;
+import tile_interactive.*;
 
 import java.io.*;
 import java.util.Objects;
@@ -32,12 +30,26 @@ public class SaveLoad {
     }
 
     public Entity getITile(String itemName, int col, int row) {
-        Entity iTile = null;
+        Entity iTile = switch (itemName) {
+            case "IT_Weed" -> new IT_WeedTile(gp, col, row);
+            case "IT_RockeryBare" -> new IT_BareRockery(gp, col, row);
+            case "IT_Water" -> new IT_WaterTile(gp, col, row);
+            case "IT_Bathroom" -> new IT_Bathroom(gp, col, row);
+            case "IT_BookHut1_Left" -> new IT_BookHut1_Left(gp, col, row);
+            case "IT_BookHut1_Left_TR" -> new IT_BookHut1_Left_TR(gp, col, row);
+            case "IT_BookHut1_Right" -> new IT_BookHut1_Right(gp, col, row);
+            case "IT_BookHut1_Right_TR" -> new IT_BookHut1_Right_TR(gp, col, row);
+            case "IT_BookHut2_Left" -> new IT_BookHut2_Left(gp, col, row);
+            case "IT_BookHut2_Left_TR" -> new IT_BookHut2_Left_TR(gp, col, row);
+            case "IT_BookHut2_Right" -> new IT_BookHut2_Right(gp, col, row);
+            case "IT_BookHut2_Right_TR" -> new IT_BookHut2_Right_TR(gp, col, row);
+            case "IT_BookHut3_Left" -> new IT_BookHut3_Left(gp, col, row);
+            case "IT_BookHut3_Left_TR" -> new IT_BookHut3_Left_TR(gp, col, row);
+            case "IT_BookHut3_Right" -> new IT_BookHut3_Right(gp, col, row);
+            case "IT_BookHut3_Right_TR" -> new IT_BookHut3_Right_TR(gp, col, row);
+            default -> null;
+        };
 
-        switch(itemName) {
-            case "IT_Weed": iTile = new IT_WeedTile(gp, col, row); break;
-            case "IT_RockeryBare": iTile = new IT_BareRockery(gp, col, row); break;
-        }
         return iTile;
     }
 
@@ -291,7 +303,6 @@ public class SaveLoad {
             }
 
             if (loadWithChoppedChickenEquipped) {
-                gp.player.choppedChickenCount = ds.choppedChickenCount;
                 gp.player.haveChoppedChickenResource = true;
             }
 
@@ -334,10 +345,15 @@ public class SaveLoad {
                         }
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
                         if (gp.obj[mapNum][i].opened) {
-                            switch(gp.obj[mapNum][i].name) { //add cases here for objects that could be loaded in an open state but dont have 2 images
-                                case "Cupboard2": gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image; gp.obj[mapNum][i].collision = true; break;
-                                case "Bin_Green": gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image; gp.obj[mapNum][i].collision = true; break;
-                                default:  gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2; gp.obj[mapNum][i].collision = false; break;
+                            switch (gp.obj[mapNum][i].name) { //add cases here for objects that could be loaded in an open state but dont have 2 images
+                                case "Cupboard2", "Bin_Green", "BathLeft", "BathRight" -> {
+                                    gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image;
+                                    gp.obj[mapNum][i].collision = true;
+                                }
+                                default -> {
+                                    gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
+                                    gp.obj[mapNum][i].collision = false;
+                                }
                             }
                         }
                     }
