@@ -224,6 +224,16 @@ public class Player extends Entity {
         }
     }
 
+    public void setProjectile(Entity object) {
+        if (object != null) {
+            if (Objects.equals(object.name, "Pip's Bone")) {
+                projectile = new OBJ_PipsBone(gp);
+            } else if (Objects.equals(object.name, "Chopped Chicken")) {
+                projectile = new OBJ_ChoppedChicken(gp);
+            }
+        }
+    }
+
     public void getImage(String colorOutfit, boolean loadGame) {
         //MENU
         down1 = setup("/player/mum_down1_brown", gp.tileSize, gp.tileSize);
@@ -515,7 +525,7 @@ public class Player extends Entity {
                 String text = "";
                 int selectSfx;
 
-                if (canObtainItem(gp.obj[gp.currentMap][i], this)) { //npc not required here so passing !Andrea (object being picked up)
+                if (canObtainItem(gp.obj[gp.currentMap][i], this)) {
                     if (gp.obj[gp.currentMap][i].isWeapon) {
                         if (currentWeapon == null) {
                             currentWeapon = gp.obj[gp.currentMap][i];
@@ -526,6 +536,11 @@ public class Player extends Entity {
                         if (currentArmour == null) {
                             currentArmour = gp.obj[gp.currentMap][i];
                             defense = getDefense();
+                        }
+                    } else if (gp.obj[gp.currentMap][i].isProjectile) {
+                        if (currentProjectile == null) {
+                            currentProjectile = gp.obj[gp.currentMap][i];
+                            setProjectile(currentProjectile);
                         }
                     } else if (gp.obj[gp.currentMap][i].isWeapon && gp.obj[gp.currentMap][i] == currentWeapon) {
                         currentWeapon = null;
@@ -857,7 +872,7 @@ public class Player extends Entity {
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
 
-            if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
+            if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon && currentWeapon == null) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage(gp.ui.outfitChosen);
@@ -866,7 +881,7 @@ public class Player extends Entity {
                 currentWeapon = null;
                 attack = getAttack();
                 gp.playSFX(11);
-            } else if (selectedItem.isProjectile && selectedItem != currentProjectile) {
+            } else if (selectedItem.isProjectile && selectedItem != currentProjectile && currentProjectile == null) {
                 currentProjectile = selectedItem;
                 if (Objects.equals(selectedItem.name, "Pip's Bone")) {
                     projectile = new OBJ_PipsBone(gp);
@@ -879,7 +894,7 @@ public class Player extends Entity {
                 projectile = null;
                 gp.playSFX(11);
             }
-            if (selectedItem.type == type_armour && selectedItem != currentArmour) {
+            if (selectedItem.type == type_armour && selectedItem != currentArmour && currentArmour == null) {
                 currentArmour = selectedItem;
                 defense = getDefense();
                 gp.playSFX(11);

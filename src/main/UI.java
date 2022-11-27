@@ -616,13 +616,12 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(32F));
 
         int textX = frameX + 20;
-        int textY = frameY + gp.tileSize;
+        int textY = frameY + gp.tileSize - 10;
         final int lineHeight = 35;
 
         //NAMES
         g2.drawString("Level", textX, textY); textY += lineHeight;
         g2.drawString("Stress", textX, textY); textY += lineHeight;
-        g2.drawString("Toys", textX, textY); textY += lineHeight;
         g2.drawString("Strength", textX, textY); textY += lineHeight;
         g2.drawString("Dexterity", textX, textY); textY += lineHeight;
         g2.drawString("Attack", textX, textY); textY += lineHeight;
@@ -631,13 +630,13 @@ public class UI {
         g2.drawString("Next Level", textX, textY); textY += lineHeight;
         g2.drawString("Coin", textX, textY); textY += lineHeight + 10;
         g2.drawString("Weapon", textX, textY); textY += lineHeight + 15;
-        g2.drawString("Armour", textX, textY);
+        g2.drawString("Armour", textX, textY); textY += lineHeight + 15;
         g2.drawString("Projectile", textX, textY);
 
         //VALUES
         int tailX = (frameX + frameWidth) - 30;
         // Reset textY
-        textY = frameY + gp.tileSize;
+        textY = frameY + gp.tileSize - 10;
         String value;
 
         value = String.valueOf(gp.player.level);
@@ -650,10 +649,10 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        value = gp.player.mana + "/" + gp.player.maxMana;
-        textX = getXForAlignToRightText(value, tailX);
-        g2.drawString(value, textX, textY);
-        textY += lineHeight;
+//        value = gp.player.mana + "/" + gp.player.maxMana;
+//        textX = getXForAlignToRightText(value, tailX);
+//        g2.drawString(value, textX, textY);
+//        textY += lineHeight;
 
         value = String.valueOf(gp.player.strength);
         textX = getXForAlignToRightText(value, tailX);
@@ -689,6 +688,7 @@ public class UI {
         textX = getXForAlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
+
         if (gp.player.currentWeapon != null) {
             g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY-24, null);
         }
@@ -696,6 +696,7 @@ public class UI {
         if (gp.player.currentArmour != null) {
             g2.drawImage(gp.player.currentArmour.down1, tailX - gp.tileSize, textY-22, null);
         }
+        textY += gp.tileSize;
         if (gp.player.currentProjectile != null) {
             g2.drawImage(gp.player.currentProjectile.down1, tailX - gp.tileSize, textY-22, null);
         }
@@ -739,9 +740,9 @@ public class UI {
         for (int i = 0; i < entity.inventory.size(); i++) {
 
             //EQUIP CURSOR
-            if (entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentArmour || entity.inventory.get(i) == entity.currentProjectile || (entity.inventory.get(i) == entity.currentLight && !Objects.equals(entity.inventory.get(i).name, "Anti Brightness Pills"))) {
+            if ((entity.currentWeapon != null && Objects.equals(entity.inventory.get(i).name, entity.currentWeapon.name)) || (entity.currentArmour != null && Objects.equals(entity.inventory.get(i).name, entity.currentArmour.name)) || (entity.currentProjectile != null && Objects.equals(entity.inventory.get(i).name, entity.currentProjectile.name)) || ((entity.currentLight != null && Objects.equals(entity.inventory.get(i).name, entity.currentLight.name)) && !Objects.equals(entity.inventory.get(i).name, "Anti Brightness Pills"))) {
                 g2.setColor(new Color(240, 190, 90));
-                g2. fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
+                g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
 
             }
             g2.drawImage(entity.inventory.get(i).down1, slotX, slotY, null);
