@@ -123,7 +123,7 @@ public class NPC_Dad extends Entity {
         dialogueText[63][4] = "Don't use it all though, we can't afford\nto keep putting the bloody heating on!";
 
         //MAGIC BOOK QUIZ
-        dialogueText[64][0] = "I wonder of we still have that old blue book\nyou know which I mean?";
+        dialogueText[64][0] = "I wonder of we still have that old red book\nyou know which I mean?";
         dialogueText[64][1] = "It's that personal quiz book where it knows\nyour personality type by your name and age an\nhabits etc.  Do you remember it?";
         dialogueText[64][2] = "Go and see if you can find it int' book hut\nfor me and we'll have a do at it!";
     }

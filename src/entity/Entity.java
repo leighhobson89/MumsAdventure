@@ -271,19 +271,24 @@ public class Entity {
             if ((Math.abs(object.worldX/gp.tileSize - player.worldX/gp.tileSize) <= 1 || Math.abs(object.worldY/gp.tileSize - player.worldY/gp.tileSize) <= 1) && object.goesTransparentWhenStoodOn) {
                 object.collisionType = 1;
                 switch (side) {
-                    case "left":
+                    case "left" -> {
                         object.solidArea.x = 0;
                         object.solidArea.y = 0;
                         object.solidArea.width = 5;
                         object.solidArea.height = 48;
-                        break;
-                    case "right":
+                    }
+                    case "right" -> {
                         object.solidArea.x = 43;
                         object.solidArea.y = 0;
                         object.solidArea.width = 5;
                         object.solidArea.height = 48;
+                    }
                 }
                 object.transparent = true;
+            }
+
+            if (missionSubstate == 1 && missionState == MissionStates.MAGIC_BOOK_QUIZ) {
+                changeOtherObjectImage("MagicQuizBook", 37, 6, 2);
             }
         }
 
@@ -1096,12 +1101,18 @@ public class Entity {
     }
 
     public void changeOtherObjectImage(String name, int worldX, int worldY, int image) {
-        for (int i = 0; i < gp.obj.length; i++) {
-            if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, name) && gp.obj[gp.currentMap][i].worldX == worldX && gp.obj[gp.currentMap][i].worldY == worldY) {
-                switch (image) {
-                    case 1 -> gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image;
-                    case 2 -> gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
-                    case 3 -> gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image3;
+        int objectWorldX;
+        int objectWorldY;
+        for (int i = 0; i < gp.obj[1].length; i++) {
+            if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, name)) {
+                objectWorldX = gp.obj[gp.currentMap][i].worldX/gp.tileSize;
+                objectWorldY = gp.obj[gp.currentMap][i].worldY/gp.tileSize;
+                if (objectWorldX == worldX && objectWorldY == worldY) {
+                    switch (image) {
+                        case 1 -> gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image;
+                        case 2 -> gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
+                        case 3 -> gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image3;
+                    }
                 }
             }
         }

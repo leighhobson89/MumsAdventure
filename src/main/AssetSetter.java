@@ -348,6 +348,11 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_MagicQuizBook(gp);
+        gp.obj[mapNum][i].worldX = 37 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_Bookhut3_Right(gp);
         gp.obj[mapNum][i].worldX = 38 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;

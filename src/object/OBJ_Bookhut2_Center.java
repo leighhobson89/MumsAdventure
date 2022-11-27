@@ -18,6 +18,7 @@ public class OBJ_Bookhut2_Center extends Entity {
         name = OBJ_NAME;
         displayName = "Bookhut2_Center";
         image = setup("/objects/bookhut2_center", gp.tileSize, gp.tileSize);
+        image2 = setup("/objects/bookhut2_center_open", gp.tileSize, gp.tileSize);
         down1 = image;
         direction = "down";
         collision = false;

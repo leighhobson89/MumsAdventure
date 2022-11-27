@@ -534,6 +534,7 @@ public class Player extends Entity {
                     } else if (gp.obj[gp.currentMap][i].isProjectile && gp.obj[gp.currentMap][i] == currentProjectile) {
                         currentProjectile = null;
                     }
+
                     if (Objects.equals(gp.obj[gp.currentMap][i].name, "Pip's Bone")) {
                         if (firstTimePickUpBone) {
                             gp.gameState = gp.dialogueState;
@@ -542,10 +543,21 @@ public class Player extends Entity {
                         }
                         boneCount = 1;
                         gp.player.boneIndex = gp.player.inventory.size()-1;
-                    } if (Objects.equals(gp.obj[gp.currentMap][i].name, "Chopped Chicken")) {
+                    }
+
+                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "Chopped Chicken")) {
                         choppedChickenCount++;
                         gp.player.chickenIndex = gp.player.inventory.size()-1;
                     }
+
+                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "MagicQuizBook")) {
+                        for (int j = 0; j < inventory.size(); j++) {
+                            if (Objects.equals(inventory.get(j).name, "MagicQuizBook")) {
+                                inventory.get(j).down1 = inventory.get(j).image2;
+                            }
+                        }
+                    }
+
                     selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
                     gp.playSFX(selectSfx);
                     text = "Picked up " + gp.obj[gp.currentMap][i].displayName + "!";

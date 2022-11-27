@@ -293,6 +293,11 @@ public class EventHandler {
             gp.player.insideShed = true;
         } else {
             gp.player.insideShed = false;
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "MagicQuizBook")) {
+                    gp.player.changeOtherObjectImage("MagicQuizBook", 37, 6, 1);
+                }
+            }
         }
         System.out.println("Shed inside? " + gp.player.insideShed);
     }
