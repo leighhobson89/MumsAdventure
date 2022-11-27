@@ -571,6 +571,9 @@ public class Player extends Entity {
                                 inventory.get(j).down1 = inventory.get(j).image2;
                             }
                         }
+                        if (missionState == MissionStates.MAGIC_BOOK_QUIZ) {
+                            missionSubstate = 2;
+                        }
                     }
 
                     selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
