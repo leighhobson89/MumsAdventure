@@ -282,10 +282,12 @@ public class Player extends Entity {
 
     public void update() {
 
-        for (int i = 0; i < gp.obj[1].length; i++) {
-            if (gp.obj[gp.currentMap][i] != null) {
-                if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOn) {
-                    handleTransparencyAndCollisionInBookHut(this, gp.obj[gp.currentMap][i]);
+        if (missionState >= MissionStates.MAGIC_BOOK_QUIZ) {
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null) {
+                    if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOn) {
+                        handleTransparencyAndCollisionInBookHut(this, gp.obj[gp.currentMap][i]);
+                    }
                 }
             }
         }
@@ -807,10 +809,10 @@ public class Player extends Entity {
                 gp.obj[gp.currentMap][i].stressLevel += damage;
                 gp.obj[gp.currentMap][i].invincible = true;
 
-                if (gp.obj[gp.currentMap][i].stressLevel >= gp.obj[gp.currentMap][i].monsterMaxStress) {
+                if (gp.obj[gp.currentMap][i].stressLevel >= gp.obj[gp.currentMap][i].monsterMaxStress && Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood")) {
                     gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image3; //possibly change this image3 variable name if more objects added
                     gp.player.blockWoodState = 3; //for upstairs correct image
-                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
+                    if (gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
                         gp.ui.addMessage("You chopped the chicken!");
                         gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 11);
                         gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 10);

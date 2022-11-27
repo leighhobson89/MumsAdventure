@@ -872,7 +872,7 @@ public class Entity {
                         dyingAnimation(g2);
                     }
                     if (this.goesTransparentWhenStoodOn && this.transparent) {
-                        changeAlpha(g2, 0.3F);
+                        changeAlpha(g2, 0.6F);
                     }
 
             g2.drawImage(image, tempScreenX, tempScreenY, null);

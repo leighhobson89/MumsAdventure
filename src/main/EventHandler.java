@@ -175,6 +175,12 @@ public class EventHandler {
 
         tempCol = col;
         tempRow = row;
+        setImageStates(tempMap);
+        canTouchEvent = false;
+        //add sound effect stairs
+    }
+
+    public void setImageStates(int tempMap) {
         for (int i = 0; i < gp.obj[1].length; i++) { //set correct image state for outdoor objects that appear on both maps, add more as required
             if (gp.obj[tempMap][i] != null) {
                 if (Objects.equals(gp.obj[tempMap][i].name, "BackGate")) {
@@ -188,11 +194,14 @@ public class EventHandler {
                         case 2 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image2;
                         case 3 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image3;
                     }
+                } else if (Objects.equals(gp.obj[tempMap][i].name, "Bookhut1_Center") || Objects.equals(gp.obj[tempMap][i].name, "Bookhut2_Center") ) {
+                    switch (gp.player.bookHutState) {
+                        case 0 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image;
+                        case 1 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image2;
+                    }
                 }
             }
         }
-        canTouchEvent = false;
-        //add sound effect stairs
     }
 
     public void cupboardHall() {

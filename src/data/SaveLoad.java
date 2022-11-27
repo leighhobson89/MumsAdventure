@@ -380,6 +380,9 @@ public class SaveLoad {
             gp.player.andreaOnMap = ds.andreaOnMap;
             gp.player.firstTimeChattingToAndrea = ds.firstTimeChattingToAndrea;
 
+            //SET CORRECT IMAGE STATES
+            gp.eHandler.setImageStates(gp.currentMap);
+
 
         } catch (Exception e) {
             System.out.println("Load Exception!");
