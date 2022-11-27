@@ -204,7 +204,6 @@ public class SaveLoad {
 
             //NPCS ON MAP
             ds.andreaOnMap = gp.player.andreaOnMap;
-            ds.firstTimeChattingToAndrea = gp.player.firstTimeChattingToAndrea;
 
             //Write the DataStorage Object
             oos.writeObject(ds);
@@ -378,7 +377,6 @@ public class SaveLoad {
 
             //NPCS ON MAP
             gp.player.andreaOnMap = ds.andreaOnMap;
-            gp.player.firstTimeChattingToAndrea = ds.firstTimeChattingToAndrea;
 
             //SET CORRECT IMAGE STATES
             gp.eHandler.setImageStates(gp.currentMap);

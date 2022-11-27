@@ -592,6 +592,7 @@ public class UI {
                 }
                 gp.gameState = gp.playState;
                 npc.dialogueIndex = 0;
+                npc.currentDialogueFinished = true;
             }
         }
 
@@ -1169,8 +1170,7 @@ public class UI {
                         npc.inventory.remove(npc.inventory.get(itemIndex));
                         gp.playSFX(11);
                         gp.player.missionSubstate++;
-                        if (gp.player.missionSubstate == 2) {
-                            gp.player.missionSubstate = 0;
+                        if (gp.player.missionSubstate == 3) {
                             gp.player.andreaTempGoalCol = 0;
                             gp.player.andreaTempGoalRow = 0;
                             npc.startDialogue(npc, 6);
@@ -1278,8 +1278,7 @@ public class UI {
                                 commandNum = 0;
                                 subState = 0;
                                 gp.player.missionSubstate++;
-                                if (gp.player.missionSubstate == 2) {
-                                    gp.player.missionSubstate = 0;
+                                if (gp.player.missionSubstate == 3) {
                                     gp.player.andreaTempGoalCol = 0;
                                     gp.player.andreaTempGoalRow = 0;
                                     npc.startDialogue(npc, 6);

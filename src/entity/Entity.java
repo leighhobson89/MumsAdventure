@@ -61,7 +61,6 @@ public class Entity {
     public Random rand = new Random();
     public boolean repeatSfx = true;
     public boolean andreaOnMap;
-    public boolean firstTimeChattingToAndrea = true;
     public int andreaTempGoalCol;
     public int andreaTempGoalRow;
     public boolean goesTransparentWhenHit;
@@ -80,6 +79,7 @@ public class Entity {
     public int backGateState;
     public int bookHutState = 0;
     public int collisionType;
+    public boolean currentDialogueFinished;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -446,7 +446,7 @@ public class Entity {
             gp.player.switchInteractiveTile(iTileIndex);
         }
 
-        if (gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.player.missionSubstate >= MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT) {
+        if (gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.player.missionSubstate >= 2) {
             gp.misStat.endMissionTasks(MissionStates.CHOP_CHICKEN_FOR_DOGS, false);
             gp.ui.addMessage("That's the dogs fed, nice one!");
             gp.player.phoebeEatingChickenCounter = 0;

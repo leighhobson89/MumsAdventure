@@ -126,6 +126,10 @@ public class NPC_Dad extends Entity {
         dialogueText[64][0] = "I wonder of we still have that old red book\nyou know which I mean?";
         dialogueText[64][1] = "It's that personal quiz book where it knows\nyour personality type by your name and age an\nhabits etc.  Do you remember it?";
         dialogueText[64][2] = "Go and see if you can find it int' book hut\nfor me and we'll have a do at it!";
+
+        dialogueText[65][0] = "Oh here it is!  Smells a bit foisty!\nShall we have a do then?";
+        dialogueText[65][1] = "I'll ask you a few questions and\nwe'll see what you know!";
+        dialogueText[65][2] = "Just choose the best answer!";
     }
 
     public void setAction(int goalCol, int goalRow) {
@@ -159,7 +163,15 @@ public class NPC_Dad extends Entity {
         switch (gp.player.missionState) {
             case MissionStates.WEEDING_MISSION -> dialogueSet = 61; //weeding mission
             case MissionStates.MOP_UP_THE_SHOWER_WATER -> dialogueSet = 63; //mop shower water mission
-            case MissionStates.MAGIC_BOOK_QUIZ -> dialogueSet = 64; //magic book quiz
+            case MissionStates.MAGIC_BOOK_QUIZ -> {
+                if (gp.player.missionSubstate == 0) {
+                    dialogueSet = 64; //magic book quiz beginning of mission
+                } else if (gp.player.missionSubstate == 2) {
+                    dialogueSet = 65; //start magic book quiz
+                    gp.player.missionSubstate = 3;
+                }
+
+            }
             default -> dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission
         }
         //character specific stuff here

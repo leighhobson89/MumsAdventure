@@ -105,18 +105,22 @@ public class NPC_Andrea extends Entity {
     }
 
     public void speak() {
-        if (firstTimeChattingToAndrea) {
+        if (gp.player.missionSubstate == 0) {
             dialogueSet = 0;
-        } else {
-            dialogueSet = 2;
         }
         facePlayer();
         startDialogue(this, dialogueSet);
         gp.ui.npc = this;
-        if (!firstTimeChattingToAndrea) {
-            gp.ui.commandNum = 0;
-            gp.gameState = gp.tradeState;
+        if (currentDialogueFinished) {
+            currentDialogueFinished = false;
+            if (gp.player.missionSubstate == 0) {
+                gp.player.missionSubstate++;
+            }
+            if (gp.player.missionSubstate == 1 || gp.player.missionSubstate == 2) {
+                gp.ui.commandNum = 0;
+                dialogueSet = 2;
+                gp.gameState = gp.tradeState;
+            }
         }
-        firstTimeChattingToAndrea = false;
     }
 }

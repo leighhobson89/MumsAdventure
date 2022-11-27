@@ -44,7 +44,6 @@ public class DataStorage implements Serializable {
     boolean repeatSfx;
     int dialogueSet;
     boolean andreaOnMap;
-    boolean firstTimeChattingToAndrea;
     int choppedChickenCount;
     int thrownChickenCount = 0;
     Entity currentProjectile;
