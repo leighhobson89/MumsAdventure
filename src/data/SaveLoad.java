@@ -112,6 +112,7 @@ public class SaveLoad {
             ds.blockWoodState = gp.player.blockWoodState;
             ds.backGateState = gp.player.backGateState;
             ds.bookHutState = gp.player.bookHutState;
+            ds.quizScoreCount = gp.player.quizScoreCount;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -284,6 +285,7 @@ public class SaveLoad {
             gp.player.blockWoodState = ds.blockWoodState;
             gp.player.backGateState = ds.backGateState;
             gp.player.bookHutState = ds.bookHutState;
+            gp.player.quizScoreCount = ds.quizScoreCount;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

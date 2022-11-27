@@ -1077,38 +1077,115 @@ public class UI {
         x += gp.tileSize;
         y += gp.tileSize;
 
-        switch (missionSubstate) {
-            case 4:
-            g2.drawString("CorrectAnswer", x, y);
-                if (commandNum == 0) {
-                    g2.drawString(">", x - 24, y);
-                    if (gp.keyH.enterPressed) {
-                        gp.playSFX(11); //correctSound
-                        subState = 1; // correctSubstate
+        if (subState == 0) {
+            switch (missionSubstate) {
+                case 4 -> {
+                    g2.drawString("CorrectAnswer1", x, y);
+                    if (commandNum == 0) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //correctSound
+                            subState = 1; // correctSubstate
+                        }
+                    }
+                    y += gp.tileSize;
+                    g2.drawString("WrongAnswer1", x, y);
+                    if (commandNum == 1) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //wrongSound
+                            subState = 2; // wrongSubstate
+                        }
                     }
                 }
-                y += gp.tileSize;
-                g2.drawString("WrongAnswer", x, y);
-                if (commandNum == 1) {
-                    g2.drawString(">", x - 24, y);
-                    if (gp.keyH.enterPressed) {
-                        gp.playSFX(11); //wrongSound
-                        subState = 2; // wrongSubstate
+                case 5 -> {
+                    g2.drawString("WrongAnswer2", x, y);
+                    if (commandNum == 0) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //correctSound
+                            subState = 2; // correctSubstate
+                        }
+                    }
+                    y += gp.tileSize;
+                    g2.drawString("CorrectAnswer2", x, y);
+                    if (commandNum == 1) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //wrongSound
+                            subState = 1; // wrongSubstate
+                        }
                     }
                 }
-                break;
-            case 5:
-            g2.drawString("Take", x, y);
-                break;
-            case 6:
-            g2.drawString("Take", x, y);
-                break;
-            case 7:
-            g2.drawString("Take", x, y);
-                break;
-            case 8:
-            g2.drawString("Take", x, y);
-                break;
+                case 6 -> {
+                    g2.drawString("WrongAnswer3", x, y);
+                    if (commandNum == 0) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //correctSound
+                            subState = 2; // correctSubstate
+                        }
+                    }
+                    y += gp.tileSize;
+                    g2.drawString("CorrectAnswer3", x, y);
+                    if (commandNum == 1) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //wrongSound
+                            subState = 1; // wrongSubstate
+                        }
+                    }
+                }
+                case 7 -> {
+                    g2.drawString("WrongAnswer4", x, y);
+                    if (commandNum == 0) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //correctSound
+                            subState = 2; // correctSubstate
+                        }
+                    }
+                    y += gp.tileSize;
+                    g2.drawString("CorrectAnswer4", x, y);
+                    if (commandNum == 1) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //wrongSound
+                            subState = 1; // wrongSubstate
+                        }
+                    }
+                }
+                case 8 -> {
+                    g2.drawString("WrongAnswer5", x, y);
+                    if (commandNum == 0) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //correctSound
+                            subState = 2; // correctSubstate
+                        }
+                    }
+                    y += gp.tileSize;
+                    g2.drawString("CorrectAnswer5", x, y);
+                    if (commandNum == 1) {
+                        g2.drawString(">", x - 24, y);
+                        if (gp.keyH.enterPressed) {
+                            gp.playSFX(11); //wrongSound
+                            subState = 1; // wrongSubstate
+                        }
+                    }
+                }
+            }
+        } else if (subState == 1) { //correct answer
+            currentDialogue = "";
+            npc.startDialogue(npc, 71);
+            subState = 0;
+            gp.player.missionSubstate++;
+            gp.player.quizScoreCount++;
+        } else if (subState == 2) { //correct answer
+            currentDialogue = "";
+            npc.startDialogue(npc, 72);
+            subState = 0;
+            gp.player.missionSubstate++;
         }
     }
 

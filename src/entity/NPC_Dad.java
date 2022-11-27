@@ -4,6 +4,7 @@ import main.GamePanel;
 import main.MissionStates;
 
 import java.awt.*;
+import java.util.Objects;
 import java.util.Random;
 
 public class NPC_Dad extends Entity {
@@ -131,7 +132,17 @@ public class NPC_Dad extends Entity {
         dialogueText[65][1] = "I'll ask you a few questions and\nwe'll see what you know!";
         dialogueText[65][2] = "Just choose the best answer!";
 
-        dialogueText[66][0] = "Reyt here we go then! Here's your\nfirst question:\nWhat do you have to do when you\nfinish in the shower?";
+        dialogueText[66][0] = "Reyt here we go then! Here's your first question:\n\nWhat do you have to do when you\nfinish in the shower?";
+
+        dialogueText[67][0] = "Question 2:\n\nbla bla bla";
+        dialogueText[68][0] = "Question 3:\n\nbla bla bla";
+        dialogueText[69][0] = "Question 4:\n\nbla bla bla";
+        dialogueText[70][0] = "Question 5:\n\nbla bla bla";
+
+        dialogueText[71][0] = "That's right!";
+        dialogueText[72][0] = "That's wrong!";
+        dialogueText[73][0] = "That's it then.\nYour score was " + gp.player.quizScoreCount + "/5";
+        dialogueText[73][1] = "So there you go.  Good init!\nYou can have a do next time!\nI want some peace now!";
     }
 
     public void setAction(int goalCol, int goalRow) {
@@ -169,19 +180,36 @@ public class NPC_Dad extends Entity {
                 } else if (gp.player.missionSubstate == 2) {
                     dialogueSet = 65; //start magic book quiz
                     gp.player.missionSubstate = 3;
-                } else if (gp.player.missionSubstate == 3) {
-                    dialogueSet = 66;
-                    gp.player.missionSubstate = 4;
+                } else if (gp.player.missionSubstate >= 3) {
+                    switch(gp.player.missionSubstate) {
+                        case 3 -> {
+                            gp.player.missionSubstate = 4;
+                            dialogueSet = 66;
+                        }
+                        case 4 -> dialogueSet = 66;
+                        case 5 -> dialogueSet = 67;
+                        case 6 -> dialogueSet = 68;
+                        case 7 -> dialogueSet = 69;
+                        case 8 -> dialogueSet = 70;
+                        case 9 -> dialogueSet = 73;                    }
                 }
-
             }
             default -> dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission
         }
         //character specific stuff here
         facePlayer();
+        if (gp.player.missionState == MissionStates.MAGIC_BOOK_QUIZ && gp.player.missionSubstate == 9) {
+            for (int i = 0; i < gp.player.inventory.size(); i++) {
+                if (Objects.equals(gp.player.inventory.get(i).name, "MagicQuizBook")) {
+                    gp.player.inventory.remove(i);
+                    break;
+                }
+            }
+            setDialogue();
+            gp.misStat.endMissionTasks(MissionStates.MAGIC_BOOK_QUIZ, true);
+        }
         startDialogue(this, dialogueSet);
-
-        if (gp.player.missionState == MissionStates.MAGIC_BOOK_QUIZ && gp.player.missionSubstate == 4) {
+        if (gp.player.missionSubstate >= 4 && gp.player.missionSubstate < 9) {
             gp.gameState = gp.quizState;
         }
     }

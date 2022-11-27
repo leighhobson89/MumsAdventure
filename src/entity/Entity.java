@@ -97,6 +97,7 @@ public class Entity {
     public int phoebeEatingChickenCounter;
     public int pipEatingChickenCounter;
     public int showerCounter = 0;
+    public int quizScoreCount = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
