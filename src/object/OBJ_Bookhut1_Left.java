@@ -22,6 +22,7 @@ public class OBJ_Bookhut1_Left extends Entity {
         down1 = image;
         direction = "down";
         collision = true;
+        collisionType = 0;
         goesTransparentWhenHit = false;
         goesTransparentWhenStoodOn = true;
 
@@ -31,6 +32,5 @@ public class OBJ_Bookhut1_Left extends Entity {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-
     }
 }

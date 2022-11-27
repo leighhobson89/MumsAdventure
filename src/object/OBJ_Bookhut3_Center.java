@@ -20,7 +20,7 @@ public class OBJ_Bookhut3_Center extends Entity {
         image = setup("/objects/bookhut3_center", gp.tileSize, gp.tileSize);
         down1 = image;
         direction = "down";
-        collision = true;
+        collision = false;
         goesTransparentWhenHit = false;
         goesTransparentWhenStoodOn = true;
 

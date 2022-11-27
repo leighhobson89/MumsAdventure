@@ -128,6 +128,12 @@ public class TileManager {
         setup(96, "bookHutBackLeft", true);
         setup(97, "bookHutBackCentre", false);
         setup(98, "bookHutBackRight", true);
+        setup(99, "bookhut1_left", false);
+        setup(100, "bookhut1_right", false);
+        setup(101, "bookhut2_left", false);
+        setup(102, "bookhut2_right", false);
+        setup(103, "bookhut3_left", false);
+        setup(104, "bookhut3_right", false);
 
 
     }

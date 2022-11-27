@@ -21,6 +21,7 @@ public class OBJ_Bookhut3_Right extends Entity {
         down1 = image;
         direction = "down";
         collision = true;
+        collisionType = 0;
         goesTransparentWhenHit = false;
         goesTransparentWhenStoodOn = true;
 

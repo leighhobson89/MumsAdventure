@@ -148,7 +148,9 @@ public class NPC_Dad extends Entity {
     public void speak() {
         switch (gp.player.missionToSet) {
             case MissionStates.MOP_UP_THE_SHOWER_WATER -> gp.player.missionState = MissionStates.MOP_UP_THE_SHOWER_WATER;
-            case MissionStates.MAGIC_BOOK_QUIZ -> gp.player.missionState = MissionStates.MAGIC_BOOK_QUIZ;
+            case MissionStates.MAGIC_BOOK_QUIZ -> {
+                gp.player.missionState = MissionStates.MAGIC_BOOK_QUIZ;
+            }
         }
         if (gp.player.weedCount > 0) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;

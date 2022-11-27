@@ -35,18 +35,6 @@ public class SaveLoad {
             case "IT_RockeryBare" -> new IT_BareRockery(gp, col, row);
             case "IT_Water" -> new IT_WaterTile(gp, col, row);
             case "IT_Bathroom" -> new IT_Bathroom(gp, col, row);
-            case "IT_BookHut1_Left" -> new IT_BookHut1_Left(gp, col, row);
-            case "IT_BookHut1_Left_TR" -> new IT_BookHut1_Left_TR(gp, col, row);
-            case "IT_BookHut1_Right" -> new IT_BookHut1_Right(gp, col, row);
-            case "IT_BookHut1_Right_TR" -> new IT_BookHut1_Right_TR(gp, col, row);
-            case "IT_BookHut2_Left" -> new IT_BookHut2_Left(gp, col, row);
-            case "IT_BookHut2_Left_TR" -> new IT_BookHut2_Left_TR(gp, col, row);
-            case "IT_BookHut2_Right" -> new IT_BookHut2_Right(gp, col, row);
-            case "IT_BookHut2_Right_TR" -> new IT_BookHut2_Right_TR(gp, col, row);
-            case "IT_BookHut3_Left" -> new IT_BookHut3_Left(gp, col, row);
-            case "IT_BookHut3_Left_TR" -> new IT_BookHut3_Left_TR(gp, col, row);
-            case "IT_BookHut3_Right" -> new IT_BookHut3_Right(gp, col, row);
-            case "IT_BookHut3_Right_TR" -> new IT_BookHut3_Right_TR(gp, col, row);
             default -> null;
         };
 

@@ -513,7 +513,6 @@ public class AssetSetter {
             }
             count = waterTileCount;
         }
-
         return count;
     }
 

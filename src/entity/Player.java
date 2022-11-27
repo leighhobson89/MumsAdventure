@@ -281,6 +281,15 @@ public class Player extends Entity {
     }
 
     public void update() {
+
+        for (int i = 0; i < gp.obj[1].length; i++) {
+            if (gp.obj[gp.currentMap][i] != null) {
+                if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOn) {
+                    handleTransparencyAndCollisionInBookHut(this, gp.obj[gp.currentMap][i]);
+                }
+            }
+        }
+
         if (missionState == MissionStates.MOP_UP_THE_SHOWER_WATER && showerCounterStart) {
             showerCounter++;
             if (showerCounter >= LENGTH_OF_SHOWER) {

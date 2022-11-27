@@ -79,6 +79,7 @@ public class Entity {
     public int blockWoodState; //for upstairs correct image
     public int backGateState;
     public int bookHutState = 0;
+    public int collisionType;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -253,15 +254,56 @@ public class Entity {
     public void speak() {
         //overridden in specific entity class
     }
-    public void makeObjectTransparentAndTempRemoveCollision(Entity entity) {
-        if (gp.player.bookHutState == 1 && gp.player.insideShed && entity.goesTransparentWhenStoodOn) {
-            if (Math.abs(entity.worldX - gp.player.worldX) <= 1 || Math.abs(entity.worldY - gp.player.worldY) <= 1) {
-                entity.collision = false;
-                entity.transparent = true;
+    public void handleTransparencyAndCollisionInBookHut(Entity player, Entity object) {
+        String side = "";
+        switch(object.name) {
+            case "Bookhut2_Left", "Bookhut3_Left":
+                side = "left";
+                break;
+            case "Bookhut2_Right", "Bookhut3_Right":
+                side = "right";
+                break;
+            default:
+                side = "";
+        }
+
+        if (gp.player.bookHutState == 1 && gp.player.insideShed) {
+            if ((Math.abs(object.worldX/gp.tileSize - player.worldX/gp.tileSize) <= 1 || Math.abs(object.worldY/gp.tileSize - player.worldY/gp.tileSize) <= 1) && object.goesTransparentWhenStoodOn) {
+                object.collisionType = 1;
+                switch (side) {
+                    case "left":
+                        object.solidArea.x = 0;
+                        object.solidArea.y = 0;
+                        object.solidArea.width = 5;
+                        object.solidArea.height = 48;
+                        break;
+                    case "right":
+                        object.solidArea.x = 43;
+                        object.solidArea.y = 0;
+                        object.solidArea.width = 5;
+                        object.solidArea.height = 48;
+                }
+                object.transparent = true;
             }
-        } else if (!Objects.equals(entity.name, "Bookhut1_Center")) {
-            entity.transparent = false;
-            entity.collision = true;
+        }
+
+        if (gp.player.bookHutState == 1 && Objects.equals(object.name, "Bookhut1_Center")) {
+            object.transparent = false;
+            object.collision = false;
+        }
+
+        if (!gp.player.insideShed && !Objects.equals(object.name, "Bookhut1_Center")) {
+            object.transparent = false;
+            if (!Objects.equals(object.name, "Bookhut2_Center")) {
+                object.collisionType = 0;
+            }
+        }
+
+        if (!gp.player.insideShed) {
+            object.solidArea.width = 48;
+            object.solidArea.height = 32;
+            object.solidArea.x = object.solidAreaDefaultX;
+            object.solidArea.y = object.solidAreaDefaultY;
         }
     }
 
@@ -392,14 +434,6 @@ public class Entity {
     }
 
     public void update() {
-
-        for (int i = 0; i < gp.obj[1].length; i++) {
-            if (gp.obj[gp.currentMap][i] != null) {
-                if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOn) {
-                    makeObjectTransparentAndTempRemoveCollision(this);
-                }
-            }
-        }
 
         int iTileIndex;
         if (gp.player.bookHutState == 1) {
@@ -836,6 +870,9 @@ public class Entity {
                     if (dying) {
                         image = dyingImage;
                         dyingAnimation(g2);
+                    }
+                    if (this.goesTransparentWhenStoodOn && this.transparent) {
+                        changeAlpha(g2, 0.3F);
                     }
 
             g2.drawImage(image, tempScreenX, tempScreenY, null);

@@ -285,5 +285,6 @@ public class EventHandler {
         } else {
             gp.player.insideShed = false;
         }
+        System.out.println("Shed inside? " + gp.player.insideShed);
     }
 }
