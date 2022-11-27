@@ -124,12 +124,14 @@ public class NPC_Dad extends Entity {
 
         //MAGIC BOOK QUIZ
         dialogueText[64][0] = "I wonder of we still have that old red book\nyou know which I mean?";
-        dialogueText[64][1] = "It's that personal quiz book where it knows\nyour personality type by your name and age an\nhabits etc.  Do you remember it?";
+        dialogueText[64][1] = "It's that magic quiz book where it knows\nyou and asks questions about your family life.\nDo you remember it?";
         dialogueText[64][2] = "Go and see if you can find it int' book hut\nfor me and we'll have a do at it!";
 
         dialogueText[65][0] = "Oh here it is!  Smells a bit foisty!\nShall we have a do then?";
         dialogueText[65][1] = "I'll ask you a few questions and\nwe'll see what you know!";
         dialogueText[65][2] = "Just choose the best answer!";
+
+        dialogueText[66][0] = "Reyt here we go then! Here's your\nfirst question:\nWhat do you have to do when you\nfinish in the shower?";
     }
 
     public void setAction(int goalCol, int goalRow) {
@@ -152,9 +154,7 @@ public class NPC_Dad extends Entity {
     public void speak() {
         switch (gp.player.missionToSet) {
             case MissionStates.MOP_UP_THE_SHOWER_WATER -> gp.player.missionState = MissionStates.MOP_UP_THE_SHOWER_WATER;
-            case MissionStates.MAGIC_BOOK_QUIZ -> {
-                gp.player.missionState = MissionStates.MAGIC_BOOK_QUIZ;
-            }
+            case MissionStates.MAGIC_BOOK_QUIZ -> gp.player.missionState = MissionStates.MAGIC_BOOK_QUIZ;
         }
         if (gp.player.weedCount > 0) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;
@@ -169,6 +169,9 @@ public class NPC_Dad extends Entity {
                 } else if (gp.player.missionSubstate == 2) {
                     dialogueSet = 65; //start magic book quiz
                     gp.player.missionSubstate = 3;
+                } else if (gp.player.missionSubstate == 3) {
+                    dialogueSet = 66;
+                    gp.player.missionSubstate = 4;
                 }
 
             }
@@ -177,5 +180,9 @@ public class NPC_Dad extends Entity {
         //character specific stuff here
         facePlayer();
         startDialogue(this, dialogueSet);
+
+        if (gp.player.missionState == MissionStates.MAGIC_BOOK_QUIZ && gp.player.missionSubstate == 4) {
+            gp.gameState = gp.quizState;
+        }
     }
 }

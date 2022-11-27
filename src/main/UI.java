@@ -118,6 +118,11 @@ public class UI {
         if (gp.gameState == gp.sleepState) {
             drawSleepScreen();
         }
+
+        //QUIZ STATE
+        if (gp.gameState == gp.quizState) {
+            drawQuizScreen();
+        }
     }
 
     public void drawGameOverScreen() {
@@ -1049,6 +1054,61 @@ public class UI {
             gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
             gp.eHandler.previousEventX = gp.player.worldX;
             gp.eHandler.previousEventY = gp.player.worldY;
+        }
+    }
+
+    public void drawQuizScreen() {
+        quiz_questionSelect(gp.player.missionSubstate);
+        gp.keyH.enterPressed = false;
+    }
+
+    public void quiz_questionSelect(int missionSubstate) {
+        drawDialogueScreen(1);
+
+        //DRAW WINDOW
+        int x = gp.tileSize * 3;
+        int y = gp.tileSize * 5;
+        int width = gp.tileSize * 12;
+        int height = (int)(gp.tileSize * 3.5);
+
+        drawSubWindow(x, y, width, height);
+
+        //DRAW TEXTS
+        x += gp.tileSize;
+        y += gp.tileSize;
+
+        switch (missionSubstate) {
+            case 4:
+            g2.drawString("CorrectAnswer", x, y);
+                if (commandNum == 0) {
+                    g2.drawString(">", x - 24, y);
+                    if (gp.keyH.enterPressed) {
+                        gp.playSFX(11); //correctSound
+                        subState = 1; // correctSubstate
+                    }
+                }
+                y += gp.tileSize;
+                g2.drawString("WrongAnswer", x, y);
+                if (commandNum == 1) {
+                    g2.drawString(">", x - 24, y);
+                    if (gp.keyH.enterPressed) {
+                        gp.playSFX(11); //wrongSound
+                        subState = 2; // wrongSubstate
+                    }
+                }
+                break;
+            case 5:
+            g2.drawString("Take", x, y);
+                break;
+            case 6:
+            g2.drawString("Take", x, y);
+                break;
+            case 7:
+            g2.drawString("Take", x, y);
+                break;
+            case 8:
+            g2.drawString("Take", x, y);
+                break;
         }
     }
 

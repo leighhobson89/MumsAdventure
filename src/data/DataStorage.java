@@ -34,6 +34,7 @@ public class DataStorage implements Serializable {
     boolean savedWithChoppedChickenEquipped;
     int spiderCount;
     int missionState;
+    int missionSubState;
     public List<Integer> missionList = new ArrayList<>();
     boolean readyForNextPhoneMission;
     int missionToSet;

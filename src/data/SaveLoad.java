@@ -89,6 +89,7 @@ public class SaveLoad {
             ds.thrownChickenCount = gp.player.thrownChickenCount;
             ds.spiderCount = gp.player.spiderCount;
             ds.missionState = gp.player.missionState;
+            ds.missionSubState = gp.player.missionSubstate;
             ds.missionList = gp.player.missionList;
             ds.readyForNextPhoneMission = gp.player.readyForNextPhoneMission;
             ds.missionToSet = gp.player.missionToSet;
@@ -257,6 +258,7 @@ public class SaveLoad {
             gp.player.weedCount = ds.weedCount;
             gp.player.spiderCount = ds.spiderCount;
             gp.player.missionState = ds.missionState;
+            gp.player.missionSubstate = ds.missionSubState;
             gp.player.missionList = ds.missionList;
             gp.player.readyForNextPhoneMission = ds.readyForNextPhoneMission;
             gp.player.missionToSet = ds.missionToSet;

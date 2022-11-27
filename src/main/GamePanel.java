@@ -85,6 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int tradeState = 8;
     public final int sleepState = 9;
     public final int mapState = 10;
+    public final int quizState = 11;
 
 
     public GamePanel() throws IOException, FontFormatException { //constructor
@@ -191,6 +192,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (timer >= 1000000000) { //output FPS in console
                 System.out.println("FPS: " + drawCount);
+                System.out.println("MissionSubState: " + player.missionSubstate);
                 drawCount = 0;
                 timer = 0;
             }
