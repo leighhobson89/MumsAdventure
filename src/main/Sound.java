@@ -86,13 +86,15 @@ public class Sound {
     }
 
     public void checkVolume() { //range runs from -80f to +6f
-        switch(volumeScale) {
-            case 0: volume = -80f; break; //min possible
-            case 1: volume = -20f; break;
-            case 2: volume = -12f; break;
-            case 3: volume = -5f; break;
-            case 4: volume = 1f; break;
-            case 5: volume = 6f; break; //max possible
+        switch (volumeScale) {
+            case 0 -> volume = -80f;
+            //min possible
+            case 1 -> volume = -20f;
+            case 2 -> volume = -12f;
+            case 3 -> volume = -5f;
+            case 4 -> volume = 1f;
+            case 5 -> volume = 6f;
+            //max possible
         }
         fc.setValue(volume);
     }

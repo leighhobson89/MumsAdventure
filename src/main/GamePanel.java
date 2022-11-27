@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     public KeyHandler keyH = new KeyHandler(this);
     public MissionStates misStat = new MissionStates(this);
     Sound music = new Sound();
-    Sound sfx = new Sound();
+    public Sound sfx = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
