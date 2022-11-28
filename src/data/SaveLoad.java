@@ -210,7 +210,9 @@ public class SaveLoad {
 
             //Write the DataStorage Object
             oos.writeObject(ds);
-            System.out.println(gp.player.blockWoodState);
+
+            //DEBUG
+            //add system.out here for save
 
         } catch (Exception e) {
             System.out.println("Save Exception!");
@@ -389,7 +391,7 @@ public class SaveLoad {
             gp.eHandler.setImageStates(gp.currentMap);
 
             //DEBUG
-            System.out.println(gp.player.blockWoodState);
+            //add system.out here for load
 
 
         } catch (Exception e) {
