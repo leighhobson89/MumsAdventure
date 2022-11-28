@@ -649,6 +649,10 @@ public class Player extends Entity {
 
     public void interactNPC(int i) {
 
+        if (i != 999) {
+            gp.npc[gp.currentMap][i].move(direction);
+        }
+
         if (gp.keyH.enterPressed) {
             if (i != 999) {
                 gp.npc[gp.currentMap][i].speak();

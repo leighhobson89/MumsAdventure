@@ -25,6 +25,7 @@ public class Entity {
     public boolean collision = false;
     public String[][] dialogueText = new String[100][20];
     public Entity attacker;
+    public Entity linkedEntity;
 
     //STATE
     public int worldX, worldY;
@@ -247,6 +248,7 @@ public class Entity {
         showerCounter = 0;
     }
     public void setLoot(Entity loot) {}
+    public void move(String direction) {}
     public void setAction(int goalCol, int goalRow) {
         //overridden in specific entity class
     }
@@ -1056,6 +1058,10 @@ public class Entity {
                     gp.player.andreaOnMap = true;
                 }
                 case 4 -> gp.player.missionState = MissionStates.CHOP_CHICKEN_FOR_DOGS;
+                case 7 -> {
+                    gp.player.missionState = MissionStates.DRAG_COOKER_TO_BINS;
+                    gp.aSetter.setInteractiveTilesAfterStart(MissionStates.DRAG_COOKER_TO_BINS);
+                }
             }
             gp.player.readyForNextPhoneMission = false;
         }

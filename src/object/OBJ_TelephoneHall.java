@@ -50,8 +50,10 @@ public class OBJ_TelephoneHall extends Entity {
         dialogueText[4][3] = "I got some yesterday up Colne and\n it's in the fridge.";
         dialogueText[4][4] = "Can you get it out, and go and chop it up\non the chopping block outside?";
         dialogueText[4][5] = "Then throw it in the garden for them\nthey'll love it!";
-
-
+        //DRAG BIN
+        dialogueText[7][0] = "Alright, it's the tip here at Barlick!";
+        dialogueText[7][1] = "We're coming for the old cooker this afternoon.\nCan you drag it up to the back so we can pick\nit up?";
+        dialogueText[7][2] = "Cheers, nice one! Sure we'll make a bob or two\non the scrap...Whoops I shouldn't be saying that!";
     }
 
     public void interact() {

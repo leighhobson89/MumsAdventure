@@ -160,6 +160,14 @@ public class CollisionChecker {
                             entity.collisionOn = false;
                             index = i;
                         }
+                        if ((Objects.equals(target[gp.currentMap][i].name, "IT_CookerTile"))  && Objects.equals(entity.name, "OldCooker")) {
+                            entity.collisionOn = false;
+                            index = i;
+                        }
+                        if ((Objects.equals(target[gp.currentMap][i].name, "IT_CookerTile")) && entity.type == entity.type_player) {
+                            entity.collisionOn = false;
+                            index = i;
+                        }
                     }
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;

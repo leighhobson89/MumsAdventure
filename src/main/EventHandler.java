@@ -175,6 +175,16 @@ public class EventHandler {
 
         tempCol = col;
         tempRow = row;
+        if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset moveable object if change area and it is not where it needs to be
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && (Objects.equals(gp.obj[gp.currentMap][i].name, "OldCooker"))) {
+                    if (gp.obj[gp.currentMap][i].linkedEntity == null) {
+                        gp.obj[gp.currentMap][i].worldX = 39;
+                        gp.obj[gp.currentMap][i].worldX = 8;
+                    }
+                }
+            }
+        }
         setImageStates(tempMap);
         canTouchEvent = false;
         //add sound effect stairs

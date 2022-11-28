@@ -20,8 +20,8 @@ public class OBJ_Bin_Green extends Entity {
         image = setup("/objects/bin_Green", gp.tileSize, gp.tileSize);
         down1 = image;
         direction = "down";
-
         collision = true;
+
         solidArea.x = 0;
         solidArea.y = 16;
         solidArea.width = 48;

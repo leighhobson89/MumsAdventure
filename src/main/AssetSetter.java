@@ -4,6 +4,7 @@ import entity.*;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
 import object.*;
+import tile_interactive.IT_CookerTile;
 import tile_interactive.IT_WaterTile;
 import tile_interactive.IT_WeedTile;
 
@@ -496,6 +497,12 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize*9;
         i++;
 
+        gp.npc[mapNum][i] = new NPC_RustyCooker(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize*39;
+        gp.npc[mapNum][i].worldY = gp.tileSize*8;
+        i++;
+
+
         //        mapNum = 1;  //ADD NPCs TO NEXT MAP LIKE THIS
 //        i = 0;
 //        gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
@@ -542,7 +549,6 @@ public class AssetSetter {
         int colToAdd = 0;
         int rowToAdd = 0;
         int mapNum = 0;
-        int waterTileCount = 0;
 
         if (missionTrigger == MissionStates.MOP_UP_THE_SHOWER_WATER) { //need a better way to do this
             mapNum = 1;
@@ -550,7 +556,7 @@ public class AssetSetter {
             rowToAdd = 12;
             for (int i = 0; i < gp.iTile[mapNum].length; i++) {
                 if (gp.iTile[mapNum][i] == null) {
-                    gp.iTile[mapNum][i] = new IT_WaterTile(gp, colToAdd, rowToAdd); i++; waterTileCount++;
+                    gp.iTile[mapNum][i] = new IT_WaterTile(gp, colToAdd, rowToAdd); i++; count++;
                     colToAdd++;
                     if (colToAdd > 29) {
                         colToAdd = 28;
@@ -561,7 +567,16 @@ public class AssetSetter {
                     }
                 }
             }
-            count = waterTileCount;
+        }
+        if (missionTrigger == MissionStates.DRAG_COOKER_TO_BINS) {
+//          mapNum = 0; // already set above
+            colToAdd = 60;
+            rowToAdd = 12;
+            for (int i = 0; i < gp.iTile[mapNum].length; i++) {
+                if (gp.iTile[mapNum][i] == null) {
+                    gp.iTile[mapNum][i] = new IT_CookerTile(gp, colToAdd, rowToAdd); i++; count++;
+                }
+            }
         }
         return count;
     }
