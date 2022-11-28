@@ -134,10 +134,10 @@ public class NPC_Dad extends Entity {
 
         dialogueText[66][0] = "Reyt here we go then! Here's your first question:\n\nWhat do you have to do when you\nfinish in the shower?";
 
-        dialogueText[67][0] = "Question 2:\n\nbla bla bla";
-        dialogueText[68][0] = "Question 3:\n\nbla bla bla";
-        dialogueText[69][0] = "Question 4:\n\nbla bla bla";
-        dialogueText[70][0] = "Question 5:\n\nbla bla bla";
+        dialogueText[67][0] = "Question 2:\n\nWhat have I wasted money on and then let it rot?";
+        dialogueText[68][0] = "Question 3:\n\nWhat will I do if you try and have a clear out?";
+        dialogueText[69][0] = "Question 4:\n\nWhat do I call normal families having a nice day\nout at the sea side?";
+        dialogueText[70][0] = "Last Question:\n\nWhat's the likelihood of us ever moving house?";
 
         dialogueText[71][0] = "That's right!";
         dialogueText[72][0] = "That's wrong!";
@@ -191,7 +191,8 @@ public class NPC_Dad extends Entity {
                         case 6 -> dialogueSet = 68;
                         case 7 -> dialogueSet = 69;
                         case 8 -> dialogueSet = 70;
-                        case 9 -> dialogueSet = 73;                    }
+                        case 9 -> dialogueSet = 73;
+                    }
                 }
             }
             default -> dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission

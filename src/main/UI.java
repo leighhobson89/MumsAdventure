@@ -562,6 +562,7 @@ public class UI {
         if (npc != null) {
             if (npc.dialogueText[npc.dialogueSet][npc.dialogueIndex] != null) {
                 //currentDialogue = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex];
+                System.out.println(npc.dialogueText[npc.dialogueSet][npc.dialogueIndex]);
 
                 char[] characters = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 
@@ -1063,24 +1064,26 @@ public class UI {
     }
 
     public void quiz_questionSelect(int missionSubstate) {
-        drawDialogueScreen(1);
+        if (subState == 0) {
+            drawDialogueScreen(1);
+        }
 
         //DRAW WINDOW
-        int x = gp.tileSize * 3;
+        int x = gp.tileSize;
         int y = gp.tileSize * 5;
-        int width = gp.tileSize * 12;
-        int height = (int)(gp.tileSize * 3.5);
+        int width = gp.tileSize * 18;
+        int height = (int)(gp.tileSize * 2.5);
 
         drawSubWindow(x, y, width, height);
 
         //DRAW TEXTS
-        x += gp.tileSize;
+        x += gp.tileSize-15;
         y += gp.tileSize;
 
         if (subState == 0) {
             switch (missionSubstate) {
                 case 4 -> {
-                    g2.drawString("CorrectAnswer1", x, y);
+                    g2.drawString("Wipe it down carefully, cos you haven't bothered sealing it properly!", x, y);
                     if (commandNum == 0) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
@@ -1089,7 +1092,7 @@ public class UI {
                         }
                     }
                     y += gp.tileSize;
-                    g2.drawString("WrongAnswer1", x, y);
+                    g2.drawString("Nothing, just get out, get dry, and get on with my day!", x, y);
                     if (commandNum == 1) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
@@ -1099,90 +1102,88 @@ public class UI {
                     }
                 }
                 case 5 -> {
-                    g2.drawString("WrongAnswer2", x, y);
+                    g2.drawString("You've never wasted anything!", x, y);
                     if (commandNum == 0) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
-                            gp.playSFX(11); //correctSound
-                            subState = 2; // correctSubstate
+                            gp.playSFX(11);
+                            subState = 2;
                         }
                     }
                     y += gp.tileSize;
-                    g2.drawString("CorrectAnswer2", x, y);
+                    g2.drawString("That bloody camper van up there, another waste of money!", x, y);
                     if (commandNum == 1) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
-                            gp.playSFX(11); //wrongSound
-                            subState = 1; // wrongSubstate
+                            gp.playSFX(11);
+                            subState = 1;
                         }
                     }
                 }
                 case 6 -> {
-                    g2.drawString("WrongAnswer3", x, y);
+                    g2.drawString("Stand aside, and let me get on with it!", x, y);
                     if (commandNum == 0) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
-                            gp.playSFX(11); //correctSound
-                            subState = 2; // correctSubstate
+                            gp.playSFX(11);
+                            subState = 2;
                         }
                     }
                     y += gp.tileSize;
-                    g2.drawString("CorrectAnswer3", x, y);
+                    g2.drawString("Hang about, obstructing everything I try to do!", x, y);
                     if (commandNum == 1) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
-                            gp.playSFX(11); //wrongSound
-                            subState = 1; // wrongSubstate
+                            gp.playSFX(11);
+                            subState = 1;
                         }
                     }
                 }
                 case 7 -> {
-                    g2.drawString("WrongAnswer4", x, y);
+                    g2.drawString("You call them 'Chip Eaters'!", x, y);
                     if (commandNum == 0) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
-                            gp.playSFX(11); //correctSound
-                            subState = 2; // correctSubstate
+                            gp.playSFX(11);
+                            subState = 1;
                         }
                     }
                     y += gp.tileSize;
-                    g2.drawString("CorrectAnswer4", x, y);
+                    g2.drawString("No special name, just normal people enjoying!", x, y);
                     if (commandNum == 1) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
-                            gp.playSFX(11); //wrongSound
-                            subState = 1; // wrongSubstate
+                            gp.playSFX(11);
+                            subState = 2;
                         }
                     }
                 }
                 case 8 -> {
-                    g2.drawString("WrongAnswer5", x, y);
+                    g2.drawString("Absolutely every chance, and I can't bloody wait!", x, y);
                     if (commandNum == 0) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
-                            gp.playSFX(11); //correctSound
-                            subState = 2; // correctSubstate
+                            gp.playSFX(11);
+                            subState = 2;
                         }
                     }
                     y += gp.tileSize;
-                    g2.drawString("CorrectAnswer5", x, y);
+                    g2.drawString("None at all, I'm destined to be miserable sat here forever!", x, y);
                     if (commandNum == 1) {
                         g2.drawString(">", x - 24, y);
                         if (gp.keyH.enterPressed) {
-                            gp.playSFX(11); //wrongSound
-                            subState = 1; // wrongSubstate
+                            gp.playSFX(11);
+                            subState = 1;
                         }
                     }
                 }
             }
         } else if (subState == 1) { //correct answer
-            currentDialogue = "";
             npc.startDialogue(npc, 71);
             subState = 0;
             gp.player.missionSubstate++;
             gp.player.quizScoreCount++;
         } else if (subState == 2) { //correct answer
-            currentDialogue = "";
             npc.startDialogue(npc, 72);
             subState = 0;
             gp.player.missionSubstate++;
