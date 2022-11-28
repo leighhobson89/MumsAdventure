@@ -875,12 +875,12 @@ public class Player extends Entity {
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
 
-            if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon && currentWeapon == null) {
+            if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
-            } else if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop)) {
+            } else if (selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) {
                 currentWeapon = null;
                 attack = getAttack();
                 gp.playSFX(11);
