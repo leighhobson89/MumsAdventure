@@ -19,7 +19,7 @@ public class OBJ_Hatchet extends Entity {
         attackValue = 5;
         attackArea.width = 36;
         attackArea.height = 36;
-        description = "[" + name + "]\nAxe for chopping chicken\nfor Phoebe & Pip!";
+        description = "[" + name + "]\nAxe to chop chicken\nfor Phoebe & Pip!";
         price = 30;
         knockBackPower = 8;
         isWeapon = true;

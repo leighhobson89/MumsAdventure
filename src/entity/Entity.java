@@ -80,6 +80,7 @@ public class Entity {
     public int bookHutState = 0;
     public int collisionType;
     public boolean currentDialogueFinished;
+    public boolean stainRemoverUsed;
 
     //COUNTER
     public int spriteCounter = 0;

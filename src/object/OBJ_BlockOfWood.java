@@ -4,6 +4,8 @@ import entity.Entity;
 import main.GamePanel;
 import main.MissionStates;
 
+import java.util.Objects;
+
 public class OBJ_BlockOfWood extends Entity {
 
     GamePanel gp;
@@ -22,7 +24,7 @@ public class OBJ_BlockOfWood extends Entity {
         image2 = setup("/objects/blockOfWoodChicken", gp.tileSize, gp.tileSize);
         image3 = setup("/objects/blockOfWoodBlood", gp.tileSize, gp.tileSize);
         down1 = image;
-        gp.player.blockWoodState = 1; //for upstairs correct image
+        blockWoodState = 1; //for upstairs correct image
         direction = "down";
         collision = false;
         goesTransparentWhenHit = false;
@@ -44,6 +46,8 @@ public class OBJ_BlockOfWood extends Entity {
         dialogueText[0][0] = "I'll get this chopped up nicely for Phoebe and Pip!\n(Whack it with your axe a few times!)";
         dialogueText[1][0] = "A chopping block covered in dried blood!";
         dialogueText[2][0] = "I need some chicken to chop!";
+        dialogueText[3][0] = "You clean the blood off the Chopping Block with the\ncheap knock off Chinese Stain Remover!";
+        dialogueText[4][0] = "A nice clean Chopping Block!";
     }
 
     public void interact() {
@@ -61,8 +65,27 @@ public class OBJ_BlockOfWood extends Entity {
         } else if (!opened && gp.player.missionState < MissionStates.CHOP_CHICKEN_FOR_DOGS) {
             startDialogue(this, 1);
             gp.keyH.enterPressed = false;
-        } else if (opened && gp.player.missionState > MissionStates.CHOP_CHICKEN_FOR_DOGS || opened && gp.player.missionState == MissionStates.BETWEEN_MISSIONS) {
-            startDialogue(this, 0);
+        } else if (opened && gp.player.missionList.size() >= 7) {
+            boolean stainRemoverUsed = false;
+            for (int i = 0; i < gp.player.inventory.size(); i++) {
+                if (Objects.equals(gp.player.inventory.get(i).name, "StainRemover")) {
+                    gp.ui.addMessage("Stain Remover used to clean blood!");
+                    gp.player.inventory.remove(i);
+                    stainRemoverUsed = true;
+                    gp.player.stainRemoverUsed = true;
+                    break;
+                }
+            }
+            if (stainRemoverUsed) {
+                startDialogue(this, 3);
+                down1 = image;
+            } else {
+                if (gp.player.stainRemoverUsed) {
+                    startDialogue(this, 4);
+                } else {
+                    startDialogue(this, 1);
+                }
+            }
             gp.keyH.enterPressed = false;
         }
     }

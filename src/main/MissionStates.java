@@ -23,6 +23,7 @@ public class MissionStates {
         }
         gp.player.missionState = MissionStates.BETWEEN_MISSIONS;
         gp.player.missionList.add(missionToAddToCompletedList); //add completed weeding mission to missionList
+        System.out.println( gp.player.missionList);
         gp.player.missionToSet = missionToAddToCompletedList + 1;
         gp.player.missionSubstate = 0;
     }

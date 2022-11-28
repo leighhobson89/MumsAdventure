@@ -562,7 +562,6 @@ public class UI {
         if (npc != null) {
             if (npc.dialogueText[npc.dialogueSet][npc.dialogueIndex] != null) {
                 //currentDialogue = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex];
-                System.out.println(npc.dialogueText[npc.dialogueSet][npc.dialogueIndex]);
 
                 char[] characters = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 

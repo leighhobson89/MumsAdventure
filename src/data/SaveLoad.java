@@ -113,6 +113,7 @@ public class SaveLoad {
             ds.backGateState = gp.player.backGateState;
             ds.bookHutState = gp.player.bookHutState;
             ds.quizScoreCount = gp.player.quizScoreCount;
+            ds.stainRemoverUsed = gp.player.stainRemoverUsed;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -209,6 +210,7 @@ public class SaveLoad {
 
             //Write the DataStorage Object
             oos.writeObject(ds);
+            System.out.println(gp.player.blockWoodState);
 
         } catch (Exception e) {
             System.out.println("Save Exception!");
@@ -286,6 +288,7 @@ public class SaveLoad {
             gp.player.backGateState = ds.backGateState;
             gp.player.bookHutState = ds.bookHutState;
             gp.player.quizScoreCount = ds.quizScoreCount;
+            gp.player.stainRemoverUsed = ds.stainRemoverUsed;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
@@ -384,6 +387,9 @@ public class SaveLoad {
 
             //SET CORRECT IMAGE STATES
             gp.eHandler.setImageStates(gp.currentMap);
+
+            //DEBUG
+            System.out.println(gp.player.blockWoodState);
 
 
         } catch (Exception e) {

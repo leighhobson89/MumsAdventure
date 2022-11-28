@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.MissionStates;
+import object.OBJ_StainRemover;
 
 import java.awt.*;
 import java.util.Objects;
@@ -143,6 +144,7 @@ public class NPC_Dad extends Entity {
         dialogueText[72][0] = "That's wrong!";
         dialogueText[73][0] = "That's it then.\nYour score was " + gp.player.quizScoreCount + "/5";
         dialogueText[73][1] = "So there you go.  Good init!\nYou can have a do next time!\nI want some peace now!";
+        dialogueText[73][2] = "Oh and here's that bloody Chinese stain remover off ebay\nAbsolutely ruined that CD it did, throw it in the grey bin!";
     }
 
     public void setAction(int goalCol, int goalRow) {
@@ -206,7 +208,10 @@ public class NPC_Dad extends Entity {
                     break;
                 }
             }
+            gp.player.inventory.add(new OBJ_StainRemover(gp));
+
             setDialogue();
+            gp.ui.addMessage("You received some Dodgy Chinese Stain Remover!");
             gp.misStat.endMissionTasks(MissionStates.MAGIC_BOOK_QUIZ, true);
         }
         startDialogue(this, dialogueSet);
