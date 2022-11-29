@@ -301,7 +301,7 @@ public class Player extends Entity {
             }
         }
 
-        if (missionState >= MissionStates.MAGIC_BOOK_QUIZ) {
+        if (missionList.size() >= MissionStates.MAGIC_BOOK_QUIZ + 1) {
             for (int i = 0; i < gp.obj[1].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null) {
                     if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOn) {
