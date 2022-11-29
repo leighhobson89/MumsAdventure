@@ -79,6 +79,7 @@ public class Entity {
     public int blockWoodState; //for upstairs correct image
     public int backGateState;
     public int bookHutState = 0;
+    public int toolHutState = 0;
     public int collisionType;
     public boolean currentDialogueFinished;
     public boolean stainRemoverUsed;

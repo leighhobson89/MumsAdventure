@@ -18,7 +18,7 @@ public class OBJ_BookHutKey extends Entity {
         displayName = "Silver Key";
         description = "[" + name + "]\nA silver key";
         isSaleable = false;
-        down1 = setup("/objects/frontBackDoorKey", gp.tileSize, gp.tileSize); //todo change image
+        down1 = setup("/objects/bookHutKey", gp.tileSize, gp.tileSize);
         direction = "down";
         type = type_consumable;
 

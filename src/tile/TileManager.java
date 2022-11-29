@@ -135,6 +135,9 @@ public class TileManager {
         setup(103, "bookhut3_left", false);
         setup(104, "bookhut3_right", false);
         setup(105, "path2", false);
+        setup(106, "toolHutBackLeft", true);
+        setup(107, "toolHutBackCentre", true);
+        setup(108, "toolHutBackRight", true);
 
 
     }

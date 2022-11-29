@@ -364,6 +364,56 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_ToolHutKey(gp);
+        gp.obj[mapNum][i].worldX = 35 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut1_Left(gp);
+        gp.obj[mapNum][i].worldX = 32 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut1_Center(gp);
+        gp.obj[mapNum][i].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut1_Right(gp);
+        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut2_Left(gp);
+        gp.obj[mapNum][i].worldX = 32 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut2_Center(gp);
+        gp.obj[mapNum][i].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut2_Right(gp);
+        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut3_Left(gp);
+        gp.obj[mapNum][i].worldX = 32 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut3_Center(gp);
+        gp.obj[mapNum][i].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut3_Right(gp);
+        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
 
@@ -469,6 +519,51 @@ public class AssetSetter {
 
         gp.obj[mapNum][i] = new OBJ_Bookhut3_Right(gp);
         gp.obj[mapNum][i].worldX = 38 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut1_Left(gp);
+        gp.obj[mapNum][i].worldX = 32 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut1_Center(gp);
+        gp.obj[mapNum][i].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut1_Right(gp);
+        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut2_Left(gp);
+        gp.obj[mapNum][i].worldX = 32 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut2_Center(gp);
+        gp.obj[mapNum][i].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut2_Right(gp);
+        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut3_Left(gp);
+        gp.obj[mapNum][i].worldX = 32 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut3_Center(gp);
+        gp.obj[mapNum][i].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Toolhut3_Right(gp);
+        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
         i++;
     }

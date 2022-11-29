@@ -85,6 +85,16 @@ public class EntityGenerator {
             case OBJ_BookHutKey.OBJ_NAME: obj = new OBJ_BookHutKey(gp); break;
             case OBJ_MagicQuizBook.OBJ_NAME: obj = new OBJ_MagicQuizBook(gp); break;
             case OBJ_StainRemover.OBJ_NAME: obj = new OBJ_StainRemover(gp); break;
+            case OBJ_Toolhut1_Left.OBJ_NAME: obj = new OBJ_Toolhut1_Left(gp); break;
+            case OBJ_Toolhut1_Center.OBJ_NAME: obj = new OBJ_Toolhut1_Center(gp); break;
+            case OBJ_Toolhut1_Right.OBJ_NAME: obj = new OBJ_Toolhut1_Right(gp); break;
+            case OBJ_Toolhut2_Left.OBJ_NAME: obj = new OBJ_Toolhut2_Left(gp); break;
+            case OBJ_Toolhut2_Center.OBJ_NAME: obj = new OBJ_Toolhut2_Center(gp); break;
+            case OBJ_Toolhut2_Right.OBJ_NAME: obj = new OBJ_Toolhut2_Right(gp); break;
+            case OBJ_Toolhut3_Left.OBJ_NAME: obj = new OBJ_Toolhut3_Left(gp); break;
+            case OBJ_Toolhut3_Center.OBJ_NAME: obj = new OBJ_Toolhut3_Center(gp); break;
+            case OBJ_Toolhut3_Right.OBJ_NAME: obj = new OBJ_Toolhut3_Right(gp); break;
+            case OBJ_ToolHutKey.OBJ_NAME: obj = new OBJ_ToolHutKey(gp); break;
         }
         return obj;
     }
