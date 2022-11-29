@@ -134,6 +134,7 @@ public class TileManager {
         setup(102, "bookhut2_right", false);
         setup(103, "bookhut3_left", false);
         setup(104, "bookhut3_right", false);
+        setup(105, "path2", false);
 
 
     }

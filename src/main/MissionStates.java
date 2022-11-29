@@ -15,6 +15,7 @@ public class MissionStates {
     public static final int MOP_UP_THE_SHOWER_WATER = 5;
     public static final int MAGIC_BOOK_QUIZ = 6;
     public static final int DRAG_COOKER_TO_BINS = 7;
+    public static final int GET_PAID_FOR_OLD_COOKER = 8;
 
     public void endMissionTasks(int missionToAddToCompletedList, boolean nextMissionIsPhoneMission) {
         if (nextMissionIsPhoneMission) {

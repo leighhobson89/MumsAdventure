@@ -176,11 +176,11 @@ public class EventHandler {
         tempCol = col;
         tempRow = row;
         if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset moveable object if change area and it is not where it needs to be
-            for (int i = 0; i < gp.obj[1].length; i++) {
-                if (gp.obj[gp.currentMap][i] != null && (Objects.equals(gp.obj[gp.currentMap][i].name, "OldCooker"))) {
-                    if (gp.obj[gp.currentMap][i].linkedEntity == null) {
-                        gp.obj[gp.currentMap][i].worldX = 39;
-                        gp.obj[gp.currentMap][i].worldX = 8;
+            for (int i = 0; i < gp.npc[1].length; i++) {
+                if (gp.npc[gp.currentMap][i] != null && (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker"))) {
+                    if (gp.npc[gp.currentMap][i].linkedEntity == null) {
+                        gp.npc[gp.currentMap][i].worldX = 39 * gp.tileSize;
+                        gp.npc[gp.currentMap][i].worldY = 8 * gp.tileSize;
                     }
                 }
             }

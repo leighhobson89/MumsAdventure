@@ -11,6 +11,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
+import static entity.NPC_RustyCooker.npcName;
+
 public class Player extends Entity {
     KeyHandler keyH;
     UtilityTool uTool = new UtilityTool();
@@ -291,6 +293,13 @@ public class Player extends Entity {
     }
 
     public void update() {
+
+        if (missionState == MissionStates.GET_PAID_FOR_OLD_COOKER) {
+            if (worldX/gp.tileSize > 56) {
+                startDialogue(this, 19);
+                gp.misStat.endMissionTasks(MissionStates.GET_PAID_FOR_OLD_COOKER, false);
+            }
+        }
 
         if (missionState >= MissionStates.MAGIC_BOOK_QUIZ) {
             for (int i = 0; i < gp.obj[1].length; i++) {
@@ -609,6 +618,7 @@ public class Player extends Entity {
         dialogueText[17][0] = "Bloody pills, I can't think straight!\nWhat am I doing up here??\nThe stress has gone at least!";
         dialogueText[18][0] = "Phew! He gets absolutely furious if water\ngets left on the floor!";
         dialogueText[18][1] = "If he would just finish the house, we wouldn't\nhave these problems!";
+        dialogueText[19][0] = "Bloody scarpered with my money!\nIdiots that tip giving it him, for God's sake!";
     }
 
     public void checkIfPassOutFromStress() {

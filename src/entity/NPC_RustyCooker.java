@@ -48,6 +48,10 @@ public class NPC_RustyCooker extends Entity {
     public void setDialogue() {
         dialogueText[0][0] = "An old rusty cooker!";
         dialogueText[1][0] = "You can pull the cooker to where the bins are so it\ncan be collected next week!";
+        dialogueText[1][1] = "If you get it stuck, just go upstairs and back down\nand it will magically move back to the start!";
+        dialogueText[1][2] = "Look for a tile on its own next to the gate, and\ndump it there for collection!";
+        dialogueText[2][0] = "There, that's another old bit of junk sorted\nhope they hurry up before he sees it else he'll\nno doubt try and rescue it again!";
+        dialogueText[2][1] = "'If they don't come Miss, I'll sort it out for you init!'";
     }
 
     public void update() {
@@ -92,14 +96,14 @@ public class NPC_RustyCooker extends Entity {
         ArrayList<Entity> cookerList = new ArrayList<>();
 
         //Create a list of pads
-        for (int i = 0; i <gp.iTile[1].length; i++) {
+        for (int i = 0; i < gp.iTile[1].length; i++) {
             if (gp.iTile[gp.currentMap][i] != null && gp.iTile[gp.currentMap][i].name != null && gp.iTile[gp.currentMap][i].name.equals(IT_CookerTile.itName)) {
                 padList.add(gp.iTile[gp.currentMap][i]);
             }
         }
 
         //Create a list of moveable items e.g. cooker
-        for (int i = 0; i <gp.npc[1].length; i++) {
+        for (int i = 0; i < gp.npc[1].length; i++) {
             if (gp.npc[gp.currentMap][i] != null && gp.npc[gp.currentMap][i].name.equals(NPC_RustyCooker.npcName)) {
                 cookerList.add(gp.npc[gp.currentMap][i]);
             }
@@ -137,6 +141,7 @@ public class NPC_RustyCooker extends Entity {
 
         //if all good mission can complete
         if (count == cookerList.size()) {
+            startDialogue(this, 2);
             gp.misStat.endMissionTasks(MissionStates.DRAG_COOKER_TO_BINS, true);
             collision = false;
         }

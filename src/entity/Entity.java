@@ -1062,6 +1062,23 @@ public class Entity {
                     gp.player.missionState = MissionStates.DRAG_COOKER_TO_BINS;
                     gp.aSetter.setInteractiveTilesAfterStart(MissionStates.DRAG_COOKER_TO_BINS);
                 }
+                case 8 -> {
+                    gp.player.missionState = MissionStates.GET_PAID_FOR_OLD_COOKER;
+                    for (int i = 0; i < gp.npc[1].length; i++) {
+                        if (gp.npc[gp.currentMap][i] != null) {
+                            if (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker")) {
+                                gp.npc[gp.currentMap][i] = null;
+
+                            }
+                            if (gp.npc[gp.currentMap][i] != null) {
+                                if (Objects.equals(gp.npc[gp.currentMap][i].name, "Merchant")) {
+                                    gp.npc[gp.currentMap][i] = null;
+
+                                }
+                            }
+                        }
+                    }
+                }
             }
             gp.player.readyForNextPhoneMission = false;
         }
