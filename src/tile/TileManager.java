@@ -138,6 +138,13 @@ public class TileManager {
         setup(106, "toolHutBackLeft", true);
         setup(107, "toolHutBackCentre", true);
         setup(108, "toolHutBackRight", true);
+        setup(109, "carpetBaldy1", false);
+        setup(110, "carpetBaldy2", false);
+        setup(111, "stairsLandingBathroomBorder", false);
+        setup(112, "spareRoomLandingBorder", false);
+        setup(113, "landingLeighBedroomBorder", false);
+        setup(114, "landingDadBedroomBorder", false);
+
 
 
     }

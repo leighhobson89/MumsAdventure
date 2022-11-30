@@ -187,6 +187,11 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
+        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 23 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_FrontDoor(gp);
         gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
@@ -246,8 +251,6 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
-
-        //58 57 56 9
 
         gp.obj[mapNum][i] = new OBJ_Camper1(gp);
         gp.obj[mapNum][i].worldX = 54 * gp.tileSize;
@@ -417,6 +420,21 @@ public class AssetSetter {
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
 
+        gp.obj[mapNum][i] = new OBJ_InsideDoor(gp);
+        gp.obj[mapNum][i].worldX = 25 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_InsideDoor(gp);
+        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
+        gp.obj[mapNum][i].worldX = 21 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_BackGate(gp);
         gp.obj[mapNum][i].worldX = 31 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
@@ -566,6 +584,11 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
         i++;
+
+        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
+        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 23 * gp.tileSize;
+        i++;
     }
 
     public void setNPC() {
@@ -590,6 +613,11 @@ public class AssetSetter {
         gp.npc[mapNum][i] = new NPC_Merchant(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*62;
         gp.npc[mapNum][i].worldY = gp.tileSize*9;
+        i++;
+
+        gp.npc[mapNum][i] = new NPC_Baldy(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize*18;
+        gp.npc[mapNum][i].worldY = gp.tileSize*23;
         i++;
 
         gp.npc[mapNum][i] = new NPC_RustyCooker(gp);
