@@ -93,7 +93,7 @@ public class MON_Spider extends Entity {
         int rand = new Random().nextInt(100) + 1;
 
         //SET THE MONSTER DROP
-        if (gp.player.spiderCount >= 4 && !toolHutKeyDropped) {
+        if (gp.player.spiderCount >= 4 && !gp.player.toolHutKeyDropped) {
             gp.player.toolHutKeyDropped = true;
             dropItem(new OBJ_ToolHutKey(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
         } else {
@@ -103,7 +103,7 @@ public class MON_Spider extends Entity {
             if (rand >= 50 && rand < 80) {
                 dropItem(new OBJ_LightningBoltStress(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
             }
-            if (rand >= 80 && rand < 100 && !toolHutKeyDropped) {
+            if (rand >= 80 && rand < 100 && !gp.player.toolHutKeyDropped) {
                 dropItem(new OBJ_ToolHutKey(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
                 gp.player.toolHutKeyDropped = true;
             }

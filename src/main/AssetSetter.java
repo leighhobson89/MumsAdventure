@@ -367,11 +367,6 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_ToolHutKey(gp);
-        gp.obj[mapNum][i].worldX = 35 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-        i++;
-
         gp.obj[mapNum][i] = new OBJ_Toolhut1_Left(gp);
         gp.obj[mapNum][i].worldX = 32 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 8 * gp.tileSize;

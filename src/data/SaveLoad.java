@@ -76,16 +76,6 @@ public class SaveLoad {
             ds.boneIndex = gp.player.boneIndex;
             ds.chickenIndex = gp.player.chickenIndex;
             ds.choppedChickenCount = gp.player.choppedChickenCount;
-            if (gp.player.boneCount > 0) {
-                ds.savedWithBoneEquipped = true;
-            } else {
-                ds.savedWithBoneEquipped = false;
-            }
-            if (gp.player.choppedChickenCount > 0) {
-                ds.savedWithChoppedChickenEquipped = true;
-            } else {
-                ds.savedWithChoppedChickenEquipped = false;
-            }
             ds.thrownChickenCount = gp.player.thrownChickenCount;
             ds.spiderCount = gp.player.spiderCount;
             ds.missionState = gp.player.missionState;
