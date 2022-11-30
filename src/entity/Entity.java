@@ -83,6 +83,7 @@ public class Entity {
     public int collisionType;
     public boolean currentDialogueFinished;
     public boolean stainRemoverUsed;
+    public boolean toolHutKeyDropped;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -372,18 +373,81 @@ public class Entity {
 
     }
 
-    public void dropItem(Entity droppedItem) {
+    public boolean checkIfObjectInWay(Entity entity) {
+        boolean objectInWay = false;
+        int objCol;
+        int objRow;
+        int entCol;
+        int entRow;
         for (int i = 0; i < gp.obj[1].length; i++) {
-            if (gp.obj[gp.currentMap][i] == null) {
-                gp.obj[gp.currentMap][i] = droppedItem;
-                if (Objects.equals(droppedItem.name, "StressBolt")) {
-                    gp.obj[gp.currentMap][i].worldX = worldX + 20; //Get the dead monster's worldX
-                    gp.obj[gp.currentMap][i].worldY = worldY + 20;
-                } else {
-                    gp.obj[gp.currentMap][i].worldX = worldX;
-                    gp.obj[gp.currentMap][i].worldY = worldY;
+            if (gp.obj[gp.currentMap][i] != null) {
+                objCol = gp.obj[gp.currentMap][i].worldX / gp.tileSize;
+                objRow = gp.obj[gp.currentMap][i].worldY / gp.tileSize;
+                entCol = entity.worldX;
+                entRow = entity.worldY;
+                if (objCol == entCol && objRow == entRow) {
+                    objectInWay = true;
+                    break;
                 }
-                break;
+            }
+        }
+        return objectInWay;
+    }
+
+    public void dropItem(Entity droppedItem, int tileX, int tileY) {
+        int startX = tileX - 2;
+        int startY = tileY - 2;
+        boolean canDrop = true;
+        int thisTile = gp.tileM.mapTileNum[gp.currentMap][tileX][tileY];
+
+        if (!gp.tileM.tile[thisTile].collision && !checkIfObjectInWay(this)) {
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if(gp.obj[gp.currentMap][i] == null) {
+                    gp.obj[gp.currentMap][i] = droppedItem;
+                    if (Objects.equals(droppedItem.name, "StressBolt")) {
+                        gp.obj[gp.currentMap][i].worldX = worldX + 20; //Get the dead monster's worldX
+                        gp.obj[gp.currentMap][i].worldY = worldY + 20;
+                    } else {
+                        gp.obj[gp.currentMap][i].worldX = worldX;
+                        gp.obj[gp.currentMap][i].worldY = worldY;
+                    }
+                    break;
+                }
+            }
+        } else {
+            this.worldX = startX;
+            this.worldY = startY;
+            while (gp.tileM.tile[thisTile].collision || checkIfObjectInWay(this) || (this.worldX < 11 || this.worldX > 60) || (this.worldY < 5 || this.worldY > 19)) {
+                this.worldX++;
+                if (this.worldX - startX > 4) {
+                    this.worldY++;
+                    this.worldX = startX;
+                }
+                if (this.worldY - startY > 4) {
+                    canDrop = false;
+                    break;
+                }
+                thisTile = gp.tileM.mapTileNum[gp.currentMap][this.worldX][this.worldY];
+            }
+            this.worldX = this.worldX * gp.tileSize;
+            this.worldY = this.worldY * gp.tileSize;
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if (gp.obj[gp.currentMap][i] == null && canDrop) {
+                    gp.obj[gp.currentMap][i] = droppedItem;
+                    if (Objects.equals(droppedItem.name, "StressBolt")) {
+                        gp.obj[gp.currentMap][i].worldX = worldX + 20; //Get the dead monster's worldX
+                        gp.obj[gp.currentMap][i].worldY = worldY + 20;
+                    } else {
+                        gp.obj[gp.currentMap][i].worldX = worldX;
+                        gp.obj[gp.currentMap][i].worldY = worldY;
+                    }
+                    break;
+                }
+                else if (!canDrop) {
+                    if (Objects.equals(droppedItem.name, "ToolHutKey")) {
+                        gp.player.toolHutKeyDropped = false;
+                    }
+                }
             }
         }
     }

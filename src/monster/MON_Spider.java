@@ -4,6 +4,7 @@ import entity.Entity;
 import main.GamePanel;
 import object.OBJ_Coin;
 import object.OBJ_LightningBoltStress;
+import object.OBJ_ToolHutKey;
 
 import java.util.Random;
 
@@ -92,11 +93,20 @@ public class MON_Spider extends Entity {
         int rand = new Random().nextInt(100) + 1;
 
         //SET THE MONSTER DROP
-        if (rand < 50) {
-            dropItem(new OBJ_Coin(gp));
-        }
-        if (rand >= 50 && rand < 80) {
-            dropItem(new OBJ_LightningBoltStress(gp));
+        if (gp.player.spiderCount >= 4 && !toolHutKeyDropped) {
+            gp.player.toolHutKeyDropped = true;
+            dropItem(new OBJ_ToolHutKey(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
+        } else {
+            if (rand < 50) {
+                dropItem(new OBJ_Coin(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
+            }
+            if (rand >= 50 && rand < 80) {
+                dropItem(new OBJ_LightningBoltStress(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
+            }
+            if (rand >= 80 && rand < 100 && !toolHutKeyDropped) {
+                dropItem(new OBJ_ToolHutKey(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
+                gp.player.toolHutKeyDropped = true;
+            }
         }
     }
 }

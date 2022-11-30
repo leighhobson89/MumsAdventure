@@ -93,10 +93,10 @@ public class MON_WaspSwarm extends Entity {
 
         //SET THE MONSTER DROP
         if (rand < 50) {
-            dropItem(new OBJ_Coin(gp));
+            dropItem(new OBJ_Coin(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
         }
         if (rand >= 50 && rand < 80) {
-            dropItem(new OBJ_LightningBoltStress(gp));
+            dropItem(new OBJ_LightningBoltStress(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
         }
     }
 }

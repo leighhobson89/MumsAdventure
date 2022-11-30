@@ -114,6 +114,7 @@ public class SaveLoad {
             ds.bookHutState = gp.player.bookHutState;
             ds.quizScoreCount = gp.player.quizScoreCount;
             ds.stainRemoverUsed = gp.player.stainRemoverUsed;
+            ds.toolHutKeyDropped = gp.player.toolHutKeyDropped;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -291,6 +292,7 @@ public class SaveLoad {
             gp.player.bookHutState = ds.bookHutState;
             gp.player.quizScoreCount = ds.quizScoreCount;
             gp.player.stainRemoverUsed = ds.stainRemoverUsed;
+            gp.player.toolHutKeyDropped = ds.toolHutKeyDropped;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

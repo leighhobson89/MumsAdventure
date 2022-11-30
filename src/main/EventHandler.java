@@ -232,7 +232,7 @@ public class EventHandler {
     }
 
     public void kitchenPantry() {
-        gp.aSetter.setObjectAfterStart("Mop", gp.currentMap, 24, 14);
+        gp.aSetter.setObjectAfterStart("Mop", gp.currentMap, 24, 13);
     }
 
     public void fridgeOpen() {

@@ -32,8 +32,8 @@ public class CollisionChecker {
             direction = entity.knockBackDirection;
         }
 
-        switch(direction) {
-            case "up":
+        switch (direction) {
+            case "up" -> {
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
@@ -41,8 +41,8 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                     tileState = true;
                 }
-                break;
-            case "down":
+            }
+            case "down" -> {
                 entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
@@ -50,8 +50,8 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                     tileState = true;
                 }
-                break;
-            case "left":
+            }
+            case "left" -> {
                 entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
@@ -59,8 +59,8 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                     tileState = true;
                 }
-                break;
-            case "right":
+            }
+            case "right" -> {
                 entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
@@ -68,7 +68,7 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                     tileState = true;
                 }
-                break;
+            }
         }
         return tileState;
     }
@@ -165,6 +165,10 @@ public class CollisionChecker {
                             index = i;
                         }
                         if ((Objects.equals(target[gp.currentMap][i].name, "IT_CookerTile")) && entity.type == entity.type_player) {
+                            entity.collisionOn = false;
+                            index = i;
+                        }
+                        if ((Objects.equals(target[gp.currentMap][i].name, "IT_RockeryBare")) && entity.type == entity.type_player) {
                             entity.collisionOn = false;
                             index = i;
                         }
