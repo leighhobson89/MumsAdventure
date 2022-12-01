@@ -191,7 +191,7 @@ public class Player extends Entity {
     public int getCurrentWeaponSlot() {
         int currentWeaponSlot = 0;
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i) == currentWeapon) {
+            if (inventory.get(i).isWeapon && Objects.equals(inventory.get(i).name, gp.player.currentWeapon.name)) {
                 currentWeaponSlot = i;
             }
         }
@@ -201,7 +201,7 @@ public class Player extends Entity {
     public int getCurrentArmourSlot() {
         int currentArmourSlot = 0;
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i) == currentArmour) {
+            if (inventory.get(i).isArmour && Objects.equals(inventory.get(i).name, gp.player.currentArmour.name)) {
                 currentArmourSlot = i;
             }
         }
@@ -211,7 +211,7 @@ public class Player extends Entity {
     public int getCurrentProjectileSlot() {
         int currentProjectileSlot = 0;
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i) == currentProjectile) {
+            if (inventory.get(i).isProjectile && Objects.equals(inventory.get(i).name, gp.player.currentProjectile.name)) {
                 currentProjectileSlot = i;
             }
         }
