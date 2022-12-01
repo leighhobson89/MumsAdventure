@@ -4,7 +4,6 @@ import entity.Entity;
 import main.GamePanel;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
-import object.*;
 import tile_interactive.*;
 
 import java.io.*;
@@ -199,7 +198,12 @@ public class SaveLoad {
             //NPCS ON MAP
             ds.andreaOnMap = gp.player.andreaOnMap;
 
+            for (int i = 0; i < gp.npc[1].length; i++) {
+                ds.npcList.add(gp.npc[gp.currentMap][i]);
+            }
+
             //Write the DataStorage Object
+
             oos.writeObject(ds);
 
             //DEBUG
@@ -378,6 +382,17 @@ public class SaveLoad {
 
             //NPCS ON MAP
             gp.player.andreaOnMap = ds.andreaOnMap;
+
+            for (Entity entity:ds.npcList) {
+                for (int j = 0; j < gp.npc[1].length; j++) {
+                    if (Objects.equals(entity.name, gp.npc[gp.currentMap][j].name)) {
+                        gp.npc[gp.currentMap][j].worldX = entity.worldX;
+                        gp.npc[gp.currentMap][j].worldY = entity.worldY;
+                        gp.npc[gp.currentMap][j].onPath = entity.onPath;
+                        gp.npc[gp.currentMap][j].direction = entity.direction;
+                    }
+                }
+            }
 
             //SET CORRECT IMAGE STATES
             gp.eHandler.setImageStates(gp.currentMap);
