@@ -1091,6 +1091,7 @@ public class UI {
         y += gp.tileSize;
 
         if (subState == 0) {
+            commandNum = 0;
             g2.drawString("Sit down to watch TV", x, y);
             if (commandNum == 0) {
                 g2.drawString(">", x - 24, y);

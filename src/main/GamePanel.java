@@ -219,6 +219,9 @@ public class GamePanel extends JPanel implements Runnable {
 }
     public void update() {
         if (gameState == playState) {
+            if (player.worldX / tileSize == 19 && player.worldY / tileSize == 18) { //watching tv
+                player.direction = "up";
+            }
             //MISSION
             eHandler.setUpNextPhoneCallWhenNotInAMissionAndNextMissionIsAPhoneMission(player.missionState); //increment time after a mission ends, to set the new one if required
             if (player.setShovelFlag) {

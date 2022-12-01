@@ -282,6 +282,16 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/mum_spatula_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_spatula_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
+            if (currentWeapon.type == type_tv_remote) {
+                attackUp1 = setup("/player/mum_remote_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
+                attackUp2 = setup("/player/mum_remote_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown1 = setup("/player/mum_remote_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown2 = setup("/player/mum_remote_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackLeft1 = setup("/player/mum_remote_up1_" + colorOutfit, gp.tileSize * 2, gp.tileSize); //32 x 16 images
+                attackLeft2 = setup("/player/mum_remote_up2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight1 = setup("/player/mum_remote_up1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight2 = setup("/player/mum_remote_up2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+            }
         }
     }
 
@@ -513,6 +523,24 @@ public class Player extends Entity {
         if (stressLevel < 0) {
             stressLevel = 0;
         }
+
+        if(currentWeapon != null && currentWeapon.type == type_tv_remote) {
+            if (tvIsOff && attacking) {
+                tvIsOff = false;
+                for (int i = 0; i < gp.obj[1].length; i++) {
+                    if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "TV_Lounge")) {
+                        gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
+                    }
+                }
+            } else if (!tvIsOff && attacking) {
+                tvIsOff = true;
+                for (int i = 0; i < gp.obj[1].length; i++) {
+                    if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "TV_Lounge")) {
+                        gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image;
+                    }
+                }
+            }
+        }
     }
 
     public void pickUpObject(int i) {
@@ -621,7 +649,8 @@ public class Player extends Entity {
         dialogueText[19][0] = "Bloody scarpered with my money!\nIdiots that tip giving it him, for God's sake!";
         dialogueText[20][0] = "Just gotta use this remote now!";
         dialogueText[20][1] = "(You will find it in your inventory)";
-        dialogueText[21][0] = "Enough of that, I better get something done!";
+        dialogueText[21][0] = "Turn that bloody telly off when you're not using it\nI'm not made o' money!";
+        dialogueText[22][0] = "Right enough of that, time to get something done!";
     }
 
     public void checkIfPassOutFromStress() {
@@ -900,7 +929,17 @@ public class Player extends Entity {
             } else if (selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) {
                 if (selectedItem.type == type_tv_remote) {
                    gp.player.worldY = gp.player.worldY - gp.tileSize;
-                   startDialogue(this, 21);
+                   if (!tvIsOff) {
+                       startDialogue(this, 21);
+                   } else {
+                       startDialogue(this, 22);
+                   }
+                   for (int i = 0; i < gp.obj[1].length; i++) {
+                       if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "TV_Lounge")) {
+                           gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image;
+                           tvIsOff = true;
+                       }
+                   }
                    inventory.remove(gp.player.tvRemoteIndex);
                 }
                 currentWeapon = null;

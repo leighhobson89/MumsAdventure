@@ -188,13 +188,25 @@ public class KeyHandler implements KeyListener {
                 upPressed = true;
             }
             if (code == KeyEvent.VK_DOWN) {
-                downPressed = true;
+                if (gp.player.worldX / gp.tileSize == 19 && gp.player.worldY / gp.tileSize == 18) { //watching tv
+                    downPressed = false;
+                } else {
+                    downPressed = true;
+                }
             }
             if (code == KeyEvent.VK_LEFT) {
-                leftPressed = true;
+                if (gp.player.worldX / gp.tileSize == 19 && gp.player.worldY / gp.tileSize == 18) { //watching tv
+                    leftPressed = false;
+                } else {
+                    leftPressed = true;
+                }
             }
             if (code == KeyEvent.VK_RIGHT) {
-                rightPressed = true;
+                if (gp.player.worldX / gp.tileSize == 19 && gp.player.worldY / gp.tileSize == 18) { //watching tv
+                    rightPressed = false;
+                } else {
+                    rightPressed = true;
+                }
             }
             if (code == KeyEvent.VK_SHIFT) {
                 gp.player.speedBoost = true;

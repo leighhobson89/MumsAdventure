@@ -147,6 +147,7 @@ public class Entity {
     public boolean haveBoneResource;
     public boolean haveChoppedChickenResource;
     public int tvRemoteIndex;
+    public boolean tvIsOff = true;
 
     //ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();
