@@ -86,6 +86,9 @@ public class GamePanel extends JPanel implements Runnable {
     public final int sleepState = 9;
     public final int mapState = 10;
     public final int quizState = 11;
+    public int quizSubState;
+    public final int mumsChair = 0;
+    public final int dadQuiz = 1;
 
 
     public GamePanel() throws IOException, FontFormatException { //constructor

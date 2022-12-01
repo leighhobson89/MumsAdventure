@@ -146,6 +146,7 @@ public class Entity {
     public boolean savedWithAProjectileEquipped;
     public boolean haveBoneResource;
     public boolean haveChoppedChickenResource;
+    public int tvRemoteIndex;
 
     //ITEM ATTRIBUTES
     public ArrayList<Entity> inventory = new ArrayList<>();
@@ -190,6 +191,7 @@ public class Entity {
     public final int type_axe = 11;
     public final int type_mop = 12;
     public final int type_switchable_interactive_tile = 13;
+    public final int type_tv_remote = 14;
 
     public Entity(GamePanel gp) {
         this.gp = gp;

@@ -4,6 +4,7 @@ import entity.Entity;
 import object.OBJ_Coin;
 import object.OBJ_LightningBoltStress;
 import object.OBJ_SqueakyToy_UI;
+import object.OBJ_TV_Remote;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -72,7 +73,7 @@ public class UI {
         g2.setColor(Color.WHITE);
 
         //TITLE STATE
-        if(gp.gameState == gp.titleState) {
+        if (gp.gameState == gp.titleState) {
             drawTitleScreen();
         }
         //PLAY STATE
@@ -121,7 +122,7 @@ public class UI {
 
         //QUIZ STATE
         if (gp.gameState == gp.quizState) {
-            drawQuizScreen();
+            drawQuizScreen(gp.quizSubState);
         }
     }
 
@@ -550,6 +551,12 @@ public class UI {
                 y = gp.tileSize / 2;
                 width = gp.screenWidth - (gp.tileSize * 6);
                 height = gp.tileSize * 4;
+            }
+            case 2 -> {
+                x = gp.tileSize * 3;
+                y = gp.tileSize / 2;
+                width = gp.screenWidth - (gp.tileSize * 6);
+                height = gp.tileSize * 2;
             }
         }
 
@@ -1057,12 +1064,69 @@ public class UI {
         }
     }
 
-    public void drawQuizScreen() {
-        quiz_questionSelect(gp.player.missionSubstate);
+    public void drawQuizScreen(int quizSubState) {
+        if (quizSubState == gp.mumsChair) {
+            mumChair_questionSelect();
+        } else if (quizSubState == gp.dadQuiz) {
+            dadQuiz_questionSelect(gp.player.missionSubstate);
+        }
         gp.keyH.enterPressed = false;
     }
 
-    public void quiz_questionSelect(int missionSubstate) {
+    public void mumChair_questionSelect() {
+        if (subState == 0) {
+            drawDialogueScreen(2);
+        }
+
+        //DRAW WINDOW
+        int x = gp.tileSize * 4;
+        int y = gp.tileSize * 5;
+        int width = gp.tileSize * 15;
+        int height = (int)(gp.tileSize * 2.5);
+
+        drawSubWindow(x, y, width, height);
+
+        //DRAW TEXTS
+        x += gp.tileSize-15;
+        y += gp.tileSize;
+
+        if (subState == 0) {
+            g2.drawString("Sit down to watch TV", x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x - 24, y);
+                if (gp.keyH.enterPressed) {
+                    gp.playSFX(11);
+                    subState = 1; // sit to watch tv
+                }
+            }
+            y += gp.tileSize;
+            g2.drawString("Sit down and relax, destress, and save the game!", x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x - 24, y);
+                if (gp.keyH.enterPressed) {
+                    gp.playSFX(11);
+                    subState = 2; // destressEvent
+                }
+            }
+        } else if (subState == 1) { // sit to watch tv
+            if (gp.player.inventory.size() != gp.player.maxInventorySize) {
+                gp.player.inventory.add(new OBJ_TV_Remote(gp));
+                gp.player.tvRemoteIndex = gp.player.inventory.size() - 1;
+            }
+            gp.player.worldX = 19 * gp.tileSize;
+            gp.player.worldY = 18 * gp.tileSize;
+            gp.player.direction = "up";
+            subState = 0;
+            commandNum = 0;
+            gp.player.startDialogue(gp.player, 20);
+        } else if (subState == 2) { // destressEvent
+            gp.eHandler.DestressEvent();
+            subState = 0;
+            commandNum = 0;
+        }
+    }
+
+    public void dadQuiz_questionSelect(int missionSubstate) {
         if (subState == 0) {
             drawDialogueScreen(1);
         }

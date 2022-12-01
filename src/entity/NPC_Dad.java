@@ -216,6 +216,7 @@ public class NPC_Dad extends Entity {
         }
         startDialogue(this, dialogueSet);
         if (gp.player.missionSubstate >= 4 && gp.player.missionSubstate < 9) {
+            gp.quizSubState = gp.dadQuiz;
             gp.gameState = gp.quizState;
         }
     }

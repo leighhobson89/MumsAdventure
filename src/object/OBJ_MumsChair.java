@@ -28,11 +28,18 @@ public class OBJ_MumsChair extends Entity {
         solidArea.height = 28;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogueText[0][0] = "Should I sit quietly and destress, or watch TV?";
     }
 
     public void interact() {
-        gp.gameState = gp.dialogueState;
-        gp.eHandler.DestressEvent();
+        startDialogue(this, 0);
+        gp.quizSubState = gp.mumsChair;
+        gp.gameState = gp.quizState;
         gp.keyH.enterPressed = false;
     }
 }

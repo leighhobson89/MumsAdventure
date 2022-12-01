@@ -619,6 +619,9 @@ public class Player extends Entity {
         dialogueText[18][0] = "Phew! He gets absolutely furious if water\ngets left on the floor!";
         dialogueText[18][1] = "If he would just finish the house, we wouldn't\nhave these problems!";
         dialogueText[19][0] = "Bloody scarpered with my money!\nIdiots that tip giving it him, for God's sake!";
+        dialogueText[20][0] = "Just gotta use this remote now!";
+        dialogueText[20][1] = "(You will find it in your inventory)";
+        dialogueText[21][0] = "Enough of that, I better get something done!";
     }
 
     public void checkIfPassOutFromStress() {
@@ -889,12 +892,17 @@ public class Player extends Entity {
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
 
-            if ((selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
+            if ((selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
-            } else if (selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) {
+            } else if (selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) {
+                if (selectedItem.type == type_tv_remote) {
+                   gp.player.worldY = gp.player.worldY - gp.tileSize;
+                   startDialogue(this, 21);
+                   inventory.remove(gp.player.tvRemoteIndex);
+                }
                 currentWeapon = null;
                 attack = getAttack();
                 gp.playSFX(11);

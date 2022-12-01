@@ -95,6 +95,7 @@ public class EntityGenerator {
             case OBJ_Toolhut3_Center.OBJ_NAME: obj = new OBJ_Toolhut3_Center(gp); break;
             case OBJ_Toolhut3_Right.OBJ_NAME: obj = new OBJ_Toolhut3_Right(gp); break;
             case OBJ_ToolHutKey.OBJ_NAME: obj = new OBJ_ToolHutKey(gp); break;
+            case OBJ_TV_Remote.OBJ_NAME: obj = new OBJ_TV_Remote(gp); break;
         }
         return obj;
     }
