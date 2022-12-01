@@ -31,6 +31,11 @@ public class AssetSetter {
     }
 
     public void setObjectAfterStart(String name, int mapNum, int x, int y) { //finds first available slot in object array if setting object after start of game
+        int startX = x - 2;
+        int startY = y - 2;
+        int thisTile = gp.tileM.mapTileNum[gp.currentMap][x][y];
+        Entity testEntity = new OBJ_Cupboard2(gp);
+
         int count = 0;
         for (int i = 0; i < gp.obj[1].length; i++) {
             if (gp.obj[gp.currentMap][i] != null) {
@@ -41,56 +46,87 @@ public class AssetSetter {
         }
 
         int i = count;
-        switch (name) { //chooses object
-            case "Pip's Bone":
-                gp.obj[mapNum][i] = new OBJ_PipsBone(gp);
-                boneX = x * gp.tileSize;
-                boneY = y * gp.tileSize;
+        if (!gp.tileM.tile[thisTile].collision && !gp.player.checkIfObjectInWay(testEntity)) {
+            switch (name) { //chooses object
+                case "Pip's Bone" -> {
+                    gp.obj[mapNum][i] = new OBJ_PipsBone(gp);
+                    boneX = x * gp.tileSize;
+                    boneY = y * gp.tileSize;
+                }
+                case "Chopped Chicken Phoebe" -> {
+                    gp.obj[mapNum][i] = new OBJ_ChoppedChickenPhoebe(gp);
+                    choppedChickenPhoebeX = x * gp.tileSize;
+                    choppedChickenPhoebeY = y * gp.tileSize;
+                }
+                case "Chopped Chicken Pip" -> {
+                    gp.obj[mapNum][i] = new OBJ_ChoppedChickenPip(gp);
+                    choppedChickenPipX = x * gp.tileSize;
+                    choppedChickenPipY = y * gp.tileSize;
+                }
+                case "Old Cardigan" -> gp.obj[mapNum][i] = new OBJ_GrandmasCardigan(gp);
+                case "Spatula" -> gp.obj[mapNum][i] = new OBJ_Spatula(gp);
+                case "Hatchet" -> gp.obj[mapNum][i] = new OBJ_Hatchet(gp);
+                case "FrontBackDoorOpen" -> gp.obj[mapNum][i] = new OBJ_FrontBackDoorOpen(gp);
+                case "HundredQuid" -> gp.obj[mapNum][i] = new OBJ_SuperCoin(gp);
+                case "Garden Shovel" -> gp.obj[mapNum][i] = new OBJ_Shovel(gp);
+                case "Lavender Crocs" -> gp.obj[mapNum][i] = new OBJ_Lavendar_Crocs(gp);
+                case "Chicken" -> gp.obj[mapNum][i] = new OBJ_Chicken(gp);
+                case "Chopped Chicken" -> gp.obj[mapNum][i] = new OBJ_ChoppedChicken(gp);
+                case "Mop" -> gp.obj[mapNum][i] = new OBJ_Mop(gp);
+            }
+
+            gp.obj[mapNum][i].worldX = x * gp.tileSize;
+            gp.obj[mapNum][i].worldY = y * gp.tileSize;
+        } else {
+            testEntity.worldX = startX;
+            testEntity.worldY = startY;
+            while (gp.tileM.tile[thisTile].collision || gp.player.checkIfObjectInWay(testEntity) || (testEntity.worldX < 11 || testEntity.worldX > 60) || (testEntity.worldY < 5 || testEntity.worldY > 19)) {
+                testEntity.worldX++;
+                if (testEntity.worldX - startX > 4) {
+                    testEntity.worldY++;
+                    testEntity.worldX = startX;
+                }
+                if (testEntity.worldY - startY > 4) {
+                    break;
+                }
+                thisTile = gp.tileM.mapTileNum[gp.currentMap][testEntity.worldX][testEntity.worldY];
+            }
+            testEntity.worldX = testEntity.worldX * gp.tileSize;
+            testEntity.worldY = testEntity.worldY * gp.tileSize;
+            for (int j = 0; j < gp.obj[1].length; j++) {
+                switch (name) { //chooses object
+                    case "Pip's Bone" -> {
+                        gp.obj[mapNum][j] = new OBJ_PipsBone(gp);
+                        boneX = testEntity.worldX;
+                        boneY = testEntity.worldY;
+                    }
+                    case "Chopped Chicken Phoebe" -> {
+                        gp.obj[mapNum][j] = new OBJ_ChoppedChickenPhoebe(gp);
+                        choppedChickenPhoebeX = testEntity.worldX;
+                        choppedChickenPhoebeY = testEntity.worldY;
+                    }
+                    case "Chopped Chicken Pip" -> {
+                        gp.obj[mapNum][j] = new OBJ_ChoppedChickenPip(gp);
+                        choppedChickenPipX = testEntity.worldX;
+                        choppedChickenPipY = testEntity.worldY;
+                    }
+                    case "Old Cardigan" -> gp.obj[mapNum][j] = new OBJ_GrandmasCardigan(gp);
+                    case "Spatula" -> gp.obj[mapNum][j] = new OBJ_Spatula(gp);
+                    case "Hatchet" -> gp.obj[mapNum][j] = new OBJ_Hatchet(gp);
+                    case "FrontBackDoorOpen" -> gp.obj[mapNum][j] = new OBJ_FrontBackDoorOpen(gp);
+                    case "HundredQuid" -> gp.obj[mapNum][j] = new OBJ_SuperCoin(gp);
+                    case "Garden Shovel" -> gp.obj[mapNum][j] = new OBJ_Shovel(gp);
+                    case "Lavender Crocs" -> gp.obj[mapNum][j] = new OBJ_Lavendar_Crocs(gp);
+                    case "Chicken" -> gp.obj[mapNum][j] = new OBJ_Chicken(gp);
+                    case "Chopped Chicken" -> gp.obj[mapNum][j] = new OBJ_ChoppedChicken(gp);
+                    case "Mop" -> gp.obj[mapNum][j] = new OBJ_Mop(gp);
+                }
+
+                gp.obj[mapNum][j].worldX = testEntity.worldX;
+                gp.obj[mapNum][j].worldY = testEntity.worldY;
                 break;
-            case "Chopped Chicken Phoebe":
-                gp.obj[mapNum][i] = new OBJ_ChoppedChickenPhoebe(gp);
-                choppedChickenPhoebeX = x * gp.tileSize;
-                choppedChickenPhoebeY = y * gp.tileSize;
-                break;
-            case "Chopped Chicken Pip":
-                gp.obj[mapNum][i] = new OBJ_ChoppedChickenPip(gp);
-                choppedChickenPipX = x * gp.tileSize;
-                choppedChickenPipY = y * gp.tileSize;
-                break;
-            case "Old Cardigan":
-                gp.obj[mapNum][i] = new OBJ_GrandmasCardigan(gp);
-                break;
-            case "Spatula":
-                gp.obj[mapNum][i] = new OBJ_Spatula(gp);
-                break;
-            case "Hatchet":
-                gp.obj[mapNum][i] = new OBJ_Hatchet(gp);
-                break;
-            case "FrontBackDoorOpen":
-                gp.obj[mapNum][i] = new OBJ_FrontBackDoorOpen(gp);
-                break;
-            case "HundredQuid":
-                gp.obj[mapNum][i] = new OBJ_SuperCoin(gp);
-                break;
-            case "Garden Shovel":
-                gp.obj[mapNum][i] = new OBJ_Shovel(gp);
-                break;
-            case "Lavender Crocs":
-                gp.obj[mapNum][i] = new OBJ_Lavendar_Crocs(gp);
-                break;
-            case "Chicken":
-                gp.obj[mapNum][i] = new OBJ_Chicken(gp);
-                break;
-            case "Chopped Chicken":
-                gp.obj[mapNum][i] = new OBJ_ChoppedChicken(gp);
-                break;
-            case "Mop":
-                gp.obj[mapNum][i] = new OBJ_Mop(gp);
+            }
         }
-
-        gp.obj[mapNum][i].worldX = x * gp.tileSize;
-        gp.obj[mapNum][i].worldY = y * gp.tileSize;
-
     }
 
     public void setNPCAfterStart(String name, int mapNum, int x, int y) {

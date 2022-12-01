@@ -46,6 +46,10 @@ public class SaveLoad {
 
             DataStorage ds = new DataStorage();
 
+            //DEBUG - PROJECTILE WORKAROUND
+            Entity tempProjectile = gp.player.currentProjectile;
+            gp.player.currentProjectile = null;
+
             //MUSIC CONFIG
             ds.musicPlaying = gp.keyH.musicPlaying;
 
@@ -198,16 +202,17 @@ public class SaveLoad {
             //NPCS ON MAP
             ds.andreaOnMap = gp.player.andreaOnMap;
 
-            for (int i = 0; i < gp.npc[1].length; i++) {
-                ds.npcList.add(gp.npc[gp.currentMap][i]);
-            }
+//            for (int i = 0; i < gp.npc[1].length; i++) {
+//                ds.npcList.add(gp.npc[gp.currentMap][i]);
+//            }
 
             //Write the DataStorage Object
 
             oos.writeObject(ds);
 
             //DEBUG
-            //add system.out here for save
+            //reset projectile for workaround
+            gp.player.currentProjectile = tempProjectile;
 
         } catch (Exception e) {
             System.out.println("Save Exception!");
@@ -383,16 +388,16 @@ public class SaveLoad {
             //NPCS ON MAP
             gp.player.andreaOnMap = ds.andreaOnMap;
 
-            for (Entity entity:ds.npcList) {
-                for (int j = 0; j < gp.npc[1].length; j++) {
-                    if (Objects.equals(entity.name, gp.npc[gp.currentMap][j].name)) {
-                        gp.npc[gp.currentMap][j].worldX = entity.worldX;
-                        gp.npc[gp.currentMap][j].worldY = entity.worldY;
-                        gp.npc[gp.currentMap][j].onPath = entity.onPath;
-                        gp.npc[gp.currentMap][j].direction = entity.direction;
-                    }
-                }
-            }
+//            for (Entity entity:ds.npcList) {
+//                for (int j = 0; j < gp.npc[1].length; j++) {
+//                    if (Objects.equals(entity.name, gp.npc[gp.currentMap][j].name)) {
+//                        gp.npc[gp.currentMap][j].worldX = entity.worldX;
+//                        gp.npc[gp.currentMap][j].worldY = entity.worldY;
+//                        gp.npc[gp.currentMap][j].onPath = entity.onPath;
+//                        gp.npc[gp.currentMap][j].direction = entity.direction;
+//                    }
+//                }
+//            }
 
             //SET CORRECT IMAGE STATES
             gp.eHandler.setImageStates(gp.currentMap);
