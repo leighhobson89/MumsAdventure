@@ -144,6 +144,7 @@ public class TileManager {
         setup(112, "spareRoomLandingBorder", false);
         setup(113, "landingLeighBedroomBorder", false);
         setup(114, "landingDadBedroomBorder", false);
+        setup(115, "carpetStairsLandingMat", false);
     }
 
     public void setup(int index, String imageName, boolean collision) {

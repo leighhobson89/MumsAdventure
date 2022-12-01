@@ -272,7 +272,7 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/mum_attack_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_attack_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
-            if (currentWeapon.type == type_axe ||currentWeapon.type == type_long_weapon || currentWeapon.type == type_gardeningShovel || currentWeapon.type == type_mop) {
+            if (currentWeapon.type == type_axe ||currentWeapon.type == type_long_weapon || currentWeapon.type == type_mop) {
                 attackUp1 = setup("/player/mum_spatula_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
                 attackUp2 = setup("/player/mum_spatula_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
                 attackDown1 = setup("/player/mum_spatula_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
@@ -281,6 +281,16 @@ public class Player extends Entity {
                 attackLeft2 = setup("/player/mum_spatula_left2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight1 = setup("/player/mum_spatula_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_spatula_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+            }
+            if (currentWeapon.type == type_gardeningShovel) {
+                attackUp1 = setup("/player/mum_shovel_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
+                attackUp2 = setup("/player/mum_shovel_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown1 = setup("/player/mum_shovel_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown2 = setup("/player/mum_shovel_down2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackLeft1 = setup("/player/mum_shovel_left1_" + colorOutfit, gp.tileSize * 2, gp.tileSize); //32 x 16 images
+                attackLeft2 = setup("/player/mum_shovel_left2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight1 = setup("/player/mum_shovel_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight2 = setup("/player/mum_shovel_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
             if (currentWeapon.type == type_tv_remote) {
                 attackUp1 = setup("/player/mum_remote_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images

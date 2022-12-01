@@ -53,7 +53,7 @@ public class Projectile extends Entity {
             if (monsterIndex != 999) {
                 gp.aSetter.setObjectAfterStart(gp.player.itemToThrow, gp.currentMap, projX, projY);
                 gp.player.damageMonster(monsterIndex, this, attack, knockBackPower);
-                generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
+                generateParticle(this, gp.monster[gp.currentMap][monsterIndex]);
                 switch (this.name) {
                     case "Chopped Chicken" -> gp.playSFX(31);
                     case "Pip's Bone" -> gp.playSFX(20);
