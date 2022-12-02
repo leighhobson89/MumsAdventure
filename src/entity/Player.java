@@ -272,7 +272,7 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/mum_attack_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_attack_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
-            if (currentWeapon.type == type_axe ||currentWeapon.type == type_long_weapon || currentWeapon.type == type_mop) {
+            if (currentWeapon.type == type_axe ||currentWeapon.type == type_long_weapon) {
                 attackUp1 = setup("/player/mum_spatula_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
                 attackUp2 = setup("/player/mum_spatula_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
                 attackDown1 = setup("/player/mum_spatula_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
@@ -301,6 +301,16 @@ public class Player extends Entity {
                 attackLeft2 = setup("/player/mum_remote_up2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight1 = setup("/player/mum_remote_up1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_remote_up2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+            }
+            if (currentWeapon.type == type_mop) {
+                attackUp1 = setup("/player/mum_mop_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
+                attackUp2 = setup("/player/mum_mop_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown1 = setup("/player/mum_mop_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown2 = setup("/player/mum_mop_down2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackLeft1 = setup("/player/mum_mop_left1_" + colorOutfit, gp.tileSize * 2, gp.tileSize); //32 x 16 images
+                attackLeft2 = setup("/player/mum_mop_left2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight1 = setup("/player/mum_mop_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight2 = setup("/player/mum_mop_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
         }
     }
