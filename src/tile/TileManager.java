@@ -145,6 +145,28 @@ public class TileManager {
         setup(113, "landingLeighBedroomBorder", false);
         setup(114, "landingDadBedroomBorder", false);
         setup(115, "carpetStairsLandingMat", false);
+        setup(116, "newBrickBottomLeft", true);
+        setup(117, "newBrickBottomRight", true);
+        setup(118, "newBrickTopLeft", true);
+        setup(119, "newBrickTopRight", true);
+        setup(120, "newBrickHorizontal", true);
+        setup(121, "newBrickVertical", true);
+        setup(122, "newInternalCornerTopLeft", true);
+        setup(123, "newInternalCornerTopRight", true);
+        setup(124, "newInternalCornerBottomLeft", true);
+        setup(125, "newInternalCornerBottomRight", true);
+        setup(126, "newInternalBottomEnd", true);
+        setup(127, "newInternalTopEnd", true);
+        setup(128, "newInternalLeftEnd", true);
+        setup(129, "newInternalRightEnd", true);
+        setup(130, "newInternalMiddleHorizontal", true);
+        setup(131, "newInternalMiddleVertical", true);
+        setup(132, "newInternalLeftEndShadow", true);
+        setup(133, "newInternalRightEndShadow", true);
+        setup(134, "newInternalTTop", true);
+        setup(135, "newInternalTBottom", true);
+        setup(136, "newInternalShortHorizontal", true);
+        setup(137, "newInternalRightEnd2", true);
     }
 
     public void setup(int index, String imageName, boolean collision) {
