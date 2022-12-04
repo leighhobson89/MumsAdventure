@@ -220,7 +220,7 @@ public class KeyHandler implements KeyListener {
                     gp.stopMusic();
                     musicPlaying = false;
                 } else {
-                    gp.playMusic(0, false, 0);
+                    gp.playMusic(0, false);
                     musicPlaying = true;
                 }
             }
@@ -271,7 +271,7 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_P) {
                 gp.gameState = gp.playState;
                 if (musicPlaying) {
-                    gp.playMusic(MUSIC_POSITION_PAUSE, true, 0);
+                    gp.playMusic(MUSIC_POSITION_PAUSE, true);
                 }
             }
             if (code == KeyEvent.VK_Q) {

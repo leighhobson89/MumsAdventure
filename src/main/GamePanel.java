@@ -118,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
 //        player.missionToSet = 2;
 //        //END OF DEBUG
 
-        playMusic(0, false, 0);
+        playMusic(0, false);
         if (!musicSetToPlayFromStart) {
             keyH.musicPlaying = false;
             stopMusic();
@@ -134,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void resetGame(boolean restart) {
         if (!keyH.musicPlaying) {
-            playMusic(0, false, 0);
+            playMusic(0, false);
         }
         player.resetCounter();
         player.setDefaultPositions();
@@ -218,6 +218,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
 }
     public void update() {
+        //MUSIC
+        if (music.length <= music.clip.getMicrosecondPosition() && gameState != pauseState && keyH.musicPlaying) {
+            playMusic(0, false);
+        }
         if (gameState == playState) {
             if (player.worldX / tileSize == 19 && player.worldY / tileSize == 18) { //watching tv
                 player.direction = "up";
@@ -438,10 +442,25 @@ public class GamePanel extends JPanel implements Runnable {
         g.dispose();
     }
 
-    public void playMusic(long position, boolean pausing, int i) {
-        music.setFile(i);
+    public void playMusic(long position, boolean pausing) {
+        int file;
+        int ran = new Random().nextInt(100);
+        if (ran < 33 && music.lastSong != 0) {
+            file = 0;
+        } else if (ran < 66  && music.lastSong != 34) {
+            file = 34;
+        } else {
+            if(music.lastSong != 35) {
+                file = 35;
+            } else {
+                file = 0;
+            }
+
+        }
+        music.lastSong = file;
+        music.setFile(file);
+        music.length = music.clip.getMicrosecondLength();
         music.play(position, pausing);
-        music.loop();
     }
 
     public void stopMusic() {

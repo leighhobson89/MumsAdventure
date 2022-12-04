@@ -9,6 +9,8 @@ import java.net.URL;
 public class Sound {
 
     Clip clip;
+    public long length;
+    public int lastSong;
     URL[] soundURL = new URL[50];
     FloatControl fc;
     int volumeScale = 3;
@@ -16,7 +18,7 @@ public class Sound {
 
     public Sound() {
 
-        soundURL[0] = getClass().getResource("/sound/inGameSong.wav");
+        soundURL[0] = getClass().getResource("/sound/inGameSong1.wav");
         soundURL[1] = getClass().getResource("/sound/keys.wav");
         soundURL[2] = getClass().getResource("/sound/pills.wav");
         soundURL[3] = getClass().getResource("/sound/doorUnlock.wav");
@@ -50,6 +52,8 @@ public class Sound {
         soundURL[31] = getClass().getResource("/sound/squelch.wav");
         soundURL[32] = getClass().getResource("/sound/showerRunning.wav");
         soundURL[33] = getClass().getResource("/sound/showerDripping.wav");
+        soundURL[34] = getClass().getResource("/sound/inGameSong2.wav");
+        soundURL[35] = getClass().getResource("/sound/inGameSong3.wav");
     }
 
     public void setFile(int i) {
