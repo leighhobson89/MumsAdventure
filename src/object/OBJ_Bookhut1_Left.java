@@ -2,7 +2,6 @@ package object;
 
 import entity.Entity;
 import main.GamePanel;
-import main.MissionStates;
 
 public class OBJ_Bookhut1_Left extends Entity {
 

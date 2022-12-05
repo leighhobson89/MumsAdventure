@@ -86,10 +86,10 @@ public class CollisionChecker {
                 gp.obj[gp.currentMap][i].solidArea.y = gp.obj[gp.currentMap][i].worldY + gp.obj[gp.currentMap][i].solidArea.y;
 
                 switch (entity.direction) {
-                    case "up": entity.solidArea.y -= entity.speed; break;
-                    case "down": entity.solidArea.y += entity.speed; break;
-                    case "left": entity.solidArea.x -= entity.speed; break;
-                    case "right": entity.solidArea.x += entity.speed; break;
+                    case "up" -> entity.solidArea.y -= entity.speed;
+                    case "down" -> entity.solidArea.y += entity.speed;
+                    case "left" -> entity.solidArea.x -= entity.speed;
+                    case "right" -> entity.solidArea.x += entity.speed;
                 }
 
                 if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && (Objects.equals(entity.name, "Pip") || Objects.equals(entity.name, "Phoebe")) && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && (Objects.equals(gp.obj[gp.currentMap][i].name, "Fridge") || Objects.equals(gp.obj[gp.currentMap][i].name, "BackGate") || Objects.equals(gp.obj[gp.currentMap][i].name, "KitchenCupboard1") || Objects.equals(gp.obj[gp.currentMap][i].name, "BackGateSideways"))) {
@@ -133,15 +133,15 @@ public class CollisionChecker {
                 target[gp.currentMap][i].solidArea.y = target[gp.currentMap][i].worldY + target[gp.currentMap][i].solidArea.y;
 
                 switch (direction) {
-                    case "up": entity.solidArea.y -= entity.speed; break;
-                    case "down": entity.solidArea.y += entity.speed; break;
-                    case "left": entity.solidArea.x -= entity.speed; break;
-                    case "right": entity.solidArea.x += entity.speed; break;
+                    case "up" -> entity.solidArea.y -= entity.speed;
+                    case "down" -> entity.solidArea.y += entity.speed;
+                    case "left" -> entity.solidArea.x -= entity.speed;
+                    case "right" -> entity.solidArea.x += entity.speed;
                 }
 
                 if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) { //if entity touches object...
                     if(target[gp.currentMap][i] != entity) {
-                        if (!Objects.equals(target[gp.currentMap][i].name, "IT_Weed") && entity.type != entity.type_monster) { //lets monsters run about on destructable tiles
+                        if (!Objects.equals(target[gp.currentMap][i].name, "IT_Weed") && entity.type != entity.type_monster) { //lets monsters run about on destructible tiles
                             entity.collisionOn = true;
                             index = i;
                         } else if (Objects.equals(target[gp.currentMap][i].name, "IT_Weed") && entity.type != entity.type_monster) {

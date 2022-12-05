@@ -2,9 +2,6 @@ package object;
 
 import entity.Entity;
 import main.GamePanel;
-import main.MissionStates;
-
-import java.util.Objects;
 
 public class OBJ_TV_Lounge extends Entity {
 

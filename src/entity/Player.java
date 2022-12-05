@@ -52,6 +52,7 @@ public class Player extends Entity {
         setDefaultValues();
     }
 
+    @SuppressWarnings("MismatchedReadAndWriteOfArray")
     public void countDownTimerForItemEffect(int value, String effect) {
         createTimer();
         if ("Pills".equals(effect)) {
@@ -85,7 +86,6 @@ public class Player extends Entity {
             } else if (Objects.equals(direction, "right")) {
                 direction = "left";
             }
-        } else if ("LightPills".equals(effect)) {
         }
         if (interval == 1) {
             timer.cancel();
@@ -141,7 +141,6 @@ public class Player extends Entity {
         currentWeapon = null;
         currentArmour = null;
         currentLight = null;
-//        projectile = new OBJ_PipsToy_Magic(gp);
          // projectile = new OBJ_PipsBone(gp); activate this for projectile that doesn't affect toys in ui when wanting to add bone that can be picked up after throwing or something : Change sound too if needed
         attack = 0;
         defense = 0;
@@ -313,13 +312,14 @@ public class Player extends Entity {
         }
     }
 
-    public void getGuardImage() {
-        guardUp = setup("/player/mum_guard_up", gp.tileSize, gp.tileSize);
-        guardDown = setup("/player/mum_guard_down", gp.tileSize, gp.tileSize);
-        guardLeft = setup("/player/mum_guard_left", gp.tileSize, gp.tileSize);
-        guardRight = setup("/player/mum_guard_right", gp.tileSize, gp.tileSize);
-    }
+//    public void getGuardImage() {
+//        guardUp = setup("/player/mum_guard_up", gp.tileSize, gp.tileSize);
+//        guardDown = setup("/player/mum_guard_down", gp.tileSize, gp.tileSize);
+//        guardLeft = setup("/player/mum_guard_left", gp.tileSize, gp.tileSize);
+//        guardRight = setup("/player/mum_guard_right", gp.tileSize, gp.tileSize);
+//    }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     public void update() {
 
         if (missionState == MissionStates.GET_PAID_FOR_OLD_COOKER) {
@@ -402,6 +402,7 @@ public class Player extends Entity {
             if (speedBoost && !dizzyFlag) {
                 speed = pillsSpeed;
             } else if (dizzyFlag) {
+                //do nothing
             } else {
                 speed = defaultSpeed;
             }
@@ -621,9 +622,9 @@ public class Player extends Entity {
                     }
 
                     if (Objects.equals(gp.obj[gp.currentMap][i].name, "MagicQuizBook")) {
-                        for (int j = 0; j < inventory.size(); j++) {
-                            if (Objects.equals(inventory.get(j).name, "MagicQuizBook")) {
-                                inventory.get(j).down1 = inventory.get(j).image2;
+                        for (Entity entity : inventory) {
+                            if (Objects.equals(entity.name, "MagicQuizBook")) {
+                                entity.down1 = entity.image2;
                             }
                         }
                         if (missionState == MissionStates.MAGIC_BOOK_QUIZ) {
@@ -786,9 +787,9 @@ public class Player extends Entity {
                     setKnockBack(gp.monster[gp.currentMap][i], attacker, knockBackPower);
                 }
 
-                if (gp.monster[gp.currentMap][i].offBalance) {
-                    //todo if introduce monsters with weapons and parry ability
-                }
+//                if (gp.monster[gp.currentMap][i].offBalance) {
+//                    //todo if introduce monsters with weapons and parry ability
+//                }
 
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
                 if (damage < 0) {
@@ -829,7 +830,7 @@ public class Player extends Entity {
                 if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress) {
                     if (gp.player.weedCount > 1) {
                         gp.player.weedCount--;
-                        gp.iTile[1][i+gp.aSetter.mapNumTotal] = gp.iTile[1][i+gp.aSetter.mapNumTotal].switchForm(); //remove weed from upstairs view - **only works if interacive tiles in same location on all maps**
+                        gp.iTile[1][i+gp.aSetter.mapNumTotal] = gp.iTile[1][i+gp.aSetter.mapNumTotal].switchForm(); //remove weed from upstairs view - **only works if interactive tiles in same location on all maps**
                     } else if (gp.player.weedCount == 1) { //end of weeding mission
                         gp.player.weedCount--;
                         gp.gameState = gp.dialogueState;
@@ -988,11 +989,10 @@ public class Player extends Entity {
             if (selectedItem.type == type_light && !Objects.equals(selectedItem.name, "Anti Brightness Pills")) {
                 if (currentLight == selectedItem) {
                     currentLight = null;
-                    gp.playSFX(11);
                 } else {
                     currentLight = selectedItem;
-                    gp.playSFX(11);
                 }
+                gp.playSFX(11);
                 lightUpdated = true;
             } else if (selectedItem.type == type_light && Objects.equals(selectedItem.name, "Anti Brightness Pills")) {
                 gp.playSFX(2);
@@ -1080,60 +1080,92 @@ public class Player extends Entity {
         int tempScreenY = screenY;
 
         switch (direction) {
-            case "up":
+            case "up" -> {
                 if (!attacking) {
-                    if (spriteNum == 1) { image = up1;}
-                    if (spriteNum == 2) { image = up2;}
+                    if (spriteNum == 1) {
+                        image = up1;
+                    }
+                    if (spriteNum == 2) {
+                        image = up2;
+                    }
                 }
                 if (attacking) {
                     tempScreenY = screenY - gp.tileSize;
-                    if (spriteNum == 1) { image = attackUp1;}
-                    if (spriteNum == 2) { image = attackUp2;}
+                    if (spriteNum == 1) {
+                        image = attackUp1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackUp2;
+                    }
                 }
                 if (guarding) {
                     image = guardUp;
                 }
-                break;
-            case "down":
+            }
+            case "down" -> {
                 if (!attacking) {
-                    if (spriteNum == 1) { image = down1;}
-                    if (spriteNum == 2) { image = down2;}
+                    if (spriteNum == 1) {
+                        image = down1;
+                    }
+                    if (spriteNum == 2) {
+                        image = down2;
+                    }
                 }
                 if (attacking) {
-                    if (spriteNum == 1) { image = attackDown1;}
-                    if (spriteNum == 2) { image = attackDown2;}
+                    if (spriteNum == 1) {
+                        image = attackDown1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackDown2;
+                    }
                 }
                 if (guarding) {
                     image = guardDown;
                 }
-                break;
-            case "left":
+            }
+            case "left" -> {
                 if (!attacking) {
-                    if (spriteNum == 1) { image = left1;}
-                    if (spriteNum == 2) { image = left2;}
+                    if (spriteNum == 1) {
+                        image = left1;
+                    }
+                    if (spriteNum == 2) {
+                        image = left2;
+                    }
                 }
                 if (attacking) {
                     tempScreenX = screenX - gp.tileSize;
-                    if (spriteNum == 1) { image = attackLeft1;}
-                    if (spriteNum == 2) { image = attackLeft2;}
+                    if (spriteNum == 1) {
+                        image = attackLeft1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackLeft2;
+                    }
                 }
                 if (guarding) {
                     image = guardLeft;
                 }
-                break;
-            case "right":
+            }
+            case "right" -> {
                 if (!attacking) {
-                    if (spriteNum == 1) { image = right1;}
-                    if (spriteNum == 2) { image = right2;}
+                    if (spriteNum == 1) {
+                        image = right1;
+                    }
+                    if (spriteNum == 2) {
+                        image = right2;
+                    }
                 }
                 if (attacking) {
-                    if (spriteNum == 1) { image = attackRight1;}
-                    if (spriteNum == 2) { image = attackRight2;}
+                    if (spriteNum == 1) {
+                        image = attackRight1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackRight2;
+                    }
                 }
                 if (guarding) {
                     image = guardRight;
                 }
-                break;
+            }
         }
 
         if (transparent) {

@@ -99,10 +99,7 @@ public class EventHandler {
     }
 
     public int spiderEvent(int col, int row, int gameState, int spiderCount, boolean randomizeLocation, boolean gardening) {
-        boolean atBin = false;
-        if (col == 30 && row == 8) {
-            atBin = true;
-        }
+        boolean atBin = col == 30 && row == 8;
         if (atBin) {
             gp.playSFX(14);
         }
@@ -177,7 +174,7 @@ public class EventHandler {
 
         tempCol = col;
         tempRow = row;
-        if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset moveable object if change area and it is not where it needs to be
+        if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset movable object if change area, and it is not where it needs to be
             for (int i = 0; i < gp.npc[1].length; i++) {
                 if (gp.npc[gp.currentMap][i] != null && (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker"))) {
                     if (gp.npc[gp.currentMap][i].linkedEntity == null) {
@@ -266,6 +263,7 @@ public class EventHandler {
         }
     }
 
+    @SuppressWarnings("SuspiciousListRemoveInLoop")
     public void removeMissionItemFromPlayerInventory(ArrayList<Entity> inventory, int missionState, int missionSubState) {
         for (int i = 0; i < inventory.size(); i++) {
             switch(missionState) {
@@ -328,15 +326,11 @@ public class EventHandler {
     }
 
     public void flagInsideToolHut(boolean isInside) {
-        if (isInside) {
-            gp.player.insideToolShed = true;
-        } else {
-            gp.player.insideToolShed = false;
-//            for (int i = 0; i < gp.obj[1].length; i++) { //change for toolhut item
-//                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "MagicQuizBook")) {
-//                    gp.player.changeOtherObjectImage("MagicQuizBook", 37, 6, 1);
-//                }
-//            }
-        }
+        //            for (int i = 0; i < gp.obj[1].length; i++) { //change for toolhut item
+        //                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "MagicQuizBook")) {
+        //                    gp.player.changeOtherObjectImage("MagicQuizBook", 37, 6, 1);
+        //                }
+        //            }
+        gp.player.insideToolShed = isInside;
     }
 }

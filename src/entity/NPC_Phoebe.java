@@ -1,11 +1,9 @@
 package entity;
 
 import main.GamePanel;
-import main.MissionStates;
 
 import java.awt.*;
 import java.util.Objects;
-import java.util.Random;
 
 public class NPC_Phoebe extends Entity {
 

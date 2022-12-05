@@ -18,11 +18,7 @@ public class MissionStates {
     public static final int GET_PAID_FOR_OLD_COOKER = 8;
 
     public void endMissionTasks(int missionToAddToCompletedList, boolean nextMissionIsPhoneMission) {
-        if (nextMissionIsPhoneMission) {
-            gp.player.nextMissionIsPhoneMission = true;
-        } else {
-            gp.player.nextMissionIsPhoneMission = false;
-        }
+        gp.player.nextMissionIsPhoneMission = nextMissionIsPhoneMission;
         gp.player.missionState = MissionStates.BETWEEN_MISSIONS;
         gp.player.missionList.add(missionToAddToCompletedList); //add completed weeding mission to missionList
         System.out.println( gp.player.missionList);

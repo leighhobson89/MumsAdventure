@@ -3,11 +3,11 @@ package object;
 import entity.Entity;
 import main.GamePanel;
 
-public class OBJ_Lavendar_Crocs extends Entity {
+public class OBJ_Lavender_Crocs extends Entity {
 
     public static final String OBJ_NAME = "Lavender Crocs";
 
-    public OBJ_Lavendar_Crocs(GamePanel gp) {
+    public OBJ_Lavender_Crocs(GamePanel gp) {
         super(gp);
 
         isUpdateable = false;

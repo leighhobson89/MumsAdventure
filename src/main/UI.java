@@ -18,10 +18,10 @@ public class UI {
     Graphics2D g2;
     public Font maruMonica, maruMonica_40;
     BufferedImage bolt_full, bolt_half, bolt_blank, squeakyToyFull, squeakyToyEmpty, coin;
-    public boolean messageOn = false;
+    //public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
-    public boolean gameFinished = false;
+    //public boolean gameFinished = false;
     public String currentDialogue;
     public int commandNum = 0;
     public int titleScreenState = 0; //0: FIRST TITLE SCREEN 1: SECOND SCREEN
@@ -254,7 +254,9 @@ public class UI {
                 messageY += 50;
 
                 if (messageCounter.get(i) > 180) {
+                    //noinspection SuspiciousListRemoveInLoop
                     message.remove(i);
+                    //noinspection SuspiciousListRemoveInLoop
                     messageCounter.remove(i);
                 }
             }
@@ -477,7 +479,6 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 42F));
 
             x = gp.screenWidth - gp.tileSize*5;
-            y = gp.tileSize*2;
             g2.drawImage(gp.player.left1, x, y, gp.tileSize*4, gp.tileSize*4, null);
 
             text = "- Use the arrow keys to move around.";
@@ -799,20 +800,18 @@ public class UI {
             g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
             // DESCRIPTION FRAME
-            int dFrameX = frameX;
             int dFrameY = frameY + frameHeight;
-            int dFrameWidth = frameWidth;
             int dFrameHeight = gp.tileSize * 3;
 
             //DRAW DESCRIPTION TEXT
-            int textX = dFrameX + 20;
+            int textX = frameX + 20;
             int textY = dFrameY + gp.tileSize;
             g2.setFont(g2.getFont().deriveFont(28F));
 
             int itemIndex = getItemIndexOnSlot(slotCol, slotRow);
 
             if (itemIndex < entity.inventory.size()) {
-                drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+                drawSubWindow(frameX, dFrameY, frameWidth, dFrameHeight);
                 for (String line: entity.inventory.get(itemIndex).description.split("\n")) {
                     g2.drawString(line, textX, textY);
                     textY += 32;
@@ -980,7 +979,7 @@ public class UI {
         g2.drawString("Character Screen", textX, textY); textY += gp.tileSize;
         g2.drawString("Pause", textX, textY); textY += gp.tileSize;
         g2.drawString("Music On / Off", textX, textY); textY += gp.tileSize;
-        g2.drawString("Options", textX, textY); textY += gp.tileSize;
+        g2.drawString("Options", textX, textY);
 
         textX = (int) (frameX + gp.tileSize*5.5);
         textY = frameY + gp.tileSize*2 + 3;
@@ -990,7 +989,7 @@ public class UI {
         g2.drawString("C", textX, textY); textY += gp.tileSize;
         g2.drawString("P", textX, textY); textY += gp.tileSize;
         g2.drawString("S", textX, textY); textY += gp.tileSize;
-        g2.drawString("ESC", textX, textY); textY += gp.tileSize;
+        g2.drawString("ESC", textX, textY);
 
         // BACK
         textX = frameX + gp.tileSize;
@@ -1315,7 +1314,6 @@ public class UI {
                 }
             }
         }
-        y += gp.tileSize;
 
     }
 

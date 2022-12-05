@@ -36,7 +36,7 @@ public class DataStorage implements Serializable {
     int missionState;
     int missionSubState;
     public List<Integer> missionList = new ArrayList<>();
-    public List<Entity> npcList = new ArrayList<Entity>();
+    //public List<Entity> npcList = new ArrayList<Entity>();
     boolean readyForNextPhoneMission;
     int missionToSet;
     int playerWorldX;

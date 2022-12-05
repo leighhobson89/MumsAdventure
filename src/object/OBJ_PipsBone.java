@@ -48,11 +48,8 @@ public class OBJ_PipsBone extends Projectile {
     }
 
     public boolean haveResource(Entity user) {
-        gp.player.haveBoneResource = false;
 
-        if (user.boneCount >= useCost) {
-            gp.player.haveBoneResource = true;
-        }
+        gp.player.haveBoneResource = user.boneCount >= useCost;
         return gp.player.haveBoneResource;
     }
 
@@ -61,19 +58,15 @@ public class OBJ_PipsBone extends Projectile {
     }
 
     public Color getParticleColor() {
-        Color color = new Color(65,50,30);
-        return color;
+        return new Color(65,50,30);
     }
     public int getParticleSize() {
-        int size = 4; //6 pixels
-        return size;
+        return 4;
     }
     public int getParticleSpeed() {
-        int speed = 1;
-        return speed;
+        return 1;
     }
     public int getParticleMaxLife() {
-        int maxLife = 20;
-        return maxLife;
+        return 20;
     }
 }

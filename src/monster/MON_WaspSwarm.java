@@ -77,7 +77,7 @@ public class MON_WaspSwarm extends Entity {
         int rand = new Random().nextInt(100) + 1;
         actionLockCounter = 0;
 
-        if (rand < 50) { //random chance of counterattacking player if hit it, or maybe it run away
+        if (rand < 50) { //random chance of counterattacking player if hit it, or maybe it runs away
             onPath = false;
             direction = gp.player.direction;
             speed = defaultSpeed;

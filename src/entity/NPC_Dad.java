@@ -6,7 +6,6 @@ import object.OBJ_StainRemover;
 
 import java.awt.*;
 import java.util.Objects;
-import java.util.Random;
 
 public class NPC_Dad extends Entity {
     public NPC_Dad(GamePanel gp) {
@@ -175,10 +174,7 @@ public class NPC_Dad extends Entity {
             gp.player.setShovelFlag = true;
         }
         switch (gp.player.missionState) {
-            case MissionStates.WEEDING_MISSION -> {
-                dialogueSet = 61;
-
-            }
+            case MissionStates.WEEDING_MISSION -> dialogueSet = 61;
             case MissionStates.MOP_UP_THE_SHOWER_WATER -> dialogueSet = 63; //mop shower water mission
             case MissionStates.MAGIC_BOOK_QUIZ -> {
                 if (gp.player.missionSubstate == 0) {

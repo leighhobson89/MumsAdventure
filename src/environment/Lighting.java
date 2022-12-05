@@ -16,7 +16,7 @@ public class Lighting {
     public final int day = 0;
     public final int dusk = 1;
     public final int night = 2;
-    public final int dawn = 3;
+    //public final int dawn = 3;
     public int dayState = day;
 
     public Lighting(GamePanel gp) {
@@ -37,8 +37,8 @@ public class Lighting {
             int centerY = gp.player.screenY + (gp.tileSize)/2;
 
             // Create a gradient effect within visible circle
-            Color color[] = new Color[8];
-            float fraction[] = new float[8];
+            Color[] color = new Color[8];
+            float[] fraction = new float[8];
 
             color[0] = new Color(255,255,255, 25);
             color[1] = new Color(255,255,255,90);

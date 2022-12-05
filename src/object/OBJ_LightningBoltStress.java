@@ -2,7 +2,6 @@ package object;
 
 import entity.Entity;
 import main.GamePanel;
-import main.UtilityTool;
 
 public class OBJ_LightningBoltStress extends Entity {
 

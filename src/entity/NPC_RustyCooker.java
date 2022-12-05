@@ -7,7 +7,6 @@ import tile_interactive.InteractiveTile;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class NPC_RustyCooker extends Entity {
 
@@ -79,11 +78,11 @@ public class NPC_RustyCooker extends Entity {
             checkCollision();
 
             if(!collisionOn) {
-                switch(direction) {
-                    case "up": worldY -= speed; break;
-                    case "down": worldY += speed; break;
-                    case "left": worldX -= speed; break;
-                    case "right": worldX += speed; break;
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
                 }
             }
             detectPlate();
@@ -102,7 +101,7 @@ public class NPC_RustyCooker extends Entity {
             }
         }
 
-        //Create a list of moveable items e.g. cooker
+        //Create a list of movable items e.g. cooker
         for (int i = 0; i < gp.npc[1].length; i++) {
             if (gp.npc[gp.currentMap][i] != null && gp.npc[gp.currentMap][i].name.equals(NPC_RustyCooker.npcName)) {
                 cookerList.add(gp.npc[gp.currentMap][i]);
@@ -112,29 +111,29 @@ public class NPC_RustyCooker extends Entity {
         int count = 0;
 
         // Scan the pad list
-        for (int i = 0; i < padList.size(); i++) {
-            int xDistance = Math.abs(worldX - padList.get(i).worldX);
-            int yDistance = Math.abs(worldY - padList.get(i).worldY);
+        for (InteractiveTile interactiveTile : padList) {
+            int xDistance = Math.abs(worldX - interactiveTile.worldX);
+            int yDistance = Math.abs(worldY - interactiveTile.worldY);
             int distance = Math.max(xDistance, yDistance);
 
             if (distance < 10) {
                 if (linkedEntity == null) {
-                    linkedEntity = padList.get(i);
+                    linkedEntity = interactiveTile;
                     gp.playSFX(10); //change to cooker in right place sfx
                     this.worldX = 60 * gp.tileSize;
                     this.worldY = 12 * gp.tileSize;
                 }
             } else {
-                if (linkedEntity == padList.get(i)) {
+                if (linkedEntity == interactiveTile) {
                     linkedEntity = null;
                 }
             }
         }
 
-        //Scan the moveable item list
-        for (int i = 0; i < cookerList.size(); i++) {
+        //Scan the movable item list
+        for (Entity entity : cookerList) {
             //Count the items on the pads
-            if (cookerList.get(i).linkedEntity != null) {
+            if (entity.linkedEntity != null) {
                 count++;
             }
         }

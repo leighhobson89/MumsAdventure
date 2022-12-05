@@ -8,7 +8,6 @@ import tile_interactive.IT_CookerTile;
 import tile_interactive.IT_WaterTile;
 import tile_interactive.IT_WeedTile;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class AssetSetter {
@@ -69,7 +68,7 @@ public class AssetSetter {
                 case "FrontBackDoorOpen" -> gp.obj[mapNum][i] = new OBJ_FrontBackDoorOpen(gp);
                 case "HundredQuid" -> gp.obj[mapNum][i] = new OBJ_SuperCoin(gp);
                 case "Garden Shovel" -> gp.obj[mapNum][i] = new OBJ_Shovel(gp);
-                case "Lavender Crocs" -> gp.obj[mapNum][i] = new OBJ_Lavendar_Crocs(gp);
+                case "Lavender Crocs" -> gp.obj[mapNum][i] = new OBJ_Lavender_Crocs(gp);
                 case "Chicken" -> gp.obj[mapNum][i] = new OBJ_Chicken(gp);
                 case "Chopped Chicken" -> gp.obj[mapNum][i] = new OBJ_ChoppedChicken(gp);
                 case "Mop" -> gp.obj[mapNum][i] = new OBJ_Mop(gp);
@@ -93,7 +92,9 @@ public class AssetSetter {
             }
             testEntity.worldX = testEntity.worldX * gp.tileSize;
             testEntity.worldY = testEntity.worldY * gp.tileSize;
-            for (int j = 0; j < gp.obj[1].length; j++) {
+            //noinspection LoopStatementThatDoesntLoop
+            for (int j = 0; j < gp.obj[1].length; //noinspection UnusedAssignment
+                 j++) {
                 switch (name) { //chooses object
                     case "Pip's Bone" -> {
                         gp.obj[mapNum][j] = new OBJ_PipsBone(gp);
@@ -116,7 +117,7 @@ public class AssetSetter {
                     case "FrontBackDoorOpen" -> gp.obj[mapNum][j] = new OBJ_FrontBackDoorOpen(gp);
                     case "HundredQuid" -> gp.obj[mapNum][j] = new OBJ_SuperCoin(gp);
                     case "Garden Shovel" -> gp.obj[mapNum][j] = new OBJ_Shovel(gp);
-                    case "Lavender Crocs" -> gp.obj[mapNum][j] = new OBJ_Lavendar_Crocs(gp);
+                    case "Lavender Crocs" -> gp.obj[mapNum][j] = new OBJ_Lavender_Crocs(gp);
                     case "Chicken" -> gp.obj[mapNum][j] = new OBJ_Chicken(gp);
                     case "Chopped Chicken" -> gp.obj[mapNum][j] = new OBJ_ChoppedChicken(gp);
                     case "Mop" -> gp.obj[mapNum][j] = new OBJ_Mop(gp);
@@ -142,12 +143,9 @@ public class AssetSetter {
 
         int i = count;
         switch (name) { //chooses npc
-            case "Andrea":
-                gp.npc[mapNum][i] = new NPC_Andrea(gp);
-                break;
-            case "placeholder": //there to allow switch to work with only one case, so replace with extra npcs when needed
-                gp.npc[mapNum][i] = new NPC_Dad(gp);
-                break;
+            case "Andrea" -> gp.npc[mapNum][i] = new NPC_Andrea(gp);
+            case "placeholder" -> //there to allow switch to work with only one case, so replace with extra npcs when needed
+                    gp.npc[mapNum][i] = new NPC_Dad(gp);
         }
 
         gp.npc[mapNum][i].worldX = x * gp.tileSize;
@@ -624,7 +622,7 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
         gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 23 * gp.tileSize;
-        i++;
+        //i++;
     }
 
     public void setNPC() {
@@ -659,7 +657,7 @@ public class AssetSetter {
         gp.npc[mapNum][i] = new NPC_RustyCooker(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*39;
         gp.npc[mapNum][i].worldY = gp.tileSize*8;
-        i++;
+        //i++;
 
 
         //        mapNum = 1;  //ADD NPCs TO NEXT MAP LIKE THIS
@@ -673,14 +671,15 @@ public class AssetSetter {
     public int setMonster(String type, int monsterNumber, int x, int y, boolean randomizeLocation) {
         int mapNum = 0;
 
-        switch(type) {
-            case "Spider":
+        switch (type) {
+            case "Spider" -> {
                 gp.monster[mapNum][monsterNumber] = new MON_Spider(gp);
                 gp.monster[mapNum][monsterNumber].newMonster = true;
-                break;
-            case "WaspSwarm":
+            }
+            case "WaspSwarm" -> {
                 gp.monster[mapNum][monsterNumber] = new MON_WaspSwarm(gp);
                 gp.monster[mapNum][monsterNumber].newMonster = true;
+            }
         }
         if (randomizeLocation) { // sets monster in any square up to 2 tiles away from player in any direction but never on the player
             Random rand = new Random();
@@ -705,8 +704,8 @@ public class AssetSetter {
 
     public int setInteractiveTilesAfterStart(int missionTrigger) {
         int count = 0;
-        int colToAdd = 0;
-        int rowToAdd = 0;
+        int colToAdd;
+        int rowToAdd;
         int mapNum = 0;
 
         if (missionTrigger == MissionStates.MOP_UP_THE_SHOWER_WATER) { //need a better way to do this

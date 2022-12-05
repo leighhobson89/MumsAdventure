@@ -53,11 +53,8 @@ public class OBJ_ChoppedChicken extends Projectile {
     }
 
     public boolean haveResource(Entity user) {
-        gp.player.haveChoppedChickenResource = false;
 
-        if (user.choppedChickenCount >= useCost) {
-            gp.player.haveChoppedChickenResource = true;
-        }
+        gp.player.haveChoppedChickenResource = user.choppedChickenCount >= useCost;
         return gp.player.haveChoppedChickenResource;
     }
 
@@ -66,19 +63,15 @@ public class OBJ_ChoppedChicken extends Projectile {
     }
 
     public Color getParticleColor() {
-        Color color = new Color(65,50,30);
-        return color;
+        return new Color(65,50,30);
     }
     public int getParticleSize() {
-        int size = 4; //6 pixels
-        return size;
+        return 4;
     }
     public int getParticleSpeed() {
-        int speed = 1;
-        return speed;
+        return 1;
     }
     public int getParticleMaxLife() {
-        int maxLife = 20;
-        return maxLife;
+        return 20;
     }
 }

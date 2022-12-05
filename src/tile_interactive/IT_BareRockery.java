@@ -1,6 +1,5 @@
 package tile_interactive;
 
-import entity.Entity;
 import main.GamePanel;
 
 public class IT_BareRockery extends InteractiveTile {
@@ -8,7 +7,7 @@ public class IT_BareRockery extends InteractiveTile {
     GamePanel gp;
 
     public IT_BareRockery(GamePanel gp, int col, int row) {
-        super(gp, col, row);
+        super(gp);
         this.gp = gp;
 
         this.worldX = gp.tileSize * col;

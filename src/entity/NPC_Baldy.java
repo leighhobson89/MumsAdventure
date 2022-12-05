@@ -1,11 +1,8 @@
 package entity;
 
 import main.GamePanel;
-import main.MissionStates;
-import object.OBJ_StainRemover;
 
 import java.awt.*;
-import java.util.Objects;
 
 public class NPC_Baldy extends Entity {
     public NPC_Baldy(GamePanel gp) {

@@ -19,30 +19,28 @@ public class SaveLoad {
     boolean loadWithChoppedChickenEquipped;
 
     public Entity getMonster(String itemName) {
-        Entity monster = null;
 
-        switch(itemName) {
-            case "Spider": monster = new MON_Spider(gp); break;
-            case "WaspSwarm": monster = new MON_WaspSwarm(gp); break;
-        }
-        return monster;
+        return switch (itemName) {
+            case "Spider" -> new MON_Spider(gp);
+            case "WaspSwarm" -> new MON_WaspSwarm(gp);
+            default -> null;
+        };
     }
 
     public Entity getITile(String itemName, int col, int row) {
-        Entity iTile = switch (itemName) {
+
+        return switch (itemName) {
             case "IT_Weed" -> new IT_WeedTile(gp, col, row);
             case "IT_RockeryBare" -> new IT_BareRockery(gp, col, row);
             case "IT_Water" -> new IT_WaterTile(gp, col, row);
             case "IT_Bathroom" -> new IT_Bathroom(gp, col, row);
             default -> null;
         };
-
-        return iTile;
     }
 
     public void save() {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("save.dat"));
 
             DataStorage ds = new DataStorage();
 
@@ -88,7 +86,6 @@ public class SaveLoad {
             ds.missionToSet = gp.player.missionToSet;
             ds.setShovelFlag = gp.player.setShovelFlag;
             ds.repeatSfx = gp.player.repeatSfx;
-            ds.currentProjectile = gp.player.currentProjectile;
             ds.itemToThrow = gp.player.itemToThrow;
             ds.startCounterPhoebeEatingChicken = gp.player.startCounterPhoebeEatingChicken;
             ds.startCounterPipEatingChicken = gp.player.startCounterPipEatingChicken;
@@ -222,7 +219,7 @@ public class SaveLoad {
 
     public void load() {
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("save.dat"));
 
             //Read the DataStorage Object
             DataStorage ds = (DataStorage)ois.readObject();
@@ -344,7 +341,7 @@ public class SaveLoad {
                         }
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
                         if (gp.obj[mapNum][i].opened) {
-                            switch (gp.obj[mapNum][i].name) { //add cases here for objects that could be loaded in an open state but dont have 2 images
+                            switch (gp.obj[mapNum][i].name) { //add cases here for objects that could be loaded in an open state but don't have 2 images
                                 case "Cupboard2", "Bin_Green", "BathLeft", "BathRight" -> {
                                     gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image;
                                     gp.obj[mapNum][i].collision = true;

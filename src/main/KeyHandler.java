@@ -188,25 +188,16 @@ public class KeyHandler implements KeyListener {
                 upPressed = true;
             }
             if (code == KeyEvent.VK_DOWN) {
-                if (gp.player.worldX / gp.tileSize == 19 && gp.player.worldY / gp.tileSize == 18) { //watching tv
-                    downPressed = false;
-                } else {
-                    downPressed = true;
-                }
+                //watching tv
+                downPressed = gp.player.worldX / gp.tileSize != 19 || gp.player.worldY / gp.tileSize != 18;
             }
             if (code == KeyEvent.VK_LEFT) {
-                if (gp.player.worldX / gp.tileSize == 19 && gp.player.worldY / gp.tileSize == 18) { //watching tv
-                    leftPressed = false;
-                } else {
-                    leftPressed = true;
-                }
+                //watching tv
+                leftPressed = gp.player.worldX / gp.tileSize != 19 || gp.player.worldY / gp.tileSize != 18;
             }
             if (code == KeyEvent.VK_RIGHT) {
-                if (gp.player.worldX / gp.tileSize == 19 && gp.player.worldY / gp.tileSize == 18) { //watching tv
-                    rightPressed = false;
-                } else {
-                    rightPressed = true;
-                }
+                //watching tv
+                rightPressed = gp.player.worldX / gp.tileSize != 19 || gp.player.worldY / gp.tileSize != 18;
             }
             if (code == KeyEvent.VK_SHIFT) {
                 gp.player.speedBoost = true;
@@ -246,11 +237,7 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.mapState;
             }
             if (code == KeyEvent.VK_X) {
-                if (!gp.map.miniMapOn) {
-                    gp.map.miniMapOn = true;
-                } else {
-                    gp.map.miniMapOn = false;
-                }
+                gp.map.miniMapOn = !gp.map.miniMapOn;
             }
             //GUARD
 //            if (code == KeyEvent.VK_ALT) {
@@ -301,11 +288,11 @@ public class KeyHandler implements KeyListener {
             enterPressed = true;
         }
 
-        int maxCommandNum = 0;
-        switch (gp.ui.subState) {
-            case 0: maxCommandNum = 5; break;
-            case 3: maxCommandNum = 1; break;
-        }
+        int maxCommandNum = switch (gp.ui.subState) {
+            case 0 -> 5;
+            case 3 -> 1;
+            default -> 0;
+        };
         if (code == KeyEvent.VK_UP) {
             gp.ui.commandNum--;
             gp.playSFX(10);

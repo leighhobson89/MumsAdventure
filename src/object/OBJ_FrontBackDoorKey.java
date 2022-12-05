@@ -51,10 +51,6 @@ public class OBJ_FrontBackDoorKey extends Entity {
             startDialogue(this, 1);
             return false;
         }
-        if (doorUnlockedCount >= 2) {
-            return true;
-        } else {
-            return false;
-        }
+        return doorUnlockedCount >= 2;
     }
 }

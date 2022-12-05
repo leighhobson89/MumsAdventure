@@ -220,24 +220,19 @@ public class Entity {
     }
 
     public int getXdistance(Entity target) {
-        int xDistance = Math.abs(worldX - target.worldX);
-        return xDistance;
+        return Math.abs(worldX - target.worldX);
     }
     public int getYdistance(Entity target) {
-        int yDistance = Math.abs(worldY - target.worldY);
-        return yDistance;
+        return Math.abs(worldY - target.worldY);
     }
     public int getTileDistance(Entity target) {
-        int tileDistance = (getXdistance(target) + getYdistance(target)) /gp.tileSize;
-        return tileDistance;
+        return (getXdistance(target) + getYdistance(target)) /gp.tileSize;
     }
     public int getGoalCol(Entity target) {
-        int goalCol = (target.worldX + target.solidArea.x)/gp.tileSize;
-        return goalCol;
+        return (target.worldX + target.solidArea.x)/gp.tileSize;
     }
     public int getGoalRow(Entity target) {
-        int goalRow = (target.worldY + target.solidArea.y)/gp.tileSize;
-        return goalRow;
+        return (target.worldY + target.solidArea.y)/gp.tileSize;
     }
     public void resetCounter() {
         spriteCounter = 0;
@@ -255,7 +250,7 @@ public class Entity {
         phoebeEatingChickenCounter = 0;
         showerCounter = 0;
     }
-    public void setLoot(Entity loot) {}
+    //public void setLoot(Entity loot) {}
     public void move(String direction) {}
     public void setAction(int goalCol, int goalRow) {
         //overridden in specific entity class
@@ -356,18 +351,14 @@ public class Entity {
         int randSet = 0;
 
         if (Objects.equals(action, "HitWithWeaponOrProjectile")) {
-            switch (entityAffected) {
-                case "Dad":
-                    bound = 4;
-                    randSet = random.nextInt(bound) + 4;
-                    break;
+            if ("Dad".equals(entityAffected)) {
+                bound = 4;
+                randSet = random.nextInt(bound) + 4;
             }
         } else if (Objects.equals(action, "NormalChat")) {
-            switch (entityAffected) {
-                case "Dad":
-                    bound = 60; //increase if more random dialogues added
-                    randSet = random.nextInt(bound);
-                    break;
+            if ("Dad".equals(entityAffected)) {
+                bound = 60; //increase if more random dialogues added
+                randSet = random.nextInt(bound);
             }
         }
         return randSet;
@@ -463,20 +454,16 @@ public class Entity {
     }
 
     public Color getParticleColor() {
-        Color color = null;
-        return color;
+        return null;
     }
     public int getParticleSize() {
-        int size = 0; //6 pixels
-        return size;
+        return 0;
     }
     public int getParticleSpeed() {
-        int speed = 0;
-        return speed;
+        return 0;
     }
     public int getParticleMaxLife() {
-        int maxLife = 0;
-        return maxLife;
+        return 0;
     }
 
     public void generateParticle(Entity generator, Entity target) {
@@ -633,61 +620,61 @@ public class Entity {
         }
     }
 
-        public void checkAttackOrNot(int rate, int straight, int horizontal) { //for monsters that attack with weapon
-            boolean targetInRange = false;
-            int xDis = getXdistance(gp.player);
-            int yDis = getYdistance(gp.player);
+//        public void checkAttackOrNot(int rate, int straight, int horizontal) { //for monsters that attack with weapon
+//            boolean targetInRange = false;
+//            int xDis = getXdistance(gp.player);
+//            int yDis = getYdistance(gp.player);
+//
+//            switch (direction) {
+//                case "up":
+//                    if (gp.player.worldY < worldY && yDis < straight && xDis < horizontal) {
+//                        targetInRange = true;
+//                    }
+//                    break;
+//                case "down":
+//                    if (gp.player.worldY > worldY && yDis < straight && xDis < horizontal) {
+//                        targetInRange = true;
+//                    }
+//                    break;
+//                case "left":
+//                    if (gp.player.worldX < worldX && xDis < straight && yDis < horizontal) {
+//                        targetInRange = true;
+//                    }
+//                    break;
+//                case "right":
+//                    if (gp.player.worldX > worldX && xDis < straight && yDis < horizontal) {
+//                        targetInRange = true;
+//                    }
+//                    break;
+//            }
+//
+//            if (targetInRange) {
+//                // Check if it initiates an attack
+//                int i = new Random().nextInt(rate);
+//                if (i == 0) {
+//                    attacking = true;
+//                    spriteNum = 1;
+//                    spriteCounter = 0;
+//                    shotAvailableCounter = 0;
+//                }
+//            }
+//        }
 
-            switch (direction) {
-                case "up":
-                    if (gp.player.worldY < worldY && yDis < straight && xDis < horizontal) {
-                        targetInRange = true;
-                    }
-                    break;
-                case "down":
-                    if (gp.player.worldY > worldY && yDis < straight && xDis < horizontal) {
-                        targetInRange = true;
-                    }
-                    break;
-                case "left":
-                    if (gp.player.worldX < worldX && xDis < straight && yDis < horizontal) {
-                        targetInRange = true;
-                    }
-                    break;
-                case "right":
-                    if (gp.player.worldX > worldX && xDis < straight && yDis < horizontal) {
-                        targetInRange = true;
-                    }
-                    break;
-            }
-
-            if (targetInRange) {
-                // Check if it initiates an attack
-                int i = new Random().nextInt(rate);
-                if (i == 0) {
-                    attacking = true;
-                    spriteNum = 1;
-                    spriteCounter = 0;
-                    shotAvailableCounter = 0;
-                }
-            }
-        }
-
-    public void checkShootOrNot(int rate, int shotInterval) {
-                    int i = new Random().nextInt(rate) + 1;
-            if (i == 0 && !projectile.alive && shotAvailableCounter == shotInterval) {
-                projectile.set(worldX, worldY, direction, true, this);
-
-                //CHECK VACANCY
-                for (int j = 0; j < gp.projectile[1].length; j++) {
-                    if (gp.projectile[gp.currentMap][j] == null) {
-                        gp.projectile[gp.currentMap][j] = projectile;
-                        break;
-                    }
-                }
-                shotAvailableCounter = 0;
-            }
-    }
+//    public void checkShootOrNot(int rate, int shotInterval) {
+//                    int i = new Random().nextInt(rate) + 1;
+//            if (i == 0 && !projectile.alive && shotAvailableCounter == shotInterval) {
+//                projectile.set(worldX, worldY, direction, true, this);
+//
+//                //CHECK VACANCY
+//                for (int j = 0; j < gp.projectile[1].length; j++) {
+//                    if (gp.projectile[gp.currentMap][j] == null) {
+//                        gp.projectile[gp.currentMap][j] = projectile;
+//                        break;
+//                    }
+//                }
+//                shotAvailableCounter = 0;
+//            }
+//    }
 
     public boolean checkStartsChasingOrNot(Entity target, int distance, int rate, boolean damagedJustReceived) {
         if (getTileDistance(target) < distance) {
@@ -727,23 +714,14 @@ public class Entity {
     }
 
     public String getOppositeDirection(String direction) {
-        String oppositeDirection = "";
 
-        switch (direction) {
-            case "up":
-                oppositeDirection = "down";
-                break;
-            case "down":
-                oppositeDirection = "up";
-                break;
-            case "left":
-                oppositeDirection = "right";
-                break;
-            case "right":
-                oppositeDirection = "left";
-                break;
-        }
-        return oppositeDirection;
+        return switch (direction) {
+            case "up" -> "down";
+            case "down" -> "up";
+            case "left" -> "right";
+            case "right" -> "left";
+            default -> "";
+        };
     }
 
     public void attacking() {
@@ -762,11 +740,11 @@ public class Entity {
             int solidAreaHeight = solidArea.height;
 
             //Adjust the player's worldX/Y for the attackArea
-            switch(direction) {
-                case "up": worldY -= attackArea.height; break;
-                case "down": worldY += attackArea.height; break;
-                case "left": worldX -= attackArea.width; break;
-                case "right": worldX += attackArea.width; break;
+            switch (direction) {
+                case "up" -> worldY -= attackArea.height;
+                case "down" -> worldY += attackArea.height;
+                case "left" -> worldX -= attackArea.width;
+                case "right" -> worldX += attackArea.width;
             }
 
             // attackArea becomes solidArea
@@ -881,48 +859,80 @@ public class Entity {
             int tempScreenY = screenY;
 
             switch (direction) {
-                case "up":
+                case "up" -> {
                     if (!attacking) {
-                        if (spriteNum == 1) { image = up1;}
-                        if (spriteNum == 2) { image = up2;}
+                        if (spriteNum == 1) {
+                            image = up1;
+                        }
+                        if (spriteNum == 2) {
+                            image = up2;
+                        }
                     }
                     if (attacking) {
                         tempScreenY = screenY - gp.tileSize;
-                        if (spriteNum == 1) { image = attackUp1;}
-                        if (spriteNum == 2) { image = attackUp2;}
+                        if (spriteNum == 1) {
+                            image = attackUp1;
+                        }
+                        if (spriteNum == 2) {
+                            image = attackUp2;
+                        }
                     }
-                    break;
-                case "down":
+                }
+                case "down" -> {
                     if (!attacking) {
-                        if (spriteNum == 1) { image = down1;}
-                        if (spriteNum == 2) { image = down2;}
+                        if (spriteNum == 1) {
+                            image = down1;
+                        }
+                        if (spriteNum == 2) {
+                            image = down2;
+                        }
                     }
                     if (attacking) {
-                        if (spriteNum == 1) { image = attackDown1;}
-                        if (spriteNum == 2) { image = attackDown2;}
+                        if (spriteNum == 1) {
+                            image = attackDown1;
+                        }
+                        if (spriteNum == 2) {
+                            image = attackDown2;
+                        }
                     }
-                    break;
-                case "left":
+                }
+                case "left" -> {
                     if (!attacking) {
-                        if (spriteNum == 1) { image = left1;}
-                        if (spriteNum == 2) { image = left2;}
+                        if (spriteNum == 1) {
+                            image = left1;
+                        }
+                        if (spriteNum == 2) {
+                            image = left2;
+                        }
                     }
                     if (attacking) {
                         tempScreenX = screenX - gp.tileSize;
-                        if (spriteNum == 1) { image = attackLeft1;}
-                        if (spriteNum == 2) { image = attackLeft2;}
+                        if (spriteNum == 1) {
+                            image = attackLeft1;
+                        }
+                        if (spriteNum == 2) {
+                            image = attackLeft2;
+                        }
                     }
-                    break;
-                case "right":
+                }
+                case "right" -> {
                     if (!attacking) {
-                        if (spriteNum == 1) { image = right1;}
-                        if (spriteNum == 2) { image = right2;}
+                        if (spriteNum == 1) {
+                            image = right1;
+                        }
+                        if (spriteNum == 2) {
+                            image = right2;
+                        }
                     }
                     if (attacking) {
-                        if (spriteNum == 1) { image = attackRight1;}
-                        if (spriteNum == 2) { image = attackRight2;}
+                        if (spriteNum == 1) {
+                            image = attackRight1;
+                        }
+                        if (spriteNum == 2) {
+                            image = attackRight2;
+                        }
                     }
-                    break;
+                }
             }
 
             //Monster HP bar
@@ -1005,7 +1015,7 @@ public class Entity {
         int startCol = (worldX + solidArea.x)/gp.tileSize;
         int startRow = (worldY + solidArea.y)/gp.tileSize;
 
-        gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow, this);
+        gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow);
 
         if (gp.pFinder.search()) {
             //Next worldX & worldY
@@ -1074,7 +1084,7 @@ public class Entity {
         }
     }
 
-    public int getDetected(Entity user, Entity target[][], String targetName) { //detect object next to user ie opening doors
+    public int getDetected(Entity user, Entity[][] target, String targetName) { //detect object next to user ie opening doors
         int index = 999;
 
         //Check the surrounding object
@@ -1082,10 +1092,10 @@ public class Entity {
         int nextWorldY = user.getTopY();
 
         switch (user.direction) {
-            case "up": nextWorldY = user.getTopY() - gp.player.speed; break;
-            case "down": nextWorldY = user.getBottomY() + gp.player.speed; break;
-            case "left": nextWorldX = user.getLeftX() - gp.player.speed; break;
-            case "right": nextWorldX = user.getRightX() + gp.player.speed; break;
+            case "up" -> nextWorldY = user.getTopY() - gp.player.speed;
+            case "down" -> nextWorldY = user.getBottomY() + gp.player.speed;
+            case "left" -> nextWorldX = user.getLeftX() - gp.player.speed;
+            case "right" -> nextWorldX = user.getRightX() + gp.player.speed;
         }
 
         int col = nextWorldX/gp.tileSize;
@@ -1113,13 +1123,10 @@ public class Entity {
         int worldX = entity.worldX/gp.tileSize;
         int worldY = entity.worldY/gp.tileSize;
 
-        if ((worldX == MAX_WORLD_X_COORDINATE && entity.direction.equals("right"))
+        return (worldX == MAX_WORLD_X_COORDINATE && entity.direction.equals("right"))
                 || (worldY == MAX_WORLD_Y_COORDINATE && entity.direction.equals("down"))
                 || (worldX == MIN_WORLD_X_COORDINATE && entity.direction.equals("left"))
-                || (worldY == MIN_WORLD_Y_COORDINATE && entity.direction.equals("up"))) {
-            return true;
-        }
-        return false;
+                || (worldY == MIN_WORLD_Y_COORDINATE && entity.direction.equals("up"));
     }
 
     public void setNewMissionState(boolean readyForNextPhoneMission, int missionState, int missionToSet) {
@@ -1182,15 +1189,15 @@ public class Entity {
 
     public boolean checkIfPlayerHasMissionItem(ArrayList<Entity> inventory, int missionState, int missionSubState) {
         boolean playerHasRequiredItem = false;
-        for (int i = 0; i < inventory.size(); i++) {
-            switch(missionState) {
+        for (Entity entity : inventory) {
+            switch (missionState) {
                 case MissionStates.CHOP_CHICKEN_FOR_DOGS:
-                    if (Objects.equals(inventory.get(i).name, "Chicken")) {
+                    if (Objects.equals(entity.name, "Chicken")) {
                         playerHasRequiredItem = true;
                     }
                     break;
                 case MissionStates.MAGIC_BOOK_QUIZ:
-                    if (Objects.equals(inventory.get(i).name, "BookHutKey") && missionSubState == 0) {
+                    if (Objects.equals(entity.name, "BookHutKey") && missionSubState == 0) {
                         playerHasRequiredItem = true;
                     }
                     break;
@@ -1201,9 +1208,10 @@ public class Entity {
 
     public boolean checkIfPlayerHasItem(ArrayList<Entity> inventory, String itemToCheck) {
         boolean playerHasRequiredItem = false;
-        for (int i = 0; i < inventory.size(); i++) {
-            if (Objects.equals(inventory.get(i).name, itemToCheck)) {
+        for (Entity entity : inventory) {
+            if (Objects.equals(entity.name, itemToCheck)) {
                 playerHasRequiredItem = true;
+                break;
             }
         }
         return playerHasRequiredItem;

@@ -13,39 +13,18 @@ public class UtilityTool {
     }
 
     public String parseNumberString(int value) {
-        String number = "";
-        switch(value) {
-            case 1:
-                number = "one";
-                break;
-            case 2:
-                number = "two";
-                break;
-            case 3:
-                number = "three";
-                break;
-            case 4:
-                number = "four";
-                break;
-            case 5:
-                number = "five";
-                break;
-            case 6:
-                number = "six";
-                break;
-            case 7:
-                number = "seven";
-                break;
-            case 8:
-                number = "eight";
-                break;
-            case 9:
-                number = "nine";
-                break;
-            case 10:
-                number = "ten";
-                break;
-        }
-        return number;
+        return switch (value) {
+            case 1 -> "one";
+            case 2 -> "two";
+            case 3 -> "three";
+            case 4 -> "four";
+            case 5 -> "five";
+            case 6 -> "six";
+            case 7 -> "seven";
+            case 8 -> "eight";
+            case 9 -> "nine";
+            case 10 -> "ten";
+            default -> "";
+        };
     }
 }

@@ -60,7 +60,7 @@ public class MON_Spider extends Entity {
 
             //CODE TO MAKE MONSTER FIRE PROJECTILE WHEN ONPATH (COUNTERATTACK)
             //Check if it shoots a projectile
-            checkShootOrNot(200, 30);
+            //checkShootOrNot(200, 30);
 
         } else {
             //Check if it starts chasing
@@ -78,7 +78,7 @@ public class MON_Spider extends Entity {
         int rand = new Random().nextInt(100) + 1;
         actionLockCounter = 0;
 
-        if (rand < 50) { //random chance of counterattacking player if hit it, or maybe it run away
+        if (rand < 50) { //random chance of counterattacking player if hit it, or maybe it runs away
             onPath = false;
             direction = gp.player.direction;
             speed = defaultSpeed;

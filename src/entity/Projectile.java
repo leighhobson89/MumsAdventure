@@ -1,8 +1,6 @@
 package entity;
 
 import main.GamePanel;
-import object.OBJ_ChoppedChickenPhoebe;
-import object.OBJ_ChoppedChickenPip;
 
 import java.util.Objects;
 

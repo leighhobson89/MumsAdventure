@@ -10,7 +10,7 @@ public class IT_WeedTile extends InteractiveTile {
     GamePanel gp;
 
     public IT_WeedTile(GamePanel gp, int col, int row) {
-        super(gp, col, row);
+        super(gp);
         this.gp = gp;
 
         this.worldX = gp.tileSize * col;
@@ -25,12 +25,8 @@ public class IT_WeedTile extends InteractiveTile {
     }
 
     public boolean isCorrectItem(Entity entity) {
-        boolean isCorrectItem = false;
 
-        if(entity.currentWeapon.type == type_gardeningShovel) {
-            isCorrectItem = true;
-        }
-        return isCorrectItem;
+        return entity.currentWeapon.type == type_gardeningShovel;
     }
 
     public void playSfx() {
@@ -38,24 +34,19 @@ public class IT_WeedTile extends InteractiveTile {
     }
 
     public InteractiveTile switchForm() {
-        InteractiveTile tile = new IT_BareRockery(gp, worldX/gp.tileSize, worldY/gp.tileSize);
-        return tile;
+        return new IT_BareRockery(gp, worldX/gp.tileSize, worldY/gp.tileSize);
     }
 
     public Color getParticleColor() {
-        Color color = new Color(65,50,30);
-        return color;
+        return new Color(65,50,30);
     }
     public int getParticleSize() {
-        int size = 6; //6 pixels
-        return size;
+        return 6;
     }
     public int getParticleSpeed() {
-        int speed = 1;
-        return speed;
+        return 1;
     }
     public int getParticleMaxLife() {
-        int maxLife = 20;
-        return maxLife;
+        return 20;
     }
 }

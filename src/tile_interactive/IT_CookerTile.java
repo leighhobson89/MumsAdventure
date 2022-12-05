@@ -1,9 +1,6 @@
 package tile_interactive;
 
-import entity.Entity;
 import main.GamePanel;
-
-import java.awt.*;
 
 public class IT_CookerTile extends InteractiveTile {
 
@@ -11,7 +8,7 @@ public class IT_CookerTile extends InteractiveTile {
     public static final String itName = "IT_CookerTile";
 
     public IT_CookerTile(GamePanel gp, int col, int row) {
-        super(gp, col, row);
+        super(gp);
         this.gp = gp;
 
         this.worldX = gp.tileSize * col;

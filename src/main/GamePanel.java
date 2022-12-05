@@ -65,8 +65,8 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[][] obj = new Entity[maxMap][100];
     public Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] monster = new Entity[maxMap][30];
-    public InteractiveTile iTile[][] = new InteractiveTile[maxMap][100];
-    public Entity projectile[][] = new Entity[maxMap][20];
+    public InteractiveTile[][] iTile = new InteractiveTile[maxMap][100];
+    public Entity[][] projectile = new Entity[maxMap][20];
     public ArrayList<Entity> particleList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
     public ArrayList<Entity> tempEntityList = new ArrayList<>();
@@ -173,7 +173,7 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() { //update screen, redraw it according to the FPS set
 
-        double drawInterval = 1000000000 / FPS; // 0.016667 seconds
+        @SuppressWarnings("IntegerDivisionInFloatingPointContext") double drawInterval = 1000000000 / FPS; // 0.016667 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -207,6 +207,7 @@ public class GamePanel extends JPanel implements Runnable {
                     remainingTime = 0;
                 }
 
+                //noinspection BusyWait
                 Thread.sleep((long) remainingTime);
 
                 nextDrawTime += drawInterval;
@@ -271,6 +272,7 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                     if (!particleList.get(i).alive) {
                         particleList.remove(i);
+                        break;
                     }
                 }
             }
@@ -372,25 +374,19 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
             //PARTICLE
-            for (int i = 0; i < particleList.size(); i++) {
-                if (particleList.get(i) != null) {
-                    entityList.add(particleList.get(i));
+            for (Entity entity : particleList) {
+                if (entity != null) {
+                    entityList.add(entity);
                 }
             }
 
 
             //SORT
-            Collections.sort(entityList, new Comparator<Entity>() {
-                @Override
-                public int compare(Entity e1, Entity e2) {
-
-                    return Integer.compare(e1.worldY, e2.worldY);
-                }
-            });
+            entityList.sort(Comparator.comparingInt(e -> e.worldY));
 
             //DRAW ENTITIES
-            for (int i= 0; i < entityList.size(); i++) {
-                entityList.get(i).draw(g2);
+            for (Entity entity : entityList) {
+                entity.draw(g2);
             }
 
             //EMPTY ENTITY LIST
@@ -408,9 +404,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         //DEBUG
         if (keyH.showDebugText) {
-            tileM.drawPathFinderTrack = true; // switches on path finder track
-            for (int i = 0; i < tempEntityList.size(); i++) {
-                drawCollisionBoxOnEntity(g2, tempEntityList.get(i));
+            tileM.drawPathFinderTrack = true; // switches on pathfinder track
+            for (Entity entity : tempEntityList) {
+                drawCollisionBoxOnEntity(g2, entity);
             }
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;

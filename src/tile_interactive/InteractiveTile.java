@@ -2,18 +2,13 @@ package tile_interactive;
 
 import entity.Entity;
 import main.GamePanel;
-import main.MissionStates;
-import object.*;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Arrays;
 
 public class InteractiveTile extends Entity {
     GamePanel gp;
     public boolean destructible = false;
 
-    public InteractiveTile(GamePanel gp, int col, int row) {
+    public InteractiveTile(GamePanel gp) {
         super(gp);
         this.gp = gp;
     }
