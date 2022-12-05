@@ -1,7 +1,6 @@
 package main;
 
 import entity.Entity;
-import object.OBJ_BathLeft;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -305,9 +304,9 @@ public class EventHandler {
 
     public void flagInsideShed(boolean isInside) {
         if (isInside) {
-            gp.player.insideShed = true;
+            gp.player.insideBookShed = true;
         } else {
-            gp.player.insideShed = false;
+            gp.player.insideBookShed = false;
             for (int i = 0; i < gp.obj[1].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "MagicQuizBook")) {
                     gp.player.changeOtherObjectImage("MagicQuizBook", 37, 6, 1);

@@ -11,8 +11,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
-import static entity.NPC_RustyCooker.npcName;
-
 public class Player extends Entity {
     KeyHandler keyH;
     UtilityTool uTool = new UtilityTool();
@@ -331,11 +329,11 @@ public class Player extends Entity {
             }
         }
 
-        if (missionList.size() >= MissionStates.MAGIC_BOOK_QUIZ + 1) {
+        if (missionList.size() >= MissionStates.MAGIC_BOOK_QUIZ) {
             for (int i = 0; i < gp.obj[1].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null) {
-                    if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOn) {
-                        handleTransparencyAndCollisionInBookHut(this, gp.obj[gp.currentMap][i]);
+                    if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnBookHut) {
+                        handleTransparencyAndCollisionInHuts(this, gp.obj[gp.currentMap][i]);
                     }
                 }
             }
@@ -572,7 +570,7 @@ public class Player extends Entity {
                 gp.obj[gp.currentMap][i] = null;
 
             }  //OBSTACLE
-            else if (gp.obj[gp.currentMap][i].type == type_obstacle) { //for doors and other obstacles that need to use objects to pass them
+            else if (gp.obj[gp.currentMap][i].type == type_obstacle || gp.obj[gp.currentMap][i].type == type_hut) { //for doors and other obstacles that need to use objects to pass them
                 if (keyH.enterPressed) {
                     attackCanceled = true;
                     gp.obj[gp.currentMap][i].interact();

@@ -14,7 +14,7 @@ public class OBJ_Bookhut2_Center extends Entity {
         this.gp = gp;
 
         isUpdateable = false;
-        type = type_obstacle;
+        type = type_hut;
         name = OBJ_NAME;
         displayName = "Bookhut2_Center";
         image = setup("/objects/bookhut2_center", gp.tileSize, gp.tileSize);
@@ -23,7 +23,7 @@ public class OBJ_Bookhut2_Center extends Entity {
         direction = "down";
         collision = false;
         goesTransparentWhenHit = false;
-        goesTransparentWhenStoodOn = true;
+        goesTransparentWhenStoodOnBookHut = true;
 
         solidArea.x = 0;
         solidArea.y = 16;

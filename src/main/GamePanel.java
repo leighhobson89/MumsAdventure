@@ -112,10 +112,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 //        //DEBUG TO SKIP AHEAD IN MISSIONS - COMMENT FOR NORMAL GAME FROM START
 //        //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSIONLIST IF STARTING FURTHER ON
-//        player.weedCount = 0;
-//        player.missionList.add(1);
-//        player.missionState = 2;
-//        player.missionToSet = 2;
+        player.weedCount = 0;
+        player.missionList.add(1);
+        player.missionState = 2;
+        player.missionToSet = 2;
 //        //END OF DEBUG
 
         playMusic(0, false);
@@ -228,10 +228,6 @@ public class GamePanel extends JPanel implements Runnable {
             }
             //MISSION
             eHandler.setUpNextPhoneCallWhenNotInAMissionAndNextMissionIsAPhoneMission(player.missionState); //increment time after a mission ends, to set the new one if required
-            if (player.setShovelFlag) {
-                player.setShovelFlag = false;
-                aSetter.setObjectAfterStart("Garden Shovel", currentMap, 45, 8);
-            }
             if (player.missionState == MissionStates.HELP_ANDREA_OUT && player.andreaOnMap) {
                 aSetter.setNPCAfterStart("Andrea", 0, 9, 1);
                 player.andreaOnMap = false;

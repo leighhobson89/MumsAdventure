@@ -169,12 +169,16 @@ public class NPC_Dad extends Entity {
             case MissionStates.MOP_UP_THE_SHOWER_WATER -> gp.player.missionState = MissionStates.MOP_UP_THE_SHOWER_WATER;
             case MissionStates.MAGIC_BOOK_QUIZ -> gp.player.missionState = MissionStates.MAGIC_BOOK_QUIZ;
         }
-        if (gp.player.weedCount > 0) {
+        if (gp.player.weedCount > 0 && !gp.player.setShovelFlag) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;
+            gp.aSetter.setObjectAfterStart("Garden Shovel", gp.currentMap, 45, 8);
             gp.player.setShovelFlag = true;
         }
         switch (gp.player.missionState) {
-            case MissionStates.WEEDING_MISSION -> dialogueSet = 61; //weeding mission
+            case MissionStates.WEEDING_MISSION -> {
+                dialogueSet = 61;
+
+            }
             case MissionStates.MOP_UP_THE_SHOWER_WATER -> dialogueSet = 63; //mop shower water mission
             case MissionStates.MAGIC_BOOK_QUIZ -> {
                 if (gp.player.missionSubstate == 0) {

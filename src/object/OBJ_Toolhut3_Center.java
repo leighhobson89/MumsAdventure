@@ -14,7 +14,7 @@ public class OBJ_Toolhut3_Center extends Entity {
         this.gp = gp;
 
         isUpdateable = false;
-        type = type_obstacle;
+        type = type_hut;
         name = OBJ_NAME;
         displayName = "Toolhut3_Center";
         image = setup("/objects/toolhut3_center", gp.tileSize, gp.tileSize);
@@ -22,7 +22,7 @@ public class OBJ_Toolhut3_Center extends Entity {
         direction = "down";
         collision = false;
         goesTransparentWhenHit = false;
-        goesTransparentWhenStoodOn = true;
+        goesTransparentWhenStoodOnToolHut = true;
 
         solidArea.x = 0;
         solidArea.y = 16;

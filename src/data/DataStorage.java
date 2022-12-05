@@ -65,6 +65,7 @@ public class DataStorage implements Serializable {
     int backGateState;
     int blockWoodState;
     int bookHutState;
+    int toolHutState;
     int quizScoreCount;
     boolean stainRemoverUsed;
     boolean toolHutKeyDropped;

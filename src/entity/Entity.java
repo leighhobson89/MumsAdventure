@@ -65,8 +65,10 @@ public class Entity {
     public int andreaTempGoalCol;
     public int andreaTempGoalRow;
     public boolean goesTransparentWhenHit;
-    public boolean goesTransparentWhenStoodOn;
-    public boolean insideShed;
+    public boolean goesTransparentWhenStoodOnBookHut;
+    public boolean goesTransparentWhenStoodOnToolHut;
+    public boolean insideBookShed;
+    public boolean insideToolShed;
     public boolean isUpdateable;
     public boolean pipChickenEaten;
     public boolean phoebeChickenEaten;
@@ -193,6 +195,7 @@ public class Entity {
     public final int type_mop = 12;
     public final int type_switchable_interactive_tile = 13;
     public final int type_tv_remote = 14;
+    public final int type_hut = 15;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -263,21 +266,15 @@ public class Entity {
     public void speak() {
         //overridden in specific entity class
     }
-    public void handleTransparencyAndCollisionInBookHut(Entity player, Entity object) {
-        String side = "";
-        switch(object.name) {
-            case "Bookhut2_Left", "Bookhut3_Left":
-                side = "left";
-                break;
-            case "Bookhut2_Right", "Bookhut3_Right":
-                side = "right";
-                break;
-            default:
-                side = "";
-        }
+    public void handleTransparencyAndCollisionInHuts(Entity player, Entity object) {
+        String side = switch (object.name) {
+            case "Bookhut2_Left", "Bookhut3_Left", "Toolhut2_Left", "Toolhut3_Left" -> "left";
+            case "Bookhut2_Right", "Bookhut3_Right", "Toolhut2_Right", "Toolhut3_Right" -> "right";
+            default -> "";
+        };
 
-        if (gp.player.bookHutState == 1 && gp.player.insideShed) {
-            if ((Math.abs(object.worldX/gp.tileSize - player.worldX/gp.tileSize) <= 1 || Math.abs(object.worldY/gp.tileSize - player.worldY/gp.tileSize) <= 1) && object.goesTransparentWhenStoodOn) {
+        if (gp.player.bookHutState == 1 && (gp.player.insideBookShed || gp.player.insideToolShed)) {
+            if ((Math.abs(object.worldX/gp.tileSize - player.worldX/gp.tileSize) <= 1 || Math.abs(object.worldY/gp.tileSize - player.worldY/gp.tileSize) <= 1) && (object.goesTransparentWhenStoodOnBookHut || object.goesTransparentWhenStoodOnToolHut)) {
                 object.collisionType = 1;
                 switch (side) {
                     case "left" -> {
@@ -301,19 +298,29 @@ public class Entity {
             }
         }
 
-        if (gp.player.bookHutState == 1 && Objects.equals(object.name, "Bookhut1_Center")) {
+        if ((gp.player.bookHutState == 1 && Objects.equals(object.name, "Bookhut1_Center"))) {
+            object.transparent = false;
+            object.collision = false;
+        }
+        if ((gp.player.toolHutState == 1 && Objects.equals(object.name, "Toolhut1_Center"))) {
             object.transparent = false;
             object.collision = false;
         }
 
-        if (!gp.player.insideShed && !Objects.equals(object.name, "Bookhut1_Center")) {
+        if ((!gp.player.insideBookShed && !Objects.equals(object.name, "Bookhut1_Center"))) {
             object.transparent = false;
             if (!Objects.equals(object.name, "Bookhut2_Center")) {
                 object.collisionType = 0;
             }
         }
+//        if ((!gp.player.insideToolShed && !Objects.equals(object.name, "Toolhut1_Center"))) { //will need to fix when entering tool shed to get transparency right
+//            object.transparent = false;
+//            if (!Objects.equals(object.name, "Toolhut2_Center")) {
+//                object.collisionType = 0;
+//            }
+//        }
 
-        if (!gp.player.insideShed) {
+        if (!gp.player.insideBookShed && !gp.player.insideToolShed) {
             object.solidArea.width = 48;
             object.solidArea.height = 32;
             object.solidArea.x = object.solidAreaDefaultX;
@@ -948,7 +955,7 @@ public class Entity {
                         image = dyingImage;
                         dyingAnimation(g2);
                     }
-                    if (this.goesTransparentWhenStoodOn && this.transparent) {
+                    if (this.goesTransparentWhenStoodOnBookHut && this.transparent) {
                         changeAlpha(g2, 0.6F);
                     }
 
