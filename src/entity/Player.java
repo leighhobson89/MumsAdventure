@@ -332,7 +332,7 @@ public class Player extends Entity {
         if (missionList.size() >= MissionStates.MAGIC_BOOK_QUIZ) {
             for (int i = 0; i < gp.obj[1].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null) {
-                    if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnBookHut) {
+                    if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnBookHut || gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnToolHut ) {
                         handleTransparencyAndCollisionInHuts(this, gp.obj[gp.currentMap][i]);
                     }
                 }

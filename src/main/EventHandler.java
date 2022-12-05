@@ -59,10 +59,13 @@ public class EventHandler {
             if (hit(0, 19, 10, "right", "")) {transitionUpDownStairs(1, 24, 10);}
             else if (hit(1, 24, 10, "left", "")) {transitionUpDownStairs(0, 19, 10);}
             else if (hit(0, 37, 8, "down", "up")) {
-                flagInsideShed(false);
-            }
-            else if (hit(0, 37, 8, "up", "down")) {
-                flagInsideShed(true);
+                flagInsideBookHut(false);
+            } else if (hit(0, 37, 8, "up", "down")) {
+                flagInsideBookHut(true);
+            } else if (hit(0, 33, 8, "down", "up")) {
+                flagInsideToolHut(false);
+            } else if (hit(0, 33, 8, "up", "down")) {
+                flagInsideToolHut(true);
             }
         }
     }
@@ -311,7 +314,7 @@ public class EventHandler {
         gp.player.missionSubstate++;
     }
 
-    public void flagInsideShed(boolean isInside) {
+    public void flagInsideBookHut(boolean isInside) {
         if (isInside) {
             gp.player.insideBookShed = true;
         } else {
@@ -321,6 +324,19 @@ public class EventHandler {
                     gp.player.changeOtherObjectImage("MagicQuizBook", 37, 6, 1);
                 }
             }
+        }
+    }
+
+    public void flagInsideToolHut(boolean isInside) {
+        if (isInside) {
+            gp.player.insideToolShed = true;
+        } else {
+            gp.player.insideToolShed = false;
+//            for (int i = 0; i < gp.obj[1].length; i++) { //change for toolhut item
+//                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "MagicQuizBook")) {
+//                    gp.player.changeOtherObjectImage("MagicQuizBook", 37, 6, 1);
+//                }
+//            }
         }
     }
 }

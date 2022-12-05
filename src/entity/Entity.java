@@ -273,8 +273,8 @@ public class Entity {
             default -> "";
         };
 
-        if (gp.player.bookHutState == 1 && (gp.player.insideBookShed || gp.player.insideToolShed)) {
-            if ((Math.abs(object.worldX/gp.tileSize - player.worldX/gp.tileSize) <= 1 || Math.abs(object.worldY/gp.tileSize - player.worldY/gp.tileSize) <= 1) && (object.goesTransparentWhenStoodOnBookHut || object.goesTransparentWhenStoodOnToolHut)) {
+        if ((gp.player.bookHutState == 1 && gp.player.insideBookShed) || (gp.player.toolHutState == 1 && gp.player.insideToolShed)) {
+            if ((Math.abs(object.worldX/gp.tileSize - player.worldX/gp.tileSize) <= 1 && Math.abs(object.worldY/gp.tileSize - player.worldY/gp.tileSize) <= 1) && (object.goesTransparentWhenStoodOnBookHut || object.goesTransparentWhenStoodOnToolHut)) {
                 object.collisionType = 1;
                 switch (side) {
                     case "left" -> {

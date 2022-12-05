@@ -289,7 +289,7 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Fridge(gp);
-        gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
+        gp.obj[mapNum][i].worldX = 25 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
 
