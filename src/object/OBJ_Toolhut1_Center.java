@@ -37,10 +37,30 @@ public class OBJ_Toolhut1_Center extends Entity {
     }
 
     public void setDialogue() {
-
+        dialogueText[0][0] = "You unlock the tool shed.";
+        dialogueText[1][0] = "I need the tool shed key to get in here.";
+        dialogueText[2][0] = "It's already unlocked!";
     }
 
     public void interact() {
-
+        if (!opened && checkIfPlayerHasItem(gp.player.inventory, "ToolHutKey")) {
+            gp.playSFX(3);
+            gp.eHandler.removeItemFromPlayerInventory(gp.player.inventory, "ToolHutKey");
+            startDialogue(this, 0);
+            changeOtherObjectImage("Toolhut2_Center", 37, 7, 2);
+            down1 = image2; //set open tool hut Image
+            gp.player.toolHutState = 1;
+            collision = false;
+            opened = true;
+            gp.keyH.enterPressed = false;
+        } else if (!opened && !checkIfPlayerHasItem(gp.player.inventory, "ToolHutKey")) {
+            startDialogue(this, 1);
+            //debug
+            gp.player.inventory.add(new OBJ_ToolHutKey(gp));
+            gp.keyH.enterPressed = false;
+        } else if (opened) {
+            startDialogue(this, 2);
+            gp.keyH.enterPressed = false;
+        }
     }
 }

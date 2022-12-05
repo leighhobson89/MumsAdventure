@@ -1195,7 +1195,16 @@ public class Entity {
                     }
                     break;
             }
+        }
+        return playerHasRequiredItem;
+    }
 
+    public boolean checkIfPlayerHasItem(ArrayList<Entity> inventory, String itemToCheck) {
+        boolean playerHasRequiredItem = false;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (Objects.equals(inventory.get(i).name, itemToCheck)) {
+                playerHasRequiredItem = true;
+            }
         }
         return playerHasRequiredItem;
     }

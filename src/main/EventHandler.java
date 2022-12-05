@@ -280,6 +280,15 @@ public class EventHandler {
         }
     }
 
+    public void removeItemFromPlayerInventory(ArrayList<Entity> inventory, String itemToRemove) {
+        for (int i = 0; i < inventory.size(); i++) {
+            if (Objects.equals(inventory.get(i).name, itemToRemove)) {
+                inventory.remove(i);
+                break;
+            }
+        }
+    }
+
     public void startShower() {
         for (int i = 0; i < gp.obj[1].length; i++) {
             if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "BathLeft")) {
