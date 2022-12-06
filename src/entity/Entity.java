@@ -196,6 +196,7 @@ public class Entity {
     public final int type_switchable_interactive_tile = 13;
     public final int type_tv_remote = 14;
     public final int type_hut = 15;
+    public final int type_flamingAerosol = 16;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -1201,6 +1202,10 @@ public class Entity {
                         playerHasRequiredItem = true;
                     }
                     break;
+                case MissionStates.GET_RID_OF_WASP_NEST:
+                    if (Objects.equals(entity.name, "FlammableSpray") && missionSubState == 1) {
+                        playerHasRequiredItem = true;
+                    }
             }
         }
         return playerHasRequiredItem;

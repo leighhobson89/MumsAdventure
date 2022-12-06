@@ -234,6 +234,8 @@ public class EventHandler {
         gp.aSetter.setObjectAfterStart("Mop", gp.currentMap, 24, 13, false);
     }
 
+    public void fishTankDrawer() { gp.aSetter.setObjectAfterStart("Lighter", gp.currentMap, 17, 17, false); }
+
     public void fridgeOpen() {
         gp.aSetter.setObjectAfterStart("Chicken", gp.currentMap, 26, 11, false);
     }

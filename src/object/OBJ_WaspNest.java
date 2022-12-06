@@ -39,10 +39,10 @@ public class OBJ_WaspNest extends Entity {
     }
 
     public void interact() {
-        if (!opened && missionSubstate < 1) {
+        if (!opened && gp.player.missionSubstate < 1) {
             gp.aSetter.setMonster("WaspSwarm", gp.aSetter.monsterNumber, 17, 16, gp.currentMap, false);
             startDialogue(this, 1);
-            missionSubstate++;
+            gp.player.missionSubstate++;
             gp.keyH.enterPressed = false;
         } else if (!opened && missionSubstate == 1) {
             startDialogue(this, 0);
