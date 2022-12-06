@@ -342,7 +342,7 @@ public class SaveLoad {
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
                         if (gp.obj[mapNum][i].opened) {
                             switch (gp.obj[mapNum][i].name) { //add cases here for objects that could be loaded in an open state but don't have 2 images
-                                case "Cupboard2", "Bin_Green", "BathLeft", "BathRight" -> {
+                                case "Cupboard2", "Bin_Green", "BathLeft", "BathRight", "Fridge" -> {
                                     gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image;
                                     gp.obj[mapNum][i].collision = true;
                                 }

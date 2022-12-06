@@ -1145,7 +1145,7 @@ public class Entity {
                     gp.aSetter.setInteractiveTilesAfterStart(MissionStates.DRAG_COOKER_TO_BINS);
                 }
                 case 8 -> {
-                    gp.player.missionState = MissionStates.GET_PAID_FOR_OLD_COOKER;
+                    gp.player.missionState = MissionStates.NOT_GET_PAID_FOR_OLD_COOKER;
                     for (int i = 0; i < gp.npc[1].length; i++) {
                         if (gp.npc[gp.currentMap][i] != null) {
                             if (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker")) {

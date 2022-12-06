@@ -219,23 +219,23 @@ public class EventHandler {
     }
 
     public void cupboardHall() {
-        gp.aSetter.setObjectAfterStart("Old Cardigan", gp.currentMap, 24, 11);
+        gp.aSetter.setObjectAfterStart("Old Cardigan", gp.currentMap, 24, 11, false);
     }
 
     public void cupboardLounge() {
-        gp.aSetter.setObjectAfterStart("Lavender Crocs", gp.currentMap, 18, 13);
+        gp.aSetter.setObjectAfterStart("Lavender Crocs", gp.currentMap, 18, 13, false);
     }
 
     public void kitchenCupBoard() {
-        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 27, 15);
+        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 27, 15, false);
     }
 
     public void kitchenPantry() {
-        gp.aSetter.setObjectAfterStart("Mop", gp.currentMap, 24, 13);
+        gp.aSetter.setObjectAfterStart("Mop", gp.currentMap, 24, 13, false);
     }
 
     public void fridgeOpen() {
-        gp.aSetter.setObjectAfterStart("Chicken", gp.currentMap, 26, 11);
+        gp.aSetter.setObjectAfterStart("Chicken", gp.currentMap, 26, 11, false);
     }
 
     public void lightPillsEvent() {

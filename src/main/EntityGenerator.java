@@ -96,6 +96,9 @@ public class EntityGenerator {
             case OBJ_ToolHutKey.OBJ_NAME -> new OBJ_ToolHutKey(gp);
             case OBJ_TV_Remote.OBJ_NAME -> new OBJ_TV_Remote(gp);
             case OBJ_TV_Lounge.OBJ_NAME -> new OBJ_TV_Lounge(gp);
+            case OBJ_Lighter.OBJ_NAME -> new OBJ_Lighter(gp);
+            case OBJ_Flammable_Spray.OBJ_NAME -> new OBJ_Flammable_Spray(gp);
+            case OBJ_WaspNest.OBJ_NAME -> new OBJ_WaspNest(gp);
             default -> null;
         };
     }

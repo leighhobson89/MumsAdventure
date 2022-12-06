@@ -17,10 +17,6 @@ public class NPC_Dad extends Entity {
         type = type_npc;
         goesTransparentWhenHit = true;
 
-//        //comment for not throw bone
-//        projectile = new OBJ_PipsBone(gp);
-//        //end bone throwing
-
         getImage();
         setDialogue();
 
@@ -144,6 +140,13 @@ public class NPC_Dad extends Entity {
         dialogueText[73][0] = "That's it then.\nYour score was " + gp.player.quizScoreCount + "/5";
         dialogueText[73][1] = "So there you go.  Good init!\nYou can have a do next time!\nI want some peace now!";
         dialogueText[73][2] = "Oh and here's that bloody Chinese stain remover off ebay\nAbsolutely ruined that CD it did, throw it in the grey bin!";
+
+        //GET RID OF WASP NEST MISSION
+        dialogueText[74][0] = "Did you get that money from the cooker then, how much?";
+        dialogueText[74][1] = "Well...erm...bloody idiots gave it to that Asian up\nthe drive to give to us, and then they shot off!";
+        dialogueText[74][2] = "Oh bloody hell, so did you get it?";
+        dialogueText[74][3] = "Did I heck, he scarpered off din't he!";
+        dialogueText[74][4] = "Bloody useless.  Anyway there is a wasps nest in\nLeigh's old room.  If you can get in, get rid of it!";
     }
 
     public void setAction(int goalCol, int goalRow) {
@@ -153,24 +156,20 @@ public class NPC_Dad extends Entity {
         } else {
             getRandomDirection();
         }
-//        //comment for not throw bone
-//        int i = new Random().nextInt(1000) + 1; //odds of throwing a bone
-//        if (i > 999 && !projectile.alive && shotAvailableCounter == 30) {
-//            projectile.set(worldX, worldY, direction, true, this);
-//            gp.projectileList.add(projectile);
-//            shotAvailableCounter = 0;
-//        // end bone code
-//        }
     }
 
     public void speak() {
         switch (gp.player.missionToSet) {
             case MissionStates.MOP_UP_THE_SHOWER_WATER -> gp.player.missionState = MissionStates.MOP_UP_THE_SHOWER_WATER;
             case MissionStates.MAGIC_BOOK_QUIZ -> gp.player.missionState = MissionStates.MAGIC_BOOK_QUIZ;
+            case MissionStates.GET_RID_OF_WASP_NEST -> {
+                gp.player.missionState = MissionStates.GET_RID_OF_WASP_NEST;
+                gp.aSetter.setObjectAfterStart("WaspNest", 1, 17, 14, false);
+            }
         }
         if (gp.player.weedCount > 0 && !gp.player.setShovelFlag) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;
-            gp.aSetter.setObjectAfterStart("Garden Shovel", gp.currentMap, 45, 8);
+            gp.aSetter.setObjectAfterStart("Garden Shovel", gp.currentMap, 45, 8, false);
             gp.player.setShovelFlag = true;
         }
         switch (gp.player.missionState) {
@@ -197,6 +196,7 @@ public class NPC_Dad extends Entity {
                     }
                 }
             }
+            case MissionStates.GET_RID_OF_WASP_NEST -> dialogueSet = 74; //get rid of wasp nest mission
             default -> dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission
         }
         //character specific stuff here

@@ -40,13 +40,13 @@ public class OBJ_FrontBackDoorKey extends Entity {
             doorUnlockedCount++;
             gp.playSFX(3);
             gp.obj[gp.currentMap][objIndexFront] = null;
-            gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 16, 11);
+            gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 16, 11, false);
         } else if (objIndexBack != 999) {
             startDialogue(this, 0);
             doorUnlockedCount++;
             gp.playSFX(3);
             gp.obj[gp.currentMap][objIndexBack] = null;
-            gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 30, 11);
+            gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 30, 11, false);
         } else {
             startDialogue(this, 1);
             return false;

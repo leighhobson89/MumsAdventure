@@ -39,6 +39,19 @@ public class NPC_Phoebe extends Entity {
 
     }
 
+    //        //comment for not throw bone
+//        projectile = new OBJ_PipsBone(gp);
+//        //end bone throwing
+
+    //        //comment for not throw bone
+//        int i = new Random().nextInt(1000) + 1; //odds of throwing a bone
+//        if (i > 999 && !projectile.alive && shotAvailableCounter == 30) {
+//            projectile.set(worldX, worldY, direction, true, this);
+//            gp.projectileList.add(projectile);
+//            shotAvailableCounter = 0;
+//        // end bone code
+//        }
+
     public void setDialogue() {
         dialogueText[0][0] = "Woof!";
         dialogueText[1][0] = "Grr!";

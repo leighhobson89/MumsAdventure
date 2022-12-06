@@ -18,7 +18,8 @@ public class OBJ_Fridge extends Entity {
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "Fridge";
-        down1 = setup("/objects/fridge", gp.tileSize, gp.tileSize);
+        image = setup("/objects/fridge", gp.tileSize, gp.tileSize);
+        down1 = image;
         direction = "down";
         collision = true;
 

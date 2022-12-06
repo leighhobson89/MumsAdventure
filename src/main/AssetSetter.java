@@ -29,15 +29,15 @@ public class AssetSetter {
         this.gp = gp;
     }
 
-    public void setObjectAfterStart(String name, int mapNum, int x, int y) { //finds first available slot in object array if setting object after start of game
+    public void setObjectAfterStart(String name, int mapNum, int x, int y, boolean isItARandomMonsterDrop) { //finds first available slot in object array if setting object after start of game
         int startX = x - 2;
         int startY = y - 2;
-        int thisTile = gp.tileM.mapTileNum[gp.currentMap][x][y];
+        int thisTile = gp.tileM.mapTileNum[mapNum][x][y];
         Entity testEntity = new OBJ_Cupboard2(gp);
 
         int count = 0;
         for (int i = 0; i < gp.obj[1].length; i++) {
-            if (gp.obj[gp.currentMap][i] != null) {
+            if (gp.obj[mapNum][i] != null) {
                 count++; //at end of loop, count will show the index of the last object in the array
             } else {
                 break;
@@ -72,11 +72,12 @@ public class AssetSetter {
                 case "Chicken" -> gp.obj[mapNum][i] = new OBJ_Chicken(gp);
                 case "Chopped Chicken" -> gp.obj[mapNum][i] = new OBJ_ChoppedChicken(gp);
                 case "Mop" -> gp.obj[mapNum][i] = new OBJ_Mop(gp);
+                case "WaspNest" -> gp.obj[mapNum][i] = new OBJ_WaspNest(gp);
             }
 
             gp.obj[mapNum][i].worldX = x * gp.tileSize;
             gp.obj[mapNum][i].worldY = y * gp.tileSize;
-        } else {
+        } else if (isItARandomMonsterDrop) {
             testEntity.worldX = startX;
             testEntity.worldY = startY;
             while (gp.tileM.tile[thisTile].collision || gp.player.checkIfObjectInWay(testEntity) || (testEntity.worldX < 11 || testEntity.worldX > 60) || (testEntity.worldY < 5 || testEntity.worldY > 19)) {
@@ -88,7 +89,7 @@ public class AssetSetter {
                 if (testEntity.worldY - startY > 4) {
                     break;
                 }
-                thisTile = gp.tileM.mapTileNum[gp.currentMap][testEntity.worldX][testEntity.worldY];
+                thisTile = gp.tileM.mapTileNum[mapNum][testEntity.worldX][testEntity.worldY];
             }
             testEntity.worldX = testEntity.worldX * gp.tileSize;
             testEntity.worldY = testEntity.worldY * gp.tileSize;
@@ -121,6 +122,7 @@ public class AssetSetter {
                     case "Chicken" -> gp.obj[mapNum][j] = new OBJ_Chicken(gp);
                     case "Chopped Chicken" -> gp.obj[mapNum][j] = new OBJ_ChoppedChicken(gp);
                     case "Mop" -> gp.obj[mapNum][j] = new OBJ_Mop(gp);
+                    case "WaspNest" -> gp.obj[mapNum][j] = new OBJ_WaspNest(gp);
                 }
 
                 gp.obj[mapNum][j].worldX = testEntity.worldX;

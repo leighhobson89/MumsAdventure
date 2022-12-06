@@ -322,10 +322,10 @@ public class Player extends Entity {
     @SuppressWarnings("StatementWithEmptyBody")
     public void update() {
 
-        if (missionState == MissionStates.GET_PAID_FOR_OLD_COOKER) {
+        if (missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
             if (worldX/gp.tileSize > 56) {
                 startDialogue(this, 19);
-                gp.misStat.endMissionTasks(MissionStates.GET_PAID_FOR_OLD_COOKER, false);
+                gp.misStat.endMissionTasks(MissionStates.NOT_GET_PAID_FOR_OLD_COOKER, false);
             }
         }
 
@@ -835,7 +835,7 @@ public class Player extends Entity {
                         gp.player.weedCount--;
                         gp.gameState = gp.dialogueState;
                         startDialogue(this, 2);
-                        gp.aSetter.setObjectAfterStart("HundredQuid", gp.currentMap, gp.iTile[gp.currentMap][i].worldX/gp.tileSize, gp.iTile[gp.currentMap][i].worldY/gp.tileSize); //place supercoin where last weed dug up as reward
+                        gp.aSetter.setObjectAfterStart("HundredQuid", gp.currentMap, gp.iTile[gp.currentMap][i].worldX/gp.tileSize, gp.iTile[gp.currentMap][i].worldY/gp.tileSize, false); //place supercoin where last weed dug up as reward
                         gp.misStat.endMissionTasks(MissionStates.WEEDING_MISSION, true);
                     }
                 }
@@ -909,8 +909,8 @@ public class Player extends Entity {
                     gp.player.blockWoodState = 3; //for upstairs correct image
                     if (gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
                         gp.ui.addMessage("You chopped the chicken!");
-                        gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 11);
-                        gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 10);
+                        gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 11, false);
+                        gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 10, false);
                     }
                 }
             }
