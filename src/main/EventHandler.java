@@ -108,7 +108,7 @@ public class EventHandler {
                 gp.gameState = gameState;
                 gp.playSFX(8);
                 gp.player.startDialogue(gp.player, 14);
-                gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
+                gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, gp.currentMap, randomizeLocation);
                 gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
                 spiderCount++;
             }
@@ -117,11 +117,11 @@ public class EventHandler {
             gp.playSFX(8);
             if (spiderCount == 1) {
                 gp.player.startDialogue(gp.player, 12);
-                gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation); // trigger a spider when the dialogue is closed
+                gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, gp.currentMap, randomizeLocation); // trigger a spider when the dialogue is closed
             } else if (spiderCount > 1) {
                 gp.player.setDialogue();
                 gp.player.startDialogue(gp.player, 13);
-                gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, randomizeLocation);
+                gp.aSetter.monsterNumber = gp.aSetter.setMonster("Spider", gp.aSetter.monsterNumber, col, row, gp.currentMap, randomizeLocation);
             }
             gp.player.pillsConsumableNow = gp.player.stressLevel >= gp.player.STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS;
             //eventRect[col][row].eventDone = true; //for non recurring events only

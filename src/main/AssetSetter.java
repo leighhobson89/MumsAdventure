@@ -670,9 +670,7 @@ public class AssetSetter {
 //        i++;
     }
 
-    public int setMonster(String type, int monsterNumber, int x, int y, boolean randomizeLocation) {
-        int mapNum = 0;
-
+    public int setMonster(String type, int monsterNumber, int x, int y, int mapNum, boolean randomizeLocation) {
         switch (type) {
             case "Spider" -> {
                 gp.monster[mapNum][monsterNumber] = new MON_Spider(gp);

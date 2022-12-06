@@ -106,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.missionList.add(MissionStates.BETWEEN_MISSIONS); //add non mission state to missionList at beginning of game
         aSetter.setNPC();
         aSetter.setObject();
-        aSetter.monsterNumber = aSetter.setMonster("WaspSwarm", aSetter.monsterNumber, 13, 18, false);
+        aSetter.monsterNumber = aSetter.setMonster("WaspSwarm", aSetter.monsterNumber, 13, 18, currentMap, false);
         player.weedCount = aSetter.setInteractiveTile();
         eManager.setup();
 

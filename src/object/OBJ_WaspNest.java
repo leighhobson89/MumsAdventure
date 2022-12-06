@@ -39,7 +39,15 @@ public class OBJ_WaspNest extends Entity {
     }
 
     public void interact() {
-        startDialogue(this, 0);
-        gp.keyH.enterPressed = false;
+        if (!opened && missionSubstate < 1) {
+            gp.aSetter.setMonster("WaspSwarm", gp.aSetter.monsterNumber, 17, 16, gp.currentMap, false);
+            startDialogue(this, 1);
+            missionSubstate++;
+            gp.keyH.enterPressed = false;
+        } else if (!opened && missionSubstate == 1) {
+            startDialogue(this, 0);
+            gp.keyH.enterPressed = false;
+        }
+
     }
 }
