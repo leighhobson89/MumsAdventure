@@ -42,6 +42,7 @@ public class OBJ_Bucket extends Entity {
         dialogueText[0][0] = "It's a bucket of water! Fancy that!";
         dialogueText[1][0] = "Get up to that Wasp Nest and put it out\nbefore it burns the bloody house down!";
         dialogueText[2][0] = "Phew! The fire is out, and the wasp nest\nis destroyed, thank God for that!";
+        dialogueText[3][0] = "It's an empty bucket! Fancy that!";
     }
 
     public boolean use(Entity entity) {
@@ -74,8 +75,10 @@ public class OBJ_Bucket extends Entity {
             } else {
                 startDialogue(this, 1);
             }
-        } else {
+        } else if (gp.player.bucketFull) {
             startDialogue(this, 0);
+        } else { //bucket empty
+            startDialogue(this, 3);
         }
         gp.keyH.enterPressed = false;
         return false;
