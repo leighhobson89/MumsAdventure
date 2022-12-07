@@ -100,6 +100,8 @@ public class EntityGenerator {
             case OBJ_Flammable_Spray.OBJ_NAME -> new OBJ_Flammable_Spray(gp);
             case OBJ_WaspNest.OBJ_NAME -> new OBJ_WaspNest(gp);
             case OBJ_FishTankDrawer.OBJ_NAME -> new OBJ_FishTankDrawer(gp);
+            case OBJ_KitchenSink.OBJ_NAME -> new OBJ_KitchenSink(gp);
+            case OBJ_Bucket.OBJ_NAME -> new OBJ_Bucket(gp);
             default -> null;
         };
     }

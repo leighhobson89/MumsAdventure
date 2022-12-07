@@ -159,9 +159,19 @@ public class AssetSetter {
         int mapNum = 0;
         int i = 0;
 
+        gp.obj[mapNum][i] = new OBJ_Bucket(gp);
+        gp.obj[mapNum][i].worldX = 31 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 19 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_FishTankDrawer(gp);
         gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_KitchenSink(gp);
+        gp.obj[mapNum][i].worldX = 29 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_TV_Lounge(gp);
