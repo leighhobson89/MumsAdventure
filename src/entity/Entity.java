@@ -263,6 +263,7 @@ public class Entity {
         //overridden in specific entity class
     }
     public void handleTransparencyAndCollisionInHuts(Entity player, Entity object) {
+        //SET COLLISION OF WALLS WHEN INSIDE HUTS
         String side = switch (object.name) {
             case "Bookhut2_Left", "Bookhut3_Left", "Toolhut2_Left", "Toolhut3_Left" -> "left";
             case "Bookhut2_Right", "Bookhut3_Right", "Toolhut2_Right", "Toolhut3_Right" -> "right";
@@ -307,17 +308,21 @@ public class Entity {
         }
 
         if ((!gp.player.insideBookShed && !Objects.equals(object.name, "Bookhut1_Center"))) {
-            object.transparent = false;
             if (!Objects.equals(object.name, "Bookhut2_Center")) {
                 object.collisionType = 0;
             }
+            switch (object.name) {
+                case "Bookhut1_Left", "Bookhut1_Right", "Bookhut2_Left", "Bookhut2_Center", "Bookhut2_Right", "Bookhut3_Left", "Bookhut3_Center", "Bookhut3_Right" -> object.transparent = false;
+            }
         }
-//        if ((!gp.player.insideToolShed && !Objects.equals(object.name, "Toolhut1_Center"))) { //will need to fix when entering tool shed to get transparency right
-//            object.transparent = false;
-//            if (!Objects.equals(object.name, "Toolhut2_Center")) {
-//                object.collisionType = 0;
-//            }
-//        }
+        if ((!gp.player.insideToolShed && !Objects.equals(object.name, "Toolhut1_Center"))) {
+            if (!Objects.equals(object.name, "Toolhut2_Center")) {
+                object.collisionType = 0;
+            }
+            switch (object.name) {
+                case "Toolhut1_Left", "Toolhut1_Right", "Toolhut2_Left", "Toolhut2_Center", "Toolhut2_Right", "Toolhut3_Left", "Toolhut3_Center", "Toolhut3_Right" -> object.transparent = false;
+            }
+        }
 
         if (!gp.player.insideBookShed && !gp.player.insideToolShed) {
             object.solidArea.width = 48;
@@ -969,7 +974,7 @@ public class Entity {
                         image = dyingImage;
                         dyingAnimation(g2);
                     }
-                    if (this.goesTransparentWhenStoodOnBookHut && this.transparent) {
+                    if ((this.goesTransparentWhenStoodOnBookHut || this.goesTransparentWhenStoodOnToolHut) && this.transparent) {
                         changeAlpha(g2, 0.6F);
                     }
 
