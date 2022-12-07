@@ -212,7 +212,7 @@ public class EventHandler {
             }
         }
         for (int i = 0; i < gp.player.inventory.size(); i++) { //for changing images in inventory
-            if (Objects.equals(gp.player.inventory.get(i).name, "MagicQuizBook")) {
+            if (Objects.equals(gp.player.inventory.get(i).name, "MagicQuizBook") || Objects.equals(gp.player.inventory.get(i).name, "FlammableSpray")) {
                 gp.player.inventory.get(i).down1 = gp.player.inventory.get(i).image2;
             }
         }
@@ -328,11 +328,15 @@ public class EventHandler {
     }
 
     public void flagInsideToolHut(boolean isInside) {
-        //            for (int i = 0; i < gp.obj[1].length; i++) { //change for toolhut item
-        //                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "MagicQuizBook")) {
-        //                    gp.player.changeOtherObjectImage("MagicQuizBook", 37, 6, 1);
-        //                }
-        //            }
-        gp.player.insideToolShed = isInside;
+        if (isInside) {
+            gp.player.insideToolShed = true;
+        } else {
+            gp.player.insideToolShed = false;
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "FlammableSpray")) {
+                    gp.player.changeOtherObjectImage("FlammableSpray", 33, 6, 1);
+                }
+            }
+        }
     }
 }

@@ -43,6 +43,7 @@ public class OBJ_Lighter extends Entity {
             } else if (gp.player.missionSubstate == 1 && checkIfPlayerHasMissionItem(gp.player.inventory, MissionStates.GET_RID_OF_WASP_NEST, 1)) {
                 for (int i = 0; i < gp.player.inventory.size(); i++) {
                     if (Objects.equals(gp.player.inventory.get(i).name, "FlammableSpray")) {
+                        gp.player.inventory.get(i).name = "FlammableSprayWeapon";
                         gp.player.inventory.get(i).isWeapon = true;
                         gp.player.inventory.get(i).type = type_flamingAerosol;
                         gp.player.inventory.get(i).down1 = image2;

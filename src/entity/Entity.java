@@ -289,8 +289,11 @@ public class Entity {
                 object.transparent = true;
             }
 
-            if (missionSubstate == 1 && missionState == MissionStates.MAGIC_BOOK_QUIZ) {
+            if (missionSubstate == 1 && missionState == MissionStates.MAGIC_BOOK_QUIZ && gp.player.insideBookShed) {
                 changeOtherObjectImage("MagicQuizBook", 37, 6, 2);
+            }
+            if (gp.player.insideToolShed) {
+                changeOtherObjectImage("FlammableSpray", 33, 6, 2);
             }
         }
 

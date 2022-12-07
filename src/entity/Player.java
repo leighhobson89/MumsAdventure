@@ -332,7 +332,17 @@ public class Player extends Entity {
         if (missionList.size() >= MissionStates.MAGIC_BOOK_QUIZ) {
             for (int i = 0; i < gp.obj[1].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null) {
-                    if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnBookHut || gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnToolHut ) {
+                    if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnBookHut) {
+                        handleTransparencyAndCollisionInHuts(this, gp.obj[gp.currentMap][i]);
+                    }
+                }
+            }
+        }
+
+        if (gp.player.toolHutState == 1) {
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null) {
+                    if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnToolHut) {
                         handleTransparencyAndCollisionInHuts(this, gp.obj[gp.currentMap][i]);
                     }
                 }
@@ -629,6 +639,13 @@ public class Player extends Entity {
                         }
                         if (missionState == MissionStates.MAGIC_BOOK_QUIZ) {
                             missionSubstate = 2;
+                        }
+                    }
+                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "FlammableSpray")) {
+                        for (Entity entity : inventory) {
+                            if (Objects.equals(entity.name, "FlammableSpray")) {
+                                entity.down1 = entity.image2;
+                            }
                         }
                     }
 

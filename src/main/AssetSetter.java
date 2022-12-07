@@ -404,6 +404,7 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
         i++;
 
+
         gp.obj[mapNum][i] = new OBJ_Bookhut3_Right(gp);
         gp.obj[mapNum][i].worldX = 38 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
@@ -450,6 +451,11 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Toolhut3_Center(gp);
+        gp.obj[mapNum][i].worldX = 33 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Flammable_Spray(gp);
         gp.obj[mapNum][i].worldX = 33 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
         i++;

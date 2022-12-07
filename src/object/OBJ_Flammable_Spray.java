@@ -7,7 +7,7 @@ import main.MissionStates;
 public class OBJ_Flammable_Spray extends Entity {
 
     GamePanel gp;
-    public static final String OBJ_NAME = "Flammable Spray";
+    public static final String OBJ_NAME = "FlammableSpray";
 
     public OBJ_Flammable_Spray(GamePanel gp) {
 
@@ -18,14 +18,15 @@ public class OBJ_Flammable_Spray extends Entity {
         type = type_consumable;
         name = OBJ_NAME;
         displayName = "Flammable Spray";
-        image = setup("/objects/flammableSpray", gp.tileSize, gp.tileSize);
+        image = null;
+        image2 = setup("/objects/flammableSpray", gp.tileSize, gp.tileSize);
         down1 = image;
-        //todo add image2 with flames for when its lit and turns into weapon
+        //todo add image3 with flames for when its lit and turns into weapon
         direction = "down";
         attackValue = 2;
         attackArea.width = 36;
         attackArea.height = 36;
-        description = "[" + name + "]\nSome super flammable spray";
+        description = "[" + name + "]\nSome super flammable\nspray";
         isSaleable = false;
         price = 0;
         knockBackPower = 3;
