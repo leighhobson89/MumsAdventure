@@ -32,7 +32,7 @@ public class OBJ_Lighter extends Entity {
 
         public boolean use(Entity entity) {
 
-            if (gp.player.missionState != MissionStates.GET_RID_OF_WASP_NEST) {
+            if (gp.player.missionState != MissionStates.GET_RID_OF_WASP_NEST || gp.player.missionSubstate == 0) {
                 startDialogue(this, 0);
                 gp.keyH.enterPressed = false;
                 return false;
@@ -43,17 +43,16 @@ public class OBJ_Lighter extends Entity {
             } else if (gp.player.missionSubstate == 1 && checkIfPlayerHasMissionItem(gp.player.inventory, MissionStates.GET_RID_OF_WASP_NEST, 1)) {
                 for (int i = 0; i < gp.player.inventory.size(); i++) {
                     if (Objects.equals(gp.player.inventory.get(i).name, "FlammableSpray")) {
-                        gp.player.inventory.get(i).name = "FlammableSprayWeapon";
                         gp.player.inventory.get(i).isWeapon = true;
                         gp.player.inventory.get(i).type = type_flamingAerosol;
-                        gp.player.inventory.get(i).down1 = image2;
+                        gp.player.inventory.get(i).down1 =  gp.player.inventory.get(i).image3;
                         gp.player.currentWeapon = gp.player.inventory.get(i);
                         gp.player.attack = gp.player.getAttack();
                         gp.player.getAttackImage(gp.ui.outfitChosen);
-                    }
-                    if (Objects.equals(gp.player.inventory.get(i).name, "Lighter")) {
-                        //noinspection SuspiciousListRemoveInLoop
-                        gp.player.inventory.remove(i);
+                        gp.player.inventory.get(i).name = "FlammableSprayWeapon";
+                        gp.player.inventory.get(i).displayName = "Flaming Aerosol";
+                        gp.player.inventory.get(i).description = "A Flaming Aerosol!";
+                        gp.player.missionSubstate = 2;
                     }
                 }
                 startDialogue(this, 2);

@@ -79,6 +79,7 @@ public class OBJ_BlockOfWood extends Entity {
             if (stainRemoverUsed) {
                 startDialogue(this, 3);
                 down1 = image;
+                gp.player.blockWoodState = 1;
             } else {
                 if (gp.player.stainRemoverUsed) {
                     startDialogue(this, 4);

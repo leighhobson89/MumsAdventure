@@ -20,10 +20,10 @@ public class OBJ_Flammable_Spray extends Entity {
         displayName = "Flammable Spray";
         image = null;
         image2 = setup("/objects/flammableSpray", gp.tileSize, gp.tileSize);
+        image3 = setup("/objects/flammableSprayLit", gp.tileSize, gp.tileSize);
         down1 = image;
-        //todo add image3 with flames for when its lit and turns into weapon
         direction = "down";
-        attackValue = 2;
+        attackValue = 5;
         attackArea.width = 36;
         attackArea.height = 36;
         description = "[" + name + "]\nSome super flammable\nspray";

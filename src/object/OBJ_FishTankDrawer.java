@@ -17,7 +17,8 @@ public class OBJ_FishTankDrawer extends Entity {
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "FishTankDrawer";
-        down1 = setup("/objects/fishTankDrawer", gp.tileSize, gp.tileSize);
+        image = setup("/objects/fishTankDrawer", gp.tileSize, gp.tileSize);
+        down1 = image;
         direction = "down";
         collision = true;
 

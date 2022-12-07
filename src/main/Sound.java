@@ -54,6 +54,7 @@ public class Sound {
         soundURL[33] = getClass().getResource("/sound/showerDripping.wav");
         soundURL[34] = getClass().getResource("/sound/inGameSong2.wav");
         soundURL[35] = getClass().getResource("/sound/inGameSong3.wav");
+        soundURL[36] = getClass().getResource("/sound/flamerSfx.wav");
     }
 
     public void setFile(int i) {

@@ -309,6 +309,16 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/mum_mop_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_mop_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
+            if (currentWeapon.type == type_flamingAerosol) {
+                attackUp1 = setup("/player/mum_flamer_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
+                attackUp2 = setup("/player/mum_flamer_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown1 = setup("/player/mum_flamer_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackDown2 = setup("/player/mum_flamer_down2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
+                attackLeft1 = setup("/player/mum_flamer_left1_" + colorOutfit, gp.tileSize * 2, gp.tileSize); //32 x 16 images
+                attackLeft2 = setup("/player/mum_flamer_left2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight1 = setup("/player/mum_flamer_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+                attackRight2 = setup("/player/mum_flamer_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
+            }
         }
     }
 
@@ -458,6 +468,8 @@ public class Player extends Entity {
                     gp.playSFX(30);
                 } else if (currentWeapon.type == type_mop) {
                     gp.playSFX(31);
+                } else if (currentWeapon.type == type_flamingAerosol) {
+                    gp.playSFX(36);
                 }
 
                 attacking = true;
@@ -687,6 +699,8 @@ public class Player extends Entity {
         dialogueText[20][1] = "(You will find it in your inventory)";
         dialogueText[21][0] = "Turn that bloody telly off when you're not using it\nI'm not made o' money!";
         dialogueText[22][0] = "Right enough of that, time to get something done!";
+        dialogueText[23][0] = "There it's burning!";
+        dialogueText[23][1] = "Oooohh Jeeze...Bloody house is catching\nfire! Quick where's the bloody water??\nOh Goodddd!";
     }
 
     public void checkIfPassOutFromStress() {
@@ -765,7 +779,7 @@ public class Player extends Entity {
                 } else if (Objects.equals(this.name, "WaspSwarm")) {
                     gp.playSFX(26);
                 }
-                gp.player.transparent = true; //this and next line were in an if condition
+                gp.player.transparent = true;
                 setKnockBack(gp.player, this, knockBackPower);
 
                 gp.player.stressLevel += damage;
@@ -910,24 +924,39 @@ public class Player extends Entity {
 
             if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && Objects.equals(gp.player.currentWeapon.name, "Hatchet") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.obj[gp.currentMap][i].down1 == gp.obj[gp.currentMap][i].image2) { //chop chicken mission
                 damage = 1;
-            } else { //add further conditions when required
+            } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest") && Objects.equals(gp.player.currentWeapon.name, "FlammableSprayWeapon") && gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 2) { //get rid of wasp nest mission
+                damage = 1;
+            }
+            else { //add further conditions when required
                 damage = 0;
             }
 
             if (!gp.obj[gp.currentMap][i].invincible) {
                 if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.obj[gp.currentMap][i].down1 == gp.obj[gp.currentMap][i].image2) {
                     gp.playSFX(31); //play chicken squelch sound
+                } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest") && gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 2) {
+                    gp.playSFX(26); //play wasps sound
                 }
                 gp.obj[gp.currentMap][i].stressLevel += damage;
                 gp.obj[gp.currentMap][i].invincible = true;
 
                 if (gp.obj[gp.currentMap][i].stressLevel >= gp.obj[gp.currentMap][i].monsterMaxStress && Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood")) {
-                    gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image3; //possibly change this image3 variable name if more objects added
+                    gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image3;
                     gp.player.blockWoodState = 3; //for upstairs correct image
                     if (gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) {
                         gp.ui.addMessage("You chopped the chicken!");
                         gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 11, false);
                         gp.aSetter.setObjectAfterStart("Chopped Chicken", gp.currentMap, 35, 10, false);
+                    }
+                }
+                if (gp.obj[gp.currentMap][i].stressLevel >= gp.obj[gp.currentMap][i].monsterMaxStress && Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest")) {
+                    gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
+                    if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST) {
+                        gp.ui.addMessage("You set fire to the Wasp Nest!");
+                        gp.aSetter.monsterNumber = gp.aSetter.setMonster("WaspSwarm", gp.aSetter.monsterNumber, 17, 16, gp.currentMap, false);
+                        gp.aSetter.monsterNumber = gp.aSetter.setMonster("WaspSwarm", gp.aSetter.monsterNumber, 17, 17, gp.currentMap, false);
+                        gp.player.missionSubstate = 3;
+                        startDialogue(this, 23);
                     }
                 }
             }
@@ -957,12 +986,12 @@ public class Player extends Entity {
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
 
-            if ((selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
+            if ((selectedItem.type == type_flamingAerosol || selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
-            } else if (selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) {
+            } else if (selectedItem.type == type_flamingAerosol || selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) {
                 if (selectedItem.type == type_tv_remote) {
                    gp.player.worldY = gp.player.worldY - gp.tileSize;
                    if (!tvIsOff) {

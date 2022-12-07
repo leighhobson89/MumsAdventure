@@ -54,7 +54,7 @@ public class OBJ_TelephoneHall extends Entity {
         dialogueText[7][0] = "Alright, it's the tip here at Barlick!";
         dialogueText[7][1] = "We're coming for the old cooker this afternoon.\nCan you drag it up to the back so we can pick\nit up?";
         dialogueText[7][2] = "Cheers, nice one! Sure we'll make a bob or two\non the scrap...Whoops I shouldn't be saying that!";
-        //GET PAID FOR OLD COOKER
+        //NOT GET PAID FOR OLD COOKER
         dialogueText[8][0] = "Alright, it's the tip here at Barlick again!";
         dialogueText[8][1] = "We've picked up the cooker love!";
         dialogueText[8][2] = "The Asian at the top of the drive said he\nknows you so we gave him the scrap value for it!\nHope you trust him!";
