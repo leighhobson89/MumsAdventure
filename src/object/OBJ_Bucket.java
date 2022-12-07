@@ -66,6 +66,7 @@ public class OBJ_Bucket extends Entity {
                 description = "[" + name + "]\nAn Empty Bucket!";
                 gp.obj[gp.currentMap][waspNestIndex].down1 = gp.obj[gp.currentMap][waspNestIndex].image4;
                 gp.misStat.endMissionTasks(MissionStates.GET_RID_OF_WASP_NEST, false);
+                gp.player.bucketFull = false;
                 for (int i = 0; i < gp.player.inventory.size(); i++) {
                     if (Objects.equals(gp.player.inventory.get(i).name, "FlammableSprayWeapon")) {
                         gp.eHandler.removeItemFromPlayerInventory(gp.player.inventory, "FlammableSprayWeapon");
