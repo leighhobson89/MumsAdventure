@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class MON_WaspSwarm extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public MON_WaspSwarm(GamePanel gp) {
         super(gp);
 

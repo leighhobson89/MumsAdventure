@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Config {
 
-    GamePanel gp;
+    final GamePanel gp;
 
     public Config(GamePanel gp) {
         this.gp = gp;

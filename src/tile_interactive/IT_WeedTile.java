@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class IT_WeedTile extends InteractiveTile {
 
-    GamePanel gp;
+    final GamePanel gp;
 
     public IT_WeedTile(GamePanel gp, int col, int row) {
         super(gp);

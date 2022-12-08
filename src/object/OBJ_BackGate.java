@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_BackGate extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "BackGate";
 
     public OBJ_BackGate(GamePanel gp) {

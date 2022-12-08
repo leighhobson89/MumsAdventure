@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class EventHandler {
 
-    GamePanel gp;
-    EventRect[][][] eventRect;
+    final GamePanel gp;
+    final EventRect[][][] eventRect;
 
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;

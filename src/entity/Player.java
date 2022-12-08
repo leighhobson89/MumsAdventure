@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 
 public class Player extends Entity {
-    KeyHandler keyH;
-    UtilityTool uTool = new UtilityTool();
+    final KeyHandler keyH;
+    final UtilityTool uTool = new UtilityTool();
     public final int STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS = 4;
     final int MAX_SPEED_UNDER_INFLUENCE = 5;
     final int LENGTH_OF_SHOWER = 510;
@@ -42,7 +42,6 @@ public class Player extends Entity {
         setDefaultValues();
     }
 
-    @SuppressWarnings("MismatchedReadAndWriteOfArray")
     public void countDownTimerForItemEffect(String effect) {
         if ("Pills".equals(effect)) {
             pillsInProcess = true;
@@ -281,7 +280,6 @@ public class Player extends Entity {
 //        guardRight = setup("/player/mum_guard_right", gp.tileSize, gp.tileSize);
 //    }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     public void update() {
         if (pillsInProcess) {
             pillsCounter++;

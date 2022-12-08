@@ -4,7 +4,7 @@ import main.GamePanel;
 
 public class IT_BareRockery extends InteractiveTile {
 
-    GamePanel gp;
+    final GamePanel gp;
 
     public IT_BareRockery(GamePanel gp, int col, int row) {
         super(gp);

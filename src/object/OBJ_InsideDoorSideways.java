@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_InsideDoorSideways extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "InsideDoorSideways";
 
     public OBJ_InsideDoorSideways(GamePanel gp) {

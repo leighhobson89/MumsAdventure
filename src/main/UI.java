@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class UI {
-    GamePanel gp;
+    final GamePanel gp;
     Graphics2D g2;
     public Font maruMonica, maruMonica_40;
     BufferedImage bolt_full, bolt_half, bolt_blank, squeakyToyFull, squeakyToyEmpty, coin;
     //public boolean messageOn = false;
-    ArrayList<String> message = new ArrayList<>();
-    ArrayList<Integer> messageCounter = new ArrayList<>();
+    final ArrayList<String> message = new ArrayList<>();
+    final ArrayList<Integer> messageCounter = new ArrayList<>();
     //public boolean gameFinished = false;
     public String currentDialogue;
     public int commandNum = 0;

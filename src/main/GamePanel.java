@@ -28,8 +28,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow; //576 px
     public final boolean musicSetToPlayFromStart = true; //Change to true to play music from start
     //WORLD SETTINGS
-    public int maxWorldCol = 71;
-    public int maxWorldRow = 26;
+    public final int maxWorldCol = 71;
+    public final int maxWorldRow = 26;
     public final int maxMap = 10;
     public int currentMap = 0;
     //FOR FULL SCREEN
@@ -40,36 +40,36 @@ public class GamePanel extends JPanel implements Runnable {
     public boolean fullScreenOn = false;
 
     //FPS
-    int FPS = 60;
+    final int FPS = 60;
 
     //SYSTEM
-    public TileManager tileM = new TileManager(this);
-    public KeyHandler keyH = new KeyHandler(this);
-    public MissionStates misStat = new MissionStates(this);
-    Sound music = new Sound();
-    public Sound sfx = new Sound();
-    public CollisionChecker cChecker = new CollisionChecker(this);
-    public AssetSetter aSetter = new AssetSetter(this);
-    public UI ui = new UI(this);
-    public EventHandler eHandler = new EventHandler(this);
-    Config config = new Config(this);
-    public PathFinder pFinder = new PathFinder(this);
-    public EnvironmentManager eManager = new EnvironmentManager(this);
-    SaveLoad saveLoad = new SaveLoad(this);
-    Map map = new Map(this);
-    public EntityGenerator eGenerator = new EntityGenerator(this);
+    public final TileManager tileM = new TileManager(this);
+    public final KeyHandler keyH = new KeyHandler(this);
+    public final MissionStates misStat = new MissionStates(this);
+    final Sound music = new Sound();
+    public final Sound sfx = new Sound();
+    public final CollisionChecker cChecker = new CollisionChecker(this);
+    public final AssetSetter aSetter = new AssetSetter(this);
+    public final UI ui = new UI(this);
+    public final EventHandler eHandler = new EventHandler(this);
+    final Config config = new Config(this);
+    public final PathFinder pFinder = new PathFinder(this);
+    public final EnvironmentManager eManager = new EnvironmentManager(this);
+    final SaveLoad saveLoad = new SaveLoad(this);
+    final Map map = new Map(this);
+    public final EntityGenerator eGenerator = new EntityGenerator(this);
     Thread gameThread;
 
     //ENTITY AND OBJECT
-    public Player player = new Player(this,keyH);
-    public Entity[][] obj = new Entity[maxMap][100];
-    public Entity[][] npc = new Entity[maxMap][10];
+    public final Player player = new Player(this,keyH);
+    public final Entity[][] obj = new Entity[maxMap][100];
+    public final Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] monster = new Entity[maxMap][30];
-    public InteractiveTile[][] iTile = new InteractiveTile[maxMap][100];
-    public Entity[][] projectile = new Entity[maxMap][20];
-    public ArrayList<Entity> particleList = new ArrayList<>();
-    public ArrayList<Entity> entityList = new ArrayList<>();
-    public ArrayList<Entity> tempEntityList = new ArrayList<>();
+    public final InteractiveTile[][] iTile = new InteractiveTile[maxMap][100];
+    public final Entity[][] projectile = new Entity[maxMap][20];
+    public final ArrayList<Entity> particleList = new ArrayList<>();
+    public final ArrayList<Entity> entityList = new ArrayList<>();
+    public final ArrayList<Entity> tempEntityList = new ArrayList<>();
 
 
     //GAME STATE
@@ -197,7 +197,6 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println("FPS: " + drawCount);
                 System.out.println("MissionState: " + player.missionState);
                 System.out.println("Substate: " + player.missionSubstate);
-                System.out.println("WaspNestState: " + player.waspNestState);
                 drawCount = 0;
                 timer = 0;
             }

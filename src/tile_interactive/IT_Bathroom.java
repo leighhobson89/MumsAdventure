@@ -4,7 +4,7 @@ import main.GamePanel;
 
 public class IT_Bathroom extends InteractiveTile {
 
-    GamePanel gp;
+    final GamePanel gp;
 
     public IT_Bathroom(GamePanel gp, int col, int row) {
         super(gp);

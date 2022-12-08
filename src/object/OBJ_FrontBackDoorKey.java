@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_FrontBackDoorKey extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "FrontBackDoorKey";
 
     public OBJ_FrontBackDoorKey(GamePanel gp) {

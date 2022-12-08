@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class IT_WaterTile extends InteractiveTile {
 
-    GamePanel gp;
+    final GamePanel gp;
 
     public IT_WaterTile(GamePanel gp, int col, int row) {
         super(gp);

@@ -6,7 +6,7 @@ import main.MissionStates;
 
 public class OBJ_BathLeft extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "BathLeft";
 
     public OBJ_BathLeft(GamePanel gp) {

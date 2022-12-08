@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    GamePanel gp;
+    final GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, spacePressed, throwKeyPressed, guardAltPressed;
     long MUSIC_POSITION_PAUSE = 0;
     public boolean musicPlaying = true;

@@ -6,7 +6,7 @@ import main.MissionStates;
 
 public class OBJ_Bookhut1_Center extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Bookhut1_Center";
 
     public OBJ_Bookhut1_Center(GamePanel gp) {

@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_FortyQuidForAndrea extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Forty Quid For Andrea";
 
     public OBJ_FortyQuidForAndrea(GamePanel gp) {

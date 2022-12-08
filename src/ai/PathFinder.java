@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class PathFinder {
 
-    GamePanel gp;
+    final GamePanel gp;
     Node[][] node;
-    ArrayList<Node> openList = new ArrayList<>();
-    public ArrayList<Node> pathList = new ArrayList<>();
+    final ArrayList<Node> openList = new ArrayList<>();
+    public final ArrayList<Node> pathList = new ArrayList<>();
     Node startNode, goalNode, currentNode;
     boolean goalReached = false;
     int step = 0;

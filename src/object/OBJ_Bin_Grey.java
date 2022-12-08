@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class OBJ_Bin_Grey extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Bin_Grey";
 
     public OBJ_Bin_Grey(GamePanel gp) {

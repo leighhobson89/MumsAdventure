@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_Shovel extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Garden Shovel";
 
     public OBJ_Shovel(GamePanel gp) {

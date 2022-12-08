@@ -6,7 +6,7 @@ import main.MissionStates;
 
 public class OBJ_Fridge extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Fridge";
 
     public OBJ_Fridge(GamePanel gp) {

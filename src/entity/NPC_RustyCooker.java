@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class NPC_RustyCooker extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String npcName = "OldCooker";
 
     public NPC_RustyCooker(GamePanel gp) {
@@ -57,10 +57,6 @@ public class NPC_RustyCooker extends Entity {
 
     }
 
-    public void setAction(int goalCol, int goalRow) {
-
-    }
-
     public void speak() {
 
         //character specific stuff here
@@ -86,7 +82,6 @@ public class NPC_RustyCooker extends Entity {
                 }
             }
             detectPlate();
-        System.out.println("LinkedEntity: " + linkedEntity);
         }
     }
 

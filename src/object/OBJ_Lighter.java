@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class OBJ_Lighter extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Lighter";
 
     public OBJ_Lighter(GamePanel gp) {

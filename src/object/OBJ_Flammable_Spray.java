@@ -2,11 +2,10 @@ package object;
 
 import entity.Entity;
 import main.GamePanel;
-import main.MissionStates;
 
 public class OBJ_Flammable_Spray extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "FlammableSpray";
 
     public OBJ_Flammable_Spray(GamePanel gp) {

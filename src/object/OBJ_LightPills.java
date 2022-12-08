@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_LightPills extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Anti Brightness Pills";
 
     boolean consumableNow = false;

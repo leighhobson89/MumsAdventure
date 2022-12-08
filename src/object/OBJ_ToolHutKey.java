@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_ToolHutKey extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "ToolHutKey";
 
     public OBJ_ToolHutKey(GamePanel gp) {

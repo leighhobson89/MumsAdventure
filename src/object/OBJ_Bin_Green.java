@@ -6,7 +6,7 @@ import main.MissionStates;
 
 public class OBJ_Bin_Green extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Bin_Green";
 
     public OBJ_Bin_Green(GamePanel gp) {

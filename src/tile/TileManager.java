@@ -13,9 +13,9 @@ import java.util.Objects;
 
 public class TileManager {
 
-    GamePanel gp;
-    public Tile[] tile;
-    public int[][][] mapTileNum;
+    final GamePanel gp;
+    public final Tile[] tile;
+    public final int[][][] mapTileNum;
     public boolean drawPathFinderTrack;
 
     public TileManager(GamePanel gp) {

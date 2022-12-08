@@ -11,7 +11,7 @@ import java.io.*;
 import java.util.Objects;
 
 public class SaveLoad {
-    GamePanel gp;
+    final GamePanel gp;
 
     public SaveLoad(GamePanel gp) {
         this.gp = gp;

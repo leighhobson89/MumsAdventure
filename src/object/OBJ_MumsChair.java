@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_MumsChair extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "MumsChair";
 
     public OBJ_MumsChair(GamePanel gp) {

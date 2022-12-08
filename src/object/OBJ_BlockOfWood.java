@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class OBJ_BlockOfWood extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "BlockOfWood";
 
     public OBJ_BlockOfWood(GamePanel gp) {

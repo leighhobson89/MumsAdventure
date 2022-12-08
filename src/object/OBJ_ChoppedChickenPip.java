@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class OBJ_ChoppedChickenPip extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Chopped Chicken Pip";
 
     public OBJ_ChoppedChickenPip(GamePanel gp) {

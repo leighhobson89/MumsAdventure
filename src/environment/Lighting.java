@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class Lighting {
 
-    GamePanel gp;
+    final GamePanel gp;
     BufferedImage brightFilter;
     public int dayCounter;
     public float filterAlpha = 0f;

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
 
     public BufferedImage dyingImage, up1, up2, down1, down2, left1, left2, right1, right2, down1_red, down1_purple, dadDown1, phoebeRight2, phoebeLeft1;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2, guardUp, guardDown, guardLeft, guardRight;
@@ -23,13 +23,13 @@ public class Entity {
     public Rectangle attackArea = new Rectangle(0,0,0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
-    public String[][] dialogueText = new String[100][20];
+    public final String[][] dialogueText = new String[100][20];
     public Entity attacker;
     public Entity linkedEntity;
 
     //STATE
     public int worldX, worldY;
-    public int phoneNormalWorldX = 816;
+    public final int phoneNormalWorldX = 816;
     public String direction = "right";
     public int spriteNum = 1;
     public int dialogueSet = 61;
@@ -59,7 +59,7 @@ public class Entity {
     public boolean nextMissionIsPhoneMission;
     public int missionToSet = 1;
     public int missionSubstate = 0;
-    public Random rand = new Random();
+    public final Random rand = new Random();
     public boolean repeatSfx = true;
     public boolean andreaOnMap;
     public int andreaTempGoalCol;
@@ -158,7 +158,7 @@ public class Entity {
     public boolean tvIsOff = true;
 
     //ITEM ATTRIBUTES
-    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
     public int value;
     public int attackValue;
@@ -356,6 +356,7 @@ public class Entity {
 
     //DEBUG - CAN CHANGE THIS TO SPEED UP TELEPHONE RINGING
     public int setRandomCounter() {
+        //noinspection ConstantConditions
         if (this.gp.player != null) {
             return gp.player.rand.nextInt(300) + 400; //3800 + 1200 for normal game
         }

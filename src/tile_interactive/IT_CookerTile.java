@@ -4,7 +4,7 @@ import main.GamePanel;
 
 public class IT_CookerTile extends InteractiveTile {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String itName = "IT_CookerTile";
 
     public IT_CookerTile(GamePanel gp, int col, int row) {

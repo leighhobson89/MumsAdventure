@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_Toolhut1_Left extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Toolhut1_Left";
 
     public OBJ_Toolhut1_Left(GamePanel gp) {

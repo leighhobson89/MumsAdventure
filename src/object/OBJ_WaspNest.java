@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class OBJ_WaspNest extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "WaspNest";
 
     public OBJ_WaspNest(GamePanel gp) {

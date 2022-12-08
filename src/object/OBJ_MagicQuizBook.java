@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_MagicQuizBook extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "MagicQuizBook";
 
     public OBJ_MagicQuizBook(GamePanel gp) {

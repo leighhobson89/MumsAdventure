@@ -11,7 +11,7 @@ public class Sound {
     Clip clip;
     public long length;
     public int lastSong;
-    URL[] soundURL = new URL[50];
+    final URL[] soundURL = new URL[50];
     FloatControl fc;
     int volumeScale = 3;
     float volume;

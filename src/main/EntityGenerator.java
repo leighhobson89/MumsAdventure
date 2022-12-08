@@ -5,7 +5,7 @@ import object.*;
 
 public class EntityGenerator {
 
-    GamePanel gp;
+    final GamePanel gp;
 
     public EntityGenerator(GamePanel gp) {
         this.gp = gp;

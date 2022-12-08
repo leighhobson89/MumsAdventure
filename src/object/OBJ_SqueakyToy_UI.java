@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_SqueakyToy_UI extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Squeaky Toy UI";
 
     public OBJ_SqueakyToy_UI(GamePanel gp) {

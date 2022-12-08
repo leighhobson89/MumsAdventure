@@ -6,7 +6,7 @@ import main.MissionStates;
 
 public class OBJ_TelephoneHall extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "TelephoneHall";
 
     public OBJ_TelephoneHall(GamePanel gp) {

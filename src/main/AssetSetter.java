@@ -11,7 +11,7 @@ import tile_interactive.IT_WeedTile;
 import java.util.Random;
 
 public class AssetSetter {
-    GamePanel gp;
+    final GamePanel gp;
 
     //INDICES FOR INSTANCES OF MONSTERS (can add NPC and OBJ equivalents later if required)
     public int monsterNumber = 0;

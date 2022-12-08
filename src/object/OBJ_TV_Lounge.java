@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_TV_Lounge extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "TV_Lounge";
 
     public OBJ_TV_Lounge(GamePanel gp) {

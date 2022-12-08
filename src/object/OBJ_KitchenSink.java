@@ -2,13 +2,12 @@ package object;
 
 import entity.Entity;
 import main.GamePanel;
-import main.MissionStates;
 
 import java.util.Objects;
 
 public class OBJ_KitchenSink extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "KitchenSink";
 
     public OBJ_KitchenSink(GamePanel gp) {

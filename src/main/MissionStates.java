@@ -1,7 +1,7 @@
 package main;
 
 public class MissionStates {
-    GamePanel gp;
+    final GamePanel gp;
 
     public MissionStates(GamePanel gp) {
         this.gp = gp;

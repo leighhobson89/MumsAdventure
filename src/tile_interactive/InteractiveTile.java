@@ -5,7 +5,7 @@ import main.GamePanel;
 import java.awt.*;
 
 public class InteractiveTile extends Entity {
-    GamePanel gp;
+    final GamePanel gp;
     public boolean destructible = false;
 
     public InteractiveTile(GamePanel gp) {

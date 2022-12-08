@@ -5,7 +5,7 @@ import main.GamePanel;
 
 public class OBJ_FishTankDrawer extends Entity {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "FishTankDrawer";
 
     public OBJ_FishTankDrawer(GamePanel gp) {

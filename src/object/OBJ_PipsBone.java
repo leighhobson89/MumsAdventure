@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class OBJ_PipsBone extends Projectile {
 
-    GamePanel gp;
+    final GamePanel gp;
     public static final String OBJ_NAME = "Pip's Bone";
 
     public OBJ_PipsBone(GamePanel gp) {
