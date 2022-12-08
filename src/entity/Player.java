@@ -701,6 +701,8 @@ public class Player extends Entity {
         dialogueText[22][0] = "Right enough of that, time to get something done!";
         dialogueText[23][0] = "There it's burning!";
         dialogueText[23][1] = "Oooohh Jeeze...Bloody house is catching\nfire! Quick where's the bloody water??\nOh Goodddd!";
+        dialogueText[24][0] = "It's a bucket of water! Fancy that!";
+        dialogueText[25][0] = "It's an empty bucket! Fancy that!";
     }
 
     public void checkIfPassOutFromStress() {
@@ -985,6 +987,14 @@ public class Player extends Entity {
 
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
+
+            if (selectedItem.type == type_bucket) {
+                if (gp.player.bucketFull) {
+                    startDialogue(this, 24);
+                } else {
+                    startDialogue(this, 25);
+                }
+            }
 
             if ((selectedItem.type == type_flamingAerosol || selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;

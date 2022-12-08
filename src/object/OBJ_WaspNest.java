@@ -4,6 +4,8 @@ import entity.Entity;
 import main.GamePanel;
 import main.MissionStates;
 
+import java.util.Objects;
+
 public class OBJ_WaspNest extends Entity {
 
     GamePanel gp;
@@ -68,25 +70,56 @@ public class OBJ_WaspNest extends Entity {
         dialogueText[1][0] = "Aaaaghhhhh!";
         dialogueText[2][0] = "Burn it to the ground with the flaming aerosol,\nquick!";
         dialogueText[3][0] = "Quick! Get water, its burning the bloody house\ndown!!";
+        dialogueText[4][0] = "Phew! The fire is out, and the wasp nest\nis destroyed, thank God for that!";
+        dialogueText[5][0] = "Quick! I need a container and water, this\nfire is burning the bloody house down!!";
+        dialogueText[6][0] = "The wasp's nest is destroyed, phew!";
     }
 
     public void interact() {
-        if (!opened && gp.player.missionSubstate < 1) {
+        boolean hasBucket = false;
+        int bucketIndex = 0;
+        for (int i = 0; i < gp.player.inventory.size(); i++) {
+            if (Objects.equals(gp.player.inventory.get(i).name, "Bucket")) {
+                hasBucket = true;
+                bucketIndex = i;
+            }
+        }
+        if (opened) {
+            startDialogue(this, 6);
+        }
+        if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate < 1) {
             gp.aSetter.setMonster("WaspSwarm", gp.aSetter.monsterNumber, 17, 16, gp.currentMap, false);
             startDialogue(this, 1);
             gp.player.missionSubstate = 1;
             gp.playSFX(8);
-            gp.keyH.enterPressed = false;
-        } else if (!opened && gp.player.missionSubstate == 1) {
+        } else if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 1) {
             startDialogue(this, 0);
-            gp.keyH.enterPressed = false;
-        } else if (gp.player.missionSubstate == 2) {
+        } else if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 2) {
             startDialogue(this, 2);
-            gp.keyH.enterPressed = false;
-        } else if (gp.player.missionSubstate == 3) {
-            startDialogue(this, 3);
-            gp.keyH.enterPressed = false;
+        } else if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 3) {
+            if (hasBucket) {
+                if (gp.player.bucketFull) {
+                    startDialogue(this, 4);
+                    opened = true;
+                    gp.player.inventory.get(bucketIndex).down1 = gp.player.inventory.get(bucketIndex).image;
+                    gp.player.inventory.get(bucketIndex).displayName = "An Empty Bucket";
+                    gp.player.inventory.get(bucketIndex).description = "[" + gp.player.inventory.get(bucketIndex).name + "]\nAn Empty Bucket!";
+                    down1 = image4;
+                    gp.player.bucketFull = false;
+                    for (int i = 0; i < gp.player.inventory.size(); i++) {
+                        if (Objects.equals(gp.player.inventory.get(i).name, "FlammableSprayWeapon")) {
+                            gp.eHandler.removeItemFromPlayerInventory(gp.player.inventory, "FlammableSprayWeapon");
+                            gp.player.currentWeapon = null;
+                        }
+                    }
+                    gp.misStat.endMissionTasks(MissionStates.GET_RID_OF_WASP_NEST, false);
+                } else {
+                    startDialogue(this, 3);
+                }
+            } else {
+                startDialogue(this, 5);
+            }
         }
-
+        gp.keyH.enterPressed = false;
+        }
     }
-}

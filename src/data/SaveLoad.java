@@ -4,6 +4,7 @@ import entity.Entity;
 import main.GamePanel;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
+import object.OBJ_Flammable_Spray;
 import tile_interactive.*;
 
 import java.io.*;
@@ -311,8 +312,24 @@ public class SaveLoad {
 
             //PLAYER INVENTORY
             for (int i = 0; i < ds.itemNames.size(); i++) {
-                gp.player.inventory.add(gp.eGenerator.getObject(ds.itemNames.get(i)));
-                gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
+                if (ds.itemNames.get(i).equals("FlammableSprayWeapon")) {
+                    gp.player.inventory.add(new OBJ_Flammable_Spray(gp));
+                    for (int j = 0; j < gp.player.inventory.size(); j++) {
+                        if (Objects.equals(gp.player.inventory.get(j).name, "FlammableSpray")) {
+                            gp.player.inventory.get(i).isWeapon = true;
+                            gp.player.inventory.get(i).type = gp.player.type_flamingAerosol;
+                            gp.player.inventory.get(i).down1 =  gp.player.inventory.get(i).image3;
+                            gp.player.attack = gp.player.getAttack();
+                            gp.player.getAttackImage(gp.ui.outfitChosen);
+                            gp.player.inventory.get(i).name = "FlammableSprayWeapon";
+                            gp.player.inventory.get(i).displayName = "Flaming Aerosol";
+                            gp.player.inventory.get(i).description = "A Flaming Aerosol!";
+                        }
+                    }
+                } else {
+                    gp.player.inventory.add(gp.eGenerator.getObject(ds.itemNames.get(i)));
+                    gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
+                }
             }
 
             //PLAYER EQUIPPED ITEMS
@@ -324,6 +341,13 @@ public class SaveLoad {
             }
             if (gp.player.savedWithAProjectileEquipped) {
                 gp.player.currentProjectile = gp.player.inventory.get(ds.currentProjectileSlot);
+            }
+            if (gp.player.bucketFull) {
+                for (int i = 0; i < gp.player.inventory.size(); i++) {
+                    if (Objects.equals(gp.player.inventory.get(i).name, "Bucket")) {
+                        gp.player.inventory.get(i).down1 = gp.player.inventory.get(i).image2;
+                    }
+                }
             }
             gp.player.getAttack();
             gp.player.getDefense();

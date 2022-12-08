@@ -198,7 +198,7 @@ public class Entity {
     public final int type_tv_remote = 14;
     public final int type_hut = 15;
     public final int type_flamingAerosol = 16;
-    public final int type_refillable_item = 17; //e.g. bucket
+    public final int type_bucket = 17; //e.g. bucket
 
     public Entity(GamePanel gp) {
         this.gp = gp;
