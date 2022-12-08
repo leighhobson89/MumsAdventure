@@ -168,9 +168,6 @@ public class EventHandler {
             gp.player.worldX = gp.tileSize*randX;
             gp.player.worldY = gp.tileSize*randY;
         }
-
-        gp.playSFX(2);
-        gp.player.countDownTimerForItemEffect(gp.player.PILLS_COUNT_DOWN_VALUE, "Pills");
         gp.player.stressLevel = 0;
     }
 
@@ -265,7 +262,7 @@ public class EventHandler {
         gp.gameState = gp.dialogueState;
         gp.player.startDialogue(gp.player, 16);
 
-        gp.player.countDownTimerForItemEffect(gp.player.LIGHT_PILLS_COUNT_DOWN_VALUE, "LightPills");
+        gp.player.countDownTimerForItemEffect("LightPills");
     }
 
     public void setUpNextPhoneCallWhenNotInAMissionAndNextMissionIsAPhoneMission(int missionState) {

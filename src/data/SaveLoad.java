@@ -109,6 +109,10 @@ public class SaveLoad {
             ds.toolHutState = gp.player.toolHutState;
             ds.bucketFull = gp.player.bucketFull;
             ds.waspNestState = gp.player.waspNestState;
+            ds.pillsInProcess = gp.player.pillsInProcess;
+            ds.pillsCounter = gp.player.pillsCounter;
+            ds.lightPillsInProcess = gp.player.lightPillsInProcess;
+            ds.lightPillsCounter = gp.player.lightPillsCounter;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -296,6 +300,10 @@ public class SaveLoad {
             gp.player.toolHutState = ds.toolHutState;
             gp.player.bucketFull = ds.bucketFull;
             gp.player.waspNestState = ds.waspNestState;
+            gp.player.pillsInProcess = ds.pillsInProcess;
+            gp.player.pillsCounter = ds.pillsCounter;
+            gp.player.lightPillsInProcess = ds.lightPillsInProcess;
+            gp.player.lightPillsCounter = ds.lightPillsCounter;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

@@ -88,6 +88,8 @@ public class Entity {
     public boolean toolHutKeyDropped;
     public boolean bucketFull;
     public int waspNestState;
+    public boolean pillsInProcess;
+    public boolean lightPillsInProcess;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -106,13 +108,15 @@ public class Entity {
     public int pipEatingChickenCounter;
     public int showerCounter = 0;
     public int quizScoreCount = 0;
+    public int pillsCounter = 0;
+    public int lightPillsCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
     public String displayName;
     public int speed;
     public int defaultSpeed;
-    public int pillsSpeed;
+    public int boostSpeed;
     public boolean isWeapon;
     public boolean isArmour;
     public boolean isProjectile;
@@ -253,6 +257,7 @@ public class Entity {
         pipEatingChickenCounter = 0;
         phoebeEatingChickenCounter = 0;
         showerCounter = 0;
+        pillsCounter = 0;
     }
     //public void setLoot(Entity loot) {}
     public void move(String direction) {}

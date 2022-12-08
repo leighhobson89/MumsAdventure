@@ -33,9 +33,8 @@ public class OBJ_Pills extends Entity {
 
             if (gp.player.pillsConsumableNow) {
                 gp.eHandler.teleportPills(gp.currentMap);
-                gp.eManager.lighting.dayState = gp.eManager.lighting.day;
-                gp.eManager.lighting.filterAlpha = 0;
-                gp.eManager.lighting.dayCounter = 0;
+                gp.playSFX(2);
+                gp.player.countDownTimerForItemEffect("Pills");
                 return true;
             }
             startDialogue(this, 0);

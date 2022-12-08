@@ -14,27 +14,17 @@ import java.util.*;
 public class Player extends Entity {
     KeyHandler keyH;
     UtilityTool uTool = new UtilityTool();
-
-    public final int PILLS_COUNT_DOWN_VALUE = 20;
-    public final int LIGHT_PILLS_COUNT_DOWN_VALUE = 60;
     public final int STRESS_LEVEL_NEEDED_TO_CONSUME_PILLS = 4;
-    final int MAX_SPEED_UNDER_INFLUENCE = 4;
+    final int MAX_SPEED_UNDER_INFLUENCE = 5;
     final int LENGTH_OF_SHOWER = 510;
 
     public boolean usedItemOrNot = false;
     public final int screenX;
     public final int screenY;
-    public static int interval;
     public int standCounter;
     public boolean attackCanceled;
     public boolean lightUpdated;
-    public Timer timer;
     int randSet;
-
-    public void createTimer() {
-        timer = new Timer();
-    }
-
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -53,53 +43,15 @@ public class Player extends Entity {
     }
 
     @SuppressWarnings("MismatchedReadAndWriteOfArray")
-    public void countDownTimerForItemEffect(int value, String effect) {
-        createTimer();
+    public void countDownTimerForItemEffect(String effect) {
         if ("Pills".equals(effect)) {
-            speed = 1;
-        } else if ("LightPills".equals(effect)) {
-            gp.player.lightUpdated = true;
-            gp.eManager.lighting.update();
-        }
-        int period;
-        final int[] timeLeft = new int[1];
-        period = 1000;
-        interval = value;
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                timeLeft[0] = (setInterval(effect));
-            }
-        }, value, period);
-    }
-
-    private int setInterval(String effect) {
-        if ("Pills".equals(effect)) {
+            pillsInProcess = true;
             dizzyFlag = true;
-            speed = (int) (Math.random() * MAX_SPEED_UNDER_INFLUENCE) + 1; //random speed every second while effect lasts
-            if (Objects.equals(direction, "up")) {
-                direction = "down";
-            } else if (Objects.equals(direction, "down")) {
-                direction = "up";
-            } else if (Objects.equals(direction, "left")) {
-                direction = "right";
-            } else if (Objects.equals(direction, "right")) {
-                direction = "left";
-            }
+        } else if ("LightPills".equals(effect)) {
+            lightUpdated = true;
+            gp.eManager.lighting.update();
+            lightPillsInProcess = true;
         }
-        if (interval == 1) {
-            timer.cancel();
-            if ("Pills".equals(effect)) {
-                speed = 2;
-                dizzyFlag = false;
-            }
-            if ("LightPills".equals(effect)) {
-                gp.player.lightUpdated = true;
-                gp.player.currentLight = null;
-                gp.eManager.lighting.update();
-            }
-        }
-        return --interval;
     }
 
     public void cleanMissionList() {
@@ -112,7 +64,7 @@ public class Player extends Entity {
         worldX = gp.tileSize * 19;
         worldY = gp.tileSize * 17;
         defaultSpeed = 2;
-        pillsSpeed = 4;
+        boostSpeed = 4;
         speed = defaultSpeed;
         direction = "up";
         spiderCount = 1;
@@ -331,6 +283,26 @@ public class Player extends Entity {
 
     @SuppressWarnings("StatementWithEmptyBody")
     public void update() {
+        if (pillsInProcess) {
+            pillsCounter++;
+            if (pillsCounter > 1200) { //20 secs of effect
+                pillsCounter = 0;
+                pillsInProcess = false;
+                dizzyFlag = false;
+            }
+        }
+
+        if (lightPillsInProcess) {
+            lightPillsCounter++;
+            if (lightPillsCounter > 3600) { //60 secs of effect
+                lightPillsCounter = 0;
+                lightPillsInProcess = false;
+                lightUpdated = true;
+                currentLight = null;
+                gp.eManager.lighting.update();
+
+            }
+        }
 
         if (missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
             if (worldX/gp.tileSize > 56) {
@@ -417,12 +389,16 @@ public class Player extends Entity {
                 direction = "up";
             } else if (keyH.leftPressed) {
                 direction = "right";
+            } else if (keyH.rightPressed) {
+                direction = "left";
             }
 
             if (speedBoost && !dizzyFlag) {
-                speed = pillsSpeed;
+                speed = boostSpeed;
             } else if (dizzyFlag) {
-                //do nothing
+                if (pillsCounter % 2 == 0) { //change speed every 2 seconds
+                    speed = (int) (Math.random() * MAX_SPEED_UNDER_INFLUENCE) + 1;
+                }
             } else {
                 speed = defaultSpeed;
             }
