@@ -50,7 +50,7 @@ public class OBJ_WaspNest extends Entity {
             }
         }
 
-        if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 3) {
+        if (gp.player.waspNestState == 1) {
             if (spriteCounter < 20) {
                 down1 = image2;
             } else {
@@ -101,6 +101,7 @@ public class OBJ_WaspNest extends Entity {
                 if (gp.player.bucketFull) {
                     startDialogue(this, 4);
                     opened = true;
+                    gp.player.waspNestState = 2;
                     gp.player.inventory.get(bucketIndex).down1 = gp.player.inventory.get(bucketIndex).image;
                     gp.player.inventory.get(bucketIndex).displayName = "An Empty Bucket";
                     gp.player.inventory.get(bucketIndex).description = "[" + gp.player.inventory.get(bucketIndex).name + "]\nAn Empty Bucket!";

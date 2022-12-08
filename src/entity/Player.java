@@ -953,6 +953,7 @@ public class Player extends Entity {
                 }
                 if (gp.obj[gp.currentMap][i].stressLevel >= gp.obj[gp.currentMap][i].monsterMaxStress && Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest")) {
                     gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
+                    gp.player.waspNestState = 1;
                     if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST) {
                         gp.ui.addMessage("You set fire to the Wasp Nest!");
                         gp.aSetter.monsterNumber = gp.aSetter.setMonster("WaspSwarm", gp.aSetter.monsterNumber, 17, 16, gp.currentMap, false);

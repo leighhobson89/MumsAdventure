@@ -108,6 +108,7 @@ public class SaveLoad {
             ds.toolHutKeyDropped = gp.player.toolHutKeyDropped;
             ds.toolHutState = gp.player.toolHutState;
             ds.bucketFull = gp.player.bucketFull;
+            ds.waspNestState = gp.player.waspNestState;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -294,6 +295,7 @@ public class SaveLoad {
             gp.player.toolHutKeyDropped = ds.toolHutKeyDropped;
             gp.player.toolHutState = ds.toolHutState;
             gp.player.bucketFull = ds.bucketFull;
+            gp.player.waspNestState = ds.waspNestState;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

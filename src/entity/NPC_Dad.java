@@ -164,6 +164,7 @@ public class NPC_Dad extends Entity {
             case MissionStates.MAGIC_BOOK_QUIZ -> gp.player.missionState = MissionStates.MAGIC_BOOK_QUIZ;
             case MissionStates.GET_RID_OF_WASP_NEST -> {
                 gp.player.missionState = MissionStates.GET_RID_OF_WASP_NEST;
+                gp.player.waspNestState = 0;
                 gp.aSetter.setObjectAfterStart("WaspNest", 1, 17, 14, false);
             }
         }

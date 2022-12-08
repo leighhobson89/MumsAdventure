@@ -136,6 +136,7 @@ public class EventHandler {
             if (gp.player.stressLevel > 0 || gp.eManager.lighting.dayState != gp.eManager.lighting.day) {
                 gp.player.attackCanceled = true;
                 gp.playSFX(12);
+                gp.player.startDialogue(gp.player, 10);
                 gp.gameState = gp.sleepState;
                 gp.player.stressLevel = 0;
                 canTouchEvent = false;
@@ -207,6 +208,17 @@ public class EventHandler {
                     switch (gp.player.bookHutState) {
                         case 0 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image;
                         case 1 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image2;
+                    }
+                } else if (Objects.equals(gp.obj[tempMap][i].name, "Toolhut1_Center") || Objects.equals(gp.obj[tempMap][i].name, "Toolhut2_Center") ) {
+                    switch (gp.player.toolHutState) {
+                        case 0 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image;
+                        case 1 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image2;
+                    }
+                }  else if (Objects.equals(gp.obj[tempMap][i].name, "WaspNest")) {
+                    switch (gp.player.waspNestState) {
+                        case 0 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image;
+                        case 1 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image3;
+                        case 2 -> gp.obj[tempMap][i].down1 = gp.obj[tempMap][i].image4;
                     }
                 }
             }

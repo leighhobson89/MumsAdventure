@@ -87,6 +87,7 @@ public class Entity {
     public boolean stainRemoverUsed;
     public boolean toolHutKeyDropped;
     public boolean bucketFull;
+    public int waspNestState;
 
     //COUNTER
     public int spriteCounter = 0;
