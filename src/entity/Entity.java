@@ -1220,7 +1220,7 @@ public class Entity {
                         playerHasRequiredItem = true;
                     }
                     break;
-                case MissionStates.GET_RID_OF_WASP_NEST:
+                case MissionStates.DESTROY_WASP_NEST:
                     if (Objects.equals(entity.name, "FlammableSpray") && missionSubState == 1) {
                         playerHasRequiredItem = true;
                     }

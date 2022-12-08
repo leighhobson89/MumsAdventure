@@ -660,6 +660,13 @@ public class Player extends Entity {
                             }
                         }
                     }
+                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest")) {
+                        for (Entity entity : inventory) {
+                            if (Objects.equals(entity.name, "WaspNest")) {
+                                entity.down1 = entity.image4;
+                            }
+                        }
+                    }
 
                     selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
                     gp.playSFX(selectSfx);
@@ -926,7 +933,7 @@ public class Player extends Entity {
 
             if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && Objects.equals(gp.player.currentWeapon.name, "Hatchet") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.obj[gp.currentMap][i].down1 == gp.obj[gp.currentMap][i].image2) { //chop chicken mission
                 damage = 1;
-            } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest") && Objects.equals(gp.player.currentWeapon.name, "FlammableSprayWeapon") && gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 2) { //get rid of wasp nest mission
+            } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest") && Objects.equals(gp.player.currentWeapon.name, "FlammableSprayWeapon") && gp.player.missionState == MissionStates.DESTROY_WASP_NEST && gp.player.missionSubstate == 2) { //get rid of wasp nest mission
                 damage = 1;
             }
             else { //add further conditions when required
@@ -936,7 +943,7 @@ public class Player extends Entity {
             if (!gp.obj[gp.currentMap][i].invincible) {
                 if (Objects.equals(gp.obj[gp.currentMap][i].name, "BlockOfWood") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && gp.obj[gp.currentMap][i].down1 == gp.obj[gp.currentMap][i].image2) {
                     gp.playSFX(31); //play chicken squelch sound
-                } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest") && gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 2) {
+                } else if (Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest") && gp.player.missionState == MissionStates.DESTROY_WASP_NEST && gp.player.missionSubstate == 2) {
                     gp.playSFX(26); //play wasps sound
                 }
                 gp.obj[gp.currentMap][i].stressLevel += damage;
@@ -954,7 +961,7 @@ public class Player extends Entity {
                 if (gp.obj[gp.currentMap][i].stressLevel >= gp.obj[gp.currentMap][i].monsterMaxStress && Objects.equals(gp.obj[gp.currentMap][i].name, "WaspNest")) {
                     gp.obj[gp.currentMap][i].down1 = gp.obj[gp.currentMap][i].image2;
                     gp.player.waspNestState = 1;
-                    if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST) {
+                    if (gp.player.missionState == MissionStates.DESTROY_WASP_NEST) {
                         gp.ui.addMessage("You set fire to the Wasp Nest!");
                         gp.aSetter.monsterNumber = gp.aSetter.setMonster("WaspSwarm", gp.aSetter.monsterNumber, 17, 16, gp.currentMap, false);
                         gp.aSetter.monsterNumber = gp.aSetter.setMonster("WaspSwarm", gp.aSetter.monsterNumber, 17, 17, gp.currentMap, false);

@@ -141,12 +141,20 @@ public class NPC_Dad extends Entity {
         dialogueText[73][1] = "So there you go.  Good init!\nYou can have a do next time!\nI want some peace now!";
         dialogueText[73][2] = "Oh and here's that bloody Chinese stain remover off ebay\nAbsolutely ruined that CD it did, throw it in the grey bin!";
 
-        //GET RID OF WASP NEST MISSION
+        //DESTROY WASP NEST MISSION
         dialogueText[74][0] = "Did you get that money from the cooker then, how much?";
         dialogueText[74][1] = "Well...erm...bloody idiots gave it to that Asian up\nthe drive to give to us, and then they shot off!";
         dialogueText[74][2] = "Oh bloody hell, so did you get it?";
         dialogueText[74][3] = "Did I heck, he scarpered off din't he!";
         dialogueText[74][4] = "Bloody useless.  Anyway there is a wasps nest in\nLeigh's old room.  If you can get in, get rid of it!";
+
+        //CHUCK WASP NEST AWAY MISSION
+        dialogueText[75][0] = "What's that smoke smell? I hope you didn't start\na bloody fire up there!";
+        dialogueText[75][1] = "But you've got rid of it, yeah?";
+        dialogueText[75][2] = "Yeah its sorted, but the remnants are still\nup there.";
+        dialogueText[75][3] = "Well get shut of it then!\nGo and pick it up and chuck it in the green bin.";
+        dialogueText[75][4] = "I'm not going near that green bin,\nit's full of bloody spiders!";
+        dialogueText[75][5] = "There's no more spiders there, I sorted it.\nJust chuck it in there!";
     }
 
     public void setAction(int goalCol, int goalRow) {
@@ -162,10 +170,19 @@ public class NPC_Dad extends Entity {
         switch (gp.player.missionToSet) {
             case MissionStates.MOP_UP_THE_SHOWER_WATER -> gp.player.missionState = MissionStates.MOP_UP_THE_SHOWER_WATER;
             case MissionStates.MAGIC_BOOK_QUIZ -> gp.player.missionState = MissionStates.MAGIC_BOOK_QUIZ;
-            case MissionStates.GET_RID_OF_WASP_NEST -> {
-                gp.player.missionState = MissionStates.GET_RID_OF_WASP_NEST;
+            case MissionStates.DESTROY_WASP_NEST -> {
+                gp.player.missionState = MissionStates.DESTROY_WASP_NEST;
                 gp.player.waspNestState = 0;
                 gp.aSetter.setObjectAfterStart("WaspNest", 1, 17, 14, false);
+            }
+            case MissionStates.CHUCK_WASP_NEST_IN_BIN -> {
+                int mapNum = 1; //select upstairs map
+                gp.player.missionState = MissionStates.CHUCK_WASP_NEST_IN_BIN;
+                for (int i = 0; i < gp.obj[1].length; i++) {
+                    if (gp.obj[mapNum][i] != null && Objects.equals(gp.obj[mapNum][i].name, "WaspNest")) {
+                        gp.obj[mapNum][i].type = type_consumable; //make wasp nest collectable
+                    }
+                }
             }
         }
         if (gp.player.weedCount > 0 && !gp.player.setShovelFlag) {
@@ -197,7 +214,8 @@ public class NPC_Dad extends Entity {
                     }
                 }
             }
-            case MissionStates.GET_RID_OF_WASP_NEST -> dialogueSet = 74; //get rid of wasp nest mission
+            case MissionStates.DESTROY_WASP_NEST -> dialogueSet = 74; //burn wasp nest mission
+            case MissionStates.CHUCK_WASP_NEST_IN_BIN -> dialogueSet = 75; //chuck wasp nest in bin mission
             default -> dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission
         }
         //character specific stuff here

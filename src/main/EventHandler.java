@@ -226,6 +226,8 @@ public class EventHandler {
         for (int i = 0; i < gp.player.inventory.size(); i++) { //for changing images in inventory
             if (Objects.equals(gp.player.inventory.get(i).name, "MagicQuizBook") || Objects.equals(gp.player.inventory.get(i).name, "FlammableSpray")) {
                 gp.player.inventory.get(i).down1 = gp.player.inventory.get(i).image2;
+            } else if (Objects.equals(gp.player.inventory.get(i).name, "WaspNest")) {
+                gp.player.inventory.get(i).down1 = gp.player.inventory.get(i).image4;
             }
         }
     }

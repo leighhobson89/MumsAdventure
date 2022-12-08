@@ -20,6 +20,7 @@ public class OBJ_WaspNest extends Entity {
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "WaspNest";
+        description = "[" + name + "]\nThe burnt out shell\nof the wasp nest!";
         image = setup("/objects/waspNest", gp.tileSize, gp.tileSize);
         image2 = setup("/objects/waspNestOnFire", gp.tileSize, gp.tileSize);
         image3 = setup("/objects/waspNestOnFire2", gp.tileSize, gp.tileSize);
@@ -87,16 +88,16 @@ public class OBJ_WaspNest extends Entity {
         if (opened) {
             startDialogue(this, 6);
         }
-        if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate < 1) {
+        if (gp.player.missionState == MissionStates.DESTROY_WASP_NEST && gp.player.missionSubstate < 1) {
             gp.aSetter.setMonster("WaspSwarm", gp.aSetter.monsterNumber, 17, 16, gp.currentMap, false);
             startDialogue(this, 1);
             gp.player.missionSubstate = 1;
             gp.playSFX(8);
-        } else if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 1) {
+        } else if (gp.player.missionState == MissionStates.DESTROY_WASP_NEST && gp.player.missionSubstate == 1) {
             startDialogue(this, 0);
-        } else if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 2) {
+        } else if (gp.player.missionState == MissionStates.DESTROY_WASP_NEST && gp.player.missionSubstate == 2) {
             startDialogue(this, 2);
-        } else if (gp.player.missionState == MissionStates.GET_RID_OF_WASP_NEST && gp.player.missionSubstate == 3) {
+        } else if (gp.player.missionState == MissionStates.DESTROY_WASP_NEST && gp.player.missionSubstate == 3) {
             if (hasBucket) {
                 if (gp.player.bucketFull) {
                     startDialogue(this, 4);
@@ -113,7 +114,7 @@ public class OBJ_WaspNest extends Entity {
                             gp.player.currentWeapon = null;
                         }
                     }
-                    gp.misStat.endMissionTasks(MissionStates.GET_RID_OF_WASP_NEST, false);
+                    gp.misStat.endMissionTasks(MissionStates.DESTROY_WASP_NEST, false);
                 } else {
                     startDialogue(this, 3);
                 }

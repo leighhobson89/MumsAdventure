@@ -2,6 +2,7 @@ package object;
 
 import entity.Entity;
 import main.GamePanel;
+import main.MissionStates;
 
 public class OBJ_Bin_Green extends Entity {
 
@@ -34,17 +35,26 @@ public class OBJ_Bin_Green extends Entity {
 
     public void setDialogue() {
         dialogueText[0][0] = "No way I'm opening that bin again!";
+        dialogueText[1][0] = "There, that's rid of that horrible thing.";
     }
 
     public void interact() {
-        if (!opened) {
+        if (gp.player.missionState == MissionStates.CHUCK_WASP_NEST_IN_BIN) {
             gp.playSFX(14);
-
-            gp.player.spiderCount = gp.eHandler.spiderEvent(27, 8, gp.dialogueState, gp.player.spiderCount, true, false);
-            opened = true;
+            startDialogue(this, 1);
+            gp.keyH.enterPressed = false;
+            gp.eHandler.removeItemFromPlayerInventory(gp.player.inventory, "WaspNest");
+            gp.misStat.endMissionTasks(MissionStates.CHUCK_WASP_NEST_IN_BIN, false);
         } else {
-            startDialogue(this, 0);
+            if (!opened) {
+                gp.playSFX(14);
+
+                gp.player.spiderCount = gp.eHandler.spiderEvent(27, 8, gp.dialogueState, gp.player.spiderCount, true, false);
+                opened = true;
+            } else {
+                startDialogue(this, 0);
+            }
+            gp.keyH.enterPressed = false;
         }
-        gp.keyH.enterPressed = false;
     }
 }
