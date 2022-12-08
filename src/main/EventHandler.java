@@ -148,9 +148,14 @@ public class EventHandler {
     //}
 
     public void teleportPills (int currentMap) {
+        int[][] optionArray;
         gp.gameState = gp.dialogueState;
         gp.player.startDialogue(gp.player, 17);
-        int[][] optionArray = {{0,17,11},{0,18,13},{0,20,11},{0,23,15},{0,24,15},{0,28,11}}; //add some upstairs locations too
+        if (gp.player.doorUnlockedCount > 0) {
+            optionArray = new int[][] {{0,46,15},{0,58,17},{0,12,10},{0,15,19},{0,17,11},{0,18,13},{0,20,11},{0,23,15},{0,24,15},{0,28,11},{1,22,11},{1,19,16},{1,29,12},{1,27,18}};
+        } else {
+            optionArray = new int[][] {{0,17,11},{0,18,13},{0,20,11},{0,23,15},{0,24,15},{0,28,11},{1,22,11},{1,19,16},{1,29,12},{1,27,18}};
+        }
         Random random = new Random();
         int randomLocation = random.nextInt(optionArray.length);
         int map = optionArray[randomLocation][0];
@@ -158,11 +163,11 @@ public class EventHandler {
         int randY = optionArray[randomLocation][2];
 
         if (map != currentMap) {
-            transitionUpDownStairs(map, 19, 17); //if required to teleport to another floor then handle that here
+            transitionUpDownStairs(map, randX, randY);
+        } else {
+            gp.player.worldX = gp.tileSize*randX;
+            gp.player.worldY = gp.tileSize*randY;
         }
-
-        gp.player.worldX = gp.tileSize*randX;
-        gp.player.worldY = gp.tileSize*randY;
 
         gp.playSFX(2);
         gp.player.countDownTimerForItemEffect(gp.player.PILLS_COUNT_DOWN_VALUE, "Pills");
@@ -170,11 +175,12 @@ public class EventHandler {
     }
 
     public void transitionUpDownStairs(int map, int col, int row) {
-        gp.gameState = gp.transitionState;
-        tempMap = map;
 
+        tempMap = map;
         tempCol = col;
         tempRow = row;
+        gp.gameState = gp.transitionState;
+
         if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset movable object if change area, and it is not where it needs to be
             for (int i = 0; i < gp.npc[1].length; i++) {
                 if (gp.npc[gp.currentMap][i] != null && (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker"))) {
