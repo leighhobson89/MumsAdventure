@@ -810,11 +810,13 @@ public class UI {
 
             int itemIndex = getItemIndexOnSlot(slotCol, slotRow);
 
-            if (itemIndex < entity.inventory.size()) {
-                drawSubWindow(frameX, dFrameY, frameWidth, dFrameHeight);
-                for (String line: entity.inventory.get(itemIndex).description.split("\n")) {
-                    g2.drawString(line, textX, textY);
-                    textY += 32;
+            if (entity.inventory.size() > 0) {
+                if (itemIndex < entity.inventory.size()) {
+                    drawSubWindow(frameX, dFrameY, frameWidth, dFrameHeight);
+                    for (String line: entity.inventory.get(itemIndex).description.split("\n")) {
+                        g2.drawString(line, textX, textY);
+                        textY += 32;
+                    }
                 }
             }
         }
