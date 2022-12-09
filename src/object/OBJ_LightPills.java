@@ -28,6 +28,13 @@ public class OBJ_LightPills extends Entity {
         stackable = true;
         lightRadius = 576;
 
+        solidArea.x = -3;
+        solidArea.y = -3;
+        solidArea.width = 51;
+        solidArea.height = 51;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
         setDialogue();
     }
 

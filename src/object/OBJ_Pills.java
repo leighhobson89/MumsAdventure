@@ -24,6 +24,13 @@ public class OBJ_Pills extends Entity {
         stackable = true;
         isSaleable = true;
 
+        solidArea.x = -3;
+        solidArea.y = -3;
+        solidArea.width = 51;
+        solidArea.height = 51;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
         setDialogue();
     }
 

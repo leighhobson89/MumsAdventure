@@ -244,7 +244,7 @@ public class EventHandler {
     }
 
     public void kitchenCupBoard() {
-        gp.aSetter.setObjectAfterStart("Spatula", gp.currentMap, 27, 15, false);
+        gp.aSetter.setObjectAfterStart("BookHutKey", gp.currentMap, 27, 15, false);
     }
 
     public void kitchenPantry() {
@@ -254,7 +254,7 @@ public class EventHandler {
     public void fishTankDrawer() { gp.aSetter.setObjectAfterStart("Lighter", gp.currentMap, 17, 17, false); }
 
     public void fridgeOpen() {
-        gp.aSetter.setObjectAfterStart("Chicken", gp.currentMap, 26, 11, false);
+        gp.aSetter.setObjectAfterStart("Chicken", gp.currentMap, 25, 11, false);
     }
 
     public void lightPillsEvent() {

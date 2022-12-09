@@ -26,6 +26,13 @@ public class OBJ_Spatula extends Entity {
         motion1_duration = 4;
         motion2_duration = 20;
         isSaleable = true;
+
+        solidArea.x = -3;
+        solidArea.y = -3;
+        solidArea.width = 51;
+        solidArea.height = 51;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
     }
 
 }

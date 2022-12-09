@@ -74,6 +74,7 @@ public class AssetSetter {
                 case "Mop" -> gp.obj[mapNum][i] = new OBJ_Mop(gp);
                 case "WaspNest" -> gp.obj[mapNum][i] = new OBJ_WaspNest(gp);
                 case "Lighter" -> gp.obj[mapNum][i] = new OBJ_Lighter(gp);
+                case "BookHutKey" -> gp.obj[mapNum][i] = new OBJ_BookHutKey(gp);
             }
 
             gp.obj[mapNum][i].worldX = x * gp.tileSize;
@@ -180,8 +181,8 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new OBJ_LightPills(gp);
-        gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 16 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Cupboard2(gp);
@@ -297,6 +298,11 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
         gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Cooker(gp);
+        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_BlockOfWood(gp);
@@ -420,9 +426,9 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_BookHutKey(gp);
-        gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        gp.obj[mapNum][i] = new OBJ_Spatula(gp);
+        gp.obj[mapNum][i].worldX = 24 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Toolhut1_Left(gp);

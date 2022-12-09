@@ -32,7 +32,7 @@ public class OBJ_KitchenCupboard1 extends Entity {
     }
 
     public void setDialogue() {
-        dialogueText[0][0] = "Oh good, I can use this to whack them bloody spiders!";
+        dialogueText[0][0] = "Oh there's that bloody key, I have been looking\nall over for that!";
         dialogueText[1][0] = "The cupboard is empty!";
     }
 
