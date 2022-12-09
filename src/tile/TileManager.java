@@ -252,7 +252,7 @@ public class TileManager {
                 worldRow++;
             }
         }
-
+        //DEBUG RELATED CODE
         if (drawPathFinderTrack) { //draw path if debug is switched on
             g2.setColor(new Color(255,0,0,70));
 
@@ -266,5 +266,6 @@ public class TileManager {
                 g2.fillRect(screenX, screenY, gp.tileSize, gp.tileSize);
             }
         }
+        //END OF DEBUG RELATED CODE
     }
 }

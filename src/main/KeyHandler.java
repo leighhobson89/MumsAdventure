@@ -12,6 +12,7 @@ public class KeyHandler implements KeyListener {
 
     //DEBUG
     boolean showDebugText;
+    //END OF DEBUG
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -243,10 +244,11 @@ public class KeyHandler implements KeyListener {
 //            if (code == KeyEvent.VK_ALT) {
 //                guardAltPressed = true;
 //            }
-            //DEBUG
+            //DEBUG CODE
             if (code == KeyEvent.VK_D) {
                 showDebugText = !showDebugText; //toggle draw speed information with 'D' key
             }
+            //END OF DEBUG CODE
             if (code == KeyEvent.VK_R) {
                 switch(gp.currentMap) {
                     case 0: gp.tileM.loadMap("/maps/world01.txt", 0); //refresh the map after editing the world map file and saving it during gameplay

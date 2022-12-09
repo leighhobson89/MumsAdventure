@@ -48,6 +48,7 @@ public class SaveLoad {
             //DEBUG - PROJECTILE WORKAROUND
             Entity tempProjectile = gp.player.currentProjectile;
             gp.player.currentProjectile = null;
+            //END DEBUG
 
             //MUSIC CONFIG
             ds.musicPlaying = gp.keyH.musicPlaying;
@@ -218,6 +219,7 @@ public class SaveLoad {
             //DEBUG
             //reset projectile for workaround
             gp.player.currentProjectile = tempProjectile;
+            //END DEBUG
 
         } catch (Exception e) {
             System.out.println("Save Exception!");
@@ -439,6 +441,7 @@ public class SaveLoad {
 
             //DEBUG
             //add system.out here for load
+            //END DEBUG
 
 
         } catch (Exception e) {

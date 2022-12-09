@@ -296,11 +296,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void drawToTempScreen() { //FULL SCREEN STUFF
-        //DEBUG
+        //DEBUG TEXT CODE
         long drawStart = 0;
         if (keyH.showDebugText) {
             drawStart = System.nanoTime();
         }
+        //END OF DEBUG DISPLAY CODE
 
         //TITLE SCREEN
         if (gameState == titleState) {
@@ -404,7 +405,7 @@ public class GamePanel extends JPanel implements Runnable {
             ui.draw(g2);
         }
 
-        //DEBUG
+        //DEBUG CODE
         if (keyH.showDebugText) {
             tileM.drawPathFinderTrack = true; // switches on pathfinder track
             for (Entity entity : tempEntityList) {
@@ -417,6 +418,7 @@ public class GamePanel extends JPanel implements Runnable {
             int x = 10;
             int y = 400;
             int lineHeight = 35;
+            //END OF DEBUG DISPLAY CODE
 
             //DRAW WORLD POSITION DATA AND DRAW SPEED
             g2.drawString("WorldX: " + player.worldX, x, y); y += lineHeight;
@@ -493,4 +495,5 @@ public class GamePanel extends JPanel implements Runnable {
             g2.drawRect(entity.worldX + entity.solidArea.x, entity.worldY + entity.solidArea.y, entity.solidArea.width, entity.solidArea.height); // - UNCOMMENT TO DISPLAY COLLISION RECTANGLE ON PLAYER
         }
     }
+    //END OF DEBUG
 }

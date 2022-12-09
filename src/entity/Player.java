@@ -1218,6 +1218,7 @@ public class Player extends Entity {
 //      g2.setFont(new Font("Arial", Font.BOLD, 26));
 //      g2.setColor(Color.BLACK);
 //      g2.drawString("Invincible: " + invincibleCounter, 10, 400); //- UNCOMMENT TO DISPLAY INVINCIBILITY COUNTER
+        //END DEBUG
 
     }
 }
