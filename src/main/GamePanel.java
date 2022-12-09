@@ -112,10 +112,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 //        //DEBUG TO SKIP AHEAD IN MISSIONS - COMMENT FOR NORMAL GAME FROM START
 //        //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSIONLIST IF STARTING FURTHER ON
-//        player.weedCount = 0;
-//        player.missionList.add(1);
-//        player.missionState = 2;
-//        player.missionToSet = 2;
+        player.weedCount = 0;
+        player.missionList.add(1);
+        player.missionState = 2;
+        player.missionToSet = 2;
 //        //END OF DEBUG
 
         playMusic(0, false);
