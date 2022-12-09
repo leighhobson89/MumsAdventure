@@ -394,7 +394,7 @@ public class Player extends Entity {
             if (speedBoost && !dizzyFlag) {
                 speed = boostSpeed;
             } else if (dizzyFlag) {
-                if (pillsCounter % 2 == 0) { //change speed every 2 seconds
+                if (pillsCounter % 4 == 0) { //change speed every 2 seconds
                     speed = (int) (Math.random() * MAX_SPEED_UNDER_INFLUENCE) + 1;
                 }
             } else {
