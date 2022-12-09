@@ -53,12 +53,12 @@ public class TileManager {
         setup(19, "fence1", true);
         setup(22, "sofaTop", false);
         setup(23, "sofaBottom", true);
-        setup(24, "tableTL", false);
+        setup(24, "tableTL", true);
         setup(25, "tableTR", true);
         setup(26, "tableBL", false);
         setup(27, "tableBR", true);
-        setup(28, "tableLivingRoomTop", true);
-        setup(29, "tableLivingRoomBottom", true);
+        setup(28, "tableLivingRoomLeft", true);
+        setup(29, "tableLivingRoomRight", true);
         setup(30, "cupboard1HorLounge", true);
         setup(31, "cupboard1VerLounge", true);
         setup(32, "cupboard1HorHall", true);
@@ -175,6 +175,9 @@ public class TileManager {
         setup(143, "workTop6", true);
         setup(144, "fridgeTop", true);
         setup(145, "cookerTop", true);
+        setup(146, "diningCupboardLeft", true);
+        setup(147, "diningCupboardRight", true);
+        setup(148, "diningCupboardMiddle", true);
     }
 
     public void setup(int index, String imageName, boolean collision) {

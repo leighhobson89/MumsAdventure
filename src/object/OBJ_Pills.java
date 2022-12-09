@@ -27,7 +27,7 @@ public class OBJ_Pills extends Entity {
         solidArea.x = -3;
         solidArea.y = -3;
         solidArea.width = 51;
-        solidArea.height = 51;
+        solidArea.height = 60;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

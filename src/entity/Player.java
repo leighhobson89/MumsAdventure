@@ -862,7 +862,7 @@ public class Player extends Entity {
                 if (gp.iTile[gp.currentMap][i].stressLevel >= gp.iTile[gp.currentMap][i].maxStress && gp.iTile[gp.currentMap][i].type !=gp.player.type_switchable_interactive_tile) {
                     int rand = new Random().nextInt(100);
                     gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].switchForm();
-                    if (rand > 80) { //DEBUG - change to increase likelihood of spider appearing after destroying a tile
+                    if (rand > 90) { //DEBUG - change to increase likelihood of spider appearing after destroying a tile
                         int playerX = gp.player.worldX/gp.tileSize;
                         int playerY = gp.player.worldY/ gp.tileSize;
                         gp.player.spiderCount = gp.eHandler.spiderEvent(playerX+2, playerY+2, gp.dialogueState, gp.player.spiderCount, false, true);

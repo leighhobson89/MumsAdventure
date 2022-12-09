@@ -181,8 +181,8 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new OBJ_LightPills(gp);
-        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 16 * gp.tileSize;
+        gp.obj[mapNum][i].worldX = 18 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 16 * gp.tileSize - 10;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Cupboard2(gp);
@@ -196,8 +196,8 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Pills(gp);
-        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
+        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 16 * gp.tileSize - 10;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Guitar1(gp);
@@ -291,8 +291,8 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new OBJ_PipsBone(gp);
-        gp.obj[mapNum][i].worldX = 25 * gp.tileSize; boneX = 25;
-        gp.obj[mapNum][i].worldY = 18 * gp.tileSize; boneY = 18;
+        gp.obj[mapNum][i].worldX = 26 * gp.tileSize; boneX = 26;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize; boneY = 10;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
@@ -660,8 +660,8 @@ public class AssetSetter {
         int i = 0;
 
         gp.npc[mapNum][i] = new NPC_Dad(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize*17;
-        gp.npc[mapNum][i].worldY = gp.tileSize*15;
+        gp.npc[mapNum][i].worldX = gp.tileSize*18;
+        gp.npc[mapNum][i].worldY = gp.tileSize*14;
         i++;
 
         gp.npc[mapNum][i] = new NPC_Phoebe(gp);

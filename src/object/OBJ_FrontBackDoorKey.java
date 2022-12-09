@@ -22,6 +22,13 @@ public class OBJ_FrontBackDoorKey extends Entity {
         direction = "down";
         type = type_consumable;
 
+        solidArea.x = -3;
+        solidArea.y = -3;
+        solidArea.width = 51;
+        solidArea.height = 60;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
         setDialogue();
     }
 

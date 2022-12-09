@@ -820,7 +820,6 @@ public class UI {
                 }
             }
         }
-
     }
 
     public void drawOptionsScreen() {
