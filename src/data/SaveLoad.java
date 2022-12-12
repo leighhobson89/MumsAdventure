@@ -2,6 +2,7 @@ package data;
 
 import entity.Entity;
 import main.GamePanel;
+import main.MissionStates;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
 import object.OBJ_Flammable_Spray;
@@ -424,6 +425,14 @@ public class SaveLoad {
 
             //NPCS ON MAP
             gp.player.andreaOnMap = ds.andreaOnMap;
+
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+                for (int i = 0; i < gp.npc[1].length; i++) {
+                    if (gp.npc[mapNum][i] != null && (Objects.equals(gp.npc[mapNum][i].name, "OldCooker") || Objects.equals(gp.npc[mapNum][i].name, "Merchant")) && ds.missionState >= MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
+                        gp.npc[mapNum][i] = null;
+                    }
+                }
+            }
 
 //            for (Entity entity:ds.npcList) {
 //                for (int j = 0; j < gp.npc[1].length; j++) {
