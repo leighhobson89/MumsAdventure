@@ -83,7 +83,7 @@ public class DataStorage implements Serializable {
     int currentArmourSlot;
     int currentProjectileSlot;
 
-    //OBJECT ON MAP
+    //OBJECTS ON MAP
     String[][] mapObjectNames;
     int[][] mapObjectWorldX;
     int[][] mapObjectWorldY;
@@ -101,4 +101,10 @@ public class DataStorage implements Serializable {
     String [][] mapITileNames;
     int[][] mapITileWorldX;
     int[][] mapITileWorldY;
+
+    //NPCS ON MAP
+    String[][] mapNpcNames;
+    int[][] mapNpcWorldX;
+    int[][] mapNpcWorldY;
+    String[][] mapNpcDirection;
 }

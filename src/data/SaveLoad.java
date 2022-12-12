@@ -1,6 +1,6 @@
 package data;
 
-import entity.Entity;
+import entity.*;
 import main.GamePanel;
 import main.MissionStates;
 import monster.MON_Spider;
@@ -25,6 +25,20 @@ public class SaveLoad {
         return switch (itemName) {
             case "Spider" -> new MON_Spider(gp);
             case "WaspSwarm" -> new MON_WaspSwarm(gp);
+            default -> null;
+        };
+    }
+
+    public Entity getNpc(String itemName) {
+
+        return switch (itemName) {
+            case "Andrea" -> new NPC_Andrea(gp);
+            case "Baldy" -> new NPC_Baldy(gp);
+            case "Dad" -> new NPC_Dad(gp);
+            case "Merchant" -> new NPC_Merchant(gp);
+            case "Phoebe" -> new NPC_Phoebe(gp);
+            case "Pip" -> new NPC_Pip(gp);
+            case "OldCooker" -> new NPC_RustyCooker(gp);
             default -> null;
         };
     }
@@ -209,9 +223,23 @@ public class SaveLoad {
             //NPCS ON MAP
             ds.andreaOnMap = gp.player.andreaOnMap;
 
-//            for (int i = 0; i < gp.npc[1].length; i++) {
-//                ds.npcList.add(gp.npc[gp.currentMap][i]);
-//            }
+            ds.mapNpcNames = new String[gp.maxMap][gp.monster[1].length];
+            ds.mapNpcWorldX = new int[gp.maxMap][gp.monster[1].length];
+            ds.mapNpcWorldY = new int[gp.maxMap][gp.monster[1].length];
+            ds.mapNpcDirection = new String[gp.maxMap][gp.monster[1].length];
+
+            for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
+                for (int i = 0; i < gp.npc[1].length; i++) {
+                    if (gp.npc[mapNum][i] == null) {
+                        ds.mapNpcNames[mapNum][i] = "NA";
+                    } else {
+                        ds.mapNpcNames[mapNum][i] = gp.npc[mapNum][i].name;
+                        ds.mapNpcWorldX[mapNum][i] = gp.npc[mapNum][i].worldX;
+                        ds.mapNpcWorldY[mapNum][i] = gp.npc[mapNum][i].worldY;
+                        ds.mapNpcDirection[mapNum][i] = gp.npc[mapNum][i].direction;
+                    }
+                }
+            }
 
             //Write the DataStorage Object
 
@@ -428,22 +456,19 @@ public class SaveLoad {
 
             for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
                 for (int i = 0; i < gp.npc[1].length; i++) {
-                    if (gp.npc[mapNum][i] != null && (Objects.equals(gp.npc[mapNum][i].name, "OldCooker") || Objects.equals(gp.npc[mapNum][i].name, "Merchant")) && ds.missionState >= MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
+                    if (gp.npc[mapNum][i] != null && ((Objects.equals(gp.npc[mapNum][i].name, "OldCooker") || Objects.equals(gp.npc[mapNum][i].name, "Merchant")) && ds.missionState >= MissionStates.NOT_GET_PAID_FOR_OLD_COOKER)) {
                         gp.npc[mapNum][i] = null;
+                    }
+                    if (ds.mapNpcNames[mapNum][i].equals("NA")) {
+                        gp.npc[mapNum][i] = null;
+                    } else {
+                        gp.npc[mapNum][i] = getNpc(ds.mapNpcNames[mapNum][i]);
+                        gp.npc[mapNum][i].worldX = ds.mapNpcWorldX[mapNum][i];
+                        gp.npc[mapNum][i].worldY = ds.mapNpcWorldY[mapNum][i];
+                        gp.npc[mapNum][i].direction = ds.mapNpcDirection[mapNum][i];
                     }
                 }
             }
-
-//            for (Entity entity:ds.npcList) {
-//                for (int j = 0; j < gp.npc[1].length; j++) {
-//                    if (Objects.equals(entity.name, gp.npc[gp.currentMap][j].name)) {
-//                        gp.npc[gp.currentMap][j].worldX = entity.worldX;
-//                        gp.npc[gp.currentMap][j].worldY = entity.worldY;
-//                        gp.npc[gp.currentMap][j].onPath = entity.onPath;
-//                        gp.npc[gp.currentMap][j].direction = entity.direction;
-//                    }
-//                }
-//            }
 
             //SET CORRECT IMAGE STATES
             gp.eHandler.setImageStates(gp.currentMap);

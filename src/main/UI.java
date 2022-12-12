@@ -1462,7 +1462,6 @@ public class UI {
                                 gp.player.inventory.remove(itemIndex);
                             }
                             if (Objects.equals(npc.name, "Andrea") && Objects.equals(gp.player.inventory.get(itemIndex).name, "Red Boots")) {
-                                alreadyRemoved = true;
                                 gp.ui.addMessage("You \"lend\" Andrea your best Red Boots!");
                                 gp.player.coin = (int) (gp.player.coin - (gp.player.inventory.get(itemIndex).price * 0.7));
                                 gp.playSFX(11);
@@ -1470,8 +1469,7 @@ public class UI {
                                 npc.startDialogue(npc, 5);
                                 commandNum = 0;
                                 subState = 0;
-                            }
-                            if (Objects.equals(npc.name, "Andrea") && Objects.equals(gp.player.inventory.get(itemIndex).name, "Forty Quid For Andrea")) {
+                            } else if (Objects.equals(npc.name, "Andrea") && Objects.equals(gp.player.inventory.get(itemIndex).name, "Forty Quid For Andrea")) {
                                 gp.ui.addMessage("You \"lend\" Andrea " + gp.player.inventory.get(itemIndex).value + "quid! -> Coin: " + (gp.player.coin - gp.player.inventory.get(itemIndex).value));
                                 gp.playSFX(22);
                                 gp.player.inventory.remove(itemIndex);

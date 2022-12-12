@@ -116,6 +116,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.missionList.add(1);
         player.missionState = 2;
         player.missionToSet = 2;
+        player.doorUnlockedCount = 0;
 //        //END OF DEBUG
 
         playMusic(0, false);
@@ -195,6 +196,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (timer >= 1000000000) { //output FPS in console
                 System.out.println("FPS: " + drawCount);
+                System.out.println("doorunlockedcount: " + player.doorUnlockedCount);
                 System.out.println("MissionState: " + player.missionState);
                 System.out.println("Substate: " + player.missionSubstate);
                 drawCount = 0;

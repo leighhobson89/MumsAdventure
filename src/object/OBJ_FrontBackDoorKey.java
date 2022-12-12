@@ -44,13 +44,13 @@ public class OBJ_FrontBackDoorKey extends Entity {
 
         if (objIndexFront != 999) {
             startDialogue(this, 0);
-            doorUnlockedCount++;
+            gp.player.doorUnlockedCount++;
             gp.playSFX(3);
             gp.obj[gp.currentMap][objIndexFront] = null;
             gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 16, 11, false);
         } else if (objIndexBack != 999) {
             startDialogue(this, 0);
-            doorUnlockedCount++;
+            gp.player.doorUnlockedCount++;
             gp.playSFX(3);
             gp.obj[gp.currentMap][objIndexBack] = null;
             gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 30, 11, false);
@@ -58,6 +58,6 @@ public class OBJ_FrontBackDoorKey extends Entity {
             startDialogue(this, 1);
             return false;
         }
-        return doorUnlockedCount >= 2;
+        return gp.player.doorUnlockedCount >= 2;
     }
 }
