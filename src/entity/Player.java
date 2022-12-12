@@ -24,6 +24,7 @@ public class Player extends Entity {
     public int standCounter;
     public boolean attackCanceled;
     public boolean lightUpdated;
+
     int randSet;
 
     public Player(GamePanel gp, KeyHandler keyH) {
@@ -104,9 +105,10 @@ public class Player extends Entity {
     }
 
     public void setDefaultPositions() {
-          worldX = gp.tileSize * 19;
-          worldY = gp.tileSize * 17;
-          direction = "up";
+        gp.currentMap = 0;
+        worldX = gp.tileSize * 19;
+        worldY = gp.tileSize * 17;
+        direction = "up";
     }
 
     public void restoreStatus() {

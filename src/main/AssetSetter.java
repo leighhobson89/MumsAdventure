@@ -1,6 +1,8 @@
 package main;
 
 import entity.*;
+import monster.MON_CarGoingDown;
+import monster.MON_CarGoingUp;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
 import object.*;
@@ -706,6 +708,14 @@ public class AssetSetter {
             }
             case "WaspSwarm" -> {
                 gp.monster[mapNum][monsterNumber] = new MON_WaspSwarm(gp);
+                gp.monster[mapNum][monsterNumber].newMonster = true;
+            }
+            case "CarGoingDown" -> {
+                gp.monster[mapNum][monsterNumber] = new MON_CarGoingDown(gp);
+                gp.monster[mapNum][monsterNumber].newMonster = true;
+            }
+            case "CarGoingUp" -> {
+                gp.monster[mapNum][monsterNumber] = new MON_CarGoingUp(gp);
                 gp.monster[mapNum][monsterNumber].newMonster = true;
             }
         }
