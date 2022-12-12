@@ -592,7 +592,7 @@ public class UI {
                     gp.player.repeatSfx = true;
                     charIndex = 0;
                     combinedText = "";
-                    gp.stopSFX();
+                    gp.stopSFX(0);
 
                     if (gp.gameState == gp.dialogueState) {
                         npc.dialogueIndex++;

@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final MissionStates misStat = new MissionStates(this);
     final Sound music = new Sound();
     public final Sound sfx = new Sound();
+    public final Sound sfxPhone = new Sound();
     public final CollisionChecker cChecker = new CollisionChecker(this);
     public final AssetSetter aSetter = new AssetSetter(this);
     public final UI ui = new UI(this);
@@ -462,11 +463,11 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void stopMusic() {
-        music.stop(false);
+        music.stop(false, 0);
     }
 
     public long pauseMusic() {
-        return music.stop(true);
+        return music.stop(true, 0);
     }
 
     public void playSFX(int i) {
@@ -475,12 +476,22 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void loopSFX(int i) {
-        sfx.setFile(i);
-        sfx.loop();
+        if (i == 28) {
+            sfxPhone.setFile(i);
+            sfxPhone.loop(i);
+        } else {
+            sfx.setFile(i);
+            sfx.loop(i);
+        }
     }
 
-    public void stopSFX() {
-        sfx.stop(false);
+    public void stopSFX(int phone) {
+        if (phone == 28) {
+            sfxPhone.stop(false, 28);
+        } else {
+            sfx.stop(false, 0);
+        }
+
     }
 
     public void clearMonsters() {

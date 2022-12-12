@@ -1,14 +1,12 @@
 package main;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.*;
 import java.net.URL;
 
 public class Sound {
 
     Clip clip;
+    Clip clipPhone;
     public long length;
     public int lastSong;
     final URL[] soundURL = new URL[50];
@@ -59,18 +57,34 @@ public class Sound {
     }
 
     public void setFile(int i) {
-        try {
+        if (i == 28) {
+            try {
+                AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+                clipPhone = AudioSystem.getClip();
+                clipPhone.open(ais);
+                fc = (FloatControl) clipPhone.getControl(FloatControl.Type.MASTER_GAIN);
+                checkVolume();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+                clip = AudioSystem.getClip();
+                clip.open(ais);
+                fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+                checkVolume();
 
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
-            clip = AudioSystem.getClip();
-            clip.open(ais);
-            fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-            checkVolume();
-
-        } catch(Exception e) {
-            e.printStackTrace();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    public void stopPhoneSfx() {
+        clipPhone.stop();
+    }
+
     public void play(long position, boolean pausing) {
         clip.start();
         if (pausing) {
@@ -78,17 +92,31 @@ public class Sound {
         }
     }
 
-    public void loop() {
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    public void loop(int phone) {
+        if (phone == 28) {
+            clipPhone.loop(Clip.LOOP_CONTINUOUSLY);
+        } else {
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
     }
 
-    public long stop(boolean pausing) {
-        long position = 0;
-        if (pausing) {
-            position = clip.getMicrosecondPosition();
+    public long stop(boolean pausing, int phone) {
+        if (phone == 28) {
+            long position = 0;
+            if (pausing) {
+                position = clipPhone.getMicrosecondPosition();
+            }
+            clipPhone.stop();
+            return position;
+        } else {
+            long position = 0;
+            if (pausing) {
+                position = clip.getMicrosecondPosition();
+            }
+            clip.stop();
+            return position;
         }
-        clip.stop();
-        return position;
+
     }
 
     public void checkVolume() { //range runs from -80f to +6f

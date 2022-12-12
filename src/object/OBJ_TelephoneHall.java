@@ -61,7 +61,7 @@ public class OBJ_TelephoneHall extends Entity {
     }
 
     public void interact() {
-        gp.stopSFX();
+        gp.sfxPhone.stop(false, 28);
         gp.player.phoneRinging = false;
         if (gp.player.readyForNextPhoneMission || gp.player.missionState == MissionStates.WEEDING_MISSION) {
             if (gp.player.nextMissionIsPhoneMission) {
