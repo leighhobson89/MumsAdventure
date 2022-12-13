@@ -18,7 +18,7 @@ public class Entity {
 
     public BufferedImage dyingImage, up1, up2, down1, down2, left1, left2, right1, right2, down1_red, down1_purple, dadDown1, phoebeRight2, phoebeLeft1;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2, guardUp, guardDown, guardLeft, guardRight;
-    public BufferedImage image, image2, image3, image4;
+    public BufferedImage image, image2, image3, image4, image5;
     public Rectangle solidArea = new Rectangle(8, 16, 32, 32);
     public Rectangle attackArea = new Rectangle(0,0,0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
@@ -110,6 +110,8 @@ public class Entity {
     public int quizScoreCount = 0;
     public int pillsCounter = 0;
     public int lightPillsCounter = 0;
+    public int carCountDown;
+    public int carCountUp;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -272,6 +274,8 @@ public class Entity {
         phoebeEatingChickenCounter = 0;
         showerCounter = 0;
         pillsCounter = 0;
+        carCountDown = 0;
+        carCountUp = 0;
     }
     //public void setLoot(Entity loot) {}
     public void move(String direction) {}

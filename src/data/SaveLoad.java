@@ -129,6 +129,8 @@ public class SaveLoad {
             ds.pillsCounter = gp.player.pillsCounter;
             ds.lightPillsInProcess = gp.player.lightPillsInProcess;
             ds.lightPillsCounter = gp.player.lightPillsCounter;
+            ds.carCountDown = gp.player.carCountDown;
+            ds.carCountUp = gp.player.carCountUp;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -335,6 +337,8 @@ public class SaveLoad {
             gp.player.pillsCounter = ds.pillsCounter;
             gp.player.lightPillsInProcess = ds.lightPillsInProcess;
             gp.player.lightPillsCounter = ds.lightPillsCounter;
+            gp.player.carCountDown = ds.carCountDown;
+            gp.player.carCountUp = ds.carCountUp;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

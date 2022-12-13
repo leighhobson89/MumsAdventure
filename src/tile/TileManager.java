@@ -32,7 +32,7 @@ public class TileManager {
     public void getTileImage() {
 
         setup(0, "lawn1", false);
-        setup(1, "brick1", false);
+        setup(1, "brick1", true);
         setup(2, "carpetLounge", false);
         setup(3, "carpetStairsLanding", false);
         setup(4, "carpetDining", false);
@@ -49,7 +49,7 @@ public class TileManager {
         setup(15, "pathHorizontal", false);
         setup(16, "pathVertical", false);
         setup(17, "rockery", true);
-        setup(18, "hedge", false);
+        setup(18, "hedge", true);
         setup(19, "fence1", true);
         setup(22, "sofaTop", false);
         setup(23, "sofaBottom", true);
