@@ -103,6 +103,8 @@ public class EntityGenerator {
             case OBJ_KitchenSink.OBJ_NAME -> new OBJ_KitchenSink(gp);
             case OBJ_Bucket.OBJ_NAME -> new OBJ_Bucket(gp);
             case OBJ_Cooker.OBJ_NAME -> new OBJ_Cooker(gp);
+            case OBJ_OutdoorGateVertical.OBJ_NAME -> new OBJ_OutdoorGateVertical(gp);
+            case OBJ_GarageDoorWhite.OBJ_NAME -> new OBJ_GarageDoorWhite(gp);
             default -> null;
         };
     }

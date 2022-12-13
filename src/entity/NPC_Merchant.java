@@ -20,7 +20,7 @@ public class NPC_Merchant extends Entity {
         setDialogue();
         setItems();
 
-        solidArea = new Rectangle(-64, -64,128,128); //contact area reaches over fence so player can interact
+        solidArea = new Rectangle(-49, -49,64,64); //contact area reaches over fence so player can interact
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
     }
