@@ -2,6 +2,7 @@ package object;
 
 import entity.Entity;
 import main.GamePanel;
+import main.MissionStates;
 
 public class OBJ_GarageDoorWhite extends Entity {
 
@@ -13,7 +14,7 @@ public class OBJ_GarageDoorWhite extends Entity {
         super(gp);
         this.gp = gp;
 
-        isUpdateable = false;
+        isUpdateable = true;
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "GarageDoorWhite";
@@ -36,6 +37,7 @@ public class OBJ_GarageDoorWhite extends Entity {
 
     public void setDialogue() {
         dialogueText[0][0] = "The garage door's already open!";
+        dialogueText[1][0] = "I've shut that garage door behind you\nseeing as though you left it wide open!";
     }
     public void interact() {
         if (!opened) {
@@ -49,5 +51,14 @@ public class OBJ_GarageDoorWhite extends Entity {
             startDialogue(this, 0);
         }
         gp.keyH.enterPressed = false;
+    }
+
+    public void update() {
+        if (opened && (worldX/gp.tileSize) - (gp.player.worldX/gp.tileSize) > 15) {
+            opened = false;
+            down1 = image;
+            collision = true;
+            startDialogue(this, 1);
+        }
     }
 }

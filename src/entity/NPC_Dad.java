@@ -13,7 +13,8 @@ public class NPC_Dad extends Entity {
 
         name = "Dad";
         direction = "right";
-        speed = 1;
+        defaultSpeed = 1;
+        speed = defaultSpeed;
         type = type_npc;
         goesTransparentWhenHit = true;
 
@@ -23,6 +24,7 @@ public class NPC_Dad extends Entity {
         solidArea = new Rectangle(8, 16,32,32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        onPath = true;
     }
 
     public void getImage() {
@@ -157,12 +159,80 @@ public class NPC_Dad extends Entity {
         dialogueText[75][5] = "There's no more spiders there, I sorted it.\nJust chuck it in there!";
     }
 
-    public void setAction(int goalCol, int goalRow) {
+    public void update() {
 
-        if (checkEdgeOfMap(this)) {
-            turnEntityAround(this);
+        super.update();
+        if (gp.currentMap == 0 && (gp.player.worldX >= (17 * gp.tileSize) && gp.player.worldX <= (21 * gp.tileSize)) && (gp.player.worldY >= (13 * gp.tileSize) && gp.player.worldY <= (18 * gp.tileSize))) { //if player in living room
+            gp.player.inLivingRoom = true;
+            speed = defaultSpeed;
+        } else if (gp.currentMap != 0) {
+            gp.player.inLivingRoom = false;
+            speed = defaultSpeed;
         } else {
-            getRandomDirection();
+            gp.player.inLivingRoom = false;
+            speed = 2;
+        }
+    }
+
+    public void setAction(int goalCol, int goalRow) {
+        goalCol = 0;
+        goalRow = 0;
+
+        if(onPath && !gp.player.inLivingRoom) {
+            right2 = setup("/NPC/dad_right2", gp.tileSize, gp.tileSize);
+            if (Objects.equals(gp.player.direction, "up")) { //dog chase player but stay one square behind
+                goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+                goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 2;
+            } else if (Objects.equals(gp.player.direction, "down")) {
+                goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+                goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) - 2;
+            } else if (Objects.equals(gp.player.direction, "right")) {
+                goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) - 2;
+                goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+            } else if (Objects.equals(gp.player.direction, "left")) {
+                goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 2;
+                goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+            }
+            searchPath(goalCol, goalRow);
+        } else if (onPath && gp.player.dadHasGuitar) {
+
+            goalCol = 17;
+            goalRow = 14;
+            int actCol = worldX/gp.tileSize+1;
+            int actRow = worldY/gp.tileSize+1;
+
+            int xDistance = Math.abs(actCol - goalCol);
+            int yDistance = Math.abs(actRow - goalRow);
+            int tileDistance = ((xDistance*gp.tileSize) + (yDistance*gp.tileSize));
+
+            if (tileDistance > 1) {
+                searchPath(goalCol, goalRow);
+            } else {
+                speed = 0;
+                right2 = setup("/NPC/dad_right1", gp.tileSize, gp.tileSize);
+                direction = "right";
+            }
+        } else if (onPath) {
+
+            goalCol = 21;
+            goalRow = 18;
+            int actCol = worldX/gp.tileSize;
+            int actRow = worldY/gp.tileSize;
+
+            int xDistance = Math.abs(actCol - goalCol);
+            int yDistance = Math.abs(actRow - goalRow);
+            int tileDistance = ((xDistance*gp.tileSize) + (yDistance*gp.tileSize));
+
+            if (tileDistance > 1) {
+                searchPath(goalCol, goalRow);
+            }
+        }
+        else {
+            if (checkEdgeOfMap(this)) {
+                turnEntityAround(this);
+            } else {
+                getRandomDirection();
+            }
         }
     }
 

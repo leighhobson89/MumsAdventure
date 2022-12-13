@@ -92,8 +92,10 @@ public class CollisionChecker {
                     case "right" -> entity.solidArea.x += entity.speed;
                 }
 
-                if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && (Objects.equals(entity.name, "Pip") || Objects.equals(entity.name, "Phoebe")) && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS && (Objects.equals(gp.obj[gp.currentMap][i].name, "Fridge") || Objects.equals(gp.obj[gp.currentMap][i].name, "BackGate") || Objects.equals(gp.obj[gp.currentMap][i].name, "KitchenCupboard1") || Objects.equals(gp.obj[gp.currentMap][i].name, "BackGateSideways"))) {
+                if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && (Objects.equals(entity.name, "Pip") || Objects.equals(entity.name, "Phoebe") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) && gp.obj[gp.currentMap][i].npcCanWalkOnWhenFollowing) {
                     entity.collisionOn = false;
+                } else if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && Objects.equals(entity.name, "Dad") && gp.obj[gp.currentMap][i].npcCanWalkOnWhenFollowing) {
+                    gp.obj[gp.currentMap][i].collisionOn = false;
                 } else if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
                     if (gp.obj[gp.currentMap][i].collision) {
                         entity.collisionOn = true;
@@ -153,6 +155,10 @@ public class CollisionChecker {
                             index = i;
                         }
                         if ((Objects.equals(target[gp.currentMap][i].name, "Dad"))  && entity.type == entity.type_player) {
+                            entity.collisionOn = false;
+                            index = i;
+                        }
+                        if ((Objects.equals(target[gp.currentMap][i].name, "Dad"))  && entity.type == entity.type_dads_guitar) {
                             entity.collisionOn = false;
                             index = i;
                         }

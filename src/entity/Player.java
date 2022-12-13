@@ -262,7 +262,7 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/mum_mop_right1_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
                 attackRight2 = setup("/player/mum_mop_right2_" + colorOutfit, gp.tileSize * 2, gp.tileSize);
             }
-            if (currentWeapon.type == type_flamingAerosol) {
+            if (currentWeapon.type == type_flaming_aerosol) {
                 attackUp1 = setup("/player/mum_flamer_up1_" + colorOutfit, gp.tileSize, gp.tileSize * 2); //16 x 32 images
                 attackUp2 = setup("/player/mum_flamer_up2_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
                 attackDown1 = setup("/player/mum_flamer_down1_" + colorOutfit, gp.tileSize, gp.tileSize * 2);
@@ -444,7 +444,7 @@ public class Player extends Entity {
                     gp.playSFX(30);
                 } else if (currentWeapon.type == type_mop) {
                     gp.playSFX(31);
-                } else if (currentWeapon.type == type_flamingAerosol) {
+                } else if (currentWeapon.type == type_flaming_aerosol) {
                     gp.playSFX(36);
                 }
 
@@ -569,7 +569,7 @@ public class Player extends Entity {
                 gp.obj[gp.currentMap][i] = null;
 
             }  //OBSTACLE
-            else if (gp.obj[gp.currentMap][i].type == type_obstacle || gp.obj[gp.currentMap][i].type == type_hut) { //for doors and other obstacles that need to use objects to pass them
+            else if (gp.obj[gp.currentMap][i].type == type_dads_guitar || gp.obj[gp.currentMap][i].type == type_obstacle || gp.obj[gp.currentMap][i].type == type_hut) { //for doors and other obstacles that need to use objects to pass them
                 if (keyH.enterPressed) {
                     attackCanceled = true;
                     gp.obj[gp.currentMap][i].interact();
@@ -980,12 +980,12 @@ public class Player extends Entity {
                 }
             }
 
-            if ((selectedItem.type == type_flamingAerosol || selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
+            if ((selectedItem.type == type_flaming_aerosol || selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) && selectedItem != currentWeapon) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage(gp.ui.outfitChosen);
                 gp.playSFX(11);
-            } else if (selectedItem.type == type_flamingAerosol || selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) {
+            } else if (selectedItem.type == type_flaming_aerosol || selectedItem.type == type_tv_remote || selectedItem.type == type_axe || selectedItem.type == type_short_weapon || selectedItem.type == type_long_weapon || selectedItem.type == type_gardeningShovel || selectedItem.type == type_mop) {
                 if (selectedItem.type == type_tv_remote) {
                    gp.player.worldY = gp.player.worldY - gp.tileSize;
                    if (!tvIsOff) {

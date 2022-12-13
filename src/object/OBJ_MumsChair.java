@@ -13,6 +13,7 @@ public class OBJ_MumsChair extends Entity {
         super(gp);
         this.gp = gp;
 
+        npcCanWalkOnWhenFollowing = true;
         isUpdateable = false;
         type = type_obstacle;
         name = OBJ_NAME;

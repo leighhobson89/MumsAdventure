@@ -90,6 +90,15 @@ public class PathFinder {
                     node[itCol][itRow].solid = true;
                 }
             }
+            //CHECK OBJECTS
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].collision) {
+                    int objCol = gp.obj[gp.currentMap][i].worldX/gp.tileSize;
+                    int objRow = gp.obj[gp.currentMap][i].worldY/gp.tileSize;
+                    node[objCol][objRow].solid = true;
+                    break;
+                }
+            }
 
             //SET COST
             getCost(node[col][row]);

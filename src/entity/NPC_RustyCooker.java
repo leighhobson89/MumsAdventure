@@ -53,10 +53,6 @@ public class NPC_RustyCooker extends Entity {
         dialogueText[2][1] = "'If they don't come Miss, I'll sort it out for you init!'";
     }
 
-    public void update() {
-
-    }
-
     public void speak() {
 
         //character specific stuff here

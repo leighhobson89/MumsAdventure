@@ -131,6 +131,9 @@ public class SaveLoad {
             ds.lightPillsCounter = gp.player.lightPillsCounter;
             ds.carCountDown = gp.player.carCountDown;
             ds.carCountUp = gp.player.carCountUp;
+            ds.npcCanWalkOnWhenFollowing = gp.player.npcCanWalkOnWhenFollowing;
+            ds.inLivingRoom = gp.player.inLivingRoom;
+            ds.dadHasGuitar = gp.player.dadHasGuitar;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -339,6 +342,9 @@ public class SaveLoad {
             gp.player.lightPillsCounter = ds.lightPillsCounter;
             gp.player.carCountDown = ds.carCountDown;
             gp.player.carCountUp = ds.carCountUp;
+            gp.player.npcCanWalkOnWhenFollowing = ds.npcCanWalkOnWhenFollowing;
+            gp.player.inLivingRoom = ds.inLivingRoom;
+            gp.player.dadHasGuitar = ds.dadHasGuitar;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
@@ -362,7 +368,7 @@ public class SaveLoad {
                     for (int j = 0; j < gp.player.inventory.size(); j++) {
                         if (Objects.equals(gp.player.inventory.get(j).name, "FlammableSpray")) {
                             gp.player.inventory.get(i).isWeapon = true;
-                            gp.player.inventory.get(i).type = gp.player.type_flamingAerosol;
+                            gp.player.inventory.get(i).type = gp.player.type_flaming_aerosol;
                             gp.player.inventory.get(i).down1 =  gp.player.inventory.get(i).image3;
                             gp.player.attack = gp.player.getAttack();
                             gp.player.getAttackImage(gp.ui.outfitChosen);

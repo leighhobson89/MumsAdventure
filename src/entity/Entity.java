@@ -90,6 +90,9 @@ public class Entity {
     public int waspNestState;
     public boolean pillsInProcess;
     public boolean lightPillsInProcess;
+    public boolean npcCanWalkOnWhenFollowing;
+    public boolean inLivingRoom;
+    public boolean dadHasGuitar;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -204,8 +207,9 @@ public class Entity {
     public final int type_switchable_interactive_tile = 13;
     public final int type_tv_remote = 14;
     public final int type_hut = 15;
-    public final int type_flamingAerosol = 16;
-    public final int type_bucket = 17; //e.g. bucket
+    public final int type_flaming_aerosol = 16;
+    public final int type_bucket = 17;
+    public final int type_dads_guitar = 18;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -1114,7 +1118,7 @@ public class Entity {
             int nextCol = gp.pFinder.pathList.get(0).col;
             int nextRow = gp.pFinder.pathList.get(0).row;
 
-            if (nextCol == goalCol && nextRow == goalRow) {
+            if (nextCol == goalCol && nextRow == goalRow && !Objects.equals(this.name, "Dad")) {
                 onPath = false;
             }
         }

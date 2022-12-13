@@ -62,7 +62,6 @@ public class MON_CarGoingUp extends Entity {
         if (setupCar) { // SETUP NEXT CAR
             if (carCountUp < randomTime) {
                 carCountUp++;
-                System.out.println("Time Left Next Up: " + (randomTime - carCountUp));
             }
         }
 

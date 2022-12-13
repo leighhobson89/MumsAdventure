@@ -77,6 +77,9 @@ public class DataStorage implements Serializable {
     int lightPillsCounter;
     int carCountDown;
     int carCountUp;
+    boolean npcCanWalkOnWhenFollowing;
+    boolean inLivingRoom;
+    boolean dadHasGuitar;
 
     //PLAYER INVENTORY
     final ArrayList<String> itemNames = new ArrayList<>();

@@ -44,7 +44,7 @@ public class OBJ_Lighter extends Entity {
                 for (int i = 0; i < gp.player.inventory.size(); i++) {
                     if (Objects.equals(gp.player.inventory.get(i).name, "FlammableSpray")) {
                         gp.player.inventory.get(i).isWeapon = true;
-                        gp.player.inventory.get(i).type = type_flamingAerosol;
+                        gp.player.inventory.get(i).type = type_flaming_aerosol;
                         gp.player.inventory.get(i).down1 =  gp.player.inventory.get(i).image3;
                         gp.player.currentWeapon = gp.player.inventory.get(i);
                         gp.player.attack = gp.player.getAttack();
