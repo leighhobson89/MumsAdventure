@@ -212,12 +212,12 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 16 * gp.tileSize - 10;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Guitar2(gp);
+        gp.obj[mapNum][i] = new OBJ_GuitarElectric(gp);
         gp.obj[mapNum][i].worldX = 20 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Guitar1(gp);
+        gp.obj[mapNum][i] = new OBJ_GuitarAcoustic(gp);
         gp.obj[mapNum][i].worldX = 21 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
         i++;
@@ -270,6 +270,11 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_BackDoor(gp);
         gp.obj[mapNum][i].worldX = 30 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Music_Notes(gp);
+        gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_TelephoneHall(gp);

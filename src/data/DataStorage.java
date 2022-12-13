@@ -80,6 +80,8 @@ public class DataStorage implements Serializable {
     boolean npcCanWalkOnWhenFollowing;
     boolean inLivingRoom;
     boolean dadHasGuitar;
+    boolean dadPlayingGuitar;
+    boolean musicCentreOn;
 
     //PLAYER INVENTORY
     final ArrayList<String> itemNames = new ArrayList<>();

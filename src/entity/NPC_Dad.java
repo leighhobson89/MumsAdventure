@@ -29,14 +29,35 @@ public class NPC_Dad extends Entity {
 
     public void getImage() {
 
-        up1 = setup("/NPC/dad_up1", gp.tileSize, gp.tileSize);
-        up2 = setup("/NPC/dad_up2", gp.tileSize, gp.tileSize);
-        down1 = setup("/NPC/dad_down1", gp.tileSize, gp.tileSize);
-        down2 = setup("/NPC/dad_down2", gp.tileSize, gp.tileSize);
-        left1 = setup("/NPC/dad_left1", gp.tileSize, gp.tileSize);
-        left2 = setup("/NPC/dad_left2", gp.tileSize, gp.tileSize);
-        right1 = setup("/NPC/dad_right1", gp.tileSize, gp.tileSize);
-        right2 = setup("/NPC/dad_right2", gp.tileSize, gp.tileSize);
+        image = setup("/NPC/dad_right1", gp.tileSize, gp.tileSize);
+        image2 = setup("/NPC/dad_right2", gp.tileSize, gp.tileSize);
+
+        up1Standard = setup("/NPC/dad_up1", gp.tileSize, gp.tileSize);
+        up2Standard = setup("/NPC/dad_up2", gp.tileSize, gp.tileSize);
+        down1Standard = setup("/NPC/dad_down1", gp.tileSize, gp.tileSize);
+        down2Standard = setup("/NPC/dad_down2", gp.tileSize, gp.tileSize);
+        left1Standard = setup("/NPC/dad_left1", gp.tileSize, gp.tileSize);
+        left2Standard = setup("/NPC/dad_left2", gp.tileSize, gp.tileSize);
+        right1Standard = setup("/NPC/dad_right1", gp.tileSize, gp.tileSize);
+        right2Standard = setup("/NPC/dad_right2", gp.tileSize, gp.tileSize);
+
+        up1Guitar = setup("/NPC/dad_up1Guitar", gp.tileSize, gp.tileSize);
+        up2Guitar = setup("/NPC/dad_up2Guitar", gp.tileSize, gp.tileSize);
+        down1Guitar = setup("/NPC/dad_down1Guitar", gp.tileSize, gp.tileSize);
+        down2Guitar = setup("/NPC/dad_down2Guitar", gp.tileSize, gp.tileSize);
+        left1Guitar = setup("/NPC/dad_left1Guitar", gp.tileSize, gp.tileSize);
+        left2Guitar = setup("/NPC/dad_left2Guitar", gp.tileSize, gp.tileSize);
+        right1Guitar = setup("/NPC/dad_right1Guitar", gp.tileSize, gp.tileSize);
+        right2Guitar = setup("/NPC/dad_right2Guitar", gp.tileSize, gp.tileSize);
+
+        down1 = down1Standard;
+        down2 = down2Standard;
+        up1 = up1Standard;
+        up2 = up2Standard;
+        left1 = left1Standard;
+        left2 = left2Standard;
+        right1 = right1Standard;
+        right2 = right2Standard;
 
     }
 
@@ -178,8 +199,8 @@ public class NPC_Dad extends Entity {
         goalCol = 0;
         goalRow = 0;
 
-        if(onPath && !gp.player.inLivingRoom) {
-            right2 = setup("/NPC/dad_right2", gp.tileSize, gp.tileSize);
+        if(onPath && !gp.player.inLivingRoom && !gp.player.dadHasGuitar) {
+            right2 = image2;
             if (Objects.equals(gp.player.direction, "up")) { //dog chase player but stay one square behind
                 goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
                 goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 2;
@@ -194,7 +215,40 @@ public class NPC_Dad extends Entity {
                 goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
             }
             searchPath(goalCol, goalRow);
+        } else if (onPath && !gp.player.inLivingRoom) {
+            gp.player.dadPlayingGuitar = false;
+            goalCol = 21;
+            goalRow = 18;
+            int actCol = worldX/gp.tileSize+1;
+            int actRow = worldY/gp.tileSize+1;
+
+            int xDistance = Math.abs(actCol - goalCol);
+            int yDistance = Math.abs(actRow - goalRow);
+            int tileDistance = ((xDistance*gp.tileSize) + (yDistance*gp.tileSize));
+
+            if (tileDistance > 1) {
+                searchPath(goalCol, goalRow);
+            } else {
+                speed = 2;
+                gp.player.dadHasGuitar = false;
+                down1 = down1Standard;
+                down2 = down2Standard;
+                up1 = up1Standard;
+                up2 = up2Standard;
+                left1 = left1Standard;
+                left2 = left2Standard;
+                right1 = right1Standard;
+                right2 = right2Standard;
+            }
         } else if (onPath && gp.player.dadHasGuitar) {
+            down1 = down1Guitar;
+            down2 = down2Guitar;
+            up1 = up1Guitar;
+            up2 = up2Guitar;
+            left1 = left1Guitar;
+            left2 = left2Guitar;
+            right1 = right1Guitar;
+            right2 = right2Guitar;
 
             goalCol = 17;
             goalRow = 14;
@@ -209,8 +263,9 @@ public class NPC_Dad extends Entity {
                 searchPath(goalCol, goalRow);
             } else {
                 speed = 0;
-                right2 = setup("/NPC/dad_right1", gp.tileSize, gp.tileSize);
+                right2 = right1Guitar;
                 direction = "right";
+                gp.player.dadPlayingGuitar = true;
             }
         } else if (onPath) {
 

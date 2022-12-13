@@ -134,6 +134,8 @@ public class SaveLoad {
             ds.npcCanWalkOnWhenFollowing = gp.player.npcCanWalkOnWhenFollowing;
             ds.inLivingRoom = gp.player.inLivingRoom;
             ds.dadHasGuitar = gp.player.dadHasGuitar;
+            ds.dadPlayingGuitar = gp.player.dadPlayingGuitar;
+            ds.musicCentreOn = gp.player.musicCentreOn;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -345,6 +347,8 @@ public class SaveLoad {
             gp.player.npcCanWalkOnWhenFollowing = ds.npcCanWalkOnWhenFollowing;
             gp.player.inLivingRoom = ds.inLivingRoom;
             gp.player.dadHasGuitar = ds.dadHasGuitar;
+            gp.player.dadPlayingGuitar = ds.dadPlayingGuitar;
+            gp.player.musicCentreOn = ds.musicCentreOn;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

@@ -17,8 +17,8 @@ public class EntityGenerator {
             case OBJ_PipsBone.OBJ_NAME -> new OBJ_PipsBone(gp);
             case OBJ_FrontBackDoorKey.OBJ_NAME -> new OBJ_FrontBackDoorKey(gp);
             case OBJ_GrandmasCardigan.OBJ_NAME -> new OBJ_GrandmasCardigan(gp);
-            case OBJ_Guitar1.OBJ_NAME -> new OBJ_Guitar1(gp);
-            case OBJ_Guitar2.OBJ_NAME -> new OBJ_Guitar2(gp);
+            case OBJ_GuitarAcoustic.OBJ_NAME -> new OBJ_GuitarAcoustic(gp);
+            case OBJ_GuitarElectric.OBJ_NAME -> new OBJ_GuitarElectric(gp);
             case OBJ_Lavender_Crocs.OBJ_NAME -> new OBJ_Lavender_Crocs(gp);
             case OBJ_LightPills.OBJ_NAME -> new OBJ_LightPills(gp);
             case OBJ_Pills.OBJ_NAME -> new OBJ_Pills(gp);
@@ -105,6 +105,7 @@ public class EntityGenerator {
             case OBJ_Cooker.OBJ_NAME -> new OBJ_Cooker(gp);
             case OBJ_OutdoorGateVertical.OBJ_NAME -> new OBJ_OutdoorGateVertical(gp);
             case OBJ_GarageDoorWhite.OBJ_NAME -> new OBJ_GarageDoorWhite(gp);
+            case OBJ_Music_Notes.OBJ_NAME -> new OBJ_Music_Notes(gp);
             default -> null;
         };
     }
