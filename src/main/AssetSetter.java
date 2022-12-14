@@ -67,7 +67,6 @@ public class AssetSetter {
                 case "Old Cardigan" -> gp.obj[mapNum][i] = new OBJ_GrandmasCardigan(gp);
                 case "Spatula" -> gp.obj[mapNum][i] = new OBJ_Spatula(gp);
                 case "Hatchet" -> gp.obj[mapNum][i] = new OBJ_Hatchet(gp);
-                case "FrontBackDoorOpen" -> gp.obj[mapNum][i] = new OBJ_FrontBackDoorOpen(gp);
                 case "HundredQuid" -> gp.obj[mapNum][i] = new OBJ_SuperCoin(gp);
                 case "Garden Shovel" -> gp.obj[mapNum][i] = new OBJ_Shovel(gp);
                 case "Lavender Crocs" -> gp.obj[mapNum][i] = new OBJ_Lavender_Crocs(gp);
@@ -119,7 +118,6 @@ public class AssetSetter {
                     case "Old Cardigan" -> gp.obj[mapNum][j] = new OBJ_GrandmasCardigan(gp);
                     case "Spatula" -> gp.obj[mapNum][j] = new OBJ_Spatula(gp);
                     case "Hatchet" -> gp.obj[mapNum][j] = new OBJ_Hatchet(gp);
-                    case "FrontBackDoorOpen" -> gp.obj[mapNum][j] = new OBJ_FrontBackDoorOpen(gp);
                     case "HundredQuid" -> gp.obj[mapNum][j] = new OBJ_SuperCoin(gp);
                     case "Garden Shovel" -> gp.obj[mapNum][j] = new OBJ_Shovel(gp);
                     case "Lavender Crocs" -> gp.obj[mapNum][j] = new OBJ_Lavender_Crocs(gp);

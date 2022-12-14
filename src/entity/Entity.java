@@ -165,13 +165,13 @@ public class Entity {
     public boolean dizzyFlag;
     public boolean speedBoost;
     public boolean firstTimePickUpBone;
-    public int doorUnlockedCount;
     public boolean savedWithAWeaponEquipped;
     public boolean savedWithAnArmourEquipped;
     public boolean savedWithAProjectileEquipped;
     public boolean haveBoneResource;
     public boolean haveChoppedChickenResource;
     public int tvRemoteIndex;
+    public boolean hasOutsideDoorsKey;
 
     //ITEM ATTRIBUTES
     public final ArrayList<Entity> inventory = new ArrayList<>();

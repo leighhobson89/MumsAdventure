@@ -123,7 +123,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.missionList.add(1);
         player.missionState = 2;
         player.missionToSet = 2;
-        player.doorUnlockedCount = 0;
+        player.hasOutsideDoorsKey = false;
 //        //END OF DEBUG
 
         playMusic(0, false);

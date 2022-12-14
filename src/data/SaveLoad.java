@@ -91,7 +91,6 @@ public class SaveLoad {
             ds.nextLevelExp = gp.player.nextLevelExp;
             ds.coin = gp.player.coin;
             ds.dialogueSet = gp.player.dialogueSet;
-            ds.doorUnlockedCount = gp.player.doorUnlockedCount;
             ds.weedCount = gp.player.weedCount;
             ds.timesPassedOut = gp.player.timesPassedOut;
             ds.pillsConsumableNow = gp.player.pillsConsumableNow;
@@ -142,6 +141,7 @@ public class SaveLoad {
             ds.musicCentreOn = gp.player.musicCentreOn;
             ds.dadOption = gp.player.dadOption;
             ds.andreaSafe = gp.player.andreaSafe;
+            ds.hasOutsideDoorsKey = gp.player.hasOutsideDoorsKey;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -300,7 +300,6 @@ public class SaveLoad {
             gp.player.exp = ds.exp;
             gp.player.nextLevelExp = ds.nextLevelExp;
             gp.player.coin = ds.coin;
-            gp.player.doorUnlockedCount = ds.doorUnlockedCount;
             gp.player.timesPassedOut = ds.timesPassedOut;
             gp.player.pillsConsumableNow = ds.pillsConsumableNow;
             gp.player.boneIndex = ds.boneIndex;
@@ -358,6 +357,7 @@ public class SaveLoad {
             gp.player.musicCentreOn = ds.musicCentreOn;
             gp.player.dadOption = ds.dadOption;
             gp.player.andreaSafe = ds.andreaSafe;
+            gp.player.hasOutsideDoorsKey = ds.hasOutsideDoorsKey;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

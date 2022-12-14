@@ -44,20 +44,20 @@ public class OBJ_FrontBackDoorKey extends Entity {
 
         if (objIndexFront != 999) {
             startDialogue(this, 0);
-            gp.player.doorUnlockedCount++;
             gp.playSFX(3);
-            gp.obj[gp.currentMap][objIndexFront] = null;
-            gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 16, 11, false);
+            gp.obj[gp.currentMap][objIndexFront].down1 = gp.obj[gp.currentMap][objIndexFront].image2;
+            gp.obj[gp.currentMap][objIndexFront].collision = false;
+            gp.obj[gp.currentMap][objIndexFront].opened = true;
         } else if (objIndexBack != 999) {
             startDialogue(this, 0);
-            gp.player.doorUnlockedCount++;
             gp.playSFX(3);
-            gp.obj[gp.currentMap][objIndexBack] = null;
-            gp.aSetter.setObjectAfterStart("FrontBackDoorOpen", gp.currentMap, 30, 11, false);
+            gp.obj[gp.currentMap][objIndexBack].down1 = gp.obj[gp.currentMap][objIndexBack].image2;
+            gp.obj[gp.currentMap][objIndexBack].collision = false;
+            gp.obj[gp.currentMap][objIndexBack].opened = true;
         } else {
             startDialogue(this, 1);
             return false;
         }
-        return gp.player.doorUnlockedCount >= 2;
+        return false;
     }
 }

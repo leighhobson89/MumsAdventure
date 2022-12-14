@@ -21,7 +21,6 @@ public class DataStorage implements Serializable {
     int coin;
     String colorOutfit;
     String outfitChosen;
-    int doorUnlockedCount;
     int weedCount;
     int timesPassedOut;
     boolean pillsConsumableNow;
@@ -82,11 +81,9 @@ public class DataStorage implements Serializable {
     boolean dadHasGuitar;
     boolean dadPlayingGuitar;
     boolean musicCentreOn;
-    boolean guitarToMusicCenterTransitionPart1;
-    boolean guitarToMusicCenterTransitionPart2;
-    boolean guitarToMusicCenterTransitionPart3;
     int dadOption;
     boolean andreaSafe;
+    boolean hasOutsideDoorsKey;
 
     //PLAYER INVENTORY
     final ArrayList<String> itemNames = new ArrayList<>();

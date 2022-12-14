@@ -80,6 +80,7 @@ public class Player extends Entity {
         dadOption = 1;
         dadHasGuitar = false;
         dadPlayingGuitar = false;
+        hasOutsideDoorsKey = false;
 
         //PLAYER STATUS
         level = 1;
@@ -646,6 +647,9 @@ public class Player extends Entity {
                                 entity.down1 = entity.image4;
                             }
                         }
+                    }
+                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "FrontBackDoorKey")) {
+                        gp.player.hasOutsideDoorsKey = true;
                     }
 
                     selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);

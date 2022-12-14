@@ -151,7 +151,7 @@ public class EventHandler {
         int[][] optionArray;
         gp.gameState = gp.dialogueState;
         gp.player.startDialogue(gp.player, 17);
-        if (gp.player.doorUnlockedCount > 0) {
+        if (gp.player.hasOutsideDoorsKey) {
             optionArray = new int[][] {{0,46,15},{0,58,17},{0,12,10},{0,15,19},{0,17,11},{0,18,13},{0,20,11},{0,23,15},{0,24,15},{0,28,11},{1,22,11},{1,19,16},{1,29,12},{1,27,18}};
         } else {
             optionArray = new int[][] {{0,17,11},{0,18,13},{0,20,11},{0,23,15},{0,24,15},{0,28,11},{1,22,11},{1,19,16},{1,29,12},{1,27,18}};

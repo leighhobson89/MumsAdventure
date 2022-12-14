@@ -41,7 +41,6 @@ public class EntityGenerator {
             case OBJ_BedMumDadBR.OBJ_NAME -> new OBJ_BedMumDadBR(gp);
             case OBJ_BedMumDadTL.OBJ_NAME -> new OBJ_BedMumDadTL(gp);
             case OBJ_BedMumDadTR.OBJ_NAME -> new OBJ_BedMumDadTR(gp);
-            case OBJ_FrontBackDoorOpen.OBJ_NAME -> new OBJ_FrontBackDoorOpen(gp);
             case OBJ_Coin.OBJ_NAME -> new OBJ_Coin(gp);
             case OBJ_LightningBoltStress.OBJ_NAME -> new OBJ_LightningBoltStress(gp);
             case OBJ_SuperCoin.OBJ_NAME -> new OBJ_SuperCoin(gp);
