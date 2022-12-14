@@ -33,7 +33,7 @@ public class Entity {
     public int worldX, worldY;
     public final int phoneNormalWorldX = 816;
     public final int livingRoomEntranceTopX = 18;
-    public final int livingRoomEntranceTopY = 11;
+    public final int livingRoomEntranceTopY = 12;
     public final int livingRoomEntranceSideX = 22;
     public final int livingRoomEntranceSideY = 16;
     public String direction = "right";

@@ -76,6 +76,10 @@ public class Player extends Entity {
         firstTimePickUpBone = true;
         randomCounter = setRandomCounter();
         buzzCounter = 0;
+        inLivingRoom = true;
+        dadOption = 1;
+        dadHasGuitar = false;
+        dadPlayingGuitar = false;
 
         //PLAYER STATUS
         level = 1;

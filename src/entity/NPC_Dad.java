@@ -186,29 +186,29 @@ public class NPC_Dad extends Entity {
         super.update();
 
         if (gp.currentMap == 0 && !gp.player.inLivingRoom && (
-                gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceTopX && gp.player.worldY/gp.tileSize  == gp.player.livingRoomEntranceTopY) ||
-                (gp.player.worldX/gp.tileSize  == gp.player.livingRoomEntranceSideX && gp.player.worldY/gp.tileSize  == gp.player.livingRoomEntranceSideY) &&
+                gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceTopX && gp.player.worldY/gp.tileSize == gp.player.livingRoomEntranceTopY) ||
+                (gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceSideX && gp.player.worldY/gp.tileSize == gp.player.livingRoomEntranceSideY) &&
                     (Objects.equals(gp.player.direction, "left") || Objects.equals(gp.player.direction, "down"))
         ) { //if player in living room
             gp.player.justEnteredLivingRoom = true;
+            gp.player.inLivingRoom = true;
         }
 
-        if (gp.player.justEnteredLivingRoom && (gp.player.worldX/gp.tileSize > 16 && gp.player.worldX/gp.tileSize < 23) && (gp.player.worldY/gp.tileSize > 11 && gp.player.worldY/gp.tileSize < 20)) { //if player just enetered living room
-            gp.player.justEnteredLivingRoom = false;
-            gp.player.inLivingRoom = true;
-            speed = defaultSpeed;
+        if (gp.player.justEnteredLivingRoom && (gp.player.worldX/gp.tileSize > 16 && gp.player.worldX/gp.tileSize < 22) && (gp.player.worldY/gp.tileSize > 11 && gp.player.worldY/gp.tileSize < 20)) { //if player just enetered living room
             int ran = new Random().nextInt(100);
             if (ran > 50) { //music center option
                 gp.player.dadOption = 0;
             } else { //guitar play option
                 gp.player.dadOption = 1;
             }
+            speed = defaultSpeed;
+            gp.player.justEnteredLivingRoom = false;
         }
 
-        if (gp.currentMap == 0 && gp.player.inLivingRoom && (Objects.equals(gp.player.direction, "right") || Objects.equals(gp.player.direction, "up")) && (gp.player.worldX/gp.tileSize <= 16 || gp.player.worldX/gp.tileSize >= 23) || (gp.player.worldY/gp.tileSize <= 11 || gp.player.worldY/gp.tileSize >= 20)) {
+        if (gp.currentMap == 0 && gp.player.inLivingRoom && (Objects.equals(gp.player.direction, "right") || Objects.equals(gp.player.direction, "up")) && (gp.player.worldX/gp.tileSize <= 16 || gp.player.worldX/gp.tileSize >= 22) || (gp.player.worldY/gp.tileSize <= 11 || gp.player.worldY/gp.tileSize >= 20)) {
             gp.player.inLivingRoom = false;
         }
-        System.out.println("worldX: " + gp.player.worldX/ gp.tileSize + " worldY: " + gp.player.worldY/ gp.tileSize + " inLivingRoom " + gp.player.inLivingRoom + " dadOption: " + gp.player.dadOption);
+        System.out.println("worldX: " + gp.player.worldX/ gp.tileSize + " worldY: " + gp.player.worldY/ gp.tileSize + " inLivingRoom " + gp.player.inLivingRoom + " dadOption: " + gp.player.dadOption + " dadHasGuitar " + gp.player.dadHasGuitar);
 
     }
 
@@ -223,7 +223,6 @@ public class NPC_Dad extends Entity {
             }
         } else if (gp.player.dadOption == 1) {
             if(onPath && !gp.player.inLivingRoom && !gp.player.dadHasGuitar) { //follow player when outside living room
-                speed = 2;
                 right2 = image2;
                 if (Objects.equals(gp.player.direction, "up")) {
                     goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
@@ -240,6 +239,7 @@ public class NPC_Dad extends Entity {
                 }
                 searchPath(goalCol, goalRow);
             } else if (onPath && (!gp.player.inLivingRoom)) { // walk to put guitar back after player leaves living room
+                speed = 2;
                 gp.player.dadPlayingGuitar = false;
                 goalCol = 21;
                 goalRow = 18;
