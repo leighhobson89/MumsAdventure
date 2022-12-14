@@ -220,6 +220,7 @@ public class Entity {
     public final int type_flaming_aerosol = 16;
     public final int type_bucket = 17;
     public final int type_music_device_dad = 18;
+    public final int type_closeable_door = 19;
 
     public Entity(GamePanel gp) {
         this.gp = gp;

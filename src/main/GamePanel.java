@@ -62,6 +62,8 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public final int ARBITRARY_IDENTIFIER_DAD_GUITAR = 750; //used for testing collision of Dad NPC with Acoustic Guitar
     public final int ARBITRARY_IDENTIFIER_DAD_MUSIC_CENTER = 850; //used for testing collision of Dad NPC with Music Center
+    public final int ARBITRARY_IDENTIFIER_CLOSEABLE_DOORS = 950; //used for closing doors behind player
+    public final int DOOR_COUNTER_TIMER = 50;
 
     //ENTITY AND OBJECT
     public final Player player = new Player(this,keyH);

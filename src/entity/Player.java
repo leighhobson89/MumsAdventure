@@ -61,8 +61,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 19;
-        worldY = gp.tileSize * 17;
+        worldX = gp.tileSize * 39; //19
+        worldY = gp.tileSize * 10;
         defaultSpeed = 2;
         boostSpeed = 4;
         speed = defaultSpeed;
@@ -110,7 +110,7 @@ public class Player extends Entity {
 
     public void setDefaultPositions() {
         gp.currentMap = 0;
-        worldX = gp.tileSize * 19;
+        worldX = gp.tileSize * 19; //19
         worldY = gp.tileSize * 17;
         direction = "up";
     }
@@ -573,7 +573,7 @@ public class Player extends Entity {
                 gp.obj[gp.currentMap][i] = null;
 
             }  //OBSTACLE
-            else if (gp.obj[gp.currentMap][i].type == type_music_device_dad || gp.obj[gp.currentMap][i].type == type_obstacle || gp.obj[gp.currentMap][i].type == type_hut) { //for doors and other obstacles that need to use objects to pass them
+            else if (gp.obj[gp.currentMap][i].type == type_closeable_door || gp.obj[gp.currentMap][i].type == type_music_device_dad || gp.obj[gp.currentMap][i].type == type_obstacle || gp.obj[gp.currentMap][i].type == type_hut) { //for doors and other obstacles that need to use objects to pass them
                 if (keyH.enterPressed) {
                     attackCanceled = true;
                     gp.obj[gp.currentMap][i].interact();

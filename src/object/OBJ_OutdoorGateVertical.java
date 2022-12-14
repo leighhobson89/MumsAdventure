@@ -3,9 +3,16 @@ package object;
 import entity.Entity;
 import main.GamePanel;
 
+import java.util.Objects;
+
 public class OBJ_OutdoorGateVertical extends Entity {
 
     final GamePanel gp;
+    boolean closeDoorFlag = false;
+    int tempWorldX = 0;
+    int tempWorldY = 0;
+    int tileDistance = 0;
+    int index = 0;
     public static final String OBJ_NAME = "OutdoorGateVerticalClosed";
 
     public OBJ_OutdoorGateVertical(GamePanel gp) {
@@ -13,8 +20,8 @@ public class OBJ_OutdoorGateVertical extends Entity {
         super(gp);
         this.gp = gp;
 
-        isUpdateable = false;
-        type = type_obstacle;
+        isUpdateable = true;
+        type = type_closeable_door;
         name = OBJ_NAME;
         displayName = "OutdoorGateVerticalClosed";
         direction = "down";
@@ -37,6 +44,33 @@ public class OBJ_OutdoorGateVertical extends Entity {
     public void setDialogue() {
         dialogueText[0][0] = "The gates's already open!";
     }
+
+    public void update() {
+
+        for (int i = 0; i < gp.npc[1].length; i++) {
+            if (opened && gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "Dad")) {
+                int touching = gp.cChecker.checkEntity(this, gp.npc);
+                if (touching == gp.ARBITRARY_IDENTIFIER_CLOSEABLE_DOORS && !closeDoorFlag) {
+                    index = i;
+                    tempWorldX = gp.npc[gp.currentMap][i].worldX/gp.tileSize;
+                    tempWorldY = gp.npc[gp.currentMap][i].worldY/gp.tileSize;
+                    closeDoorFlag = true;
+                }
+            }
+        }
+        tileDistance = Math.abs((gp.npc[gp.currentMap][index].worldX/gp.tileSize - tempWorldX) + (gp.npc[gp.currentMap][index].worldY/gp.tileSize - tempWorldY));
+        if (closeDoorFlag) {
+            if (tileDistance > 1) {
+                closeDoorFlag = false;
+            }
+            if (!closeDoorFlag) {
+                down1 = image;
+                collision = true;
+                opened = false;
+            }
+        }
+    }
+
     public void interact() {
         if (!opened) {
             gp.playSFX(4);

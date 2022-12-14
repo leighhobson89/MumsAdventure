@@ -19,8 +19,9 @@ public class NPC_RustyCooker extends Entity {
 
         name = npcName;
         direction = "down";
-        speed = 4;
+        speed = 0;
         collision = true;
+        onPath = false;
 
         dialogueSet = 0;
 
@@ -60,6 +61,12 @@ public class NPC_RustyCooker extends Entity {
         startDialogue(this, dialogueSet);
         if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) {
             dialogueSet = 1;
+        }
+    }
+
+    public void setAction(int goalCol, int goalRow) {
+        if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) {
+            speed = 4;
         }
     }
 

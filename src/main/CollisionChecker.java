@@ -166,6 +166,10 @@ public class CollisionChecker {
                                 index = gp.ARBITRARY_IDENTIFIER_DAD_MUSIC_CENTER;
                             }
                         }
+                        if ((Objects.equals(target[gp.currentMap][i].name, "Dad")) && entity.type == entity.type_closeable_door) {
+                            entity.collisionOn = false;
+                            index = gp.ARBITRARY_IDENTIFIER_CLOSEABLE_DOORS;
+                        }
                         if ((Objects.equals(target[gp.currentMap][i].name, "IT_Water"))  && entity.type == entity.type_player) {
                             entity.collisionOn = false;
                             index = i;
