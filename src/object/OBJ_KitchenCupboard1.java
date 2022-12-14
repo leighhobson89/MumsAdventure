@@ -18,7 +18,8 @@ public class OBJ_KitchenCupboard1 extends Entity {
         type = type_obstacle;
         name = OBJ_NAME;
         displayName = "Kitchen Cupboard";
-        down1 = setup("/objects/kitchenCupboard1", gp.tileSize, gp.tileSize);
+        image = setup("/objects/kitchenCupboard1", gp.tileSize, gp.tileSize);
+        down1 = image;
         direction = "down";
         collision = true;
 

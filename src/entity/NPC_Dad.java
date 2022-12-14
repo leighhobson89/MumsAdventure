@@ -216,6 +216,7 @@ public class NPC_Dad extends Entity {
     }
 
     public void setAction(int goalCol, int goalRow) {
+
         goalCol = 0;
         goalRow = 0;
         if (gp.player.dadOption == 0) { //MUSIC CENTER

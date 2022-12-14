@@ -92,9 +92,12 @@ public class CollisionChecker {
                     case "right" -> entity.solidArea.x += entity.speed;
                 }
 
-                if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && (Objects.equals(entity.name, "Pip") || Objects.equals(entity.name, "Phoebe") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) && gp.obj[gp.currentMap][i].npcCanWalkOnWhenFollowing) {
+                int tileXDistance = Math.abs((entity.worldX/gp.tileSize) - (gp.player.worldX/gp.tileSize));
+                int tileYDistance = Math.abs((entity.worldY/gp.tileSize) - (gp.player.worldY/gp.tileSize));
+
+                if ((entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && (Objects.equals(entity.name, "Pip") || Objects.equals(entity.name, "Phoebe") && gp.player.missionState == MissionStates.CHOP_CHICKEN_FOR_DOGS) && gp.obj[gp.currentMap][i].npcCanWalkOnWhenFollowing) || (tileXDistance > 10 && entity.onPath && (Objects.equals(entity.name, "Pip") || Objects.equals(entity.name, "Phoebe"))) || (tileYDistance > 6 && entity.onPath && (Objects.equals(entity.name, "Pip") || Objects.equals(entity.name, "Phoebe")))) {
                     entity.collisionOn = false;
-                } else if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && Objects.equals(entity.name, "Dad") && gp.obj[gp.currentMap][i].npcCanWalkOnWhenFollowing) {
+                } else if ((entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea) && Objects.equals(entity.name, "Dad") && gp.obj[gp.currentMap][i].npcCanWalkOnWhenFollowing) || (tileXDistance > 8 && Objects.equals(entity.name, "Dad")) || (tileYDistance > 6 && Objects.equals(entity.name, "Dad"))) {
                     gp.obj[gp.currentMap][i].collisionOn = false;
                 } else if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
                     if (gp.obj[gp.currentMap][i].collision) {

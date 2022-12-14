@@ -601,7 +601,6 @@ public class Entity {
                 }
             }
         }
-
         if (!isUpdateable) {
             if (knockBack) {
                 checkCollision();
@@ -632,7 +631,7 @@ public class Entity {
                 checkCollision();
 
                 //IF COLLISION IS FALSE, ENTITY CAN MOVE
-                if (!collisionOn) {
+                if (!collisionOn && !Objects.equals(this.name, "OldCooker")) {
                     switch (direction) {
                         case "up" -> worldY -= speed;
                         case "down" -> worldY += speed;
