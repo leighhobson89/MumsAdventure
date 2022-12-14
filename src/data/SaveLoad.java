@@ -136,6 +136,10 @@ public class SaveLoad {
             ds.dadHasGuitar = gp.player.dadHasGuitar;
             ds.dadPlayingGuitar = gp.player.dadPlayingGuitar;
             ds.musicCentreOn = gp.player.musicCentreOn;
+            ds.guitarToMusicCenterTransitionPart1 = gp.player.guitarToMusicCenterTransitionPart1;
+            ds.guitarToMusicCenterTransitionPart2 = gp.player.guitarToMusicCenterTransitionPart2;
+            ds.guitarToMusicCenterTransitionPart3 = gp.player.guitarToMusicCenterTransitionPart3;
+            ds.dadOption = gp.player.dadOption;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -349,6 +353,10 @@ public class SaveLoad {
             gp.player.dadHasGuitar = ds.dadHasGuitar;
             gp.player.dadPlayingGuitar = ds.dadPlayingGuitar;
             gp.player.musicCentreOn = ds.musicCentreOn;
+            gp.player.guitarToMusicCenterTransitionPart1 = ds.guitarToMusicCenterTransitionPart1;
+            gp.player.guitarToMusicCenterTransitionPart2 = ds.guitarToMusicCenterTransitionPart2;
+            gp.player.guitarToMusicCenterTransitionPart3 = ds.guitarToMusicCenterTransitionPart3;
+            gp.player.dadOption = ds.dadOption;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

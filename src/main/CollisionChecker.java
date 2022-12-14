@@ -160,7 +160,7 @@ public class CollisionChecker {
                         }
                         if ((Objects.equals(target[gp.currentMap][i].name, "Dad"))  && entity.type == entity.type_dads_guitar) {
                             entity.collisionOn = false;
-                            index = i;
+                            index = gp.ARBITRARY_IDENTIFIER_DAD;
                         }
                         if ((Objects.equals(target[gp.currentMap][i].name, "IT_Water"))  && entity.type == entity.type_player) {
                             entity.collisionOn = false;

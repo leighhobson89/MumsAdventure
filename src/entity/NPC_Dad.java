@@ -6,6 +6,7 @@ import object.OBJ_StainRemover;
 
 import java.awt.*;
 import java.util.Objects;
+import java.util.Random;
 
 public class NPC_Dad extends Entity {
     public NPC_Dad(GamePanel gp) {
@@ -183,110 +184,127 @@ public class NPC_Dad extends Entity {
     public void update() {
 
         super.update();
-        if (gp.currentMap == 0 && (gp.player.worldX >= (17 * gp.tileSize) && gp.player.worldX <= (21 * gp.tileSize)) && (gp.player.worldY >= (13 * gp.tileSize) && gp.player.worldY <= (18 * gp.tileSize))) { //if player in living room
+
+        if (gp.currentMap == 0 && !gp.player.inLivingRoom && (
+                gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceTopX && gp.player.worldY/gp.tileSize  == gp.player.livingRoomEntranceTopY) ||
+                (gp.player.worldX/gp.tileSize  == gp.player.livingRoomEntranceSideX && gp.player.worldY/gp.tileSize  == gp.player.livingRoomEntranceSideY) &&
+                    (Objects.equals(gp.player.direction, "left") || Objects.equals(gp.player.direction, "down"))
+        ) { //if player in living room
+            gp.player.justEnteredLivingRoom = true;
+        }
+
+        if (gp.player.justEnteredLivingRoom && (gp.player.worldX/gp.tileSize > 16 && gp.player.worldX/gp.tileSize < 23) && (gp.player.worldY/gp.tileSize > 11 && gp.player.worldY/gp.tileSize < 20)) { //if player just enetered living room
+            gp.player.justEnteredLivingRoom = false;
             gp.player.inLivingRoom = true;
             speed = defaultSpeed;
-        } else if (gp.currentMap != 0) {
-            gp.player.inLivingRoom = false;
-            speed = defaultSpeed;
-        } else {
-            gp.player.inLivingRoom = false;
-            speed = 2;
+            int ran = new Random().nextInt(100);
+            if (ran > 50) { //music center option
+                gp.player.dadOption = 0;
+            } else { //guitar play option
+                gp.player.dadOption = 1;
+            }
         }
+
+        if (gp.currentMap == 0 && gp.player.inLivingRoom && (Objects.equals(gp.player.direction, "right") || Objects.equals(gp.player.direction, "up")) && (gp.player.worldX/gp.tileSize <= 16 || gp.player.worldX/gp.tileSize >= 23) || (gp.player.worldY/gp.tileSize <= 11 || gp.player.worldY/gp.tileSize >= 20)) {
+            gp.player.inLivingRoom = false;
+        }
+        System.out.println("worldX: " + gp.player.worldX/ gp.tileSize + " worldY: " + gp.player.worldY/ gp.tileSize + " inLivingRoom " + gp.player.inLivingRoom + " dadOption: " + gp.player.dadOption);
+
     }
 
     public void setAction(int goalCol, int goalRow) {
         goalCol = 0;
         goalRow = 0;
-
-        if(onPath && !gp.player.inLivingRoom && !gp.player.dadHasGuitar) {
-            right2 = image2;
-            if (Objects.equals(gp.player.direction, "up")) { //dog chase player but stay one square behind
-                goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-                goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 2;
-            } else if (Objects.equals(gp.player.direction, "down")) {
-                goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-                goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) - 2;
-            } else if (Objects.equals(gp.player.direction, "right")) {
-                goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) - 2;
-                goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
-            } else if (Objects.equals(gp.player.direction, "left")) {
-                goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 2;
-                goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
-            }
-            searchPath(goalCol, goalRow);
-        } else if (onPath && !gp.player.inLivingRoom) {
-            gp.player.dadPlayingGuitar = false;
-            goalCol = 21;
-            goalRow = 18;
-            int actCol = worldX/gp.tileSize+1;
-            int actRow = worldY/gp.tileSize+1;
-
-            int xDistance = Math.abs(actCol - goalCol);
-            int yDistance = Math.abs(actRow - goalRow);
-            int tileDistance = ((xDistance*gp.tileSize) + (yDistance*gp.tileSize));
-
-            if (tileDistance > 1) {
-                searchPath(goalCol, goalRow);
-            } else {
-                speed = 2;
-                gp.player.dadHasGuitar = false;
-                down1 = down1Standard;
-                down2 = down2Standard;
-                up1 = up1Standard;
-                up2 = up2Standard;
-                left1 = left1Standard;
-                left2 = left2Standard;
-                right1 = right1Standard;
-                right2 = right2Standard;
-            }
-        } else if (onPath && gp.player.dadHasGuitar) {
-            down1 = down1Guitar;
-            down2 = down2Guitar;
-            up1 = up1Guitar;
-            up2 = up2Guitar;
-            left1 = left1Guitar;
-            left2 = left2Guitar;
-            right1 = right1Guitar;
-            right2 = right2Guitar;
-
-            goalCol = 17;
-            goalRow = 14;
-            int actCol = worldX/gp.tileSize+1;
-            int actRow = worldY/gp.tileSize+1;
-
-            int xDistance = Math.abs(actCol - goalCol);
-            int yDistance = Math.abs(actRow - goalRow);
-            int tileDistance = ((xDistance*gp.tileSize) + (yDistance*gp.tileSize));
-
-            if (tileDistance > 1) {
-                searchPath(goalCol, goalRow);
-            } else {
-                speed = 0;
-                right2 = right1Guitar;
-                direction = "right";
-                gp.player.dadPlayingGuitar = true;
-            }
-        } else if (onPath) {
-
-            goalCol = 21;
-            goalRow = 18;
-            int actCol = worldX/gp.tileSize;
-            int actRow = worldY/gp.tileSize;
-
-            int xDistance = Math.abs(actCol - goalCol);
-            int yDistance = Math.abs(actRow - goalRow);
-            int tileDistance = ((xDistance*gp.tileSize) + (yDistance*gp.tileSize));
-
-            if (tileDistance > 1) {
-                searchPath(goalCol, goalRow);
-            }
-        }
-        else {
+        if (gp.player.dadOption == 0) {
             if (checkEdgeOfMap(this)) {
                 turnEntityAround(this);
             } else {
                 getRandomDirection();
+            }
+        } else if (gp.player.dadOption == 1) {
+            if(onPath && !gp.player.inLivingRoom && !gp.player.dadHasGuitar) { //follow player when outside living room
+                speed = 2;
+                right2 = image2;
+                if (Objects.equals(gp.player.direction, "up")) {
+                    goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+                    goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 2;
+                } else if (Objects.equals(gp.player.direction, "down")) {
+                    goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+                    goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) - 2;
+                } else if (Objects.equals(gp.player.direction, "right")) {
+                    goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) - 2;
+                    goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+                } else if (Objects.equals(gp.player.direction, "left")) {
+                    goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 2;
+                    goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+                }
+                searchPath(goalCol, goalRow);
+            } else if (onPath && (!gp.player.inLivingRoom)) { // walk to put guitar back after player leaves living room
+                gp.player.dadPlayingGuitar = false;
+                goalCol = 21;
+                goalRow = 18;
+                int actCol = worldX/gp.tileSize+1;
+                int actRow = worldY/gp.tileSize+1;
+
+                int xDistance = Math.abs(actCol - goalCol);
+                int yDistance = Math.abs(actRow - goalRow);
+                int tileDistance = ((xDistance*gp.tileSize) + (yDistance*gp.tileSize));
+
+                if (tileDistance > 1) {
+                    searchPath(goalCol, goalRow);
+                } else { //once arrive at place for guitar, change images back and set follow speed
+                    speed = 2;
+                    gp.player.guitarToMusicCenterTransitionPart1 = false;
+                    gp.player.guitarToMusicCenterTransitionPart2 = true;
+                    gp.player.dadHasGuitar = false;
+                    down1 = down1Standard;
+                    down2 = down2Standard;
+                    up1 = up1Standard;
+                    up2 = up2Standard;
+                    left1 = left1Standard;
+                    left2 = left2Standard;
+                    right1 = right1Standard;
+                    right2 = right2Standard;
+                }
+            } else if (onPath && gp.player.dadHasGuitar) { // walk to sofa with guitar after picking it up
+                down1 = down1Guitar;
+                down2 = down2Guitar;
+                up1 = up1Guitar;
+                up2 = up2Guitar;
+                left1 = left1Guitar;
+                left2 = left2Guitar;
+                right1 = right1Guitar;
+                right2 = right2Guitar;
+                goalCol = 17;
+                goalRow = 14;
+                int actCol = worldX/gp.tileSize+1;
+                int actRow = worldY/gp.tileSize+1;
+
+                int xDistance = Math.abs(actCol - goalCol);
+                int yDistance = Math.abs(actRow - goalRow);
+                int tileDistance = ((xDistance*gp.tileSize) + (yDistance*gp.tileSize));
+
+                if (tileDistance > 1) {
+                    searchPath(goalCol, goalRow);
+                } else {
+                    speed = 0;
+                    right2 = right1Guitar;
+                    direction = "right";
+                    gp.player.dadPlayingGuitar = true;
+                }
+            } else if (onPath) { //walk to pick up guitar when player enters living room
+                goalCol = 21;
+                goalRow = 18;
+                int actCol = worldX/gp.tileSize;
+                int actRow = worldY/gp.tileSize;
+
+                int xDistance = Math.abs(actCol - goalCol);
+                int yDistance = Math.abs(actRow - goalRow);
+                int tileDistance = ((xDistance*gp.tileSize) + (yDistance*gp.tileSize));
+
+                if (tileDistance > 1) {
+                    searchPath(goalCol, goalRow);
+                }
             }
         }
     }

@@ -82,6 +82,10 @@ public class DataStorage implements Serializable {
     boolean dadHasGuitar;
     boolean dadPlayingGuitar;
     boolean musicCentreOn;
+    boolean guitarToMusicCenterTransitionPart1;
+    boolean guitarToMusicCenterTransitionPart2;
+    boolean guitarToMusicCenterTransitionPart3;
+    int dadOption;
 
     //PLAYER INVENTORY
     final ArrayList<String> itemNames = new ArrayList<>();

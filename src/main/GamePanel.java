@@ -60,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
     final Map map = new Map(this);
     public final EntityGenerator eGenerator = new EntityGenerator(this);
     Thread gameThread;
+    public final int ARBITRARY_IDENTIFIER_DAD = 750; //used for testing collision of Dad NPC with objects e.g. Acoustic Guitar
 
     //ENTITY AND OBJECT
     public final Player player = new Player(this,keyH);

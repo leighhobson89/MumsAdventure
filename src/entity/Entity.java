@@ -32,6 +32,10 @@ public class Entity {
     //STATE
     public int worldX, worldY;
     public final int phoneNormalWorldX = 816;
+    public final int livingRoomEntranceTopX = 18;
+    public final int livingRoomEntranceTopY = 11;
+    public final int livingRoomEntranceSideX = 22;
+    public final int livingRoomEntranceSideY = 16;
     public String direction = "right";
     public int spriteNum = 1;
     public int dialogueSet = 61;
@@ -88,15 +92,21 @@ public class Entity {
     public boolean currentDialogueFinished;
     public boolean stainRemoverUsed;
     public boolean toolHutKeyDropped;
+    public boolean tvIsOff = true;
     public boolean bucketFull;
     public int waspNestState;
     public boolean pillsInProcess;
     public boolean lightPillsInProcess;
     public boolean npcCanWalkOnWhenFollowing;
     public boolean inLivingRoom;
+    public int dadOption;
     public boolean dadHasGuitar;
     public boolean dadPlayingGuitar;
     public boolean musicCentreOn;
+    public boolean guitarToMusicCenterTransitionPart1;
+    public boolean guitarToMusicCenterTransitionPart2;
+    public boolean guitarToMusicCenterTransitionPart3;
+    public boolean justEnteredLivingRoom;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -164,7 +174,6 @@ public class Entity {
     public boolean haveBoneResource;
     public boolean haveChoppedChickenResource;
     public int tvRemoteIndex;
-    public boolean tvIsOff = true;
 
     //ITEM ATTRIBUTES
     public final ArrayList<Entity> inventory = new ArrayList<>();

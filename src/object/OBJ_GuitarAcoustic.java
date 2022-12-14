@@ -42,7 +42,7 @@ public class OBJ_GuitarAcoustic extends Entity {
     }
 
     public void update() {
-        if (gp.player.inLivingRoom) {
+        if (gp.player.inLivingRoom && !gp.player.guitarToMusicCenterTransitionPart1) {
             for (int i = 0; i < gp.npc[1].length; i++) {
                 if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "Dad")) {
                     int touching = gp.cChecker.checkEntity(this, gp.npc);
@@ -57,7 +57,7 @@ public class OBJ_GuitarAcoustic extends Entity {
             for (int i = 0; i < gp.npc[1].length; i++) {
                 if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "Dad")) {
                     int touching = gp.cChecker.checkEntity(this, gp.npc);
-                    if (touching != 999) {
+                    if (touching == gp.ARBITRARY_IDENTIFIER_DAD) {
                         down1 = image;
                         collision = true;
                     }
