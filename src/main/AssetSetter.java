@@ -277,6 +277,11 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_Music_Notes(gp);
+        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_TelephoneHall(gp);
         gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;

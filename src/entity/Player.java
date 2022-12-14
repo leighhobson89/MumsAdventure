@@ -573,7 +573,7 @@ public class Player extends Entity {
                 gp.obj[gp.currentMap][i] = null;
 
             }  //OBSTACLE
-            else if (gp.obj[gp.currentMap][i].type == type_dads_guitar || gp.obj[gp.currentMap][i].type == type_obstacle || gp.obj[gp.currentMap][i].type == type_hut) { //for doors and other obstacles that need to use objects to pass them
+            else if (gp.obj[gp.currentMap][i].type == type_music_device_dad || gp.obj[gp.currentMap][i].type == type_obstacle || gp.obj[gp.currentMap][i].type == type_hut) { //for doors and other obstacles that need to use objects to pass them
                 if (keyH.enterPressed) {
                     attackCanceled = true;
                     gp.obj[gp.currentMap][i].interact();

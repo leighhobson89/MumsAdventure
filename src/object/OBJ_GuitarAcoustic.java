@@ -18,7 +18,7 @@ public class OBJ_GuitarAcoustic extends Entity {
 
         isUpdateable = true;
         npcCanWalkOnWhenFollowing = true;
-        type = type_dads_guitar;
+        type = type_music_device_dad;
         name = OBJ_NAME;
         displayName = "Acoustic Guitar";
         image = setup("/objects/guitar1", gp.tileSize, gp.tileSize);
@@ -42,11 +42,11 @@ public class OBJ_GuitarAcoustic extends Entity {
     }
 
     public void update() {
-        if (gp.player.inLivingRoom && !gp.player.guitarToMusicCenterTransitionPart1) {
+        if (gp.player.inLivingRoom && gp.player.dadOption == 1) {
             for (int i = 0; i < gp.npc[1].length; i++) {
                 if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "Dad")) {
                     int touching = gp.cChecker.checkEntity(this, gp.npc);
-                    if (touching != 999) {
+                    if (touching == gp.ARBITRARY_IDENTIFIER_DAD_GUITAR) {
                         down1 = image2;
                         collision = false;
                         gp.player.dadHasGuitar = true;
@@ -57,7 +57,7 @@ public class OBJ_GuitarAcoustic extends Entity {
             for (int i = 0; i < gp.npc[1].length; i++) {
                 if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "Dad")) {
                     int touching = gp.cChecker.checkEntity(this, gp.npc);
-                    if (touching == gp.ARBITRARY_IDENTIFIER_DAD) {
+                    if (touching == gp.ARBITRARY_IDENTIFIER_DAD_GUITAR) {
                         down1 = image;
                         collision = true;
                     }

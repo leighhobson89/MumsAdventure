@@ -158,9 +158,13 @@ public class CollisionChecker {
                             entity.collisionOn = false;
                             index = i;
                         }
-                        if ((Objects.equals(target[gp.currentMap][i].name, "Dad"))  && entity.type == entity.type_dads_guitar) {
+                        if ((Objects.equals(target[gp.currentMap][i].name, "Dad")) && entity.type == entity.type_music_device_dad) {
                             entity.collisionOn = false;
-                            index = gp.ARBITRARY_IDENTIFIER_DAD;
+                            if (Objects.equals(entity.name, "Acoustic Guitar")) {
+                                index = gp.ARBITRARY_IDENTIFIER_DAD_GUITAR;
+                            } else if (Objects.equals(entity.name, "Music_Center")) {
+                                index = gp.ARBITRARY_IDENTIFIER_DAD_MUSIC_CENTER;
+                            }
                         }
                         if ((Objects.equals(target[gp.currentMap][i].name, "IT_Water"))  && entity.type == entity.type_player) {
                             entity.collisionOn = false;

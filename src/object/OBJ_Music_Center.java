@@ -3,6 +3,8 @@ package object;
 import entity.Entity;
 import main.GamePanel;
 
+import java.util.Objects;
+
 public class OBJ_Music_Center extends Entity {
 
     final GamePanel gp;
@@ -15,7 +17,7 @@ public class OBJ_Music_Center extends Entity {
 
         npcCanWalkOnWhenFollowing = true;
         isUpdateable = false;
-        type = type_obstacle;
+        type = type_music_device_dad;
         name = OBJ_NAME;
         displayName = "Music_Center";
         down1 = setup("/objects/cupboard2HorLounge", gp.tileSize, gp.tileSize);

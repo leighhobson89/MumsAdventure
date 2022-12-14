@@ -60,7 +60,8 @@ public class GamePanel extends JPanel implements Runnable {
     final Map map = new Map(this);
     public final EntityGenerator eGenerator = new EntityGenerator(this);
     Thread gameThread;
-    public final int ARBITRARY_IDENTIFIER_DAD = 750; //used for testing collision of Dad NPC with objects e.g. Acoustic Guitar
+    public final int ARBITRARY_IDENTIFIER_DAD_GUITAR = 750; //used for testing collision of Dad NPC with Acoustic Guitar
+    public final int ARBITRARY_IDENTIFIER_DAD_MUSIC_CENTER = 850; //used for testing collision of Dad NPC with Music Center
 
     //ENTITY AND OBJECT
     public final Player player = new Player(this,keyH);
@@ -423,7 +424,6 @@ public class GamePanel extends JPanel implements Runnable {
             int x = 10;
             int y = 400;
             int lineHeight = 35;
-            //END OF DEBUG DISPLAY CODE
 
             //DRAW WORLD POSITION DATA AND DRAW SPEED
             g2.drawString("WorldX: " + player.worldX, x, y); y += lineHeight;
@@ -432,6 +432,7 @@ public class GamePanel extends JPanel implements Runnable {
             g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
             g2.drawString("Draw Time: " + passed, x, y); y += lineHeight;
             g2.drawString("Current Map: " + currentMap, x, y);
+            //END OF DEBUG DISPLAY CODE
         } else {
             tileM.drawPathFinderTrack = false;
         }

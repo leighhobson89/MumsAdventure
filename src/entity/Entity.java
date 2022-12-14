@@ -103,9 +103,6 @@ public class Entity {
     public boolean dadHasGuitar;
     public boolean dadPlayingGuitar;
     public boolean musicCentreOn;
-    public boolean guitarToMusicCenterTransitionPart1;
-    public boolean guitarToMusicCenterTransitionPart2;
-    public boolean guitarToMusicCenterTransitionPart3;
     public boolean justEnteredLivingRoom;
 
     //COUNTER
@@ -222,7 +219,7 @@ public class Entity {
     public final int type_hut = 15;
     public final int type_flaming_aerosol = 16;
     public final int type_bucket = 17;
-    public final int type_dads_guitar = 18;
+    public final int type_music_device_dad = 18;
 
     public Entity(GamePanel gp) {
         this.gp = gp;

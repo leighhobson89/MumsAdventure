@@ -38,6 +38,20 @@ public class OBJ_Music_Notes extends Entity {
 
     public void update() {
         if (gp.player.dadPlayingGuitar) {
+            worldX = 16*gp.tileSize;
+            worldY = 14*gp.tileSize;
+            if (spriteCounter < 50) {
+                down1 = image2;
+            } else {
+                down1 = image3;
+            }
+            if (spriteCounter > 100) {
+                spriteCounter = 0;
+            }
+            spriteCounter++;
+        } else if (gp.player.musicCentreOn) {
+            worldX = 19*gp.tileSize;
+            worldY = 12*gp.tileSize;
             if (spriteCounter < 50) {
                 down1 = image2;
             } else {
