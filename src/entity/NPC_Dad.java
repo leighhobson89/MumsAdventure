@@ -218,7 +218,7 @@ public class NPC_Dad extends Entity {
     public void setAction(int goalCol, int goalRow) {
         goalCol = 0;
         goalRow = 0;
-        if (gp.player.dadOption == 0) {
+        if (gp.player.dadOption == 0) { //MUSIC CENTER
             if(onPath && !gp.player.inLivingRoom && !gp.player.musicCentreOn) { //follow player when outside living room
                 speed = 2;
                 if (Objects.equals(gp.player.direction, "up")) {
@@ -307,13 +307,7 @@ public class NPC_Dad extends Entity {
                     gp.player.musicCentreOn = true;
                 }
             }
-
-
-
-
-
-
-        } else if (gp.player.dadOption == 1) {
+        } else if (gp.player.dadOption == 1) { //GUITAR
             if(onPath && !gp.player.inLivingRoom && !gp.player.dadHasGuitar) { //follow player when outside living room
                 speed = 2;
                 right2 = image2;
