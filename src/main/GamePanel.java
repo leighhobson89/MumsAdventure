@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxWorldRow = 26;
     public final int maxMap = 10;
     public int currentMap = 0;
+    public int otherMap = 1;
     //FOR FULL SCREEN
     int screenWidth2 = screenWidth;
     int screenHeight2 = screenHeight;
@@ -68,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
     //ENTITY AND OBJECT
     public final Player player = new Player(this,keyH);
     public final Entity[][] obj = new Entity[maxMap][150];
-    public final Entity[][] npc = new Entity[maxMap][10];
+    public Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] monster = new Entity[maxMap][30];
     public final InteractiveTile[][] iTile = new InteractiveTile[maxMap][100];
     public final Entity[][] projectile = new Entity[maxMap][20];
@@ -205,6 +206,8 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println("FPS: " + drawCount);
                 System.out.println("MissionState: " + player.missionState);
                 System.out.println("Substate: " + player.missionSubstate);
+                System.out.println("CurrentMapNPCs:" + Arrays.toString(npc[currentMap]) + "\nOtherMapNPCs: " + Arrays.toString(npc[otherMap]));
+
                 drawCount = 0;
                 timer = 0;
             }

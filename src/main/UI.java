@@ -1056,6 +1056,7 @@ public class UI {
         if (counter == 50) {
             counter = 0;
             gp.gameState = gp.playState;
+            gp.otherMap = gp.currentMap;
             gp.currentMap = gp.eHandler.tempMap;
             gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
             gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;

@@ -680,7 +680,7 @@ public class AssetSetter {
     }
 
     public void setNPC() {
-        int mapNum = 0;
+        int mapNum = 0; //DOWNSTAIRS
         int i = 0;
 
         gp.npc[mapNum][i] = new NPC_Dad(gp);
@@ -711,15 +711,25 @@ public class AssetSetter {
         gp.npc[mapNum][i] = new NPC_RustyCooker(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*39;
         gp.npc[mapNum][i].worldY = gp.tileSize*8;
+        i++;
+
+        mapNum = 1;  //UPSTAIRS
+        i = 0;
+
+        gp.npc[mapNum][i] = new NPC_Dad(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize*19;
+        gp.npc[mapNum][i].worldY = gp.tileSize*17;
+        i++;
+
+        gp.npc[mapNum][i] = new NPC_Phoebe(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize*18;
+        gp.npc[mapNum][i].worldY = gp.tileSize*17;
+        i++;
+
+        gp.npc[mapNum][i] = new NPC_Pip(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize*21;
+        gp.npc[mapNum][i].worldY = gp.tileSize*17;
         //i++;
-
-
-        //        mapNum = 1;  //ADD NPCs TO NEXT MAP LIKE THIS
-//        i = 0;
-//        gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
-//        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
-//        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-//        i++;
     }
 
     public int setMonster(String type, int monsterNumber, int x, int y, int mapNum, boolean randomizeLocation) {

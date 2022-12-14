@@ -28,6 +28,8 @@ public class Entity {
     public final String[][] dialogueText = new String[100][20];
     public Entity attacker;
     public Entity linkedEntity;
+    public final int[][] downstairsPositions = {{0,19,10},{0,46,15},{0,58,17},{0,12,10},{0,15,19},{0,17,11},{0,18,13},{0,20,11},{0,23,15},{0,24,15},{0,28,11}}; //0 address is stairway for downstairs
+    public final int[][] upstairsPositions = {{1,24,10},{1,22,11},{1,19,16},{1,29,12},{1,27,18}}; //0 address is stairway for upstairs
 
     //STATE
     public int worldX, worldY;
@@ -105,6 +107,9 @@ public class Entity {
     public boolean musicCentreOn;
     public boolean justEnteredLivingRoom;
     public boolean andreaSafe;
+    public boolean withinView;
+    public boolean followingPlayer;
+    public boolean offMap;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -557,6 +562,23 @@ public class Entity {
     }
 
     public void update() {
+
+        //RELATED WITH NPC UPSTAIRS
+//        if (gp.currentMap == 0) {
+//            gp.otherMap = 1;
+//        } else if (gp.currentMap == 1) {
+//            gp.otherMap = 0;
+//        }
+
+        for (int i = 0; i < gp.npc[gp.otherMap].length; i++) { //sets npcs when player not on map
+            if (gp.npc[gp.otherMap][i] != null) {
+                gp.npc[gp.otherMap][i].speed = 0;
+                gp.npc[gp.otherMap][i].offMap = false;
+                gp.npc[gp.otherMap][i].withinView = false;
+                gp.npc[gp.otherMap][i].followingPlayer = false;
+            }
+        }
+        //
 
         int iTileIndex;
         if (gp.player.bookHutState == 1) {

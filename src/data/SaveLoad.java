@@ -78,6 +78,7 @@ public class SaveLoad {
 
             //MAP SELECTION
             ds.currentMap = gp.currentMap;
+            ds.otherMap = gp.otherMap;
 
             // PLAYER STATS
             ds.level = gp.player.level;
@@ -250,6 +251,9 @@ public class SaveLoad {
                         ds.mapNpcWorldX[mapNum][i] = gp.npc[mapNum][i].worldX;
                         ds.mapNpcWorldY[mapNum][i] = gp.npc[mapNum][i].worldY;
                         ds.mapNpcDirection[mapNum][i] = gp.npc[mapNum][i].direction;
+                        ds.mapNpcOffMap[mapNum][i] = gp.npc[mapNum][i].offMap;
+                        ds.mapNpcWithinView[mapNum][i] = gp.npc[mapNum][i].withinView;
+                        ds.mapNpcFollowingPlayer[mapNum][i] = gp.npc[mapNum][i].followingPlayer;
                     }
                 }
             }
@@ -284,6 +288,7 @@ public class SaveLoad {
 
             //MAP SELECTION
             gp.currentMap = ds.currentMap;
+            gp.otherMap = ds.otherMap;
 
             //PLAYER POSITION
             gp.player.worldX = ds.playerWorldX;
@@ -494,6 +499,9 @@ public class SaveLoad {
                         gp.npc[mapNum][i].worldX = ds.mapNpcWorldX[mapNum][i];
                         gp.npc[mapNum][i].worldY = ds.mapNpcWorldY[mapNum][i];
                         gp.npc[mapNum][i].direction = ds.mapNpcDirection[mapNum][i];
+                        gp.npc[mapNum][i].offMap = ds.mapNpcOffMap[mapNum][i];
+                        gp.npc[mapNum][i].withinView = ds.mapNpcWithinView[mapNum][i];
+                        gp.npc[mapNum][i].followingPlayer = ds.mapNpcFollowingPlayer[mapNum][i];
                     }
                 }
             }

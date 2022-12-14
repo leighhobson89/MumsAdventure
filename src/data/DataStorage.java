@@ -41,6 +41,7 @@ public class DataStorage implements Serializable {
     int playerWorldX;
     int playerWorldY;
     int currentMap;
+    int otherMap;
     boolean setShovelFlag;
     boolean repeatSfx;
     int dialogueSet;
@@ -116,4 +117,7 @@ public class DataStorage implements Serializable {
     int[][] mapNpcWorldX;
     int[][] mapNpcWorldY;
     String[][] mapNpcDirection;
+    boolean[][] mapNpcOffMap;
+    boolean[][] mapNpcWithinView;
+    boolean[][] mapNpcFollowingPlayer;
 }
