@@ -211,7 +211,7 @@ public class NPC_Dad extends Entity {
         if (gp.currentMap == 0 && gp.player.inLivingRoom && (Objects.equals(gp.player.direction, "right") || Objects.equals(gp.player.direction, "up")) && (gp.player.worldX/gp.tileSize <= 16 || gp.player.worldX/gp.tileSize >= 22) || (gp.player.worldY/gp.tileSize <= 11 || gp.player.worldY/gp.tileSize >= 20)) {
             gp.player.inLivingRoom = false;
         }
-        System.out.println("worldX: " + gp.player.worldX/ gp.tileSize + " worldY: " + gp.player.worldY/ gp.tileSize + " inLivingRoom " + gp.player.inLivingRoom + " dadOption: " + gp.player.dadOption + " dadHasGuitar " + gp.player.dadHasGuitar + " dadPlayingGuitar: " + gp.player.dadPlayingGuitar + " musicCenterOn: " + gp.player.musicCentreOn + " waypoint: " + waypoint);
+        //System.out.println("worldX: " + gp.player.worldX/ gp.tileSize + " worldY: " + gp.player.worldY/ gp.tileSize + " inLivingRoom " + gp.player.inLivingRoom + " dadOption: " + gp.player.dadOption + " dadHasGuitar " + gp.player.dadHasGuitar + " dadPlayingGuitar: " + gp.player.dadPlayingGuitar + " musicCenterOn: " + gp.player.musicCentreOn + " waypoint: " + waypoint);
 
     }
 

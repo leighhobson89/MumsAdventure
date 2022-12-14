@@ -3,6 +3,8 @@ package data;
 import entity.*;
 import main.GamePanel;
 import main.MissionStates;
+import monster.MON_CarGoingDown;
+import monster.MON_CarGoingUp;
 import monster.MON_Spider;
 import monster.MON_WaspSwarm;
 import object.OBJ_Flammable_Spray;
@@ -25,6 +27,8 @@ public class SaveLoad {
         return switch (itemName) {
             case "Spider" -> new MON_Spider(gp);
             case "WaspSwarm" -> new MON_WaspSwarm(gp);
+            case "CarGoingDown" -> new MON_CarGoingDown(gp);
+            case "CarGoingUp" -> new MON_CarGoingUp(gp);
             default -> null;
         };
     }
@@ -137,6 +141,7 @@ public class SaveLoad {
             ds.dadPlayingGuitar = gp.player.dadPlayingGuitar;
             ds.musicCentreOn = gp.player.musicCentreOn;
             ds.dadOption = gp.player.dadOption;
+            ds.andreaSafe = gp.player.andreaSafe;
 
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
@@ -231,10 +236,10 @@ public class SaveLoad {
             //NPCS ON MAP
             ds.andreaOnMap = gp.player.andreaOnMap;
 
-            ds.mapNpcNames = new String[gp.maxMap][gp.monster[1].length];
-            ds.mapNpcWorldX = new int[gp.maxMap][gp.monster[1].length];
-            ds.mapNpcWorldY = new int[gp.maxMap][gp.monster[1].length];
-            ds.mapNpcDirection = new String[gp.maxMap][gp.monster[1].length];
+            ds.mapNpcNames = new String[gp.maxMap][gp.npc[1].length];
+            ds.mapNpcWorldX = new int[gp.maxMap][gp.npc[1].length];
+            ds.mapNpcWorldY = new int[gp.maxMap][gp.npc[1].length];
+            ds.mapNpcDirection = new String[gp.maxMap][gp.npc[1].length];
 
             for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
                 for (int i = 0; i < gp.npc[1].length; i++) {
@@ -351,6 +356,7 @@ public class SaveLoad {
             gp.player.dadPlayingGuitar = ds.dadPlayingGuitar;
             gp.player.musicCentreOn = ds.musicCentreOn;
             gp.player.dadOption = ds.dadOption;
+            gp.player.andreaSafe = ds.andreaSafe;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
@@ -474,6 +480,11 @@ public class SaveLoad {
                 for (int i = 0; i < gp.npc[1].length; i++) {
                     if (gp.npc[mapNum][i] != null && ((Objects.equals(gp.npc[mapNum][i].name, "OldCooker") || Objects.equals(gp.npc[mapNum][i].name, "Merchant")) && ds.missionState >= MissionStates.NOT_GET_PAID_FOR_OLD_COOKER)) {
                         gp.npc[mapNum][i] = null;
+                    }
+                    if (gp.player.andreaSafe) {
+                        if (gp.npc[mapNum][i] != null && Objects.equals(gp.npc[mapNum][i].name, "Andrea")) {
+                            gp.npc[mapNum][i] = null;
+                        }
                     }
                     if (ds.mapNpcNames[mapNum][i].equals("NA")) {
                         gp.npc[mapNum][i] = null;

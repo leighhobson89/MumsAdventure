@@ -61,7 +61,9 @@ public class OBJ_BackGate extends Entity {
                 }
             }
         }
-        tileDistance = Math.abs((gp.npc[gp.currentMap][index].worldX/gp.tileSize - tempWorldX) + (gp.npc[gp.currentMap][index].worldY/gp.tileSize - tempWorldY));
+        if (gp.npc[gp.currentMap][index] != null) {
+            tileDistance = Math.abs((gp.npc[gp.currentMap][index].worldX / gp.tileSize - tempWorldX) + (gp.npc[gp.currentMap][index].worldY / gp.tileSize - tempWorldY));
+        }
         if (closeDoorFlag) {
             if (tileDistance > 1) {
                 closeDoorFlag = false;

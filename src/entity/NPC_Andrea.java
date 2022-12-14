@@ -6,9 +6,11 @@ import object.OBJ_AmandaCoat;
 import object.OBJ_Pills;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class NPC_Andrea extends Entity {
 
+    int tileDistance = 0;
     public NPC_Andrea(GamePanel gp) {
         super(gp);
 
@@ -93,14 +95,28 @@ public class NPC_Andrea extends Entity {
     }
 
     public void setAction(int goalCol, int goalRow) {
-
         if(onPath) {
-            if (gp.player.missionState == MissionStates.HELP_ANDREA_OUT) {
+            if (gp.player.missionState == MissionStates.HELP_ANDREA_OUT && gp.player.missionSubstate < 3) {
                 goalCol = 9;
                 goalRow = 9;
+            } else {
+                goalCol = 1;
+                goalRow = 1;
             }
-
             searchPath(goalCol, goalRow);
+        }
+        tileDistance = Math.abs(((worldX / gp.tileSize) - goalCol) + ((worldY / gp.tileSize) - goalRow));
+        System.out.println(gp.player.missionList);
+        if (tileDistance < 1 && gp.player.missionSubstate == 3) {
+            gp.player.andreaSafe = true;
+            for (int i = 0; i < gp.npc[1].length; i++) {
+                if (gp.npc[gp.currentMap][i] != null) {
+                    if (Objects.equals(gp.npc[gp.currentMap][i].name, "Andrea")) {
+                        gp.npc[gp.currentMap][i] = null;
+                    }
+                }
+            }
+            gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT, true);
         }
     }
 

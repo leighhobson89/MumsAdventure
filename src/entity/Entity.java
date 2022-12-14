@@ -104,6 +104,7 @@ public class Entity {
     public boolean dadPlayingGuitar;
     public boolean musicCentreOn;
     public boolean justEnteredLivingRoom;
+    public boolean andreaSafe;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -1201,12 +1202,10 @@ public class Entity {
                         if (gp.npc[gp.currentMap][i] != null) {
                             if (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker")) {
                                 gp.npc[gp.currentMap][i] = null;
-
                             }
                             if (gp.npc[gp.currentMap][i] != null) {
                                 if (Objects.equals(gp.npc[gp.currentMap][i].name, "Merchant")) {
                                     gp.npc[gp.currentMap][i] = null;
-
                                 }
                             }
                         }

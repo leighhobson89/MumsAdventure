@@ -49,7 +49,7 @@ public class TileManager {
         setup(15, "pathHorizontal", false);
         setup(16, "pathVertical", false);
         setup(17, "rockery", true);
-        setup(18, "hedge", true);
+        setup(18, "hedge", false);
         setup(19, "fence1", true);
         setup(22, "sofaTop", false);
         setup(23, "sofaBottom", true);

@@ -1374,7 +1374,6 @@ public class UI {
                             gp.player.andreaTempGoalCol = 0;
                             gp.player.andreaTempGoalRow = 0;
                             npc.startDialogue(npc, 6);
-                            gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT, true);
                             gp.player.AndreaLeaveSetup(npc);
                             commandNum = 0;
                             subState = 0;
@@ -1480,7 +1479,6 @@ public class UI {
                                     gp.player.andreaTempGoalCol = 0;
                                     gp.player.andreaTempGoalRow = 0;
                                     npc.startDialogue(npc, 6);
-                                    gp.misStat.endMissionTasks(MissionStates.HELP_ANDREA_OUT, true);
                                     gp.player.AndreaLeaveSetup(npc);
                                 } else {
                                     npc.startDialogue(npc, 8);
