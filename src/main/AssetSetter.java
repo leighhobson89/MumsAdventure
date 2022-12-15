@@ -689,8 +689,8 @@ public class AssetSetter {
         i++;
 
         gp.npc[mapNum][i] = new NPC_Phoebe(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize*18; //23
-        gp.npc[mapNum][i].worldY = gp.tileSize*10; //17
+        gp.npc[mapNum][i].worldX = gp.tileSize*23; //23
+        gp.npc[mapNum][i].worldY = gp.tileSize*17; //17
         i++;
 
         gp.npc[mapNum][i] = new NPC_Pip(gp);
