@@ -56,17 +56,18 @@ public class NPC_Pip extends Entity {
 //        System.out.println("time to wait: " + timeToBeOffMap + "\ntime passed: " + transitionCounter + "\noffMap: " + offMap);
 //        for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
 //            if (gp.npc[gp.otherMap][i] != null && Objects.equals(gp.npc[gp.otherMap][i].name, this.name)) {
-//                System.out.println("offOtherMap: " + gp.npc[gp.otherMap][i].offMap);
+//                System.out.println("offOtherMap: " + gp.npc[gp.otherMap][i].offMap + "onPath: " + onPath);
 //            }
 //        }
 //        //
-        if (offMap) {
+        if (offMap && gp.player.currentProjectile == null) {
             if (timeToBeOffMap > transitionCounter) {
                 transitionCounter++;
             } else {
                 for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
                     if (gp.npc[gp.otherMap][i] != null && Objects.equals(gp.npc[gp.otherMap][i].name, this.name)) {
                         gp.npc[gp.otherMap][i].offMap = true;
+                        gp.npc[gp.otherMap][i].onPath = false;
                         gp.npc[gp.otherMap][i].speed = 0;
                         if (gp.otherMap == 0) {
                             gp.npc[gp.otherMap][i].worldX = gp.tileSize;
@@ -77,6 +78,7 @@ public class NPC_Pip extends Entity {
                         }
                     }
                 }
+                onPath = false;
                 timeToBeOffMap = 0;
                 transitionCounter = 0;
                 offMap = false;
@@ -107,6 +109,35 @@ public class NPC_Pip extends Entity {
             //System.out.println("WithinViewPip: " + withinView);
 
             if (gp.player.currentProjectile != null) {
+                for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
+                    if (gp.npc[gp.otherMap][i] != null && Objects.equals(gp.npc[gp.otherMap][i].name, this.name)) {
+                        gp.npc[gp.otherMap][i].offMap = true;
+                        gp.npc[gp.otherMap][i].speed = 0;
+                        if (gp.otherMap == 0) {
+                            gp.npc[gp.otherMap][i].worldX = gp.tileSize;
+                            gp.npc[gp.otherMap][i].worldY = gp.tileSize;
+                        } else if (gp.otherMap == 1) {
+                            gp.npc[gp.otherMap][i].worldX = 50 * gp.tileSize;
+                            gp.npc[gp.otherMap][i].worldY = 5 * gp.tileSize;
+                        }
+                    }
+                }
+                timeToBeOffMap = 0;
+                transitionCounter = 0;
+                offMap = false;
+                if (gp.currentMap == 0 && callingNPCBack) {
+                    worldX = 18 * gp.tileSize;
+                    worldY = 10 * gp.tileSize;
+                    direction = "down";
+                    speed = defaultSpeed;
+                    callingNPCBack = false;
+                } else if (gp.currentMap == 1 && callingNPCBack) {
+                    worldX = 25 * gp.tileSize;
+                    worldY = 10 * gp.tileSize;
+                    direction = "right";
+                    speed = defaultSpeed;
+                    callingNPCBack = false;
+                }
                 if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0) {
                     //follow player
                     onPath = true;

@@ -183,6 +183,7 @@ public class EventHandler {
                         entity.offMap = true;
                         int ran;
                         gp.npc[gp.otherMap][i].speed = gp.npc[gp.otherMap][i].defaultSpeed;
+                        gp.npc[gp.otherMap][i].onPath = false;
                         if (gp.otherMap == 0) {
                             ran = new Random().nextInt(gp.player.downstairsPositions.length);
                             gp.npc[gp.otherMap][i].worldX = gp.player.downstairsPositions[ran][1]*gp.tileSize;

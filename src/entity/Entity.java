@@ -179,6 +179,7 @@ public class Entity {
     public int tvRemoteIndex;
     public boolean hasOutsideDoorsKey;
     public int timeToBeOffMap;
+    public boolean callingNPCBack;
 
     //ITEM ATTRIBUTES
     public final ArrayList<Entity> inventory = new ArrayList<>();

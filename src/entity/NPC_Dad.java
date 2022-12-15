@@ -193,6 +193,7 @@ public class NPC_Dad extends Entity {
                 for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
                     if (gp.npc[gp.otherMap][i] != null && Objects.equals(gp.npc[gp.otherMap][i].name, this.name)) {
                         gp.npc[gp.otherMap][i].offMap = true;
+                        gp.npc[gp.otherMap][i].onPath = false;
                         gp.npc[gp.otherMap][i].speed = 0;
                         if (gp.otherMap == 0) {
                             gp.npc[gp.otherMap][i].worldX = gp.tileSize;

@@ -610,6 +610,13 @@ public class Player extends Entity {
                     }
 
                     if (Objects.equals(gp.obj[gp.currentMap][i].name, "Pip's Bone")) {
+                        for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
+                            if (gp.npc[gp.currentMap][j] != null && Objects.equals(gp.npc[gp.currentMap][j].name, "Pip")) {
+                                if (gp.npc[gp.currentMap][j].offMap) {
+                                    gp.npc[gp.currentMap][j].callingNPCBack = true;
+                                }
+                            }
+                        }
                         if (firstTimePickUpBone) {
                             gp.gameState = gp.dialogueState;
                             this.startDialogue(this, 0);
@@ -620,6 +627,13 @@ public class Player extends Entity {
                     }
 
                     if (Objects.equals(gp.obj[gp.currentMap][i].name, "Chopped Chicken")) {
+                        for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
+                            if (gp.npc[gp.currentMap][j] != null && (Objects.equals(gp.npc[gp.currentMap][j].name, "Phoebe") || Objects.equals(gp.npc[gp.currentMap][j].name, "Pip"))) {
+                                if (gp.npc[gp.currentMap][j].offMap) {
+                                    gp.npc[gp.currentMap][j].callingNPCBack = true;
+                                }
+                            }
+                        }
                         choppedChickenCount++;
                         gp.player.chickenIndex = gp.player.inventory.size()-1;
                     }
@@ -1015,8 +1029,22 @@ public class Player extends Entity {
             } else if (selectedItem.isProjectile && selectedItem != currentProjectile && currentProjectile == null) {
                 currentProjectile = selectedItem;
                 if (Objects.equals(selectedItem.name, "Pip's Bone")) {
+                    for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
+                        if (gp.npc[gp.currentMap][j] != null && (Objects.equals(gp.npc[gp.currentMap][j].name, "Pip"))) {
+                            if (gp.npc[gp.currentMap][j].offMap) {
+                                gp.npc[gp.currentMap][j].callingNPCBack = true;
+                            }
+                        }
+                    }
                     projectile = new OBJ_PipsBone(gp);
                 } else if (Objects.equals(selectedItem.name, "Chopped Chicken")) {
+                    for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
+                        if (gp.npc[gp.currentMap][j] != null && (Objects.equals(gp.npc[gp.currentMap][j].name, "Phoebe") || Objects.equals(gp.npc[gp.currentMap][j].name, "Pip"))) {
+                            if (gp.npc[gp.currentMap][j].offMap) {
+                                gp.npc[gp.currentMap][j].callingNPCBack = true;
+                            }
+                        }
+                    }
                     projectile = new OBJ_ChoppedChicken(gp);
                 }
                 gp.playSFX(11);
