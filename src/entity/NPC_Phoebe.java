@@ -73,7 +73,7 @@ public class NPC_Phoebe extends Entity {
 //            }
 //        }
 //        //
-        if (offMap && gp.player.currentProjectile == null) {
+        if (offMap && (gp.player.currentProjectile == null || !Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken"))) {
             if (timeToBeOffMap > transitionCounter) {
                 transitionCounter++;
             } else {
