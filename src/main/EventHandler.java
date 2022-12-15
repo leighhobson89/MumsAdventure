@@ -45,52 +45,52 @@ public class EventHandler {
         }
     }
 
-    public void checkEvent() {
+    public void checkEvent(Entity entity) {
 
-        //Check if the player character is more than 1 tile away from the last event
-        int xDistance = Math.abs(gp.player.worldX - previousEventX);
-        int yDistance = Math.abs(gp.player.worldY - previousEventY);
+        //Check if the character is more than 1 tile away from the last event
+        int xDistance = Math.abs(entity.worldX - previousEventX);
+        int yDistance = Math.abs(entity.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
         if (distance > gp.tileSize) {
             canTouchEvent = true;
         }
 
         if (canTouchEvent) {
-            if (hit(0, 19, 10, "right", "")) {transitionUpDownStairs(1, 24, 10);}
-            else if (hit(1, 24, 10, "left", "")) {transitionUpDownStairs(0, 19, 10);}
-            else if (hit(0, 37, 8, "down", "up")) {
+            if (entityHit(entity,0, 19, 10, "right", "")) {transitionUpDownStairs(entity,1, 24, 10);}
+            else if (entityHit(entity,1, 24, 10, "left", "")) {transitionUpDownStairs(entity,0, 19, 10);}
+            else if (entityHit(entity,0, 37, 8, "down", "up") && entity.type == entity.type_player) {
                 flagInsideBookHut(false);
-            } else if (hit(0, 37, 8, "up", "down")) {
+            } else if (entityHit(entity,0, 37, 8, "up", "down") && entity.type == entity.type_player) {
                 flagInsideBookHut(true);
-            } else if (hit(0, 33, 8, "down", "up")) {
+            } else if (entityHit(entity,0, 33, 8, "down", "up") && entity.type == entity.type_player) {
                 flagInsideToolHut(false);
-            } else if (hit(0, 33, 8, "up", "down")) {
+            } else if (entityHit(entity,0, 33, 8, "up", "down") && entity.type == entity.type_player) {
                 flagInsideToolHut(true);
             }
         }
     }
 
-    public boolean hit(int map, int col, int row, String reqDirection, String exclude) {
+    public boolean entityHit(Entity entity, int map, int col, int row, String reqDirection, String exclude) {
 
         boolean hit = false;
 
         if (map == gp.currentMap) {
-            gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
-            gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
+            entity.solidArea.x = entity.worldX + entity.solidArea.x;
+            entity.solidArea.y = entity.worldY + entity.solidArea.y;
             eventRect[map][col][row].x = col*gp.tileSize + eventRect[map][col][row].x;
             eventRect[map][col][row].y = row*gp.tileSize + eventRect[map][col][row].y;
 
-            if (gp.player.solidArea.intersects(eventRect[map][col][row]) && !eventRect[map][col][row].eventDone) {
-                if (gp.player.direction.contentEquals(reqDirection) || (reqDirection.contentEquals("any") && !reqDirection.contentEquals(exclude))) {
+            if (entity.solidArea.intersects(eventRect[map][col][row]) && !eventRect[map][col][row].eventDone) {
+                if (entity.direction.contentEquals(reqDirection) || (reqDirection.contentEquals("any") && !reqDirection.contentEquals(exclude))) {
                     hit = true;
 
-                    previousEventX = gp.player.worldX;
-                    previousEventY = gp.player.worldY;
+                    previousEventX = entity.worldX;
+                    previousEventY = entity.worldY;
                 }
             }
 
-            gp.player.solidArea.x = gp.player.solidAreaDefaultX;
-            gp.player.solidArea.y = gp.player.solidAreaDefaultY;
+            entity.solidArea.x = entity.solidAreaDefaultX;
+            entity.solidArea.y = entity.solidAreaDefaultY;
             eventRect[map][col][row].x = eventRect[map][col][row].eventRectDefaultX;
             eventRect[map][col][row].y = eventRect[map][col][row].eventRectDefaultY;
         }
@@ -163,7 +163,7 @@ public class EventHandler {
         int randY = optionArray[randomLocation][2];
 
         if (map != currentMap) {
-            transitionUpDownStairs(map, randX, randY);
+            transitionUpDownStairs(gp.player, map, randX, randY);
         } else {
             gp.player.worldX = gp.tileSize*randX;
             gp.player.worldY = gp.tileSize*randY;
@@ -171,26 +171,43 @@ public class EventHandler {
         gp.player.stressLevel = 0;
     }
 
-    public void transitionUpDownStairs(int map, int col, int row) {
-
+    public void transitionUpDownStairs(Entity entity, int map, int col, int row) {
         tempMap = map;
         tempCol = col;
         tempRow = row;
-        gp.gameState = gp.transitionState;
 
-        if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset movable object if change area, and it is not where it needs to be
-            for (int i = 0; i < gp.npc[1].length; i++) {
-                if (gp.npc[gp.currentMap][i] != null && (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker"))) {
-                    if (gp.npc[gp.currentMap][i].linkedEntity == null) {
-                        gp.npc[gp.currentMap][i].worldX = 39 * gp.tileSize;
-                        gp.npc[gp.currentMap][i].worldY = 8 * gp.tileSize;
+        if (Objects.equals(entity.name, "Dad") || Objects.equals(entity.name, "Phoebe") || Objects.equals(entity.name, "Pip")) {
+            if (!entity.followingPlayer && entity.withinView) { //eligible to transition alone
+                entity.offMap = true;
+                entity.speed = 0;
+                entity.worldX = gp.tileSize;
+                entity.worldY = gp.tileSize;
+                generateOffMapTimerValue(entity);
+            }
+        }
+
+        if (entity.type == entity.type_player) {
+            gp.gameState = gp.transitionState;
+
+            if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset movable object if change area, and it is not where it needs to be
+                for (int i = 0; i < gp.npc[1].length; i++) {
+                    if (gp.npc[gp.currentMap][i] != null && (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker"))) {
+                        if (gp.npc[gp.currentMap][i].linkedEntity == null) {
+                            gp.npc[gp.currentMap][i].worldX = 39 * gp.tileSize;
+                            gp.npc[gp.currentMap][i].worldY = 8 * gp.tileSize;
+                        }
+                        break;
                     }
                 }
             }
+            setImageStates(tempMap);
+            canTouchEvent = false;
+            //add sound effect stairs
         }
-        setImageStates(tempMap);
-        canTouchEvent = false;
-        //add sound effect stairs
+    }
+
+    private void generateOffMapTimerValue(Entity entity) {
+        entity.timeToBeOffMap = new Random().nextInt(1500) + 2000; //how long npc should disappear offMap if transition
     }
 
     public void setImageStates(int tempMap) {

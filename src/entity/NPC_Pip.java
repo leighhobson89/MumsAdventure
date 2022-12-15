@@ -51,71 +51,85 @@ public class NPC_Pip extends Entity {
     }
 
     public void update() {
-        super.update();
 
-        int xDistance = Math.abs(worldX - gp.player.worldX);
-        int yDistance = Math.abs(worldY - gp.player.worldY);
-        int tileDistance = (xDistance + yDistance)/gp.tileSize;
-
-        if (tileDistance > 10) {
-            withinView = false;
+        if (offMap) {
+            if (timeToBeOffMap > transitionCounter) {
+                transitionCounter++;
+            } else {
+                offMap = false;
+                worldX = 18 * gp.tileSize;
+                worldY = 10 * gp.tileSize;
+                direction = "down";
+                speed = defaultSpeed;
+            }
         } else {
-            withinView = true;
-        }
-        //System.out.println("WithinViewPip: " + withinView);
+            super.update();
+            gp.eHandler.checkEvent(this);
 
-        if (gp.player.currentProjectile != null) {
-            if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0) {
-                //follow player
-                onPath = true;
-                speed = 4;
-            } else if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && tileDistance > TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE) {
-                speed = 2;
-                onPath = false;
-            } else if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN) && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
-                onPath = true;
-                speed = 5;
-            } else if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN)) {
-                onPath = true;
-                speed = 5;
+            int xDistance = Math.abs(worldX - gp.player.worldX);
+            int yDistance = Math.abs(worldY - gp.player.worldY);
+            int tileDistance = (xDistance + yDistance)/gp.tileSize;
+
+            if (tileDistance > 10) {
+                withinView = false;
+            } else {
+                withinView = true;
             }
-        }
-        else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0 && gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
-            onPath = true;
-            speed = 5;
-        }
-        else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
-            //follow bone
-            xDistance = Math.abs(worldX - gp.aSetter.boneX);
-            yDistance = Math.abs(worldY - gp.aSetter.boneY);
-            tileDistance = (xDistance + yDistance)/gp.tileSize;
-            if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE && tileDistance >= 1) {
-                onPath = true;
-                speed = 5;
-            } else if (tileDistance < 1) {
-                speed = 0;
-            }
-            else {
-                speed = 2;
-                onPath = false;
-            }
-        } else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") > 0) {
-            //follow chicken
-            xDistance = Math.abs(worldX - gp.aSetter.choppedChickenPipX);
-            yDistance = Math.abs(worldY - gp.aSetter.choppedChickenPipY);
-            tileDistance = (xDistance + yDistance)/gp.tileSize;
-            if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN && tileDistance >= 1) {
-                onPath = true;
-                speed = 5;
-            } else if (tileDistance < 1) {
-                speed = 0;
-                if (!gp.player.pipChickenEaten) {
-                    gp.player.startCounterPipEatingChicken = true;
+            //System.out.println("WithinViewPip: " + withinView);
+
+            if (gp.player.currentProjectile != null) {
+                if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0) {
+                    //follow player
+                    onPath = true;
+                    speed = 4;
+                } else if (Objects.equals(gp.player.currentProjectile.name, "Pip's Bone") && tileDistance > TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE) {
+                    speed = 2;
+                    onPath = false;
+                } else if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN) && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
+                    onPath = true;
+                    speed = 5;
+                } else if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN)) {
+                    onPath = true;
+                    speed = 5;
                 }
             }
-            else {
-                speed = 2;
-                onPath = false;
+            else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0 && gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
+                onPath = true;
+                speed = 5;
+            }
+            else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
+                //follow bone
+                xDistance = Math.abs(worldX - gp.aSetter.boneX);
+                yDistance = Math.abs(worldY - gp.aSetter.boneY);
+                tileDistance = (xDistance + yDistance)/gp.tileSize;
+                if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_BONE && tileDistance >= 1) {
+                    onPath = true;
+                    speed = 5;
+                } else if (tileDistance < 1) {
+                    speed = 0;
+                }
+                else {
+                    speed = 2;
+                    onPath = false;
+                }
+            } else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") > 0) {
+                //follow chicken
+                xDistance = Math.abs(worldX - gp.aSetter.choppedChickenPipX);
+                yDistance = Math.abs(worldY - gp.aSetter.choppedChickenPipY);
+                tileDistance = (xDistance + yDistance)/gp.tileSize;
+                if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN && tileDistance >= 1) {
+                    onPath = true;
+                    speed = 5;
+                } else if (tileDistance < 1) {
+                    speed = 0;
+                    if (!gp.player.pipChickenEaten) {
+                        gp.player.startCounterPipEatingChicken = true;
+                    }
+                }
+                else {
+                    speed = 2;
+                    onPath = false;
+                }
             }
         }
     }

@@ -132,6 +132,7 @@ public class Entity {
     public int lightPillsCounter = 0;
     public int carCountDown;
     public int carCountUp;
+    public int transitionCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -177,6 +178,7 @@ public class Entity {
     public boolean haveChoppedChickenResource;
     public int tvRemoteIndex;
     public boolean hasOutsideDoorsKey;
+    public int timeToBeOffMap;
 
     //ITEM ATTRIBUTES
     public final ArrayList<Entity> inventory = new ArrayList<>();
@@ -297,6 +299,7 @@ public class Entity {
         pillsCounter = 0;
         carCountDown = 0;
         carCountUp = 0;
+        transitionCounter = 0;
     }
     //public void setLoot(Entity loot) {}
     public void move(String direction) {}

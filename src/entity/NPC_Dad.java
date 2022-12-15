@@ -186,44 +186,57 @@ public class NPC_Dad extends Entity {
 
     public void update() {
 
-        super.update();
-
-        int xDistance = Math.abs(worldX - gp.player.worldX);
-        int yDistance = Math.abs(worldY - gp.player.worldY);
-        int tileDistance = (xDistance + yDistance)/gp.tileSize;
-
-        if (tileDistance > 10) {
-            withinView = false;
-        } else {
-            withinView = true;
-        }
-        //System.out.println("WithinViewDad: " + withinView);
-
-        if (gp.currentMap == 0 && !gp.player.inLivingRoom && (
-                gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceTopX && gp.player.worldY/gp.tileSize == gp.player.livingRoomEntranceTopY) ||
-                (gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceSideX && gp.player.worldY/gp.tileSize == gp.player.livingRoomEntranceSideY) &&
-                    (Objects.equals(gp.player.direction, "left") || Objects.equals(gp.player.direction, "down"))
-        ) { //if player in living room
-            gp.player.justEnteredLivingRoom = true;
-            gp.player.inLivingRoom = true;
-        }
-
-        if (gp.player.justEnteredLivingRoom && (gp.player.worldX/gp.tileSize > 16 && gp.player.worldX/gp.tileSize < 22) && (gp.player.worldY/gp.tileSize > 11 && gp.player.worldY/gp.tileSize < 20)) { //if player just enetered living room
-            int ran = new Random().nextInt(100);
-            if (ran > 50) { //music center option
-                gp.player.dadOption = 0;
-            } else { //guitar play option
-                gp.player.dadOption = 1;
+        if (offMap) {
+            if (timeToBeOffMap > transitionCounter) {
+                transitionCounter++;
+            } else {
+                offMap = false;
+                worldX = 18 * gp.tileSize;
+                worldY = 10 * gp.tileSize;
+                direction = "down";
+                speed = defaultSpeed;
             }
-            speed = defaultSpeed;
-            gp.player.justEnteredLivingRoom = false;
-        }
+        } else {
+            super.update();
+            gp.eHandler.checkEvent(this);
 
-        if (gp.currentMap == 0 && gp.player.inLivingRoom && (Objects.equals(gp.player.direction, "right") || Objects.equals(gp.player.direction, "up")) && (gp.player.worldX/gp.tileSize <= 16 || gp.player.worldX/gp.tileSize >= 22) || (gp.player.worldY/gp.tileSize <= 11 || gp.player.worldY/gp.tileSize >= 20)) {
-            gp.player.inLivingRoom = false;
-        }
-        //System.out.println("worldX: " + gp.player.worldX/ gp.tileSize + " worldY: " + gp.player.worldY/ gp.tileSize + " inLivingRoom " + gp.player.inLivingRoom + " dadOption: " + gp.player.dadOption + " dadHasGuitar " + gp.player.dadHasGuitar + " dadPlayingGuitar: " + gp.player.dadPlayingGuitar + " musicCenterOn: " + gp.player.musicCentreOn + " waypoint: " + waypoint);
+            int xDistance = Math.abs(worldX - gp.player.worldX);
+            int yDistance = Math.abs(worldY - gp.player.worldY);
+            int tileDistance = (xDistance + yDistance)/gp.tileSize;
 
+            if (tileDistance > 10) {
+                withinView = false;
+            } else {
+                withinView = true;
+            }
+            //System.out.println("WithinViewDad: " + withinView);
+
+            if (gp.currentMap == 0 && !gp.player.inLivingRoom && (
+                    gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceTopX && gp.player.worldY/gp.tileSize == gp.player.livingRoomEntranceTopY) ||
+                    (gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceSideX && gp.player.worldY/gp.tileSize == gp.player.livingRoomEntranceSideY) &&
+                            (Objects.equals(gp.player.direction, "left") || Objects.equals(gp.player.direction, "down"))
+            ) { //if player in living room
+                gp.player.justEnteredLivingRoom = true;
+                gp.player.inLivingRoom = true;
+            }
+
+            if (gp.player.justEnteredLivingRoom && (gp.player.worldX/gp.tileSize > 16 && gp.player.worldX/gp.tileSize < 22) && (gp.player.worldY/gp.tileSize > 11 && gp.player.worldY/gp.tileSize < 20)) { //if player just enetered living room
+                int ran = new Random().nextInt(100);
+                if (ran > 50) { //music center option
+                    gp.player.dadOption = 0;
+                } else { //guitar play option
+                    gp.player.dadOption = 1;
+                }
+                speed = defaultSpeed;
+                gp.player.justEnteredLivingRoom = false;
+            }
+
+            if (gp.currentMap == 0 && gp.player.inLivingRoom && (Objects.equals(gp.player.direction, "right") || Objects.equals(gp.player.direction, "up")) && (gp.player.worldX/gp.tileSize <= 16 || gp.player.worldX/gp.tileSize >= 22) || (gp.player.worldY/gp.tileSize <= 11 || gp.player.worldY/gp.tileSize >= 20)) {
+                gp.player.inLivingRoom = false;
+            }
+            //System.out.println("worldX: " + gp.player.worldX/ gp.tileSize + " worldY: " + gp.player.worldY/ gp.tileSize + " inLivingRoom " + gp.player.inLivingRoom + " dadOption: " + gp.player.dadOption + " dadHasGuitar " + gp.player.dadHasGuitar + " dadPlayingGuitar: " + gp.player.dadPlayingGuitar + " musicCenterOn: " + gp.player.musicCentreOn + " waypoint: " + waypoint);
+
+        }
     }
 
     public void setAction(int goalCol, int goalRow) {

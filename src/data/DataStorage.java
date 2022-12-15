@@ -120,4 +120,6 @@ public class DataStorage implements Serializable {
     boolean[][] mapNpcOffMap;
     boolean[][] mapNpcWithinView;
     boolean[][] mapNpcFollowingPlayer;
+    int[][] mapNpcTransitionCounter;
+    int[][] mapNpcTimeToBeOffMap;
 }

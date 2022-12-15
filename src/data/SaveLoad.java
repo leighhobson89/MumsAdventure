@@ -144,6 +144,7 @@ public class SaveLoad {
             ds.andreaSafe = gp.player.andreaSafe;
             ds.hasOutsideDoorsKey = gp.player.hasOutsideDoorsKey;
 
+
             //PLAYER OUTFIT
             ds.colorOutfit = gp.ui.colorOutfit;
             ds.outfitChosen = gp.ui.outfitChosen;
@@ -254,6 +255,8 @@ public class SaveLoad {
                         ds.mapNpcOffMap[mapNum][i] = gp.npc[mapNum][i].offMap;
                         ds.mapNpcWithinView[mapNum][i] = gp.npc[mapNum][i].withinView;
                         ds.mapNpcFollowingPlayer[mapNum][i] = gp.npc[mapNum][i].followingPlayer;
+                        ds.mapNpcTransitionCounter[mapNum][i] = gp.npc[mapNum][i].transitionCounter;
+                        ds.mapNpcTimeToBeOffMap[mapNum][i] = gp.npc[mapNum][i].timeToBeOffMap;
                     }
                 }
             }
@@ -502,6 +505,8 @@ public class SaveLoad {
                         gp.npc[mapNum][i].offMap = ds.mapNpcOffMap[mapNum][i];
                         gp.npc[mapNum][i].withinView = ds.mapNpcWithinView[mapNum][i];
                         gp.npc[mapNum][i].followingPlayer = ds.mapNpcFollowingPlayer[mapNum][i];
+                        gp.npc[mapNum][i].transitionCounter = ds.mapNpcTransitionCounter[mapNum][i];
+                        gp.npc[mapNum][i].timeToBeOffMap = ds.mapNpcTimeToBeOffMap[mapNum][i];
                     }
                 }
             }

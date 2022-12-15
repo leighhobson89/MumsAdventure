@@ -64,42 +64,56 @@ public class NPC_Phoebe extends Entity {
     }
 
     public void update() {
-        super.update();
 
-        int xDistance = Math.abs(worldX - gp.player.worldX);
-        int yDistance = Math.abs(worldY - gp.player.worldY);
-        int tileDistance = (xDistance + yDistance)/gp.tileSize;
-
-        if (tileDistance > 10) {
-            withinView = false;
-        } else {
-            withinView = true;
-        }
-        //System.out.println("WithinViewPhoebe: " + withinView);
-
-        if (gp.player.currentProjectile != null) {
-            if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN)) {
-                onPath = true;
-                speed = 3;
+        if (offMap) {
+            if (timeToBeOffMap > transitionCounter) {
+                transitionCounter++;
+            } else {
+                offMap = false;
+                worldX = 18 * gp.tileSize;
+                worldY = 10 * gp.tileSize;
+                direction = "down";
+                speed = defaultSpeed;
             }
-        }
-        else if (gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
-            //follow chicken
-            xDistance = Math.abs(worldX - gp.aSetter.choppedChickenPhoebeX);
-            yDistance = Math.abs(worldY - gp.aSetter.choppedChickenPhoebeY);
-            tileDistance = (xDistance + yDistance)/gp.tileSize;
-            if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN && tileDistance >= 1) {
-                onPath = true;
-                speed = 3;
-            } else if (tileDistance < 1) {
-                speed = 0;
-                if (!gp.player.phoebeChickenEaten) {
-                    gp.player.startCounterPhoebeEatingChicken = true;
+        } else {
+            super.update();
+            gp.eHandler.checkEvent(this);
+
+            int xDistance = Math.abs(worldX - gp.player.worldX);
+            int yDistance = Math.abs(worldY - gp.player.worldY);
+            int tileDistance = (xDistance + yDistance)/gp.tileSize;
+
+            if (tileDistance > 10) {
+                withinView = false;
+            } else {
+                withinView = true;
+            }
+            //System.out.println("WithinViewPhoebe: " + withinView);
+
+            if (gp.player.currentProjectile != null) {
+                if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN)) {
+                    onPath = true;
+                    speed = 3;
                 }
             }
-            else {
-                speed = 2;
-                onPath = false;
+            else if (gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
+                //follow chicken
+                xDistance = Math.abs(worldX - gp.aSetter.choppedChickenPhoebeX);
+                yDistance = Math.abs(worldY - gp.aSetter.choppedChickenPhoebeY);
+                tileDistance = (xDistance + yDistance)/gp.tileSize;
+                if (tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN && tileDistance >= 1) {
+                    onPath = true;
+                    speed = 3;
+                } else if (tileDistance < 1) {
+                    speed = 0;
+                    if (!gp.player.phoebeChickenEaten) {
+                        gp.player.startCounterPhoebeEatingChicken = true;
+                    }
+                }
+                else {
+                    speed = 2;
+                    onPath = false;
+                }
             }
         }
     }

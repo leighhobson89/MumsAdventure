@@ -428,7 +428,7 @@ public class Player extends Entity {
             gp.cChecker.checkEntity(this, gp.iTile);
 
             // CHECK EVENT
-            gp.eHandler.checkEvent();
+            gp.eHandler.checkEvent(this);
 
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (!collisionOn && !keyH.spacePressed) {
