@@ -188,6 +188,17 @@ public class NPC_Dad extends Entity {
 
         super.update();
 
+        int xDistance = Math.abs(worldX - gp.player.worldX);
+        int yDistance = Math.abs(worldY - gp.player.worldY);
+        int tileDistance = (xDistance + yDistance)/gp.tileSize;
+
+        if (tileDistance > 10) {
+            withinView = false;
+        } else {
+            withinView = true;
+        }
+        //System.out.println("WithinViewDad: " + withinView);
+
         if (gp.currentMap == 0 && !gp.player.inLivingRoom && (
                 gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceTopX && gp.player.worldY/gp.tileSize == gp.player.livingRoomEntranceTopY) ||
                 (gp.player.worldX/gp.tileSize == gp.player.livingRoomEntranceSideX && gp.player.worldY/gp.tileSize == gp.player.livingRoomEntranceSideY) &&
@@ -222,6 +233,7 @@ public class NPC_Dad extends Entity {
         if (gp.player.dadOption == 0) { //MUSIC CENTER
             if(onPath && !gp.player.inLivingRoom && !gp.player.musicCentreOn) { //follow player when outside living room
                 speed = 2;
+                followingPlayer = true;
                 if (Objects.equals(gp.player.direction, "up")) {
                     goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
                     goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 2;
@@ -239,6 +251,7 @@ public class NPC_Dad extends Entity {
             } else if (onPath && !gp.player.inLivingRoom) { // walk to switch music center off when player leaves room
                 waypoint = 0;
                 right2 = image2;
+                followingPlayer = false;
                 speed = 2;
                 goalCol = 19;
                 goalRow = 13;
@@ -255,6 +268,7 @@ public class NPC_Dad extends Entity {
                     gp.player.musicCentreOn = false;
                 }
             } else if (onPath && gp.player.musicCentreOn) { // walk to sofa after switching on music center
+                followingPlayer = false;
                 if (waypoint == 0) {
                     goalCol = 18;
                     goalRow = 14;
@@ -292,6 +306,7 @@ public class NPC_Dad extends Entity {
                     }
                 }
             } else if (onPath) { //walk to switch on music centre when player enters room
+                followingPlayer = false;
                 speed = defaultSpeed;
                 goalCol = 19;
                 goalRow = 13;
@@ -311,6 +326,7 @@ public class NPC_Dad extends Entity {
         } else if (gp.player.dadOption == 1) { //GUITAR
             if(onPath && !gp.player.inLivingRoom && !gp.player.dadHasGuitar) { //follow player when outside living room
                 speed = 2;
+                followingPlayer = true;
                 right2 = image2;
                 if (Objects.equals(gp.player.direction, "up")) {
                     goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
@@ -328,6 +344,7 @@ public class NPC_Dad extends Entity {
                 searchPath(goalCol, goalRow);
             } else if (onPath && (!gp.player.inLivingRoom)) { // walk to put guitar back after player leaves living room
                 speed = 2;
+                followingPlayer = false;
                 gp.player.dadPlayingGuitar = false;
                 goalCol = 21;
                 goalRow = 18;
@@ -341,7 +358,6 @@ public class NPC_Dad extends Entity {
                 if (tileDistance > 1) {
                     searchPath(goalCol, goalRow);
                 } else { //once arrive at place for guitar, change images back and set follow speed
-                    speed = 2;
                     gp.player.dadHasGuitar = false;
                     down1 = down1Standard;
                     down2 = down2Standard;
@@ -353,6 +369,7 @@ public class NPC_Dad extends Entity {
                     right2 = right2Standard;
                 }
             } else if (onPath && gp.player.dadHasGuitar) { // walk to sofa with guitar after picking it up
+                followingPlayer = false;
                 down1 = down1Guitar;
                 down2 = down2Guitar;
                 up1 = up1Guitar;
@@ -379,6 +396,7 @@ public class NPC_Dad extends Entity {
                     gp.player.dadPlayingGuitar = true;
                 }
             } else if (onPath) { //walk to pick up guitar when player enters living room
+                followingPlayer = false;
                 goalCol = 21;
                 goalRow = 18;
                 int actCol = worldX/gp.tileSize + solidArea.x/gp.tileSize;
@@ -393,6 +411,7 @@ public class NPC_Dad extends Entity {
                 }
             }
         }
+        //System.out.println("Dad Following Player: " + followingPlayer);
     }
 
     public void speak() {

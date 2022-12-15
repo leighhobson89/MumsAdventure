@@ -70,6 +70,13 @@ public class NPC_Phoebe extends Entity {
         int yDistance = Math.abs(worldY - gp.player.worldY);
         int tileDistance = (xDistance + yDistance)/gp.tileSize;
 
+        if (tileDistance > 10) {
+            withinView = false;
+        } else {
+            withinView = true;
+        }
+        //System.out.println("WithinViewPhoebe: " + withinView);
+
         if (gp.player.currentProjectile != null) {
             if ((Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && tileDistance <= TILE_DISTANCE_TO_BE_ON_PATH_TO_CHICKEN)) {
                 onPath = true;
@@ -103,6 +110,7 @@ public class NPC_Phoebe extends Entity {
             goalCol = 0;
             goalRow = 0;
             if(onPath && Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") == 0) { //correct
+                followingPlayer = true;
                 if (Objects.equals(gp.player.direction, "up")) { //dog chase player but stay one square behind
                     goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
                     goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 1;
@@ -118,21 +126,25 @@ public class NPC_Phoebe extends Entity {
                 }
                 searchPath(goalCol, goalRow);
             } else if (onPath && Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken") && gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
+                followingPlayer = false;
                 goalCol = gp.aSetter.choppedChickenPhoebeX/gp.tileSize;
                 goalRow = gp.aSetter.choppedChickenPhoebeY/gp.tileSize;
                 searchPath(goalCol, goalRow);
             }
         } else if (onPath && (gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0)) {
+            followingPlayer = false;
             goalCol = gp.aSetter.choppedChickenPhoebeX/gp.tileSize;
             goalRow = gp.aSetter.choppedChickenPhoebeY/gp.tileSize;
             searchPath(goalCol, goalRow);
         } else {
+            followingPlayer = false;
             if (checkEdgeOfMap(this)) {
                 turnEntityAround(this);
             } else {
                 getRandomDirection();
             }
         }
+        //System.out.println("Phoebe Following Player: " + followingPlayer);
     }
 
     public void speak() {

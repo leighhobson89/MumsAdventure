@@ -107,7 +107,7 @@ public class Entity {
     public boolean musicCentreOn;
     public boolean justEnteredLivingRoom;
     public boolean andreaSafe;
-    public boolean withinView;
+    public boolean withinView = true; //watch
     public boolean followingPlayer;
     public boolean offMap;
 
