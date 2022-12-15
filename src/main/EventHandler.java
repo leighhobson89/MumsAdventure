@@ -178,8 +178,22 @@ public class EventHandler {
 
         if (Objects.equals(entity.name, "Dad") || Objects.equals(entity.name, "Phoebe") || Objects.equals(entity.name, "Pip")) {
             if (!entity.followingPlayer && entity.withinView) { //eligible to transition alone
-                entity.offMap = true;
-                entity.speed = 0;
+                for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
+                    if (gp.npc[gp.otherMap][i] != null && Objects.equals(gp.npc[gp.otherMap][i].name, entity.name)) {
+                        entity.offMap = true;
+                        int ran;
+                        gp.npc[gp.otherMap][i].speed = gp.npc[gp.otherMap][i].defaultSpeed;
+                        if (gp.otherMap == 0) {
+                            ran = new Random().nextInt(gp.player.downstairsPositions.length);
+                            gp.npc[gp.otherMap][i].worldX = gp.player.downstairsPositions[ran][1]*gp.tileSize;
+                            gp.npc[gp.otherMap][i].worldY = gp.player.downstairsPositions[ran][2]*gp.tileSize;
+                        } else if (gp.otherMap == 1) {
+                            ran = new Random().nextInt(gp.player.upstairsPositions.length);
+                            gp.npc[gp.otherMap][i].worldX = gp.player.upstairsPositions[ran][1]*gp.tileSize;
+                            gp.npc[gp.otherMap][i].worldY = gp.player.upstairsPositions[ran][2]*gp.tileSize;
+                        }
+                    }
+                }
                 entity.worldX = gp.tileSize;
                 entity.worldY = gp.tileSize;
                 generateOffMapTimerValue(entity);
@@ -189,17 +203,7 @@ public class EventHandler {
         if (entity.type == entity.type_player) {
             gp.gameState = gp.transitionState;
 
-            if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset movable object if change area, and it is not where it needs to be
-                for (int i = 0; i < gp.npc[1].length; i++) {
-                    if (gp.npc[gp.currentMap][i] != null && (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker"))) {
-                        if (gp.npc[gp.currentMap][i].linkedEntity == null) {
-                            gp.npc[gp.currentMap][i].worldX = 39 * gp.tileSize;
-                            gp.npc[gp.currentMap][i].worldY = 8 * gp.tileSize;
-                        }
-                        break;
-                    }
-                }
-            }
+
             setImageStates(tempMap);
             canTouchEvent = false;
             //add sound effect stairs
@@ -207,7 +211,7 @@ public class EventHandler {
     }
 
     private void generateOffMapTimerValue(Entity entity) {
-        entity.timeToBeOffMap = new Random().nextInt(1500) + 2000; //how long npc should disappear offMap if transition
+        entity.timeToBeOffMap = new Random().nextInt(1500) + 1; //how long npc should disappear offMap if transition
     }
 
     public void setImageStates(int tempMap) {

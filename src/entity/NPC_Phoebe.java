@@ -14,7 +14,8 @@ public class NPC_Phoebe extends Entity {
 
         name = "Phoebe";
         direction = "up";
-        speed = 2;
+        defaultSpeed = 2;
+        speed = defaultSpeed;
         type = type_npc;
         goesTransparentWhenHit = true;
 
@@ -64,15 +65,44 @@ public class NPC_Phoebe extends Entity {
     }
 
     public void update() {
+                //DEBUG
+        System.out.println("time to wait: " + timeToBeOffMap + "\ntime passed: " + transitionCounter + "\noffMap: " + offMap);
+        for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
+            if (gp.npc[gp.otherMap][i] != null && Objects.equals(gp.npc[gp.otherMap][i].name, this.name)) {
+                System.out.println("offOtherMap: " + gp.npc[gp.otherMap][i].offMap);
+            }
+        }
+        //
 
         if (offMap) {
             if (timeToBeOffMap > transitionCounter) {
                 transitionCounter++;
             } else {
+                for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
+                    if (gp.npc[gp.otherMap][i] != null && Objects.equals(gp.npc[gp.otherMap][i].name, this.name)) {
+                        gp.npc[gp.otherMap][i].offMap = true;
+                        gp.npc[gp.otherMap][i].speed = 0;
+                        if (gp.otherMap == 0) {
+                            gp.npc[gp.otherMap][i].worldX = gp.tileSize;
+                            gp.npc[gp.otherMap][i].worldY = gp.tileSize;
+                        } else if (gp.otherMap == 1) {
+                            gp.npc[gp.otherMap][i].worldX = 50 * gp.tileSize;
+                            gp.npc[gp.otherMap][i].worldY = 5 * gp.tileSize;
+                        }
+                    }
+                }
+                timeToBeOffMap = 0;
+                transitionCounter = 0;
                 offMap = false;
-                worldX = 18 * gp.tileSize;
-                worldY = 10 * gp.tileSize;
-                direction = "down";
+                if (gp.currentMap == 0) {
+                    worldX = 18 * gp.tileSize;
+                    worldY = 10 * gp.tileSize;
+                    direction = "down";
+                } else if (gp.currentMap == 1) {
+                    worldX = 25 * gp.tileSize;
+                    worldY = 10 * gp.tileSize;
+                    direction = "right";
+                }
                 speed = defaultSpeed;
             }
         } else {

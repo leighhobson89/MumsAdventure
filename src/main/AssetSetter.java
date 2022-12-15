@@ -689,8 +689,8 @@ public class AssetSetter {
         i++;
 
         gp.npc[mapNum][i] = new NPC_Phoebe(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize*23;
-        gp.npc[mapNum][i].worldY = gp.tileSize*17;
+        gp.npc[mapNum][i].worldX = gp.tileSize*18; //23
+        gp.npc[mapNum][i].worldY = gp.tileSize*10; //17
         i++;
 
         gp.npc[mapNum][i] = new NPC_Pip(gp);
@@ -717,18 +717,18 @@ public class AssetSetter {
         i = 0;
 
         gp.npc[mapNum][i] = new NPC_Dad(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize*19;
-        gp.npc[mapNum][i].worldY = gp.tileSize*17;
+        gp.npc[mapNum][i].worldX = gp.tileSize*50;
+        gp.npc[mapNum][i].worldY = gp.tileSize*5;
         i++;
 
         gp.npc[mapNum][i] = new NPC_Phoebe(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize*18;
-        gp.npc[mapNum][i].worldY = gp.tileSize*17;
+        gp.npc[mapNum][i].worldX = gp.tileSize*50;
+        gp.npc[mapNum][i].worldY = gp.tileSize*5;
         i++;
 
         gp.npc[mapNum][i] = new NPC_Pip(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize*21;
-        gp.npc[mapNum][i].worldY = gp.tileSize*17;
+        gp.npc[mapNum][i].worldX = gp.tileSize*50;
+        gp.npc[mapNum][i].worldY = gp.tileSize*5;
         //i++;
     }
 

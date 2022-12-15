@@ -206,7 +206,7 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println("FPS: " + drawCount);
                 System.out.println("MissionState: " + player.missionState);
                 System.out.println("Substate: " + player.missionSubstate);
-                System.out.println("CurrentMapNPCs:" + Arrays.toString(npc[currentMap]) + "\nOtherMapNPCs: " + Arrays.toString(npc[otherMap]));
+                //System.out.println("CurrentMapNPCs:" + Arrays.toString(npc[currentMap]) + "\nOtherMapNPCs: " + Arrays.toString(npc[otherMap]));
 
                 drawCount = 0;
                 timer = 0;

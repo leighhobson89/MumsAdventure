@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 public class UI {
     final GamePanel gp;
@@ -1062,6 +1063,18 @@ public class UI {
             gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
             gp.eHandler.previousEventX = gp.player.worldX;
             gp.eHandler.previousEventY = gp.player.worldY;
+
+            for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
+                if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset movable object if change area, and it is not where it needs to be
+                    if (gp.npc[gp.currentMap][i] != null && (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker"))) {
+                        if (gp.npc[gp.currentMap][i].linkedEntity == null) {
+                            gp.npc[gp.currentMap][i].worldX = 39 * gp.tileSize;
+                            gp.npc[gp.currentMap][i].worldY = 8 * gp.tileSize;
+                        }
+                        break;
+                    }
+                }
+            }
         }
     }
 
