@@ -65,6 +65,7 @@ public class NPC_Phoebe extends Entity {
     }
 
     public void update() {
+        System.out.println("PhoebeFollowing: " + followingPlayer);
 //        //DEBUG
 //        System.out.println("time to wait: " + timeToBeOffMap + "\ntime passed: " + transitionCounter + "\noffMap: " + offMap);
 //        for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
@@ -74,6 +75,7 @@ public class NPC_Phoebe extends Entity {
 //        }
 //        //
         if (offMap && (gp.player.currentProjectile == null || !Objects.equals(gp.player.currentProjectile.name, "Chopped Chicken"))) {
+            gp.eHandler.generateOffMapTimerValue(this);
             if (timeToBeOffMap > transitionCounter) {
                 transitionCounter++;
             } else {

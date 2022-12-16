@@ -52,6 +52,7 @@ public class NPC_Pip extends Entity {
     }
 
     public void update() {
+        System.out.println("PipFollowing: " + followingPlayer);
 //        //DEBUG
 //        System.out.println("time to wait: " + timeToBeOffMap + "\ntime passed: " + transitionCounter + "\noffMap: " + offMap);
 //        for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
@@ -61,6 +62,7 @@ public class NPC_Pip extends Entity {
 //        }
 //        //
         if (offMap && gp.player.currentProjectile == null) {
+            gp.eHandler.generateOffMapTimerValue(this);
             if (timeToBeOffMap > transitionCounter) {
                 transitionCounter++;
             } else {

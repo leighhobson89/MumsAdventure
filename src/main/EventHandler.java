@@ -202,6 +202,30 @@ public class EventHandler {
         }
 
         if (entity.type == entity.type_player) {
+            for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
+                if (gp.npc[gp.currentMap][i] != null &&(Objects.equals(gp.npc[gp.currentMap][i].name, "Dad") || Objects.equals(gp.npc[gp.currentMap][i].name, "Phoebe") || Objects.equals(gp.npc[gp.currentMap][i].name, "Pip"))) {
+                    if (gp.npc[gp.currentMap][i].followingPlayer) { //not eligible to transition alone
+                        gp.npc[gp.currentMap][i].timeToBeOffMap = 400;
+                        for (int j = 0; j < gp.npc[gp.otherMap].length; j++) {
+                            if (gp.npc[gp.otherMap][j] != null && (Objects.equals(gp.npc[gp.otherMap][j].name, gp.npc[gp.currentMap][i].name))) {
+                                gp.npc[gp.otherMap][j].offMap = false;
+                                gp.npc[gp.otherMap][j].onPath = true;
+                                gp.npc[gp.otherMap][j].speed = gp.npc[gp.otherMap][j].defaultSpeed;
+                                if (gp.otherMap == 0) {
+                                    gp.npc[gp.otherMap][j].worldX = 19 * gp.tileSize;
+                                    gp.npc[gp.otherMap][j].worldY = 10 * gp.tileSize;
+                                } else if (gp.otherMap == 1) {
+                                    gp.npc[gp.otherMap][j].worldX = 24 * gp.tileSize;
+                                    gp.npc[gp.otherMap][j].worldY = 10 * gp.tileSize;
+                                }
+                                gp.npc[gp.currentMap][i].onPath = false;
+                                gp.npc[gp.currentMap][i].offMap = true;
+                                gp.npc[gp.currentMap][i].speed = 0;
+                            }
+                        }
+                    }
+                }
+            }
             gp.gameState = gp.transitionState;
 
 
@@ -211,8 +235,8 @@ public class EventHandler {
         }
     }
 
-    private void generateOffMapTimerValue(Entity entity) {
-        entity.timeToBeOffMap = new Random().nextInt(1500) + 1; //how long npc should disappear offMap if transition
+    public void generateOffMapTimerValue(Entity entity) {
+        entity.timeToBeOffMap = new Random().nextInt(1500) + 500; //how long npc should disappear offMap if transition
     }
 
     public void setImageStates(int tempMap) {
