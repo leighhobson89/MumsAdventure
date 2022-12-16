@@ -65,7 +65,6 @@ public class NPC_Phoebe extends Entity {
     }
 
     public void update() {
-        System.out.println("PhoebeFollowing: " + followingPlayer);
 //        //DEBUG
 //        System.out.println("time to wait: " + timeToBeOffMap + "\ntime passed: " + transitionCounter + "\noffMap: " + offMap);
 //        for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {

@@ -52,7 +52,6 @@ public class NPC_Pip extends Entity {
     }
 
     public void update() {
-        System.out.println("PipFollowing: " + followingPlayer);
 //        //DEBUG
 //        System.out.println("time to wait: " + timeToBeOffMap + "\ntime passed: " + transitionCounter + "\noffMap: " + offMap);
 //        for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {

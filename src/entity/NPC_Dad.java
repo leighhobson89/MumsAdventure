@@ -185,7 +185,6 @@ public class NPC_Dad extends Entity {
     }
 
     public void update() {
-        System.out.println("DadFollowing: " + followingPlayer);
         if (offMap) {
             if (timeToBeOffMap > transitionCounter) {
                 transitionCounter++;
