@@ -182,6 +182,11 @@ public class NPC_Dad extends Entity {
         dialogueText[75][3] = "Well get shut of it then!\nGo and pick it up and chuck it in the green bin.";
         dialogueText[75][4] = "I'm not going near that green bin,\nit's full of bloody spiders!";
         dialogueText[75][5] = "There's no more spiders there, I sorted it.\nJust chuck it in there!";
+        dialogueText[76][0] = "Have you thrown the wasp nest away yet?";
+
+        //MOVE TRAMPOLINE OFF CAR MISSION
+        dialogueText[77][0] = "Come up the garden with me and show me\nwhere that Asian was stood.";
+        dialogueText[77][1] = "I want to see if he dropped owt.\nCan't just bloody leave that, makes me sick!";
     }
 
     public void update() {
@@ -466,6 +471,7 @@ public class NPC_Dad extends Entity {
                     }
                 }
             }
+            case MissionStates.MOVE_TRAMPOLINE_OFF_CAR -> gp.player.missionState = MissionStates.MOVE_TRAMPOLINE_OFF_CAR;
         }
         if (gp.player.weedCount > 0 && !gp.player.setShovelFlag) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;
@@ -497,7 +503,23 @@ public class NPC_Dad extends Entity {
                 }
             }
             case MissionStates.DESTROY_WASP_NEST -> dialogueSet = 74; //burn wasp nest mission
-            case MissionStates.CHUCK_WASP_NEST_IN_BIN -> dialogueSet = 75; //chuck wasp nest in bin mission
+            case MissionStates.CHUCK_WASP_NEST_IN_BIN -> {
+                if (gp.player.missionSubstate == 0) { //chuck wasp nest in bin mission
+                    dialogueSet = 75;
+                    gp.player.missionSubstate = 1;
+                } else if (gp.player.missionSubstate == 1) {
+                    dialogueSet = 76;
+                }
+            }
+            case MissionStates.MOVE_TRAMPOLINE_OFF_CAR -> { //move trampoline mission
+                if (gp.player.missionSubstate == 0 && gp.player.worldX/gp.tileSize < 30) {
+                    dialogueSet = 77;
+                } else if (gp.player.missionSubstate == 1) {
+                    dialogueSet = 78;
+                } else if (gp.player.worldX >= 30) {
+                    dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat");
+                }
+            }
             default -> dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat"); //not in a mission
         }
         //character specific stuff here
@@ -516,7 +538,7 @@ public class NPC_Dad extends Entity {
             gp.misStat.endMissionTasks(MissionStates.MAGIC_BOOK_QUIZ, true);
         }
         startDialogue(this, dialogueSet);
-        if (gp.player.missionSubstate >= 4 && gp.player.missionSubstate < 9) {
+        if (gp.player.missionState == MissionStates.MAGIC_BOOK_QUIZ && gp.player.missionSubstate >= 4 && gp.player.missionSubstate < 9) {
             gp.quizSubState = gp.dadQuiz;
             gp.gameState = gp.quizState;
         }

@@ -18,11 +18,12 @@ public class MissionStates {
     public static final int NOT_GET_PAID_FOR_OLD_COOKER = 8;
     public static final int DESTROY_WASP_NEST = 9;
     public static final int CHUCK_WASP_NEST_IN_BIN = 10;
+    public static final int MOVE_TRAMPOLINE_OFF_CAR = 11;
 
     public void endMissionTasks(int missionToAddToCompletedList, boolean nextMissionIsPhoneMission) {
         gp.player.nextMissionIsPhoneMission = nextMissionIsPhoneMission;
         gp.player.missionState = MissionStates.BETWEEN_MISSIONS;
-        gp.player.missionList.add(missionToAddToCompletedList); //add completed weeding mission to missionList
+        gp.player.missionList.add(missionToAddToCompletedList);
         System.out.println( gp.player.missionList);
         gp.player.missionToSet = missionToAddToCompletedList + 1;
         gp.player.missionSubstate = 0;

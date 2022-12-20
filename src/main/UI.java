@@ -110,7 +110,7 @@ public class UI {
         }
         //TRANSITION STATE
         if (gp.gameState == gp.transitionState) {
-            drawTransition();
+            drawTransition(gp.player.hasHitTheStairs);
         }
         //TRADE STATE
         if (gp.gameState == gp.tradeState) {
@@ -1049,31 +1049,38 @@ public class UI {
         }
     }
 
-    public void drawTransition() {
+    public void setupSwitchMaps() {
+        gp.gameState = gp.playState;
+        gp.otherMap = gp.currentMap;
+        gp.currentMap = gp.eHandler.tempMap;
+        gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
+        gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
+        gp.eHandler.previousEventX = gp.player.worldX;
+        gp.eHandler.previousEventY = gp.player.worldY;
+
+        for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
+            if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset movable object if change area, and it is not where it needs to be
+                if (gp.npc[gp.currentMap][i] != null && (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker"))) {
+                    if (gp.npc[gp.currentMap][i].linkedEntity == null) {
+                        gp.npc[gp.currentMap][i].worldX = 39 * gp.tileSize;
+                        gp.npc[gp.currentMap][i].worldY = 8 * gp.tileSize;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    public void drawTransition(boolean hasHitTheStairs) {
         counter++;
         g2.setColor(new Color(0,0,0,counter*5));
         g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
 
         if (counter == 50) {
+            gp.player.hasHitTheStairs = false;
             counter = 0;
-            gp.gameState = gp.playState;
-            gp.otherMap = gp.currentMap;
-            gp.currentMap = gp.eHandler.tempMap;
-            gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
-            gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
-            gp.eHandler.previousEventX = gp.player.worldX;
-            gp.eHandler.previousEventY = gp.player.worldY;
-
-            for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
-                if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) { //reset movable object if change area, and it is not where it needs to be
-                    if (gp.npc[gp.currentMap][i] != null && (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker"))) {
-                        if (gp.npc[gp.currentMap][i].linkedEntity == null) {
-                            gp.npc[gp.currentMap][i].worldX = 39 * gp.tileSize;
-                            gp.npc[gp.currentMap][i].worldY = 8 * gp.tileSize;
-                        }
-                        break;
-                    }
-                }
+            if (hasHitTheStairs) {
+                setupSwitchMaps();
             }
         }
     }

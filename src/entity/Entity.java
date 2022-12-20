@@ -110,6 +110,7 @@ public class Entity {
     public boolean withinView = true; //watch
     public boolean followingPlayer;
     public boolean offMap;
+    public boolean hasHitTheStairs;
 
     //COUNTER
     public int spriteCounter = 0;

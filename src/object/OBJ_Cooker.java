@@ -34,10 +34,11 @@ public class OBJ_Cooker extends Entity {
     }
 
     public void setDialogue() {
-        dialogueText[0][0] = "";
+        dialogueText[0][0] = "My lovely new gas cooker!";
     }
 
     public void interact() {
-
+        startDialogue(this, 0);
+        gp.keyH.enterPressed = false;
     }
 }

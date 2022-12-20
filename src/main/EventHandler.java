@@ -226,6 +226,7 @@ public class EventHandler {
                     }
                 }
             }
+            gp.player.hasHitTheStairs = true;
             gp.gameState = gp.transitionState;
 
 

@@ -32,9 +32,9 @@ public class OBJ_OutdoorGateVertical extends Entity {
         collision = true;
 
         solidArea.x = 0;
-        solidArea.y = 16;
-        solidArea.width = 48;
-        solidArea.height = 32;
+        solidArea.y = 0;
+        solidArea.width = 15;
+        solidArea.height = 48;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

@@ -505,6 +505,16 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_CarTopDrive(gp);
+        gp.obj[mapNum][i].worldX = 55 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Trampoline(gp);
+        gp.obj[mapNum][i].worldX = 56 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 2 * gp.tileSize - 20;
+        i++;
+
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
 

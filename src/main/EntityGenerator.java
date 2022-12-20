@@ -105,6 +105,8 @@ public class EntityGenerator {
             case OBJ_OutdoorGateVertical.OBJ_NAME -> new OBJ_OutdoorGateVertical(gp);
             case OBJ_GarageDoorWhite.OBJ_NAME -> new OBJ_GarageDoorWhite(gp);
             case OBJ_Music_Notes.OBJ_NAME -> new OBJ_Music_Notes(gp);
+            case OBJ_CarTopDrive.OBJ_NAME -> new OBJ_CarTopDrive(gp);
+            case OBJ_Trampoline.OBJ_NAME -> new OBJ_Trampoline(gp);
             default -> null;
         };
     }

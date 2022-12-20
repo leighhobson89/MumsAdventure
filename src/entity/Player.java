@@ -316,6 +316,15 @@ public class Player extends Entity {
             }
         }
 
+        if (missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && missionSubstate == 0) {
+            if (worldX/gp.tileSize > 54) {
+                startDialogue(this, 26);
+                gp.player.missionSubstate = 1;
+                gp.keyH.enterPressed = false;
+            }
+        }
+
+
         if (missionList.size() >= MissionStates.MAGIC_BOOK_QUIZ) {
             for (int i = 0; i < gp.obj[1].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null) {
@@ -710,6 +719,11 @@ public class Player extends Entity {
         dialogueText[23][1] = "Oooohh Jeeze...Bloody house is catching\nfire! Quick where's the bloody water??\nOh Goodddd!";
         dialogueText[24][0] = "It's a bucket of water! Fancy that!";
         dialogueText[25][0] = "It's an empty bucket! Fancy that!";
+        dialogueText[26][0] = "What the bloody hell are all them scratches\n on the car??";
+        dialogueText[26][1] = "Oh for God sake!  It'll be that bloody\nneighbour next door!\nIt'll be the wind won't it!";
+        dialogueText[26][2] = "Yeah he's a bloody gutless sod!\nHe's been round and picked it up and said nothing!";
+        dialogueText[26][3] = "Look at it over there, it's obviously been\nblown over, it's wrecked the trampoline,\nand the car!";
+        dialogueText[26][4] = "Reyt, next time I see him, I'm gonna get\nhim to admit that, the t@*t! I'm fuming!";
     }
 
     public void checkIfPassOutFromStress() {
