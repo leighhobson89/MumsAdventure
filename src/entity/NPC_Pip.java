@@ -60,9 +60,16 @@ public class NPC_Pip extends Entity {
 //            }
 //        }
 //        //
-        if (offMap && gp.player.currentProjectile == null) {
+        if (offMap && !followingPlayer) {
             gp.eHandler.generateOffMapTimerValue(this);
             if (timeToBeOffMap > transitionCounter) {
+                for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
+                    if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "Phoebe")) {
+                        if (Math.abs(gp.npc[gp.currentMap][i].timeToBeOffMap - timeToBeOffMap) < 200) {
+                            timeToBeOffMap = timeToBeOffMap + 1500;
+                        }
+                    }
+                }
                 transitionCounter++;
             } else {
                 for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
@@ -109,7 +116,7 @@ public class NPC_Pip extends Entity {
             }
             //System.out.println("WithinViewPip: " + withinView);
 
-            if (gp.player.currentProjectile != null) {
+            if (gp.player.currentProjectile != null && !offMap) {
                 for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
                     if (gp.npc[gp.otherMap][i] != null && Objects.equals(gp.npc[gp.otherMap][i].name, this.name)) {
                         gp.npc[gp.otherMap][i].offMap = true;
@@ -125,7 +132,6 @@ public class NPC_Pip extends Entity {
                 }
                 timeToBeOffMap = 0;
                 transitionCounter = 0;
-                offMap = false;
                 if (gp.currentMap == 0 && callingNPCBack) {
                     worldX = 18 * gp.tileSize;
                     worldY = 10 * gp.tileSize;
@@ -153,12 +159,10 @@ public class NPC_Pip extends Entity {
                     onPath = true;
                     speed = 5;
                 }
-            }
-            else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0 && gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
+            } else if (!offMap && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0 && gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0) {
                 onPath = true;
                 speed = 5;
-            }
-            else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
+            } else if (!offMap && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") == 0 && gp.player.checkIfObjectOnMap("Pip's Bone") > 0) {
                 //follow bone
                 xDistance = Math.abs(worldX - gp.aSetter.boneX);
                 yDistance = Math.abs(worldY - gp.aSetter.boneY);
@@ -173,7 +177,7 @@ public class NPC_Pip extends Entity {
                     speed = 2;
                     onPath = false;
                 }
-            } else if (gp.player.checkIfObjectOnMap("Chopped Chicken Pip") > 0) {
+            } else if (!offMap && gp.player.checkIfObjectOnMap("Chopped Chicken Pip") > 0) {
                 //follow chicken
                 xDistance = Math.abs(worldX - gp.aSetter.choppedChickenPipX);
                 yDistance = Math.abs(worldY - gp.aSetter.choppedChickenPipY);
@@ -190,6 +194,22 @@ public class NPC_Pip extends Entity {
                 else {
                     speed = 2;
                     onPath = false;
+                }
+            } else if (offMap) {
+                for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
+                    if (gp.npc[gp.otherMap][i] != null && Objects.equals(gp.npc[gp.otherMap][i].name, this.name)) {
+                        gp.npc[gp.otherMap][i].offMap = false;
+                        gp.npc[gp.otherMap][i].speed = 4;
+                        if (gp.otherMap == 0) {
+                            gp.npc[gp.otherMap][i].worldX = 19 * gp.tileSize;
+                            gp.npc[gp.otherMap][i].worldY = 10 * gp.tileSize;
+                            gp.npc[gp.otherMap][i].direction = "down";
+                        } else if (gp.otherMap == 1) {
+                            gp.npc[gp.otherMap][i].worldX = 24 * gp.tileSize;
+                            gp.npc[gp.otherMap][i].worldY = 10 * gp.tileSize;
+                            gp.npc[gp.otherMap][i].direction = "right";
+                        }
+                    }
                 }
             }
         }

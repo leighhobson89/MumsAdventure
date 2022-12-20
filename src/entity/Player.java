@@ -613,6 +613,7 @@ public class Player extends Entity {
                         for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
                             if (gp.npc[gp.currentMap][j] != null && Objects.equals(gp.npc[gp.currentMap][j].name, "Pip")) {
                                 if (gp.npc[gp.currentMap][j].offMap) {
+                                    gp.npc[gp.currentMap][j].offMap = false;
                                     gp.npc[gp.currentMap][j].callingNPCBack = true;
                                 }
                             }
@@ -630,6 +631,7 @@ public class Player extends Entity {
                         for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
                             if (gp.npc[gp.currentMap][j] != null && (Objects.equals(gp.npc[gp.currentMap][j].name, "Phoebe") || Objects.equals(gp.npc[gp.currentMap][j].name, "Pip"))) {
                                 if (gp.npc[gp.currentMap][j].offMap) {
+                                    gp.npc[gp.currentMap][j].offMap = false;
                                     gp.npc[gp.currentMap][j].callingNPCBack = true;
                                 }
                             }
@@ -1032,6 +1034,7 @@ public class Player extends Entity {
                     for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
                         if (gp.npc[gp.currentMap][j] != null && (Objects.equals(gp.npc[gp.currentMap][j].name, "Pip"))) {
                             if (gp.npc[gp.currentMap][j].offMap) {
+                                gp.npc[gp.currentMap][j].offMap = false;
                                 gp.npc[gp.currentMap][j].callingNPCBack = true;
                             }
                         }
@@ -1041,6 +1044,7 @@ public class Player extends Entity {
                     for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
                         if (gp.npc[gp.currentMap][j] != null && (Objects.equals(gp.npc[gp.currentMap][j].name, "Phoebe") || Objects.equals(gp.npc[gp.currentMap][j].name, "Pip"))) {
                             if (gp.npc[gp.currentMap][j].offMap) {
+                                gp.npc[gp.currentMap][j].offMap = false;
                                 gp.npc[gp.currentMap][j].callingNPCBack = true;
                             }
                         }

@@ -205,6 +205,12 @@ public class NPC_Phoebe extends Entity {
                 goalCol = gp.aSetter.choppedChickenPhoebeX/gp.tileSize;
                 goalRow = gp.aSetter.choppedChickenPhoebeY/gp.tileSize;
                 searchPath(goalCol, goalRow);
+            } else {
+                if (checkEdgeOfMap(this)) {
+                    turnEntityAround(this);
+                } else {
+                    getRandomDirection();
+                }
             }
         } else if (onPath && (gp.player.checkIfObjectOnMap("Chopped Chicken Phoebe") > 0)) {
             followingPlayer = false;

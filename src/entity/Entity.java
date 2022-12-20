@@ -567,13 +567,6 @@ public class Entity {
 
     public void update() {
 
-        //RELATED WITH NPC UPSTAIRS
-//        if (gp.currentMap == 0) {
-//            gp.otherMap = 1;
-//        } else if (gp.currentMap == 1) {
-//            gp.otherMap = 0;
-//        }
-
         for (int i = 0; i < gp.npc[gp.otherMap].length; i++) { //sets npcs when player not on map
             if (gp.npc[gp.otherMap][i] != null) {
                 gp.npc[gp.otherMap][i].withinView = false;
