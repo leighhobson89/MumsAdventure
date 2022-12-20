@@ -117,9 +117,7 @@ public class DataStorage implements Serializable {
     int[][] mapNpcWorldX;
     int[][] mapNpcWorldY;
     String[][] mapNpcDirection;
-    boolean[][] mapNpcOffMap;
-    boolean[][] mapNpcWithinView;
-    boolean[][] mapNpcFollowingPlayer;
-    int[][] mapNpcTransitionCounter;
-    int[][] mapNpcTimeToBeOffMap;
+    boolean[][] mapNpcOffMap = new boolean[10][100];
+    boolean[][] mapNpcWithinView = new boolean[10][100];
+    boolean[][] mapNpcFollowingPlayer = new boolean[10][100];
 }
