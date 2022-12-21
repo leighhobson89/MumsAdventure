@@ -187,6 +187,12 @@ public class NPC_Dad extends Entity {
         //MOVE TRAMPOLINE OFF CAR MISSION
         dialogueText[77][0] = "Come up the garden with me and show me\nwhere that Asian was stood.";
         dialogueText[77][1] = "I want to see if he dropped owt.\nCan't just bloody leave that, makes me sick!";
+
+        dialogueText[78][0] = "What the bloody hell are all them scratches\n on the car??";
+        dialogueText[78][1] = "Oh for God sake!  It'll be that bloody\nneighbour next door!\nIt'll be the wind won't it!";
+        dialogueText[78][2] = "Yeah he's a bloody gutless sod!\nHe's been round and picked it up and said nothing!";
+        dialogueText[78][3] = "Look at it over there, it's obviously been\nblown over, it's wrecked the trampoline,\nand the car!";
+        dialogueText[78][4] = "Reyt, next time I see him, I'm gonna get\nhim to admit that, the t@*t! I'm fuming!";
     }
 
     public void update() {
@@ -260,8 +266,14 @@ public class NPC_Dad extends Entity {
             if (gp.currentMap == 0 && gp.player.inLivingRoom && (Objects.equals(gp.player.direction, "right") || Objects.equals(gp.player.direction, "up")) && (gp.player.worldX/gp.tileSize <= 16 || gp.player.worldX/gp.tileSize >= 22) || (gp.player.worldY/gp.tileSize <= 11 || gp.player.worldY/gp.tileSize >= 20)) {
                 gp.player.inLivingRoom = false;
             }
-            //System.out.println("worldX: " + gp.player.worldX/ gp.tileSize + " worldY: " + gp.player.worldY/ gp.tileSize + " inLivingRoom " + gp.player.inLivingRoom + " dadOption: " + gp.player.dadOption + " dadHasGuitar " + gp.player.dadHasGuitar + " dadPlayingGuitar: " + gp.player.dadPlayingGuitar + " musicCenterOn: " + gp.player.musicCentreOn + " waypoint: " + waypoint);
 
+            if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 0) {
+                if (worldX/gp.tileSize > 52) {
+                    startDialogue(this, 78);
+                    gp.player.missionSubstate = 1;
+                    gp.keyH.enterPressed = false;
+                }
+            }
         }
     }
 
