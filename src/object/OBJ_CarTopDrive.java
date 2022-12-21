@@ -50,8 +50,8 @@ public class OBJ_CarTopDrive extends Entity {
         if (gp.player.missionList.size() > MissionStates.MOVE_TRAMPOLINE_OFF_CAR + 1) {
             startDialogue(this, 1);
         } else {
-            if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR) {
-                startDialogue(this, 1);
+            if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 1) {
+                gp.gameState = gp.transitionState;
             } else {
                 startDialogue(this, 0);
             }

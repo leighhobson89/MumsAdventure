@@ -193,6 +193,7 @@ public class NPC_Dad extends Entity {
         dialogueText[78][2] = "Yeah he's a bloody gutless sod!\nHe's been round and picked it up and said nothing!";
         dialogueText[78][3] = "Look at it over there, it's obviously been\nblown over, it's wrecked the trampoline,\nand the car!";
         dialogueText[78][4] = "Reyt, next time I see him, I'm gonna get\nhim to admit that, the t@*t! I'm fuming!";
+        dialogueText[78][5] = "Just go and inspect the car for me will ya?";
     }
 
     public void update() {

@@ -60,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
     final SaveLoad saveLoad = new SaveLoad(this);
     final Map map = new Map(this);
     public final EntityGenerator eGenerator = new EntityGenerator(this);
+    public final CutsceneManager csManager = new CutsceneManager(this);
     Thread gameThread;
     public final int ARBITRARY_IDENTIFIER_DAD_GUITAR = 750; //used for testing collision of Dad NPC with Acoustic Guitar
     public final int ARBITRARY_IDENTIFIER_DAD_MUSIC_CENTER = 850; //used for testing collision of Dad NPC with Music Center
@@ -92,6 +93,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int sleepState = 9;
     public final int mapState = 10;
     public final int quizState = 11;
+    public final int cutSceneState = 12;
+
     public int quizSubState;
     public final int mumsChair = 0;
     public final int dadQuiz = 1;
@@ -411,6 +414,9 @@ public class GamePanel extends JPanel implements Runnable {
 
             //MINI MAP
             map.drawMiniMap(g2);
+
+            //CUTSCENE
+            csManager.draw(g2);
 
             //UI
             ui.draw(g2);

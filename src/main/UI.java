@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
 
 public class UI {
     final GamePanel gp;
@@ -110,7 +109,7 @@ public class UI {
         }
         //TRANSITION STATE
         if (gp.gameState == gp.transitionState) {
-            drawTransition(gp.player.hasHitTheStairs);
+            drawTransition(gp.player.transitionStairs);
         }
         //TRADE STATE
         if (gp.gameState == gp.tradeState) {
@@ -1071,16 +1070,21 @@ public class UI {
         }
     }
 
-    public void drawTransition(boolean hasHitTheStairs) {
+    public void drawTransition(boolean transitionStairs) {
         counter++;
         g2.setColor(new Color(0,0,0,counter*5));
         g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
 
         if (counter == 50) {
-            gp.player.hasHitTheStairs = false;
+            gp.player.transitionStairs = false;
             counter = 0;
-            if (hasHitTheStairs) {
+            if (transitionStairs) {
                 setupSwitchMaps();
+            } else if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 1) {
+                gp.gameState = gp.cutSceneState;
+                gp.csManager.sceneNum = gp.csManager.trampolineCar;
+            } else {
+                gp.gameState = gp.playState;
             }
         }
     }
