@@ -44,7 +44,10 @@ public class OBJ_Bin_Green extends Entity {
             startDialogue(this, 1);
             gp.keyH.enterPressed = false;
             gp.eHandler.removeItemFromPlayerInventory(gp.player.inventory, "WaspNest");
-            gp.misStat.endMissionTasks(MissionStates.CHUCK_WASP_NEST_IN_BIN, false);
+            gp.player.missionSubstate++;
+            if (gp.player.missionSubstate == 2) {
+                gp.misStat.endMissionTasks(MissionStates.CHUCK_WASP_NEST_IN_BIN, false);
+            }
         } else {
             if (!opened) {
                 gp.playSFX(14);

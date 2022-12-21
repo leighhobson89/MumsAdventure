@@ -54,9 +54,6 @@ public class OBJ_Toolhut1_Center extends Entity {
             gp.keyH.enterPressed = false;
         } else if (!opened && !checkIfPlayerHasItem(gp.player.inventory, "ToolHutKey")) {
             startDialogue(this, 1);
-            //debug
-            gp.player.inventory.add(new OBJ_ToolHutKey(gp));
-            //end debug
             gp.keyH.enterPressed = false;
         } else if (opened) {
             startDialogue(this, 2);

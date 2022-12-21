@@ -594,7 +594,7 @@ public class UI {
                     combinedText = "";
                     gp.stopSFX(0);
 
-                    if (gp.gameState == gp.dialogueState) {
+                    if (gp.gameState == gp.dialogueState || gp.gameState == gp.cutSceneState) {
                         npc.dialogueIndex++;
                         gp.keyH.enterPressed = false;
                     }
@@ -603,7 +603,13 @@ public class UI {
                 if ((Objects.equals(npc.name, "BathLeft") || Objects.equals(npc.name, "BathRight")) && !gp.player.showerAlreadyRan && gp.player.missionState == MissionStates.MOP_UP_THE_SHOWER_WATER) {
                     gp.playSFX(32);
                 }
-                gp.gameState = gp.playState;
+
+                if (gp.gameState == gp.dialogueState) {
+                    gp.gameState = gp.playState;
+                } else if (gp.gameState == gp.cutSceneState) {
+                    gp.csManager.scenePhase++;
+                }
+
                 npc.dialogueIndex = 0;
                 npc.currentDialogueFinished = true;
             }
@@ -1080,7 +1086,7 @@ public class UI {
             counter = 0;
             if (transitionStairs) {
                 setupSwitchMaps();
-            } else if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 1) {
+            } else if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 2) {
                 gp.gameState = gp.cutSceneState;
                 gp.csManager.sceneNum = gp.csManager.trampolineCar;
             } else {

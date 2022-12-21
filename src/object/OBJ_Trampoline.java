@@ -38,7 +38,7 @@ public class OBJ_Trampoline extends Entity {
     }
 
     public void update() {
-        if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 0) {
+        if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 1) {
             down1 = image2;
         }
     }

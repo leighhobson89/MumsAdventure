@@ -288,6 +288,10 @@ public class Player extends Entity {
 //    }
 
     public void update() {
+        if (missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && missionSubstate == 3) {
+            gp.misStat.endMissionTasks(MissionStates.MOVE_TRAMPOLINE_OFF_CAR, false);
+        }
+
         if (pillsInProcess) {
             pillsCounter++;
             if (pillsCounter > 1200) { //20 secs of effect
@@ -1251,7 +1255,10 @@ public class Player extends Entity {
         if (transparent) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
-        g2.drawImage(image, tempScreenX, tempScreenY, null);
+
+        if (drawing) {
+            g2.drawImage(image, tempScreenX, tempScreenY, null);
+        }
 
         //RESET alpha
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));

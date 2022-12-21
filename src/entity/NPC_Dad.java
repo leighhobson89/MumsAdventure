@@ -193,7 +193,6 @@ public class NPC_Dad extends Entity {
         dialogueText[78][2] = "Yeah he's a bloody gutless sod!\nHe's been round and picked it up and said nothing!";
         dialogueText[78][3] = "Look at it over there, it's obviously been\nblown over, it's wrecked the trampoline,\nand the car!";
         dialogueText[78][4] = "Reyt, next time I see him, I'm gonna get\nhim to admit that, the t@*t! I'm fuming!";
-        dialogueText[78][5] = "Just go and inspect the car for me will ya?";
     }
 
     public void update() {
@@ -268,10 +267,11 @@ public class NPC_Dad extends Entity {
                 gp.player.inLivingRoom = false;
             }
 
-            if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 0) {
+            if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 1) {
                 if (worldX/gp.tileSize > 52) {
-                    startDialogue(this, 78);
-                    gp.player.missionSubstate = 1;
+                    dialogueSet = 78;
+                    gp.gameState = gp.transitionState; //enter cutscene for scratched car
+                    gp.player.missionSubstate = 2;
                     gp.keyH.enterPressed = false;
                 }
             }
@@ -484,7 +484,11 @@ public class NPC_Dad extends Entity {
                     }
                 }
             }
-            case MissionStates.MOVE_TRAMPOLINE_OFF_CAR -> gp.player.missionState = MissionStates.MOVE_TRAMPOLINE_OFF_CAR;
+            case MissionStates.MOVE_TRAMPOLINE_OFF_CAR -> {
+                if (gp.player.worldX < 40 * gp.tileSize) {
+                    gp.player.missionState = MissionStates.MOVE_TRAMPOLINE_OFF_CAR;
+                }
+            }
         }
         if (gp.player.weedCount > 0 && !gp.player.setShovelFlag) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;
@@ -525,11 +529,10 @@ public class NPC_Dad extends Entity {
                 }
             }
             case MissionStates.MOVE_TRAMPOLINE_OFF_CAR -> { //move trampoline mission
-                if (gp.player.missionSubstate == 0 && gp.player.worldX/gp.tileSize < 30) {
+                if (gp.player.missionSubstate == 0 && gp.player.worldX < 40 * gp.tileSize) {
                     dialogueSet = 77;
-                } else if (gp.player.missionSubstate == 1) {
-                    dialogueSet = 78;
-                } else if (gp.player.worldX >= 30) {
+                    gp.player.missionSubstate = 1;
+                } else if (gp.player.worldX >= 40 * gp.tileSize) {
                     dialogueSet = chooseRandomDialogueFromSet(this.name, "NormalChat");
                 }
             }

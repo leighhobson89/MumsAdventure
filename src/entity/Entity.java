@@ -111,6 +111,7 @@ public class Entity {
     public boolean followingPlayer;
     public boolean offMap;
     public boolean transitionStairs;
+    public boolean drawing = true;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -1023,22 +1024,24 @@ public class Entity {
                 }
             }
 
-                    if (invincible) {
-                        hpBarOn = true;
-                        hpBarCounter = 0;
-                        if (this.goesTransparentWhenHit) {
-                            changeAlpha(g2, 0.4F);
-                        }
-                    }
-                    if (dying) {
-                        image = dyingImage;
-                        dyingAnimation(g2);
-                    }
-                    if ((this.goesTransparentWhenStoodOnBookHut || this.goesTransparentWhenStoodOnToolHut) && this.transparent) {
-                        changeAlpha(g2, 0.6F);
-                    }
+            if (invincible) {
+                hpBarOn = true;
+                hpBarCounter = 0;
+                if (this.goesTransparentWhenHit) {
+                    changeAlpha(g2, 0.4F);
+                }
+            }
+            if (dying) {
+                image = dyingImage;
+                dyingAnimation(g2);
+            }
+            if ((this.goesTransparentWhenStoodOnBookHut || this.goesTransparentWhenStoodOnToolHut) && this.transparent) {
+                changeAlpha(g2, 0.6F);
+            }
 
-            g2.drawImage(image, tempScreenX, tempScreenY, null);
+            if (this.drawing) {
+                g2.drawImage(image, tempScreenX, tempScreenY, null);
+            }
 
             changeAlpha(g2, 1F);
         }

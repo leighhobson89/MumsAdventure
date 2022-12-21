@@ -5,6 +5,7 @@ import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
+import object.OBJ_ToolHutKey;
 import tile.Map;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
@@ -121,14 +122,25 @@ public class GamePanel extends JPanel implements Runnable {
         player.weedCount = aSetter.setInteractiveTile();
         eManager.setup();
 
-//        //DEBUG TO SKIP AHEAD IN MISSIONS - COMMENT FOR NORMAL GAME FROM START
-//        //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSIONLIST IF STARTING FURTHER ON
+//      //DEBUG TO SKIP AHEAD IN MISSIONS - COMMENT FOR NORMAL GAME FROM START
+//      //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSIONLIST IF STARTING FURTHER ON
+        //MISSION 2 START (AFTER WEEDING)
+//        player.weedCount = 0;
+//        player.missionList.add(1);
+//        player.missionState = 2;
+//        player.missionToSet = 2;
+//        player.hasOutsideDoorsKey = false;
+//        player.inventory.add(new OBJ_ToolHutKey(this));
+
+        //MISSION 11 START (AFTER CHUCKING OUT WASPNEST)
         player.weedCount = 0;
-        player.missionList.add(1);
-        player.missionState = 2;
-        player.missionToSet = 2;
+        player.missionList.add(1);player.missionList.add(2);player.missionList.add(3);player.missionList.add(4);player.missionList.add(5);player.missionList.add(6);player.missionList.add(7);player.missionList.add(8);player.missionList.add(9);
+        player.missionState = 10;
+        player.missionSubstate= 2;
+        player.missionToSet = 11;
+        misStat.endMissionTasks(MissionStates.CHUCK_WASP_NEST_IN_BIN, false);
         player.hasOutsideDoorsKey = false;
-//        //END OF DEBUG
+//      //END OF DEBUG
 
         playMusic(0, false);
         if (!musicSetToPlayFromStart) {
