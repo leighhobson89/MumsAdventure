@@ -293,7 +293,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
             if (player.exitingFromCutScene) {
                 player.cutSceneCounter++;
-                g2.setColor(new Color(0,0,0, player.cutSceneCounter*5));
+                g2.setColor(new Color(0,0,0, player.cutSceneCounter*5)); //ryisnow here
                 g2.fillRect(0,0, screenWidth, screenHeight);
 
                 if (player.cutSceneCounter == 50) {
