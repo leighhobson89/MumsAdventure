@@ -35,15 +35,22 @@ public class CutsceneManager {
     }
 
     public void scene_andreaOnPhone() {
+        if (!gp.player.tempXYDirectionSetYet) {
+            gp.player.tempPlayerWorldX = gp.player.worldX;
+            gp.player.tempPlayerWorldY = gp.player.worldY;
+            gp.player.tempPlayerDirection = gp.player.direction;
+            gp.player.tempXYDirectionSetYet = true;
+        }
+
         if (scenePhase == 0) {
             gp.player.drawing = false;
 
             for (int i = 0; i < gp.npc[gp.currentMap].length; i++) { //add player character to cutscene
                 if (gp.npc[gp.currentMap][i] == null) {
                     gp.npc[gp.currentMap][i] = new PlayerDummy(gp);
-                    gp.npc[gp.currentMap][i].worldX = 17 * gp.tileSize;
-                    gp.npc[gp.currentMap][i].worldY = 11 * gp.tileSize;
-                    gp.npc[gp.currentMap][i].direction = "up";
+                    gp.npc[gp.currentMap][i].worldX = gp.player.tempPlayerWorldX;
+                    gp.npc[gp.currentMap][i].worldY = gp.player.tempPlayerWorldY + 30;
+                    gp.npc[gp.currentMap][i].direction = gp.player.tempPlayerDirection;
                     break;
                 }
             }
@@ -61,29 +68,24 @@ public class CutsceneManager {
             }
             gp.ui.drawDialogueScreen(0);
         } else if (scenePhase == 2) {
-            for (int i = 0; i < gp.npc[gp.currentMap].length; i++) { //return to player
-                if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "PlayerDummy")) {
-                    gp.player.worldX = gp.npc[gp.currentMap][i].worldX;
-                    gp.player.worldY = gp.npc[gp.currentMap][i].worldY;
-                    gp.player.direction = gp.npc[gp.currentMap][i].direction;
-
-                    gp.npc[gp.currentMap][i] = null; //delete dummy
-                    break;
-                }
-            }
-
-            gp.player.drawing = true;
             sceneNum = NA;
             scenePhase = 0;
+            gp.player.exitingFromCutScene = true;
+            gp.player.playerDummyToBeRemoved = true;
             gp.gameState = gp.playState;
         }
     }
 
     public void scene_asianOnPhone() {
-        if (scenePhase == 0) {
-            gp.player.drawing = false;
+        if (!gp.player.tempXYDirectionSetYet) {
             gp.player.tempPlayerWorldX = gp.player.worldX;
             gp.player.tempPlayerWorldY = gp.player.worldY;
+            gp.player.tempPlayerDirection = gp.player.direction;
+            gp.player.tempXYDirectionSetYet = true;
+        }
+
+        if (scenePhase == 0) {
+            gp.player.drawing = false;
             gp.player.worldX = 55 * gp.tileSize;
             gp.player.worldY = 9 * gp.tileSize;
             if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) {
@@ -115,32 +117,37 @@ public class CutsceneManager {
                 scenePhase++;
             }
         } else if (scenePhase == 3) {
-            gp.player.worldX = gp.player.tempPlayerWorldX;
-            gp.player.worldY = gp.player.tempPlayerWorldY;
-
             if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) {
                 gp.aSetter.removeCutSceneObjectFromMap(OBJ_Tutorial_TileSelectorMarker.OBJ_NAME, gp.currentMap);
                 gp.aSetter.removeCutSceneObjectFromMap(OBJ_Tutorial_Arrow_Right.OBJ_NAME, gp.currentMap);
             }
 
-            gp.player.drawing = true;
             sceneNum = NA;
             scenePhase = 0;
+            gp.player.exitingFromCutScene = true;
             gp.gameState = gp.playState;
         }
     }
 
     public void scene_trampolineCar() {
+        if (!gp.player.tempXYDirectionSetYet) {
+            gp.player.tempPlayerWorldX = 58 * gp.tileSize;
+            gp.player.tempPlayerWorldY = 7 * gp.tileSize;
+            gp.player.tempPlayerDirection = "left";
+            gp.player.tempXYDirectionSetYet = true;
+        }
+
         if (scenePhase == 0) {
+
             gp.player.drawing = false;
             gp.player.worldX = 55 * gp.tileSize;
 
             for (int i = 0; i < gp.npc[gp.currentMap].length; i++) { //add player character to cutscene
                 if (gp.npc[gp.currentMap][i] == null) {
                     gp.npc[gp.currentMap][i] = new PlayerDummy(gp);
-                    gp.npc[gp.currentMap][i].worldX = 58 * gp.tileSize;
-                    gp.npc[gp.currentMap][i].worldY = 7 * gp.tileSize;
-                    gp.npc[gp.currentMap][i].direction = "left";
+                    gp.npc[gp.currentMap][i].worldX = gp.player.tempPlayerWorldX;
+                    gp.npc[gp.currentMap][i].worldY = gp.player.tempPlayerWorldY;
+                    gp.npc[gp.currentMap][i].direction = gp.player.tempPlayerDirection;
                     scenePhase++;
                     break;
                 }
@@ -164,19 +171,12 @@ public class CutsceneManager {
         } else if (scenePhase == 2) {
             gp.ui.drawDialogueScreen(0);
         } else if (scenePhase == 3) {
-            for (int i = 0; i < gp.npc[gp.currentMap].length; i++) { //return to player
-                if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "PlayerDummy")) {
-                    gp.player.worldX = gp.npc[gp.currentMap][i].worldX;
-                    gp.player.worldY = gp.npc[gp.currentMap][i].worldY;
-                    gp.player.direction = gp.npc[gp.currentMap][i].direction;
 
-                    gp.npc[gp.currentMap][i] = null; //delete dummy
-                }
-            }
-            gp.player.drawing = true;
             sceneNum = NA;
             scenePhase = 0;
             gp.player.missionSubstate = 3;
+            gp.player.exitingFromCutScene = true;
+            gp.player.playerDummyToBeRemoved = true;
             gp.gameState = gp.playState;
         }
     }

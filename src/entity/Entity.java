@@ -113,6 +113,10 @@ public class Entity {
     public boolean drawing = true;
     public int tempPlayerWorldX;
     public int tempPlayerWorldY;
+    public String tempPlayerDirection;
+    public boolean exitingFromCutScene;
+    public boolean playerDummyToBeRemoved;
+    public boolean tempXYDirectionSetYet;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -136,6 +140,7 @@ public class Entity {
     public int carCountDown;
     public int carCountUp;
     public int transitionCounter = 0;
+    public int cutSceneCounter = 0;
 
     //CHARACTER ATTRIBUTES
     public String name;
@@ -304,6 +309,7 @@ public class Entity {
         carCountDown = 0;
         carCountUp = 0;
         transitionCounter = 0;
+        cutSceneCounter = 0;
     }
     //public void setLoot(Entity loot) {}
     public void move(String direction) {}

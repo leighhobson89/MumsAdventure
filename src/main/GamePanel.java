@@ -21,13 +21,13 @@ public class GamePanel extends JPanel implements Runnable {
     //SCREEN SETTINGS
     final int originalTileSize = 16; //16x16 tile size
     final int scale = 3;
-
     public final int tileSize = originalTileSize * scale; //actual size 48
     public final int maxScreenCol = 20;
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; //960 px
     public final int screenHeight = tileSize * maxScreenRow; //576 px
     public final boolean musicSetToPlayFromStart = true; //Change to true to play music from start
+
     //WORLD SETTINGS
     public final int maxWorldCol = 71;
     public final int maxWorldRow = 26;
@@ -78,7 +78,6 @@ public class GamePanel extends JPanel implements Runnable {
     public final ArrayList<Entity> entityList = new ArrayList<>();
     public final ArrayList<Entity> tempEntityList = new ArrayList<>();
 
-
     //GAME STATE
     public int gameState;
     public final int titleState = 0;
@@ -98,7 +97,6 @@ public class GamePanel extends JPanel implements Runnable {
     public int quizSubState;
     public final int mumsChair = 0;
     public final int dadQuiz = 1;
-
 
     public GamePanel() throws IOException, FontFormatException { //constructor
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -293,67 +291,96 @@ public class GamePanel extends JPanel implements Runnable {
             if (player.worldX / tileSize == 19 && player.worldY / tileSize == 18) { //watching tv
                 player.direction = "up";
             }
-            //MISSION
-            eHandler.setUpNextPhoneCallWhenNotInAMissionAndNextMissionIsAPhoneMission(player.missionState); //increment time after a mission ends, to set the new one if required
+            if (player.exitingFromCutScene) {
+                player.cutSceneCounter++;
+                g2.setColor(new Color(0,0,0, player.cutSceneCounter*5));
+                g2.fillRect(0,0, screenWidth, screenHeight);
 
-            //PLAYER
-            player.update();
-            //NPC
-            for (int i = 0; i < npc[1].length; i++) {
-                if (npc[currentMap][i] != null) {
-                    npc[currentMap][i].update();
-                }
-            }
-            //MONSTER
-            for (int i = 0; i < monster[1].length; i++) {
-                if (monster[currentMap][i] != null) {
-                    if (monster[currentMap][i].alive && !monster[currentMap][i].dying) {
-                        monster[currentMap][i].update();
-                    }
-                    if (!monster[currentMap][i].alive) {
-                        monster[currentMap][i].checkDrop();
-                        monster[currentMap][i] = null;
-                    }
-                }
-            }
-            //PROJECTILE
-            for (int i = 0; i < projectile[1].length; i++) {
-                if (projectile[currentMap][i] != null) {
-                    if (projectile[currentMap][i].alive) {
-                        projectile[currentMap][i].update();
-                    }
-                    if (!projectile[currentMap][i].alive) {
-                        projectile[currentMap][i] = null;
-                    }
-                }
-            }
-            //PARTICLE
-            for (int i = 0; i < particleList.size(); i++) {
-                if (particleList.get(i) != null) {
-                    if (particleList.get(i).alive) {
-                        particleList.get(i).update();
-                    }
-                    if (!particleList.get(i).alive) {
-                        particleList.remove(i);
-                        break;
-                    }
-                }
-            }
-            //INTERACTIVE TILE
-            for (int i = 0; i < iTile[1].length; i++) {
-                if (iTile[currentMap][i] != null) {
-                    iTile[currentMap][i].update();
-                }
-            }
+                if (player.cutSceneCounter == 50) {
+                    player.cutSceneCounter = 0;
+                    player.tempXYDirectionSetYet = false;
+                    player.exitingFromCutScene = false;
 
-            //OBJECT
-            for (int i = 0; i < obj[1].length; i++) {
-                if (obj[currentMap][i] != null && obj[currentMap][i].isUpdateable) {
-                    obj[currentMap][i].update();
+                    for (int i = 0; i < npc[currentMap].length; i++) { //return to player
+                        if (npc[currentMap][i] != null && Objects.equals(npc[currentMap][i].name, "PlayerDummy")) {
+                            player.worldX = player.tempPlayerWorldX;
+                            player.worldY = player.tempPlayerWorldY;
+                            player.direction = player.tempPlayerDirection;
+
+                            if (player.playerDummyToBeRemoved) {
+                                npc[currentMap][i] = null; //delete dummy
+                                player.playerDummyToBeRemoved = false;
+                            }
+                            break;
+                        }
+                    }
+                    player.drawing = true;
+                }
+            } else {
+                //MISSION
+                eHandler.setUpNextPhoneCallWhenNotInAMissionAndNextMissionIsAPhoneMission(player.missionState); //increment time after a mission ends, to set the new one if required
+
+                //PLAYER
+                player.update();
+                //NPC
+                for (int i = 0; i < npc[1].length; i++) {
+                    if (npc[currentMap][i] != null) {
+                        npc[currentMap][i].update();
+                    }
+                }
+                //MONSTER
+                for (int i = 0; i < monster[1].length; i++) {
+                    if (monster[currentMap][i] != null) {
+                        if (monster[currentMap][i].alive && !monster[currentMap][i].dying) {
+                            monster[currentMap][i].update();
+                        }
+                        if (!monster[currentMap][i].alive) {
+                            monster[currentMap][i].checkDrop();
+                            monster[currentMap][i] = null;
+                        }
+                    }
+                }
+                //PROJECTILE
+                for (int i = 0; i < projectile[1].length; i++) {
+                    if (projectile[currentMap][i] != null) {
+                        if (projectile[currentMap][i].alive) {
+                            projectile[currentMap][i].update();
+                        }
+                        if (!projectile[currentMap][i].alive) {
+                            projectile[currentMap][i] = null;
+                        }
+                    }
+                }
+                //PARTICLE
+                for (int i = 0; i < particleList.size(); i++) {
+                    if (particleList.get(i) != null) {
+                        if (particleList.get(i).alive) {
+                            particleList.get(i).update();
+                        }
+                        if (!particleList.get(i).alive) {
+                            particleList.remove(i);
+                            break;
+                        }
+                    }
+                }
+                //INTERACTIVE TILE
+                for (int i = 0; i < iTile[1].length; i++) {
+                    if (iTile[currentMap][i] != null) {
+                        iTile[currentMap][i].update();
+                    }
+                }
+
+                //OBJECT
+                for (int i = 0; i < obj[1].length; i++) {
+                    if (obj[currentMap][i] != null && obj[currentMap][i].isUpdateable) {
+                        obj[currentMap][i].update();
+                    }
                 }
             }
         }
-        eManager.update();
+        if (!player.exitingFromCutScene) {
+            eManager.update();
+        }
     }
 
     public void drawToTempScreen() { //FULL SCREEN STUFF
