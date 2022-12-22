@@ -5,7 +5,6 @@ import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
-import object.OBJ_ToolHutKey;
 import tile.Map;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
@@ -66,7 +65,6 @@ public class GamePanel extends JPanel implements Runnable {
     public final int ARBITRARY_IDENTIFIER_DAD_GUITAR = 750; //used for testing collision of Dad NPC with Acoustic Guitar
     public final int ARBITRARY_IDENTIFIER_DAD_MUSIC_CENTER = 850; //used for testing collision of Dad NPC with Music Center
     public final int ARBITRARY_IDENTIFIER_CLOSEABLE_DOORS = 950; //used for closing doors behind player
-    public final int DOOR_COUNTER_TIMER = 50;
 
     //ENTITY AND OBJECT
     public final Player player = new Player(this,keyH);
@@ -123,7 +121,7 @@ public class GamePanel extends JPanel implements Runnable {
         eManager.setup();
 
 //      //DEBUG TO SKIP AHEAD IN MISSIONS - COMMENT FOR NORMAL GAME FROM START
-//      //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSIONLIST IF STARTING FURTHER ON
+//      //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSION-LIST IF STARTING FURTHER ON
         //MISSION 2 START (AFTER WEEDING)
 //        player.weedCount = 0;
 //        player.missionList.add(1);
@@ -132,7 +130,7 @@ public class GamePanel extends JPanel implements Runnable {
 //        player.hasOutsideDoorsKey = false;
 //        player.inventory.add(new OBJ_ToolHutKey(this));
 
-        //MISSION 11 START (AFTER CHUCKING OUT WASPNEST)
+        //MISSION 11 START (AFTER CHUCKING OUT WASP NEST)
         player.weedCount = 0;
         player.missionList.add(1);player.missionList.add(2);player.missionList.add(3);player.missionList.add(4);player.missionList.add(5);player.missionList.add(6);player.missionList.add(7);player.missionList.add(8);player.missionList.add(9);
         player.missionState = 10;
