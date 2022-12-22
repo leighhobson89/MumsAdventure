@@ -569,7 +569,6 @@ public class UI {
 
         if (npc != null) {
             if (npc.dialogueText[npc.dialogueSet][npc.dialogueIndex] != null) {
-                //currentDialogue = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex];
 
                 char[] characters = npc.dialogueText[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 
@@ -1089,6 +1088,12 @@ public class UI {
             } else if (gp.player.missionState == MissionStates.MOVE_TRAMPOLINE_OFF_CAR && gp.player.missionSubstate == 2) {
                 gp.gameState = gp.cutSceneState;
                 gp.csManager.sceneNum = gp.csManager.trampolineCar;
+            } else if (gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT || gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS || gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
+                gp.gameState = gp.cutSceneState;
+                gp.csManager.sceneNum = gp.csManager.asianOnPhone;
+            } else if (gp.player.missionState == MissionStates.HELP_ANDREA_OUT) {
+                gp.gameState = gp.cutSceneState;
+                gp.csManager.sceneNum = gp.csManager.andreaOnPhone;
             } else {
                 gp.gameState = gp.playState;
             }

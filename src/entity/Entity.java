@@ -69,7 +69,6 @@ public class Entity {
     public int missionSubstate = 0;
     public final Random rand = new Random();
     public boolean repeatSfx = true;
-    public boolean andreaOnMap;
     public int andreaTempGoalCol;
     public int andreaTempGoalRow;
     public boolean goesTransparentWhenHit;
@@ -112,6 +111,8 @@ public class Entity {
     public boolean offMap;
     public boolean transitionStairs;
     public boolean drawing = true;
+    public int tempPlayerWorldX;
+    public int tempPlayerWorldY;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -1209,7 +1210,6 @@ public class Entity {
                 case 3 -> {
                     gp.player.missionState = MissionStates.HELP_ANDREA_OUT;
                     gp.player.inventory.add(new OBJ_FortyQuidForAndrea(gp)); //add mission object
-                    gp.player.andreaOnMap = true;
                 }
                 case 4 -> gp.player.missionState = MissionStates.CHOP_CHICKEN_FOR_DOGS;
                 case 7 -> {
@@ -1222,11 +1222,6 @@ public class Entity {
                         if (gp.npc[gp.currentMap][i] != null) {
                             if (Objects.equals(gp.npc[gp.currentMap][i].name, "OldCooker")) {
                                 gp.npc[gp.currentMap][i] = null;
-                            }
-                            if (gp.npc[gp.currentMap][i] != null) {
-                                if (Objects.equals(gp.npc[gp.currentMap][i].name, "Merchant")) {
-                                    gp.npc[gp.currentMap][i] = null;
-                                }
                             }
                         }
                     }

@@ -52,7 +52,7 @@ public class OBJ_TelephoneHall extends Entity {
         dialogueText[4][5] = "Then throw it in the garden for them\nthey'll love it!";
         //DRAG BIN
         dialogueText[7][0] = "Alright, it's the tip here at Barlick!";
-        dialogueText[7][1] = "We're coming for the old cooker this afternoon.\nCan you drag it up to the back so we can pick\nit up?";
+        dialogueText[7][1] = "We're coming for the old cooker this afternoon.\nCan you move it up to the back so we can pick\nit up?";
         dialogueText[7][2] = "Cheers, nice one! Sure we'll make a bob or two\non the scrap...Whoops I shouldn't be saying that!";
         //NOT GET PAID FOR OLD COOKER
         dialogueText[8][0] = "Alright, it's the tip here at Barlick again!";
@@ -66,7 +66,14 @@ public class OBJ_TelephoneHall extends Entity {
         if (gp.player.readyForNextPhoneMission || gp.player.missionState == MissionStates.WEEDING_MISSION) {
             if (gp.player.nextMissionIsPhoneMission) {
                 setNewMissionState(gp.player.readyForNextPhoneMission, gp.player.missionState, gp.player.missionToSet);
-                startDialogue(this, gp.player.missionState);
+                if (gp.player.missionState == MissionStates.HELP_ANDREA_OUT) {
+                    gp.aSetter.setNPCAfterStart("Andrea", 0, 9, 1);
+                }
+                if (gp.player.missionState == MissionStates.SELL_DADS_ELECTRIC_GUITAR_TO_THE_MERCHANT || gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS || gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER || gp.player.missionState == MissionStates.HELP_ANDREA_OUT) {
+                    gp.gameState = gp.transitionState; //cut scene trigger
+                } else {
+                    startDialogue(this, gp.player.missionState);
+                }
             }
             gp.keyH.enterPressed = false;
             gp.player.readyForNextPhoneMission = false;

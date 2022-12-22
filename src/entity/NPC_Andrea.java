@@ -106,7 +106,6 @@ public class NPC_Andrea extends Entity {
             searchPath(goalCol, goalRow);
         }
         tileDistance = Math.abs(((worldX / gp.tileSize) - goalCol) + ((worldY / gp.tileSize) - goalRow));
-        System.out.println(gp.player.missionList);
         if (tileDistance < 1 && gp.player.missionSubstate == 3) {
             gp.player.andreaSafe = true;
             for (int i = 0; i < gp.npc[1].length; i++) {

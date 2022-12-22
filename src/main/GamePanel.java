@@ -5,6 +5,7 @@ import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
+import object.OBJ_ToolHutKey;
 import tile.Map;
 import tile.TileManager;
 import tile_interactive.InteractiveTile;
@@ -122,23 +123,62 @@ public class GamePanel extends JPanel implements Runnable {
 
 //      //DEBUG TO SKIP AHEAD IN MISSIONS - COMMENT FOR NORMAL GAME FROM START
 //      //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSION-LIST IF STARTING FURTHER ON
-        //MISSION 2 START (AFTER WEEDING)
+        //MISSION 2 START (SELL ELECTRIC GUITAR TO MERCHANT)
 //        player.weedCount = 0;
+//        loopSFX(28);
+//        player.phoneRinging = true;
+//        player.nextMissionIsPhoneMission = true;
+//        player.readyForNextPhoneMission = true;
 //        player.missionList.add(1);
-//        player.missionState = 2;
+//        player.missionState = 0;
 //        player.missionToSet = 2;
 //        player.hasOutsideDoorsKey = false;
 //        player.inventory.add(new OBJ_ToolHutKey(this));
 
-        //MISSION 11 START (AFTER CHUCKING OUT WASP NEST)
+        //MISSION 3 START (HELP ANDREA OUT)
         player.weedCount = 0;
-        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
-        player.missionState = 10;
-        player.missionSubstate= 2;
-        player.missionToSet = 11;
-        misStat.endMissionTasks(MissionStates.CHUCK_WASP_NEST_IN_BIN, false);
+        loopSFX(28);
+        player.phoneRinging = true;
+        player.nextMissionIsPhoneMission = true;
+        player.readyForNextPhoneMission = true;
+        player.missionList.addAll(Arrays.asList(1, 2));
+        player.missionState = 0;
+        player.missionToSet = 3;
         player.hasOutsideDoorsKey = false;
+
+//        //MISSION 7 START (MOVE COOKER TO BACK)
+//        player.weedCount = 0;
+//        loopSFX(28);
+//        player.phoneRinging = true;
+//        player.nextMissionIsPhoneMission = true;
+//        player.readyForNextPhoneMission = true;
+//        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
+//        player.missionState = 0;
+//        player.missionToSet = 7;
+//        player.hasOutsideDoorsKey = false;
+
+//        //MISSION 8 START (DON'T GET PAID FOR COOKER)
+//        player.weedCount = 0;
+//        loopSFX(28);
+//        player.phoneRinging = true;
+//        player.nextMissionIsPhoneMission = true;
+//        player.readyForNextPhoneMission = true;
+//        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+//        player.missionState = 0;
+//        player.missionToSet = 8;
+//        player.hasOutsideDoorsKey = false;
+
+        //MISSION 11 START (AFTER CHUCKING OUT WASP NEST)
+//        player.weedCount = 0;
+//        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+//        player.missionState = 10;
+//        player.missionSubstate= 2;
+//        player.missionToSet = 11;
+//        misStat.endMissionTasks(MissionStates.CHUCK_WASP_NEST_IN_BIN, false);
+//        player.hasOutsideDoorsKey = false;
 //      //END OF DEBUG
+
+        System.out.println(player.missionList);
 
         playMusic(0, false);
         if (!musicSetToPlayFromStart) {
@@ -255,10 +295,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
             //MISSION
             eHandler.setUpNextPhoneCallWhenNotInAMissionAndNextMissionIsAPhoneMission(player.missionState); //increment time after a mission ends, to set the new one if required
-            if (player.missionState == MissionStates.HELP_ANDREA_OUT && player.andreaOnMap) {
-                aSetter.setNPCAfterStart("Andrea", 0, 9, 1);
-                player.andreaOnMap = false;
-            }
+
             //PLAYER
             player.update();
             //NPC

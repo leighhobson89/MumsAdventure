@@ -236,7 +236,6 @@ public class SaveLoad {
             }
 
             //NPCS ON MAP
-            ds.andreaOnMap = gp.player.andreaOnMap;
 
             ds.mapNpcNames = new String[gp.maxMap][gp.npc[1].length];
             ds.mapNpcWorldX = new int[gp.maxMap][gp.npc[1].length];
@@ -481,7 +480,6 @@ public class SaveLoad {
             }
 
             //NPCS ON MAP
-            gp.player.andreaOnMap = ds.andreaOnMap;
 
             for (int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
                 for (int i = 0; i < gp.npc[1].length; i++) {

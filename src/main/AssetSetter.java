@@ -10,6 +10,7 @@ import tile_interactive.IT_CookerTile;
 import tile_interactive.IT_WaterTile;
 import tile_interactive.IT_WeedTile;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class AssetSetter {
@@ -38,9 +39,9 @@ public class AssetSetter {
         Entity testEntity = new OBJ_Cupboard2(gp);
 
         int count = 0;
-        for (int i = 0; i < gp.obj[1].length; i++) {
+        for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
             if (gp.obj[mapNum][i] != null) {
-                count++; //at end of loop, count will show the index of the last object in the array
+                count++; //at end of loop, count will show the index of the next available slot in the array
             } else {
                 break;
             }
@@ -49,33 +50,35 @@ public class AssetSetter {
         int i = count;
         if (!gp.tileM.tile[thisTile].collision && !gp.player.checkIfObjectInWay(testEntity)) {
             switch (name) { //chooses object
-                case "Pip's Bone" -> {
+                case OBJ_PipsBone.OBJ_NAME -> {
                     gp.obj[mapNum][i] = new OBJ_PipsBone(gp);
                     boneX = x * gp.tileSize;
                     boneY = y * gp.tileSize;
                 }
-                case "Chopped Chicken Phoebe" -> {
+                case OBJ_ChoppedChickenPhoebe.OBJ_NAME -> {
                     gp.obj[mapNum][i] = new OBJ_ChoppedChickenPhoebe(gp);
                     choppedChickenPhoebeX = x * gp.tileSize;
                     choppedChickenPhoebeY = y * gp.tileSize;
                 }
-                case "Chopped Chicken Pip" -> {
+                case OBJ_ChoppedChickenPip.OBJ_NAME -> {
                     gp.obj[mapNum][i] = new OBJ_ChoppedChickenPip(gp);
                     choppedChickenPipX = x * gp.tileSize;
                     choppedChickenPipY = y * gp.tileSize;
                 }
-                case "Old Cardigan" -> gp.obj[mapNum][i] = new OBJ_GrandmasCardigan(gp);
-                case "Spatula" -> gp.obj[mapNum][i] = new OBJ_Spatula(gp);
-                case "Hatchet" -> gp.obj[mapNum][i] = new OBJ_Hatchet(gp);
-                case "HundredQuid" -> gp.obj[mapNum][i] = new OBJ_SuperCoin(gp);
-                case "Garden Shovel" -> gp.obj[mapNum][i] = new OBJ_Shovel(gp);
-                case "Lavender Crocs" -> gp.obj[mapNum][i] = new OBJ_Lavender_Crocs(gp);
-                case "Chicken" -> gp.obj[mapNum][i] = new OBJ_Chicken(gp);
-                case "Chopped Chicken" -> gp.obj[mapNum][i] = new OBJ_ChoppedChicken(gp);
-                case "Mop" -> gp.obj[mapNum][i] = new OBJ_Mop(gp);
-                case "WaspNest" -> gp.obj[mapNum][i] = new OBJ_WaspNest(gp);
-                case "Lighter" -> gp.obj[mapNum][i] = new OBJ_Lighter(gp);
-                case "BookHutKey" -> gp.obj[mapNum][i] = new OBJ_BookHutKey(gp);
+                case OBJ_GrandmasCardigan.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_GrandmasCardigan(gp);
+                case OBJ_Spatula.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Spatula(gp);
+                case OBJ_Hatchet.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Hatchet(gp);
+                case OBJ_SuperCoin.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_SuperCoin(gp);
+                case OBJ_Shovel.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Shovel(gp);
+                case OBJ_Lavender_Crocs.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Lavender_Crocs(gp);
+                case OBJ_Chicken.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Chicken(gp);
+                case OBJ_ChoppedChicken.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_ChoppedChicken(gp);
+                case OBJ_Mop.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Mop(gp);
+                case OBJ_WaspNest.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_WaspNest(gp);
+                case OBJ_Lighter.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Lighter(gp);
+                case OBJ_BookHutKey.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_BookHutKey(gp);
+                case OBJ_Tutorial_TileSelectorMarker.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Tutorial_TileSelectorMarker(gp);
+                case OBJ_Tutorial_Arrow_Right.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Tutorial_Arrow_Right(gp);
             }
 
             gp.obj[mapNum][i].worldX = x * gp.tileSize;
@@ -100,31 +103,35 @@ public class AssetSetter {
             for (int j = 0; j < gp.obj[1].length; //noinspection UnusedAssignment
                  j++) {
                 switch (name) { //chooses object
-                    case "Pip's Bone" -> {
-                        gp.obj[mapNum][j] = new OBJ_PipsBone(gp);
-                        boneX = testEntity.worldX;
-                        boneY = testEntity.worldY;
+                    case OBJ_PipsBone.OBJ_NAME -> {
+                        gp.obj[mapNum][i] = new OBJ_PipsBone(gp);
+                        boneX = x * gp.tileSize;
+                        boneY = y * gp.tileSize;
                     }
-                    case "Chopped Chicken Phoebe" -> {
-                        gp.obj[mapNum][j] = new OBJ_ChoppedChickenPhoebe(gp);
-                        choppedChickenPhoebeX = testEntity.worldX;
-                        choppedChickenPhoebeY = testEntity.worldY;
+                    case OBJ_ChoppedChickenPhoebe.OBJ_NAME -> {
+                        gp.obj[mapNum][i] = new OBJ_ChoppedChickenPhoebe(gp);
+                        choppedChickenPhoebeX = x * gp.tileSize;
+                        choppedChickenPhoebeY = y * gp.tileSize;
                     }
-                    case "Chopped Chicken Pip" -> {
-                        gp.obj[mapNum][j] = new OBJ_ChoppedChickenPip(gp);
-                        choppedChickenPipX = testEntity.worldX;
-                        choppedChickenPipY = testEntity.worldY;
+                    case OBJ_ChoppedChickenPip.OBJ_NAME -> {
+                        gp.obj[mapNum][i] = new OBJ_ChoppedChickenPip(gp);
+                        choppedChickenPipX = x * gp.tileSize;
+                        choppedChickenPipY = y * gp.tileSize;
                     }
-                    case "Old Cardigan" -> gp.obj[mapNum][j] = new OBJ_GrandmasCardigan(gp);
-                    case "Spatula" -> gp.obj[mapNum][j] = new OBJ_Spatula(gp);
-                    case "Hatchet" -> gp.obj[mapNum][j] = new OBJ_Hatchet(gp);
-                    case "HundredQuid" -> gp.obj[mapNum][j] = new OBJ_SuperCoin(gp);
-                    case "Garden Shovel" -> gp.obj[mapNum][j] = new OBJ_Shovel(gp);
-                    case "Lavender Crocs" -> gp.obj[mapNum][j] = new OBJ_Lavender_Crocs(gp);
-                    case "Chicken" -> gp.obj[mapNum][j] = new OBJ_Chicken(gp);
-                    case "Chopped Chicken" -> gp.obj[mapNum][j] = new OBJ_ChoppedChicken(gp);
-                    case "Mop" -> gp.obj[mapNum][j] = new OBJ_Mop(gp);
-                    case "WaspNest" -> gp.obj[mapNum][j] = new OBJ_WaspNest(gp);
+                    case OBJ_GrandmasCardigan.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_GrandmasCardigan(gp);
+                    case OBJ_Spatula.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Spatula(gp);
+                    case OBJ_Hatchet.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Hatchet(gp);
+                    case OBJ_SuperCoin.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_SuperCoin(gp);
+                    case OBJ_Shovel.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Shovel(gp);
+                    case OBJ_Lavender_Crocs.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Lavender_Crocs(gp);
+                    case OBJ_Chicken.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Chicken(gp);
+                    case OBJ_ChoppedChicken.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_ChoppedChicken(gp);
+                    case OBJ_Mop.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Mop(gp);
+                    case OBJ_WaspNest.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_WaspNest(gp);
+                    case OBJ_Lighter.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Lighter(gp);
+                    case OBJ_BookHutKey.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_BookHutKey(gp);
+                    case OBJ_Tutorial_TileSelectorMarker.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Tutorial_TileSelectorMarker(gp);
+                    case OBJ_Tutorial_Arrow_Right.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Tutorial_Arrow_Right(gp);
                 }
 
                 gp.obj[mapNum][j].worldX = testEntity.worldX;
@@ -923,5 +930,13 @@ public class AssetSetter {
 
 
         return weedCount; //return number of weeds to dig up
+    }
+
+    public void removeCutSceneObjectFromMap(String entityName, int mapNum) {
+        for (int i = 0; i < gp.obj[mapNum].length; i++) {
+            if (gp.obj[mapNum][i] != null && Objects.equals(gp.obj[mapNum][i].name, entityName)) {
+                gp.obj[mapNum][i] = null;
+            }
+        }
     }
 }

@@ -45,7 +45,6 @@ public class DataStorage implements Serializable {
     boolean setShovelFlag;
     boolean repeatSfx;
     int dialogueSet;
-    boolean andreaOnMap;
     int choppedChickenCount;
     int thrownChickenCount = 0;
     Entity currentProjectile;

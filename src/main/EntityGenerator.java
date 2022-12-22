@@ -107,6 +107,8 @@ public class EntityGenerator {
             case OBJ_Music_Notes.OBJ_NAME -> new OBJ_Music_Notes(gp);
             case OBJ_CarTopDrive.OBJ_NAME -> new OBJ_CarTopDrive(gp);
             case OBJ_Trampoline.OBJ_NAME -> new OBJ_Trampoline(gp);
+            case OBJ_Tutorial_TileSelectorMarker.OBJ_NAME -> new OBJ_Tutorial_TileSelectorMarker(gp);
+            case OBJ_Tutorial_Arrow_Right.OBJ_NAME -> new OBJ_Tutorial_Arrow_Right(gp);
             default -> null;
         };
     }
