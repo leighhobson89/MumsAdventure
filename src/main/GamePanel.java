@@ -132,7 +132,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         //MISSION 11 START (AFTER CHUCKING OUT WASP NEST)
         player.weedCount = 0;
-        player.missionList.add(1);player.missionList.add(2);player.missionList.add(3);player.missionList.add(4);player.missionList.add(5);player.missionList.add(6);player.missionList.add(7);player.missionList.add(8);player.missionList.add(9);
+        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
         player.missionState = 10;
         player.missionSubstate= 2;
         player.missionToSet = 11;
