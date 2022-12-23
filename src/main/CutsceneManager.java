@@ -56,10 +56,16 @@ public class CutsceneManager {
             }
 
             gp.player.worldX = 13 * gp.tileSize;
-            gp.player.worldY = 6 * gp.tileSize;
+            gp.player.worldY = 11 * gp.tileSize;
 
             scenePhase++;
         } else if (scenePhase == 1) {
+            gp.player.worldY -= 2;
+
+            if (gp.player.worldY <= 6 * gp.tileSize) {
+                scenePhase++;
+            }
+        } else if (scenePhase == 2) {
             for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "TelephoneHall")) {
                     gp.obj[gp.currentMap][i].dialogueSet = gp.player.missionState;
@@ -67,7 +73,7 @@ public class CutsceneManager {
                 }
             }
             gp.ui.drawDialogueScreen(0);
-        } else if (scenePhase == 2) {
+        } else if (scenePhase == 3) {
             sceneNum = NA;
             scenePhase = 0;
             gp.player.exitingFromCutScene = true;
