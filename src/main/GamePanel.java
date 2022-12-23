@@ -134,28 +134,28 @@ public class GamePanel extends JPanel implements Runnable {
 //        player.inventory.add(new OBJ_ToolHutKey(this));
 
         //MISSION 3 START (HELP ANDREA OUT)
-        player.weedCount = 0;
-        loopSFX(28);
-        player.phoneRinging = true;
-        player.nextMissionIsPhoneMission = true;
-        player.readyForNextPhoneMission = true;
-        player.missionList.addAll(Arrays.asList(1, 2));
-        player.missionState = 0;
-        player.missionToSet = 3;
-        player.hasOutsideDoorsKey = false;
-
-//        //MISSION 7 START (MOVE COOKER TO BACK)
 //        player.weedCount = 0;
 //        loopSFX(28);
 //        player.phoneRinging = true;
 //        player.nextMissionIsPhoneMission = true;
 //        player.readyForNextPhoneMission = true;
-//        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
+//        player.missionList.addAll(Arrays.asList(1, 2));
 //        player.missionState = 0;
-//        player.missionToSet = 7;
+//        player.missionToSet = 3;
 //        player.hasOutsideDoorsKey = false;
 
-        //MISSION 8 START (DON'T GET PAID FOR COOKER)
+//        //MISSION 7 START (MOVE COOKER TO BACK)
+        player.weedCount = 0;
+        loopSFX(28);
+        player.phoneRinging = true;
+        player.nextMissionIsPhoneMission = true;
+        player.readyForNextPhoneMission = true;
+        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
+        player.missionState = 0;
+        player.missionToSet = 7;
+        player.hasOutsideDoorsKey = false;
+
+//        //MISSION 8 START (DON'T GET PAID FOR COOKER)
 //        player.weedCount = 0;
 //        loopSFX(28);
 //        player.phoneRinging = true;

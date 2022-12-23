@@ -79,6 +79,7 @@ public class AssetSetter {
                 case OBJ_BookHutKey.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_BookHutKey(gp);
                 case OBJ_Tutorial_TileSelectorMarker.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Tutorial_TileSelectorMarker(gp);
                 case OBJ_Tutorial_Arrow_Right.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_Tutorial_Arrow_Right(gp);
+                case OBJ_TruckTipCooker.OBJ_NAME -> gp.obj[mapNum][i] = new OBJ_TruckTipCooker(gp);
             }
 
             gp.obj[mapNum][i].worldX = x * gp.tileSize;
@@ -155,8 +156,7 @@ public class AssetSetter {
         int i = count;
         switch (name) { //chooses npc
             case "Andrea" -> gp.npc[mapNum][i] = new NPC_Andrea(gp);
-            case "placeholder" -> //there to allow switch to work with only one case, so replace with extra npcs when needed
-                    gp.npc[mapNum][i] = new NPC_Dad(gp);
+            case "TipDude" -> gp.npc[mapNum][i] = new NPC_TipDude(gp);
         }
 
         gp.npc[mapNum][i].worldX = x * gp.tileSize;

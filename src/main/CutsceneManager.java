@@ -1,6 +1,8 @@
 package main;
 
+import entity.NPC_TipDude;
 import entity.PlayerDummy;
+import object.OBJ_TruckTipCooker;
 import object.OBJ_Tutorial_Arrow_Right;
 import object.OBJ_Tutorial_TileSelectorMarker;
 
@@ -93,28 +95,30 @@ public class CutsceneManager {
         if (scenePhase == 0) {
             gp.player.drawing = false;
             gp.player.worldX = 55 * gp.tileSize;
-            gp.player.worldY = 9 * gp.tileSize;
+            gp.player.worldY = 7 * gp.tileSize;
             if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) {
                 gp.aSetter.setObjectAfterStart(OBJ_Tutorial_Arrow_Right.OBJ_NAME, gp.currentMap, 59, 12, false);
                 gp.aSetter.setObjectAfterStart(OBJ_Tutorial_TileSelectorMarker.OBJ_NAME, gp.currentMap, 60, 12, false);
             }
+            if (gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
+                gp.aSetter.setObjectAfterStart(OBJ_TruckTipCooker.OBJ_NAME, gp.currentMap, 62, 2, false);
+                gp.aSetter.setNPCAfterStart("TipDude", gp.currentMap, 62, 3);
+            }
             scenePhase++;
         } else if (scenePhase == 1) {
-            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
-                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "TelephoneHall")) {
-                    gp.obj[gp.currentMap][i].dialogueSet = gp.player.missionState;
-                    gp.ui.npc = gp.obj[gp.currentMap][i];
-                }
-            }
-            gp.ui.drawDialogueScreen(0);
-        } else if (scenePhase == 2) {
             if (gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
                 for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
-                    if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "Merchant")) {
+                    if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "TipDude")) {
                         gp.npc[gp.currentMap][i].direction = "down";
-                        gp.npc[gp.currentMap][i].worldY += 4;
-                        if (gp.npc[gp.currentMap][i].worldY > 18 * gp.tileSize) {
-                            gp.npc[gp.currentMap][i] = null;
+                        gp.npc[gp.currentMap][i].worldY += 2;
+                        if (gp.npc[gp.currentMap][i].worldY > 6 * gp.tileSize) {
+                            for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
+                                if (gp.npc[gp.currentMap][j] != null && Objects.equals(gp.npc[gp.currentMap][j].name, "Merchant")) {
+                                    gp.npc[gp.currentMap][j].direction = "up";
+                                }
+                            }
+                        }
+                        if (gp.npc[gp.currentMap][i].worldY > 8 * gp.tileSize + 10) {
                             scenePhase++;
                         }
                     }
@@ -122,10 +126,68 @@ public class CutsceneManager {
             } else {
                 scenePhase++;
             }
+        } else if (scenePhase == 2) {
+            if (gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
+                for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
+                    if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "TipDude")) {
+                        gp.npc[gp.currentMap][i].dialogueSet = 0;
+                        gp.ui.npc = gp.npc[gp.currentMap][i];
+                    }
+                }
+                gp.ui.drawDialogueScreen(0);
+            } else {
+                scenePhase++;
+            }
         } else if (scenePhase == 3) {
+            if (gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
+                for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
+                    if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "TipDude")) {
+                        gp.npc[gp.currentMap][i].direction = "up";
+                        gp.npc[gp.currentMap][i].worldY -= 2;
+                    }
+                    if (gp.npc[gp.currentMap][i] != null && gp.npc[gp.currentMap][i].worldY < 2 * gp.tileSize) {
+                        gp.npc[gp.currentMap][i].direction = "down";
+                        scenePhase++;
+                    }
+                }
+            } else {
+                scenePhase++;
+            }
+        } else if (scenePhase == 4) {
+            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "TelephoneHall")) {
+                    gp.obj[gp.currentMap][i].dialogueSet = gp.player.missionState;
+                    gp.ui.npc = gp.obj[gp.currentMap][i];
+                }
+            }
+            gp.ui.drawDialogueScreen(0);
+        } else if (scenePhase == 5) {
+            if (gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
+                for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
+                    if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "Merchant")) {
+                        gp.npc[gp.currentMap][i].direction = "down";
+                        gp.npc[gp.currentMap][i].worldY += 4;
+                        gp.player.worldY += 2;
+                        if (gp.npc[gp.currentMap][i].worldY > 21 * gp.tileSize) {
+                            gp.npc[gp.currentMap][i] = null;
+                            for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
+                                if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "TipDude")) {
+                                    gp.npc[gp.currentMap][i] = null;
+                                    break;
+                                }
+                            }
+                            scenePhase++;
+                        }
+                    }
+                }
+            } else {
+                scenePhase++;
+            }
+        } else if (scenePhase == 6) {
             if (gp.player.missionState == MissionStates.DRAG_COOKER_TO_BINS) {
                 gp.aSetter.removeCutSceneObjectFromMap(OBJ_Tutorial_TileSelectorMarker.OBJ_NAME, gp.currentMap);
                 gp.aSetter.removeCutSceneObjectFromMap(OBJ_Tutorial_Arrow_Right.OBJ_NAME, gp.currentMap);
+                gp.aSetter.removeCutSceneObjectFromMap(OBJ_TruckTipCooker.OBJ_NAME, gp.currentMap);
             }
 
             sceneNum = NA;

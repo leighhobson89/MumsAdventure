@@ -25,8 +25,8 @@ public class NPC_Merchant extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/NPC/buyer_left1", gp.tileSize, gp.tileSize);
-        up2 = setup("/NPC/buyer_left2", gp.tileSize, gp.tileSize);
+        up1 = setup("/NPC/buyer_up1", gp.tileSize, gp.tileSize);
+        up2 = setup("/NPC/buyer_up2", gp.tileSize, gp.tileSize);
         down1 = setup("/NPC/buyer_down1", gp.tileSize, gp.tileSize);
         down2 = setup("/NPC/buyer_down2", gp.tileSize, gp.tileSize);
         left1 = setup("/NPC/buyer_left1", gp.tileSize, gp.tileSize);
