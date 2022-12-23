@@ -134,15 +134,15 @@ public class GamePanel extends JPanel implements Runnable {
 //        player.inventory.add(new OBJ_ToolHutKey(this));
 
         //MISSION 3 START (HELP ANDREA OUT)
-        player.weedCount = 0;
-        loopSFX(28);
-        player.phoneRinging = true;
-        player.nextMissionIsPhoneMission = true;
-        player.readyForNextPhoneMission = true;
-        player.missionList.addAll(Arrays.asList(1, 2));
-        player.missionState = 0;
-        player.missionToSet = 3;
-        player.hasOutsideDoorsKey = false;
+//        player.weedCount = 0;
+//        loopSFX(28);
+//        player.phoneRinging = true;
+//        player.nextMissionIsPhoneMission = true;
+//        player.readyForNextPhoneMission = true;
+//        player.missionList.addAll(Arrays.asList(1, 2));
+//        player.missionState = 0;
+//        player.missionToSet = 3;
+//        player.hasOutsideDoorsKey = false;
 
 //        //MISSION 7 START (MOVE COOKER TO BACK)
 //        player.weedCount = 0;
@@ -155,7 +155,7 @@ public class GamePanel extends JPanel implements Runnable {
 //        player.missionToSet = 7;
 //        player.hasOutsideDoorsKey = false;
 
-//        //MISSION 8 START (DON'T GET PAID FOR COOKER)
+        //MISSION 8 START (DON'T GET PAID FOR COOKER)
 //        player.weedCount = 0;
 //        loopSFX(28);
 //        player.phoneRinging = true;
@@ -167,13 +167,13 @@ public class GamePanel extends JPanel implements Runnable {
 //        player.hasOutsideDoorsKey = false;
 
         //MISSION 11 START (AFTER CHUCKING OUT WASP NEST)
-//        player.weedCount = 0;
-//        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
-//        player.missionState = 10;
-//        player.missionSubstate= 2;
-//        player.missionToSet = 11;
-//        misStat.endMissionTasks(MissionStates.CHUCK_WASP_NEST_IN_BIN, false);
-//        player.hasOutsideDoorsKey = false;
+        player.weedCount = 0;
+        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        player.missionState = 10;
+        player.missionSubstate= 2;
+        player.missionToSet = 11;
+        misStat.endMissionTasks(MissionStates.CHUCK_WASP_NEST_IN_BIN, false);
+        player.hasOutsideDoorsKey = false;
 //      //END OF DEBUG
 
         System.out.println(player.missionList);
@@ -301,17 +301,17 @@ public class GamePanel extends JPanel implements Runnable {
                     player.tempXYDirectionSetYet = false;
                     player.exitingFromCutScene = false;
 
-                    for (int i = 0; i < npc[currentMap].length; i++) { //return to player
-                        if (npc[currentMap][i] != null && Objects.equals(npc[currentMap][i].name, "PlayerDummy")) {
-                            player.worldX = player.tempPlayerWorldX;
-                            player.worldY = player.tempPlayerWorldY;
-                            player.direction = player.tempPlayerDirection;
+                    player.worldX = player.tempPlayerWorldX;
+                    player.worldY = player.tempPlayerWorldY;
+                    player.direction = player.tempPlayerDirection;
 
-                            if (player.playerDummyToBeRemoved) {
+                    if (player.playerDummyToBeRemoved) {
+                        for (int i = 0; i < npc[currentMap].length; i++) { //return to player
+                            if (npc[currentMap][i] != null && Objects.equals(npc[currentMap][i].name, "PlayerDummy")) {
                                 npc[currentMap][i] = null; //delete dummy
                                 player.playerDummyToBeRemoved = false;
+                                break;
                             }
-                            break;
                         }
                     }
                     player.drawing = true;
