@@ -1054,7 +1054,12 @@ public class UI {
     }
 
     public void setupSwitchMaps() {
-        gp.gameState = gp.playState;
+        if (gp.player.transitionDueToPills) {
+            gp.player.transitionDueToPills = false;
+            gp.player.startDialogue(gp.player, 17);
+        } else {
+            gp.gameState = gp.playState;
+        }
         gp.otherMap = gp.currentMap;
         gp.currentMap = gp.eHandler.tempMap;
         gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;

@@ -117,6 +117,7 @@ public class Entity {
     public boolean exitingFromCutScene;
     public boolean playerDummyToBeRemoved;
     public boolean tempXYDirectionSetYet;
+    public boolean transitionDueToPills;
 
     //COUNTER
     public int spriteCounter = 0;
