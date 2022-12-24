@@ -33,6 +33,8 @@ public class NPC_Merchant extends Entity {
         left2 = setup("/NPC/buyer_left2", gp.tileSize, gp.tileSize);
         right1 = setup("/NPC/buyer_left1", gp.tileSize, gp.tileSize);
         right2 = setup("/NPC/buyer_left2", gp.tileSize, gp.tileSize);
+
+        down3 = setup("/NPC/buyer_down1", gp.tileSize, gp.tileSize);
     }
 
     public void setDialogue() {

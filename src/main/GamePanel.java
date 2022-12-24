@@ -145,26 +145,26 @@ public class GamePanel extends JPanel implements Runnable {
 //        player.hasOutsideDoorsKey = false;
 
 //        //MISSION 7 START (MOVE COOKER TO BACK)
-        player.weedCount = 0;
-        loopSFX(28);
-        player.phoneRinging = true;
-        player.nextMissionIsPhoneMission = true;
-        player.readyForNextPhoneMission = true;
-        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
-        player.missionState = 0;
-        player.missionToSet = 7;
-        player.hasOutsideDoorsKey = false;
-
-//        //MISSION 8 START (DON'T GET PAID FOR COOKER)
 //        player.weedCount = 0;
 //        loopSFX(28);
 //        player.phoneRinging = true;
 //        player.nextMissionIsPhoneMission = true;
 //        player.readyForNextPhoneMission = true;
-//        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+//        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6));
 //        player.missionState = 0;
-//        player.missionToSet = 8;
+//        player.missionToSet = 7;
 //        player.hasOutsideDoorsKey = false;
+
+        //MISSION 8 START (DON'T GET PAID FOR COOKER)
+        player.weedCount = 0;
+        loopSFX(28);
+        player.phoneRinging = true;
+        player.nextMissionIsPhoneMission = true;
+        player.readyForNextPhoneMission = true;
+        player.missionList.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        player.missionState = 0;
+        player.missionToSet = 8;
+        player.hasOutsideDoorsKey = false;
 
         //MISSION 11 START (AFTER CHUCKING OUT WASP NEST)
 //        player.weedCount = 0;
@@ -323,13 +323,13 @@ public class GamePanel extends JPanel implements Runnable {
                 //PLAYER
                 player.update();
                 //NPC
-                for (int i = 0; i < npc[1].length; i++) {
+                for (int i = 0; i < npc[currentMap].length; i++) {
                     if (npc[currentMap][i] != null) {
                         npc[currentMap][i].update();
                     }
                 }
                 //MONSTER
-                for (int i = 0; i < monster[1].length; i++) {
+                for (int i = 0; i < monster[currentMap].length; i++) {
                     if (monster[currentMap][i] != null) {
                         if (monster[currentMap][i].alive && !monster[currentMap][i].dying) {
                             monster[currentMap][i].update();
@@ -341,7 +341,7 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
                 //PROJECTILE
-                for (int i = 0; i < projectile[1].length; i++) {
+                for (int i = 0; i < projectile[currentMap].length; i++) {
                     if (projectile[currentMap][i] != null) {
                         if (projectile[currentMap][i].alive) {
                             projectile[currentMap][i].update();
@@ -364,14 +364,14 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
                 //INTERACTIVE TILE
-                for (int i = 0; i < iTile[1].length; i++) {
+                for (int i = 0; i < iTile[currentMap].length; i++) {
                     if (iTile[currentMap][i] != null) {
                         iTile[currentMap][i].update();
                     }
                 }
 
                 //OBJECT
-                for (int i = 0; i < obj[1].length; i++) {
+                for (int i = 0; i < obj[currentMap].length; i++) {
                     if (obj[currentMap][i] != null && obj[currentMap][i].isUpdateable) {
                         obj[currentMap][i].update();
                     }
@@ -413,7 +413,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             //OBJECTS
-            for (int i = 0; i < obj[1].length; i++) {
+            for (int i = 0; i < obj[currentMap].length; i++) {
                 if (obj[currentMap][i] != null) {
                     if (Objects.equals(obj[currentMap][i].name, "TelephoneHall") && player.readyForNextPhoneMission && player.weedCount < 1) { //make phone vibrate if required
                         player.buzzCounter++;
