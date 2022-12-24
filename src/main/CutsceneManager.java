@@ -1,7 +1,6 @@
 package main;
 
 import entity.Entity;
-import entity.NPC_TipDude;
 import entity.PlayerDummy;
 import object.OBJ_TruckTipCooker;
 import object.OBJ_Tutorial_Arrow_Right;
@@ -22,8 +21,6 @@ public class CutsceneManager {
     public final int trampolineCar = 1;
     public final int asianOnPhone = 2;
     public final int andreaOnPhone = 3;
-    public int tempWorldY = 0;
-    public boolean tempWorldYSetYet;
     public int spriteNum = 0;
 
     public CutsceneManager(GamePanel gp) {
@@ -113,6 +110,10 @@ public class CutsceneManager {
             if (gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
                 for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
                     if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "TipDude")) {
+                        if (!gp.npc[gp.currentMap][i].tempWorldYSetYet) {
+                            gp.npc[gp.currentMap][i].tempWorldY = gp.npc[gp.currentMap][i].worldY;
+                            gp.npc[gp.currentMap][i].tempWorldYSetYet = true;
+                        }
                         gp.npc[gp.currentMap][i].direction = "down";
                         gp.npc[gp.currentMap][i].worldY += 2;
                         switchWalkImageCutscene(gp.npc[gp.currentMap][i]);
@@ -124,6 +125,8 @@ public class CutsceneManager {
                             }
                         }
                         if (gp.npc[gp.currentMap][i].worldY > 8 * gp.tileSize + 10) {
+                            gp.npc[gp.currentMap][i].tempWorldY = 0;
+                            gp.npc[gp.currentMap][i].tempWorldYSetYet = false;
                             scenePhase++;
                         }
                     }
@@ -147,9 +150,9 @@ public class CutsceneManager {
             if (gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
                 for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
                     if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "TipDude")) {
-                        if (!tempWorldYSetYet) {
-                            tempWorldY = gp.npc[gp.currentMap][i].worldY;
-                            tempWorldYSetYet = true;
+                        if (!gp.npc[gp.currentMap][i].tempWorldYSetYet) {
+                            gp.npc[gp.currentMap][i].tempWorldY = gp.npc[gp.currentMap][i].worldY;
+                            gp.npc[gp.currentMap][i].tempWorldYSetYet = true;
                         }
                         gp.npc[gp.currentMap][i].direction = "up";
                         gp.npc[gp.currentMap][i].worldY -= 2;
@@ -157,8 +160,8 @@ public class CutsceneManager {
                     }
                     if (gp.npc[gp.currentMap][i] != null && gp.npc[gp.currentMap][i].worldY < 2 * gp.tileSize) {
                         gp.npc[gp.currentMap][i].direction = "down";
+                        gp.npc[gp.currentMap][i].tempWorldYSetYet = false;
                         scenePhase++;
-                        tempWorldYSetYet = false;
                     }
                 }
             } else {
@@ -176,11 +179,17 @@ public class CutsceneManager {
             if (gp.player.missionState == MissionStates.NOT_GET_PAID_FOR_OLD_COOKER) {
                 for (int i = 0; i < gp.npc[gp.currentMap].length; i++) {
                     if (gp.npc[gp.currentMap][i] != null && Objects.equals(gp.npc[gp.currentMap][i].name, "Merchant")) {
+                        if (!gp.npc[gp.currentMap][i].tempWorldYSetYet) {
+                            gp.npc[gp.currentMap][i].tempWorldY = gp.npc[gp.currentMap][i].worldY;
+                            gp.npc[gp.currentMap][i].tempWorldYSetYet = true;
+                        }
                         gp.npc[gp.currentMap][i].direction = "down";
                         gp.npc[gp.currentMap][i].worldY += 4;
                         switchWalkImageCutscene(gp.npc[gp.currentMap][i]);
                         gp.player.worldY += 2;
                         if (gp.npc[gp.currentMap][i].worldY > 21 * gp.tileSize) {
+                            gp.npc[gp.currentMap][i].tempWorldY = 0;
+                            gp.npc[gp.currentMap][i].tempWorldYSetYet = false;
                             gp.npc[gp.currentMap][i] = null;
                             for (int j = 0; j < gp.npc[gp.currentMap].length; j++) {
                                 if (gp.npc[gp.currentMap][j] != null && Objects.equals(gp.npc[gp.currentMap][j].name, "TipDude")) {
@@ -212,8 +221,8 @@ public class CutsceneManager {
     }
 
     private void switchWalkImageCutscene(Entity entity) {
-        if (Math.abs(entity.worldY - tempWorldY) > 45) {
-            tempWorldY = entity.worldY;
+        if (Math.abs(entity.worldY - entity.tempWorldY) > 45) {
+            entity.tempWorldY = entity.worldY;
             switch(entity.direction) {
                 case "up":
                     if (spriteNum == 0) {

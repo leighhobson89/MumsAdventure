@@ -118,6 +118,8 @@ public class Entity {
     public boolean playerDummyToBeRemoved;
     public boolean tempXYDirectionSetYet;
     public boolean transitionDueToPills;
+    public boolean tempWorldYSetYet;
+    public int tempWorldY;
 
     //COUNTER
     public int spriteCounter = 0;

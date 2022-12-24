@@ -12,6 +12,7 @@ public class NPC_TipDude extends Entity {
         direction = "down";
         speed = 1;
         type = type_npc;
+        tempWorldY = 0;
 
         getImage();
         setDialogue();
