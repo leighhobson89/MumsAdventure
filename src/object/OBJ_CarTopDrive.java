@@ -22,6 +22,7 @@ public class OBJ_CarTopDrive extends Entity {
         name = OBJ_NAME;
         direction = "down";
         collision = true;
+        isScaledUpObject = true;
 
         solidArea.x = 0;
         solidArea.y = 20;

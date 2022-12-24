@@ -203,6 +203,7 @@ public class Entity {
     public boolean isSaleable;
     public int amount = 1;
     public int lightRadius; //for different objects affecting lighting
+    public boolean isScaledUpObject;
 
     //WORLD ATTRIBUTES
     public static final int MAX_WORLD_X_COORDINATE = 69;
@@ -927,10 +928,10 @@ public class Entity {
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
+        if (isScaledUpObject || (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
                 && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
                 && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
-                && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+                && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY)) {
 
             int tempScreenX = screenX;
             int tempScreenY = screenY;
