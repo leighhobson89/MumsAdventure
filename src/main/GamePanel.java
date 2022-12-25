@@ -378,6 +378,8 @@ public class GamePanel extends JPanel implements Runnable {
                         obj[currentMap][i].update();
                     }
                 }
+
+
             }
         }
         if (!player.exitingFromCutScene) {
@@ -441,6 +443,8 @@ public class GamePanel extends JPanel implements Runnable {
             //ADD ENTITIES TO THE LIST
             //PLAYER
             entityList.add(player);
+            player.playerDrawnThisCycle = true; // set variable to draw tiles above player
+
             if (!tempEntityList.contains(player)) {
                 tempEntityList.add(player);
             }
@@ -481,6 +485,8 @@ public class GamePanel extends JPanel implements Runnable {
             for (Entity entity : entityList) {
                 entity.draw(g2);
             }
+
+            tileM.draw(g2); // draw tiles that need to be above player
 
             //EMPTY ENTITY LIST
             entityList.clear();

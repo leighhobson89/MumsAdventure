@@ -120,6 +120,7 @@ public class Entity {
     public boolean transitionDueToPills;
     public boolean tempWorldYSetYet;
     public int tempWorldY;
+    public boolean playerDrawnThisCycle;
 
     //COUNTER
     public int spriteCounter = 0;
