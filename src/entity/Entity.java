@@ -121,6 +121,7 @@ public class Entity {
     public boolean tempWorldYSetYet;
     public int tempWorldY;
     public boolean playerDrawnThisCycle;
+    public boolean drawAbovePlayer;
 
     //COUNTER
     public int spriteCounter = 0;

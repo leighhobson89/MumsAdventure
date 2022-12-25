@@ -436,7 +436,9 @@ public class GamePanel extends JPanel implements Runnable {
                     if (player.buzzCounter > 240) {
                         player.buzzCounter = 0;
                     }
-                    obj[currentMap][i].draw(g2);
+                    if (!obj[currentMap][i].drawAbovePlayer) {
+                        obj[currentMap][i].draw(g2);
+                    }
                 }
             }
 
@@ -484,6 +486,12 @@ public class GamePanel extends JPanel implements Runnable {
             //DRAW ENTITIES
             for (Entity entity : entityList) {
                 entity.draw(g2);
+            }
+
+            for (int i = 0; i < obj[1].length; i++) { //draw objects above player i.e. tree top of garden
+                if (obj[currentMap][i] != null && obj[currentMap][i].drawAbovePlayer) {
+                    obj[currentMap][i].draw(g2);
+                }
             }
 
             tileM.draw(g2); // draw tiles that need to be above player

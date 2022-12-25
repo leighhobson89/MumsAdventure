@@ -167,6 +167,31 @@ public class AssetSetter {
         int mapNum = 0;
         int i = 0;
 
+        gp.obj[mapNum][i] = new OBJ_TreeTopGarden_1(gp);
+        gp.obj[mapNum][i].worldX = 59 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_TreeTopGarden_2(gp);
+        gp.obj[mapNum][i].worldX = 60 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_TreeTopGarden_3(gp);
+        gp.obj[mapNum][i].worldX = 59 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_TreeTopGarden_4(gp);
+        gp.obj[mapNum][i].worldX = 60 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_TreeTopGarden_5(gp);
+        gp.obj[mapNum][i].worldX = 59 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 19 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_OutdoorGateVertical(gp);
         gp.obj[mapNum][i].worldX = 44 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 19 * gp.tileSize;
