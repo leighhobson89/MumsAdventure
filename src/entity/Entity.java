@@ -344,18 +344,18 @@ public class Entity {
     public void handleTransparencyOfWallsAndObjectsInGarage(Entity object) {
         if (gp.player.insideGarage) {
             object.transparent = true;
-//            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
-//                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
-//                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 2);
-//                }
-//            }
+            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
+                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 2);
+                }
+            }
         } else {
             object.transparent = false;
-//            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
-//                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
-//                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 1);
-//                }
-//            }
+            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
+                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 1);
+                }
+            }
         }
     }
 
