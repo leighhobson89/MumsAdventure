@@ -93,7 +93,7 @@ public class MON_Spider extends Entity {
         int rand = new Random().nextInt(100) + 1;
 
         //SET THE MONSTER DROP
-        if (gp.player.spiderCount >= 4 && !gp.player.toolHutKeyDropped) {
+        if (gp.player.spiderCount >= 0 && !gp.player.toolHutKeyDropped) {
             gp.player.toolHutKeyDropped = true;
             dropItem(new OBJ_ToolHutKey(gp), this.worldX/gp.tileSize, this.worldY/gp.tileSize);
         } else {

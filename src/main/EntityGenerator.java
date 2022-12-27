@@ -110,6 +110,12 @@ public class EntityGenerator {
             case OBJ_Tutorial_TileSelectorMarker.OBJ_NAME -> new OBJ_Tutorial_TileSelectorMarker(gp);
             case OBJ_Tutorial_Arrow_Right.OBJ_NAME -> new OBJ_Tutorial_Arrow_Right(gp);
             case OBJ_TruckTipCooker.OBJ_NAME -> new OBJ_TruckTipCooker(gp);
+            case OBJ_TreeTopGarden_1.OBJ_NAME -> new OBJ_TreeTopGarden_1(gp);
+            case OBJ_TreeTopGarden_2.OBJ_NAME -> new OBJ_TreeTopGarden_2(gp);
+            case OBJ_TreeTopGarden_3.OBJ_NAME -> new OBJ_TreeTopGarden_3(gp);
+            case OBJ_TreeTopGarden_4.OBJ_NAME -> new OBJ_TreeTopGarden_4(gp);
+            case OBJ_TreeTopGarden_5.OBJ_NAME -> new OBJ_TreeTopGarden_5(gp);
+            case OBJ_TreeTopGarden_6.OBJ_NAME -> new OBJ_TreeTopGarden_6(gp);
             default -> null;
         };
     }

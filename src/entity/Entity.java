@@ -16,7 +16,7 @@ public class Entity {
 
     final GamePanel gp;
 
-    public BufferedImage dyingImage, up1, up2, down1, down2, left1, left2, right1, right2, down1_red, down1_purple, dadDown1, phoebeRight2, phoebeLeft1;
+    public BufferedImage dyingImage, up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3, down1_red, down1_purple, dadDown1, phoebeRight2, phoebeLeft1;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2, guardUp, guardDown, guardLeft, guardRight;
     public BufferedImage image, image2, image3, image4, image5;
     public BufferedImage up1Guitar, up2Guitar, down1Guitar, down2Guitar, left1Guitar, left2Guitar, right1Guitar, right2Guitar;
@@ -117,6 +117,11 @@ public class Entity {
     public boolean exitingFromCutScene;
     public boolean playerDummyToBeRemoved;
     public boolean tempXYDirectionSetYet;
+    public boolean transitionDueToPills;
+    public boolean tempWorldYSetYet;
+    public int tempWorldY;
+    public boolean playerDrawnThisCycle;
+    public boolean drawAbovePlayer;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -203,6 +208,7 @@ public class Entity {
     public boolean isSaleable;
     public int amount = 1;
     public int lightRadius; //for different objects affecting lighting
+    public boolean isScaledUpObject;
 
     //WORLD ATTRIBUTES
     public static final int MAX_WORLD_X_COORDINATE = 69;
@@ -927,10 +933,10 @@ public class Entity {
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-        if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
+        if (isScaledUpObject || (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
                 && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
                 && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
-                && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+                && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY)) {
 
             int tempScreenX = screenX;
             int tempScreenY = screenY;

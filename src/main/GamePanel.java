@@ -182,8 +182,6 @@ public class GamePanel extends JPanel implements Runnable {
 //        player.inventory.add(new OBJ_GarageKey(this));
 //      //END OF DEBUG
 
-        System.out.println(player.missionList);
-
         playMusic(0, false);
         if (!musicSetToPlayFromStart) {
             keyH.musicPlaying = false;
@@ -329,13 +327,13 @@ public class GamePanel extends JPanel implements Runnable {
                 //PLAYER
                 player.update();
                 //NPC
-                for (int i = 0; i < npc[1].length; i++) {
+                for (int i = 0; i < npc[currentMap].length; i++) {
                     if (npc[currentMap][i] != null) {
                         npc[currentMap][i].update();
                     }
                 }
                 //MONSTER
-                for (int i = 0; i < monster[1].length; i++) {
+                for (int i = 0; i < monster[currentMap].length; i++) {
                     if (monster[currentMap][i] != null) {
                         if (monster[currentMap][i].alive && !monster[currentMap][i].dying) {
                             monster[currentMap][i].update();
@@ -347,7 +345,7 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
                 //PROJECTILE
-                for (int i = 0; i < projectile[1].length; i++) {
+                for (int i = 0; i < projectile[currentMap].length; i++) {
                     if (projectile[currentMap][i] != null) {
                         if (projectile[currentMap][i].alive) {
                             projectile[currentMap][i].update();
@@ -370,14 +368,14 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
                 //INTERACTIVE TILE
-                for (int i = 0; i < iTile[1].length; i++) {
+                for (int i = 0; i < iTile[currentMap].length; i++) {
                     if (iTile[currentMap][i] != null) {
                         iTile[currentMap][i].update();
                     }
                 }
 
                 //OBJECT
-                for (int i = 0; i < obj[1].length; i++) {
+                for (int i = 0; i < obj[currentMap].length; i++) {
                     if (obj[currentMap][i] != null && obj[currentMap][i].isUpdateable) {
                         obj[currentMap][i].update();
                     }
@@ -419,7 +417,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             //OBJECTS
-            for (int i = 0; i < obj[1].length; i++) {
+            for (int i = 0; i < obj[currentMap].length; i++) {
                 if (obj[currentMap][i] != null) {
                     if (Objects.equals(obj[currentMap][i].name, "TelephoneHall") && player.readyForNextPhoneMission && player.weedCount < 1) { //make phone vibrate if required
                         player.buzzCounter++;
@@ -438,13 +436,17 @@ public class GamePanel extends JPanel implements Runnable {
                     if (player.buzzCounter > 240) {
                         player.buzzCounter = 0;
                     }
-                    obj[currentMap][i].draw(g2);
+                    if (!obj[currentMap][i].drawAbovePlayer) {
+                        obj[currentMap][i].draw(g2);
+                    }
                 }
             }
 
             //ADD ENTITIES TO THE LIST
             //PLAYER
             entityList.add(player);
+            player.playerDrawnThisCycle = true; // set variable to draw tiles above player
+
             if (!tempEntityList.contains(player)) {
                 tempEntityList.add(player);
             }
@@ -485,6 +487,14 @@ public class GamePanel extends JPanel implements Runnable {
             for (Entity entity : entityList) {
                 entity.draw(g2);
             }
+
+            for (int i = 0; i < obj[1].length; i++) { //draw objects above player i.e. tree top of garden
+                if (obj[currentMap][i] != null && obj[currentMap][i].drawAbovePlayer) {
+                    obj[currentMap][i].draw(g2);
+                }
+            }
+
+            tileM.draw(g2); // draw tiles that need to be above player
 
             //EMPTY ENTITY LIST
             entityList.clear();

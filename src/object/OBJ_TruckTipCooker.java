@@ -19,6 +19,7 @@ public class OBJ_TruckTipCooker extends Entity {
         type = type_obstacle;
         name = OBJ_NAME;
         direction = "down";
+        isScaledUpObject = true;
 
         solidArea.x = 0;
         solidArea.y = 20;

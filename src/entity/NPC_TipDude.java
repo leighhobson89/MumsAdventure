@@ -12,6 +12,7 @@ public class NPC_TipDude extends Entity {
         direction = "down";
         speed = 1;
         type = type_npc;
+        tempWorldY = 0;
 
         getImage();
         setDialogue();
@@ -31,6 +32,9 @@ public class NPC_TipDude extends Entity {
         left2 = setup("/NPC/tipDude_left2", gp.tileSize, gp.tileSize);
         right1 = setup("/NPC/tipDude_right1", gp.tileSize, gp.tileSize);
         right2 = setup("/NPC/tipDude_right2", gp.tileSize, gp.tileSize);
+
+        up3 = setup("/NPC/tipDude_up1", gp.tileSize, gp.tileSize);
+        down3 = setup("/NPC/tipDude_down1", gp.tileSize, gp.tileSize);
     }
 
     public void setDialogue() {

@@ -31,156 +31,156 @@ public class TileManager {
 
     public void getTileImage() {
 
-        setup(0, "lawn1", false);
-        setup(1, "brick1", true);
-        setup(2, "carpetLounge", false);
-        setup(3, "carpetStairsLanding", false);
-        setup(4, "carpetDining", false);
-        setup(5, "carpetKitchen", false);
-        setup(6, "internalWall1", true);
-        setup(7, "lawn2", false);
-        setup(8, "brick2", true);
-        setup(9, "carpetBathroom", false);
-        setup(10, "carpetMumsRoom", false);
-        setup(11, "carpetSpareRoom", false);
-        setup(12, "driveWayStones", false);
-        setup(13, "garageBlock", true);
-        setup(14, "garageFloor", false);
-        setup(15, "pathHorizontal", false);
-        setup(16, "pathVertical", false);
-        setup(17, "rockery", true);
-        setup(18, "hedge", true);
-        setup(19, "fence1", true);
-        setup(22, "sofaTop", false);
-        setup(23, "sofaBottom", true);
-        setup(24, "tableTL", true);
-        setup(25, "tableTR", true);
-        setup(26, "tableBL", false);
-        setup(27, "tableBR", true);
-        setup(28, "tableLivingRoomLeft", true);
-        setup(29, "tableLivingRoomRight", true);
-        setup(30, "cupboard1HorLounge", true);
-        setup(31, "cupboard1VerLounge", true);
-        setup(32, "cupboard1HorHall", true);
-        setup(33, "tvLounge", true);
-        setup(34, "cupboard2HorLounge", true);
-        setup(35, "roadKerb", false);
-        setup(36, "road", false);
-        setup(37, "tree1Tile", true);
-        setup(38, "tree2Tile", true);
-        setup(39, "rockery2", true);
-        setup(40, "rockery3", true);
-        setup(41, "fireplaceTop", true);
-        setup(42, "fireplaceBottom", true);
-        setup(43, "roadKerb2", false);
-        setup(44, "fishTankL", true);
-        setup(45, "fishTankR", true);
-        setup(46, "kitCup1", true);
-        setup(47, "kitCup2", true);
-        setup(48, "kitCup3", true);
-        setup(49, "kitCup4", true);
-        setup(50, "kitCup5", true);
-        setup(51, "kitCup6", true);
-        setup(52, "kitCup7", true);
-        setup(53, "kitCup8", true);
-        setup(54, "mumsChairTile", false);
-        setup(55, "rockery4", true);
-        setup(56, "rockery5", true);
-        setup(57, "rockery6", true);
-        setup(58, "rockery2", false);
-        setup(59, "rockery3", false);
-        setup(60, "StairsLanding", false);
-        setup(61, "carpetBannister", false);
-        setup(62, "StairsDownstairs", false);
-        setup(63, "hallLoungeBorder", false);
-        setup(64, "KitchenLoungeBorder", false);
-        setup(65, "hallKitchenBorder", false);
-        setup(66, "path1", false);
-        setup(67, "pathRockeryTopAndBottom", false);
-        setup(68, "pathRockeryTopAndLeft", false);
-        setup(69, "pathRockeryTopBorder", false);
-        setup(70, "pathRockeryTopAndRight", false);
-        setup(71, "pathRockeryLeft", false);
-        setup(72, "lawnRockeryRight", false);
-        setup(73, "lawnRockeryLeft", false);
-        setup(74, "lawnRockeryTopRight", false);
-        setup(75, "lawnRockeryTopLeft", false);
-        setup(76, "pathRockeryBottomBorder", false);
-        setup(77, "frontGateOnPath", true);
-        setup(78, "frontGateOnHedge", true);
-        setup(79, "hedgeHorizontal", true);
-        setup(80, "hedgeCorner", true);
-        setup(81, "lawnPlain", false);
-        setup(82, "lawnLeaves1", false);
-        setup(83, "lawnLeaves2", false);
-        setup(84, "lawnLeaves3", false);
-        setup(85, "lawnLeaves4", false);
-        setup(86, "rockeryShrub", true);
-        setup(87, "pathLawnTop", false);
-        setup(88, "lawnMiddleLeaves1", false);
-        setup(89, "lawnMiddleLeaves2", false);
-        setup(90, "pathLawnBottom", false);
-        setup(91, "pathLawnRight", false);
-        setup(92, "fence2", true);
-        setup(93, "fenceVertical", true);
-        setup(94, "bathroomFloor", false);
-        setup(95, "fenceVertical2", true);
-        setup(96, "bookHutBackLeft", true);
-        setup(97, "bookHutBackCentre", true);
-        setup(98, "bookHutBackRight", true);
-        setup(99, "bookhut1_left", false);
-        setup(100, "bookhut1_right", false);
-        setup(101, "bookhut2_left", false);
-        setup(102, "bookhut2_right", false);
-        setup(103, "bookhut3_left", false);
-        setup(104, "bookhut3_right", false);
-        setup(105, "path2", false);
-        setup(106, "toolHutBackLeft", true);
-        setup(107, "toolHutBackCentre", true);
-        setup(108, "toolHutBackRight", true);
-        setup(109, "carpetBaldy1", false);
-        setup(110, "carpetBaldy2", false);
-        setup(111, "stairsLandingBathroomBorder", false);
-        setup(112, "spareRoomLandingBorder", false);
-        setup(113, "landingLeighBedroomBorder", false);
-        setup(114, "landingDadBedroomBorder", false);
-        setup(115, "carpetStairsLandingMat", false);
-        setup(116, "newBrickBottomLeft", true);
-        setup(117, "newBrickBottomRight", true);
-        setup(118, "newBrickTopLeft", true);
-        setup(119, "newBrickTopRight", true);
-        setup(120, "newBrickHorizontal", true);
-        setup(121, "newBrickVertical", true);
-        setup(122, "newInternalCornerTopLeft", true);
-        setup(123, "newInternalCornerTopRight", true);
-        setup(124, "newInternalCornerBottomLeft", true);
-        setup(125, "newInternalCornerBottomRight", true);
-        setup(126, "newInternalBottomEnd", true);
-        setup(127, "newInternalTopEnd", true);
-        setup(128, "newInternalLeftEnd", true);
-        setup(129, "newInternalRightEnd", true);
-        setup(130, "newInternalMiddleHorizontal", true);
-        setup(131, "newInternalMiddleVertical", true);
-        setup(132, "newInternalLeftEndShadow", true);
-        setup(133, "newInternalRightEndShadow", true);
-        setup(134, "newInternalTTop", true);
-        setup(135, "newInternalTBottom", true);
-        setup(136, "newInternalShortHorizontal", true);
-        setup(137, "newInternalRightEnd2", true);
-        setup(138, "workTop1", true);
-        setup(139, "workTop2", true);
-        setup(140, "workTop3", true);
-        setup(141, "workTop4", true);
-        setup(142, "workTop5", true);
-        setup(143, "workTop6", true);
-        setup(144, "fridgeTop", true);
-        setup(145, "cookerTop", true);
-        setup(146, "diningCupboardLeft", true);
-        setup(147, "diningCupboardRight", true);
-        setup(148, "diningCupboardMiddle", true);
+        setup(0, "lawn1", false, false);
+        setup(1, "brick1", true, false);
+        setup(2, "carpetLounge", false, false);
+        setup(3, "carpetStairsLanding", false, false);
+        setup(4, "carpetDining", false, false);
+        setup(5, "carpetKitchen", false, false);
+        setup(6, "internalWall1", true, false);
+        setup(7, "lawn2", false, false);
+        setup(8, "brick2", true, false);
+        setup(9, "carpetBathroom", false, false);
+        setup(10, "carpetMumsRoom", false, false);
+        setup(11, "carpetSpareRoom", false, false);
+        setup(12, "driveWayStones", false, false);
+        setup(13, "garageBlock", true, false);
+        setup(14, "garageFloor", false, false);
+        setup(15, "pathHorizontal", false, false);
+        setup(16, "pathVertical", false, false);
+        setup(17, "rockery", true, false);
+        setup(18, "hedge", true, false);
+        setup(19, "fence1", true, false);
+        setup(22, "sofaTop", false, false);
+        setup(23, "sofaBottom", true, false);
+        setup(24, "tableTL", true, false);
+        setup(25, "tableTR", true, false);
+        setup(26, "tableBL", false, false);
+        setup(27, "tableBR", true, false);
+        setup(28, "tableLivingRoomLeft", true, false);
+        setup(29, "tableLivingRoomRight", true, false);
+        setup(30, "cupboard1HorLounge", true, false);
+        setup(31, "cupboard1VerLounge", true, false);
+        setup(32, "cupboard1HorHall", true, false);
+        setup(33, "tvLounge", true, false);
+        setup(34, "cupboard2HorLounge", true, false);
+        setup(35, "roadKerb", false, false);
+        setup(36, "road", false, false);
+        setup(37, "tree1Tile", true, false);
+        setup(38, "tree2Tile", true, false);
+        setup(39, "rockery2", true, false);
+        setup(40, "rockery3", true, false);
+        setup(41, "fireplaceTop", true, false);
+        setup(42, "fireplaceBottom", true, false);
+        setup(43, "roadKerb2", false, false);
+        setup(44, "fishTankL", true, false);
+        setup(45, "fishTankR", true, false);
+        setup(46, "kitCup1", true, false);
+        setup(47, "kitCup2", true, false);
+        setup(48, "kitCup3", true, false);
+        setup(49, "kitCup4", true, false);
+        setup(50, "kitCup5", true, false);
+        setup(51, "kitCup6", true, false);
+        setup(52, "kitCup7", true, false);
+        setup(53, "kitCup8", true, false);
+        setup(54, "mumsChairTile", false, false);
+        setup(55, "rockery4", true, false);
+        setup(56, "rockery5", true, false);
+        setup(57, "rockery6", true, false);
+        setup(58, "rockery2", false, false);
+        setup(59, "rockery3", false, false);
+        setup(60, "StairsLanding", false, false);
+        setup(61, "carpetBannister", false, false);
+        setup(62, "StairsDownstairs", false, false);
+        setup(63, "hallLoungeBorder", false, false);
+        setup(64, "KitchenLoungeBorder", false, false);
+        setup(65, "hallKitchenBorder", false, false);
+        setup(66, "path1", false, false);
+        setup(67, "pathRockeryTopAndBottom", false, false);
+        setup(68, "pathRockeryTopAndLeft", false, false);
+        setup(69, "pathRockeryTopBorder", false, false);
+        setup(70, "pathRockeryTopAndRight", false, false);
+        setup(71, "pathRockeryLeft", false, false);
+        setup(72, "lawnRockeryRight", false, false);
+        setup(73, "lawnRockeryLeft", false, false);
+        setup(74, "lawnRockeryTopRight", false, false);
+        setup(75, "lawnRockeryTopLeft", false, false);
+        setup(76, "pathRockeryBottomBorder", false, false);
+        setup(77, "frontGateOnPath", true, false);
+        setup(78, "frontGateOnHedge", true, false);
+        setup(79, "hedgeHorizontal", true, false);
+        setup(80, "hedgeCorner", true, false);
+        setup(81, "lawnPlain", false, false);
+        setup(82, "lawnLeaves1", false, false);
+        setup(83, "lawnLeaves2", false, false);
+        setup(84, "lawnLeaves3", false, false);
+        setup(85, "lawnLeaves4", false, false);
+        setup(86, "rockeryShrub", true, false);
+        setup(87, "pathLawnTop", false, false);
+        setup(88, "lawnMiddleLeaves1", false, false);
+        setup(89, "lawnMiddleLeaves2", false, false);
+        setup(90, "pathLawnBottom", false, false);
+        setup(91, "pathLawnRight", false, false);
+        setup(92, "fence2", true, false);
+        setup(93, "fenceVertical", true, false);
+        setup(94, "bathroomFloor", false, false);
+        setup(95, "fenceVertical2", true, false);
+        setup(96, "bookHutBackLeft", true, false);
+        setup(97, "bookHutBackCentre", true, false);
+        setup(98, "bookHutBackRight", true, false);
+        setup(99, "bookhut1_left", false, false);
+        setup(100, "bookhut1_right", false, false);
+        setup(101, "bookhut2_left", false, false);
+        setup(102, "bookhut2_right", false, false);
+        setup(103, "bookhut3_left", false, false);
+        setup(104, "bookhut3_right", false, false);
+        setup(105, "path2", false, false);
+        setup(106, "toolHutBackLeft", true, false);
+        setup(107, "toolHutBackCentre", true, false);
+        setup(108, "toolHutBackRight", true, false);
+        setup(109, "carpetBaldy1", false, false);
+        setup(110, "carpetBaldy2", false, false);
+        setup(111, "stairsLandingBathroomBorder", false, false);
+        setup(112, "spareRoomLandingBorder", false, false);
+        setup(113, "landingLeighBedroomBorder", false, false);
+        setup(114, "landingDadBedroomBorder", false, false);
+        setup(115, "carpetStairsLandingMat", false, false);
+        setup(116, "newBrickBottomLeft", true, false);
+        setup(117, "newBrickBottomRight", true, false);
+        setup(118, "newBrickTopLeft", true, false);
+        setup(119, "newBrickTopRight", true, false);
+        setup(120, "newBrickHorizontal", true, false);
+        setup(121, "newBrickVertical", true, false);
+        setup(122, "newInternalCornerTopLeft", true, false);
+        setup(123, "newInternalCornerTopRight", true, false);
+        setup(124, "newInternalCornerBottomLeft", true, false);
+        setup(125, "newInternalCornerBottomRight", true, false);
+        setup(126, "newInternalBottomEnd", true, false);
+        setup(127, "newInternalTopEnd", true, false);
+        setup(128, "newInternalLeftEnd", true, false);
+        setup(129, "newInternalRightEnd", true, false);
+        setup(130, "newInternalMiddleHorizontal", true, false);
+        setup(131, "newInternalMiddleVertical", true, false);
+        setup(132, "newInternalLeftEndShadow", true, false);
+        setup(133, "newInternalRightEndShadow", true, false);
+        setup(134, "newInternalTTop", true, false);
+        setup(135, "newInternalTBottom", true, false);
+        setup(136, "newInternalShortHorizontal", true, false);
+        setup(137, "newInternalRightEnd2", true, false);
+        setup(138, "workTop1", true, false);
+        setup(139, "workTop2", true, false);
+        setup(140, "workTop3", true, false);
+        setup(141, "workTop4", true, false);
+        setup(142, "workTop5", true, false);
+        setup(143, "workTop6", true, false);
+        setup(144, "fridgeTop", true, false);
+        setup(145, "cookerTop", true, false);
+        setup(146, "diningCupboardLeft", true, false);
+        setup(147, "diningCupboardRight", true, false);
+        setup(148, "diningCupboardMiddle", true, false);
     }
 
-    public void setup(int index, String imageName, boolean collision) {
+    public void setup(int index, String imageName, boolean collision, boolean drawAbovePlayer) {
 
         UtilityTool uTool = new UtilityTool();
 
@@ -190,6 +190,7 @@ public class TileManager {
             tile[index].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/" + imageName + ".png")));
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
             tile[index].collision = collision;
+            tile[index].drawAbovePlayer = drawAbovePlayer;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -239,12 +240,22 @@ public class TileManager {
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-            if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
-                    && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
-                    && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
-                    && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-                g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+            if (!tile[tileNum].drawAbovePlayer && !gp.player.playerDrawnThisCycle) { //under player
+                if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
+                        && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
+                        && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
+                        && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+                    g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+                }
+            } else if (tile[tileNum].drawAbovePlayer && gp.player.playerDrawnThisCycle) { //above player
+                if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
+                        && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
+                        && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
+                        && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+                    g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+                }
             }
+
             worldCol++;
 
             if (worldCol == gp.maxWorldCol) {
@@ -252,6 +263,7 @@ public class TileManager {
                 worldRow++;
             }
         }
+        gp.player.playerDrawnThisCycle = false;
         //DEBUG RELATED CODE
         if (drawPathFinderTrack) { //draw path if debug is switched on
             g2.setColor(new Color(255,0,0,70));

@@ -25,6 +25,7 @@ public class MON_CarGoingUp extends Entity {
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "up";
+        isScaledUpObject = true;
 
         solidArea.x = 0;
         solidArea.y = 0;

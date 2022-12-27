@@ -56,8 +56,8 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (entityHit(entity,0, 19, 10, "right", "")) {transitionUpDownStairs(entity,1, 24, 10);}
-            else if (entityHit(entity,1, 24, 10, "left", "")) {transitionUpDownStairs(entity,0, 19, 10);}
+            if (entityHit(entity,0, 19, 10, "right", "")) {transitionUpDownStairs(entity,1, 24, 10, false);}
+            else if (entityHit(entity,1, 24, 10, "left", "")) {transitionUpDownStairs(entity,0, 19, 10, false);}
             else if (entityHit(entity,0, 37, 8, "down", "up") && entity.type == entity.type_player) {
                 flagInsideBookHut(false);
             } else if (entityHit(entity,0, 37, 8, "up", "down") && entity.type == entity.type_player) {
@@ -149,8 +149,6 @@ public class EventHandler {
 
     public void teleportPills (int currentMap) {
         int[][] optionArray;
-        gp.gameState = gp.dialogueState;
-        gp.player.startDialogue(gp.player, 17);
         if (gp.player.hasOutsideDoorsKey) {
             optionArray = new int[][] {{0,46,15},{0,58,17},{0,12,10},{0,15,19},{0,17,11},{0,18,13},{0,20,11},{0,23,15},{0,24,15},{0,28,11},{1,22,11},{1,19,16},{1,29,12},{1,27,18}};
         } else {
@@ -163,7 +161,7 @@ public class EventHandler {
         int randY = optionArray[randomLocation][2];
 
         if (map != currentMap) {
-            transitionUpDownStairs(gp.player, map, randX, randY);
+            transitionUpDownStairs(gp.player, map, randX, randY, true);
         } else {
             gp.player.worldX = gp.tileSize*randX;
             gp.player.worldY = gp.tileSize*randY;
@@ -171,7 +169,11 @@ public class EventHandler {
         gp.player.stressLevel = 0;
     }
 
-    public void transitionUpDownStairs(Entity entity, int map, int col, int row) {
+    public void transitionUpDownStairs(Entity entity, int map, int col, int row, boolean dueToPills) {
+        if (dueToPills) {
+            gp.player.transitionDueToPills = true;
+        }
+
         tempMap = map;
         tempCol = col;
         tempRow = row;
