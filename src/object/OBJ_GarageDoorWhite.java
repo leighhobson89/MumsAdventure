@@ -36,20 +36,11 @@ public class OBJ_GarageDoorWhite extends Entity {
     }
 
     public void setDialogue() {
-        dialogueText[0][0] = "The garage door's already open!";
+        dialogueText[0][0] = "You need a key to open the door";
         dialogueText[1][0] = "I've shut that garage door behind you\nseeing as though you left it wide open!";
     }
     public void interact() {
-        if (!opened) {
-            gp.playSFX(4);
-
-            down1 = image2;
-            collision = false;
-            opened = true;
-        }
-        else {
-            startDialogue(this, 0);
-        }
+        startDialogue(this, 0);
         gp.keyH.enterPressed = false;
     }
 

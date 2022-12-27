@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.MissionStates;
+import object.OBJ_GarageKey;
 import object.OBJ_StainRemover;
 
 import java.awt.*;
@@ -135,6 +136,7 @@ public class NPC_Dad extends Entity {
         dialogueText[61][1] = "I could really do with getting them dug up but I\nhave to order that horse hair for my violin bow.";
         dialogueText[61][2] = "That's gonna tek all day with this bloody laptop!";
         dialogueText[61][3] = "Can you do it?\nThere's a shovel up int' garage you can use.\nBut don't bend it, or lose it!";
+        dialogueText[61][4] = "Here's the garage key! Don't bloody lose it!\n(Press C to see your inventory)";
 
         //BONE THROWN DIALOG
         dialogueText[62][0] ="Watch where you bloody throw that\nwill yer!";
@@ -493,6 +495,7 @@ public class NPC_Dad extends Entity {
         if (gp.player.weedCount > 0 && !gp.player.setShovelFlag) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;
             gp.aSetter.setObjectAfterStart("Garden Shovel", gp.currentMap, 45, 8, false);
+            gp.player.inventory.add(new OBJ_GarageKey(gp));
             gp.player.setShovelFlag = true;
         }
         switch (gp.player.missionState) {
