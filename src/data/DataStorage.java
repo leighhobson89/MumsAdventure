@@ -120,4 +120,6 @@ public class DataStorage implements Serializable {
     boolean[][] mapNpcOffMap = new boolean[10][100];
     boolean[][] mapNpcWithinView = new boolean[10][100];
     boolean[][] mapNpcFollowingPlayer = new boolean[10][100];
+    boolean[][] mapNpcInHouse = new boolean[10][100];
+    boolean[][] mapMonsterInHouse = new boolean[10][100];
 }

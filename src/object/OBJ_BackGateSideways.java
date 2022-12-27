@@ -45,7 +45,7 @@ public class OBJ_BackGateSideways extends Entity {
             down1 = image2;
             collision = false;
             opened = true;
-            gp.player.spiderCount = gp.eHandler.spiderEvent(23, 13, gp.dialogueState, gp.player.spiderCount, true, false);
+            gp.player.spiderCount = gp.eHandler.spiderEvent(24, 11, gp.dialogueState, gp.player.spiderCount, false, false); //23,13
             gp.eHandler.kitchenPantry();
         }
         else {

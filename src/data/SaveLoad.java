@@ -143,7 +143,6 @@ public class SaveLoad {
             ds.dadOption = gp.player.dadOption;
             ds.andreaSafe = gp.player.andreaSafe;
             ds.hasOutsideDoorsKey = gp.player.hasOutsideDoorsKey;
-            ds.insideHouse = gp.player.insideHouse;
 
 
             //PLAYER OUTFIT
@@ -215,6 +214,7 @@ public class SaveLoad {
                         ds.mapMonsterWorldY[mapNum][i] = gp.monster[mapNum][i].worldY;
                         ds.mapMonsterHealth[mapNum][i] = gp.monster[mapNum][i].stressLevel;
                         ds.mapMonsterDirection[mapNum][i] = gp.monster[mapNum][i].direction;
+                        ds.mapMonsterInHouse[mapNum][i] = gp.monster[mapNum][i].insideHouse;
                     }
                 }
             }
@@ -255,6 +255,7 @@ public class SaveLoad {
                         ds.mapNpcOffMap[mapNum][i] = gp.npc[mapNum][i].offMap;
                         ds.mapNpcWithinView[mapNum][i] = gp.npc[mapNum][i].withinView;
                         ds.mapNpcFollowingPlayer[mapNum][i] = gp.npc[mapNum][i].followingPlayer;
+                        ds.mapNpcInHouse[mapNum][i] = gp.npc[mapNum][i].insideHouse;
                     }
                 }
             }
@@ -364,7 +365,6 @@ public class SaveLoad {
             gp.player.dadOption = ds.dadOption;
             gp.player.andreaSafe = ds.andreaSafe;
             gp.player.hasOutsideDoorsKey = ds.hasOutsideDoorsKey;
-            gp.player.insideHouse = ds.insideHouse;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;
@@ -464,6 +464,7 @@ public class SaveLoad {
                         gp.monster[mapNum][i].worldY = ds.mapMonsterWorldY[mapNum][i];
                         gp.monster[mapNum][i].stressLevel = ds.mapMonsterHealth[mapNum][i];
                         gp.monster[mapNum][i].direction = ds.mapMonsterDirection[mapNum][i];
+                        gp.monster[mapNum][i].insideHouse = ds.mapMonsterInHouse[mapNum][i];
                     }
                 }
             }
@@ -503,6 +504,7 @@ public class SaveLoad {
                         gp.npc[mapNum][i].offMap = ds.mapNpcOffMap[mapNum][i];
                         gp.npc[mapNum][i].withinView = ds.mapNpcWithinView[mapNum][i];
                         gp.npc[mapNum][i].followingPlayer = ds.mapNpcFollowingPlayer[mapNum][i];
+                        gp.npc[mapNum][i].insideHouse = ds.mapNpcInHouse[mapNum][i];
                     }
                 }
             }

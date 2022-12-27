@@ -12,6 +12,7 @@ public class Main {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Mum's Adventure");
+        new Main().setIcon();
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
@@ -28,5 +29,10 @@ public class Main {
 
         gamePanel.setupGame();
         gamePanel.startGameThread();
+    }
+
+    public void setIcon() {
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("player/mum_right2_red.png"));
+        window.setIconImage(icon.getImage());
     }
 }

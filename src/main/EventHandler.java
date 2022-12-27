@@ -66,10 +66,10 @@ public class EventHandler {
                 flagInsideToolHut(false);
             } else if (entityHit(entity,0, 33, 8, "up", "down") && entity.type == entity.type_player) {
                 flagInsideToolHut(true);
-            } else if (entityHit(gp.player, 0, 31, 11, "right", "") || entityHit(gp.player, 0, 15, 11, "left", "")) {
-                flagInsideHouse(false);
-            } else if (entityHit(gp.player, 0, 30, 11, "left", "") || entityHit(gp.player, 0, 16, 11, "right", "")) {
-                flagInsideHouse(true);
+            } else if (entityHit(entity, 0, 31, 11, "right", "") || entityHit(entity, 0, 15, 11, "left", "")) {
+                flagInsideHouse(entity, false);
+            } else if (entityHit(entity, 0, 30, 11, "left", "") || entityHit(entity, 0, 16, 11, "right", "")) {
+                flagInsideHouse(entity, true);
             }
         }
     }
@@ -399,12 +399,13 @@ public class EventHandler {
         }
     }
 
-    public void flagInsideHouse(boolean enteringHouse) {
+    public void flagInsideHouse(Entity entity, boolean enteringHouse) {
         if (enteringHouse) {
-            gp.player.insideHouse = true;
+            entity.insideHouse = true;
         } else {
-            gp.player.insideHouse = false;
+            entity.insideHouse = false;
         }
+        entity.enterExitHouseEventFlag = true;
     }
 
     public void flagInsideToolHut(boolean isInside) {

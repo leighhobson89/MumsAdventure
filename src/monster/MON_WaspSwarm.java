@@ -34,7 +34,6 @@ public class MON_WaspSwarm extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        getImage();
     }
 
     public void getImage() {

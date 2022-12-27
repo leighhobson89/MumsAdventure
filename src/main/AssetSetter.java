@@ -645,6 +645,11 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
         i++;
 
+        gp.obj[mapNum][i] = new OBJ_Bucket(gp);
+        gp.obj[mapNum][i].worldX = 31 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 19 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_BathLeft(gp);
         gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
@@ -832,6 +837,25 @@ public class AssetSetter {
         } else { // will place monster exactly at specified x and y co-ordinates
             gp.monster[mapNum][monsterNumber].worldX = gp.tileSize * x;
             gp.monster[mapNum][monsterNumber].worldY = gp.tileSize * y;
+        }
+
+        if (gp.monster[mapNum][monsterNumber].worldX/gp.tileSize > 16 && gp.monster[mapNum][monsterNumber].worldX/gp.tileSize < 30) {
+            if (gp.monster[mapNum][monsterNumber].worldY/gp.tileSize > 9 && gp.monster[mapNum][monsterNumber].worldY/gp.tileSize < 20) {
+                gp.monster[mapNum][monsterNumber].insideHouse = true;
+                if (gp.player.insideHouse) {
+                    gp.monster[mapNum][monsterNumber].getImage();
+                }
+            } else {
+                gp.monster[mapNum][monsterNumber].insideHouse = false;
+                if (!gp.player.insideHouse) {
+                    gp.monster[mapNum][monsterNumber].getImage();
+                }
+            }
+        } else {
+            gp.monster[mapNum][monsterNumber].insideHouse = false;
+            if (!gp.player.insideHouse) {
+                gp.monster[mapNum][monsterNumber].getImage();
+            }
         }
 
         monsterNumber++; //monster counter increments so that next call of method adds to next slot in monster array

@@ -719,6 +719,14 @@ public class Player extends Entity {
                         gp.player.hasOutsideDoorsKey = true;
                     }
 
+                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "Bucket")) {
+                        for (int j = 0; j < gp.obj[gp.otherMap].length; j++) {
+                            if (gp.obj[gp.otherMap][j] != null && Objects.equals(gp.obj[gp.otherMap][j].name, "Bucket")) {
+                                gp.obj[gp.otherMap][j] = null;
+                            }
+                        }
+                    }
+
                     selectSfx = selectSfx(gp.obj[gp.currentMap][i].name);
                     gp.playSFX(selectSfx);
                     text = "Picked up " + gp.obj[gp.currentMap][i].displayName + "!";
@@ -765,6 +773,8 @@ public class Player extends Entity {
 
     public void checkIfPassOutFromStress() {
         if (gp.player.stressLevel >= gp.player.maxStress) {
+            gp.player.insideHouse = true;
+            update();
             knockBack = false;
             timesPassedOut++;
             gp.gameState = gp.dialogueState;

@@ -502,7 +502,7 @@ public class UI {
             y = gp.tileSize*8;
             g2.drawString(text, x, y);
 
-            text = "Try and survive another day of misery!";
+            text = "- Try and survive another day of misery!";
             y = gp.tileSize*9;
             g2.drawString(text, x, y);
 

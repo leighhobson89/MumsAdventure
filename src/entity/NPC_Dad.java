@@ -304,7 +304,7 @@ public class NPC_Dad extends Entity {
                     goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 2;
                     goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
                 }
-                searchPath(goalCol, goalRow);
+                //searchPath(goalCol, goalRow); //debug
             } else if (onPath && !gp.player.inLivingRoom) { // walk to switch music center off when player leaves room
                 waypoint = 0;
                 right2 = image2;
@@ -398,7 +398,7 @@ public class NPC_Dad extends Entity {
                     goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 2;
                     goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
                 }
-                searchPath(goalCol, goalRow);
+                //searchPath(goalCol, goalRow); //debug
             } else if (onPath && (!gp.player.inLivingRoom)) { // walk to put guitar back after player leaves living room
                 speed = 2;
                 followingPlayer = false;
