@@ -75,6 +75,7 @@ public class Entity {
     public boolean goesTransparentWhenStoodOnBookHut;
     public boolean goesTransparentWhenStoodOnToolHut;
     public boolean goesTransparentWhenInGarage;
+    public boolean goesTransparentWhenInHouse;
     public boolean insideBookShed;
     public boolean insideToolShed;
     public boolean isUpdateable;
@@ -332,21 +333,29 @@ public class Entity {
         //overridden in specific entity class
     }
 
+    public void handleTransparencyOfWallsAndObjectsInHouse(Entity object) {
+        if (gp.player.insideHouse) {
+            object.transparent = true;
+        } else {
+            object.transparent = false;
+        }
+    }
+
     public void handleTransparencyOfWallsAndObjectsInGarage(Entity object) {
         if (gp.player.insideGarage) {
             object.transparent = true;
-            for (int i = 0; i < gp.obj[1].length; i++) {
-                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
-                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 2);
-                }
-            }
+//            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+//                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
+//                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 2);
+//                }
+//            }
         } else {
             object.transparent = false;
-            for (int i = 0; i < gp.obj[1].length; i++) {
-                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
-                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 1);
-                }
-            }
+//            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+//                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
+//                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 1);
+//                }
+//            }
         }
     }
 
@@ -1076,6 +1085,10 @@ public class Entity {
 
             if (this.goesTransparentWhenInGarage && this.transparent) {
                 changeAlpha(g2, 0.3F);
+            }
+
+            if (this.goesTransparentWhenInHouse && this.transparent) {
+                changeAlpha(g2, 0.1F);
             }
 
             if (this.drawing) {

@@ -66,9 +66,9 @@ public class EventHandler {
                 flagInsideToolHut(false);
             } else if (entityHit(entity,0, 33, 8, "up", "down") && entity.type == entity.type_player) {
                 flagInsideToolHut(true);
-            } else if (entityHit(gp.player, 0, 30, 11, "right", "") || entityHit(gp.player, 0, 15, 11, "left", "")) {
+            } else if (entityHit(gp.player, 0, 31, 11, "right", "") || entityHit(gp.player, 0, 15, 11, "left", "")) {
                 flagInsideHouse(false);
-            } else if (entityHit(gp.player, 0, 29, 11, "left", "") || entityHit(gp.player, 0, 16, 11, "right", "")) {
+            } else if (entityHit(gp.player, 0, 30, 11, "left", "") || entityHit(gp.player, 0, 16, 11, "right", "")) {
                 flagInsideHouse(true);
             }
         }

@@ -6,6 +6,7 @@ import main.MissionStates;
 import main.UtilityTool;
 import object.OBJ_ChoppedChicken;
 import object.OBJ_GarageRoof;
+import object.OBJ_HouseRoof;
 import object.OBJ_PipsBone;
 
 import java.awt.*;
@@ -36,7 +37,7 @@ public class Player extends Entity {
         screenX = gp.screenWidth/2 - (gp.tileSize/2); //put player in center of screen
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
-        solidArea = new Rectangle(8, 16,32,32);
+        solidArea = new Rectangle(4, 16,32,32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         goesTransparentWhenHit = true;
@@ -358,6 +359,22 @@ public class Player extends Entity {
                     gp.obj[gp.currentMap][i].collision = true;
                     gp.player.insideGarage = false;
                     handleTransparencyOfWallsAndObjectsInGarage(gp.obj[gp.currentMap][i]);
+                }
+            }
+        }
+
+        if (gp.player.insideHouse) { //if player in house
+            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, OBJ_HouseRoof.OBJ_NAME)) {
+                    gp.obj[gp.currentMap][i].collision = false;
+                    handleTransparencyOfWallsAndObjectsInHouse(gp.obj[gp.currentMap][i]);
+                }
+            }
+        } else {
+            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, OBJ_HouseRoof.OBJ_NAME)) {
+                    gp.obj[gp.currentMap][i].collision = true;
+                    handleTransparencyOfWallsAndObjectsInHouse(gp.obj[gp.currentMap][i]);
                 }
             }
         }

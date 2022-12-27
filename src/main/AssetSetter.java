@@ -167,6 +167,131 @@ public class AssetSetter {
         int mapNum = 0;
         int i = 0;
 
+        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
+        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
+        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 23 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_InsideDoor(gp);
+        gp.obj[mapNum][i].worldX = 18 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_InsideDoor(gp);
+        gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
+        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
+        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Music_Center(gp);
+        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_KitchenCupboard1(gp);
+        gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_MumsChair(gp);
+        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Cooker(gp);
+        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Fridge(gp);
+        gp.obj[mapNum][i].worldX = 25 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_TV_Lounge(gp);
+        gp.obj[mapNum][i].worldX = 21 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_KitchenSink(gp);
+        gp.obj[mapNum][i].worldX = 29 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Cupboard2(gp);
+        gp.obj[mapNum][i].worldX = 24 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Cupboard1(gp);
+        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_FishTankDrawer(gp);
+        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_LightPills(gp);
+        gp.obj[mapNum][i].worldX = 18 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 16 * gp.tileSize - 10;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Pills(gp);
+        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 16 * gp.tileSize - 10;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_GuitarElectric(gp);
+        gp.obj[mapNum][i].worldX = 20 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_GuitarAcoustic(gp);
+        gp.obj[mapNum][i].worldX = 21 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_TelephoneHall(gp);
+        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_FrontBackDoorKey(gp);
+        gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Spatula(gp);
+        gp.obj[mapNum][i].worldX = 24 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_PipsBone(gp);
+        gp.obj[mapNum][i].worldX = 26 * gp.tileSize; boneX = 26;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize; boneY = 10;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_HouseRoof(gp);
+        gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_GarageDoorWhite(gp);
         gp.obj[mapNum][i].worldX = 44 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
@@ -227,91 +352,6 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 19 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_FishTankDrawer(gp);
-        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_KitchenSink(gp);
-        gp.obj[mapNum][i].worldX = 29 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_TV_Lounge(gp);
-        gp.obj[mapNum][i].worldX = 21 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_LightPills(gp);
-        gp.obj[mapNum][i].worldX = 18 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 16 * gp.tileSize - 10;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Cupboard2(gp);
-        gp.obj[mapNum][i].worldX = 24 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Cupboard1(gp);
-        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Pills(gp);
-        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 16 * gp.tileSize - 10;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_GuitarElectric(gp);
-        gp.obj[mapNum][i].worldX = 20 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_GuitarAcoustic(gp);
-        gp.obj[mapNum][i].worldX = 21 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_InsideDoor(gp);
-        gp.obj[mapNum][i].worldX = 18 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_InsideDoor(gp);
-        gp.obj[mapNum][i].worldX = 26 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
-        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Music_Center(gp);
-        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_KitchenCupboard1(gp);
-        gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_MumsChair(gp);
-        gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 18 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
-        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
-        gp.obj[mapNum][i].worldX = 22 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 23 * gp.tileSize;
-        i++;
-
         gp.obj[mapNum][i] = new OBJ_FrontDoor(gp);
         gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
@@ -330,16 +370,6 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_Music_Notes(gp);
         gp.obj[mapNum][i].worldX = 19 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_TelephoneHall(gp);
-        gp.obj[mapNum][i].worldX = 17 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_FrontBackDoorKey(gp);
-        gp.obj[mapNum][i].worldX = 28 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 17 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_BackGate(gp);
@@ -362,29 +392,9 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_PipsBone(gp);
-        gp.obj[mapNum][i].worldX = 26 * gp.tileSize; boneX = 26;
-        gp.obj[mapNum][i].worldY = 10 * gp.tileSize; boneY = 10;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
-        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Cooker(gp);
-        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
-        i++;
-
         gp.obj[mapNum][i] = new OBJ_BlockOfWood(gp);
         gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_Fridge(gp);
-        gp.obj[mapNum][i].worldX = 25 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Camper1(gp);
@@ -497,11 +507,6 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Spatula(gp);
-        gp.obj[mapNum][i].worldX = 24 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
-        i++;
-
         gp.obj[mapNum][i] = new OBJ_Toolhut1_Left(gp);
         gp.obj[mapNum][i].worldX = 32 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
@@ -565,6 +570,11 @@ public class AssetSetter {
 
         mapNum = 1;  //ADD OBJECTS TO NEXT MAP LIKE THIS
 
+        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
+        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 23 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_InsideDoor(gp);
         gp.obj[mapNum][i].worldX = 25 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
@@ -578,6 +588,11 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
         gp.obj[mapNum][i].worldX = 21 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 12 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_HouseRoof(gp);
+        gp.obj[mapNum][i].worldX = 16 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 9 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_BackGate(gp);
@@ -728,11 +743,6 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_Toolhut3_Right(gp);
         gp.obj[mapNum][i].worldX = 34 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 6 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_InsideDoorSideways(gp);
-        gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 23 * gp.tileSize;
         //i++;
     }
 
