@@ -4,7 +4,6 @@ import main.GamePanel;
 import main.MissionStates;
 import main.UtilityTool;
 import object.OBJ_FortyQuidForAndrea;
-import object.OBJ_GarageRoof;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -125,6 +124,7 @@ public class Entity {
     public boolean playerDrawnThisCycle;
     public boolean drawAbovePlayer;
     public boolean insideGarage;
+    public boolean insideHouse = true;
 
     //COUNTER
     public int spriteCounter = 0;

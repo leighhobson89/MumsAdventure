@@ -143,6 +143,7 @@ public class SaveLoad {
             ds.dadOption = gp.player.dadOption;
             ds.andreaSafe = gp.player.andreaSafe;
             ds.hasOutsideDoorsKey = gp.player.hasOutsideDoorsKey;
+            ds.insideHouse = gp.player.insideHouse;
 
 
             //PLAYER OUTFIT
@@ -363,6 +364,7 @@ public class SaveLoad {
             gp.player.dadOption = ds.dadOption;
             gp.player.andreaSafe = ds.andreaSafe;
             gp.player.hasOutsideDoorsKey = ds.hasOutsideDoorsKey;
+            gp.player.insideHouse = ds.insideHouse;
 
             if (loadWithBoneEquipped) {
                 gp.player.boneCount = 1;

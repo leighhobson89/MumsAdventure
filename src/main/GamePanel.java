@@ -259,6 +259,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (timer >= 1000000000) { //output FPS in console
                 System.out.println("FPS: " + drawCount);
+                System.out.println("Inside House?" + player.insideHouse);
                 System.out.println("MissionState: " + player.missionState);
                 System.out.println("Substate: " + player.missionSubstate);
                 //System.out.println("CurrentMapNPCs:" + Arrays.toString(npc[currentMap]) + "\nOtherMapNPCs: " + Arrays.toString(npc[otherMap]));

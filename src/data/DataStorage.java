@@ -84,6 +84,7 @@ public class DataStorage implements Serializable {
     int dadOption;
     boolean andreaSafe;
     boolean hasOutsideDoorsKey;
+    boolean insideHouse;
 
     //PLAYER INVENTORY
     final ArrayList<String> itemNames = new ArrayList<>();
