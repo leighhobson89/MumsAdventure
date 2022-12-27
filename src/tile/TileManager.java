@@ -178,6 +178,7 @@ public class TileManager {
         setup(146, "diningCupboardLeft", true, false);
         setup(147, "diningCupboardRight", true, false);
         setup(148, "diningCupboardMiddle", true, false);
+        setup(149, "garageBigDoor", true, false);
     }
 
     public void setup(int index, String imageName, boolean collision, boolean drawAbovePlayer) {

@@ -195,6 +195,9 @@ public class NPC_Dad extends Entity {
         dialogueText[78][2] = "Yeah he's a bloody gutless sod!\nHe's been round and picked it up and said nothing!";
         dialogueText[78][3] = "Look at it over there, it's obviously been\nblown over, it's wrecked the trampoline,\nand the car!";
         dialogueText[78][4] = "Reyt, next time I see him, I'm gonna get\nhim to admit that, the t@*t! I'm fuming!";
+
+        //MISC ADDON DIALOGUES
+        dialogueText[79][0] = "Have you dug those weeds up yet?!";
     }
 
     public void update() {
@@ -494,12 +497,19 @@ public class NPC_Dad extends Entity {
         }
         if (gp.player.weedCount > 0 && !gp.player.setShovelFlag) {
             gp.player.missionState = MissionStates.WEEDING_MISSION;
-            gp.aSetter.setObjectAfterStart("Garden Shovel", gp.currentMap, 45, 8, false);
+            gp.player.missionSubstate = 0;
             gp.player.inventory.add(new OBJ_GarageKey(gp));
             gp.player.setShovelFlag = true;
         }
         switch (gp.player.missionState) {
-            case MissionStates.WEEDING_MISSION -> dialogueSet = 61;
+            case MissionStates.WEEDING_MISSION -> {
+                if (gp.player.missionSubstate == 0) {
+                    dialogueSet = 61;
+                    gp.player.missionSubstate = 1;
+                } else if (gp.player.missionSubstate == 1) {
+                    dialogueSet = 79;
+                }
+            }
             case MissionStates.MOP_UP_THE_SHOWER_WATER -> dialogueSet = 63; //mop shower water mission
             case MissionStates.MAGIC_BOOK_QUIZ -> {
                 if (gp.player.missionSubstate == 0) {

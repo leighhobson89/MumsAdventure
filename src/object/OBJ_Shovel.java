@@ -17,7 +17,9 @@ public class OBJ_Shovel extends Entity {
         type = type_gardeningShovel;
         name = OBJ_NAME;
         displayName = "Garden Shovel";
-        down1 = setup("/objects/shovel", gp.tileSize, gp.tileSize);
+        image = null;
+        image2 = setup("/objects/shovel", gp.tileSize, gp.tileSize);
+        down1 = image;
         direction = "down";
         description = "[" + name + "]\nDig up the Rockery!";
         attackValue = 1;

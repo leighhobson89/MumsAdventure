@@ -5,6 +5,7 @@ import main.KeyHandler;
 import main.MissionStates;
 import main.UtilityTool;
 import object.OBJ_ChoppedChicken;
+import object.OBJ_GarageRoof;
 import object.OBJ_PipsBone;
 
 import java.awt.*;
@@ -58,6 +59,7 @@ public class Player extends Entity {
         missionList = new ArrayList<>(); //clear missionList
         missionList.add(MissionStates.BETWEEN_MISSIONS);
         missionState = MissionStates.WEEDING_MISSION;
+        missionSubstate = 0;
     }
 
     public void setDefaultValues() {
@@ -324,7 +326,7 @@ public class Player extends Entity {
             for (int i = 0; i < gp.obj[1].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null) {
                     if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnBookHut) {
-                        handleTransparencyAndCollisionInHuts(this, gp.obj[gp.currentMap][i]);
+                        handleTransparencyAndCollisionOfWallsAndObjectsInHuts(this, gp.obj[gp.currentMap][i]);
                     }
                 }
             }
@@ -334,8 +336,28 @@ public class Player extends Entity {
             for (int i = 0; i < gp.obj[1].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null) {
                     if (gp.obj[gp.currentMap][i].goesTransparentWhenStoodOnToolHut) {
-                        handleTransparencyAndCollisionInHuts(this, gp.obj[gp.currentMap][i]);
+                        handleTransparencyAndCollisionOfWallsAndObjectsInHuts(this, gp.obj[gp.currentMap][i]);
                     }
+                }
+            }
+        }
+
+        if (gp.player.worldX > gp.tileSize * 44 && gp.player.worldX < gp.tileSize * 53) { //if player in garage
+            if (gp.player.worldY > gp.tileSize * 7 && gp.player.worldY < gp.tileSize * 18) {
+                for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+                    if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, OBJ_GarageRoof.OBJ_NAME)) {
+                        gp.obj[gp.currentMap][i].collision = false;
+                        gp.player.insideGarage = true;
+                        handleTransparencyOfWallsAndObjectsInGarage(gp.obj[gp.currentMap][i]);
+                    }
+                }
+            }
+        } else if (gp.player.insideGarage) {
+            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, OBJ_GarageRoof.OBJ_NAME)) {
+                    gp.obj[gp.currentMap][i].collision = true;
+                    gp.player.insideGarage = false;
+                    handleTransparencyOfWallsAndObjectsInGarage(gp.obj[gp.currentMap][i]);
                 }
             }
         }
@@ -644,6 +666,14 @@ public class Player extends Entity {
                         gp.player.chickenIndex = gp.player.inventory.size()-1;
                     }
 
+                    if (Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
+                        for (Entity entity : inventory) {
+                            if (Objects.equals(entity.name, "Garden Shovel")) {
+                                entity.down1 = entity.image2;
+                            }
+                        }
+                    }
+
                     if (Objects.equals(gp.obj[gp.currentMap][i].name, "MagicQuizBook")) {
                         for (Entity entity : inventory) {
                             if (Objects.equals(entity.name, "MagicQuizBook")) {
@@ -875,7 +905,7 @@ public class Player extends Entity {
                     if (gp.player.weedCount > 1) {
                         gp.player.weedCount--;
                         gp.iTile[1][i+gp.aSetter.mapNumTotal] = gp.iTile[1][i+gp.aSetter.mapNumTotal].switchForm(); //remove weed from upstairs view - **only works if interactive tiles in same location on all maps**
-                    } else if (gp.player.weedCount == 1) { //end of weeding mission
+                    } else if (gp.player.weedCount == 1 && gp.player.missionSubstate == 1) { //end of weeding mission
                         gp.player.weedCount--;
                         gp.gameState = gp.dialogueState;
                         startDialogue(this, 2);

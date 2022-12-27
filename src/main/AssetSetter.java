@@ -167,6 +167,21 @@ public class AssetSetter {
         int mapNum = 0;
         int i = 0;
 
+        gp.obj[mapNum][i] = new OBJ_GarageDoorWhite(gp);
+        gp.obj[mapNum][i].worldX = 44 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_GarageRoof(gp);
+        gp.obj[mapNum][i].worldX = 44 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Shovel(gp);
+        gp.obj[mapNum][i].worldX = 45 * gp.tileSize;
+        gp.obj[mapNum][i].worldY = 8 * gp.tileSize;
+        i++;
+
         gp.obj[mapNum][i] = new OBJ_TreeTopGarden_1(gp);
         gp.obj[mapNum][i].worldX = 57 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 14 * gp.tileSize;
@@ -355,11 +370,6 @@ public class AssetSetter {
         gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
         gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
-        i++;
-
-        gp.obj[mapNum][i] = new OBJ_GarageDoorWhite(gp);
-        gp.obj[mapNum][i].worldX = 44 * gp.tileSize;
-        gp.obj[mapNum][i].worldY = 10 * gp.tileSize;
         i++;
 
         gp.obj[mapNum][i] = new OBJ_Cooker(gp);

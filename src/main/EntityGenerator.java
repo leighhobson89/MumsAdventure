@@ -116,6 +116,8 @@ public class EntityGenerator {
             case OBJ_TreeTopGarden_4.OBJ_NAME -> new OBJ_TreeTopGarden_4(gp);
             case OBJ_TreeTopGarden_5.OBJ_NAME -> new OBJ_TreeTopGarden_5(gp);
             case OBJ_TreeTopGarden_6.OBJ_NAME -> new OBJ_TreeTopGarden_6(gp);
+            case OBJ_GarageKey.OBJ_NAME -> new OBJ_GarageKey(gp);
+            case OBJ_GarageRoof.OBJ_NAME -> new OBJ_GarageRoof(gp);
             default -> null;
         };
     }

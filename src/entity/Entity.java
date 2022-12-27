@@ -4,6 +4,7 @@ import main.GamePanel;
 import main.MissionStates;
 import main.UtilityTool;
 import object.OBJ_FortyQuidForAndrea;
+import object.OBJ_GarageRoof;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -74,6 +75,7 @@ public class Entity {
     public boolean goesTransparentWhenHit;
     public boolean goesTransparentWhenStoodOnBookHut;
     public boolean goesTransparentWhenStoodOnToolHut;
+    public boolean goesTransparentWhenInGarage;
     public boolean insideBookShed;
     public boolean insideToolShed;
     public boolean isUpdateable;
@@ -122,6 +124,7 @@ public class Entity {
     public int tempWorldY;
     public boolean playerDrawnThisCycle;
     public boolean drawAbovePlayer;
+    public boolean insideGarage;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -328,7 +331,26 @@ public class Entity {
     public void speak() {
         //overridden in specific entity class
     }
-    public void handleTransparencyAndCollisionInHuts(Entity player, Entity object) {
+
+    public void handleTransparencyOfWallsAndObjectsInGarage(Entity object) {
+        if (gp.player.insideGarage) {
+            object.transparent = true;
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
+                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 2);
+                }
+            }
+        } else {
+            object.transparent = false;
+            for (int i = 0; i < gp.obj[1].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, "Garden Shovel")) {
+                    gp.player.changeOtherObjectImage("Garden Shovel", 45, 8, 1);
+                }
+            }
+        }
+    }
+
+    public void handleTransparencyAndCollisionOfWallsAndObjectsInHuts(Entity player, Entity object) {
         //SET COLLISION OF WALLS WHEN INSIDE HUTS
         String side = switch (object.name) {
             case "Bookhut2_Left", "Bookhut3_Left", "Toolhut2_Left", "Toolhut3_Left" -> "left";
@@ -1050,6 +1072,10 @@ public class Entity {
             }
             if ((this.goesTransparentWhenStoodOnBookHut || this.goesTransparentWhenStoodOnToolHut) && this.transparent) {
                 changeAlpha(g2, 0.6F);
+            }
+
+            if (this.goesTransparentWhenInGarage && this.transparent) {
+                changeAlpha(g2, 0.3F);
             }
 
             if (this.drawing) {

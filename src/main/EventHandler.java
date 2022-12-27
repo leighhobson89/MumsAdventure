@@ -280,6 +280,8 @@ public class EventHandler {
                 gp.player.inventory.get(i).down1 = gp.player.inventory.get(i).image2;
             } else if (Objects.equals(gp.player.inventory.get(i).name, "WaspNest")) {
                 gp.player.inventory.get(i).down1 = gp.player.inventory.get(i).image4;
+            } else if (Objects.equals(gp.player.inventory.get(i).name, "Garden Shovel")) {
+                gp.player.inventory.get(i).down1 = gp.player.inventory.get(i).image2;
             }
         }
     }
