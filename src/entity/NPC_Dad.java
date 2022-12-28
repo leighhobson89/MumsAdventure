@@ -308,7 +308,7 @@ public class NPC_Dad extends Entity {
                 searchPath(goalCol, goalRow);
             } else if (onPath && !gp.player.inLivingRoom) { // walk to switch music center off when player leaves room
                 waypoint = 0;
-                right2 = image2;
+                //right2 = image2; can probably remove this line
                 followingPlayer = false;
                 speed = 2;
                 goalCol = 19;
@@ -385,7 +385,7 @@ public class NPC_Dad extends Entity {
             if(onPath && !gp.player.inLivingRoom && !gp.player.dadHasGuitar) { //follow player when outside living room
                 speed = 2;
                 followingPlayer = true;
-                right2 = image2;
+                //right2 = image2; can probably remove this line
                 if (Objects.equals(gp.player.direction, "up")) {
                     goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
                     goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 2;
