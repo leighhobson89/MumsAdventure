@@ -658,18 +658,15 @@ public class Entity {
                     } else { //npc in garage
                         npc.getImage();
                     }
-                    if (Objects.equals(npc.name, "OldCooker")) {
-                        npc.getImage();
-                    }
                 } else { //player not in garage
                     if (npc.insideGarage || npc.insideHouse) {
                         setNullImages(npc);
                     } else {
                         npc.getImage();
                     }
-                    if (Objects.equals(npc.name, "OldCooker")) {
-                        npc.getImage();
-                    }
+                }
+                if (Objects.equals(npc.name, "OldCooker")) {
+                    npc.getImage();
                 }
             }
         }
@@ -704,18 +701,15 @@ public class Entity {
                     } else { //npc in house
                         npc.getImage();
                     }
-                    if (Objects.equals(npc.name, "OldCooker")) {
-                        npc.getImage();
-                    }
                 } else { //player not in house
                     if (npc.insideHouse || npc.insideGarage) {
                         setNullImages(npc);
                     } else {
                         npc.getImage();
                     }
-                    if (Objects.equals(npc.name, "OldCooker")) {
-                        npc.getImage();
-                    }
+                }
+                if (Objects.equals(npc.name, "OldCooker")) {
+                    npc.getImage();
                 }
             }
         }
