@@ -77,10 +77,11 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum == 1) { //LOAD GAME
                     boolean successfulLoad = gp.saveLoad.load();
                     if (successfulLoad) {
+                        gp.ui.addMessage("Game Loaded :)");
                         gp.gameState = gp.playState;
                         gp.playSFX(11);
                     } else {
-                        gp.gameState = gp.titleState;
+                        gp.ui.addMessage("Load Process Failed :(");
                     }
                 }
                 if (gp.ui.commandNum == 2) { //INSTRUCTIONS

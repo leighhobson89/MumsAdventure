@@ -19,7 +19,7 @@ public class UI {
     public Font maruMonica, maruMonica_40;
     BufferedImage bolt_full, bolt_half, bolt_blank, squeakyToyFull, squeakyToyEmpty, coin;
     //public boolean messageOn = false;
-    final ArrayList<String> message = new ArrayList<>();
+    public final ArrayList<String> message = new ArrayList<>();
     final ArrayList<Integer> messageCounter = new ArrayList<>();
     //public boolean gameFinished = false;
     public String currentDialogue;
@@ -75,6 +75,7 @@ public class UI {
         //TITLE STATE
         if (gp.gameState == gp.titleState) {
             drawTitleScreen();
+            drawMessage();
         }
         //PLAY STATE
         if (gp.gameState == gp.playState) {

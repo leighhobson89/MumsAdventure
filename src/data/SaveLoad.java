@@ -521,11 +521,6 @@ public class SaveLoad {
             gp.eHandler.setImageStates(gp.currentMap);
             success = true;
 
-            //DEBUG
-            //add system.out here for load
-            //END DEBUG
-
-
         } catch (Exception e) {
             System.out.println("Load Exception!");
             success = false;
