@@ -669,7 +669,7 @@ public class Entity {
                         npc.getImage();
                     }
                 }
-                if (Objects.equals(npc.name, "OldCooker")) {
+                if (Objects.equals(npc.name, "OldCooker") || Objects.equals(npc.name, "Andrea") || Objects.equals(npc.name, "Merchant")) {
                     npc.getImage();
                 }
             }
@@ -712,7 +712,7 @@ public class Entity {
                         npc.getImage();
                     }
                 }
-                if (Objects.equals(npc.name, "OldCooker")) {
+                if (Objects.equals(npc.name, "OldCooker") || Objects.equals(npc.name, "Andrea") || Objects.equals(npc.name, "Merchant")) {
                     npc.getImage();
                 }
             }

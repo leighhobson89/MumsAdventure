@@ -776,17 +776,19 @@ public class AssetSetter {
         gp.npc[mapNum][i] = new NPC_Merchant(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*62;
         gp.npc[mapNum][i].worldY = gp.tileSize*9;
+        gp.npc[mapNum][i].getImage();
         i++;
 
         gp.npc[mapNum][i] = new NPC_Baldy(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*18;
         gp.npc[mapNum][i].worldY = gp.tileSize*23;
+        gp.npc[mapNum][i].getImage();
         i++;
 
         gp.npc[mapNum][i] = new NPC_RustyCooker(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*39;
         gp.npc[mapNum][i].worldY = gp.tileSize*8;
-        i++;
+//      i++;
 
         mapNum = 1;  //UPSTAIRS
         i = 0;
