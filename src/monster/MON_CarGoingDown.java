@@ -27,12 +27,12 @@ public class MON_CarGoingDown extends Entity {
         direction = "down";
         isScaledUpObject = true;
 
-        solidArea.x = 0;
-        solidArea.y = 0;
-        solidArea.width = gp.tileSize*IMAGE_SCALE_FACTOR;
-        solidArea.height = gp.tileSize*IMAGE_SCALE_FACTOR;
-        solidAreaDefaultX = solidArea.x;
-        solidAreaDefaultY = solidArea.y;
+//        solidArea.x = 0;
+//        solidArea.y = 0;
+//        solidArea.width = gp.tileSize*IMAGE_SCALE_FACTOR;
+//        solidArea.height = gp.tileSize*IMAGE_SCALE_FACTOR;
+//        solidAreaDefaultX = solidArea.x;
+//        solidAreaDefaultY = solidArea.y;
 
         getImage();
         down1 = image;

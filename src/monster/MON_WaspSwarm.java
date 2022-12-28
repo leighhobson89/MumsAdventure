@@ -63,6 +63,22 @@ public class MON_WaspSwarm extends Entity {
     public void update() {
         super.update();
         gp.eHandler.checkEvent(this);
+
+        if (this.worldX > 44 * gp.tileSize && this.worldX < 53 * gp.tileSize) {
+            if (this.worldY > 7 * gp.tileSize && this.worldY < 18 * gp.tileSize) {
+                this.insideGarage = true;
+            }
+        } else {
+            this.insideGarage = false;
+        }
+
+        if (this.worldX > 16 * gp.tileSize && this.worldX < 30 * gp.tileSize) {
+            if (this.worldY > 9 * gp.tileSize && this.worldY < 20 * gp.tileSize) {
+                this.insideHouse = true;
+            }
+        } else {
+            this.insideHouse = false;
+        }
     }
 
     public void setAction(int goalCol, int goalRow) {

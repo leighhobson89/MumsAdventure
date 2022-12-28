@@ -417,14 +417,16 @@ public class NPC_Dad extends Entity {
                     searchPath(goalCol, goalRow);
                 } else { //once arrive at place for guitar, change images back and set follow speed
                     gp.player.dadHasGuitar = false;
-                    down1 = down1Standard;
-                    down2 = down2Standard;
-                    up1 = up1Standard;
-                    up2 = up2Standard;
-                    left1 = left1Standard;
-                    left2 = left2Standard;
-                    right1 = right1Standard;
-                    right2 = right2Standard;
+                    if (gp.player.insideHouse) {
+                        down1 = down1Standard;
+                        down2 = down2Standard;
+                        up1 = up1Standard;
+                        up2 = up2Standard;
+                        left1 = left1Standard;
+                        left2 = left2Standard;
+                        right1 = right1Standard;
+                        right2 = right2Standard;
+                    }
                 }
             } else if (onPath && gp.player.dadHasGuitar) { // walk to sofa with guitar after picking it up
                 followingPlayer = false;

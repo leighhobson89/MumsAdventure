@@ -123,17 +123,17 @@ public class GamePanel extends JPanel implements Runnable {
 //      //DEBUG TO SKIP AHEAD IN MISSIONS - COMMENT FOR NORMAL GAME FROM START
 //      //CHANGE VALUES AND REMEMBER TO ADD PREVIOUS MISSIONS TO MISSION-LIST IF STARTING FURTHER ON
         //MISSION 2 START (SELL ELECTRIC GUITAR TO MERCHANT)
-        player.weedCount = 0;
-        loopSFX(28);
-        player.phoneRinging = true;
-        player.nextMissionIsPhoneMission = true;
-        player.readyForNextPhoneMission = true;
-        player.missionList.add(1);
-        player.missionState = 0;
-        player.missionToSet = 2;
-        player.hasOutsideDoorsKey = false;
-        player.inventory.add(new OBJ_ToolHutKey(this));
-        player.inventory.add(new OBJ_GarageKey(this));
+//        player.weedCount = 0;
+//        loopSFX(28);
+//        player.phoneRinging = true;
+//        player.nextMissionIsPhoneMission = true;
+//        player.readyForNextPhoneMission = true;
+//        player.missionList.add(1);
+//        player.missionState = 0;
+//        player.missionToSet = 2;
+//        player.hasOutsideDoorsKey = false;
+//        player.inventory.add(new OBJ_ToolHutKey(this));
+//        player.inventory.add(new OBJ_GarageKey(this));
 
         //MISSION 3 START (HELP ANDREA OUT)
 //        player.weedCount = 0;
