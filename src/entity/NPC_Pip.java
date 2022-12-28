@@ -25,19 +25,31 @@ public class NPC_Pip extends Entity {
         solidArea = new Rectangle(8, 16,32,32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        getInitialImage();
+    }
+
+    public void getInitialImage() {
+
+        up1Standard = setup("/NPC/phoebe_up1", gp.tileSize, gp.tileSize);
+        up2Standard = setup("/NPC/phoebe_up2", gp.tileSize, gp.tileSize);
+        down1Standard = setup("/NPC/phoebe_down1", gp.tileSize, gp.tileSize);
+        down2Standard = setup("/NPC/phoebe_down2", gp.tileSize, gp.tileSize);
+        left1Standard = setup("/NPC/phoebe_left1", gp.tileSize, gp.tileSize);
+        left2Standard = setup("/NPC/phoebe_left2", gp.tileSize, gp.tileSize);
+        right1Standard = setup("/NPC/phoebe_right1", gp.tileSize, gp.tileSize);
+        right2Standard = setup("/NPC/phoebe_right2", gp.tileSize, gp.tileSize);
+
     }
 
     public void getImage() {
-
-        up1 = setup("/NPC/phoebe_up1", gp.tileSize, gp.tileSize);
-        up2 = setup("/NPC/phoebe_up2", gp.tileSize, gp.tileSize);
-        down1 = setup("/NPC/phoebe_down1", gp.tileSize, gp.tileSize);
-        down2 = setup("/NPC/phoebe_down2", gp.tileSize, gp.tileSize);
-        left1 = setup("/NPC/phoebe_left1", gp.tileSize, gp.tileSize);
-        left2 = setup("/NPC/phoebe_left2", gp.tileSize, gp.tileSize);
-        right1 = setup("/NPC/phoebe_right1", gp.tileSize, gp.tileSize);
-        right2 = setup("/NPC/phoebe_right2", gp.tileSize, gp.tileSize);
-
+        up1 = up1Standard;
+        up2 = up2Standard;
+        down1 = down1Standard;
+        down2 = down2Standard;
+        left1 = left1Standard;
+        left2 = left2Standard;
+        right1 = right1Standard;
+        right2 = right2Standard;
     }
 
     public void setDialogue() {
@@ -52,6 +64,7 @@ public class NPC_Pip extends Entity {
     }
 
     public void update() {
+
 //        //DEBUG
 //        System.out.println("time to wait: " + timeToBeOffMap + "\ntime passed: " + transitionCounter + "\noffMap: " + offMap);
 //        for (int i = 0; i < gp.npc[gp.otherMap].length; i++) {
@@ -224,15 +237,15 @@ public class NPC_Pip extends Entity {
                 followingPlayer = true;
                 if (Objects.equals(gp.player.direction, "up")) { //dog chase player but stay one square behind
                     goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-                    goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 1;
+                    goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) + 2;
                 } else if (Objects.equals(gp.player.direction, "down")) {
                     goalCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
-                    goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) - 1;
+                    goalRow = ((gp.player.worldY + gp.player.solidArea.y)/gp.tileSize) - 2;
                 } else if (Objects.equals(gp.player.direction, "right")) {
-                    goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) - 1;
+                    goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) - 2;
                     goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
                 } else if (Objects.equals(gp.player.direction, "left")) {
-                    goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 1;
+                    goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 2;
                     goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
                 }
                 searchPath(goalCol, goalRow);

@@ -70,6 +70,10 @@ public class EventHandler {
                 flagInsideHouse(entity, false);
             } else if (entityHit(entity, 0, 30, 11, "left", "") || entityHit(entity, 0, 16, 11, "right", "")) {
                 flagInsideHouse(entity, true);
+            } else if (entityHit(entity, 0, 44, 10, "right", "")) {
+                flagInsideGarage(entity, true);
+            } else if (entityHit(entity, 0, 44, 10, "left", "")) {
+                flagInsideGarage(entity, false);
             }
         }
     }
@@ -397,6 +401,15 @@ public class EventHandler {
                 }
             }
         }
+    }
+
+    private void flagInsideGarage(Entity entity, boolean enteringGarage) {
+        if (enteringGarage) {
+            entity.insideGarage = true;
+        } else {
+            entity.insideGarage = false;
+        }
+        entity.enterExitGarageEventFlag = true;
     }
 
     public void flagInsideHouse(Entity entity, boolean enteringHouse) {

@@ -23,7 +23,7 @@ public class NPC_Dad extends Entity {
         type = type_npc;
         goesTransparentWhenHit = true;
 
-        getImage();
+        getInitialImage();
         setDialogue();
 
         solidArea = new Rectangle(8, 16,32,32);
@@ -32,7 +32,7 @@ public class NPC_Dad extends Entity {
         onPath = true;
     }
 
-    public void getImage() {
+    public void getInitialImage() {
 
         image = setup("/NPC/dad_right1", gp.tileSize, gp.tileSize);
         image2 = setup("/NPC/dad_right2", gp.tileSize, gp.tileSize);
@@ -54,16 +54,17 @@ public class NPC_Dad extends Entity {
         left2Guitar = setup("/NPC/dad_left2Guitar", gp.tileSize, gp.tileSize);
         right1Guitar = setup("/NPC/dad_right1Guitar", gp.tileSize, gp.tileSize);
         right2Guitar = setup("/NPC/dad_right2Guitar", gp.tileSize, gp.tileSize);
+    }
 
-        down1 = down1Standard;
-        down2 = down2Standard;
+    public void getImage() {
         up1 = up1Standard;
         up2 = up2Standard;
+        down1 = down1Standard;
+        down2 = down2Standard;
         left1 = left1Standard;
         left2 = left2Standard;
         right1 = right1Standard;
         right2 = right2Standard;
-
     }
 
     public void setDialogue() {
@@ -304,7 +305,7 @@ public class NPC_Dad extends Entity {
                     goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 2;
                     goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
                 }
-                //searchPath(goalCol, goalRow); //debug
+                searchPath(goalCol, goalRow);
             } else if (onPath && !gp.player.inLivingRoom) { // walk to switch music center off when player leaves room
                 waypoint = 0;
                 right2 = image2;
@@ -398,7 +399,7 @@ public class NPC_Dad extends Entity {
                     goalCol = ((gp.player.worldX + gp.player.solidArea.x)/gp.tileSize) + 2;
                     goalRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
                 }
-                //searchPath(goalCol, goalRow); //debug
+                searchPath(goalCol, goalRow);
             } else if (onPath && (!gp.player.inLivingRoom)) { // walk to put guitar back after player leaves living room
                 speed = 2;
                 followingPlayer = false;

@@ -343,21 +343,17 @@ public class Player extends Entity {
             }
         }
 
-        if (gp.player.worldX > gp.tileSize * 44 && gp.player.worldX < gp.tileSize * 53) { //if player in garage
-            if (gp.player.worldY > gp.tileSize * 7 && gp.player.worldY < gp.tileSize * 18) {
-                for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
-                    if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, OBJ_GarageRoof.OBJ_NAME)) {
-                        gp.obj[gp.currentMap][i].collision = false;
-                        gp.player.insideGarage = true;
-                        handleTransparencyOfWallsAndObjectsInGarage(gp.obj[gp.currentMap][i]);
-                    }
+        if (gp.player.insideGarage) { //if player in garage
+            for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
+                if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, OBJ_GarageRoof.OBJ_NAME)) {
+                    gp.obj[gp.currentMap][i].collision = false;
+                    handleTransparencyOfWallsAndObjectsInGarage(gp.obj[gp.currentMap][i]);
                 }
             }
-        } else if (gp.player.insideGarage) {
+        } else {
             for (int i = 0; i < gp.obj[gp.currentMap].length; i++) {
                 if (gp.obj[gp.currentMap][i] != null && Objects.equals(gp.obj[gp.currentMap][i].name, OBJ_GarageRoof.OBJ_NAME)) {
                     gp.obj[gp.currentMap][i].collision = true;
-                    gp.player.insideGarage = false;
                     handleTransparencyOfWallsAndObjectsInGarage(gp.obj[gp.currentMap][i]);
                 }
             }

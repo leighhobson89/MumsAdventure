@@ -758,16 +758,19 @@ public class AssetSetter {
         gp.npc[mapNum][i] = new NPC_Dad(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*18;
         gp.npc[mapNum][i].worldY = gp.tileSize*14;
+        gp.npc[mapNum][i].getImage();
         i++;
 
         gp.npc[mapNum][i] = new NPC_Phoebe(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*23; //23
         gp.npc[mapNum][i].worldY = gp.tileSize*17; //17
+        gp.npc[mapNum][i].getImage();
         i++;
 
         gp.npc[mapNum][i] = new NPC_Pip(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*20;
         gp.npc[mapNum][i].worldY = gp.tileSize*11;
+        gp.npc[mapNum][i].getImage();
         i++;
 
         gp.npc[mapNum][i] = new NPC_Merchant(gp);
@@ -791,17 +794,22 @@ public class AssetSetter {
         gp.npc[mapNum][i] = new NPC_Dad(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*50;
         gp.npc[mapNum][i].worldY = gp.tileSize*5;
+        gp.npc[mapNum][i].getImage();
         i++;
 
         gp.npc[mapNum][i] = new NPC_Phoebe(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*50;
         gp.npc[mapNum][i].worldY = gp.tileSize*5;
+        gp.npc[mapNum][i].getImage();
         i++;
 
         gp.npc[mapNum][i] = new NPC_Pip(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*50;
         gp.npc[mapNum][i].worldY = gp.tileSize*5;
+        gp.npc[mapNum][i].getImage();
         //i++;
+
+
     }
 
     public int setMonster(String type, int monsterNumber, int x, int y, int mapNum, boolean randomizeLocation) {

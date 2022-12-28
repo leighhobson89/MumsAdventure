@@ -25,19 +25,31 @@ public class NPC_Phoebe extends Entity {
         solidArea = new Rectangle(8, 16,32,32);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        getInitialImage();
+    }
+
+    public void getInitialImage() {
+
+        up1Standard = setup("/NPC/phoebe_up1", gp.tileSize, gp.tileSize);
+        up2Standard = setup("/NPC/phoebe_up2", gp.tileSize, gp.tileSize);
+        down1Standard = setup("/NPC/phoebe_down1", gp.tileSize, gp.tileSize);
+        down2Standard = setup("/NPC/phoebe_down2", gp.tileSize, gp.tileSize);
+        left1Standard = setup("/NPC/phoebe_left1", gp.tileSize, gp.tileSize);
+        left2Standard = setup("/NPC/phoebe_left2", gp.tileSize, gp.tileSize);
+        right1Standard = setup("/NPC/phoebe_right1", gp.tileSize, gp.tileSize);
+        right2Standard = setup("/NPC/phoebe_right2", gp.tileSize, gp.tileSize);
+
     }
 
     public void getImage() {
-
-        up1 = setup("/NPC/phoebe_up1", gp.tileSize, gp.tileSize);
-        up2 = setup("/NPC/phoebe_up2", gp.tileSize, gp.tileSize);
-        down1 = setup("/NPC/phoebe_down1", gp.tileSize, gp.tileSize);
-        down2 = setup("/NPC/phoebe_down2", gp.tileSize, gp.tileSize);
-        left1 = setup("/NPC/phoebe_left1", gp.tileSize, gp.tileSize);
-        left2 = setup("/NPC/phoebe_left2", gp.tileSize, gp.tileSize);
-        right1 = setup("/NPC/phoebe_right1", gp.tileSize, gp.tileSize);
-        right2 = setup("/NPC/phoebe_right2", gp.tileSize, gp.tileSize);
-
+        up1 = up1Standard;
+        up2 = up2Standard;
+        down1 = down1Standard;
+        down2 = down2Standard;
+        left1 = left1Standard;
+        left2 = left2Standard;
+        right1 = right1Standard;
+        right2 = right2Standard;
     }
 
     //        //comment for not throw bone

@@ -34,18 +34,35 @@ public class MON_WaspSwarm extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        getInitialImage();
+    }
+
+    public void getInitialImage() {
+        dyingImage = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
+        up1Standard = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
+        up2Standard = setup("/monster/waspSwarm2", gp.tileSize, gp.tileSize);
+        down1Standard = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
+        down2Standard = setup("/monster/waspSwarm2", gp.tileSize, gp.tileSize);
+        left1Standard = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
+        left2Standard = setup("/monster/waspSwarm2", gp.tileSize, gp.tileSize);
+        right1Standard = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
+        right2Standard = setup("/monster/waspSwarm2", gp.tileSize, gp.tileSize);
     }
 
     public void getImage() {
-        dyingImage = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
-        up1 = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
-        up2 = setup("/monster/waspSwarm2", gp.tileSize, gp.tileSize);
-        down1 = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
-        down2 = setup("/monster/waspSwarm2", gp.tileSize, gp.tileSize);
-        left1 = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
-        left2 = setup("/monster/waspSwarm2", gp.tileSize, gp.tileSize);
-        right1 = setup("/monster/waspSwarm1", gp.tileSize, gp.tileSize);
-        right2 = setup("/monster/waspSwarm2", gp.tileSize, gp.tileSize);
+        up1 = up1Standard;
+        up2 = up2Standard;
+        down1 = down1Standard;
+        down2 = down2Standard;
+        left1 = left1Standard;
+        left2 = left2Standard;
+        right1 = right1Standard;
+        right2 = right2Standard;
+    }
+
+    public void update() {
+        super.update();
+        gp.eHandler.checkEvent(this);
     }
 
     public void setAction(int goalCol, int goalRow) {

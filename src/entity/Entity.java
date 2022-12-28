@@ -127,6 +127,7 @@ public class Entity {
     public boolean insideGarage;
     public boolean insideHouse = true;
     public boolean enterExitHouseEventFlag;
+    public boolean enterExitGarageEventFlag;
 
     //COUNTER
     public int spriteCounter = 0;
@@ -612,10 +613,61 @@ public class Entity {
         }
     }
 
+    public void setNullImages(Entity entity) {
+        entity.up1 = null;
+        entity.up2 = null;
+        entity.down1 = null;
+        entity.down2 = null;
+        entity.left1 = null;
+        entity.left2 = null;
+        entity.right1 = null;
+        entity.right2 = null;
+    }
+
     public void update() {
 
         Entity npc;
         Entity monster;
+
+        //player enters or exits garage
+        for (int i = 0; i < gp.monster[gp.currentMap].length; i++) { //make monster invisible if player in garage and they aren't etc
+            monster = gp.monster[gp.currentMap][i];
+            if (monster != null && gp.player.enterExitGarageEventFlag) {
+                if (gp.player.insideGarage) { //player in garage
+                    if (!monster.insideGarage) { //monster not in garage
+                        setNullImages(monster);
+                    } else { //monster in garage
+                        monster.getImage();
+                    }
+                } else { //player not in garage
+                    if (monster.insideGarage || monster.insideHouse) {
+                        setNullImages(monster);
+                    } else {
+                        monster.getImage();
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < gp.npc[gp.currentMap].length; i++) { //make npc invisible if player in garage and they aren't etc
+            npc = gp.npc[gp.currentMap][i];
+            if (npc != null && gp.player.enterExitGarageEventFlag) {
+                if (gp.player.insideGarage) { //player in garage
+                    if (!npc.insideGarage) { //npc not in garage
+                        setNullImages(npc);
+                    } else { //npc in garage
+                        npc.getImage();
+                    }
+                } else { //player not in garage
+                    if (npc.insideGarage || npc.insideHouse) {
+                        setNullImages(npc);
+                    } else {
+                        npc.getImage();
+                    }
+                }
+            }
+        }
+        gp.player.enterExitGarageEventFlag = false;
 
         //player enters or exits house
         for (int i = 0; i < gp.monster[gp.currentMap].length; i++) { //make monster invisible if player in house and they aren't etc
@@ -623,34 +675,102 @@ public class Entity {
             if (monster != null && gp.player.enterExitHouseEventFlag) {
                 if (gp.player.insideHouse) { //player in house
                     if (!monster.insideHouse) { //monster not in house
-                        monster.up1 = null;
-                        monster.up2 = null;
-                        monster.down1 = null;
-                        monster.down2 = null;
-                        monster.left1 = null;
-                        monster.left2 = null;
-                        monster.right1 = null;
-                        monster.right2 = null;
+                        setNullImages(monster);
                     } else { //monster in house
                         monster.getImage();
                     }
                 } else { //player not in house
-                    if (monster.insideHouse) {
-                        monster.up1 = null;
-                        monster.up2 = null;
-                        monster.down1 = null;
-                        monster.down2 = null;
-                        monster.left1 = null;
-                        monster.left2 = null;
-                        monster.right1 = null;
-                        monster.right2 = null;
+                    if (monster.insideHouse || monster.insideGarage) {
+                        setNullImages(monster);
                     } else {
                         monster.getImage();
                     }
                 }
             }
         }
+
+        for (int i = 0; i < gp.npc[gp.currentMap].length; i++) { //make npc invisible if player in house and they aren't etc
+            npc = gp.npc[gp.currentMap][i];
+            if (npc != null && gp.player.enterExitHouseEventFlag) {
+                if (gp.player.insideHouse) { //player in house
+                    if (!npc.insideHouse) { //npc not in house
+                        setNullImages(npc);
+                    } else { //npc in house
+                        npc.getImage();
+                    }
+                } else { //player not in house
+                    if (npc.insideHouse || npc.insideGarage) {
+                        setNullImages(npc);
+                    } else {
+                        npc.getImage();
+                    }
+                }
+            }
+        }
         gp.player.enterExitHouseEventFlag = false;
+
+        //npc enters or exits garage
+        for (int i = 0; i < gp.npc[gp.currentMap].length; i++) { //make monster invisible if player in garage and they aren't etc
+            npc = gp.npc[gp.currentMap][i];
+            if (npc != null && npc.enterExitGarageEventFlag) {
+                if (gp.player.insideGarage) { //player in garage
+                    if (!npc.insideGarage) { //monster not in garage
+                        setNullImages(npc);
+                    } else { //monster in garage
+                        npc.getImage();
+                    }
+                } else { //player not in garage
+                    if (npc.insideGarage) {
+                        setNullImages(npc);
+                    } else {
+                        npc.getImage();
+                    }
+                }
+                npc.enterExitGarageEventFlag = false;
+            }
+        }
+
+        //npc enters or exits house
+        for (int i = 0; i < gp.npc[gp.currentMap].length; i++) { //make monster invisible if player in house and they aren't etc
+            npc = gp.npc[gp.currentMap][i];
+            if (npc != null && npc.enterExitHouseEventFlag) {
+                if (gp.player.insideHouse) { //player in house
+                    if (!npc.insideHouse) { //monster not in house
+                        setNullImages(npc);
+                    } else { //monster in house
+                        npc.getImage();
+                    }
+                } else { //player not in house
+                    if (npc.insideHouse) {
+                        setNullImages(npc);
+                    } else {
+                        npc.getImage();
+                    }
+                }
+                npc.enterExitHouseEventFlag = false;
+            }
+        }
+
+        //monster enters or exits garage
+        for (int i = 0; i < gp.monster[gp.currentMap].length; i++) { //make monster invisible if player in garage and they aren't etc
+            monster = gp.monster[gp.currentMap][i];
+            if (monster != null && monster.enterExitGarageEventFlag) {
+                if (gp.player.insideGarage) { //player in garage
+                    if (!monster.insideGarage) { //monster not in garage
+                        setNullImages(monster);
+                    } else { //monster in garage
+                        monster.getImage();
+                    }
+                } else { //player not in garage
+                    if (monster.insideGarage) {
+                        setNullImages(monster);
+                    } else {
+                        monster.getImage();
+                    }
+                }
+                monster.enterExitGarageEventFlag = false;
+            }
+        }
 
         //monster enters or exits house
         for (int i = 0; i < gp.monster[gp.currentMap].length; i++) { //make monster invisible if player in house and they aren't etc
@@ -658,27 +778,13 @@ public class Entity {
             if (monster != null && monster.enterExitHouseEventFlag) {
                 if (gp.player.insideHouse) { //player in house
                     if (!monster.insideHouse) { //monster not in house
-                        monster.up1 = null;
-                        monster.up2 = null;
-                        monster.down1 = null;
-                        monster.down2 = null;
-                        monster.left1 = null;
-                        monster.left2 = null;
-                        monster.right1 = null;
-                        monster.right2 = null;
+                        setNullImages(monster);
                     } else { //monster in house
                         monster.getImage();
                     }
                 } else { //player not in house
                     if (monster.insideHouse) {
-                        monster.up1 = null;
-                        monster.up2 = null;
-                        monster.down1 = null;
-                        monster.down2 = null;
-                        monster.left1 = null;
-                        monster.left2 = null;
-                        monster.right1 = null;
-                        monster.right2 = null;
+                        setNullImages(monster);
                     } else {
                         monster.getImage();
                     }
