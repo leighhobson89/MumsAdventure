@@ -75,9 +75,13 @@ public class KeyHandler implements KeyListener {
                     gp.playSFX(11);
                 }
                 if (gp.ui.commandNum == 1) { //LOAD GAME
-                    gp.saveLoad.load();
-                    gp.gameState = gp.playState;
-                    gp.playSFX(11);
+                    boolean successfulLoad = gp.saveLoad.load();
+                    if (successfulLoad) {
+                        gp.gameState = gp.playState;
+                        gp.playSFX(11);
+                    } else {
+                        gp.gameState = gp.titleState;
+                    }
                 }
                 if (gp.ui.commandNum == 2) { //INSTRUCTIONS
                     gp.ui.titleScreenState = 2;

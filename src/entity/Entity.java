@@ -332,6 +332,10 @@ public class Entity {
     public void getImage() {
 
     }
+
+    public void getInitialImage() {
+
+    }
     public void damageReaction() {
         //overridden in specific monster class
     }

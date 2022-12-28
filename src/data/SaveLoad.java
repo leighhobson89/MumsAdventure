@@ -274,7 +274,8 @@ public class SaveLoad {
         }
     }
 
-    public void load() {
+    public boolean load() {
+        boolean success;
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream("save.dat"));
 
@@ -466,6 +467,9 @@ public class SaveLoad {
                         gp.monster[mapNum][i].direction = ds.mapMonsterDirection[mapNum][i];
                         gp.monster[mapNum][i].insideHouse = ds.mapMonsterInHouse[mapNum][i];
                     }
+                    if (gp.monster[mapNum][i] != null && gp.monster[mapNum][i].insideHouse) {
+                        gp.monster[mapNum][i].getImage();
+                    }
                 }
             }
 
@@ -506,11 +510,16 @@ public class SaveLoad {
                         gp.npc[mapNum][i].followingPlayer = ds.mapNpcFollowingPlayer[mapNum][i];
                         gp.npc[mapNum][i].insideHouse = ds.mapNpcInHouse[mapNum][i];
                     }
+
+                    if (gp.npc[mapNum][i] != null && gp.npc[mapNum][i].insideHouse && (Objects.equals(gp.npc[mapNum][i].name, "Dad") || Objects.equals(gp.npc[mapNum][i].name, "Phoebe") || Objects.equals(gp.npc[mapNum][i].name, "Pip"))) {
+                        gp.npc[mapNum][i].getImage();
+                    }
                 }
             }
 
             //SET CORRECT IMAGE STATES
             gp.eHandler.setImageStates(gp.currentMap);
+            success = true;
 
             //DEBUG
             //add system.out here for load
@@ -519,6 +528,8 @@ public class SaveLoad {
 
         } catch (Exception e) {
             System.out.println("Load Exception!");
+            success = false;
         }
+    return success;
     }
 }
