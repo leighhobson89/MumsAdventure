@@ -192,7 +192,7 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = 11 * gp.tileSize;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_BackGateSideways(gp);
+        gp.obj[mapNum][i] = new OBJ_KitchenPantry(gp);
         gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
         gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
         i++;

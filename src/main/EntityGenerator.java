@@ -32,7 +32,7 @@ public class EntityGenerator {
             case OBJ_Bin_Blue.OBJ_NAME -> new OBJ_Bin_Blue(gp);
             case OBJ_Bin_Green.OBJ_NAME -> new OBJ_Bin_Green(gp);
             case OBJ_Bin_Grey.OBJ_NAME -> new OBJ_Bin_Grey(gp);
-            case OBJ_BackGateSideways.OBJ_NAME -> new OBJ_BackGateSideways(gp);
+            case OBJ_KitchenPantry.OBJ_NAME -> new OBJ_KitchenPantry(gp);
             case OBJ_BackGate.OBJ_NAME -> new OBJ_BackGate(gp);
             case OBJ_MumsChair.OBJ_NAME -> new OBJ_MumsChair(gp);
             case OBJ_FrontDoor.OBJ_NAME -> new OBJ_FrontDoor(gp);

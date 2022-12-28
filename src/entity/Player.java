@@ -796,7 +796,7 @@ public class Player extends Entity {
             case "Bin_Blue", "Lavender Crocs" -> 14;
             case "Acoustic Guitar" -> 17;
             case "Electric Guitar" -> 16;
-            case "InsideDoor", "InsideDoorSideways", "BackGate", "BackGateSideways" -> 4;
+            case "InsideDoor", "InsideDoorSideways", "BackGate", "KitchenPantry" -> 4;
             case "FrontDoor" -> 3;
             case "Old Cardigan" -> 18;
             case "Spatula" -> 19;
