@@ -21,7 +21,7 @@ public class NPC_TipDude extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
     }
-//o
+
     public void getImage() {
 
         up1 = setup("/NPC/tipDude_up1", gp.tileSize, gp.tileSize);
