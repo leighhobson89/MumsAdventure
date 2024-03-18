@@ -174,6 +174,9 @@ public class EventHandler {
             gp.player.worldX = gp.tileSize*randX;
             gp.player.worldY = gp.tileSize*randY;
         }
+        if (randX >= 17 && randY >= 10 && randX <= 30 && randY <= 19) { //if pills teleport player indoors then set flag correctly so roof is removed etc
+            gp.player.insideHouse = true;
+        }
         gp.player.stressLevel = 0;
     }
 
