@@ -82,41 +82,52 @@ public class Sound {
     }
 
     public void stopPhoneSfx() {
-        clipPhone.stop();
+        if (clipPhone != null) {
+            clipPhone.stop();
+        }
     }
 
     public void play(long position, boolean pausing) {
-        clip.start();
-        if (pausing) {
-            clip.setMicrosecondPosition(position);
+        if (clip != null) {
+            clip.start();
+            if (pausing) {
+                clip.setMicrosecondPosition(position);
+            }
         }
     }
 
     public void loop(int phone) {
         if (phone == 28) {
-            clipPhone.loop(Clip.LOOP_CONTINUOUSLY);
+            if (clipPhone != null) {
+                clipPhone.loop(Clip.LOOP_CONTINUOUSLY);
+            }
         } else {
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            if (clip != null) {
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
         }
     }
 
     public long stop(boolean pausing, int phone) {
         if (phone == 28) {
             long position = 0;
-            if (pausing) {
-                position = clipPhone.getMicrosecondPosition();
+            if (clipPhone != null) {
+                if (pausing) {
+                    position = clipPhone.getMicrosecondPosition();
+                }
+                clipPhone.stop();
             }
-            clipPhone.stop();
             return position;
         } else {
             long position = 0;
-            if (pausing) {
-                position = clip.getMicrosecondPosition();
+            if (clip != null) {
+                if (pausing) {
+                    position = clip.getMicrosecondPosition();
+                }
+                clip.stop();
             }
-            clip.stop();
             return position;
         }
-
     }
 
     public void checkVolume() { //range runs from -80f to +6f
@@ -130,6 +141,8 @@ public class Sound {
             case 5 -> volume = 6f;
             //max possible
         }
-        fc.setValue(volume);
+        if (fc != null) {
+            fc.setValue(volume);
+        }
     }
 }
