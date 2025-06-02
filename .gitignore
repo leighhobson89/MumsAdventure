@@ -1,0 +1,29 @@
+# Gradle files
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Mac OS X
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Local configuration files
+*.properties
+*.prefs
+
+# Application specific files
+save.dat
+config.txt

@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:7.7.1'
+}
+
+test {
+    useTestNG()
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'main.Main'
+        )
+    }
+}
+
+application {
+    mainClass = 'main.Main'
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'main.Main'
+        )
+    }
+}
+
+
+group = 'com.mumsadventure'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+tasks.register('runApp', JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'main.Main'
+}
